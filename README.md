@@ -1,2 +1,2 @@
-# Amulet-Of-Iovar
-Nethack inspired roguelike made with Godot
+# Amulet Of Iovar
+Nethack inspired roguelike made with Godot.
