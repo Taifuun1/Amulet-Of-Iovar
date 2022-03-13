@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/FOV/FOV.tres" type="TileSet" id=1]
+[ext_resource path="res://Objects/FOV/FOV.gd" type="Script" id=2]
+
+[node name="FOV" type="TileMap"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+script = ExtResource( 2 )

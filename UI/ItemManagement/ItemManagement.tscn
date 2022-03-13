@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/ItemManagement/ItemManagement.gd" type="Script" id=1]
+
+[node name="ItemManagement" type="MarginContainer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+script = ExtResource( 1 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ItemManagementList" type="VBoxContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
