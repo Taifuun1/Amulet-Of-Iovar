@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Hidden.png" type="Texture" id=1]
-[ext_resource path="res://Assets/FOVGrey.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Miscellaneous/Hidden.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Miscellaneous/FOVGrey.png" type="Texture" id=2]
 
 [resource]
 0/name = "HIDDEN"

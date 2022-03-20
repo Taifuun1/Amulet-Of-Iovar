@@ -1,20 +1,20 @@
 extends AStarPath
 
-var grid = []
-var rooms = []
 var tiles
 
-func _ready():
-	pass
+var dungeonType = "dungeon1"
+
+var grid = []
+var rooms = []
+var spawnableFloors = []
+
+var critters = []
 
 func setName():
 	var level = Globals.levelId
 	name = str(Globals.levelId)
 	Globals.levelId += 1
 	return level
-
-func getLevel():
-	return grid
 
 func createNewLevel(_tiles, _isFirstLevel = false):
 	tiles = _tiles
@@ -25,7 +25,7 @@ func createNewLevel(_tiles, _isFirstLevel = false):
 		for _y in range(Globals.gridSize.y):
 			grid[_x].append({
 				"tile": tiles.EMPTY,
-				"creature": null,
+				"critter": null,
 				"items": []
 			})
 	
@@ -71,6 +71,7 @@ func createDungeon():
 				for x in range(int(roomPlacement.x) - ((int(roomSize.x) / 2) - 1), int(roomPlacement.x) + ((int(roomSize.x) / 2) - 1)):
 					for y in range(int(roomPlacement.y) - ((int(roomSize.y) / 2) - 1), int(roomPlacement.y) + ((int(roomSize.y) / 2) - 1)):
 						grid[x][y].tile = tiles.FLOOR
+						spawnableFloors.append(Vector2(x, y))
 				for x in range(int(roomPlacement.x) - (int(roomSize.x) / 2), int(roomPlacement.x) + (int(roomSize.x) / 2)):
 					for y in range(int(roomPlacement.y) - (int(roomSize.y) / 2), int(roomPlacement.y) + (int(roomSize.y) / 2)):
 						if grid[x][y].tile != tiles.FLOOR:

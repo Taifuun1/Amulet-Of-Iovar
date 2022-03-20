@@ -20,7 +20,7 @@ func showItemManagementList():
 		var newItem = inventoryItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
 		newItem.setValues(_item)
-		newItem.get_node("Checked").connect("pressed", self, "_on_Item_Management_List_Clicked", [{ "id": _item.id }])
+#		newItem.get_node("Clickable").connect("input_event", self, "_on_Item_Management_List_Clicked", [{ "id": _item.id }])
 		$ItemManagementList.add_child(newItem)
 	show()
 
@@ -32,12 +32,14 @@ func hideItemManagementList():
 	hide()
 
 func _on_Item_Management_List_Clicked(_id):
-	var clickedItem = get_node("ItemManagementList/{id}".format({ "id": _id.id }))
+	var clickedItem = get_node("ItemManagementList/{id}".format({ "id": _id }))
 	var isRemoved = false
 	for item in range(selectedItems.size()):
 		if selectedItems[item] == clickedItem.id:
 			selectedItems.remove(item)
 			isRemoved = true
+			clickedItem.get_node("Checked").pressed = false
 			break
 	if !isRemoved:
-		selectedItems.append(_id.id)
+		selectedItems.append(_id)
+		clickedItem.get_node("Checked").pressed = true

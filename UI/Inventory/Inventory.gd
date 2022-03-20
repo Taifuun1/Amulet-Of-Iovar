@@ -1,20 +1,23 @@
-extends MarginContainer
+extends CanvasLayer
 
 onready var inventoryItem = preload("res://UI/InventoryItem/InventoryItem.tscn")
 
-var isPlayerInventory = false
-
 var inventory = []
+
+var isPlayerInventory
 
 func create(_isPlayer = false):
 	name = "Inventory"
 	isPlayerInventory = _isPlayer
-	hide()
+	$InventoryContainer.hide()
 
 func getInventory():
 	return inventory
 
 func addToInventory(_item):
+	inventory.append(_item)
+	return
+
 #	for item in inventory:
 #		if item.itemName == _item.itemName:
 #			if item.stackable:
@@ -22,8 +25,6 @@ func addToInventory(_item):
 #			else:
 #				inventory.append(_item)
 #			return
-	inventory.append(_item)
-	return
 	
 #	$Inventory
 #	var isInInventory = inventory.has(_item)
@@ -37,6 +38,9 @@ func addToInventory(_item):
 #		Globals.inventory = inventory
 
 func dropFromInventory(_item):
+	inventory.remove(_item)
+	return
+
 #	for item in inventory:
 #		if item.itemName == _item.itemName:
 #			if item.stackable and item.amount != 1:
@@ -44,9 +48,6 @@ func dropFromInventory(_item):
 #			else:
 #				inventory.erase(_item)
 #			return
-	
-	inventory.remove(_item)
-	return
 	
 #	if !inventory[inventory.find(_item)]:
 #		inventory.inventory.find
@@ -58,17 +59,11 @@ func showInventoryList():
 		var newItem = inventoryItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
 		newItem.setValues(_item)
-#		newItem.id = _item.id
-#		newItem.name = str(_item.id)
-#		newItem.get_node("Name").text = _item.itemName
-#		newItem.get_node("Alignment").text = _item.alignment
-#		if newItem.enchantment == true:
-#			newItem.get_node("Enchantment").text = str(_item.enchantment)
 		newItem.get_node("Checked").connect("pressed", self, "_on_Inventory_List_Clicked", [{ "id": _item.id }])
-		$InventoryList.add_child(newItem)
-	show()
+		$InventoryContainer/InventoryList.add_child(newItem)
+	$InventoryContainer.show()
 
 func hideInventoryList():
-	for item in $InventoryList.get_children():
+	for item in $InventoryContainer/InventoryList.get_children():
 		item.queue_free()
-	hide()
+	$InventoryContainer.hide()

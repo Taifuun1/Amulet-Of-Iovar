@@ -1,12 +1,8 @@
 extends Node
 
-var ai
+var aI
 
-func _ready():
-	pass
-
-func setAi(_ai):
-	ai = _ai
-
-func getCritterMove():
-	
+func getCritterMove(_level):
+	if aI == "aggressive":
+#		calculatePath
+		pass

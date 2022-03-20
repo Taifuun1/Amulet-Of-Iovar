@@ -2,18 +2,20 @@
 
 [ext_resource path="res://UI/Inventory/Inventory.gd" type="Script" id=1]
 
-[node name="Inventory" type="MarginContainer"]
-margin_left = -960.0
-margin_top = -540.0
-margin_right = 960.0
-margin_bottom = 540.0
+[node name="Inventory" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="Background" type="ColorRect" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
-color = Color( 0, 0, 0, 1 )
+[node name="InventoryContainer" type="MarginContainer" parent="."]
+margin_left = 660.0
+margin_top = 340.0
+margin_right = 1260.0
+margin_bottom = 740.0
 
-[node name="InventoryList" type="VBoxContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="Background" type="ColorRect" parent="InventoryContainer"]
+margin_right = 600.0
+margin_bottom = 400.0
+color = Color( 0.0509804, 0.109804, 0.247059, 1 )
+
+[node name="InventoryList" type="VBoxContainer" parent="InventoryContainer"]
+margin_right = 600.0
+margin_bottom = 400.0

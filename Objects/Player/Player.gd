@@ -46,3 +46,35 @@ func calculateHitDmg():
 
 func hitCritter(_dmg):
 	hp -= _dmg
+	if hp <= 0:
+		return "dead"
+
+func openInventory():
+	$Inventory.showInventoryList()
+
+func pickUpItems(_playerTile, _items, _grid):
+	if _items.size() != 0:
+		for _item in _items:
+			pickUpItem(_playerTile, _item, _grid)
+
+func pickUpItem(_playerTile, _item, _grid):
+	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
+		if _grid[_playerTile.x][_playerTile.y].items[_itemOnGround] == _item:
+			_grid[_playerTile.x][_playerTile.y].items.remove(_itemOnGround)
+			$Inventory.addToInventory(get_node("/root/World/Items/{id}".format({ "id": _item })).id)
+			get_node("/root/World/Items/{id}".format({ "id": _item })).hide()
+			return
+
+func dropItems(_playerTile, _items, _grid):
+	if _items.size() != 0:
+		for _item in _items:
+			dropItem(_playerTile, _item, _grid)
+
+func dropItem(_playerTile, _item, _grid):
+	_grid[_playerTile.x][_playerTile.y].items.append(get_node("/root/World/Items/{id}".format({ "id": _item })).id)
+	$Inventory.dropFromInventory(get_node("/root/World/Items/{id}".format({ "id": _item })).id)
+	get_node("/root/World/Items/{id}".format({ "id": _item })).show()
+	return
+
+func wieldWeapon(_items):
+	$Equipment.wieldWeapon(_items[0], "right")
