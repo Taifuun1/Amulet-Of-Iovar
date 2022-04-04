@@ -1,5 +1,8 @@
 extends Node
 
+onready var gameConsole = $"/root/World/UI/GameConsole"
+onready var gameStats = $"/root/World/UI/GameStats"
+
 var gridSize = Vector2(60, 24)
 
 var race

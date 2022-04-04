@@ -4,15 +4,18 @@ var gridPosition
 
 var id
 var itemName
-var unidentifiedItemName
 
 var type
-var useValue
+var category
+
+var value
+
 var alignment
-var enchantment
+var enchantment = null
 
 var stackable
 
+var unidentifiedItemName
 var notIdentified = {
 	"use": false,
 	"alignment": false,
@@ -28,36 +31,76 @@ func createItem(_item, extraData = {}):
 		itemName = "{critterName} {itemName}".format({ "critterName": extraData.critterName, "itemName": _item.itemName})
 	else:
 		itemName = _item.itemName
-	unidentifiedItemName = _item.unidentifiedItemName
-	stackable = _item.stackable
-	type = _item.type
-	useValue = _item.value
 	
-	alignment = "blessed"
-	enchantment = randi() % 2
+	type = _item.type
+	category = _item.category
+	
+	value = _item.value
+	
+	if randi() % 5 + 0 == 5:
+		if randi() % 2 == 1:
+			alignment = "Blessed"
+		else:
+			alignment = "Cursed"
+	else:
+		alignment = "Neutral"
+	
+	if randi() % 8 == 1:
+		if randi() % 2 == 1:
+			enchantment = randi() % 2
+		else:
+			enchantment = -randi() % 2
+	else:
+		enchantment = 0
+	
+	stackable = _item.stackable
+	
+	unidentifiedItemName = _item.unidentifiedItemName
 	
 	$ItemSprite.texture = _item.texture
 
 func createItemByName(_itemName, _items, extraData = {}):
-	var item = _items.getItemByName(_itemName)
+	var _item = _items.getItemByName(_itemName, "miscellaneous", "other")
 	
 	id = Globals.itemId
 	name = str(id)
 	Globals.itemId += 1
 	
-	if item.itemName == "Corpse":
-		itemName = "{critterName} {itemName}".format({ "critterName": extraData.critterName, "itemName": item.itemName})
+	if _item.itemName == "Corpse":
+		itemName = "{critterName} {itemName}".format({ "critterName": extraData.critterName, "itemName": _item.itemName})
 	else:
-		itemName = item.itemName
-	unidentifiedItemName = item.unidentifiedItemName
-	stackable = item.stackable
-	type = item.type
-	useValue = item.value
+		itemName = _item.itemName
 	
-	alignment = "blessed"
-	enchantment = randi() % 2
+	type = _item.type
+	category = _item.category
 	
-	$ItemSprite.texture = item.texture
+	value = _item.value
+	
+	if randi() % 5 + 0 == 5:
+		if randi() % 2 == 1:
+			alignment = "Blessed"
+		else:
+			alignment = "Cursed"
+	else:
+		alignment = "Neutral"
+	
+	if enchantment:
+		if randi() % 8 == 1:
+			if randi() % 2 == 1:
+				enchantment = randi() % 2
+			else:
+				enchantment = -randi() % 2
+		else:
+			enchantment = 0
+	
+	stackable = _item.stackable
+	
+	unidentifiedItemName = _item.unidentifiedItemName
+	
+	$ItemSprite.texture = _item.texture
 
 func getTotalUseValue():
-	return useValue + enchantment
+	return value + enchantment
+
+func getTexture():
+	return $ItemSprite.texture

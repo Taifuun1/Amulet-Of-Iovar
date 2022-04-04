@@ -15,9 +15,6 @@ var notIdentified = {
 	"enchantment": false
 }
 
-func getId():
-	return id
-
 func setValues(_item):
 	id = _item.id
 	name = str(_item.id)
@@ -26,3 +23,7 @@ func setValues(_item):
 	get_node("Alignment").text = _item.alignment
 	if enchantment == true:
 		get_node("Enchantment").text = str(_item.enchantment)
+
+func _gui_input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+		$"/root/World/UI/ItemManagement"._on_Item_Management_List_Clicked(id)

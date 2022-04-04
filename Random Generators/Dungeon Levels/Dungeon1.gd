@@ -4,17 +4,16 @@ var tiles
 
 var dungeonType = "dungeon1"
 
+var level
 var grid = []
 var rooms = []
 var spawnableFloors = []
-
 var critters = []
 
 func setName():
-	var level = Globals.levelId
+	level = Globals.levelId
 	name = str(Globals.levelId)
 	Globals.levelId += 1
-	return level
 
 func createNewLevel(_tiles, _isFirstLevel = false):
 	tiles = _tiles
@@ -36,7 +35,7 @@ func createNewLevel(_tiles, _isFirstLevel = false):
 		}
 	
 	# Create corridors
-	pathFind(grid, tiles)
+	pathFindCorridors(grid, tiles)
 	for room in rooms:
 		for door in room:
 			var randomEndPointRoom
@@ -46,12 +45,14 @@ func createNewLevel(_tiles, _isFirstLevel = false):
 				endPointDoor = randomEndPointRoom[randi() % randomEndPointRoom.size()]
 				if(door != endPointDoor):
 					break
-			var path = calculatePath(door, endPointDoor)
+			var path = calculateCorridorsPath(door, endPointDoor)
 			for point in path:
 				if grid[point.x][point.y].tile != tiles.DOOR:
 					grid[point.x][point.y].tile = tiles.CORRIDOR
 	
-	return grid.duplicate()
+	pathFindPathFinding(grid, tiles)
+	
+	return self
 
 func createDungeon():
 	for _room in range(randi() % 2 + 5):

@@ -1,6 +1,6 @@
-extends MarginContainer
+extends Control
 
-onready var inventoryItem = preload("res://UI/InventoryItem/InventoryItem.tscn")
+onready var inventoryItem = preload("res://UI/ItemManagement/ItemManagementItem.tscn")
 
 var items = []
 var selectedItems = []
@@ -9,18 +9,11 @@ func create():
 	name = "ItemManagement"
 	hide()
 
-func setItems(_items):
-	items = _items
-
-func getSelectedItems():
-	return selectedItems
-
 func showItemManagementList():
 	for item in items:
 		var newItem = inventoryItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
 		newItem.setValues(_item)
-#		newItem.get_node("Clickable").connect("input_event", self, "_on_Item_Management_List_Clicked", [{ "id": _item.id }])
 		$ItemManagementList.add_child(newItem)
 	show()
 
@@ -34,9 +27,9 @@ func hideItemManagementList():
 func _on_Item_Management_List_Clicked(_id):
 	var clickedItem = get_node("ItemManagementList/{id}".format({ "id": _id }))
 	var isRemoved = false
-	for item in range(selectedItems.size()):
-		if selectedItems[item] == clickedItem.id:
-			selectedItems.remove(item)
+	for _item in range(selectedItems.size()):
+		if selectedItems[_item] == clickedItem.id:
+			selectedItems.remove(_item)
 			isRemoved = true
 			clickedItem.get_node("Checked").pressed = false
 			break

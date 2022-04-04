@@ -6,6 +6,7 @@ var miscellaneous = {
 			"texture": load("res://Assets/Miscellaneous/Corpse.png"),
 			"unIdentifiedTexture": load("res://Assets/Miscellaneous/Corpse.png"),
 			"type": "Corpse",
+			"category": null,
 			"value": null,
 			"enchantment": true,
 			"stackable": false

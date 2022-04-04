@@ -9,6 +9,9 @@ var humanoids = {
 			"alignment": "Neutral",
 			"hp": 14,
 			"mp": 2,
+			"ac": 2,
+			"baseDamage": 4,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 8,
 				"legerity": 3,

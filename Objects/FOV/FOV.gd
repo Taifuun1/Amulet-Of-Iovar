@@ -23,9 +23,6 @@ func buildFOVLevel():
 func moveLevel(_level):
 	currentFOVLevel = fovLevels[_level]
 
-func getCurrentLevelCell(_x, _y):
-	return currentFOVLevel[_x][_y]
-
 func seeCell(_x, _y):
 	currentFOVLevel[_x][_y] = -1
 	set_cell(_x, _y, -1)

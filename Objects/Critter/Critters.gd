@@ -31,7 +31,7 @@ func generateCrittersForLevel(_level):
 	var _critterGeneration = critterGeneration[_level.dungeonType]
 	var _critters = []
 	
-	for _i in range(randi() % 4 + 4):
+	for _i in range(randi() % 2 + 2):
 		_critters.append(returnRandomCritter(_critterGeneration["floor"]))
 	
 	for _critter in _critters:
@@ -42,6 +42,7 @@ func generateCrittersForLevel(_level):
 				newCritter.createCritter(_critter)
 				_level.grid[gridPosition.x][gridPosition.y].critter = newCritter.id
 				$"/root/World/Critters".add_child(newCritter, true)
+				_level.critters.append(newCritter.id)
 
 func returnRandomCritter(_critterGeneration):
 	var type

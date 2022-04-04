@@ -1,18 +1,12 @@
 extends CanvasLayer
 
-onready var inventoryItem = preload("res://UI/InventoryItem/InventoryItem.tscn")
+onready var inventoryItem = preload("res://UI/Inventory/InventoryItem.tscn")
 
 var inventory = []
 
-var isPlayerInventory
-
-func create(_isPlayer = false):
+func create():
 	name = "Inventory"
-	isPlayerInventory = _isPlayer
 	$InventoryContainer.hide()
-
-func getInventory():
-	return inventory
 
 func addToInventory(_item):
 	inventory.append(_item)
@@ -38,7 +32,7 @@ func addToInventory(_item):
 #		Globals.inventory = inventory
 
 func dropFromInventory(_item):
-	inventory.remove(_item)
+	inventory.erase(_item)
 	return
 
 #	for item in inventory:
@@ -54,7 +48,7 @@ func dropFromInventory(_item):
 #	else:
 #		pass
 
-func showInventoryList():
+func showInventory():
 	for item in inventory:
 		var newItem = inventoryItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
@@ -63,7 +57,15 @@ func showInventoryList():
 		$InventoryContainer/InventoryList.add_child(newItem)
 	$InventoryContainer.show()
 
-func hideInventoryList():
+func hideInventory():
 	for item in $InventoryContainer/InventoryList.get_children():
 		item.queue_free()
 	$InventoryContainer.hide()
+
+func getItemsOfType(_types):
+	var _items = []
+	for _type in _types:
+		for _item in inventory:
+			if get_node("/root/World/Items/{id}".format({ "id": _item })).type == _type:
+				_items.append(_item)
+	return _items

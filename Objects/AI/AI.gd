@@ -1,8 +1,7 @@
 extends Node
 
-var aI
+var aI = "Aggressive"
 
-func getCritterMove(_level):
-	if aI == "aggressive":
-#		calculatePath
-		pass
+func getCritterMove(_critterTile, _playerTile, _level):
+	if aI == "Aggressive":
+		return _level.calculatePathFindingPath(_critterTile, _playerTile)

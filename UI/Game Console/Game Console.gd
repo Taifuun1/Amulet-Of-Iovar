@@ -1,9 +1,20 @@
-extends MarginContainer
+extends Control
 
 var consoleLog = []
 
+func create():
+	createLabel("Welcome to Amulet of Iovar!")
+
 func addLog(_log):
-	consoleLog.append(_log)
-	var label = Label.instance()
-	label.text = "LMAAOOOOOOO"
-	$GameConsoleScrollContainer/GameConsoleScroll.add_child(label)
+	createLabel(_log)
+
+func createLabel(_text):
+	var label = Label.new()
+	label.text = _text
+	label.set_autowrap(true)
+	$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.add_child(label)
+	if $Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child_count() >= 30:
+		$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.remove_child($Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child(0))
+	# Wait a frame for Godot to realize the new label
+	yield(get_tree().create_timer(.01), "timeout")
+	$Background/GameConsoleContainer/GameConsoleScrollContainer.scroll_vertical = $Background/GameConsoleContainer/GameConsoleScrollContainer.get_v_scrollbar().max_value

@@ -76,9 +76,14 @@ func returnRandomItem(_itemGeneration):
 	else:
 		return null
 
-func getItemByName(_itemName, _type = null):
-	for types in items.values():
-		for rarity in types.values():
-			for _item in rarity:
-				if _item.itemName == _itemName:
-					return _item
+func getItemByName(_itemName, _type = null, _rarity = null):
+	if _type != null and _rarity != null:
+		for _item in items[_type][_rarity]:
+			if _item.itemName == _itemName:
+				return _item
+	else:
+		for types in items.values():
+			for rarity in types.values():
+				for _item in rarity:
+					if _item.itemName == _itemName:
+						return _item
