@@ -10,14 +10,13 @@ var humanoids = {
 			"hp": 14,
 			"mp": 2,
 			"ac": 2,
-			"baseDamage": 4,
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 8,
 				"legerity": 3,
 				"balance": 5,
 				"belief": 4,
-				"sagacity": 9,
+				"visage": 9,
 				"wisdom": 2
 			},
 			"statIncreases": {

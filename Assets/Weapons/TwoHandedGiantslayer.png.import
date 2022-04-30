@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TwoHandedGiantslayer.png-4a48100fe4711ca3c523a8e225a88aae.stex"
+path="res://.import/TwohandedGiantslayer.png-af0a9e589499fbe62e785f03d1416765.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Weapons/TwoHandedGiantslayer.png"
-dest_files=[ "res://.import/TwoHandedGiantslayer.png-4a48100fe4711ca3c523a8e225a88aae.stex" ]
+source_file="res://Assets/Weapons/TwohandedGiantslayer.png"
+dest_files=[ "res://.import/TwohandedGiantslayer.png-af0a9e589499fbe62e785f03d1416765.stex" ]
 
 [params]
 

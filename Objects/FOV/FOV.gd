@@ -3,8 +3,8 @@ extends TileMap
 var currentFOVLevel = []
 var fovLevels = []
 
-func createFOVLevels():
-	for _level in range(4):
+func createFOVLevels(_levelCount):
+	for _level in range(_levelCount):
 		var response = buildFOVLevel()
 		if typeof(response) != TYPE_ARRAY:
 			push_error(response)

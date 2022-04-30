@@ -17,6 +17,18 @@ var critterGeneration = {
 			}
 		},
 		"custom": null
+	},
+	"minesOfTidoh": {
+		"floor": {
+			"type": {
+				"animals": 800,
+				"humanoids": 200,
+			},
+			"rarity": {
+				"common": 1000,
+			}
+		},
+		"custom": null
 	}
 }
 

@@ -1,61 +1,96 @@
 var weapons = {
 	"common": [
 		{
-			"itemName": "Iron sword",
-			"unidentifiedItemName": "Grey sword",
-			"texture": load("res://Assets/Weapons/SwordIron.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/SwordIron.png"),
+			"itemName": "Chipped sword",
+			"unidentifiedItemName": "Chipped sword",
+			"texture": load("res://Assets/Weapons/SwordChippedSword.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordChippedSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"value": 3,
+			"value": {
+				"dmg": [2,4],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
 		{
-			"itemName": "Iron two-handed sword",
-			"unidentifiedItemName": "Large grey sword",
-			"texture": load("res://Assets/Weapons/TwoHandedSwordIron.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwoHandedSwordIron.png"),
+			"itemName": "Dull two-hander",
+			"unidentifiedItemName": "Dull two-handed sword",
+			"texture": load("res://Assets/Weapons/TwohandedSwordDullTwohander.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedSwordDullTwohander.png"),
 			"type": "Weapon",
-			"category": "Two-handed sword",
-			"value": 6,
+			"category": "Two-hander",
+			"value": {
+				"dmg": [4,7],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
 		{
-			"itemName": "Iron dagger",
-			"unidentifiedItemName": "Grey dagger",
-			"texture": load("res://Assets/Weapons/DaggerIron.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerIron.png"),
+			"itemName": "Cut dagger",
+			"unidentifiedItemName": "Cut dagger",
+			"texture": load("res://Assets/Weapons/DaggerCutDagger.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerCutDagger.png"),
 			"type": "Weapon",
 			"category": "Dagger",
-			"value": 2,
+			"value": {
+				"dmg": [1,3],
+				"d": 2,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
 		{
-			"itemName": "Iron hammer",
-			"unidentifiedItemName": "Grey hammer",
-			"texture": load("res://Assets/Weapons/HammerIron.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/HammerIron.png"),
+			"itemName": "Worn mace",
+			"unidentifiedItemName": "Worn mace",
+			"texture": load("res://Assets/Weapons/MaceWornMace.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/MaceWornMace.png"),
 			"type": "Weapon",
-			"category": "Hammer",
-			"value": 3,
+			"category": "Mace",
+			"value": {
+				"dmg": [2,4],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 1,
+					"element": "Toxix"
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
 		{
-			"itemName": "Iron flail",
-			"unidentifiedItemName": "Grey flail",
-			"texture": load("res://Assets/Weapons/FlailIron.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/FlailIron.png"),
+			"itemName": "Rigid flail",
+			"unidentifiedItemName": "Rigid flail",
+			"texture": load("res://Assets/Weapons/FlailRigidFlail.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/FlailRigidFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
-			"value": 1,
+			"value": {
+				"dmg": [1,2],
+				"d": 3,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common"
@@ -63,126 +98,464 @@ var weapons = {
 	],
 	"uncommon": [
 		{
-			"itemName": "Steel sword",
-			"unidentifiedItemName": "Light-grey sword",
-			"texture": load("res://Assets/Weapons/SwordSteel.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/SwordSteel.png"),
-			"type": "Weapon",
-			"category": "Sword",
-			"value": 5,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon"
-		},
-		{
-			"itemName": "Steel two-handed sword",
-			"unidentifiedItemName": "Large light-grey sword",
-			"texture": load("res://Assets/Weapons/TwoHandedSwordSteel.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwoHandedSwordSteel.png"),
-			"type": "Weapon",
-			"category": "Two-handed sword",
-			"value": 8,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon"
-		},
-		{
-			"itemName": "Steel dagger",
-			"unidentifiedItemName": "Light-grey dagger",
-			"texture": load("res://Assets/Weapons/DaggerSteel.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerSteel.png"),
+			"itemName": "Orc dagger",
+			"unidentifiedItemName": "Dark dagger",
+			"texture": load("res://Assets/Weapons/DaggerOrcDagger.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerOrcDagger.png"),
 			"type": "Weapon",
 			"category": "Dagger",
-			"value": 4,
+			"value": {
+				"dmg": [3,5],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
 		{
-			"itemName": "Steel mace",
-			"unidentifiedItemName": "Light-grey mace",
-			"texture": load("res://Assets/Weapons/HammerSteel.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/HammerSteel.png"),
-			"type": "Weapon",
-			"category": "Hammer",
-			"value": 5,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon"
-		},
-		{
-			"itemName": "Steel flail",
-			"unidentifiedItemName": "Light-grey flail",
-			"texture": load("res://Assets/Weapons/FlailSteel.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/FlailSteel.png"),
+			"itemName": "Sharp Flail",
+			"unidentifiedItemName": "Sharp Flail",
+			"texture": load("res://Assets/Weapons/FlailSharpFlail.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/FlailSharpFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
-			"value": 3,
+			"value": {
+				"dmg": [7,10],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Uncommon"
+		},
+		{
+			"itemName": "Dwarvish laysword",
+			"unidentifiedItemName": "Dwarvish laysword",
+			"texture": load("res://Assets/Weapons/SwordDwarvishLaysword.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordDwarvishLaysword.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"value": {
+				"dmg": [4,6],
+				"d": 2,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Uncommon"
+		},
+		{
+			"itemName": "Orcish sword",
+			"unidentifiedItemName": "Dark sword",
+			"texture": load("res://Assets/Weapons/SwordOrcSword.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordOrcSword.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"value": {
+				"dmg": [4,6],
+				"d": 2,
+				"bonusDmg": {
+					"dmg": 1,
+					"element": "Toxix"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Uncommon"
+		},
+		{
+			"itemName": "Elvish sword",
+			"unidentifiedItemName": "Elvish sword",
+			"texture": load("res://Assets/Weapons/SwordElvishSword.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordElvishSword.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"value": {
+				"dmg": [4,6],
+				"d": 2,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		}
 	],
-	"artefact": [
+	"rare": [
 		{
-			"itemName": "Justice'er sword",
-			"unidentifiedItemName": "Straight sword",
-			"texture": load("res://Assets/Weapons/SwordJusticeer.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/SwordJusticeer.png"),
+			"itemName": "Glowing dagger",
+			"unidentifiedItemName": "Glowing dagger",
+			"texture": load("res://Assets/Weapons/DaggerGlowingDagger.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerGlowingDagger.png"),
+			"type": "Weapon",
+			"category": "Dagger",
+			"value": {
+				"dmg": [2,4],
+				"d": 2,
+				"bonusDmg": {
+					"dmg": 2,
+					"element": "Thunder"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Rare"
+		},
+		{
+			"itemName": "Morning star",
+			"unidentifiedItemName": "Morning star",
+			"texture": load("res://Assets/Weapons/MaceMorningStar.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/MaceMorningStar.png"),
+			"type": "Weapon",
+			"category": "Mace",
+			"value": {
+				"dmg": [6,8],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Rare"
+		},
+		{
+			"itemName": "Adorned sword",
+			"unidentifiedItemName": "Adorned sword",
+			"texture": load("res://Assets/Weapons/SwordAdornedSword.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordAdornedSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"value": 8,
+			"value": {
+				"dmg": [7,10],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Artefact"
+			"rarity": "Rare"
 		},
 		{
-			"itemName": "Giantslayer",
-			"unidentifiedItemName": "Large hunk of iron",
-			"texture": load("res://Assets/Weapons/TwoHandedGiantslayer.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwoHandedGiantslayer.png"),
+			"itemName": "Mithril two-hander",
+			"unidentifiedItemName": "Mithril two-hander",
+			"texture": load("res://Assets/Weapons/TwohandedSwordMithrilTwohander.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedSwordMithrilTwohander.png"),
 			"type": "Weapon",
-			"category": "Two-handed sword",
-			"value": 16,
+			"category": "Two-hander",
+			"value": {
+				"dmg": [8,14],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Artefact"
+			"rarity": "Rare"
+		}
+	],
+	"legendary": [
+		{
+			"itemName": "Krakag Orraig",
+			"unidentifiedItemName": "Krakag Orraig",
+			"texture": load("res://Assets/Weapons/DaggerKrakagOrraig.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerKrakagOrraig.png"),
+			"type": "Weapon",
+			"category": "Dagger",
+			"value": {
+				"dmg": [5,7],
+				"d": 2,
+				"bonusDmg": {
+					"dmg": 5,
+					"element": "Toxix"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
 		},
 		{
-			"itemName": "Dagger of elbier",
-			"unidentifiedItemName": "Glittering dagger",
+			"itemName": "Dagger of Elbier",
+			"unidentifiedItemName": "Dagger of Elbier",
 			"texture": load("res://Assets/Weapons/DaggerOfElbier.png"),
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerOfElbier.png"),
 			"type": "Weapon",
 			"category": "Dagger",
-			"value": 6,
+			"value": {
+				"dmg": [5,7],
+				"d": 2,
+				"bonusDmg": {
+					"dmg": 3,
+					"element": "Thunder"
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Artefact"
+			"rarity": "Legendary"
 		},
 		{
-			"itemName": "Dumpel pompel",
-			"unidentifiedItemName": "Heavy-looking hammer",
-			"texture": load("res://Assets/Weapons/HammerDumpelPompel.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/HammerDumpelPompel.png"),
-			"type": "Weapon",
-			"category": "Hammer",
-			"value": 8,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Artefact"
-		},
-		{
-			"itemName": "Crustel flail",
-			"unidentifiedItemName": "Dull-looking flail",
-			"texture": load("res://Assets/Weapons/FlailCrustel.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/FlailCrustel.png"),
+			"itemName": "Crustel Flail",
+			"unidentifiedItemName": "Crustel Flail",
+			"texture": load("res://Assets/Weapons/FlailCrustelFlail.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/FlailCrustelFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
-			"value": 5,
+			"value": {
+				"dmg": [5,7],
+				"d": 4,
+				"bonusDmg": {
+					"dmg": 5,
+					"element": "Gleeie'er"
+				}
+			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Artefact"
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Loperiels Destiny",
+			"unidentifiedItemName": "Loperiels Destiny",
+			"texture": load("res://Assets/Weapons/FlailLoperielsDestiny.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/FlailLoperielsDestiny.png"),
+			"type": "Weapon",
+			"category": "Flail",
+			"value": {
+				"dmg": [3,6],
+				"d": 4,
+				"bonusDmg": {
+					"dmg": 2,
+					"element": "Toxix"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Dumpel Pompel",
+			"unidentifiedItemName": "Dumpel Pompel",
+			"texture": load("res://Assets/Weapons/MaceDumpelPompel.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/MaceDumpelPompel.png"),
+			"type": "Weapon",
+			"category": "Mace",
+			"value": {
+				"dmg": [8,10],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Final Dawn",
+			"unidentifiedItemName": "Final Dawn",
+			"texture": load("res://Assets/Weapons/MaceFinalDawn.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/MaceFinalDawn.png"),
+			"type": "Weapon",
+			"category": "Mace",
+			"value": {
+				"dmg": [6,8],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 8,
+					"element": "Fleir"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Titan Slayer",
+			"unidentifiedItemName": "Titan Slayer",
+			"texture": load("res://Assets/Weapons/MaceTitanSlayer.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/MaceTitanSlayer.png"),
+			"type": "Weapon",
+			"category": "Mace",
+			"value": {
+				"dmg": [8,14],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Fleirflare",
+			"unidentifiedItemName": "Fleirflare",
+			"texture": load("res://Assets/Weapons/SwordFleirflare.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordFleirflare.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"value": {
+				"dmg": [6,8],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 6,
+					"element": "Fleir"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Frostfury",
+			"unidentifiedItemName": "Frostfury",
+			"texture": load("res://Assets/Weapons/SwordFrostfury.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordFrostfury.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"value": {
+				"dmg": [6,8],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 6,
+					"element": "Frost"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Justice'eer Sword",
+			"unidentifiedItemName": "Justice'eer Sword",
+			"texture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"value": {
+				"dmg": [8,14],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Stormbringer",
+			"unidentifiedItemName": "Stormbringer",
+			"texture": load("res://Assets/Weapons/SwordStormbringer.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordStormbringer.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"value": {
+				"dmg": [5,7],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 5,
+					"element": "Gleeie'er"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Vorpal Sword",
+			"unidentifiedItemName": "Vorpal Sword",
+			"texture": load("res://Assets/Weapons/SwordVorpalSword.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordVorpalSword.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"value": {
+				"dmg": [13,17],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Giantslayer",
+			"unidentifiedItemName": "Giantslayer",
+			"texture": load("res://Assets/Weapons/TwohandedGiantslayer.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedGiantslayer.png"),
+			"type": "Weapon",
+			"category": "Two-hander",
+			"value": {
+				"dmg": [18,22],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "BrittleLeaf",
+			"unidentifiedItemName": "BrittleLeaf",
+			"texture": load("res://Assets/Weapons/TwohandedSwordBrittleLeaf.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedSwordBrittleLeaf.png"),
+			"type": "Weapon",
+			"category": "Two-hander",
+			"value": {
+				"dmg": [6,8],
+				"d": 2,
+				"bonusDmg": {
+					"dmg": 3,
+					"element": "Gleeie'er"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		},
+		{
+			"itemName": "Icesplitter",
+			"unidentifiedItemName": "Icesplitter",
+			"texture": load("res://Assets/Weapons/TwohandedSwordIcesplitter.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedSwordIcesplitter.png"),
+			"type": "Weapon",
+			"category": "Two-hander",
+			"value": {
+				"dmg": [12,15],
+				"d": 1,
+				"bonusDmg": {
+					"dmg": 6,
+					"element": "Frost"
+				}
+			},
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Legendary"
 		}
 	]
 }

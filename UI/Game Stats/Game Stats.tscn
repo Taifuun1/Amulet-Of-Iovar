@@ -224,6 +224,26 @@ rect_min_size = Vector2( 123, 0 )
 text = "-"
 align = 2
 
+[node name="DungeonLevelContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 192.0
+margin_right = 377.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="DungeonLevelText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Dungeon Level"
+
+[node name="DungeonLevel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_left = 381.0
 margin_right = 741.0

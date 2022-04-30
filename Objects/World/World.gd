@@ -6,18 +6,21 @@ onready var critters = preload("res://Objects/Critter/Critters.tscn").instance()
 onready var items = preload("res://Objects/Item/Items.tscn").instance()
 
 onready var dungeon1 = preload("res://Random Generators/Dungeon Levels/Dungeon1.tscn")
+onready var minesOfTidoh = preload("res://Random Generators/Mines Of Tidoh/MinesOfTidoh.tscn")
+onready var tidohMiningOutpost = preload("res://Random Generators/Mines Of Tidoh/TidohMiningOutpost.tscn")
 
 var updateObjects = true
 
 enum tiles { 
 	EMPTY
 	CORRIDOR
-	DOOR
-	FOUNTAIN
-	FLOOR
-	DOWN_STAIR
 	WALL
+	FLOOR
+	SIDEWALK
+	DOWN_STAIR
 	UP_STAIR
+	GRASS
+	DOOR
 }
 
 enum uI {
@@ -30,7 +33,7 @@ enum uI {
 
 var level = null
 var levels = {
-	"firstLevel": 0,
+	"firstLevel": null,
 	"dungeon1": [],
 	"minesOfTidoh": [],
 	"dungeon2": [],
@@ -56,8 +59,6 @@ var direction = null
 func _ready():
 	randomize()
 	
-	$FOV.createFOVLevels()
-	
 	items.create()
 	$Items.add_child(items)
 	
@@ -67,16 +68,47 @@ func _ready():
 	$UI/ItemManagement.create()
 	$UI/Equipment.create()
 	
+	# Dungeon 1
 	var firstLevel = dungeon1.instance()
 	firstLevel.setName()
+	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
-	for _level in range(3):
+	for _level in range(2):
 		var newDungeon = dungeon1.instance()
 		newDungeon.setName()
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
+	# Mines of Tidoh
+	for _level in range(3):
+		var newCave = minesOfTidoh.instance()
+		newCave.setName()
+		levels.minesOfTidoh.append(newCave)
+		$Levels.add_child(newCave)
+	var newMiningOutpost = tidohMiningOutpost.instance()
+	newMiningOutpost.setName()
+	levels.minesOfTidoh.append(newMiningOutpost)
+	$Levels.add_child(newMiningOutpost)
+	for _level in range(3):
+		var newCave = minesOfTidoh.instance()
+		newCave.setName()
+		levels.minesOfTidoh.append(newCave)
+		$Levels.add_child(newCave)
+	# Dungeon 2
+	for _level in range(3):
+		var newDungeon = dungeon1.instance()
+		newDungeon.setName()
+		levels.dungeon2.append(newDungeon)
+		$Levels.add_child(newDungeon)
+	
+	var levelCount = 0
+	for section in levels:
+		if typeof(levels[section]) != TYPE_ARRAY:
+			levelCount += 1
+		else:
+			levelCount += levels[section].size()
+	$FOV.createFOVLevels(levelCount)
 
-func _input(event):
+func _input(_event):
 	if (Input.is_action_just_pressed("START") and level == null):
 		create()
 		yield(get_tree().create_timer(0.1), "timeout")
@@ -112,20 +144,38 @@ func _input(event):
 				_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
 			processGameTurn(_playerTile, _tileToMoveTo)
 		elif (
-			Input.is_action_just_pressed("ASCEND") or
-			Input.is_action_just_pressed("DESCEND")
+			Input.is_action_just_pressed("ASCEND") and
+			level.grid[_playerTile.x][_playerTile.y].tile == tiles.UP_STAIR and
+			Globals.currentDungeonLevel > 1 and
+			inGame
 		):
-			if Input.is_action_just_pressed("ASCEND"):
-				moveLevel(-1)
-			elif Input.is_action_just_pressed("DESCEND"):
-				moveLevel(1)
+			$"/root/World".hide()
+			var stair = moveLevel(-1)
 			updateTiles()
-			if Input.is_action_just_pressed("ASCEND"):
+			if stair == null:
 				placeCritter(tiles.DOWN_STAIR, 0)
-			elif Input.is_action_just_pressed("DESCEND"):
-				placeCritter(tiles.UP_STAIR, 0)
+			else:
+				level.grid[stair.x][stair.y].critter = 0
 			yield(get_tree().create_timer(0.1), "timeout")
 			drawLevel()
+			$"/root/World".show()
+		elif (
+			Input.is_action_just_pressed("DESCEND") and
+			level.grid[_playerTile.x][_playerTile.y].tile == tiles.DOWN_STAIR and
+			Globals.currentDungeonLevel < 9 and
+			levels.minesOfTidoh.back().level != Globals.currentDungeonLevel and
+			inGame
+		):
+			$"/root/World".hide()
+			var stair = moveLevel(1)
+			updateTiles()
+			if stair == null:
+				placeCritter(tiles.UP_STAIR, 0)
+			else:
+				level.grid[stair.x][stair.y].critter = 0
+			yield(get_tree().create_timer(0.1), "timeout")
+			drawLevel()
+			$"/root/World".show()
 		elif Input.is_action_just_pressed("ACCEPT"):
 			processGameTurn(_playerTile)
 		elif (Input.is_action_just_pressed("PICK_UP") and inGame):
@@ -175,18 +225,6 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 		inGame
 	):
 		$"Critters/0".processPlayerAction(_playerTile, _tileToMoveTo, $Items/Items, level)
-	elif (Input.is_action_pressed("ASCEND") and
-		level.grid[_playerTile.x][_playerTile.y].tile == tiles.UP_STAIR and
-		Globals.currentDungeonLevel != 1 and
-		inGame
-	):
-		moveLevel(-1)
-	elif (Input.is_action_pressed("DESCEND") and
-		level.grid[_playerTile.x][_playerTile.y].tile == tiles.DOWN_STAIR and
-		Globals.currentDungeonLevel != 4 and
-		inGame
-	 ):
-		moveLevel(1)
 	elif (Input.is_action_pressed("ACCEPT") and !inGame
 	):
 		processAccept()
@@ -277,14 +315,20 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 func create():
 	$UI/GameConsole.create()
 	
-	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel(tiles, true)
-	for _level in levels.dungeon1:
+	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel(tiles)
+	for _level in range(levels.dungeon1.size()):
+		if levels.dungeon1[_level] == levels.dungeon1.back():
+			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel(tiles, true)
+		else:
+			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel(tiles)
+	for _level in levels.minesOfTidoh:
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel(tiles)
+	for _level in levels.dungeon2:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel(tiles)
 	
 	$Critters.add_child(player, true)
-	player.create()
+	player.create("mercenary")
 	placeCritter(tiles.UP_STAIR, 0)
-	
 	
 	createItemsForEachLevel()
 	createCrittersForEachLevel()
@@ -295,11 +339,47 @@ func create():
 	inGame = true
 
 func moveLevel(_direction):
-	var nextLevelInArray = Globals.currentDungeonLevel + _direction - 1
-	level = get_node("Levels/{level}".format({ "level": nextLevelInArray }))
-	$FOV.moveLevel(nextLevelInArray)
-	Globals.currentDungeonLevel += _direction
 	updateObjects = true
+	if (
+		(
+			levels.dungeon1.back().level == Globals.currentDungeonLevel and
+			_direction == 1
+		) or
+		(
+			levels.dungeon2.front().level == Globals.currentDungeonLevel and
+			_direction == -1
+		) or
+		(
+			levels.minesOfTidoh.front().level == Globals.currentDungeonLevel and
+			_direction == -1
+		)
+	):
+		var goToStair
+		for stair in level.stairs.keys():
+			if level.stairs[stair] == getCritterTile(0):
+				if stair == "downStair" and _direction == 1:
+					Globals.currentDungeonLevel = levels.dungeon2.front().level
+					goToStair = "upStair"
+					break
+				elif stair == "secondDownStair" and _direction == 1:
+					Globals.currentDungeonLevel = levels.minesOfTidoh.front().level
+					goToStair = "upStair"
+					break
+				elif stair == "upStair" and _direction == -1:
+					if levels.minesOfTidoh.front().level == Globals.currentDungeonLevel:
+						goToStair = "secondDownStair"
+					elif levels.dungeon2.front().level == Globals.currentDungeonLevel:
+						goToStair = "downStair"
+					Globals.currentDungeonLevel = levels.dungeon1.back().level
+					break
+		level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
+		$FOV.moveLevel(Globals.currentDungeonLevel - 1)
+		return level.stairs[goToStair]
+	else:
+		Globals.currentDungeonLevel += _direction
+		level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
+		$FOV.moveLevel(Globals.currentDungeonLevel - 1)
+	return null
 
 func updateTiles():
 	for x in (level.grid.size()):

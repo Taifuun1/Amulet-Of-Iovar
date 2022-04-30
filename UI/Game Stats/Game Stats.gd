@@ -17,7 +17,8 @@ func updateStats(stats = {
 	ac = null,
 	attacks = null,
 	currentHit = null,
-	hits = null
+	hits = null,
+	dungeonLevel = null
 }):
 	if stats.maxhp != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HPContainer/HPAmount.max_value = stats.maxhp
@@ -43,6 +44,8 @@ func updateStats(stats = {
 #		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.text = str(stats.alignment)
 #	if stats.alignment != null:
 #		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.text = str(stats.alignment)
+	if stats.dungeonLevel != null:
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.text = str(stats.dungeonLevel)
 
 func addResistance(_resistance):
 #	var label = RichTextLabel.new()

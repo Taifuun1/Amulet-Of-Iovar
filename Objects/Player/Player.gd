@@ -1,52 +1,75 @@
 extends BaseCritter
 
+var strengthIncrease = 0
+var legerityIncrease = 0
+var balanceIncrease = 0
+var beliefIncrease = 0
+var visageIncrease = 0
+var wisdomIncrease = 0
+
 var skills = {
-	"sword": 0,
-	"twohandedSword": 0,
-	"dagger": 0,
-	"hammer": 0,
-	"flail": 0
+	"sword": {
+		"skill": 0,
+		"skillCap": 0
+	},
+	"twohandedSword": {
+		"skill": 0,
+		"skillCap": 0
+	},
+	"dagger": {
+		"skill": 0,
+		"skillCap": 0
+	},
+	"mace": {
+		"skill": 0,
+		"skillCap": 0
+	},
+	"flail": {
+		"skill": 0,
+		"skillCap": 0
+	}
 }
 
-var skillcap = {
-	"sword": 2,
-	"twohandedSword": 1,
-	"dagger": 0,
-	"hammer": 0,
-	"flail": 0
-}
-
-func create():
+func create(_class):
 	id = 0
 	name = str(0)
 	
 	add_child(inventory)
 	$Inventory.create()
 	
+	var _playerClass = load("res://Objects/Player/PlayableClasses.gd").new()[_class]
+	
 	critterName = "Player"
 	race = "Human"
 	alignment = "Neutral"
 	
-	strength = 9
-	legerity = 9
-	balance = 9
-	belief = 9
-	sagacity = 9
-	wisdom = 9
+	strength = _playerClass.strength
+	legerity = _playerClass.legerity
+	balance = _playerClass.balance
+	belief = _playerClass.belief
+	visage = _playerClass.visage
+	wisdom = _playerClass.wisdom
+	
+	strengthIncrease = _playerClass.strengthIncrease
+	legerityIncrease = _playerClass.legerityIncrease
+	balanceIncrease = _playerClass.balanceIncrease
+	beliefIncrease = _playerClass.beliefIncrease
+	visageIncrease = _playerClass.visageIncrease
+	wisdomIncrease = _playerClass.wisdomIncrease
+	
+	skills = _playerClass.skills
 	
 	level = 1
-	hp = 12
-	mp = 10
+	hp = _playerClass.hp
+	mp = _playerClass.mp
 	ac = $"/root/World/UI/Equipment".getArmorClass()
-	baseDamage = 1
-	attacks = [( baseDamage + ( strength * ( 1 / 3 ) ) )]
 	currentHit = 0
-	hits = [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0]
+	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 	
 	abilities = []
 	resistances = []
 	
-	updatePlayerStats(12, 10)
+	updatePlayerStats(_playerClass.hp, _playerClass.mp, 1)
 	
 	$PlayerSprite.texture = load("res://Assets/Mercenary.png")
 
@@ -55,7 +78,12 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
 		if _critter.aI.aI == "Aggressive":
 			if hits[currentHit] == 1:
-				_critter.takeDamage(attacks, _tileToMoveTo, _items, _level)
+				if $"/root/World/UI/Equipment".hands["lefthand"] != null and $"/root/World/UI/Equipment".hands["righthand"] != null:
+					var left = $"/root/World/UI/Equipment".hands["lefthand"].getAttacks()
+					var right = $"/root/World/UI/Equipment".hands["righthand"].getAttacks()
+					_critter.takeDamage(left.append_array(right), _tileToMoveTo, _items, _level)
+				else:
+					_critter.takeDamage([strength * 1 / 3], _tileToMoveTo, _items, _level)
 			else:
 				Globals.gameConsole.addLog("You miss!")
 			if currentHit == 15:
@@ -72,7 +100,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
 			Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
 
-func updatePlayerStats(maxhp = null, maxmp = null):
+func updatePlayerStats(maxhp = null, maxmp = null, dungeonLevel = null):
 	Globals.gameStats.updateStats({
 		maxhp = maxhp,
 		hp = hp,
@@ -85,44 +113,62 @@ func updatePlayerStats(maxhp = null, maxmp = null):
 		ac = ac,
 		attacks = attacks,
 		currentHit = currentHit,
-		hits = hits
+		hits = hits,
+		dungeonLevel = dungeonLevel
 	})
 
 func calculateEquipment():
+	# Armor class
 	ac = $"/root/World/UI/Equipment".getArmorClass()
-	if $"/root/World/UI/Equipment".hands["lefthand"] == null and $"/root/World/UI/Equipment".hands["righthand"] == null:
-		attacks = [(baseDamage + (strength * ( 1 / 3 )))]
-		return
-	elif (
-		$"/root/World/UI/Equipment".hands["lefthand"] != null and
-		$"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]
-	):
-		attacks = [(baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()]
-		return
-	else:
-		attacks.clear()
-		if (
-			$"/root/World/UI/Equipment".hands["lefthand"] != null and
-			get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).type == "Weapon"
-		):
-			attacks.append((baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
-			if(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).category == "Dagger"):
-				attacks.append((baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
-			elif(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).category == "Flail"):
-				attacks.append((baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
-				attacks.append((baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
-		if (
-			$"/root/World/UI/Equipment".hands["righthand"] != null and
-			get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).type == "Weapon"
-		):
-			attacks.append((baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
-			if(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).category == "Dagger"):
-				attacks.append((baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
-			elif(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).category == "Flail"):
-				attacks.append((baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
-				attacks.append((baseDamage + (strength * ( 1 / 3 ))) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
-		if attacks.empty():
-			attacks.append(1)
+	
+#	# Melee damage and hits
+#	if $"/root/World/UI/Equipment".hands["lefthand"] == null and $"/root/World/UI/Equipment".hands["righthand"] == null:
+#		attacks = [ strength * 1 / 3 ]
+#		return
+#	elif (
+#		$"/root/World/UI/Equipment".hands["lefthand"] != null and
+#		$"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]
+#	):
+#		attacks = [ ( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()]
+#		return
+#	else:
+#		attacks.clear()
+#		attacks["melee"] = strength * 1 / 3
+#		var left = get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] }))
+#		var right = get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] }))
+#		match left.category:
+#			"Sword":
+#				attacks["sword"] = .getTotalUseValue()
+#			"Two-handed sword":
+#				attacks["sword"] = (strength * 1 / 3) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()
+#			"Dagger":
+#				attacks["sword"] = (strength * 1 / 3) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()
+#			"Mace":
+#				attacks["sword"] = (strength * 1 / 3) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()
+#			"Flail":
+#				attacks["sword"] = (strength * 1 / 3) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()
+#		if (
+#			$"/root/World/UI/Equipment".hands["lefthand"] != null and
+#			get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).type == "Weapon"
+#		):
+#			attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
+#			if(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).category == "Dagger"):
+#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
+#			elif(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).category == "Flail"):
+#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
+#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
+#		if (
+#			$"/root/World/UI/Equipment".hands["righthand"] != null and
+#			get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).type == "Weapon"
+#		):
+#			attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
+#			if(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).category == "Dagger"):
+#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
+#			elif(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).category == "Flail"):
+#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
+#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
+#		if attacks.empty():
+#			attacks.append(1)
 
 func takeDamage(_attacks, _crittername):
 	var _attacksLog = []

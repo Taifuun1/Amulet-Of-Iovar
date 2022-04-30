@@ -8,6 +8,8 @@ var level
 var grid = []
 var rooms = []
 var spawnableFloors = []
+var stairs = {}
+
 var critters = []
 
 func setName():
@@ -15,7 +17,7 @@ func setName():
 	name = str(Globals.levelId)
 	Globals.levelId += 1
 
-func createNewLevel(_tiles, _isFirstLevel = false):
+func createNewLevel(_tiles, _isDouble = false):
 	tiles = _tiles
 	
 	# Create rooms with doors and staircases
@@ -28,7 +30,7 @@ func createNewLevel(_tiles, _isFirstLevel = false):
 				"items": []
 			})
 	
-	var response = createDungeon()
+	var response = createDungeon(_isDouble)
 	if response.error != null:
 		return {
 			"error": response.error
@@ -43,18 +45,18 @@ func createNewLevel(_tiles, _isFirstLevel = false):
 			while(true):
 				randomEndPointRoom = rooms[randi() % rooms.size()]
 				endPointDoor = randomEndPointRoom[randi() % randomEndPointRoom.size()]
-				if(door != endPointDoor):
+				if(door != endPointDoor and randomEndPointRoom != room):
 					break
 			var path = calculateCorridorsPath(door, endPointDoor)
 			for point in path:
 				if grid[point.x][point.y].tile != tiles.DOOR:
 					grid[point.x][point.y].tile = tiles.CORRIDOR
 	
-	pathFindPathFinding(grid, tiles)
+	enemyPathFinding(grid, tiles)
 	
 	return self
 
-func createDungeon():
+func createDungeon(_isDouble = false):
 	for _room in range(randi() % 2 + 5):
 		for _createAttempts in range(100):
 			var roomPlacement = Vector2(randi() % (int(Globals.gridSize.x) - 1) + 1, randi() % (int(Globals.gridSize.y) - 1) + 1)
@@ -85,7 +87,7 @@ func createDungeon():
 				break
 			else:
 				continue
-	placeStairs(false)
+	stairs = placeStairs(grid, tiles, spawnableFloors, _isDouble)
 	return {
 		"error": null
 	}
@@ -107,25 +109,6 @@ func placeDoors(room):
 		grid[placement.x][placement.y].tile = tiles.DOOR
 		rooms.back().append(placement)
 	return true
-
-func placeStairs(_isDouble):
-	var double = _isDouble
-	for _i in range(100):
-		var x = randi() % (grid.size() - 1)
-		var y = randi() % (grid[x].size() - 1)
-		if(grid[x][y].tile == tiles.FLOOR):
-			grid[x][y].tile = tiles.DOWN_STAIR
-			if double:
-				double = false
-				continue
-			else:
-				break
-	for _i in range(100):
-		var x = randi() % grid.size()
-		var y = randi() % grid[x].size()
-		if(grid[x][y].tile == tiles.FLOOR):
-			grid[x][y].tile = tiles.UP_STAIR
-			break
 
 func checkIfRoomIsInvalid(roomPlacement, roomSize):
 	for x in range(int(roomPlacement.x) - ((int(roomSize.x) / 2) + 1), int(roomPlacement.x) + ((int(roomSize.x) / 2) + 1)):

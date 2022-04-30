@@ -27,6 +27,25 @@ var itemGeneration = {
 			}
 		},
 		"custom": null
+	},
+	"minesOfTidoh": {
+		"floor": {
+			"type": {
+				"weapons": 300,
+				"armor": 300,
+				"rings": 100,
+				"tools": 150,
+				"miscellaneous": 150
+			},
+			"rarity": {
+				"common": 800,
+				"uncommon": 100,
+				"rare": 50,
+				"mythical": 40,
+				"artefact": 10
+			}
+		},
+		"custom": null
 	}
 }
 
@@ -49,7 +68,7 @@ func generateItemsForLevel(_level):
 	
 	for _item in _items:
 		if _item != null:
-			var gridPosition = _level.spawnableFloors[randi() % _level.spawnableFloors.size() - 1]
+			var gridPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size() - 1)]
 			var newItem = item.instance()
 			newItem.createItem(_item)
 			_level.grid[gridPosition.x][gridPosition.y].items.append(newItem.id)

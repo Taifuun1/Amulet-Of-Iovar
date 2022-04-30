@@ -17,7 +17,7 @@ var stackable
 
 var unidentifiedItemName
 var notIdentified = {
-	"use": false,
+	"name": false,
 	"alignment": false,
 	"enchantment": false
 }
@@ -31,6 +31,7 @@ func createItem(_item, extraData = {}):
 		itemName = "{critterName} {itemName}".format({ "critterName": extraData.critterName, "itemName": _item.itemName})
 	else:
 		itemName = _item.itemName
+	unidentifiedItemName = _item.unidentifiedItemName
 	
 	type = _item.type
 	category = _item.category
@@ -54,8 +55,6 @@ func createItem(_item, extraData = {}):
 		enchantment = 0
 	
 	stackable = _item.stackable
-	
-	unidentifiedItemName = _item.unidentifiedItemName
 	
 	$ItemSprite.texture = _item.texture
 
@@ -99,8 +98,11 @@ func createItemByName(_itemName, _items, extraData = {}):
 	
 	$ItemSprite.texture = _item.texture
 
-func getTotalUseValue():
-	return value + enchantment
+func getAttacks():
+	var attacks = []
+	for d in value:
+		attacks.append((randi() % d.dmg[1] + d.dmg[0]) + enchantment)
+	return attacks
 
 func getTexture():
 	return $ItemSprite.texture

@@ -2,10 +2,41 @@ extends BaseCritter
 
 var aI = load("res://Objects/AI/AI.tscn").instance()
 
+func createCritter(_critter, _extraData = {}):
+	id = Globals.critterId
+	name = str(id)
+	Globals.critterId += 1
+	
+	add_child(inventory)
+	$Inventory.create()
+	
+	critterName = _critter.critterName
+	race = _critter.race
+	alignment = _critter.alignment
+	
+	strength = _critter.stats.strength
+	legerity = _critter.stats.legerity
+	balance = _critter.stats.balance
+	belief = _critter.stats.belief
+	visage = _critter.stats.visage
+	wisdom = _critter.stats.wisdom
+	
+	level = 1
+	hp = _critter.hp
+	mp = _critter.mp
+	ac = _critter.ac
+	attacks = [ strength * 1 / 3 ]
+	currentHit = 0
+	hits = _critter.hits
+	
+	abilities = _critter.abilities
+	resistances = _critter.resistances
+	
+	$CritterSprite.texture = _critter.texture
+
 func createCritterByName(_critterName, _critters):
 	var _critter = _critters.getCritterByName(_critterName)
 	createCritter(_critter)
-	baseDamage = _critter.baseDamage
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level, _tiles):
 	var _path = aI.getCritterMove(_critterTile, _playerTile, _level)

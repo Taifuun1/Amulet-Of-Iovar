@@ -10,14 +10,13 @@ var animals = {
 			"hp": 5,
 			"mp": 0,
 			"ac": 0,
-			"baseDamage": 1,
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 5,
 				"legerity": 3,
 				"balance": 3,
 				"belief": 0,
-				"sagacity": 0,
+				"visage": 0,
 				"wisdom": 0
 			},
 			"statIncreases": {
@@ -25,7 +24,7 @@ var animals = {
 				"legerity": 1,
 				"balance": 0,
 				"belief": 0,
-				"sagacity": 0,
+				"visage": 0,
 				"wisdom": 0
 			},
 			"abilities": [],

@@ -22,6 +22,7 @@ var equipment = {
 	"feet": null
 }
 
+var dualWielding = false
 var hoveredEquipment = null
 
 func create():
@@ -41,6 +42,8 @@ func _process(_delta):
 				$"EquipmentBackground/RightHand/Sprite".texture = null
 				_changed = true
 		else:
+			if hands[hoveredEquipment.to_lower()] != null:
+				dualWielding = false
 			if hands[hoveredEquipment.to_lower()] != null:
 				_changed = true
 			hands[hoveredEquipment.to_lower()] = null
@@ -78,6 +81,7 @@ func setEquipment(_id):
 	var _matchingType = checkIfMatchingEquipmentAndSlot(_item.type, _item.category)
 	var _changed = false
 	if _matchingType == "Weapon":
+		dualWielding = false
 		if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
 			hands["lefthand"] = null
 			hands["righthand"] = null
@@ -91,6 +95,8 @@ func setEquipment(_id):
 		elif hands["lefthand"] != _item.id and hands["righthand"] != _item.id:
 			hands[hoveredEquipment.to_lower()] = _item.id
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
+		if hands["lefthand"] != null and hands["righthand"] != null and !(hands["lefthand"] == hands["righthand"]):
+			dualWielding = true
 		_changed = true
 	if _matchingType == "Accessory":
 		accessories[hoveredEquipment.to_lower()] = _item.id
@@ -110,7 +116,6 @@ func checkIfWearingEquipment(_id):
 	for _hand in hands.keys():
 		if hands[_hand] == _id:
 			hands[_hand] = null
-			print(_hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1))
 			if _hand == "righthand":
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = null
 			else:
