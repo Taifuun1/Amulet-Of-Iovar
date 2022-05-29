@@ -28,6 +28,7 @@ enum uI {
 	INVENTORY
 	PICK_UP_ITEMS
 	DROP_ITEMS
+	READ
 	EQUIPMENT
 }
 
@@ -37,8 +38,13 @@ var levels = {
 	"dungeon1": [],
 	"minesOfTidoh": [],
 	"dungeon2": [],
-	"arena": [],
+	"beach": [],
 	"dungeon3": [],
+	"library": [],
+	"dungeon4": [],
+	"banditWarcamp": [],
+	
+	"arena": [],
 	"fortress": [],
 	"theGreatShadows": [],
 	"halls1": [],
@@ -186,6 +192,8 @@ func _input(_event):
 			openInventory()
 		elif (Input.is_action_just_pressed("EQUIPMENT") and inGame):
 			openEquipmentItemMenu()
+		elif (Input.is_action_just_pressed("READ") and inGame):
+			openReadItemMenu()
 		elif (Input.is_action_just_pressed("BACK")):
 			closeMenu()
 		elif Input.is_action_just_pressed("KEEP_MOVING") and inGame:
@@ -330,8 +338,15 @@ func create():
 	player.create("mercenary")
 	placeCritter(tiles.UP_STAIR, 0)
 	
+	$Items/Items.randomizeRandomItems()
+	
 	createItemsForEachLevel()
 	createCrittersForEachLevel()
+	
+	var newItem = load("res://Objects/Item/Item.tscn").instance()
+	newItem.createItem($"/root/World/Items/Items".getItemByName("scroll of identify"), { "alignment": "Blessed" })
+	$"/root/World/Items".add_child(newItem, true)
+	$Critters/"0"/Inventory.addToInventory(newItem.id)
 	
 	updateTiles()
 	
@@ -409,7 +424,9 @@ func openInventory():
 		inGame = false
 
 func openPickUpItemMenu(_playerTile):
-	if level.grid[_playerTile.x][_playerTile.y].items.size() != 0 and uIState == uI.GAME:
+	if level.grid[_playerTile.x][_playerTile.y].items.size() == 1 and uIState == uI.GAME:
+		$Critters/"0".pickUpItems(_playerTile, level.grid[_playerTile.x][_playerTile.y].items, level.grid)
+	elif level.grid[_playerTile.x][_playerTile.y].items.size() != 0 and uIState == uI.GAME:
 		$UI/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
 		$UI/ItemManagement.showItemManagementList()
 		uIState = uI.PICK_UP_ITEMS
@@ -428,6 +445,13 @@ func openEquipmentItemMenu():
 		uIState = uI.EQUIPMENT     
 		inGame = false
 
+func openReadItemMenu():
+	if uIState == uI.GAME:
+		$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["Scroll"])
+		$UI/ItemManagement.showItemManagementList(true)
+		uIState = uI.READ
+		inGame = false
+
 func processAccept():
 	var _playerTile = getCritterTile(0)
 	var _items = $UI/ItemManagement.selectedItems
@@ -440,7 +464,7 @@ func processAccept():
 	closeMenu()
 
 func closeMenu():
-	if uIState == uI.PICK_UP_ITEMS or uIState == uI.DROP_ITEMS:
+	if uIState == uI.PICK_UP_ITEMS or uIState == uI.DROP_ITEMS or uIState == uI.READ:
 		$UI/ItemManagement.hideItemManagementList()
 	if uIState == uI.EQUIPMENT:
 		$UI/Equipment.hideEquipment()

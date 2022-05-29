@@ -17,13 +17,14 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Common"
+			"rarity": "Common",
+			"identified": false
 		},
 		{
 			"itemName": "Dull two-hander",
 			"unidentifiedItemName": "Dull two-handed sword",
-			"texture": load("res://Assets/Weapons/TwohandedSwordDullTwohander.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedSwordDullTwohander.png"),
+			"texture": load("res://Assets/Weapons/TwohanderDullTwohander.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderDullTwohander.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
 			"value": {
@@ -36,7 +37,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Common"
+			"rarity": "Common",
+			"identified": false
 		},
 		{
 			"itemName": "Cut dagger",
@@ -55,7 +57,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Common"
+			"rarity": "Common",
+			"identified": false
 		},
 		{
 			"itemName": "Worn mace",
@@ -68,13 +71,14 @@ var weapons = {
 				"dmg": [2,4],
 				"d": 1,
 				"bonusDmg": {
-					"dmg": 1,
-					"element": "Toxix"
+					"dmg": 0,
+					"element": null
 				}
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Common"
+			"rarity": "Common",
+			"identified": false
 		},
 		{
 			"itemName": "Rigid flail",
@@ -93,7 +97,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Common"
+			"rarity": "Common",
+			"identified": false
 		}
 	],
 	"uncommon": [
@@ -114,11 +119,12 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Uncommon"
+			"rarity": "Uncommon",
+			"identified": false
 		},
 		{
-			"itemName": "Sharp Flail",
-			"unidentifiedItemName": "Sharp Flail",
+			"itemName": "Sharp flail",
+			"unidentifiedItemName": "Sharp flail",
 			"texture": load("res://Assets/Weapons/FlailSharpFlail.png"),
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailSharpFlail.png"),
 			"type": "Weapon",
@@ -133,7 +139,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Uncommon"
+			"rarity": "Uncommon",
+			"identified": false
 		},
 		{
 			"itemName": "Dwarvish laysword",
@@ -152,7 +159,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Uncommon"
+			"rarity": "Uncommon",
+			"identified": false
 		},
 		{
 			"itemName": "Orcish sword",
@@ -171,7 +179,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Uncommon"
+			"rarity": "Uncommon",
+			"identified": false
 		},
 		{
 			"itemName": "Elvish sword",
@@ -190,7 +199,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Uncommon"
+			"rarity": "Uncommon",
+			"identified": false
 		}
 	],
 	"rare": [
@@ -211,7 +221,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Rare"
+			"rarity": "Rare",
+			"identified": false
 		},
 		{
 			"itemName": "Morning star",
@@ -230,7 +241,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Rare"
+			"rarity": "Rare",
+			"identified": false
 		},
 		{
 			"itemName": "Adorned sword",
@@ -249,13 +261,14 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Rare"
+			"rarity": "Rare",
+			"identified": false
 		},
 		{
 			"itemName": "Mithril two-hander",
 			"unidentifiedItemName": "Mithril two-hander",
-			"texture": load("res://Assets/Weapons/TwohandedSwordMithrilTwohander.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedSwordMithrilTwohander.png"),
+			"texture": load("res://Assets/Weapons/TwohanderMithrilTwohander.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderMithrilTwohander.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
 			"value": {
@@ -268,7 +281,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Rare"
+			"rarity": "Rare",
+			"identified": false
 		}
 	],
 	"legendary": [
@@ -289,7 +303,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Dagger of Elbier",
@@ -308,11 +323,12 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
-			"itemName": "Crustel Flail",
-			"unidentifiedItemName": "Crustel Flail",
+			"itemName": "Crustel flail",
+			"unidentifiedItemName": "Crustel flail",
 			"texture": load("res://Assets/Weapons/FlailCrustelFlail.png"),
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailCrustelFlail.png"),
 			"type": "Weapon",
@@ -327,7 +343,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Loperiels Destiny",
@@ -346,7 +363,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Dumpel Pompel",
@@ -365,7 +383,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Final Dawn",
@@ -384,7 +403,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Titan Slayer",
@@ -403,7 +423,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Fleirflare",
@@ -422,7 +443,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Frostfury",
@@ -441,11 +463,12 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
-			"itemName": "Justice'eer Sword",
-			"unidentifiedItemName": "Justice'eer Sword",
+			"itemName": "Justice'eer sword",
+			"unidentifiedItemName": "Justice'eer sword",
 			"texture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
 			"type": "Weapon",
@@ -460,7 +483,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Stormbringer",
@@ -479,11 +503,12 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
-			"itemName": "Vorpal Sword",
-			"unidentifiedItemName": "Vorpal Sword",
+			"itemName": "Vorpal sword",
+			"unidentifiedItemName": "Vorpal sword",
 			"texture": load("res://Assets/Weapons/SwordVorpalSword.png"),
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordVorpalSword.png"),
 			"type": "Weapon",
@@ -498,13 +523,14 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Giantslayer",
 			"unidentifiedItemName": "Giantslayer",
-			"texture": load("res://Assets/Weapons/TwohandedGiantslayer.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedGiantslayer.png"),
+			"texture": load("res://Assets/Weapons/TwohanderGiantslayer.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderGiantslayer.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
 			"value": {
@@ -517,13 +543,14 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
-			"itemName": "BrittleLeaf",
-			"unidentifiedItemName": "BrittleLeaf",
-			"texture": load("res://Assets/Weapons/TwohandedSwordBrittleLeaf.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedSwordBrittleLeaf.png"),
+			"itemName": "Brittleleaf",
+			"unidentifiedItemName": "Brittleleaf",
+			"texture": load("res://Assets/Weapons/TwohanderBrittleLeaf.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderBrittleLeaf.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
 			"value": {
@@ -536,13 +563,14 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		},
 		{
 			"itemName": "Icesplitter",
 			"unidentifiedItemName": "Icesplitter",
-			"texture": load("res://Assets/Weapons/TwohandedSwordIcesplitter.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwohandedSwordIcesplitter.png"),
+			"texture": load("res://Assets/Weapons/TwohanderIcesplitter.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderIcesplitter.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
 			"value": {
@@ -555,7 +583,8 @@ var weapons = {
 			},
 			"enchantment": true,
 			"stackable": false,
-			"rarity": "Legendary"
+			"rarity": "Legendary",
+			"identified": false
 		}
 	]
 }

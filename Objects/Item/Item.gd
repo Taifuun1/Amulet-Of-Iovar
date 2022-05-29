@@ -1,7 +1,5 @@
 extends Node
 
-var gridPosition
-
 var id
 var itemName
 
@@ -13,24 +11,25 @@ var value
 var alignment
 var enchantment = null
 
-var stackable
-
+var identifiedItemName
 var unidentifiedItemName
 var notIdentified = {
-	"name": false,
 	"alignment": false,
 	"enchantment": false
 }
 
-func createItem(_item, extraData = {}):
+var stackable
+
+func createItem(_item, _extraData = {}):
 	id = Globals.itemId
 	name = str(id)
 	Globals.itemId += 1
 	
-	if _item.itemName == "Corpse":
-		itemName = "{critterName} {itemName}".format({ "critterName": extraData.critterName, "itemName": _item.itemName})
-	else:
+	if GlobalItemInfo.globalItemInfo.has(itemName) and GlobalItemInfo.globalItemInfo[itemName].identified:
 		itemName = _item.itemName
+	else:
+		itemName = _item.unidentifiedItemName
+	identifiedItemName = _item.itemName
 	unidentifiedItemName = _item.unidentifiedItemName
 	
 	type = _item.type
@@ -38,13 +37,16 @@ func createItem(_item, extraData = {}):
 	
 	value = _item.value
 	
-	if randi() % 5 + 0 == 5:
-		if randi() % 2 == 1:
-			alignment = "Blessed"
-		else:
-			alignment = "Cursed"
+	if _extraData.has("alignment"):
+		alignment = _extraData.alignment
 	else:
-		alignment = "Neutral"
+		if randi() % 5 + 0 == 5:
+			if randi() % 2 == 1:
+				alignment = "Blessed"
+			else:
+				alignment = "Cursed"
+		else:
+			alignment = "Neutral"
 	
 	if randi() % 8 == 1:
 		if randi() % 2 == 1:
@@ -58,17 +60,14 @@ func createItem(_item, extraData = {}):
 	
 	$ItemSprite.texture = _item.texture
 
-func createItemByName(_itemName, _items, extraData = {}):
-	var _item = _items.getItemByName(_itemName, "miscellaneous", "other")
+func createCorpse(_critterName, _items):
+	var _item = _items.miscellaneousItems[0]
 	
 	id = Globals.itemId
 	name = str(id)
 	Globals.itemId += 1
 	
-	if _item.itemName == "Corpse":
-		itemName = "{critterName} {itemName}".format({ "critterName": extraData.critterName, "itemName": _item.itemName})
-	else:
-		itemName = _item.itemName
+	itemName = "{critterName} {itemName}".format({ "critterName": _critterName, "itemName": "corpse"})
 	
 	type = _item.type
 	category = _item.category
@@ -83,18 +82,9 @@ func createItemByName(_itemName, _items, extraData = {}):
 	else:
 		alignment = "Neutral"
 	
-	if enchantment:
-		if randi() % 8 == 1:
-			if randi() % 2 == 1:
-				enchantment = randi() % 2
-			else:
-				enchantment = -randi() % 2
-		else:
-			enchantment = 0
+	enchantment = 0
 	
 	stackable = _item.stackable
-	
-	unidentifiedItemName = _item.unidentifiedItemName
 	
 	$ItemSprite.texture = _item.texture
 
@@ -106,3 +96,9 @@ func getAttacks():
 
 func getTexture():
 	return $ItemSprite.texture
+
+func checkItemIdentification():
+	if GlobalItemInfo.globalItemInfo.has(identifiedItemName) and GlobalItemInfo.globalItemInfo[identifiedItemName].identified == true:
+		itemName = identifiedItemName
+		notIdentified.alignment = true
+		notIdentified.enchantment = true

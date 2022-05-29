@@ -2,15 +2,15 @@ extends Node
 
 onready var critter = preload("res://Objects/Critter/Critter.tscn")
 
-var animals = preload("res://Objects/Critter/Animals/Animals.gd").new()
-var humanoids = preload("res://Objects/Critter/Humanoids/Humanoids.gd").new()
+var newts = preload("res://Objects/Critter/Newts/Newts.gd").new()
+var dwarves = preload("res://Objects/Critter/Dwarves/Dwarves.gd").new()
 
 var critterGeneration = {
 	"dungeon1": {
 		"floor": {
 			"type": {
-				"animals": 800,
-				"humanoids": 200,
+				"newts": 800,
+				"dwarves": 200,
 			},
 			"rarity": {
 				"common": 1000,
@@ -21,8 +21,8 @@ var critterGeneration = {
 	"minesOfTidoh": {
 		"floor": {
 			"type": {
-				"animals": 800,
-				"humanoids": 200,
+				"newts": 800,
+				"dwarves": 200,
 			},
 			"rarity": {
 				"common": 1000,
@@ -36,8 +36,8 @@ var critters = {}
 
 func create():
 	name = "Critters"
-	critters["animals"] = animals.animals
-	critters["humanoids"] = humanoids.humanoids
+	critters["newts"] = newts.newts
+	critters["dwarves"] = dwarves.dwarves
 
 func generateCrittersForLevel(_level):
 	var _critterGeneration = critterGeneration[_level.dungeonType]

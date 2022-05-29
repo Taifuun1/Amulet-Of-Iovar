@@ -50,11 +50,11 @@ func dropFromInventory(_item):
 
 func showInventory():
 	for item in inventory:
-		var newItem = inventoryItem.instance()
+		var _newItem = inventoryItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
-		newItem.setValues(_item)
-		newItem.get_node("Checked").connect("pressed", self, "_on_Inventory_List_Clicked", [{ "id": _item.id }])
-		$InventoryContainer/InventoryList.add_child(newItem)
+		_newItem.setValues(_item)
+		_newItem.get_node("Checked").connect("pressed", self, "_on_Inventory_List_Clicked", [{ "id": _item.id }])
+		$InventoryContainer/InventoryList.add_child(_newItem)
 	$InventoryContainer.show()
 
 func hideInventory():

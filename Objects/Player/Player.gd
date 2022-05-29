@@ -71,7 +71,7 @@ func create(_class):
 	
 	updatePlayerStats(_playerClass.hp, _playerClass.mp, 1)
 	
-	$PlayerSprite.texture = load("res://Assets/Mercenary.png")
+	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
 
 func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 	if(_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter != null):
@@ -198,7 +198,7 @@ func pickUpItems(_playerTile, _items, _grid):
 			pickUpItem(_playerTile, _item, _grid)
 			itemsLog.append("You pickup {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
 	var itemsLogString = PoolStringArray(itemsLog).join(" ")
-	$"/root/World/UI/GameConsole".addLog(itemsLogString)
+	Globals.gameConsole.addLog(itemsLogString)
 
 func pickUpItem(_playerTile, _item, _grid):
 	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
@@ -215,10 +215,95 @@ func dropItems(_playerTile, _items, _grid):
 			dropItem(_playerTile, _item, _grid)
 			itemsLog.append("You drop {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
 	var itemsLogString = PoolStringArray(itemsLog).join(" ")
-	$"/root/World/UI/GameConsole".addLog(itemsLogString)
+	Globals.gameConsole.addLog(itemsLogString)
 
 func dropItem(_playerTile, _item, _grid):
 	_grid[_playerTile.x][_playerTile.y].items.append(_item)
 	$Inventory.dropFromInventory(_item)
 	get_node("/root/World/Items/{id}".format({ "id": _item })).show()
 	$"/root/World/UI/Equipment".checkIfWearingEquipment(_item)
+
+func readItem(_id):
+	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
+	if _readItem.type.matchn("scroll"):
+		match _readItem.identifiedItemName.to_lower():
+			"scroll of identify":
+				Globals.gameConsole.addLog("You read a {itemName}.".format({ "itemName": _readItem.itemName }))
+				if (
+					GlobalItemInfo.globalItemInfo.has(_readItem.identifiedItemName) and
+					GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified == false
+				):
+					GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified = true
+					Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _readItem.identifiedItemName, "unidentifiedItemName": _readItem.unidentifiedItemName }))
+				var _items = $"/root/World/Critters/0/Inventory".inventory.duplicate(true)
+				if _items.empty():
+					Globals.gameConsole.addLog("You hear strange whispers in your head. LLLLLL......")
+				else:
+					var _identifiableItemsInInventory = false
+					if !_readItem.alignment.matchn("cursed"):
+						if _readItem.alignment.matchn("blessed"):
+							for _item in _items:
+								var _itemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
+								if (
+									GlobalItemInfo.globalItemInfo.has(_itemInInventory.identifiedItemName) and
+									GlobalItemInfo.globalItemInfo[_itemInInventory.identifiedItemName].identified == false
+								):
+									_identifiableItemsInInventory = true
+									GlobalItemInfo.globalItemInfo[_itemInInventory.identifiedItemName].identified = true
+									_itemInInventory.notIdentified.alignment = true
+									_itemInInventory.notIdentified.enchantment = true
+									Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _itemInInventory.identifiedItemName, "unidentifiedItemName": _itemInInventory.unidentifiedItemName }))
+						else:
+							while true:
+								if _items.empty():
+									break
+								var _item = _items[randi() % _items.size()]
+								var _randomItemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
+								if (
+									GlobalItemInfo.globalItemInfo.has(_randomItemInInventory.identifiedItemName) and
+									GlobalItemInfo.globalItemInfo[_randomItemInInventory.identifiedItemName].identified == false
+								):
+									GlobalItemInfo.globalItemInfo[_randomItemInInventory.identifiedItemName].identified = true
+									_randomItemInInventory.notIdentified.alignment = true
+									_randomItemInInventory.notIdentified.enchantment = true
+									Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _randomItemInInventory.identifiedItemName, "unidentifiedItemName": _randomItemInInventory.unidentifiedItemName }))
+									_identifiableItemsInInventory = true
+									break
+								_items.erase(_item)
+					if !_identifiableItemsInInventory:
+						_items = $"/root/World/Critters/0/Inventory".inventory.duplicate(true)
+						if _readItem.alignment.matchn("blessed"):
+							for _item in _items:
+								var _itemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
+								if (
+									_itemInInventory.notIdentified.alignment or
+									_itemInInventory.notIdentified.enchantment
+								):
+									_itemInInventory.notIdentified.alignment = true
+									_itemInInventory.notIdentified.enchantment = true
+									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _itemInInventory.itemName }))
+						else:
+							while true:
+								if _items.empty():
+									Globals.gameConsole.addLog("You hear strange whispers in your head. LLLLLL......")
+									break
+								var _item = _items[randi() % _items.size()]
+								var _randomItemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
+								if (
+									_randomItemInInventory.notIdentified.alignment or
+									_randomItemInInventory.notIdentified.enchantment
+								):
+									_randomItemInInventory.notIdentified.alignment = true
+									_randomItemInInventory.notIdentified.enchantment = true
+									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _randomItemInInventory.itemName }))
+									break
+								_items.erase(_item)
+					for _item in $"/root/World/Items".get_children():
+						if _item.name == "Items":
+							continue
+						_item.checkItemIdentification()
+				$"/root/World/Critters/0/Inventory".inventory.erase(_id)
+				get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+			_:
+				Globals.gameConsole.addLog("Thats not a scroll...")
+	$"/root/World".closeMenu()

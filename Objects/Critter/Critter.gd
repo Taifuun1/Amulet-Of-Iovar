@@ -79,7 +79,7 @@ func takeDamage(_attacks, _critterTile, _items, _level):
 
 func despawn(_critterTile, _items, _level):
 	var _corpse = load("res://Objects/Item/Item.tscn").instance()
-	_corpse.createItemByName("Corpse", _items, { "critterName": critterName })
+	_corpse.createCorpse(critterName, _items)
 	$"/root/World/Items".add_child(_corpse)
 	_level.grid[_critterTile.x][_critterTile.y].items.append(_corpse.id)
 	_level.grid[_critterTile.x][_critterTile.y].critter = null

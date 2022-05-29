@@ -1,7 +1,6 @@
 extends Node
 
 var id
-var gridPosition
 var itemName
 var unidentifiedItemName
 var type

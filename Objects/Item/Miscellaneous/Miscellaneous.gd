@@ -9,7 +9,8 @@ var miscellaneous = {
 			"category": null,
 			"value": null,
 			"enchantment": true,
-			"stackable": false
+			"stackable": false,
+			"identified": false
 		}
 	]
 }
