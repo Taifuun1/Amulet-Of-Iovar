@@ -36,6 +36,7 @@ config/icon="res://Assets/Amulets/AmuletRainbow.png"
 
 Globals="*res://Objects/Miscellaneous/Globals.gd"
 GlobalItemInfo="*res://Objects/Miscellaneous/GlobalItemInfo.gd"
+GlobalCritterInfo="*res://Objects/Miscellaneous/GlobalCritterInfo.gd"
 
 [debug]
 

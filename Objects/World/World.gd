@@ -10,6 +10,7 @@ onready var minesOfTidoh = preload("res://Random Generators/Mines Of Tidoh/Mines
 onready var tidohMiningOutpost = preload("res://Random Generators/Mines Of Tidoh/TidohMiningOutpost.tscn")
 
 var updateObjects = true
+var checkNewCritterSpawn = 0
 
 enum tiles { 
 	EMPTY
@@ -206,6 +207,12 @@ func processGameTurn(_playerTile, _tileToMoveTo = null):
 	else:
 		processPlayerAction(_playerTile, _tileToMoveTo)
 		processEnemyActions()
+	if checkNewCritterSpawn >= 30:
+		$Critters/Critters.checkSpawnableCrittersLevel()
+		$Critters/Critters.checkNewCritterSpawn(level)
+		checkNewCritterSpawn = 0
+	else:
+		checkNewCritterSpawn += 1
 	drawLevel()
 
 func processPlayerAction(_playerTile, _tileToMoveTo):

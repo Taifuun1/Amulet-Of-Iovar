@@ -14,6 +14,8 @@ func createCritter(_critter, _extraData = {}):
 	race = _critter.race
 	alignment = _critter.alignment
 	
+	aI.aI = _critter.aI
+	
 	strength = _critter.stats.strength
 	legerity = _critter.stats.legerity
 	balance = _critter.stats.balance
@@ -25,7 +27,7 @@ func createCritter(_critter, _extraData = {}):
 	hp = _critter.hp
 	mp = _critter.mp
 	ac = _critter.ac
-	attacks = [ strength * 1 / 3 ]
+	attacks = [ strength * 1 / 2 ]
 	currentHit = 0
 	hits = _critter.hits
 	
@@ -33,10 +35,6 @@ func createCritter(_critter, _extraData = {}):
 	resistances = _critter.resistances
 	
 	$CritterSprite.texture = _critter.texture
-
-func createCritterByName(_critterName, _critters):
-	var _critter = _critters.getCritterByName(_critterName)
-	createCritter(_critter)
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level, _tiles):
 	var _path = aI.getCritterMove(_critterTile, _playerTile, _level)
@@ -59,15 +57,15 @@ func takeDamage(_attacks, _critterTile, _items, _level):
 	var _attacksLog = []
 	if _attacks.size() != 0:
 		for _attack in _attacks:
-			var armorReduction = _attack - ( ac / 3 )
-			if armorReduction <= 1 and armorReduction >= -2:
+			var _damageAfterArmorReduction = _attack - ( ac / 3 )
+			if _damageAfterArmorReduction <= 1 and _damageAfterArmorReduction >= -2:
 				hp -= 1
-				_attacksLog.append("You hit the {critter} for 1 damage.".format({ "critter": critterName }))
-			elif armorReduction < -2:
+				_attacksLog.append("You hit the {critter} for 1 damage...".format({ "critter": critterName }))
+			elif _damageAfterArmorReduction < -2:
 				_attacksLog.append("Your attack bounces off!")
 			else:
-				hp -= armorReduction
-				_attacksLog.append("You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": armorReduction }))
+				hp -= _damageAfterArmorReduction
+				_attacksLog.append("You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damageAfterArmorReduction }))
 			if hp <= 0:
 				despawn(_critterTile, _items, _level)
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))

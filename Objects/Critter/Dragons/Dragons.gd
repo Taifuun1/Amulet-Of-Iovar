@@ -1,0 +1,212 @@
+var dragons = {
+	"hostile": [],
+	"critterTypes": [
+		{
+			"critterName": "Black dragon",
+			"race": "Dragon",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonBlackDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": [],
+			"resistances": []
+		},
+		{
+			"critterName": "Blue dragon",
+			"race": "Dragons",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonBlueDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": [],
+			"resistances": ["frost"]
+		},
+		{
+			"critterName": "Cyan dragon",
+			"race": "Dragons",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonCyanDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": [],
+			"resistances": ["confusion"]
+		},
+		{
+			"critterName": "Green dragon",
+			"race": "Dragons",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonGreenDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": [],
+			"resistances": ["fumbling"]
+		},
+		{
+			"critterName": "Red dragon",
+			"race": "Dragons",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonRedDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": [],
+			"resistances": ["fleir"]
+		},
+		{
+			"critterName": "Silver dragon",
+			"race": "Dragons",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonSilverDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": ["reflection"],
+			"resistances": []
+		},
+		{
+			"critterName": "Violet dragon",
+			"race": "Dragons",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonVioletDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": [],
+			"resistances": ["stun"]
+		},
+		{
+			"critterName": "White dragon",
+			"race": "Dragons",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonWhiteDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": [],
+			"resistances": ["stun"]
+		},
+		{
+			"critterName": "Yellow dragon",
+			"race": "Dragons",
+			"class": "Ancient",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/DragonYellowDragon.png"),
+			"alignment": "Neutral",
+			"level": 20,
+			"hp": 160,
+			"mp": 60,
+			"ac": 10,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 25,
+				"legerity": 25,
+				"balance": 25,
+				"belief": 25,
+				"visage": 30,
+				"wisdom": 48
+			},
+			"abilities": [],
+			"resistances": ["thunder"]
+		}
+	]
+}

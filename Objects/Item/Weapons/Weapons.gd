@@ -130,8 +130,8 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Flail",
 			"value": {
-				"dmg": [7,10],
-				"d": 1,
+				"dmg": [2,3],
+				"d": 3,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null

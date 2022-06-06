@@ -78,17 +78,27 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
 		if _critter.aI.aI == "Aggressive":
 			if hits[currentHit] == 1:
-				if $"/root/World/UI/Equipment".hands["lefthand"] != null and $"/root/World/UI/Equipment".hands["righthand"] != null:
-					var left = $"/root/World/UI/Equipment".hands["lefthand"].getAttacks()
-					var right = $"/root/World/UI/Equipment".hands["righthand"].getAttacks()
-					_critter.takeDamage(left.append_array(right), _tileToMoveTo, _items, _level)
+				if $"/root/World/UI/Equipment".hands["lefthand"] != null or $"/root/World/UI/Equipment".hands["righthand"] != null:
+					var _attacks = []
+					if $"/root/World/UI/Equipment".hands["lefthand"] != null and $"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"] != null:
+						_attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks())
+					else:
+						if $"/root/World/UI/Equipment".hands["lefthand"] != null:
+							_attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks())
+						if $"/root/World/UI/Equipment".hands["righthand"] != null:
+							_attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks())
+					_critter.takeDamage(_attacks, _tileToMoveTo, _items, _level)
 				else:
-					_critter.takeDamage([strength * 1 / 3], _tileToMoveTo, _items, _level)
+					_critter.takeDamage([strength * 1 / 2], _tileToMoveTo, _items, _level)
 			else:
 				Globals.gameConsole.addLog("You miss!")
 			if currentHit == 15:
 				currentHit = 0
 			currentHit += 1
+		elif _critter.aI.aI == "Neutral":
+			_level.grid[_playerTile.x][_playerTile.y].critter = _critter.id
+			_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter = 0
+			Globals.gameConsole.addLog("You switch places with the {critter}.".format({ "critter": _critter.critterName }))
 		else:
 			return false
 	else:
@@ -226,9 +236,9 @@ func dropItem(_playerTile, _item, _grid):
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if _readItem.type.matchn("scroll"):
+		Globals.gameConsole.addLog("You read a {itemName}.".format({ "itemName": _readItem.itemName }))
 		match _readItem.identifiedItemName.to_lower():
 			"scroll of identify":
-				Globals.gameConsole.addLog("You read a {itemName}.".format({ "itemName": _readItem.itemName }))
 				if (
 					GlobalItemInfo.globalItemInfo.has(_readItem.identifiedItemName) and
 					GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified == false

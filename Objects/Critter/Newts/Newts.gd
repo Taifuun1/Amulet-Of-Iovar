@@ -1,12 +1,14 @@
 var newts = {
-	"common": [
+	"hostile": [],
+	"critterTypes": [
 		{
-			"critterName": "Newt",
-			"race": "Lizard",
-			"amount": 10,
-			"ai": "Aggressive",
+			"critterName": "River newt",
+			"race": "Newt",
+			"class": "Animal",
+			"aI": "Aggressive",
 			"texture": load("res://Assets/Critters/NewtRiverNewt.png"),
 			"alignment": "Neutral",
+			"level": 2,
 			"hp": 5,
 			"mp": 0,
 			"ac": 0,
@@ -19,16 +21,100 @@ var newts = {
 				"visage": 0,
 				"wisdom": 0
 			},
-			"statIncreases": {
-				"strength": 0,
-				"legerity": 0,
-				"balance": 0,
+			"abilities": [],
+			"resistances": []
+		},
+		{
+			"critterName": "Mine newt",
+			"race": "Newt",
+			"class": "Animal",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/NewtMineNewt.png"),
+			"alignment": "Neutral",
+			"level": 4,
+			"hp": 15,
+			"mp": 0,
+			"ac": 1,
+			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+			"stats": {
+				"strength": 8,
+				"legerity": 6,
+				"balance": 6,
 				"belief": 0,
 				"visage": 0,
 				"wisdom": 0
 			},
 			"abilities": [],
 			"resistances": []
+		},
+		{
+			"critterName": "Highlands newt",
+			"race": "Newt",
+			"class": "Animal",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/NewtHighlandsNewt.png"),
+			"alignment": "Neutral",
+			"level": 8,
+			"hp": 31,
+			"mp": 0,
+			"ac": 4,
+			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+			"stats": {
+				"strength": 12,
+				"legerity": 9,
+				"balance": 8,
+				"belief": 0,
+				"visage": 0,
+				"wisdom": 0
+			},
+			"abilities": [],
+			"resistances": []
+		},
+		{
+			"critterName": "Paper newt",
+			"race": "Newt",
+			"class": "Animal",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/NewtPaperNewt.png"),
+			"alignment": "Neutral",
+			"level": 12,
+			"hp": 42,
+			"mp": 0,
+			"ac": 3,
+			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+			"stats": {
+				"strength": 12,
+				"legerity": 12,
+				"balance": 15,
+				"belief": 0,
+				"visage": 0,
+				"wisdom": 0
+			},
+			"abilities": [],
+			"resistances": []
+		},
+		{
+			"critterName": "Arctic newt",
+			"race": "Newt",
+			"class": "Animal",
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/NewtArcticNewt.png"),
+			"alignment": "Neutral",
+			"level": 15,
+			"hp": 51,
+			"mp": 0,
+			"ac": 6,
+			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+			"stats": {
+				"strength": 18,
+				"legerity": 14,
+				"balance": 14,
+				"belief": 0,
+				"visage": 0,
+				"wisdom": 0
+			},
+			"abilities": [],
+			"resistances": ["frost"]
 		}
 	]
 }

@@ -9,12 +9,15 @@ func _ready():
 	pass
 
 
-func calculateCavePath(pathStartPosition, pathEndPosition):
-	return caveAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
-
+# Critters pathfinding
 func calculatePathFindingPath(pathStartPosition, pathEndPosition):
 	return pathFindingAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
 
+# Mines pathfinding
+func calculateCavePath(pathStartPosition, pathEndPosition):
+	return caveAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
+
+# Corridors pathfinding
 func calculateCorridorsPath(pathStartPosition, pathEndPosition):
 	return corridorsAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
 
@@ -198,6 +201,9 @@ func connectCorridorCells(points, grid):
 # Helper functions
 func isOutSideTileMap(point, grid):
 	return point.x < 0 or point.y < 0 or point.x >= grid.size() or point.y >= grid[0].size()
+
+func hasPoint(point):
+	return pathFindingAstarNode.has_point(id(point))
 
 func id(point):
 	var a = point.x

@@ -87,7 +87,7 @@ func setEquipment(_id):
 			hands["righthand"] = null
 			$"EquipmentBackground/LeftHand/Sprite".texture = null
 			$"EquipmentBackground/RightHand/Sprite".texture = null
-		if _item.category == "Two-handed sword":
+		if _item.category == "Two-hander":
 			hands["lefthand"] = _item.id
 			hands["righthand"] = _item.id
 			$"EquipmentBackground/LeftHand/Sprite".texture = _item.getTexture()
@@ -142,7 +142,7 @@ func getSlot(_item):
 		_item._category == "Sword" or
 		_item._category == "Two-handed sword" or
 		_item._category == "Dagger" or
-		_item._category == "Hammer" or
+		_item._category == "Mace" or
 		_item._category == "Flail" or
 		_item._category == "Shield"
 	):
@@ -154,10 +154,10 @@ func getSlot(_item):
 		return "Accessory"
 	if (
 		_item._category == "Boots" or
-		_item._category == "Chausses" or
+		_item._category == "Greaves" or
 		_item._category == "Belt" or
 		_item._category == "Gauntlets" or
-		_item._category == "Platemail" or
+		_item._category == "Plate" or
 		_item._category == "Helmet"
 	):
 		return "Armor"
@@ -166,19 +166,19 @@ func getArmorClass():
 	var _ac = 0
 	if equipment["head"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["head"] }))
-		_ac += (_item.value + _item.enchantment)
+		_ac += (_item.value.ac + _item.enchantment)
 	if equipment["chest"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["chest"] }))
-		_ac += (_item.value + _item.enchantment)
+		_ac += (_item.value.ac + _item.enchantment)
 	if equipment["hands"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["hands"] }))
-		_ac += (_item.value + _item.enchantment)
+		_ac += (_item.value.ac + _item.enchantment)
 	if equipment["legs"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["legs"] }))
-		_ac += (_item.value + _item.enchantment)
+		_ac += (_item.value.ac + _item.enchantment)
 	if equipment["feet"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["feet"] }))
-		_ac += (_item.value + _item.enchantment)
+		_ac += (_item.value.ac + _item.enchantment)
 	if hands["lefthand"] != null and get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] })).category == "Shield":
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] }))
 		_ac += (_item.value + _item.enchantment)
@@ -192,9 +192,9 @@ func checkIfMatchingEquipmentAndSlot(_type, _category):
 		if (
 			(
 				_category == "Sword" or
-				_category == "Two-handed sword" or
+				_category == "Two-hander" or
 				_category == "Dagger" or
-				_category == "Hammer" or
+				_category == "Mace" or
 				_category == "Flail"
 			) and
 			(
@@ -231,7 +231,7 @@ func checkIfMatchingEquipmentAndSlot(_type, _category):
 			return "Armor"
 		if (
 			(
-				_category == "Platemail"
+				_category == "Plate"
 			) and
 			hoveredEquipment == "Chest"
 		):
@@ -262,7 +262,7 @@ func checkIfMatchingEquipmentAndSlot(_type, _category):
 			return "Armor"
 		if (
 			(
-				_category == "Chausses"
+				_category == "Greaves"
 			) and
 			hoveredEquipment == "Legs"
 		):

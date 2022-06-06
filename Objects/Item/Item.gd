@@ -90,8 +90,8 @@ func createCorpse(_critterName, _items):
 
 func getAttacks():
 	var attacks = []
-	for d in value:
-		attacks.append((randi() % d.dmg[1] + d.dmg[0]) + enchantment)
+	for d in range(value.d):
+		attacks.append(((randi() % value.dmg[1] + value.dmg[0]) + enchantment) + value.bonusDmg.dmg)
 	return attacks
 
 func getTexture():
