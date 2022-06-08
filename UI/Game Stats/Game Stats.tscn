@@ -23,18 +23,14 @@ color = Color( 0.0235294, 0.0313726, 0.101961, 1 )
 [node name="GameStatsContainer" type="MarginContainer" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
 
 [node name="GameStatsColumns" type="HBoxContainer" parent="Background/GameStatsContainer"]
-margin_right = 1105.0
-margin_bottom = 292.0
+margin_right = 1122.0
+margin_bottom = 312.0
 
 [node name="DetailsContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_right = 377.0
-margin_bottom = 292.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 363, 0 )
 
 [node name="HPContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
@@ -244,15 +240,134 @@ rect_min_size = Vector2( 123, 0 )
 text = "-"
 align = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
+[node name="StatsContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_left = 381.0
-margin_right = 741.0
-margin_bottom = 292.0
+margin_right = 758.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 360, 0 )
 
+[node name="StrengthContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="StrengthText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Strength"
+
+[node name="Strength" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+
+[node name="LegerityContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 24.0
+margin_right = 377.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="LegerityText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/LegerityContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Legerity"
+
+[node name="Legerity" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/LegerityContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+
+[node name="BalanceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 48.0
+margin_right = 377.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="BalanceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BalanceContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Balance"
+
+[node name="Balance" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BalanceContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+
+[node name="BeliefContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 72.0
+margin_right = 377.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="BeliefText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BeliefContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Belief"
+
+[node name="Belief" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BeliefContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+
+[node name="VisageContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 96.0
+margin_right = 377.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="VisageText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/VisageContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Visage"
+
+[node name="Visage" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/VisageContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+
+[node name="WisdomContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 120.0
+margin_right = 377.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="WisdomText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Wisdom"
+
+[node name="Wisdom" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+
 [node name="ResistancesContainer" type="GridContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
-margin_left = 745.0
-margin_right = 1105.0
-margin_bottom = 292.0
+margin_left = 762.0
+margin_right = 1122.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 360, 0 )
 columns = 8

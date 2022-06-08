@@ -12,18 +12,6 @@ onready var tidohMiningOutpost = preload("res://Random Generators/Mines Of Tidoh
 var updateObjects = true
 var checkNewCritterSpawn = 0
 
-enum tiles { 
-	EMPTY
-	CORRIDOR
-	WALL
-	FLOOR
-	SIDEWALK
-	DOWN_STAIR
-	UP_STAIR
-	GRASS
-	DOOR
-}
-
 enum uI {
 	GAME
 	INVENTORY
@@ -150,9 +138,10 @@ func _input(_event):
 			elif Input.is_action_pressed("MOVE_UP_LEFT"):
 				_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
 			processGameTurn(_playerTile, _tileToMoveTo)
+			get_tree().set_input_as_handled()
 		elif (
 			Input.is_action_just_pressed("ASCEND") and
-			level.grid[_playerTile.x][_playerTile.y].tile == tiles.UP_STAIR and
+			level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.UP_STAIR and
 			Globals.currentDungeonLevel > 1 and
 			inGame
 		):
@@ -160,7 +149,7 @@ func _input(_event):
 			var stair = moveLevel(-1)
 			updateTiles()
 			if stair == null:
-				placeCritter(tiles.DOWN_STAIR, 0)
+				placeCritter(Globals.tiles.DOWN_STAIR, 0)
 			else:
 				level.grid[stair.x][stair.y].critter = 0
 			yield(get_tree().create_timer(0.1), "timeout")
@@ -168,7 +157,7 @@ func _input(_event):
 			$"/root/World".show()
 		elif (
 			Input.is_action_just_pressed("DESCEND") and
-			level.grid[_playerTile.x][_playerTile.y].tile == tiles.DOWN_STAIR and
+			level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR and
 			Globals.currentDungeonLevel < 9 and
 			levels.minesOfTidoh.back().level != Globals.currentDungeonLevel and
 			inGame
@@ -177,7 +166,7 @@ func _input(_event):
 			var stair = moveLevel(1)
 			updateTiles()
 			if stair == null:
-				placeCritter(tiles.UP_STAIR, 0)
+				placeCritter(Globals.tiles.UP_STAIR, 0)
 			else:
 				level.grid[stair.x][stair.y].critter = 0
 			yield(get_tree().create_timer(0.1), "timeout")
@@ -201,12 +190,14 @@ func _input(_event):
 			keepMoving = true
 		$"Critters/0".updatePlayerStats()
 
-func processGameTurn(_playerTile, _tileToMoveTo = null):
-	if keepMoving and _tileToMoveTo != null:
-		keepMovingLoop(_playerTile, _tileToMoveTo)
-	else:
-		processPlayerAction(_playerTile, _tileToMoveTo)
-		processEnemyActions()
+func processGameTurn(_playerTile = null, _tileToMoveTo = null):
+	if _playerTile != null:
+		if keepMoving and _tileToMoveTo != null:
+			keepMovingLoop(_playerTile, _tileToMoveTo)
+		else:
+			processPlayerAction(_playerTile, _tileToMoveTo)
+	processEnemyActions()
+	processTurnStatsAndEffects()
 	if checkNewCritterSpawn >= 30:
 		$Critters/Critters.checkSpawnableCrittersLevel()
 		$Critters/Critters.checkNewCritterSpawn(level)
@@ -234,8 +225,8 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 			_tileToMoveTo.x < level.grid.size()
 		) and
 		(
-			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != tiles.EMPTY and
-			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != tiles.WALL
+			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.EMPTY and
+			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL
 		) and
 		inGame
 	):
@@ -249,7 +240,13 @@ func processEnemyActions():
 	if level.critters.size() != 0:
 		for _enemy in level.critters:
 			var _critterTile = getCritterTile(_enemy)
-			get_node("Critters/{id}".format({ "id": _enemy })).processCritterAction(_critterTile, _playerTile, _enemy, level, tiles)
+			get_node("Critters/{id}".format({ "id": _enemy })).processCritterAction(_critterTile, _playerTile, _enemy, level)
+
+func processTurnStatsAndEffects():
+	$"/root/World/Critters/0".processEffects()
+	if level.critters.size() != 0:
+		for _enemy in level.critters:
+			get_node("Critters/{id}".format({ "id": _enemy })).processEffects()
 
 func drawLevel():
 	if updateObjects:
@@ -264,7 +261,7 @@ func drawLevel():
 	drawCrittersAndItems()
 
 func drawCrittersAndItems():
-	# Critters, items and tiles
+	# Critters, items and Globals.tiles
 	for x in (Globals.gridSize.x):
 		for y in (Globals.gridSize.y):
 			if level.grid[x][y].critter != null:
@@ -290,7 +287,7 @@ func drawFOV():
 			var occlusion = spaceState.intersect_ray(playerCenter, testPoint)
 			if !occlusion || (occlusion.position - testPoint).length() < 1:
 				$FOV.seeCell(_x, _y)
-			elif occlusion and $FOV.currentFOVLevel[_x][_y] == -1 and level.grid[_x][_y].tile != tiles.EMPTY:
+			elif occlusion and $FOV.currentFOVLevel[_x][_y] == -1 and level.grid[_x][_y].tile != Globals.tiles.EMPTY:
 				$FOV.greyCell(_x, _y)
 
 func keepMovingLoop(_playerTile, _tileToMoveTo):
@@ -305,17 +302,43 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 				_nextTile.y >= 0 and
 				_nextTile.y < level.grid[0].size() - 1
 			) and
-			level.grid[_nextTile.x][_nextTile.y].tile != tiles.WALL and
-			level.grid[_nextTile.x][_nextTile.y].tile != tiles.EMPTY and
+			level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.WALL and
+			level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.EMPTY and
 			(
-				level.grid[_currentTile.x][_currentTile.y - 1].critter == null and
-				level.grid[_currentTile.x + 1][_currentTile.y - 1].critter == null and
-				level.grid[_currentTile.x + 1][_currentTile.y].critter == null and
-				level.grid[_currentTile.x + 1][_currentTile.y + 1].critter == null and
-				level.grid[_currentTile.x][_currentTile.y + 1].critter == null and
-				level.grid[_currentTile.x - 1][_currentTile.y + 1].critter == null and
-				level.grid[_currentTile.x - 1][_currentTile.y].critter == null and
+				level.grid[_currentTile.x][_currentTile.y - 1].critter == null
+#				_currentTile.y - 1 < 0
+			) and
+			(
+				level.grid[_currentTile.x + 1][_currentTile.y - 1].critter == null
+#				_currentTile.y - 1 < 0 or
+#				level.grid.size() < _currentTile.x + 1
+			) and
+			(
+				level.grid[_currentTile.x + 1][_currentTile.y].critter == null
+#				level.grid.size() < _currentTile.x + 1
+			) and
+			(
+				level.grid[_currentTile.x + 1][_currentTile.y + 1].critter == null
+#				level.grid.size() < _currentTile.x + 1 or
+#				level.grid[0].size() < _currentTile.y + 1
+			) and
+			(
+				level.grid[_currentTile.x][_currentTile.y + 1].critter == null
+#				level.grid[0].size() < _currentTile.y + 1
+			) and
+			(
+				level.grid[_currentTile.x - 1][_currentTile.y + 1].critter == null
+#				_currentTile.x - 1 < 0 or
+#				level.grid[0].size() < _currentTile.y + 1
+			) and
+			(
+				level.grid[_currentTile.x - 1][_currentTile.y].critter == null
+#				_currentTile.x - 1 < 0
+			) and
+			(
 				level.grid[_currentTile.x - 1][_currentTile.y - 1].critter == null
+#				_currentTile.x - 1 < 0 or
+#				_currentTile.y - 1 < 0
 			) and
 			inGame
 		):
@@ -330,20 +353,21 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 func create():
 	$UI/GameConsole.create()
 	
-	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel(tiles)
+	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
 	for _level in range(levels.dungeon1.size()):
 		if levels.dungeon1[_level] == levels.dungeon1.back():
-			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel(tiles, true)
+			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel(true)
 		else:
-			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel(tiles)
+			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel()
 	for _level in levels.minesOfTidoh:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel(tiles)
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	for _level in levels.dungeon2:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel(tiles)
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
 	$Critters.add_child(player, true)
 	player.create("mercenary")
-	placeCritter(tiles.UP_STAIR, 0)
+	placeCritter(Globals.tiles.UP_STAIR, 0)
+	player.calculateEquipmentStats()
 	
 	$Items/Items.randomizeRandomItems()
 	
@@ -351,9 +375,29 @@ func create():
 	createCrittersForEachLevel()
 	
 	var newItem = load("res://Objects/Item/Item.tscn").instance()
-	newItem.createItem($"/root/World/Items/Items".getItemByName("scroll of identify"), { "alignment": "Blessed" })
+	newItem.createItem($"/root/World/Items/Items".getItemByName("scroll of identify"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem, true)
 	$Critters/"0"/Inventory.addToInventory(newItem.id)
+	
+	var newItem2 = load("res://Objects/Item/Item.tscn").instance()
+	newItem2.createItem($"/root/World/Items/Items".getItemByName("scroll of create food"), { "alignment": "blessed" })
+	$"/root/World/Items".add_child(newItem2, true)
+	$Critters/"0"/Inventory.addToInventory(newItem2.id)
+	
+	var newItem5 = load("res://Objects/Item/Item.tscn").instance()
+	newItem5.createItem($"/root/World/Items/Items".getItemByName("scroll of create potion"), { "alignment": "blessed" })
+	$"/root/World/Items".add_child(newItem5, true)
+	$Critters/"0"/Inventory.addToInventory(newItem5.id)
+	
+	var newItem3 = load("res://Objects/Item/Item.tscn").instance()
+	newItem3.createItem($"/root/World/Items/Items".getItemByName("scroll of create food"), { "alignment": "uncursed" })
+	$"/root/World/Items".add_child(newItem3, true)
+	$Critters/"0"/Inventory.addToInventory(newItem3.id)
+	
+	var newItem4 = load("res://Objects/Item/Item.tscn").instance()
+	newItem4.createItem($"/root/World/Items/Items".getItemByName("scroll of create food"), { "alignment": "cursed" })
+	$"/root/World/Items".add_child(newItem4, true)
+	$Critters/"0"/Inventory.addToInventory(newItem4.id)
 	
 	updateTiles()
 	

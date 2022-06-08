@@ -5,6 +5,18 @@ onready var gameStats = $"/root/World/UI/GameStats"
 
 var gridSize = Vector2(60, 24)
 
+enum tiles { 
+	EMPTY
+	CORRIDOR
+	WALL
+	FLOOR
+	SIDEWALK
+	DOWN_STAIR
+	UP_STAIR
+	GRASS
+	DOOR
+}
+
 var race
 var alignment
 

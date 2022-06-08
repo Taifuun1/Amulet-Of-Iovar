@@ -224,12 +224,13 @@ func returnRandomItem(_itemGeneration):
 	for _key in _itemGeneration["type"].keys():
 		for _i in range(_itemGeneration["type"][_key]):
 			randomType.append(_key)
-	type = randomType[randi() % 1000]
 	
 	var randomRarity = []
 	for _key in _itemGeneration["rarity"].keys():
 		for _i in range(_itemGeneration["rarity"][_key]):
 			randomRarity.append(_key)
+	
+	type = randomType[randi() % 1000]
 	rarity = randomRarity[randi() % 1000]
 	
 	if items[type].has(rarity):

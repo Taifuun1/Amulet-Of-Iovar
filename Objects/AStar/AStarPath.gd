@@ -23,11 +23,11 @@ func calculateCorridorsPath(pathStartPosition, pathEndPosition):
 
 
 # Cave creation
-func pathFindCave(grid, tiles):
+func pathFindCave(grid):
 	caveAstarNode.clear()
 	var caveTiles = addAlltiles(grid)
 	connectAllCells(caveTiles, grid, true)
-	addCaveDividers(grid, tiles)
+	addCaveDividers(grid)
 
 func addAlltiles(grid):
 	var points = []
@@ -68,7 +68,7 @@ func connectAllCells(points, grid, aStarGrid = false):
 				continue
 			caveAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
 
-func addCaveDividers(_grid, _tiles):
+func addCaveDividers(_grid):
 	var _verticalDividers = [
 		{
 			"length": randi() % 10 + 10,
@@ -114,21 +114,21 @@ func addCaveDividers(_grid, _tiles):
 
 
 # Enemy pathfinding
-func enemyPathFinding(grid, tiles):
+func enemyPathFinding(grid):
 	pathFindingAstarNode.clear()
-	var walkableTiles = addWalkableTiles(grid, tiles)
+	var walkableTiles = addWalkableTiles(grid)
 	connectWalkableCells(walkableTiles, grid)
 
-func addWalkableTiles(grid, tiles):
+func addWalkableTiles(grid):
 	var points = []
 	for x in (grid.size()):
 		for y in (grid[x].size()):
 			var point = Vector2(x, y)
 			if (
-				grid[point.x][point.y].tile == tiles.EMPTY or
-				grid[point.x][point.y].tile == tiles.WALL or
-				grid[point.x][point.y].tile == tiles.UP_STAIR or
-				grid[point.x][point.y].tile == tiles.DOWN_STAIR
+				grid[point.x][point.y].tile == Globals.tiles.EMPTY or
+				grid[point.x][point.y].tile == Globals.tiles.WALL or
+				grid[point.x][point.y].tile == Globals.tiles.UP_STAIR or
+				grid[point.x][point.y].tile == Globals.tiles.DOWN_STAIR
 			):
 				continue
 			points.append(point)
@@ -158,22 +158,22 @@ func connectWalkableCells(points, grid):
 
 
 # Dungeon corridors creation
-func pathFindCorridors(grid, tiles):
+func pathFindCorridors(grid):
 	corridorsAstarNode.clear()
-	var corridorTiles = addCorridorTiles(grid, tiles)
+	var corridorTiles = addCorridorTiles(grid)
 	connectCorridorCells(corridorTiles, grid)
 
-func addCorridorTiles(grid, tiles):
+func addCorridorTiles(grid):
 	var points = []
 	for x in (grid.size()):
 		for y in (grid[x].size()):
 			var point = Vector2(x, y)
 			if (
-				grid[point.x][point.y].tile == tiles.WALL or
-				grid[point.x][point.y].tile == tiles.FLOOR or
-				grid[point.x][point.y].tile == tiles.GRASS or
-				grid[point.x][point.y].tile == tiles.UP_STAIR or
-				grid[point.x][point.y].tile == tiles.DOWN_STAIR
+				grid[point.x][point.y].tile == Globals.tiles.WALL or
+				grid[point.x][point.y].tile == Globals.tiles.FLOOR or
+				grid[point.x][point.y].tile == Globals.tiles.GRASS or
+				grid[point.x][point.y].tile == Globals.tiles.UP_STAIR or
+				grid[point.x][point.y].tile == Globals.tiles.DOWN_STAIR
 			):
 				continue
 			points.append(point)
@@ -211,7 +211,7 @@ func id(point):
 	return (a + b) * (a + b + 1) / 2 + b
 
 
-func placeStairs(_grid, _tiles, _spawnableFloors, _isDouble = false):
+func placeStairs(_grid, _spawnableFloors, _isDouble = false):
 	var downStair = _spawnableFloors[randi() % _spawnableFloors.size() - 1]
 	var secondDownStair
 	var upStair
@@ -221,19 +221,19 @@ func placeStairs(_grid, _tiles, _spawnableFloors, _isDouble = false):
 		"upStair": null
 	}
 	
-	_grid[downStair.x][downStair.y].tile = _tiles.DOWN_STAIR
+	_grid[downStair.x][downStair.y].tile = Globals.tiles.DOWN_STAIR
 	stairs.downStair = downStair
 	if _isDouble:
 		while true:
 			secondDownStair = _spawnableFloors[randi() % _spawnableFloors.size() - 1]
 			if downStair != secondDownStair:
-				_grid[secondDownStair.x][secondDownStair.y].tile = _tiles.DOWN_STAIR
+				_grid[secondDownStair.x][secondDownStair.y].tile = Globals.tiles.DOWN_STAIR
 				stairs.secondDownStair = secondDownStair
 				break
 	while true:
 		upStair = _spawnableFloors[randi() % _spawnableFloors.size() - 1]
 		if downStair != upStair:
-			_grid[upStair.x][upStair.y].tile = _tiles.UP_STAIR
+			_grid[upStair.x][upStair.y].tile = Globals.tiles.UP_STAIR
 			stairs.upStair = upStair
 			break
 	

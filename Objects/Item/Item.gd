@@ -25,7 +25,10 @@ func createItem(_item, _extraData = {}):
 	name = str(id)
 	Globals.itemId += 1
 	
-	if GlobalItemInfo.globalItemInfo.has(itemName) and GlobalItemInfo.globalItemInfo[itemName].identified:
+	if (
+		(GlobalItemInfo.globalItemInfo.has(itemName) and GlobalItemInfo.globalItemInfo[itemName].identified) or
+		_item.type == "comestible"
+	):
 		itemName = _item.itemName
 	else:
 		itemName = _item.unidentifiedItemName
@@ -42,11 +45,11 @@ func createItem(_item, _extraData = {}):
 	else:
 		if randi() % 5 + 0 == 5:
 			if randi() % 2 == 1:
-				alignment = "Blessed"
+				alignment = "blessed"
 			else:
-				alignment = "Cursed"
+				alignment = "cursed"
 		else:
-			alignment = "Neutral"
+			alignment = "uncursed"
 	
 	if randi() % 8 == 1:
 		if randi() % 2 == 1:
@@ -76,11 +79,11 @@ func createCorpse(_critterName, _items):
 	
 	if randi() % 5 + 0 == 5:
 		if randi() % 2 == 1:
-			alignment = "Blessed"
+			alignment = "blessed"
 		else:
-			alignment = "Cursed"
+			alignment = "cursed"
 	else:
-		alignment = "Neutral"
+		alignment = "uncursed"
 	
 	enchantment = 0
 	
@@ -91,7 +94,13 @@ func createCorpse(_critterName, _items):
 func getAttacks():
 	var attacks = []
 	for d in range(value.d):
-		attacks.append(((randi() % value.dmg[1] + value.dmg[0]) + enchantment) + value.bonusDmg.dmg)
+		attacks.append(
+			{
+				"dmg": [value.dmg[0], value.dmg[1]],
+				"enchantment": enchantment,
+				"bonusDmg": value.bonusDmg
+			}
+		)
 	return attacks
 
 func getTexture():

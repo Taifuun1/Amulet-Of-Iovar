@@ -26,6 +26,10 @@ func createCritter(_critter, _extraData = {}):
 	level = 1
 	hp = _critter.hp
 	mp = _critter.mp
+	basehp = _critter.hp
+	basemp = _critter.mp
+	maxhp = _critter.hp
+	maxmp = _critter.mp
 	ac = _critter.ac
 	attacks = [ strength * 1 / 2 ]
 	currentHit = 0
@@ -36,7 +40,7 @@ func createCritter(_critter, _extraData = {}):
 	
 	$CritterSprite.texture = _critter.texture
 
-func processCritterAction(_critterTile, _playerTile, _critter, _level, _tiles):
+func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	var _path = aI.getCritterMove(_critterTile, _playerTile, _level)
 	if _path.size() != 0:
 		var _to = _path[1]
@@ -57,7 +61,7 @@ func takeDamage(_attacks, _critterTile, _items, _level):
 	var _attacksLog = []
 	if _attacks.size() != 0:
 		for _attack in _attacks:
-			var _damageAfterArmorReduction = _attack - ( ac / 3 )
+			var _damageAfterArmorReduction = calculateDmg(_attack)
 			if _damageAfterArmorReduction <= 1 and _damageAfterArmorReduction >= -2:
 				hp -= 1
 				_attacksLog.append("You hit the {critter} for 1 damage...".format({ "critter": critterName }))
@@ -74,6 +78,9 @@ func takeDamage(_attacks, _critterTile, _items, _level):
 		Globals.gameConsole.addLog(_attacksLogString)
 	else:
 		Globals.gameConsole.addLog("Looks like you cant attack...")
+
+func calculateDmg(_attack):
+	return (((randi() % (_attack.dmg[1] - _attack.dmg[0]) + _attack.dmg[0]) + _attack.enchantment) + _attack.bonusDmg.dmg) - ( ac / 3 )
 
 func despawn(_critterTile, _items, _level):
 	var _corpse = load("res://Objects/Item/Item.tscn").instance()

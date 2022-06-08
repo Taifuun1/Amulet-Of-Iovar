@@ -50,7 +50,7 @@ func _process(_delta):
 			accessories[hoveredEquipment.to_lower()] = null
 			equipment[hoveredEquipment.to_lower()] = null
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
-		$"/root/World/Critters/0".calculateEquipment()
+		$"/root/World/Critters/0".calculateEquipmentStats()
 		if _changed:
 			$"/root/World".processEnemyActions()
 			$"/root/World".drawLevel()
@@ -106,7 +106,7 @@ func setEquipment(_id):
 		equipment[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		_changed = true
-	$"/root/World/Critters/0".calculateEquipment()
+	$"/root/World/Critters/0".calculateEquipmentStats()
 	if _changed:
 		$"/root/World".processEnemyActions()
 		$"/root/World".drawLevel()
@@ -135,7 +135,7 @@ func checkIfWearingEquipment(_id):
 				equipment[_equipment] = null
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = null
 				break
-	$"/root/World/Critters/0".calculateEquipment()
+	$"/root/World/Critters/0".calculateEquipmentStats()
 
 func getSlot(_item):
 	if (

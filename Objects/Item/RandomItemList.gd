@@ -24,8 +24,8 @@ var randomItemList = {
 	"potion": {
 		"type": [
 			"soda",
-			"Toxix",
 			"confusion",
+			"Toxix",
 			"heal",
 			"healaga",
 			"sleep",

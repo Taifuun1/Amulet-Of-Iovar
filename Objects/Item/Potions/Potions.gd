@@ -1,7 +1,7 @@
 var potions = {
 	"common": [
 		{
-			"itemName": "Water bottle",
+			"itemName": "Water potion",
 			"unidentifiedItemName": "Clear potion",
 			"texture": null,
 			"unIdentifiedTexture": null,

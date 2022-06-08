@@ -1,7 +1,5 @@
 extends AStarPath
 
-var tiles
-
 var dungeonType = "dungeon1"
 
 var level
@@ -17,15 +15,13 @@ func setName():
 	name = str(Globals.levelId)
 	Globals.levelId += 1
 
-func createNewLevel(_tiles, _isDouble = false):
-	tiles = _tiles
-	
+func createNewLevel(_isDouble = false):
 	# Create rooms with doors and staircases
 	for _x in range(Globals.gridSize.x):
 		grid.append([])
 		for _y in range(Globals.gridSize.y):
 			grid[_x].append({
-				"tile": tiles.EMPTY,
+				"tile": Globals.tiles.EMPTY,
 				"critter": null,
 				"items": []
 			})
@@ -37,7 +33,7 @@ func createNewLevel(_tiles, _isDouble = false):
 		}
 	
 	# Create corridors
-	pathFindCorridors(grid, tiles)
+	pathFindCorridors(grid)
 	for room in rooms:
 		for door in room:
 			var randomEndPointRoom
@@ -49,10 +45,10 @@ func createNewLevel(_tiles, _isDouble = false):
 					break
 			var path = calculateCorridorsPath(door, endPointDoor)
 			for point in path:
-				if grid[point.x][point.y].tile != tiles.DOOR:
-					grid[point.x][point.y].tile = tiles.CORRIDOR
+				if grid[point.x][point.y].tile != Globals.tiles.DOOR:
+					grid[point.x][point.y].tile = Globals.tiles.CORRIDOR
 	
-	enemyPathFinding(grid, tiles)
+	enemyPathFinding(grid)
 	
 	return self
 
@@ -73,12 +69,12 @@ func createDungeon(_isDouble = false):
 					continue
 				for x in range(int(roomPlacement.x) - ((int(roomSize.x) / 2) - 1), int(roomPlacement.x) + ((int(roomSize.x) / 2) - 1)):
 					for y in range(int(roomPlacement.y) - ((int(roomSize.y) / 2) - 1), int(roomPlacement.y) + ((int(roomSize.y) / 2) - 1)):
-						grid[x][y].tile = tiles.FLOOR
+						grid[x][y].tile = Globals.tiles.FLOOR
 						spawnableFloors.append(Vector2(x, y))
 				for x in range(int(roomPlacement.x) - (int(roomSize.x) / 2), int(roomPlacement.x) + (int(roomSize.x) / 2)):
 					for y in range(int(roomPlacement.y) - (int(roomSize.y) / 2), int(roomPlacement.y) + (int(roomSize.y) / 2)):
-						if grid[x][y].tile != tiles.FLOOR:
-							grid[x][y].tile = tiles.WALL
+						if grid[x][y].tile != Globals.tiles.FLOOR:
+							grid[x][y].tile = Globals.tiles.WALL
 				if !placeDoors({
 					"roomPlacement": roomPlacement,
 					"roomSize": roomSize,
@@ -87,7 +83,7 @@ func createDungeon(_isDouble = false):
 				break
 			else:
 				continue
-	stairs = placeStairs(grid, tiles, spawnableFloors, _isDouble)
+	stairs = placeStairs(grid, spawnableFloors, _isDouble)
 	return {
 		"error": null
 	}
@@ -106,13 +102,13 @@ func placeDoors(room):
 				placement = Vector2(int(room.roomPlacement.x) - (int(room.roomSize.x) / 2), randi() % (int(room.roomSize.y) - 3) + (int(room.roomPlacement.y) - ((int(room.roomSize.y) / 2) - 1)))
 			else:
 				placement = Vector2(int(room.roomPlacement.x) + ((int(room.roomSize.x) / 2) - 1), randi() % (int(room.roomSize.y) - 3) + (int(room.roomPlacement.y) - ((int(room.roomSize.y) / 2) - 1)))
-		grid[placement.x][placement.y].tile = tiles.DOOR
+		grid[placement.x][placement.y].tile = Globals.tiles.DOOR
 		rooms.back().append(placement)
 	return true
 
 func checkIfRoomIsInvalid(roomPlacement, roomSize):
 	for x in range(int(roomPlacement.x) - ((int(roomSize.x) / 2) + 1), int(roomPlacement.x) + ((int(roomSize.x) / 2) + 1)):
 		for y in range(int(roomPlacement.y) - ((int(roomSize.y) / 2) + 1), int(roomPlacement.y) + ((int(roomSize.y) / 2) + 1)):
-			if grid[x][y].tile == tiles.FLOOR or grid[x][y].tile == tiles.WALL:
+			if grid[x][y].tile == Globals.tiles.FLOOR or grid[x][y].tile == Globals.tiles.WALL:
 				return true
 	return false

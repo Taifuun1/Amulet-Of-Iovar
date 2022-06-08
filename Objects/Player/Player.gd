@@ -62,6 +62,10 @@ func create(_class):
 	level = 1
 	hp = _playerClass.hp
 	mp = _playerClass.mp
+	basehp = _playerClass.hp
+	basemp = _playerClass.mp
+	maxhp = _playerClass.hp
+	maxmp = _playerClass.mp
 	ac = $"/root/World/UI/Equipment".getArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
@@ -69,7 +73,7 @@ func create(_class):
 	abilities = []
 	resistances = []
 	
-	updatePlayerStats(_playerClass.hp, _playerClass.mp, 1)
+	updatePlayerStats(1)
 	
 	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
 
@@ -78,18 +82,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
 		if _critter.aI.aI == "Aggressive":
 			if hits[currentHit] == 1:
-				if $"/root/World/UI/Equipment".hands["lefthand"] != null or $"/root/World/UI/Equipment".hands["righthand"] != null:
-					var _attacks = []
-					if $"/root/World/UI/Equipment".hands["lefthand"] != null and $"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"] != null:
-						_attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks())
-					else:
-						if $"/root/World/UI/Equipment".hands["lefthand"] != null:
-							_attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks())
-						if $"/root/World/UI/Equipment".hands["righthand"] != null:
-							_attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks())
-					_critter.takeDamage(_attacks, _tileToMoveTo, _items, _level)
-				else:
-					_critter.takeDamage([strength * 1 / 2], _tileToMoveTo, _items, _level)
+				_critter.takeDamage(attacks, _tileToMoveTo, _items, _level)
 			else:
 				Globals.gameConsole.addLog("You miss!")
 			if currentHit == 15:
@@ -110,7 +103,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
 			Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
 
-func updatePlayerStats(maxhp = null, maxmp = null, dungeonLevel = null):
+func updatePlayerStats(dungeonLevel = null):
 	Globals.gameStats.updateStats({
 		maxhp = maxhp,
 		hp = hp,
@@ -124,61 +117,39 @@ func updatePlayerStats(maxhp = null, maxmp = null, dungeonLevel = null):
 		attacks = attacks,
 		currentHit = currentHit,
 		hits = hits,
-		dungeonLevel = dungeonLevel
+		dungeonLevel = dungeonLevel,
+		strength = strength,
+		legerity = legerity,
+		balance = balance,
+		belief = belief,
+		visage = visage,
+		wisdom = wisdom
 	})
 
-func calculateEquipment():
+func calculateEquipmentStats():
 	# Armor class
 	ac = $"/root/World/UI/Equipment".getArmorClass()
 	
-#	# Melee damage and hits
-#	if $"/root/World/UI/Equipment".hands["lefthand"] == null and $"/root/World/UI/Equipment".hands["righthand"] == null:
-#		attacks = [ strength * 1 / 3 ]
-#		return
-#	elif (
-#		$"/root/World/UI/Equipment".hands["lefthand"] != null and
-#		$"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]
-#	):
-#		attacks = [ ( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()]
-#		return
-#	else:
-#		attacks.clear()
-#		attacks["melee"] = strength * 1 / 3
-#		var left = get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] }))
-#		var right = get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] }))
-#		match left.category:
-#			"Sword":
-#				attacks["sword"] = .getTotalUseValue()
-#			"Two-handed sword":
-#				attacks["sword"] = (strength * 1 / 3) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()
-#			"Dagger":
-#				attacks["sword"] = (strength * 1 / 3) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()
-#			"Mace":
-#				attacks["sword"] = (strength * 1 / 3) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()
-#			"Flail":
-#				attacks["sword"] = (strength * 1 / 3) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue()
-#		if (
-#			$"/root/World/UI/Equipment".hands["lefthand"] != null and
-#			get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).type == "Weapon"
-#		):
-#			attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
-#			if(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).category == "Dagger"):
-#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
-#			elif(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).category == "Flail"):
-#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
-#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["lefthand"] })).getTotalUseValue())
-#		if (
-#			$"/root/World/UI/Equipment".hands["righthand"] != null and
-#			get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).type == "Weapon"
-#		):
-#			attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
-#			if(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).category == "Dagger"):
-#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
-#			elif(get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).category == "Flail"):
-#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
-#				attacks.append(( strength * 1 / 3 ) + get_node("/root/World/Items/{item}".format({ "item": $"/root/World/UI/Equipment".hands["righthand"] })).getTotalUseValue())
-#		if attacks.empty():
-#			attacks.append(1)
+	attacks = []
+	# Attacks
+	if $"/root/World/UI/Equipment".hands["lefthand"] != null and $"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]:
+		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks())
+	elif $"/root/World/UI/Equipment".hands["lefthand"] != null or $"/root/World/UI/Equipment".hands["righthand"] != null:
+		if $"/root/World/UI/Equipment".hands["lefthand"] != null:
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks())
+		if $"/root/World/UI/Equipment".hands["righthand"] != null:
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks())
+	else:
+		attacks = [
+			{
+				"dmg": [1 + (strength * 1 / 4), 3 + (strength * 1 / 4)],
+				"enchantment": 0,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			}
+		]
 
 func takeDamage(_attacks, _crittername):
 	var _attacksLog = []
@@ -209,6 +180,7 @@ func pickUpItems(_playerTile, _items, _grid):
 			itemsLog.append("You pickup {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
 	var itemsLogString = PoolStringArray(itemsLog).join(" ")
 	Globals.gameConsole.addLog(itemsLogString)
+	$"/root/World".processGameTurn()
 
 func pickUpItem(_playerTile, _item, _grid):
 	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
@@ -237,14 +209,14 @@ func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if _readItem.type.matchn("scroll"):
 		Globals.gameConsole.addLog("You read a {itemName}.".format({ "itemName": _readItem.itemName }))
+		if (
+			GlobalItemInfo.globalItemInfo.has(_readItem.identifiedItemName) and
+			GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified == false
+		):
+			GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified = true
+			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _readItem.identifiedItemName, "unidentifiedItemName": _readItem.unidentifiedItemName }))
 		match _readItem.identifiedItemName.to_lower():
 			"scroll of identify":
-				if (
-					GlobalItemInfo.globalItemInfo.has(_readItem.identifiedItemName) and
-					GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified == false
-				):
-					GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified = true
-					Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _readItem.identifiedItemName, "unidentifiedItemName": _readItem.unidentifiedItemName }))
 				var _items = $"/root/World/Critters/0/Inventory".inventory.duplicate(true)
 				if _items.empty():
 					Globals.gameConsole.addLog("You hear strange whispers in your head. LLLLLL......")
@@ -308,12 +280,101 @@ func readItem(_id):
 									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _randomItemInInventory.itemName }))
 									break
 								_items.erase(_item)
-					for _item in $"/root/World/Items".get_children():
-						if _item.name == "Items":
-							continue
-						_item.checkItemIdentification()
-				$"/root/World/Critters/0/Inventory".inventory.erase(_id)
-				get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+			"scroll of create food":
+				var _playerPosition = $"/root/World".getCritterTile(0)
+				if _readItem.alignment.matchn("cursed"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					newItem.createItem($"/root/World/Items/Items".getItemByName("orange"))
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("An {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				elif _readItem.alignment.matchn("uncursed"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
+					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("A {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				elif _readItem.alignment.matchn("blessed"):
+					for _direction in PoolVector2Array([
+						Vector2(-1, -1),
+						Vector2(0, -1),
+						Vector2(1, -1),
+						Vector2(1, 0),
+						Vector2(1, 1),
+						Vector2(0, 1),
+						Vector2(-1, 1),
+						Vector2(-1, 0)
+					]):
+						if (
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+						):
+							print($"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y])
+							var newItem = load("res://Objects/Item/Item.tscn").instance()
+							var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
+							var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
+							newItem.createItem(_item)
+							$"/root/World/Items".add_child(newItem, true)
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].items.append(newItem.id)
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
+					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("A bucketload of items appears around you!")
+			"scroll of create potion":
+				var _playerPosition = $"/root/World".getCritterTile(0)
+				if _readItem.alignment.matchn("cursed"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					newItem.createItem($"/root/World/Items/Items".getItemByName("potion of toxix"))
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("An {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				elif _readItem.alignment.matchn("uncursed"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
+					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("A {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				elif _readItem.alignment.matchn("blessed"):
+					for _direction in PoolVector2Array([
+						Vector2(-1, -1),
+						Vector2(0, -1),
+						Vector2(1, -1),
+						Vector2(1, 0),
+						Vector2(1, 1),
+						Vector2(0, 1),
+						Vector2(-1, 1),
+						Vector2(-1, 0)
+					]):
+						if (
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+						):
+							var newItem = load("res://Objects/Item/Item.tscn").instance()
+							var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
+							var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
+							newItem.createItem(_item)
+							$"/root/World/Items".add_child(newItem, true)
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].items.append(newItem.id)
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
+					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("A bucketload of items appears around you!")
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
+		for _item in $"/root/World/Items".get_children():
+			if _item.name == "Items":
+				continue
+			_item.checkItemIdentification()
+		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
+		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 	$"/root/World".closeMenu()

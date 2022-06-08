@@ -31,6 +31,7 @@ func _on_Item_Management_List_Clicked(_id):
 	if chooseOnClick:
 		if $"/root/World".uIState == $"/root/World".uI.READ:
 			$"/root/World/Critters/0".readItem(_id)
+			$"/root/World".processGameTurn()
 			return
 	var clickedItem = get_node("ItemManagementList/{id}".format({ "id": _id }))
 	var isRemoved = false

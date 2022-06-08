@@ -1,7 +1,5 @@
 extends AStarPath
 
-var tiles
-
 var dungeonType = "minesOfTidoh"
 
 var level
@@ -43,15 +41,13 @@ func setName():
 	name = str(Globals.levelId)
 	Globals.levelId += 1
 
-func createNewLevel(_tiles):
-	tiles = _tiles
-	
+func createNewLevel():
 	# Create rooms with doors and staircases
 	for _x in range(Globals.gridSize.x):
 		grid.append([])
 		for _y in range(Globals.gridSize.y):
 			grid[_x].append({
-				"tile": tiles.EMPTY,
+				"tile": Globals.tiles.EMPTY,
 				"critter": null,
 				"items": []
 			})
@@ -59,17 +55,17 @@ func createNewLevel(_tiles):
 	createOutpostAreas()
 	createCaveAreas()
 	
-	pathFindCorridors(grid, tiles)
+	pathFindCorridors(grid)
 	for side in range(rooms.size()):
 		for room in rooms[side]:
 			for door in room:
 				var outpostEndpointDoor = outpostDoors[side][0]
 				var path = calculateCorridorsPath(door, outpostEndpointDoor)
 				for point in path:
-					if grid[point.x][point.y].tile != tiles.DOOR:
-						grid[point.x][point.y].tile = tiles.CORRIDOR
+					if grid[point.x][point.y].tile != Globals.tiles.DOOR:
+						grid[point.x][point.y].tile = Globals.tiles.CORRIDOR
 	
-	enemyPathFinding(grid, tiles)
+	enemyPathFinding(grid)
 	
 	return self
 
@@ -106,25 +102,25 @@ func createOutpostAreas():
 					)
 				)
 			):
-				grid[_x][_y].tile = tiles.SIDEWALK
+				grid[_x][_y].tile = Globals.tiles.SIDEWALK
 			else:
-				grid[_x][_y].tile = tiles.EMPTY
+				grid[_x][_y].tile = Globals.tiles.EMPTY
 	
 	for _y in range(Globals.gridSize.y):
-		grid[outpostArea[1].x - 2][_y].tile = tiles.WALL
+		grid[outpostArea[1].x - 2][_y].tile = Globals.tiles.WALL
 	
 	for _y in range(Globals.gridSize.y):
-		grid[outpostArea[2].x + 2][_y].tile = tiles.WALL
+		grid[outpostArea[2].x + 2][_y].tile = Globals.tiles.WALL
 	
 	for _x in range(outpostArea[1].x - 1, outpostArea[2].x + 2):
-		grid[_x][0].tile = tiles.WALL
+		grid[_x][0].tile = Globals.tiles.WALL
 	
 	for _x in range(outpostArea[1].x - 1, outpostArea[2].x + 2):
-		grid[_x][Globals.gridSize.y - 1].tile = tiles.WALL
+		grid[_x][Globals.gridSize.y - 1].tile = Globals.tiles.WALL
 	
 	for _y in range(outpostArea[1].y, outpostArea[2].y):
 		for _x in range(outpostArea[1].x, outpostArea[2].x):
-			if grid[_x][_y].tile == tiles.EMPTY:
+			if grid[_x][_y].tile == Globals.tiles.EMPTY:
 				var _fullAreaSize = checkIfAreaIsViableForRoom(_x, _y)
 				if _fullAreaSize:
 					var _areaX = int(_fullAreaSize.x - 3)
@@ -162,9 +158,9 @@ func createOutpostAreas():
 									)
 								)
 							):
-								grid[_areaSizeX][_areaSizeY].tile = tiles.WALL
+								grid[_areaSizeX][_areaSizeY].tile = Globals.tiles.WALL
 							else:
-								grid[_areaSizeX][_areaSizeY].tile = tiles.FLOOR
+								grid[_areaSizeX][_areaSizeY].tile = Globals.tiles.FLOOR
 					for _areaSizeX in range(_x - 1, _x + _areaSize.x + 2):
 						for _areaSizeY in range(_y - 1, _y + _areaSize.y + 2):
 							if (
@@ -197,7 +193,7 @@ func createOutpostAreas():
 									)
 								)
 							):
-								grid[_areaSizeX][_areaSizeY].tile = tiles.SIDEWALK
+								grid[_areaSizeX][_areaSizeY].tile = Globals.tiles.SIDEWALK
 	
 	placeOutpostDoors()
 	
@@ -206,16 +202,16 @@ func createOutpostAreas():
 func fillOutpostEmptySpaces():
 	for _x in range(outpostArea[1].x, outpostArea[2].x + 1):
 		for _y in range(outpostArea[1].y, outpostArea[2].y + 1):
-			if grid[_x][_y].tile == tiles.EMPTY:
+			if grid[_x][_y].tile == Globals.tiles.EMPTY:
 				var _fullArea = checkIfAreaIsViableForPark(_x, _y)
 				if _fullArea.viable:
 					for _areaSizeX in range(_x, _x + _fullArea.length.x):
 						for _areaSizeY in range(_y, _y + _fullArea.length.y):
-							grid[_areaSizeX][_areaSizeY].tile = tiles.GRASS
+							grid[_areaSizeX][_areaSizeY].tile = Globals.tiles.GRASS
 				else:
 					for _areaSizeX in range(_x, _x + _fullArea.length.x):
 						for _areaSizeY in range(_y, _y + _fullArea.length.y):
-							grid[_areaSizeX][_areaSizeY].tile = tiles.SIDEWALK
+							grid[_areaSizeX][_areaSizeY].tile = Globals.tiles.SIDEWALK
 
 func checkIfAreaIsViableForPark(_x, _y):
 	var lengthX = 0
@@ -251,7 +247,7 @@ func checkIfAreaIsViableForRoom(_x, _y):
 func getAreaXSideLength(_x, _y, maxLength):
 	var length = 0
 	for _areaX in range(_x, _x + maxLength):
-		if grid[_areaX][_y].tile == tiles.WALL or grid[_areaX][_y].tile == tiles.SIDEWALK or length == maxLength:
+		if grid[_areaX][_y].tile == Globals.tiles.WALL or grid[_areaX][_y].tile == Globals.tiles.SIDEWALK or length == maxLength:
 			return length
 		length += 1
 	return length
@@ -260,19 +256,19 @@ func getAreaYSideLength(_x, _y, maxLength):
 	var length = 0
 	for _areaY in range(_y, _y + maxLength):
 		length += 1
-		if grid[_x][_areaY].tile == tiles.WALL or grid[_x][_areaY].tile == tiles.SIDEWALK or grid[_x][_areaY].tile == tiles.FLOOR or length == 8:
-			if _areaY == 22 or grid[_x][_areaY].tile == tiles.WALL or grid[_x][_areaY].tile == tiles.SIDEWALK:
+		if grid[_x][_areaY].tile == Globals.tiles.WALL or grid[_x][_areaY].tile == Globals.tiles.SIDEWALK or grid[_x][_areaY].tile == Globals.tiles.FLOOR or length == 8:
+			if _areaY == 22 or grid[_x][_areaY].tile == Globals.tiles.WALL or grid[_x][_areaY].tile == Globals.tiles.SIDEWALK:
 				length -= 1
 			return length
 	return length
 
 func createCaveAreas():
 	var _side = randi() % 2
-	createCaveArea(_side, tiles.UP_STAIR)
+	createCaveArea(_side, Globals.tiles.UP_STAIR)
 	if _side == 1:
-		createCaveArea(0, tiles.DOWN_STAIR)
+		createCaveArea(0, Globals.tiles.DOWN_STAIR)
 	else:
-		createCaveArea(1, tiles.DOWN_STAIR)
+		createCaveArea(1, Globals.tiles.DOWN_STAIR)
 
 func createCaveArea(_side, _stair):
 	var _rooms = randi() % 2 + 1
@@ -301,21 +297,21 @@ func createRoom(_roomPlacement, _roomSize):
 	var _availableStairFloors = []
 	for x in range(int(_roomPlacement.x) + 1, int(_roomPlacement.x) + (int(_roomSize.x) - 1)):
 		for y in range(int(_roomPlacement.y) + 1, int(_roomPlacement.y) + (int(_roomSize.y) - 1)):
-			grid[x][y].tile = tiles.FLOOR
+			grid[x][y].tile = Globals.tiles.FLOOR
 			_availableStairFloors.append(Vector2(x,y))
 			spawnableFloors.append(Vector2(x,y))
 	for x in range(int(_roomPlacement.x), int(_roomPlacement.x) + int(_roomSize.x)):
 		for y in range(int(_roomPlacement.y), int(_roomPlacement.y) + int(_roomSize.y)):
-			if grid[x][y].tile != tiles.FLOOR:
-				grid[x][y].tile = tiles.WALL
+			if grid[x][y].tile != Globals.tiles.FLOOR:
+				grid[x][y].tile = Globals.tiles.WALL
 	return _availableStairFloors
 
 func placeStair(_availableStairFloors, _stair):
 	var _randomFloor = _availableStairFloors[randi() % _availableStairFloors.size()]
 	grid[_randomFloor.x][_randomFloor.y].tile = _stair
-	if _stair == tiles.UP_STAIR:
+	if _stair == Globals.tiles.UP_STAIR:
 		stairs.upStair = _randomFloor
-	elif _stair == tiles.DOWN_STAIR:
+	elif _stair == Globals.tiles.DOWN_STAIR:
 		stairs.downStair = _randomFloor
 
 func placeDoors(room, _side):
@@ -332,7 +328,7 @@ func placeDoors(room, _side):
 				placement = Vector2(int(room.roomPlacement.x), randi() % int(room.roomSize.y - 2) + int(room.roomPlacement.y + 1))
 			else:
 				placement = Vector2(int(room.roomPlacement.x) + int(room.roomSize.x - 1), randi() % int(room.roomSize.y - 2) + int(room.roomPlacement.y + 1))
-		grid[placement.x][placement.y].tile = tiles.DOOR
+		grid[placement.x][placement.y].tile = Globals.tiles.DOOR
 		rooms[_side].back().append(placement)
 
 func placeOutpostDoors():
@@ -340,8 +336,8 @@ func placeOutpostDoors():
 		var _y = randi() % int(outpostArea[2].y) + outpostArea[1].y
 		var _x = outpostArea[_door + 1].x
 		if _door == 0:
-			grid[_x - 2][_y].tile = tiles.DOOR
+			grid[_x - 2][_y].tile = Globals.tiles.DOOR
 			outpostDoors[0].append(Vector2(_x - 2, _y))
 		else:
-			grid[_x + 2][_y].tile = tiles.DOOR
+			grid[_x + 2][_y].tile = Globals.tiles.DOOR
 			outpostDoors[1].append(Vector2(_x + 2, _y))

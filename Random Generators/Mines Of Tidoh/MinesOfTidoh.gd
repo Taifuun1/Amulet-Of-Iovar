@@ -1,7 +1,5 @@
 extends AStarPath
 
-var tiles
-
 var dungeonType = "minesOfTidoh"
 
 var level
@@ -18,15 +16,13 @@ func setName():
 	name = str(Globals.levelId)
 	Globals.levelId += 1
 
-func createNewLevel(_tiles):
-	tiles = _tiles
-	
+func createNewLevel():
 	# Create rooms with doors and staircases
 	for _x in range(Globals.gridSize.x):
 		grid.append([])
 		for _y in range(Globals.gridSize.y):
 			grid[_x].append({
-				"tile": tiles.EMPTY,
+				"tile": Globals.tiles.EMPTY,
 				"critter": null,
 				"items": []
 			})
@@ -35,9 +31,9 @@ func createNewLevel(_tiles):
 	connectSpawnAreas()
 	expandSpawnAreas()
 	fattenCorridors()
-	stairs = placeStairs(grid, tiles, spawnableFloors, false)
+	stairs = placeStairs(grid, spawnableFloors, false)
 	
-	enemyPathFinding(grid, tiles)
+	enemyPathFinding(grid)
 	
 	return self
 
@@ -55,7 +51,7 @@ func createCave():
 		spawnPoints.append(Vector2(randi() % 15 + _spawnArea.x, randi() % 8 + int(_spawnArea.y)))
 
 func connectSpawnAreas():
-	pathFindCave(grid, tiles)
+	pathFindCave(grid)
 	
 	calculateCavePath(spawnPoints[0], spawnPoints[1])
 	calculateCavePath(spawnPoints[2], spawnPoints[3])
@@ -151,7 +147,7 @@ func drawPath(_path):
 	var _lastPoint = null
 	var _pathRadius = randi() % 3 + 2
 	for point in _path:
-		grid[point.x][point.y].tile = tiles.FLOOR
+		grid[point.x][point.y].tile = Globals.tiles.FLOOR
 		spawnableFloors.append(Vector2(point.x, point.y))
 		if _lastPoint == null:
 			_lastPoint = point
@@ -159,74 +155,74 @@ func drawPath(_path):
 		if _direction == Vector2(1,0) or _direction == Vector2(-1,0):
 			for number in range(_pathRadius):
 				if point.y + number < Globals.gridSize.y:
-					grid[point.x][point.y + number].tile = tiles.FLOOR
+					grid[point.x][point.y + number].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x, point.y + number))
 				if point.y - number >= 0:
-					grid[point.x][point.y - number].tile = tiles.FLOOR
+					grid[point.x][point.y - number].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x, point.y - number))
 		elif _direction == Vector2(1,-1):
 			for number in range(_pathRadius):
 				if point.y - int(number / 2) >= 0:
-					grid[point.x][point.y - int(number / 2)].tile = tiles.FLOOR
+					grid[point.x][point.y - int(number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x, point.y - int(number / 2)))
 				if point.x + int(number / 2) < Globals.gridSize.x:
-					grid[point.x + int(number / 2)][point.y].tile = tiles.FLOOR
+					grid[point.x + int(number / 2)][point.y].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x + int(number / 2), point.y))
 				if point.x - int(number / 2) >= 0 and point.y - int(number / 2) >= 0:
-					grid[point.x - int(number / 2)][point.y - int(number / 2)].tile = tiles.FLOOR
+					grid[point.x - int(number / 2)][point.y - int(number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x - int(number / 2), point.y - int(number / 2)))
 				if point.x + int (number / 2) < Globals.gridSize.x and point.y + int(number / 2) < Globals.gridSize.y:
-					grid[point.x + int(number / 2)][point.y + int(number / 2)].tile = tiles.FLOOR
+					grid[point.x + int(number / 2)][point.y + int(number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x + int(number / 2), point.y + int(number / 2)))
 		elif _direction == Vector2(-1,1):
 			for number in range(_pathRadius):
 				if point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x][point.y + (number / 2)].tile = tiles.FLOOR
+					grid[point.x][point.y + (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x, point.y + (number / 2)))
 				if point.x - (number / 2) >= 0:
-					grid[point.x - (number / 2)][point.y].tile = tiles.FLOOR
+					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y))
 				if point.x - (number / 2) >= 0 and point.y - (number / 2) >= 0:
-					grid[point.x - (number / 2)][point.y - (number / 2)].tile = tiles.FLOOR
+					grid[point.x - (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y - (number / 2)))
 				if point.x + (number / 2) < Globals.gridSize.x and point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x + (number / 2)][point.y + (number / 2)].tile = tiles.FLOOR
+					grid[point.x + (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x + (number / 2), point.y + (number / 2)))
 		elif _direction == Vector2(-1,-1):
 			for number in range(_pathRadius):
 				if point.x - (number / 2) >= 0:
-					grid[point.x - (number / 2)][point.y].tile = tiles.FLOOR
+					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y))
 				if point.y - (number / 2) >= 0:
-					grid[point.x][point.y - (number / 2)].tile = tiles.FLOOR
+					grid[point.x][point.y - (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x, point.y - (number / 2)))
 				if point.x - (number / 2) >= 0 and point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x - (number / 2)][point.y + (number / 2)].tile = tiles.FLOOR
+					grid[point.x - (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y + (number / 2)))
 				if point.x + (number / 2) < Globals.gridSize.x and point.y - (number / 2) >= 0:
-					grid[point.x + (number / 2)][point.y - (number / 2)].tile = tiles.FLOOR
+					grid[point.x + (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x + (number / 2), point.y - (number / 2)))
 		elif _direction == Vector2(1,1):
 			for number in range(_pathRadius):
 				if point.x + (number / 2) < Globals.gridSize.y:
-					grid[point.x - (number / 2)][point.y].tile = tiles.FLOOR
+					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y))
 				if point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x][point.y - (number / 2)].tile = tiles.FLOOR
+					grid[point.x][point.y - (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x, point.y - (number / 2)))
 				if point.x - (number / 2) >= 0 and point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x - (number / 2)][point.y + (number / 2)].tile = tiles.FLOOR
+					grid[point.x - (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y + (number / 2)))
 				if point.x + (number / 2) < Globals.gridSize.x and point.y - (number / 2) >= 0:
-					grid[point.x + (number / 2)][point.y - (number / 2)].tile = tiles.FLOOR
+					grid[point.x + (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x + (number / 2), point.y - (number / 2)))
 		elif _direction == Vector2(0,1) or _direction == Vector2(0,-1):
 			for number in range(_pathRadius):
 				if point.x + number < Globals.gridSize.x:
-					grid[point.x + number][point.y].tile = tiles.FLOOR
+					grid[point.x + number][point.y].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x + number, point.y))
 				if point.x - number >= 0:
-					grid[point.x - number][point.y].tile = tiles.FLOOR
+					grid[point.x - number][point.y].tile = Globals.tiles.FLOOR
 					spawnableFloors.append(Vector2(point.x - number, point.y))
 		if randi() % 6 == 1:
 			if _pathRadius < 4:
@@ -238,5 +234,5 @@ func drawPath(_path):
 
 func draw(_path):
 	for point in _path:
-		grid[point.x][point.y].tile = tiles.FLOOR
+		grid[point.x][point.y].tile = Globals.tiles.FLOOR
 		spawnableFloors.append(Vector2(point.x, point.y))
