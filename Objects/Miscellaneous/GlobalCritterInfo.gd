@@ -1,5 +1,12 @@
 extends Node
 
+func addCritterToPlay(_critterName):
+	globalCritterInfo[_critterName].crittersInPlay += 1
+
+func removeCritterFromPlay(_critterName):
+	globalCritterInfo[_critterName].population -= 1
+	globalCritterInfo[_critterName].crittersInPlay -= 1
+
 var globalCritterInfo = {
 	"Double-pattern ant": {
 		"population": 64,
@@ -129,19 +136,19 @@ var globalCritterInfo = {
 		"population": 32,
 		"crittersInPlay": 0
 	},
-	"ElfAssassin": {
+	"Elf assassin": {
 		"population": 28,
 		"crittersInPlay": 0
 	},
-	"ElfHunter": {
+	"Elf hunter": {
 		"population": 104,
 		"crittersInPlay": 0
 	},
-	"ElfKing": {
+	"Elf king": {
 		"population": 1,
 		"crittersInPlay": 0
 	},
-	"ElfNoble": {
+	"Elf noble": {
 		"population": 48,
 		"crittersInPlay": 0
 	},

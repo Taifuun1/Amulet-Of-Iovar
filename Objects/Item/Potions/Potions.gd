@@ -3,8 +3,8 @@ var potions = {
 		{
 			"itemName": "Water potion",
 			"unidentifiedItemName": "Clear potion",
-			"texture": null,
-			"unIdentifiedTexture": null,
+			"texture": load("res://Assets/Potions/PotionRoundTransparent.png"),
+			"unIdentifiedTexture": load("res://Assets/Potions/PotionRoundTransparent.png"),
 			"type": "Potion",
 			"category": null,
 			"value": null,
@@ -16,8 +16,8 @@ var potions = {
 		{
 			"itemName": "Soda bottle",
 			"unidentifiedItemName": "Juicer potion",
-			"texture": null,
-			"unIdentifiedTexture": null,
+			"texture": load("res://Assets/Potions/PotionRoundOrange.png"),
+			"unIdentifiedTexture": load("res://Assets/Potions/PotionRoundOrange.png"),
 			"type": "Potion",
 			"category": null,
 			"value": null,
@@ -55,7 +55,7 @@ var potions = {
 	],
 	"uncommon": [
 		{
-			"itemName": "Potion of Heal",
+			"itemName": "Potion of heal",
 			"unidentifiedItemName": null,
 			"texture": null,
 			"unIdentifiedTexture": null,
@@ -106,19 +106,19 @@ var potions = {
 			"rarity": "Uncommon",
 			"identified": false
 		},
-		{
-			"itemName": "Potion of levitation",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unIdentifiedTexture": null,
-			"type": "Potion",
-			"category": null,
-			"value": null,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
-		},
+#		{
+#			"itemName": "Potion of levitation",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unIdentifiedTexture": null,
+#			"type": "Potion",
+#			"category": null,
+#			"value": null,
+#			"enchantment": true,
+#			"stackable": false,
+#			"rarity": "Uncommon",
+#			"identified": false
+#		},
 		{
 			"itemName": "Potion of paralysis",
 			"unidentifiedItemName": null,
@@ -148,7 +148,7 @@ var potions = {
 	],
 	"rare": [
 		{
-			"itemName": "Potion of Healaga",
+			"itemName": "Potion of healaga",
 			"unidentifiedItemName": null,
 			"texture": null,
 			"unIdentifiedTexture": null,

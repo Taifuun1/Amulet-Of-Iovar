@@ -2,7 +2,7 @@ var humans = {
 	"hostile": ["orcs"],
 	"critterTypes": [
 		{
-			"critterName": "Human shopkeeper",
+			"critterName": "Shopkeeper",
 			"race": "Human",
 			"class": "Humanoid",
 			"aI": "Neutral",
@@ -25,7 +25,7 @@ var humans = {
 			"resistances": []
 		},
 		{
-			"critterName": "Human guard",
+			"critterName": "Guard",
 			"race": "Human",
 			"class": "Humanoid",
 			"aI": "Neutral",
@@ -48,7 +48,7 @@ var humans = {
 			"resistances": []
 		},
 		{
-			"critterName": "Human guard captain",
+			"critterName": "Guard captain",
 			"race": "Human",
 			"class": "Humanoid",
 			"aI": "Neutral",
@@ -71,7 +71,7 @@ var humans = {
 			"resistances": []
 		},
 		{
-			"critterName": "Human outlaw watcher",
+			"critterName": "Outlaw watcher",
 			"race": "Human",
 			"class": "Humanoid",
 			"aI": "Aggressive",
@@ -94,7 +94,7 @@ var humans = {
 			"resistances": []
 		},
 		{
-			"critterName": "Human outlaw fusie'er",
+			"critterName": "Outlaw fusie'er",
 			"race": "Human",
 			"class": "Humanoid",
 			"aI": "Aggressive",
@@ -117,7 +117,7 @@ var humans = {
 			"resistances": []
 		},
 		{
-			"critterName": "Human outlaw merchandiee'er",
+			"critterName": "Outlaw merchandiee'er",
 			"race": "Human",
 			"class": "Humanoid",
 			"aI": "Aggressive",

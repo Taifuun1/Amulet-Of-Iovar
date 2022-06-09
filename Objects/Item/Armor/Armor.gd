@@ -363,22 +363,22 @@ var armors = {
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Rare"
-		},
-		{
-			"itemName": "Adorned cloak",
-			"unidentifiedItemName": "Adorned cloak",
-			"texture": load("res://Assets/Armor/CloakAdornedCloak.png"),
-			"unIdentifiedTexture": load("res://Assets/Armor/CloakAdornedCloak.png"),
-			"type": "Armor",
-			"category": "Cloak",
-			"value": {
-				"ac": 4,
-				"resistance": null
-			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Rare"
 		}
+#		{
+#			"itemName": "Adorned cloak",
+#			"unidentifiedItemName": "Adorned cloak",
+#			"texture": load("res://Assets/Armor/CloakAdornedCloak.png"),
+#			"unIdentifiedTexture": load("res://Assets/Armor/CloakAdornedCloak.png"),
+#			"type": "Armor",
+#			"category": "Cloak",
+#			"value": {
+#				"ac": 4,
+#				"resistance": null
+#			},
+#			"enchantment": true,
+#			"stackable": false,
+#			"rarity": "Rare"
+#		}
 	],
 	"legendary": [
 		{
@@ -759,8 +759,8 @@ var armors = {
 		{
 			"itemName": "Justice'eer shield",
 			"unidentifiedItemName": "Justice'eer shield",
-			"texture": load("res://Assets/Armor/ShieldJustice'erShield.png"),
-			"unIdentifiedTexture": load("res://Assets/Armor/ShieldJustice'erShield.png"),
+			"texture": load("res://Assets/Armor/ShieldJustice'eerShield.png"),
+			"unIdentifiedTexture": load("res://Assets/Armor/ShieldJustice'eerShield.png"),
 			"type": "Armor",
 			"category": "Shield",
 			"value": {

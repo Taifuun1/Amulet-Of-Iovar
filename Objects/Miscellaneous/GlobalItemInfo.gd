@@ -322,7 +322,7 @@ var globalItemInfo = {
 	"Scroll of destroy armor": {
 		"identified": false
 	},
-	"Scroll of crate critters": {
+	"Scroll of create critter": {
 		"identified": false
 	},
 	"Scroll of create potion": {

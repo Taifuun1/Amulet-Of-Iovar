@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CaninesWolf.png-62c5b7a12d714405d864c581412d00c3.stex"
+path="res://.import/PotionRoundTransparent.png-d3023ba5e3f93fd8973ec8ca9f91a709.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Critters/CaninesWolf.png"
-dest_files=[ "res://.import/CaninesWolf.png-62c5b7a12d714405d864c581412d00c3.stex" ]
+source_file="res://Assets/Potions/PotionRoundTransparent.png"
+dest_files=[ "res://.import/PotionRoundTransparent.png-d3023ba5e3f93fd8973ec8ca9f91a709.stex" ]
 
 [params]
 

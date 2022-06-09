@@ -30,6 +30,8 @@ var skills = {
 	}
 }
 
+var neutralCritters = ["Sugar ant", "Shopkeeper"]
+
 func create(_class):
 	id = 0
 	name = str(0)
@@ -142,7 +144,7 @@ func calculateEquipmentStats():
 	else:
 		attacks = [
 			{
-				"dmg": [1 + (strength * 1 / 4), 3 + (strength * 1 / 4)],
+				"dmg": [strength * 1 / 4, 2 + (strength * 1 / 4)],
 				"enchantment": 0,
 				"bonusDmg": {
 					"dmg": 0,
@@ -369,6 +371,83 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("A bucketload of items appears around you!")
+			"scroll of create critter":
+				var _playerPosition = $"/root/World".getCritterTile(0)
+				if _readItem.alignment.matchn("cursed"):
+					var _critterName = null
+					for _direction in PoolVector2Array([
+						Vector2(-1, -1),
+						Vector2(0, -1),
+						Vector2(1, -1),
+						Vector2(1, 0),
+						Vector2(1, 1),
+						Vector2(0, 1),
+						Vector2(-1, 1),
+						Vector2(-1, 0)
+					]):
+						if (
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+						):
+							if _critterName == null:
+								_critterName = $"/root/World/Critters/Critters".spawnRandomCritter(_playerPosition + _direction)
+							else:
+								$"/root/World/Critters/Critters".spawnRandomCritter(_playerPosition + _direction)
+					if _critterName != null:
+						Globals.gameConsole.addLog("A bucketload of critters appear around you!")
+					else:
+						Globals.gameConsole.addLog("Nothing happens...")
+				elif _readItem.alignment.matchn("uncursed"):
+					var _directions = [
+						Vector2(-1, -1),
+						Vector2(0, -1),
+						Vector2(1, -1),
+						Vector2(1, 0),
+						Vector2(1, 1),
+						Vector2(0, 1),
+						Vector2(-1, 1),
+						Vector2(-1, 0)
+					]
+					_directions.shuffle()
+					var _critterName = null
+					for _direction in _directions:
+						if (
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+						):
+							_critterName = $"/root/World/Critters/Critters".spawnRandomCritter(_playerPosition + _direction)
+							if _critterName != null:
+								break
+					if _critterName != null:
+						Globals.gameConsole.addLog("A {critterName} appears beside you!".format({ "critterName": _critterName }))
+					else:
+						Globals.gameConsole.addLog("Nothing happens...")
+				elif _readItem.alignment.matchn("blessed"):
+					var _directions = [
+						Vector2(-1, -1),
+						Vector2(0, -1),
+						Vector2(1, -1),
+						Vector2(1, 0),
+						Vector2(1, 1),
+						Vector2(0, 1),
+						Vector2(-1, 1),
+						Vector2(-1, 0)
+					]
+					_directions.shuffle()
+					var _critterName = null
+					var _critter = neutralCritters[randi() % neutralCritters.size()]
+					for _direction in _directions:
+						if (
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
+							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+						):
+							_critterName = $"/root/World/Critters/Critters".spawnCritter($"/root/World/Critters/Critters".getCritterByName(_critter), _playerPosition + _direction)
+							if _critterName != null:
+								break
+					if _critterName != null:
+						Globals.gameConsole.addLog("A {critterName} appears beside you...".format({ "critterName": _critterName }))
+					else:
+						Globals.gameConsole.addLog("Nothing happens...")
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		for _item in $"/root/World/Items".get_children():

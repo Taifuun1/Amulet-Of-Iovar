@@ -52,7 +52,7 @@ var snakes = {
 			"race": "Snake",
 			"class": "Animal",
 			"aI": "Aggressive",
-			"texture": load("res://Assets/Critters/SnakeSawtooth-patternSnake.png"),
+			"texture": load("res://Assets/Critters/SnakeSawtooth-PatternSnake.png"),
 			"alignment": "Neutral",
 			"level": 12,
 			"hp": 47,

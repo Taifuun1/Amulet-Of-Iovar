@@ -5,7 +5,7 @@ var aquaticLife = {
 			"critterName": "Fiddler crab",
 			"race": "Aquatic life",
 			"class": "Animal",
-			"aI": "Neutral",
+			"aI": "Aggressive",
 			"texture": load("res://Assets/Critters/AquaticLifeFiddlerCrab.png"),
 			"alignment": "Neutral",
 			"level": 7,

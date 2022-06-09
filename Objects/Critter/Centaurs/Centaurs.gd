@@ -25,7 +25,7 @@ var centaurs = {
 			"resistances": []
 		},
 		{
-			"critterName": "Hill Gryonem",
+			"critterName": "Gryonem centaur",
 			"race": "Centaurs",
 			"class": "Animal",
 			"aI": "Aggressive",

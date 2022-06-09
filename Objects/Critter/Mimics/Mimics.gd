@@ -25,11 +25,11 @@ var mimics = {
 			"resistances": ["thunder", "sleep"]
 		},
 		{
-			"critterName": "Humoungous mimic",
+			"critterName": "Humongous mimic",
 			"race": "Mimic",
 			"class": "Natural hazard",
 			"aI": "Skulking",
-			"texture": load("res://Assets/Critters/MimicHumoungousMimic.png"),
+			"texture": load("res://Assets/Critters/MimicHumongousMimic.png"),
 			"alignment": "Neutral",
 			"level": 14,
 			"hp": 38,

@@ -23,16 +23,16 @@ var randomItemList = {
 	},
 	"potion": {
 		"type": [
-			"soda",
 			"confusion",
 			"Toxix",
 			"heal",
-			"healaga",
 			"sleep",
 			"blindness",
 			"invisibility",
+#			"levitation",
 			"paralysis",
 			"hunger",
+			"healaga",
 			"gain level",
 			"up stat",
 			"down stat"

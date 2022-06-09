@@ -93,7 +93,7 @@ func createCorpse(_critterName, _items):
 
 func getAttacks():
 	var attacks = []
-	for d in range(value.d):
+	for _d in range(value.d):
 		attacks.append(
 			{
 				"dmg": [value.dmg[0], value.dmg[1]],

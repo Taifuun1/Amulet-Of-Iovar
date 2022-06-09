@@ -239,7 +239,7 @@ func returnRandomItem(_itemGeneration):
 		return null
 
 func randomizeRandomItems():
-	var _randomItemList = randomItemList.randomItemList
+	var _randomItemList = randomItemList.randomItemList.duplicate(true)
 	var _shuffledItems = {
 		"amulet": {},
 		"potion": {},

@@ -389,13 +389,18 @@ func create():
 	$"/root/World/Items".add_child(newItem5, true)
 	$Critters/"0"/Inventory.addToInventory(newItem5.id)
 	
+	var newItem6 = load("res://Objects/Item/Item.tscn").instance()
+	newItem6.createItem($"/root/World/Items/Items".getItemByName("scroll of create critter"), { "alignment": "blessed" })
+	$"/root/World/Items".add_child(newItem6, true)
+	$Critters/"0"/Inventory.addToInventory(newItem6.id)
+	
 	var newItem3 = load("res://Objects/Item/Item.tscn").instance()
-	newItem3.createItem($"/root/World/Items/Items".getItemByName("scroll of create food"), { "alignment": "uncursed" })
+	newItem3.createItem($"/root/World/Items/Items".getItemByName("scroll of create critter"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem3, true)
 	$Critters/"0"/Inventory.addToInventory(newItem3.id)
 	
 	var newItem4 = load("res://Objects/Item/Item.tscn").instance()
-	newItem4.createItem($"/root/World/Items/Items".getItemByName("scroll of create food"), { "alignment": "cursed" })
+	newItem4.createItem($"/root/World/Items/Items".getItemByName("scroll of create critter"), { "alignment": "cursed" })
 	$"/root/World/Items".add_child(newItem4, true)
 	$Critters/"0"/Inventory.addToInventory(newItem4.id)
 	

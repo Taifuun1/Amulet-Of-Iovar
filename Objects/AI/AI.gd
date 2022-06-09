@@ -4,8 +4,12 @@ var aI = "Aggressive"
 
 func getCritterMove(_critterTile, _playerTile, _level):
 	if aI == "Aggressive":
-		return _level.calculatePathFindingPath(_critterTile, _playerTile)
-	elif aI == "Neutral":
+		var _path = _level.calculatePathFindingPath(_critterTile, _playerTile)
+		if _path == null:
+			return []
+		return _path
+#	elif aI == "Neutral":
+	else:
 		var _chosenPoint
 		var _points = []
 		var _directionPoints = PoolVector2Array([

@@ -25,7 +25,7 @@ var elves = {
 			"resistances": ["Gleeie'er"]
 		},
 		{
-			"critterName": "Elf Assassin",
+			"critterName": "Elf assassin",
 			"race": "Elf",
 			"class": "Humanoid",
 			"aI": "Neutral",
@@ -48,7 +48,7 @@ var elves = {
 			"resistances": ["Gleeie'er"]
 		},
 		{
-			"critterName": "Elf Noble",
+			"critterName": "Elf noble",
 			"race": "Elf",
 			"class": "Humanoid",
 			"aI": "Neutral",
@@ -71,7 +71,7 @@ var elves = {
 			"resistances": ["Gleeie'er"]
 		},
 		{
-			"critterName": "Elf King",
+			"critterName": "Elf king",
 			"race": "Elf",
 			"class": "Humanoid",
 			"aI": "Neutral",

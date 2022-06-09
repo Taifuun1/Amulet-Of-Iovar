@@ -89,4 +89,5 @@ func despawn(_critterTile, _items, _level):
 	_level.grid[_critterTile.x][_critterTile.y].items.append(_corpse.id)
 	_level.grid[_critterTile.x][_critterTile.y].critter = null
 	_level.critters.erase(id)
+	GlobalCritterInfo.removeCritterFromPlay(critterName)
 	queue_free()
