@@ -2,6 +2,8 @@ extends BaseCritter
 
 var aI = load("res://Objects/AI/AI.tscn").instance()
 
+var expDropAmount
+
 func createCritter(_critter, _extraData = {}):
 	id = Globals.critterId
 	name = str(id)
@@ -39,12 +41,14 @@ func createCritter(_critter, _extraData = {}):
 	resistances = _critter.resistances
 	
 	$CritterSprite.texture = _critter.texture
+	
+	expDropAmount = _critter.expDropAmount
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	var _path = aI.getCritterMove(_critterTile, _playerTile, _level)
 	if _path.size() != 0:
-		var _to = _path[1]
-		if _level.grid[_to.x][_to.y].critter == 0:
+		var _moveCritterTo = _path[1]
+		if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 			if hits[currentHit] == 1:
 				$"/root/World/Critters/0".takeDamage(attacks, critterName)
 			else:
@@ -52,12 +56,15 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			if currentHit == 15:
 				currentHit = 0
 			currentHit += 1
-		elif _level.grid[_to.x][_to.y].critter == null:
-			moveCritter(_critterTile, _to, _critter, _level)
+		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
+			moveCritter(_critterTile, _moveCritterTo, _critter, _level)
+			_level.addPointToEnemyPathding(_critterTile, _level.grid)
+			_level.removePointFromEnemyPathfinding(_moveCritterTo, _level.grid)
 		else:
 			return false
 
 func takeDamage(_attacks, _critterTile, _items, _level):
+	var _didCritterDespawn = null
 	var _attacksLog = []
 	if _attacks.size() != 0:
 		for _attack in _attacks:
@@ -72,12 +79,14 @@ func takeDamage(_attacks, _critterTile, _items, _level):
 				_attacksLog.append("You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damageAfterArmorReduction }))
 			if hp <= 0:
 				despawn(_critterTile, _items, _level)
+				_didCritterDespawn = expDropAmount
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))
 				break
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
 	else:
 		Globals.gameConsole.addLog("Looks like you cant attack...")
+	return _didCritterDespawn
 
 func calculateDmg(_attack):
 	return (((randi() % (_attack.dmg[1] - _attack.dmg[0]) + _attack.dmg[0]) + _attack.enchantment) + _attack.bonusDmg.dmg) - ( ac / 3 )
@@ -88,6 +97,7 @@ func despawn(_critterTile, _items, _level):
 	$"/root/World/Items".add_child(_corpse)
 	_level.grid[_critterTile.x][_critterTile.y].items.append(_corpse.id)
 	_level.grid[_critterTile.x][_critterTile.y].critter = null
+	_level.addPointToEnemyPathding(_critterTile, _level.grid)
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
 	queue_free()

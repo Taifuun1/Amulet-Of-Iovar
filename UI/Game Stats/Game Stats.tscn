@@ -98,10 +98,30 @@ rect_min_size = Vector2( 123, 0 )
 text = "0"
 align = 2
 
-[node name="CritterNameContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+[node name="ExperienceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 96.0
 margin_right = 377.0
 margin_bottom = 116.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="ExperienceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Experience"
+
+[node name="Experience" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "0"
+align = 2
+
+[node name="CritterNameContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 120.0
+margin_right = 377.0
+margin_bottom = 140.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="CritterNameText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/CritterNameContainer"]
@@ -119,9 +139,9 @@ text = "-"
 align = 2
 
 [node name="RaceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 120.0
+margin_top = 144.0
 margin_right = 377.0
-margin_bottom = 140.0
+margin_bottom = 164.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="RaceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer"]
@@ -139,9 +159,9 @@ text = "-"
 align = 2
 
 [node name="AlignmentContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 144.0
+margin_top = 168.0
 margin_right = 377.0
-margin_bottom = 164.0
+margin_bottom = 188.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer"]
@@ -159,9 +179,9 @@ text = "-"
 align = 2
 
 [node name="ACContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 168.0
+margin_top = 192.0
 margin_right = 377.0
-margin_bottom = 188.0
+margin_bottom = 212.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="ACText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ACContainer"]
@@ -221,9 +241,9 @@ text = "-"
 align = 2
 
 [node name="DungeonLevelContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 192.0
+margin_top = 216.0
 margin_right = 377.0
-margin_bottom = 212.0
+margin_bottom = 236.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="DungeonLevelText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer"]

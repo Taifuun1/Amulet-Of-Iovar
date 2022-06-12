@@ -1,5 +1,8 @@
 extends BaseCritter
 
+var experiencePoints = 0
+var experienceLevelGainAmount = 20
+
 var strengthIncrease = 0
 var legerityIncrease = 0
 var balanceIncrease = 0
@@ -84,7 +87,9 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
 		if _critter.aI.aI == "Aggressive":
 			if hits[currentHit] == 1:
-				_critter.takeDamage(attacks, _tileToMoveTo, _items, _level)
+				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo, _items, _level)
+				if _didCritterDespawn != null:
+					addExp(_didCritterDespawn)
 			else:
 				Globals.gameConsole.addLog("You miss!")
 			if currentHit == 15:
@@ -105,6 +110,28 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
 			Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
 
+func addExp(_expAmount):
+	experiencePoints += _expAmount
+	while true:
+		if experiencePoints > experienceLevelGainAmount and level < 20:
+			gainLevel()
+		else:
+			break
+
+func gainLevel():
+	level += 1
+	
+	strength += strengthIncrease
+	legerity += legerityIncrease
+	balance += balanceIncrease
+	belief += beliefIncrease
+	visage += visageIncrease
+	wisdom += wisdomIncrease
+	
+	experienceLevelGainAmount += experienceLevelGainAmount + (experienceLevelGainAmount / 3)
+	
+	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
+
 func updatePlayerStats(dungeonLevel = null):
 	Globals.gameStats.updateStats({
 		maxhp = maxhp,
@@ -112,6 +139,8 @@ func updatePlayerStats(dungeonLevel = null):
 		maxmp = maxmp,
 		mp = mp,
 		level = level,
+		experiencePoints = experiencePoints,
+		experienceLevelGainAmount = experienceLevelGainAmount,
 		critterName = critterName,
 		race = race,
 		alignment = alignment,
@@ -182,7 +211,6 @@ func pickUpItems(_playerTile, _items, _grid):
 			itemsLog.append("You pickup {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
 	var itemsLogString = PoolStringArray(itemsLog).join(" ")
 	Globals.gameConsole.addLog(itemsLogString)
-	$"/root/World".processGameTurn()
 
 func pickUpItem(_playerTile, _item, _grid):
 	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
@@ -313,7 +341,6 @@ func readItem(_id):
 							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
 							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
 						):
-							print($"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y])
 							var newItem = load("res://Objects/Item/Item.tscn").instance()
 							var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
 							var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]

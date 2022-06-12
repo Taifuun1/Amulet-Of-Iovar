@@ -17,9 +17,6 @@ enum tiles {
 	DOOR
 }
 
-var race
-var alignment
-
 var currentDungeonLevel = 1
 
 var levelId = 1

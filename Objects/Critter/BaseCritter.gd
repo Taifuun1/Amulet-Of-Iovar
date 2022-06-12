@@ -41,16 +41,16 @@ func moveCritter(_moveFrom, _moveTo, _critter, _level):
 	_level.grid[_moveTo.x][_moveTo.y].critter = _critter
 
 func processEffects():
-	if hpRegenTimer == 40 - ( legerity / 2 ):
-		if hp != maxhp:
+	if hpRegenTimer > 25 - ( legerity / 2 ):
+		if hp < maxhp:
 			hp += 1
-			hpRegenTimer = 0
+		hpRegenTimer = 0
 	else:
 		hpRegenTimer += 1
 	
-	if mpRegenTimer == 40 - ( belief / 2 ):
-		if hp != maxhp:
-			hp += 1
-			mpRegenTimer = 0
+	if mpRegenTimer > 25 - ( belief / 2 ):
+		if mp < maxmp:
+			mp += 1
+		mpRegenTimer = 0
 	else:
 		mpRegenTimer += 1

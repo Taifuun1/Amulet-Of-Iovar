@@ -111,34 +111,36 @@ func _input(_event):
 	if !inStartScreen:
 		var _playerTile = getCritterTile(0)
 		if (
-			Input.is_action_pressed("MOVE_UP") or
-			Input.is_action_pressed("MOVE_UP_RIGHT") or
-			Input.is_action_pressed("MOVE_RIGHT") or
-			Input.is_action_pressed("MOVE_DOWN_RIGHT") or
-			Input.is_action_pressed("MOVE_DOWN") or
-			Input.is_action_pressed("MOVE_DOWN_LEFT") or
-			Input.is_action_pressed("MOVE_LEFT") or
-			Input.is_action_pressed("MOVE_UP_LEFT")
+			Input.is_action_just_pressed("MOVE_UP") or
+			Input.is_action_just_pressed("MOVE_UP_RIGHT") or
+			Input.is_action_just_pressed("MOVE_RIGHT") or
+			Input.is_action_just_pressed("MOVE_DOWN_RIGHT") or
+			Input.is_action_just_pressed("MOVE_DOWN") or
+			Input.is_action_just_pressed("MOVE_DOWN_LEFT") or
+			Input.is_action_just_pressed("MOVE_LEFT") or
+			Input.is_action_just_pressed("MOVE_UP_LEFT")
 		):
 			var _tileToMoveTo
-			if Input.is_action_pressed("MOVE_UP"):
+			if Input.is_action_just_pressed("MOVE_UP"):
 				_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y - 1)
-			elif Input.is_action_pressed("MOVE_UP_RIGHT"):
+			elif Input.is_action_just_pressed("MOVE_UP_RIGHT"):
 				_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y - 1)
-			elif Input.is_action_pressed("MOVE_RIGHT"):
+			elif Input.is_action_just_pressed("MOVE_RIGHT"):
 				_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y)
-			elif Input.is_action_pressed("MOVE_DOWN_RIGHT"):
+			elif Input.is_action_just_pressed("MOVE_DOWN_RIGHT"):
 				_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y + 1)
-			elif Input.is_action_pressed("MOVE_DOWN"):
+			elif Input.is_action_just_pressed("MOVE_DOWN"):
 				_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y + 1)
-			elif Input.is_action_pressed("MOVE_DOWN_LEFT"):
+			elif Input.is_action_just_pressed("MOVE_DOWN_LEFT"):
 				_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y + 1)
-			elif Input.is_action_pressed("MOVE_LEFT"):
+			elif Input.is_action_just_pressed("MOVE_LEFT"):
 				_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y)
-			elif Input.is_action_pressed("MOVE_UP_LEFT"):
+			elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
 				_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
-			processGameTurn(_playerTile, _tileToMoveTo)
-			get_tree().set_input_as_handled()
+			if keepMoving and _tileToMoveTo != null:
+				keepMovingLoop(_playerTile, _tileToMoveTo)
+			else:
+				processGameTurn(_playerTile, _tileToMoveTo)
 		elif (
 			Input.is_action_just_pressed("ASCEND") and
 			level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.UP_STAIR and
@@ -188,22 +190,13 @@ func _input(_event):
 			closeMenu()
 		elif Input.is_action_just_pressed("KEEP_MOVING") and inGame:
 			keepMoving = true
-		$"Critters/0".updatePlayerStats()
+		$"Critters/0".updatePlayerStats(Globals.currentDungeonLevel)
 
 func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	if _playerTile != null:
-		if keepMoving and _tileToMoveTo != null:
-			keepMovingLoop(_playerTile, _tileToMoveTo)
-		else:
-			processPlayerAction(_playerTile, _tileToMoveTo)
+		processPlayerAction(_playerTile, _tileToMoveTo)
 	processEnemyActions()
-	processTurnStatsAndEffects()
-	if checkNewCritterSpawn >= 30:
-		$Critters/Critters.checkSpawnableCrittersLevel()
-		$Critters/Critters.checkNewCritterSpawn(level)
-		checkNewCritterSpawn = 0
-	else:
-		checkNewCritterSpawn += 1
+	processCrittersStatus()
 	drawLevel()
 
 func processPlayerAction(_playerTile, _tileToMoveTo):
@@ -231,8 +224,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 		inGame
 	):
 		$"Critters/0".processPlayerAction(_playerTile, _tileToMoveTo, $Items/Items, level)
-	elif (Input.is_action_pressed("ACCEPT") and !inGame
-	):
+	elif (Input.is_action_pressed("ACCEPT") and !inGame):
 		processAccept()
 
 func processEnemyActions():
@@ -242,7 +234,16 @@ func processEnemyActions():
 			var _critterTile = getCritterTile(_enemy)
 			get_node("Critters/{id}".format({ "id": _enemy })).processCritterAction(_critterTile, _playerTile, _enemy, level)
 
-func processTurnStatsAndEffects():
+func processCrittersStatus():
+	processStatsAndEffects()
+	if checkNewCritterSpawn >= 30:
+		$Critters/Critters.checkSpawnableCrittersLevel()
+		$Critters/Critters.checkNewCritterSpawn(level)
+		checkNewCritterSpawn = 0
+	else:
+		checkNewCritterSpawn += 1
+
+func processStatsAndEffects():
 	$"/root/World/Critters/0".processEffects()
 	if level.critters.size() != 0:
 		for _enemy in level.critters:
@@ -344,6 +345,7 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 		):
 			$"Critters/0".processPlayerAction(_currentTile, _nextTile, $Items/Items, level)
 			processEnemyActions()
+			processCrittersStatus()
 			drawLevel()
 		else:
 			keepMoving = false
@@ -518,6 +520,7 @@ func processAccept():
 		$Critters/"0".dropItems(_playerTile, _items, level.grid)
 	
 	closeMenu()
+	$"/root/World".processGameTurn()
 
 func closeMenu():
 	if uIState == uI.PICK_UP_ITEMS or uIState == uI.DROP_ITEMS or uIState == uI.READ:
