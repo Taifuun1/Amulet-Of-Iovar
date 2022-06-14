@@ -4,10 +4,13 @@ var aI = load("res://Objects/AI/AI.tscn").instance()
 
 var expDropAmount
 
-func createCritter(_critter, _extraData = {}):
+var levelId
+
+func createCritter(_critter, _levelId, _extraData = {}):
 	id = Globals.critterId
 	name = str(id)
 	Globals.critterId += 1
+	levelId = levelId
 	
 	add_child(inventory)
 	$Inventory.create()
@@ -18,12 +21,12 @@ func createCritter(_critter, _extraData = {}):
 	
 	aI.aI = _critter.aI
 	
-	strength = _critter.stats.strength
-	legerity = _critter.stats.legerity
-	balance = _critter.stats.balance
-	belief = _critter.stats.belief
-	visage = _critter.stats.visage
-	wisdom = _critter.stats.wisdom
+	stats.strength = _critter.stats.strength
+	stats.legerity = _critter.stats.legerity
+	stats.balance = _critter.stats.balance
+	stats.belief = _critter.stats.belief
+	stats.visage = _critter.stats.visage
+	stats.wisdom = _critter.stats.wisdom
 	
 	level = 1
 	hp = _critter.hp
@@ -33,7 +36,7 @@ func createCritter(_critter, _extraData = {}):
 	maxhp = _critter.hp
 	maxmp = _critter.mp
 	ac = _critter.ac
-	attacks = [ strength * 1 / 2 ]
+	attacks = [ stats.strength * 1 / 2 ]
 	currentHit = 0
 	hits = _critter.hits
 	
@@ -78,7 +81,7 @@ func takeDamage(_attacks, _critterTile, _items, _level):
 				hp -= _damageAfterArmorReduction
 				_attacksLog.append("You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damageAfterArmorReduction }))
 			if hp <= 0:
-				despawn(_critterTile, _items, _level)
+				despawn(_critterTile)
 				_didCritterDespawn = expDropAmount
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))
 				break
@@ -89,15 +92,36 @@ func takeDamage(_attacks, _critterTile, _items, _level):
 	return _didCritterDespawn
 
 func calculateDmg(_attack):
-	return (((randi() % (_attack.dmg[1] - _attack.dmg[0]) + _attack.dmg[0]) + _attack.enchantment) + _attack.bonusDmg.dmg) - ( ac / 3 )
+	var _armorPenetration = ac - _attack.ap
+	if _armorPenetration < 0: _armorPenetration = 0
+	var _lowerDmg = int(_attack.dmg[0])
+	var _upperDmg = int(_attack.dmg[1]) - _attack.dmg[0]
+	if _upperDmg + _lowerDmg == 0:
+		return (_attack.enchantment + _attack.bonusDmg.dmg) - _armorPenetration
+	var _baseDmgVariance
+	if _upperDmg == 0:
+		_baseDmgVariance = _lowerDmg
+	else:
+		_baseDmgVariance = randi() % int(_upperDmg) + _lowerDmg
+	return ((_baseDmgVariance + _attack.enchantment) + _attack.bonusDmg.dmg) - _armorPenetration
 
-func despawn(_critterTile, _items, _level):
-	var _corpse = load("res://Objects/Item/Item.tscn").instance()
-	_corpse.createCorpse(critterName, _items)
-	$"/root/World/Items".add_child(_corpse)
-	_level.grid[_critterTile.x][_critterTile.y].items.append(_corpse.id)
-	_level.grid[_critterTile.x][_critterTile.y].critter = null
-	_level.addPointToEnemyPathding(_critterTile, _level.grid)
+func despawn(_critterTile = null, createCorpse = true):
+	var _level = get_node("/root/World/Levels/{level}".format({ "level": levelId }))
+	var _gridPosition
+	
+	# Position
+	if _critterTile == null:
+		_gridPosition = _level.getCritterTile(id)
+	else:
+		_gridPosition = _critterTile
+	
+	if createCorpse:
+		var _corpse = load("res://Objects/Item/Item.tscn").instance()
+		_corpse.createCorpse(critterName, $"/root/World/Items/Items")
+		$"/root/World/Items".add_child(_corpse)
+		_level.grid[_gridPosition.x][_gridPosition.y].items.append(_corpse.id)
+	_level.grid[_gridPosition.x][_gridPosition.y].critter = null
+	_level.addPointToEnemyPathding(_gridPosition, _level.grid)
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
 	queue_free()

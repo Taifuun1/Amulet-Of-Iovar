@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/List Menu/List Menu.gd" type="Script" id=1]
+
+[node name="List Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 190.0
+margin_top = 180.0
+margin_right = -190.0
+margin_bottom = -180.0
+rect_min_size = Vector2( 1540, 720 )
+script = ExtResource( 1 )
+
+[node name="Background" type="ColorRect" parent="."]
+rect_min_size = Vector2( 1540, 720 )
+color = Color( 0.0509804, 0.109804, 0.247059, 1 )
+
+[node name="Title" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 200, 22 )
+
+[node name="ListMenuContainer" type="ScrollContainer" parent="."]
+margin_top = 22.0
+margin_bottom = 698.0
+rect_min_size = Vector2( 1540, 698 )
+
+[node name="ListMenuContent" type="VBoxContainer" parent="ListMenuContainer"]
+margin_right = 1540.0
+margin_bottom = 698.0
+rect_min_size = Vector2( 1540, 698 )

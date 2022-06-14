@@ -298,7 +298,7 @@ var globalItemInfo = {
 	"Ring of Visage": {
 		"identified": false
 	},
-	"Mail": {
+	"Official mail": {
 		"identified": false
 	},
 	"Blank scroll": {

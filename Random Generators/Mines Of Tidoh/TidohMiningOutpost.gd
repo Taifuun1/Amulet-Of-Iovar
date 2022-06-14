@@ -1,25 +1,20 @@
-extends AStarPath
+extends BaseLevel
 
-var dungeonType = "minesOfTidoh"
+#var rooms = [
+#	[],
+#	[]
+#]
 
-var level
-var grid = []
-var rooms = [
-	[],
-	[]
-]
-var spawnableFloors = []
-var stairs = {
-	"downStair": null,
-	"secondDownStair": null,
-	"upStair": null
-}
+#var stairs = {
+#	"downStair": null,
+#	"secondDownStair": null,
+#	"upStair": null
+#}
+
 var outpostDoors = [
 	[],
 	[]
 ]
-
-var critters = []
 
 var outpostArea = {
 	1: Vector2(16, 2),
@@ -36,12 +31,16 @@ var caveAreas = [
 	]
 ]
 
-func setName():
-	level = Globals.levelId
-	name = str(Globals.levelId)
-	Globals.levelId += 1
-
 func createNewLevel():
+	rooms.append([])
+	rooms.append([])
+	
+	stairs = {
+		"downStair": null,
+		"secondDownStair": null,
+		"upStair": null
+	}
+	
 	# Create rooms with doors and staircases
 	for _x in range(Globals.gridSize.x):
 		grid.append([])

@@ -1,19 +1,4 @@
-extends AStarPath
-
-var dungeonType = "dungeon1"
-
-var level
-var grid = []
-var rooms = []
-var spawnableFloors = []
-var stairs = {}
-
-var critters = []
-
-func setName():
-	level = Globals.levelId
-	name = str(Globals.levelId)
-	Globals.levelId += 1
+extends BaseLevel
 
 func createNewLevel(_isDouble = false):
 	# Create rooms with doors and staircases

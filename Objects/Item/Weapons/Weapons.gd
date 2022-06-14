@@ -10,6 +10,7 @@ var weapons = {
 			"value": {
 				"dmg": [2,4],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -30,6 +31,7 @@ var weapons = {
 			"value": {
 				"dmg": [4,7],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -50,6 +52,7 @@ var weapons = {
 			"value": {
 				"dmg": [1,3],
 				"d": 2,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -68,8 +71,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Mace",
 			"value": {
-				"dmg": [2,4],
+				"dmg": [3,5],
 				"d": 1,
+				"ap": 1,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -88,8 +92,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Flail",
 			"value": {
-				"dmg": [1,2],
+				"dmg": [1,3],
 				"d": 3,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -112,6 +117,7 @@ var weapons = {
 			"value": {
 				"dmg": [3,5],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -130,8 +136,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Flail",
 			"value": {
-				"dmg": [2,3],
+				"dmg": [2,4],
 				"d": 3,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -150,8 +157,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Sword",
 			"value": {
-				"dmg": [4,6],
-				"d": 2,
+				"dmg": [5,8],
+				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -170,11 +178,12 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Sword",
 			"value": {
-				"dmg": [4,6],
-				"d": 2,
+				"dmg": [5,7],
+				"d": 1,
+				"ap": 1,
 				"bonusDmg": {
-					"dmg": 1,
-					"element": "Toxix"
+					"dmg": 0,
+					"element": null
 				}
 			},
 			"enchantment": true,
@@ -190,11 +199,12 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Sword",
 			"value": {
-				"dmg": [4,6],
-				"d": 2,
+				"dmg": [5,7],
+				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
-					"dmg": 0,
-					"element": null
+					"dmg": 1,
+					"element": "Gleeie'er"
 				}
 			},
 			"enchantment": true,
@@ -212,8 +222,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Dagger",
 			"value": {
-				"dmg": [2,4],
+				"dmg": [2,5],
 				"d": 2,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 2,
 					"element": "Thunder"
@@ -232,8 +243,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Mace",
 			"value": {
-				"dmg": [6,8],
+				"dmg": [7,10],
 				"d": 1,
+				"ap": 3,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -254,6 +266,7 @@ var weapons = {
 			"value": {
 				"dmg": [7,10],
 				"d": 1,
+				"ap": 1,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -274,6 +287,7 @@ var weapons = {
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -296,6 +310,7 @@ var weapons = {
 			"value": {
 				"dmg": [5,7],
 				"d": 2,
+				"ap": 1,
 				"bonusDmg": {
 					"dmg": 5,
 					"element": "Toxix"
@@ -316,6 +331,7 @@ var weapons = {
 			"value": {
 				"dmg": [5,7],
 				"d": 2,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 3,
 					"element": "Thunder"
@@ -336,6 +352,7 @@ var weapons = {
 			"value": {
 				"dmg": [5,7],
 				"d": 4,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 5,
 					"element": "Gleeie'er"
@@ -356,6 +373,7 @@ var weapons = {
 			"value": {
 				"dmg": [3,6],
 				"d": 4,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 2,
 					"element": "Toxix"
@@ -374,8 +392,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Mace",
 			"value": {
-				"dmg": [8,10],
+				"dmg": [9,12],
 				"d": 1,
+				"ap": 6,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -394,8 +413,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Mace",
 			"value": {
-				"dmg": [6,8],
+				"dmg": [6,9],
 				"d": 1,
+				"ap": 5,
 				"bonusDmg": {
 					"dmg": 8,
 					"element": "Fleir"
@@ -416,6 +436,7 @@ var weapons = {
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
+				"ap": 5,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -434,8 +455,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Sword",
 			"value": {
-				"dmg": [6,8],
+				"dmg": [6,9],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 6,
 					"element": "Fleir"
@@ -454,8 +476,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Sword",
 			"value": {
-				"dmg": [6,8],
+				"dmg": [6,9],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 6,
 					"element": "Frost"
@@ -476,6 +499,7 @@ var weapons = {
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -494,8 +518,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Sword",
 			"value": {
-				"dmg": [5,7],
+				"dmg": [5,8],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 5,
 					"element": "Gleeie'er"
@@ -514,8 +539,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Sword",
 			"value": {
-				"dmg": [13,17],
+				"dmg": [13,18],
 				"d": 1,
+				"ap": 3,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -534,8 +560,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Two-hander",
 			"value": {
-				"dmg": [18,22],
+				"dmg": [18,26],
 				"d": 1,
+				"ap": 2,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -554,8 +581,9 @@ var weapons = {
 			"type": "Weapon",
 			"category": "Two-hander",
 			"value": {
-				"dmg": [6,8],
+				"dmg": [6,9],
 				"d": 2,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 3,
 					"element": "Gleeie'er"
@@ -576,6 +604,7 @@ var weapons = {
 			"value": {
 				"dmg": [12,15],
 				"d": 1,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 6,
 					"element": "Frost"

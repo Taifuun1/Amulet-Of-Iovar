@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "BaseCritter",
 "language": "GDScript",
 "path": "res://Objects/Critter/BaseCritter.gd"
+}, {
+"base": "AStarPath",
+"class": "BaseLevel",
+"language": "GDScript",
+"path": "res://Random Generators/BaseLevel.gd"
 } ]
 _global_script_class_icons={
 "AStarPath": "",
-"BaseCritter": ""
+"BaseCritter": "",
+"BaseLevel": ""
 }
 
 [application]

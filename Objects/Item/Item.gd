@@ -91,17 +91,58 @@ func createCorpse(_critterName, _items):
 	
 	$ItemSprite.texture = _item.texture
 
-func getAttacks():
+func getAttacks(_stats):
 	var attacks = []
-	for _d in range(value.d):
+	var damageIncrease = calculateWeaponAttackIncrease(_stats)
+	for _d in range(value.d + damageIncrease.d):
 		attacks.append(
 			{
-				"dmg": [value.dmg[0], value.dmg[1]],
+				"dmg": [value.dmg[0] + damageIncrease.dmg, value.dmg[1] + damageIncrease.dmg],
 				"enchantment": enchantment,
+				"ap": value.ap,
 				"bonusDmg": value.bonusDmg
 			}
 		)
 	return attacks
+
+func calculateWeaponAttackIncrease(_stats):
+	if category.matchn("sword"):
+		return {
+			"dmg": _stats.balance / 3,
+			"d": 0
+		}
+	if category.matchn("two-hander"):
+		return {
+			"dmg": _stats.strength / 3,
+			"d": 0
+		}
+	if category.matchn("dagger"):
+		var _d = 0
+		if _stats.legerity > 25:
+			_d = 2
+		elif _stats.legerity > 11:
+			_d = 1
+		return {
+			"dmg": _stats.legerity / 5,
+			"d": _d
+		}
+	if category.matchn("mace"):
+		return {
+			"dmg": (_stats.strength / 4) + (_stats.balance / 4),
+			"d": 0
+		}
+	if category.matchn("flail"):
+		var _d = 0
+		if _stats.legerity > 22:
+			_d = 3
+		elif _stats.legerity > 15:
+			_d = 2
+		elif _stats.legerity > 8:
+			_d = 1
+		return {
+			"dmg": _stats.legerity / 5,
+			"d": 0
+		}
 
 func getTexture():
 	return $ItemSprite.texture

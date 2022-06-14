@@ -1,6 +1,6 @@
 extends Control
 
-onready var inventoryItem = preload("res://UI/ItemManagement/ItemManagementItem.tscn")
+onready var inventoryItem = preload("res://UI/Item Management/Item Management Item.tscn")
 
 var items = []
 var selectedItems = []

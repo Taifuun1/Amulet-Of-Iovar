@@ -1,20 +1,6 @@
-extends AStarPath
+extends BaseLevel
 
-var dungeonType = "minesOfTidoh"
-
-var level
-var grid = []
-var caverns = []
-var spawnableFloors = []
 var spawnPoints = []
-var stairs = {}
-
-var critters = []
-
-func setName():
-	level = Globals.levelId
-	name = str(Globals.levelId)
-	Globals.levelId += 1
 
 func createNewLevel():
 	# Create rooms with doors and staircases

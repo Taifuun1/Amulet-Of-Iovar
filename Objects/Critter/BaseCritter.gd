@@ -21,12 +21,14 @@ var attacks
 var currentHit
 var hits
 
-var strength
-var legerity
-var balance
-var belief
-var visage
-var wisdom
+var stats = {
+	"strength": 0,
+	"legerity": 0,
+	"balance": 0,
+	"belief": 0,
+	"visage": 0,
+	"wisdom": 0
+}
 
 var abilities
 var resistances
@@ -41,14 +43,14 @@ func moveCritter(_moveFrom, _moveTo, _critter, _level):
 	_level.grid[_moveTo.x][_moveTo.y].critter = _critter
 
 func processEffects():
-	if hpRegenTimer > 25 - ( legerity / 2 ):
+	if hpRegenTimer > 25 - ( stats.legerity / 2 ):
 		if hp < maxhp:
 			hp += 1
 		hpRegenTimer = 0
 	else:
 		hpRegenTimer += 1
 	
-	if mpRegenTimer > 25 - ( belief / 2 ):
+	if mpRegenTimer > 25 - ( stats.belief / 2 ):
 		if mp < maxmp:
 			mp += 1
 		mpRegenTimer = 0

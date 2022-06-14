@@ -60,38 +60,40 @@ func _ready():
 	critters.create()
 	$Critters.add_child(critters)
 	
+	$UI/GameConsole.create()
 	$UI/ItemManagement.create()
 	$UI/Equipment.create()
+	$UI/PopupMenu.create()
 	
 	# Dungeon 1
 	var firstLevel = dungeon1.instance()
-	firstLevel.setName()
+	firstLevel.setName("dungeon1")
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(2):
 		var newDungeon = dungeon1.instance()
-		newDungeon.setName()
+		newDungeon.setName("dungeon1")
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	# Mines of Tidoh
 	for _level in range(3):
 		var newCave = minesOfTidoh.instance()
-		newCave.setName()
+		newCave.setName("minesOfTidoh")
 		levels.minesOfTidoh.append(newCave)
 		$Levels.add_child(newCave)
 	var newMiningOutpost = tidohMiningOutpost.instance()
-	newMiningOutpost.setName()
+	newMiningOutpost.setName("minesOfTidoh")
 	levels.minesOfTidoh.append(newMiningOutpost)
 	$Levels.add_child(newMiningOutpost)
 	for _level in range(3):
 		var newCave = minesOfTidoh.instance()
-		newCave.setName()
+		newCave.setName("minesOfTidoh")
 		levels.minesOfTidoh.append(newCave)
 		$Levels.add_child(newCave)
 	# Dungeon 2
 	for _level in range(3):
 		var newDungeon = dungeon1.instance()
-		newDungeon.setName()
+		newDungeon.setName("dungeon1")
 		levels.dungeon2.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
@@ -109,7 +111,7 @@ func _input(_event):
 		yield(get_tree().create_timer(0.1), "timeout")
 		drawLevel()
 	if !inStartScreen:
-		var _playerTile = getCritterTile(0)
+		var _playerTile = level.getCritterTile(0)
 		if (
 			Input.is_action_just_pressed("MOVE_UP") or
 			Input.is_action_just_pressed("MOVE_UP_RIGHT") or
@@ -151,7 +153,7 @@ func _input(_event):
 			var stair = moveLevel(-1)
 			updateTiles()
 			if stair == null:
-				placeCritter(Globals.tiles.DOWN_STAIR, 0)
+				level.placeCritter(Globals.tiles.DOWN_STAIR, 0)
 			else:
 				level.grid[stair.x][stair.y].critter = 0
 			yield(get_tree().create_timer(0.1), "timeout")
@@ -161,14 +163,14 @@ func _input(_event):
 			Input.is_action_just_pressed("DESCEND") and
 			level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR and
 			Globals.currentDungeonLevel < 9 and
-			levels.minesOfTidoh.back().level != Globals.currentDungeonLevel and
+			levels.minesOfTidoh.back().levelId != Globals.currentDungeonLevel and
 			inGame
 		):
 			$"/root/World".hide()
 			var stair = moveLevel(1)
 			updateTiles()
 			if stair == null:
-				placeCritter(Globals.tiles.UP_STAIR, 0)
+				level.placeCritter(Globals.tiles.UP_STAIR, 0)
 			else:
 				level.grid[stair.x][stair.y].critter = 0
 			yield(get_tree().create_timer(0.1), "timeout")
@@ -228,10 +230,10 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 		processAccept()
 
 func processEnemyActions():
-	var _playerTile = getCritterTile(0)
+	var _playerTile = level.getCritterTile(0)
 	if level.critters.size() != 0:
 		for _enemy in level.critters:
-			var _critterTile = getCritterTile(_enemy)
+			var _critterTile = level.getCritterTile(_enemy)
 			get_node("Critters/{id}".format({ "id": _enemy })).processCritterAction(_critterTile, _playerTile, _enemy, level)
 
 func processCrittersStatus():
@@ -277,7 +279,7 @@ func drawCrittersAndItems():
 
 func drawFOV():
 	# FOV
-	var playerTile = getCritterTile(0)
+	var playerTile = level.getCritterTile(0)
 	var playerCenter = Vector2((playerTile.x + 0.5) * 32, (playerTile.y + 0.5) * 32)
 	var spaceState = get_world_2d().get_direct_space_state()
 	for _x in range(Globals.gridSize.x):
@@ -347,14 +349,13 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 			processEnemyActions()
 			processCrittersStatus()
 			drawLevel()
+			yield(get_tree().create_timer(0.01), "timeout")
 		else:
 			keepMoving = false
 		_currentTile = _nextTile
 		_nextTile = _nextTile + _direction
 
 func create():
-	$UI/GameConsole.create()
-	
 	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
 	for _level in range(levels.dungeon1.size()):
 		if levels.dungeon1[_level] == levels.dungeon1.back():
@@ -368,7 +369,7 @@ func create():
 	
 	$Critters.add_child(player, true)
 	player.create("mercenary")
-	placeCritter(Globals.tiles.UP_STAIR, 0)
+	level.placeCritter(Globals.tiles.UP_STAIR, 0)
 	player.calculateEquipmentStats()
 	
 	$Items/Items.randomizeRandomItems()
@@ -387,7 +388,7 @@ func create():
 	$Critters/"0"/Inventory.addToInventory(newItem2.id)
 	
 	var newItem5 = load("res://Objects/Item/Item.tscn").instance()
-	newItem5.createItem($"/root/World/Items/Items".getItemByName("scroll of create potion"), { "alignment": "blessed" })
+	newItem5.createItem($"/root/World/Items/Items".getItemByName("scroll of genocide"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem5, true)
 	$Critters/"0"/Inventory.addToInventory(newItem5.id)
 	
@@ -406,6 +407,11 @@ func create():
 	$"/root/World/Items".add_child(newItem4, true)
 	$Critters/"0"/Inventory.addToInventory(newItem4.id)
 	
+	var newItem10 = load("res://Objects/Item/Item.tscn").instance()
+	newItem10.createItem($"/root/World/Items/Items".getItemByName("dwarvish laysword"), { "alignment": "uncursed" })
+	$"/root/World/Items".add_child(newItem10, true)
+	$Critters/"0"/Inventory.addToInventory(newItem10.id)
+	
 	updateTiles()
 	
 	inStartScreen = false
@@ -415,35 +421,35 @@ func moveLevel(_direction):
 	updateObjects = true
 	if (
 		(
-			levels.dungeon1.back().level == Globals.currentDungeonLevel and
+			levels.dungeon1.back().levelId == Globals.currentDungeonLevel and
 			_direction == 1
 		) or
 		(
-			levels.dungeon2.front().level == Globals.currentDungeonLevel and
+			levels.dungeon2.front().levelId == Globals.currentDungeonLevel and
 			_direction == -1
 		) or
 		(
-			levels.minesOfTidoh.front().level == Globals.currentDungeonLevel and
+			levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel and
 			_direction == -1
 		)
 	):
 		var goToStair
 		for stair in level.stairs.keys():
-			if level.stairs[stair] == getCritterTile(0):
+			if level.stairs[stair] == level.getCritterTile(0):
 				if stair == "downStair" and _direction == 1:
-					Globals.currentDungeonLevel = levels.dungeon2.front().level
+					Globals.currentDungeonLevel = levels.dungeon2.front().levelId
 					goToStair = "upStair"
 					break
 				elif stair == "secondDownStair" and _direction == 1:
-					Globals.currentDungeonLevel = levels.minesOfTidoh.front().level
+					Globals.currentDungeonLevel = levels.minesOfTidoh.front().levelId
 					goToStair = "upStair"
 					break
 				elif stair == "upStair" and _direction == -1:
-					if levels.minesOfTidoh.front().level == Globals.currentDungeonLevel:
+					if levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel:
 						goToStair = "secondDownStair"
-					elif levels.dungeon2.front().level == Globals.currentDungeonLevel:
+					elif levels.dungeon2.front().levelId == Globals.currentDungeonLevel:
 						goToStair = "downStair"
-					Globals.currentDungeonLevel = levels.dungeon1.back().level
+					Globals.currentDungeonLevel = levels.dungeon1.back().levelId
 					break
 		level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
 		$FOV.moveLevel(Globals.currentDungeonLevel - 1)
@@ -460,21 +466,6 @@ func updateTiles():
 			set_cellv(Vector2(x, y), level.grid[x][y].tile)
 			$FOV.set_cellv(Vector2(x, y), $FOV.currentFOVLevel[x][y])
 
-func placeCritter(_tile, _critter):
-	for x in range(level.grid.size()):
-		for y in range(level.grid[x].size()):
-			var _checkedTile = level.grid[x][y].tile
-			if _checkedTile == _tile:
-				level.grid[x][y].critter = _critter
-				return
-
-func getCritterTile(_critter):
-	for x in range(level.grid.size()):
-		for y in range(level.grid[x].size()):
-			if level.grid[x][y].critter == _critter:
-				return Vector2(x, y)
-	return false
-
 func openInventory():
 	if uIState == uI.GAME:
 		$Critters/"0"/Inventory.showInventory()
@@ -484,6 +475,7 @@ func openInventory():
 func openPickUpItemMenu(_playerTile):
 	if level.grid[_playerTile.x][_playerTile.y].items.size() == 1 and uIState == uI.GAME:
 		$Critters/"0".pickUpItems(_playerTile, level.grid[_playerTile.x][_playerTile.y].items, level.grid)
+		$"/root/World".processGameTurn()
 	elif level.grid[_playerTile.x][_playerTile.y].items.size() != 0 and uIState == uI.GAME:
 		$UI/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
 		$UI/ItemManagement.showItemManagementList()
@@ -511,7 +503,7 @@ func openReadItemMenu():
 		inGame = false
 
 func processAccept():
-	var _playerTile = getCritterTile(0)
+	var _playerTile = level.getCritterTile(0)
 	var _items = $UI/ItemManagement.selectedItems
 	
 	if uIState == uI.PICK_UP_ITEMS:
@@ -522,16 +514,20 @@ func processAccept():
 	closeMenu()
 	$"/root/World".processGameTurn()
 
-func closeMenu():
-	if uIState == uI.PICK_UP_ITEMS or uIState == uI.DROP_ITEMS or uIState == uI.READ:
-		$UI/ItemManagement.hideItemManagementList()
-	if uIState == uI.EQUIPMENT:
-		$UI/Equipment.hideEquipment()
-	if uIState == uI.INVENTORY:
-		$Critters/"0"/Inventory.hideInventory()
-	uIState = uI.GAME
-	inGame = true
-	keepMoving = false
+func closeMenu(_additionalChoices = false):
+	if !_additionalChoices:
+		if uIState == uI.PICK_UP_ITEMS or uIState == uI.DROP_ITEMS or uIState == uI.READ:
+			$UI/ItemManagement.hideItemManagementList()
+		if uIState == uI.EQUIPMENT:
+			$UI/Equipment.hideEquipment()
+		if uIState == uI.INVENTORY:
+			$Critters/"0"/Inventory.hideInventory()
+		$UI/ListMenu.hideListMenuList()
+		uIState = uI.GAME
+		inGame = true
+		keepMoving = false
+	else:
+		pass
 
 func createItemsForEachLevel():
 	for _level in $Levels.get_children():

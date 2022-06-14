@@ -157,7 +157,7 @@ func spawnCritter(_critter, _position = null, _byName = false, _level = null):
 		GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].population
 	):
 		var newCritter = critter.instance()
-		newCritter.createCritter(_newCritter)
+		newCritter.createCritter(_newCritter, _spawnedLevel.levelId)
 		_spawnedLevel.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
 		$"/root/World/Critters".add_child(newCritter, true)
 		_spawnedLevel.critters.append(newCritter.id)
@@ -184,7 +184,7 @@ func spawnRandomCritter(_position, _level = null):
 			GlobalCritterInfo.globalCritterInfo[_critter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_critter.critterName].population
 		):
 			var newCritter = critter.instance()
-			newCritter.createCritter(_critter)
+			newCritter.createCritter(_critter, _spawnedLevel.levelId)
 			_spawnedLevel.grid[_position.x][_position.y].critter = newCritter.id
 			$"/root/World/Critters".add_child(newCritter, true)
 			_spawnedLevel.critters.append(newCritter.id)

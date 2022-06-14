@@ -1,7 +1,7 @@
 var scrolls = {
 	"common": [
 		{
-			"itemName": "Mail",
+			"itemName": "Official mail",
 			"unidentifiedItemName": "Stamped scroll",
 			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
 			"unIdentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),

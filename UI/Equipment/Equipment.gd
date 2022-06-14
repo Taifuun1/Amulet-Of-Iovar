@@ -181,10 +181,10 @@ func getArmorClass():
 		_ac += (_item.value.ac + _item.enchantment)
 	if hands["lefthand"] != null and get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] })).category == "Shield":
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] }))
-		_ac += (_item.value + _item.enchantment)
+		_ac += (_item.value.ac + _item.enchantment)
 	if hands["righthand"] != null and get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] })).category == "Shield":
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] }))
-		_ac += (_item.value + _item.enchantment)
+		_ac += (_item.value.ac + _item.enchantment)
 	return _ac
 
 func checkIfMatchingEquipmentAndSlot(_type, _category):

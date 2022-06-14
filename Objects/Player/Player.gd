@@ -48,12 +48,12 @@ func create(_class):
 	race = "Human"
 	alignment = "Neutral"
 	
-	strength = _playerClass.strength
-	legerity = _playerClass.legerity
-	balance = _playerClass.balance
-	belief = _playerClass.belief
-	visage = _playerClass.visage
-	wisdom = _playerClass.wisdom
+	stats.strength = _playerClass.strength
+	stats.legerity = _playerClass.legerity
+	stats.balance = _playerClass.balance
+	stats.belief = _playerClass.belief
+	stats.visage = _playerClass.visage
+	stats.wisdom = _playerClass.wisdom
 	
 	strengthIncrease = _playerClass.strengthIncrease
 	legerityIncrease = _playerClass.legerityIncrease
@@ -121,12 +121,12 @@ func addExp(_expAmount):
 func gainLevel():
 	level += 1
 	
-	strength += strengthIncrease
-	legerity += legerityIncrease
-	balance += balanceIncrease
-	belief += beliefIncrease
-	visage += visageIncrease
-	wisdom += wisdomIncrease
+	stats.strength += strengthIncrease
+	stats.legerity += legerityIncrease
+	stats.balance += balanceIncrease
+	stats.belief += beliefIncrease
+	stats.visage += visageIncrease
+	stats.wisdom += wisdomIncrease
 	
 	experienceLevelGainAmount += experienceLevelGainAmount + (experienceLevelGainAmount / 3)
 	
@@ -149,12 +149,12 @@ func updatePlayerStats(dungeonLevel = null):
 		currentHit = currentHit,
 		hits = hits,
 		dungeonLevel = dungeonLevel,
-		strength = strength,
-		legerity = legerity,
-		balance = balance,
-		belief = belief,
-		visage = visage,
-		wisdom = wisdom
+		strength = stats.strength,
+		legerity = stats.legerity,
+		balance = stats.balance,
+		belief = stats.belief,
+		visage = stats.visage,
+		wisdom = stats.wisdom
 	})
 
 func calculateEquipmentStats():
@@ -164,17 +164,18 @@ func calculateEquipmentStats():
 	attacks = []
 	# Attacks
 	if $"/root/World/UI/Equipment".hands["lefthand"] != null and $"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]:
-		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks())
+		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
 	elif $"/root/World/UI/Equipment".hands["lefthand"] != null or $"/root/World/UI/Equipment".hands["righthand"] != null:
 		if $"/root/World/UI/Equipment".hands["lefthand"] != null:
-			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks())
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
 		if $"/root/World/UI/Equipment".hands["righthand"] != null:
-			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks())
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks(stats))
 	else:
 		attacks = [
 			{
-				"dmg": [strength * 1 / 4, 2 + (strength * 1 / 4)],
+				"dmg": [stats.strength * 1 / 6, 1 + stats.strength * 1 / 6],
 				"enchantment": 0,
+				"ap": 0,
 				"bonusDmg": {
 					"dmg": 0,
 					"element": null
@@ -237,6 +238,7 @@ func dropItem(_playerTile, _item, _grid):
 
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
+	var _additionalChoices = false
 	if _readItem.type.matchn("scroll"):
 		Globals.gameConsole.addLog("You read a {itemName}.".format({ "itemName": _readItem.itemName }))
 		if (
@@ -246,6 +248,11 @@ func readItem(_id):
 			GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified = true
 			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _readItem.identifiedItemName, "unidentifiedItemName": _readItem.unidentifiedItemName }))
 		match _readItem.identifiedItemName.to_lower():
+			"blank scroll":
+				Globals.gameConsole.addLog("Its a blank scroll. Wow.")
+			"official mail":
+				Globals.gameConsole.addLog("Its a grocery list of milk, eggs and carrots. Riveting. WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
+				Globals.gameConsole.addLog("The mail disappears!")
 			"scroll of identify":
 				var _items = $"/root/World/Critters/0/Inventory".inventory.duplicate(true)
 				if _items.empty():
@@ -311,7 +318,7 @@ func readItem(_id):
 									break
 								_items.erase(_item)
 			"scroll of create food":
-				var _playerPosition = $"/root/World".getCritterTile(0)
+				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.alignment.matchn("cursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					newItem.createItem($"/root/World/Items/Items".getItemByName("orange"))
@@ -355,7 +362,7 @@ func readItem(_id):
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("A bucketload of items appears around you!")
 			"scroll of create potion":
-				var _playerPosition = $"/root/World".getCritterTile(0)
+				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.alignment.matchn("cursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					newItem.createItem($"/root/World/Items/Items".getItemByName("potion of toxix"))
@@ -399,7 +406,7 @@ func readItem(_id):
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("A bucketload of items appears around you!")
 			"scroll of create critter":
-				var _playerPosition = $"/root/World".getCritterTile(0)
+				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.alignment.matchn("cursed"):
 					var _critterName = null
 					for _direction in PoolVector2Array([
@@ -475,12 +482,32 @@ func readItem(_id):
 						Globals.gameConsole.addLog("A {critterName} appears beside you...".format({ "critterName": _critterName }))
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
+			"scroll of genocide":
+				var _aliveCritters = []
+				for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
+					if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0 and GlobalCritterInfo.globalCritterInfo[_critterName].crittersInPlay != 0:
+						_aliveCritters.append(_critterName)
+				$"/root/World/UI/ListMenu".showListMenuList("Genocide what?", _aliveCritters)
+				$"/root/World/UI/ListMenu".show()
+				_additionalChoices = true
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		for _item in $"/root/World/Items".get_children():
 			if _item.name == "Items":
 				continue
 			_item.checkItemIdentification()
-		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
-		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+		if !_readItem.identifiedItemName.to_lower().matchn("blank scroll"):
+			$"/root/World/Critters/0/Inventory".inventory.erase(_id)
+			get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+	$"/root/World".closeMenu(_additionalChoices)
+
+func dealWithScrollOfGenocide(_critterName):
+	for _critter in $"/root/World/Critters".get_children():
+		if _critter.name == "Critters":
+			continue
+		if _critter.critterName == _critterName:
+			_critter.despawn(null, false)
+	GlobalCritterInfo.globalCritterInfo[_critterName].crittersInPlay = 0
+	GlobalCritterInfo.globalCritterInfo[_critterName].population = 0
+	Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _critterName.capitalize() }))
 	$"/root/World".closeMenu()
