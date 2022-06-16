@@ -10,7 +10,7 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	id = Globals.critterId
 	name = str(id)
 	Globals.critterId += 1
-	levelId = levelId
+	levelId = _levelId
 	
 	add_child(inventory)
 	$Inventory.create()

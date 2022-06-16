@@ -199,7 +199,7 @@ var globalItemInfo = {
 	"Cool Mikeys": {
 		"identified": false
 	},
-	"Water bottle": {
+	"Water potion": {
 		"identified": false
 	},
 	"Soda bottle": {

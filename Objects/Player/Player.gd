@@ -1,8 +1,11 @@
 extends BaseCritter
 
 var experiencePoints = 0
-var experienceLevelGainAmount = 20
+var experienceNeededForPreviousLevelGainAmount = 0
+var experienceNeededForLevelGainAmount = 20
 
+var hpIncrease = 0
+var mpIncrease = 0
 var strengthIncrease = 0
 var legerityIncrease = 0
 var balanceIncrease = 0
@@ -55,6 +58,8 @@ func create(_class):
 	stats.visage = _playerClass.visage
 	stats.wisdom = _playerClass.wisdom
 	
+	hpIncrease = _playerClass.hpIncrease
+	mpIncrease = _playerClass.mpIncrease
 	strengthIncrease = _playerClass.strengthIncrease
 	legerityIncrease = _playerClass.legerityIncrease
 	balanceIncrease = _playerClass.balanceIncrease
@@ -96,24 +101,27 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 				currentHit = 0
 			currentHit += 1
 		elif _critter.aI.aI == "Neutral":
-			_level.grid[_playerTile.x][_playerTile.y].critter = _critter.id
-			_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter = 0
+			moveCritter(_playerTile, _tileToMoveTo, 0, _level, _critter.id)
 			Globals.gameConsole.addLog("You switch places with the {critter}.".format({ "critter": _critter.critterName }))
+			checkIfItemsHere(_level, _tileToMoveTo)
 		else:
 			return false
 	else:
 		moveCritter(_playerTile, _tileToMoveTo, 0, _level)
-		if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 10:
-			Globals.gameConsole.addLog("There are alot of items here.")
-		elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 1:
-			Globals.gameConsole.addLog("You see some items here.")
-		elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
-			Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
+		checkIfItemsHere(_level, _tileToMoveTo)
+
+func checkIfItemsHere(_level, _tileToMoveTo):
+	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 10:
+		Globals.gameConsole.addLog("There are alot of items here.")
+	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 1:
+		Globals.gameConsole.addLog("You see some items here.")
+	elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
+		Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
 
 func addExp(_expAmount):
 	experiencePoints += _expAmount
 	while true:
-		if experiencePoints > experienceLevelGainAmount and level < 20:
+		if experiencePoints >= experienceNeededForLevelGainAmount and level < 20:
 			gainLevel()
 		else:
 			break
@@ -121,6 +129,16 @@ func addExp(_expAmount):
 func gainLevel():
 	level += 1
 	
+	maxhp += hpIncrease
+	maxmp += mpIncrease
+	if hp + hpIncrease >= maxhp:
+		hp = maxhp
+	else:
+		hp += hpIncrease
+	if mp + mpIncrease >= maxmp:
+		mp = maxmp
+	else:
+		mp += mpIncrease
 	stats.strength += strengthIncrease
 	stats.legerity += legerityIncrease
 	stats.balance += balanceIncrease
@@ -128,7 +146,8 @@ func gainLevel():
 	stats.visage += visageIncrease
 	stats.wisdom += wisdomIncrease
 	
-	experienceLevelGainAmount += experienceLevelGainAmount + (experienceLevelGainAmount / 3)
+	experienceNeededForPreviousLevelGainAmount = experienceNeededForLevelGainAmount
+	experienceNeededForLevelGainAmount += experienceNeededForLevelGainAmount + (experienceNeededForLevelGainAmount / 3)
 	
 	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
 
@@ -140,7 +159,7 @@ func updatePlayerStats(dungeonLevel = null):
 		mp = mp,
 		level = level,
 		experiencePoints = experiencePoints,
-		experienceLevelGainAmount = experienceLevelGainAmount,
+		experienceLevelGainAmount = experienceNeededForLevelGainAmount,
 		critterName = critterName,
 		race = race,
 		alignment = alignment,
@@ -163,12 +182,24 @@ func calculateEquipmentStats():
 	
 	attacks = []
 	# Attacks
-	if $"/root/World/UI/Equipment".hands["lefthand"] != null and $"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]:
+	if (
+		$"/root/World/UI/Equipment".hands["lefthand"] != null and
+		$"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]
+	):
 		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
-	elif $"/root/World/UI/Equipment".hands["lefthand"] != null or $"/root/World/UI/Equipment".hands["righthand"] != null:
-		if $"/root/World/UI/Equipment".hands["lefthand"] != null:
+	elif (
+		$"/root/World/UI/Equipment".hands["lefthand"] != null or
+		$"/root/World/UI/Equipment".hands["righthand"] != null
+	):
+		if (
+			$"/root/World/UI/Equipment".hands["lefthand"] != null and
+			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).category.matchn("shield")
+		):
 			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
-		if $"/root/World/UI/Equipment".hands["righthand"] != null:
+		if (
+			$"/root/World/UI/Equipment".hands["righthand"] != null and
+			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).category.matchn("shield")
+		):
 			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks(stats))
 	else:
 		attacks = [
@@ -511,3 +542,68 @@ func dealWithScrollOfGenocide(_critterName):
 	GlobalCritterInfo.globalCritterInfo[_critterName].population = 0
 	Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _critterName.capitalize() }))
 	$"/root/World".closeMenu()
+
+func quaffItem(_id):
+	var _quaffedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
+	var _additionalChoices = false
+	if _quaffedItem.type.matchn("potion"):
+		Globals.gameConsole.addLog("You quaff a {itemName}.".format({ "itemName": _quaffedItem.itemName }))
+		if (
+			GlobalItemInfo.globalItemInfo.has(_quaffedItem.identifiedItemName) and
+			GlobalItemInfo.globalItemInfo[_quaffedItem.identifiedItemName].identified == false
+		):
+			GlobalItemInfo.globalItemInfo[_quaffedItem.identifiedItemName].identified = true
+			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _quaffedItem.identifiedItemName, "unidentifiedItemName": _quaffedItem.unidentifiedItemName }))
+		match _quaffedItem.identifiedItemName.to_lower():
+			"water potion":
+				if _quaffedItem.alignment.matchn("blessed"):
+					Globals.gameConsole.addLog("This tastes fantastic!")
+				if _quaffedItem.alignment.matchn("uncursed"):
+					Globals.gameConsole.addLog("This tastes like water.")
+				if _quaffedItem.alignment.matchn("cursed"):
+					Globals.gameConsole.addLog("This doesn't taste very good...")
+			"soda bottle":
+				if _quaffedItem.alignment.matchn("blessed"):
+					Globals.gameConsole.addLog("Its orange juice! Its really good!")
+				if _quaffedItem.alignment.matchn("uncursed"):
+					Globals.gameConsole.addLog("Its apple juice. Tastes nice!")
+				if _quaffedItem.alignment.matchn("cursed"):
+					Globals.gameConsole.addLog("Its radish juice. Uggghh...")
+			"potion of heal":
+				var _amountToHeal = 0
+				if _quaffedItem.alignment.matchn("blessed"):
+					_amountToHeal = 6 + (level * 4)
+					Globals.gameConsole.addLog("The {potion} heals you. That felt good!".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.alignment.matchn("uncursed"):
+					_amountToHeal = 4 + (level * 3)
+					Globals.gameConsole.addLog("The {potion} heals you.".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.alignment.matchn("cursed"):
+					_amountToHeal = 2 + (level * 2)
+					Globals.gameConsole.addLog("The {potion} heals you. That felt a little off.".format({ "potion": _quaffedItem.itemName }))
+				if hp + _amountToHeal >= maxhp:
+					if _quaffedItem.alignment.matchn("blessed"):
+						maxhp = maxhp + 1
+						Globals.gameConsole.addLog("You feel a little more vigorous.")
+					hp = maxhp
+				else:
+					hp += _amountToHeal
+			"potion of gain level":
+				if _quaffedItem.alignment.matchn("blessed"):
+					addExp(experienceNeededForLevelGainAmount)
+					Globals.gameConsole.addLog("You gain a level! You feel like you gained extra experience.")
+				if _quaffedItem.alignment.matchn("uncursed"):
+					addExp(experienceNeededForLevelGainAmount - experiencePoints)
+					Globals.gameConsole.addLog("You gain a level!")
+				if _quaffedItem.alignment.matchn("cursed"):
+					addExp(experienceNeededForPreviousLevelGainAmount - experiencePoints)
+					Globals.gameConsole.addLog("You somehow feel less experienced.")
+			_:
+				Globals.gameConsole.addLog("Thats not a potion...")
+		for _item in $"/root/World/Items".get_children():
+			if _item.name == "Items":
+				continue
+			_item.checkItemIdentification()
+#		if !quaffedItem.identifiedItemName.to_lower().matchn("blank scroll"):
+		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
+		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+	$"/root/World".closeMenu(_additionalChoices)

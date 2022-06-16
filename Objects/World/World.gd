@@ -18,6 +18,7 @@ enum uI {
 	PICK_UP_ITEMS
 	DROP_ITEMS
 	READ
+	QUAFF
 	EQUIPMENT
 }
 
@@ -162,7 +163,7 @@ func _input(_event):
 		elif (
 			Input.is_action_just_pressed("DESCEND") and
 			level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR and
-			Globals.currentDungeonLevel < 9 and
+			Globals.currentDungeonLevel < 13 and
 			levels.minesOfTidoh.back().levelId != Globals.currentDungeonLevel and
 			inGame
 		):
@@ -178,18 +179,20 @@ func _input(_event):
 			$"/root/World".show()
 		elif Input.is_action_just_pressed("ACCEPT"):
 			processGameTurn(_playerTile)
-		elif (Input.is_action_just_pressed("PICK_UP") and inGame):
-			openPickUpItemMenu(_playerTile)
-		elif (Input.is_action_just_pressed("DROP") and inGame):
-			openDropItemMenu()
-		elif (Input.is_action_just_pressed("INVENTORY") and inGame):
-			openInventory()
-		elif (Input.is_action_just_pressed("EQUIPMENT") and inGame):
-			openEquipmentItemMenu()
-		elif (Input.is_action_just_pressed("READ") and inGame):
-			openReadItemMenu()
 		elif (Input.is_action_just_pressed("BACK")):
 			closeMenu()
+		elif (Input.is_action_just_pressed("INVENTORY") and inGame):
+			openMenu("inventory")
+		elif (Input.is_action_just_pressed("PICK_UP") and inGame):
+			openMenu("pick up", _playerTile)
+		elif (Input.is_action_just_pressed("DROP") and inGame):
+			openMenu("drop")
+		elif (Input.is_action_just_pressed("EQUIPMENT") and inGame):
+			openMenu("equipment")
+		elif (Input.is_action_just_pressed("READ") and inGame):
+			openMenu("read")
+		elif (Input.is_action_just_pressed("QUAFF") and inGame):
+			openMenu("quaff")
 		elif Input.is_action_just_pressed("KEEP_MOVING") and inGame:
 			keepMoving = true
 		$"Critters/0".updatePlayerStats(Globals.currentDungeonLevel)
@@ -263,20 +266,6 @@ func drawLevel():
 	drawFOV()
 	drawCrittersAndItems()
 
-func drawCrittersAndItems():
-	# Critters, items and Globals.tiles
-	for x in (Globals.gridSize.x):
-		for y in (Globals.gridSize.y):
-			if level.grid[x][y].critter != null:
-				if $FOV.currentFOVLevel[x][y] == -1:
-					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).set_position(map_to_world(Vector2(x, y)) + half_tile_size)
-					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).show()
-				else:
-					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).hide()
-			if level.grid[x][y].items.size() != 0:
-				get_node("Items/{id}".format({ "id": level.grid[x][y].items.back() })).set_position(map_to_world(Vector2(x, y)) + half_tile_size)
-				get_node("Items/{id}".format({ "id": level.grid[x][y].items.back() })).show()
-
 func drawFOV():
 	# FOV
 	var playerTile = level.getCritterTile(0)
@@ -292,6 +281,20 @@ func drawFOV():
 				$FOV.seeCell(_x, _y)
 			elif occlusion and $FOV.currentFOVLevel[_x][_y] == -1 and level.grid[_x][_y].tile != Globals.tiles.EMPTY:
 				$FOV.greyCell(_x, _y)
+
+func drawCrittersAndItems():
+	# Critters, items and Globals.tiles
+	for x in (Globals.gridSize.x):
+		for y in (Globals.gridSize.y):
+			if level.grid[x][y].critter != null:
+				if $FOV.currentFOVLevel[x][y] == -1:
+					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).set_position(map_to_world(Vector2(x, y)) + half_tile_size)
+					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).show()
+				else:
+					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).hide()
+			if level.grid[x][y].items.size() != 0:
+				get_node("Items/{id}".format({ "id": level.grid[x][y].items.back() })).set_position(map_to_world(Vector2(x, y)) + half_tile_size)
+				get_node("Items/{id}".format({ "id": level.grid[x][y].items.back() })).show()
 
 func keepMovingLoop(_playerTile, _tileToMoveTo):
 	var _currentTile = _playerTile
@@ -397,13 +400,23 @@ func create():
 	$"/root/World/Items".add_child(newItem6, true)
 	$Critters/"0"/Inventory.addToInventory(newItem6.id)
 	
+	var newItem13 = load("res://Objects/Item/Item.tscn").instance()
+	newItem13.createItem($"/root/World/Items/Items".getItemByName("potion of gain level"), { "alignment": "blessed" })
+	$"/root/World/Items".add_child(newItem13, true)
+	$Critters/"0"/Inventory.addToInventory(newItem13.id)
+	
 	var newItem3 = load("res://Objects/Item/Item.tscn").instance()
-	newItem3.createItem($"/root/World/Items/Items".getItemByName("scroll of create critter"), { "alignment": "uncursed" })
+	newItem3.createItem($"/root/World/Items/Items".getItemByName("potion of gain level"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem3, true)
 	$Critters/"0"/Inventory.addToInventory(newItem3.id)
 	
+	var newItem16 = load("res://Objects/Item/Item.tscn").instance()
+	newItem16.createItem($"/root/World/Items/Items".getItemByName("potion of gain level"), { "alignment": "cursed" })
+	$"/root/World/Items".add_child(newItem16, true)
+	$Critters/"0"/Inventory.addToInventory(newItem16.id)
+	
 	var newItem4 = load("res://Objects/Item/Item.tscn").instance()
-	newItem4.createItem($"/root/World/Items/Items".getItemByName("scroll of create critter"), { "alignment": "cursed" })
+	newItem4.createItem($"/root/World/Items/Items".getItemByName("battered buckler"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem4, true)
 	$Critters/"0"/Inventory.addToInventory(newItem4.id)
 	
@@ -466,41 +479,45 @@ func updateTiles():
 			set_cellv(Vector2(x, y), level.grid[x][y].tile)
 			$FOV.set_cellv(Vector2(x, y), $FOV.currentFOVLevel[x][y])
 
-func openInventory():
-	if uIState == uI.GAME:
-		$Critters/"0"/Inventory.showInventory()
-		uIState = uI.INVENTORY
-		inGame = false
-
-func openPickUpItemMenu(_playerTile):
-	if level.grid[_playerTile.x][_playerTile.y].items.size() == 1 and uIState == uI.GAME:
-		$Critters/"0".pickUpItems(_playerTile, level.grid[_playerTile.x][_playerTile.y].items, level.grid)
-		$"/root/World".processGameTurn()
-	elif level.grid[_playerTile.x][_playerTile.y].items.size() != 0 and uIState == uI.GAME:
-		$UI/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
-		$UI/ItemManagement.showItemManagementList()
-		uIState = uI.PICK_UP_ITEMS
-		inGame = false
-
-func openDropItemMenu():
-	if uIState == uI.GAME:
-		$UI/ItemManagement.items = $Critters/"0"/Inventory.inventory
-		$UI/ItemManagement.showItemManagementList()
-		uIState = uI.DROP_ITEMS
-		inGame = false
-
-func openEquipmentItemMenu():
-	if uIState == uI.GAME:
-		$UI/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["Weapon", "Accessory", "Armor"]))
-		uIState = uI.EQUIPMENT     
-		inGame = false
-
-func openReadItemMenu():
-	if uIState == uI.GAME:
-		$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["Scroll"])
-		$UI/ItemManagement.showItemManagementList(true)
-		uIState = uI.READ
-		inGame = false
+func openMenu(_menu, _playerTile = null):
+	match _menu:
+		"inventory":
+			if uIState == uI.GAME:
+				$Critters/"0"/Inventory.showInventory()
+				uIState = uI.INVENTORY
+				inGame = false
+		"pick up":
+			if level.grid[_playerTile.x][_playerTile.y].items.size() == 1 and uIState == uI.GAME:
+				$Critters/"0".pickUpItems(_playerTile, level.grid[_playerTile.x][_playerTile.y].items, level.grid)
+				$"/root/World".processGameTurn()
+			elif level.grid[_playerTile.x][_playerTile.y].items.size() != 0 and uIState == uI.GAME:
+				$UI/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
+				$UI/ItemManagement.showItemManagementList()
+				uIState = uI.PICK_UP_ITEMS
+				inGame = false
+		"drop":
+			if uIState == uI.GAME:
+				$UI/ItemManagement.items = $Critters/"0"/Inventory.inventory
+				$UI/ItemManagement.showItemManagementList()
+				uIState = uI.DROP_ITEMS
+				inGame = false
+		"equipment":
+			if uIState == uI.GAME:
+				$UI/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["weapon", "accessory", "wrmor"]))
+				uIState = uI.EQUIPMENT     
+				inGame = false
+		"read":
+			if uIState == uI.GAME:
+				$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["scroll"])
+				$UI/ItemManagement.showItemManagementList(true)
+				uIState = uI.READ
+				inGame = false
+		"quaff":
+			if uIState == uI.GAME:
+				$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["potion"])
+				$UI/ItemManagement.showItemManagementList(true)
+				uIState = uI.QUAFF
+				inGame = false
 
 func processAccept():
 	var _playerTile = level.getCritterTile(0)
@@ -516,7 +533,12 @@ func processAccept():
 
 func closeMenu(_additionalChoices = false):
 	if !_additionalChoices:
-		if uIState == uI.PICK_UP_ITEMS or uIState == uI.DROP_ITEMS or uIState == uI.READ:
+		if (
+			uIState == uI.PICK_UP_ITEMS or
+			uIState == uI.DROP_ITEMS or
+			uIState == uI.READ or
+			uIState == uI.QUAFF
+		):
 			$UI/ItemManagement.hideItemManagementList()
 		if uIState == uI.EQUIPMENT:
 			$UI/Equipment.hideEquipment()

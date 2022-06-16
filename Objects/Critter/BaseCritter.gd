@@ -38,9 +38,13 @@ var statusEffects = []
 var hpRegenTimer = 0
 var mpRegenTimer = 0
 
-func moveCritter(_moveFrom, _moveTo, _critter, _level):
-	_level.grid[_moveFrom.x][_moveFrom.y].critter = null
-	_level.grid[_moveTo.x][_moveTo.y].critter = _critter
+func moveCritter(_moveFrom, _moveTo, _movingCritter, _level, _movedCritter = null):
+	if _movedCritter == null:
+		_level.grid[_moveFrom.x][_moveFrom.y].critter = null
+		_level.grid[_moveTo.x][_moveTo.y].critter = _movingCritter
+	else:
+		_level.grid[_moveFrom.x][_moveFrom.y].critter = _movedCritter
+		_level.grid[_moveTo.x][_moveTo.y].critter = _movingCritter
 
 func processEffects():
 	if hpRegenTimer > 25 - ( stats.legerity / 2 ):
