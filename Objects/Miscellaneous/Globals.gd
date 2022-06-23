@@ -8,16 +8,26 @@ var gridSize = Vector2(60, 24)
 enum tiles { 
 	EMPTY
 	CORRIDOR
-	WALL
-	FLOOR
+	WALL_DUNGEON
+	FLOOR_DUNGEON
 	SIDEWALK
-	DOWN_STAIR
-	UP_STAIR
+	DOWN_STAIR_DUNGEON
+	UP_STAIR_DUNGEON
+	CLOSED_DOOR
+	OPEN_DOOR
 	GRASS
-	DOOR
+	SEA
+	SAND
+	WALL_SAND
+	WALL_BRICK_SAND
+	FLOOR_SAND
+	DOWN_STAIR_SAND
+	UP_STAIR_SAND
+	WALL_BOARD
 }
 
 var currentDungeonLevel = 1
+var currentDungeonLevelName = "Dungeon hallways 1"
 
 var levelId = 1
 var itemId = 0

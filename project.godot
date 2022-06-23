@@ -9,25 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "TileMap",
-"class": "AStarPath",
-"language": "GDScript",
-"path": "res://Objects/AStar/AStarPath.gd"
-}, {
 "base": "Node2D",
 "class": "BaseCritter",
 "language": "GDScript",
 "path": "res://Objects/Critter/BaseCritter.gd"
 }, {
-"base": "AStarPath",
+"base": "EnemyPathfinding",
 "class": "BaseLevel",
 "language": "GDScript",
 "path": "res://Random Generators/BaseLevel.gd"
+}, {
+"base": "BaseLevel",
+"class": "Beach",
+"language": "GDScript",
+"path": "res://Random Generators/Beach/Beach.gd"
+}, {
+"base": "TileMap",
+"class": "EnemyPathfinding",
+"language": "GDScript",
+"path": "res://Objects/EnemyPathfinding/EnemyPathfinding.gd"
 } ]
 _global_script_class_icons={
-"AStarPath": "",
 "BaseCritter": "",
-"BaseLevel": ""
+"BaseLevel": "",
+"Beach": "",
+"EnemyPathfinding": ""
 }
 
 [application]
@@ -233,7 +239,7 @@ DROP={
 }
 EQUIPMENT={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 READ={
@@ -244,6 +250,16 @@ READ={
 QUAFF={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+CONSUME={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+INTERACT={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":71,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

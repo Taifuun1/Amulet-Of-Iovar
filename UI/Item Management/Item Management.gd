@@ -37,6 +37,10 @@ func _on_Item_Management_List_Clicked(_id):
 			$"/root/World/Critters/0".quaffItem(_id)
 			$"/root/World".processGameTurn()
 			return
+		if $"/root/World".uIState == $"/root/World".uI.CONSUME:
+			$"/root/World/Critters/0".consumeItem(_id)
+			$"/root/World".processGameTurn()
+			return
 	var clickedItem = get_node("ItemManagementList/{id}".format({ "id": _id }))
 	var isRemoved = false
 	for _item in range(selectedItems.size()):

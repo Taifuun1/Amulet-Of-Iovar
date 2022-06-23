@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MimicHumoungousMimic.png-d789f6238607d9e7df825218a458ae4e.stex"
+path="res://.import/MimicHumongousMimic.png-3ec847d4e9a5e7997784444d64d2ec04.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Critters/MimicHumoungousMimic.png"
-dest_files=[ "res://.import/MimicHumoungousMimic.png-d789f6238607d9e7df825218a458ae4e.stex" ]
+source_file="res://Assets/Critters/MimicHumongousMimic.png"
+dest_files=[ "res://.import/MimicHumongousMimic.png-3ec847d4e9a5e7997784444d64d2ec04.stex" ]
 
 [params]
 

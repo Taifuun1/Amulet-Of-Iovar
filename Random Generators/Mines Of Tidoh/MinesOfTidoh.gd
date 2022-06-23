@@ -3,25 +3,20 @@ extends BaseLevel
 var spawnPoints = []
 
 func createNewLevel():
-	# Create rooms with doors and staircases
-	for _x in range(Globals.gridSize.x):
-		grid.append([])
-		for _y in range(Globals.gridSize.y):
-			grid[_x].append({
-				"tile": Globals.tiles.EMPTY,
-				"critter": null,
-				"items": []
-			})
+	createGrid()
 	
+	createDungeon()
+	
+	enemyPathfinding(grid)
+	
+	return self
+
+func createDungeon():
 	createCave()
 	connectSpawnAreas()
 	expandSpawnAreas()
 	fattenCorridors()
-	stairs = placeStairs(grid, spawnableFloors, false)
-	
-	enemyPathFinding(grid)
-	
-	return self
+	placeStairs()
 
 func createCave():
 	var _spawnAreas = {
@@ -133,7 +128,7 @@ func drawPath(_path):
 	var _lastPoint = null
 	var _pathRadius = randi() % 3 + 2
 	for point in _path:
-		grid[point.x][point.y].tile = Globals.tiles.FLOOR
+		grid[point.x][point.y].tile = Globals.tiles.FLOOR_DUNGEON
 		spawnableFloors.append(Vector2(point.x, point.y))
 		if _lastPoint == null:
 			_lastPoint = point
@@ -141,74 +136,74 @@ func drawPath(_path):
 		if _direction == Vector2(1,0) or _direction == Vector2(-1,0):
 			for number in range(_pathRadius):
 				if point.y + number < Globals.gridSize.y:
-					grid[point.x][point.y + number].tile = Globals.tiles.FLOOR
+					grid[point.x][point.y + number].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x, point.y + number))
 				if point.y - number >= 0:
-					grid[point.x][point.y - number].tile = Globals.tiles.FLOOR
+					grid[point.x][point.y - number].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x, point.y - number))
 		elif _direction == Vector2(1,-1):
 			for number in range(_pathRadius):
 				if point.y - int(number / 2) >= 0:
-					grid[point.x][point.y - int(number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x][point.y - int(number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x, point.y - int(number / 2)))
 				if point.x + int(number / 2) < Globals.gridSize.x:
-					grid[point.x + int(number / 2)][point.y].tile = Globals.tiles.FLOOR
+					grid[point.x + int(number / 2)][point.y].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x + int(number / 2), point.y))
 				if point.x - int(number / 2) >= 0 and point.y - int(number / 2) >= 0:
-					grid[point.x - int(number / 2)][point.y - int(number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x - int(number / 2)][point.y - int(number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x - int(number / 2), point.y - int(number / 2)))
 				if point.x + int (number / 2) < Globals.gridSize.x and point.y + int(number / 2) < Globals.gridSize.y:
-					grid[point.x + int(number / 2)][point.y + int(number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x + int(number / 2)][point.y + int(number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x + int(number / 2), point.y + int(number / 2)))
 		elif _direction == Vector2(-1,1):
 			for number in range(_pathRadius):
 				if point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x][point.y + (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x][point.y + (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x, point.y + (number / 2)))
 				if point.x - (number / 2) >= 0:
-					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR
+					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y))
 				if point.x - (number / 2) >= 0 and point.y - (number / 2) >= 0:
-					grid[point.x - (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x - (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y - (number / 2)))
 				if point.x + (number / 2) < Globals.gridSize.x and point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x + (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x + (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x + (number / 2), point.y + (number / 2)))
 		elif _direction == Vector2(-1,-1):
 			for number in range(_pathRadius):
 				if point.x - (number / 2) >= 0:
-					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR
+					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y))
 				if point.y - (number / 2) >= 0:
-					grid[point.x][point.y - (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x][point.y - (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x, point.y - (number / 2)))
 				if point.x - (number / 2) >= 0 and point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x - (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x - (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y + (number / 2)))
 				if point.x + (number / 2) < Globals.gridSize.x and point.y - (number / 2) >= 0:
-					grid[point.x + (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x + (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x + (number / 2), point.y - (number / 2)))
 		elif _direction == Vector2(1,1):
 			for number in range(_pathRadius):
 				if point.x + (number / 2) < Globals.gridSize.y:
-					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR
+					grid[point.x - (number / 2)][point.y].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y))
 				if point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x][point.y - (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x][point.y - (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x, point.y - (number / 2)))
 				if point.x - (number / 2) >= 0 and point.y + (number / 2) < Globals.gridSize.y:
-					grid[point.x - (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x - (number / 2)][point.y + (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x - (number / 2), point.y + (number / 2)))
 				if point.x + (number / 2) < Globals.gridSize.x and point.y - (number / 2) >= 0:
-					grid[point.x + (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR
+					grid[point.x + (number / 2)][point.y - (number / 2)].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x + (number / 2), point.y - (number / 2)))
 		elif _direction == Vector2(0,1) or _direction == Vector2(0,-1):
 			for number in range(_pathRadius):
 				if point.x + number < Globals.gridSize.x:
-					grid[point.x + number][point.y].tile = Globals.tiles.FLOOR
+					grid[point.x + number][point.y].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x + number, point.y))
 				if point.x - number >= 0:
-					grid[point.x - number][point.y].tile = Globals.tiles.FLOOR
+					grid[point.x - number][point.y].tile = Globals.tiles.FLOOR_DUNGEON
 					spawnableFloors.append(Vector2(point.x - number, point.y))
 		if randi() % 6 == 1:
 			if _pathRadius < 4:
@@ -220,5 +215,103 @@ func drawPath(_path):
 
 func draw(_path):
 	for point in _path:
-		grid[point.x][point.y].tile = Globals.tiles.FLOOR
+		grid[point.x][point.y].tile = Globals.tiles.FLOOR_DUNGEON
 		spawnableFloors.append(Vector2(point.x, point.y))
+
+
+
+# Astar functions
+
+# Mines pathfinding
+func calculateCavePath(pathStartPosition, pathEndPosition):
+	return caveAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
+
+# Mines pathfinding creation
+func pathFindCave(grid):
+	caveAstarNode.clear()
+	var caveTiles = addCavetiles(grid)
+	connectCaveCells(caveTiles, grid, true)
+	addCaveDividers(grid)
+
+func addCavetiles(grid):
+	var points = []
+	for x in (grid.size()):
+		for y in (grid[x].size()):
+			var point = Vector2(x, y)
+			points.append(point)
+			caveAstarNode.add_point(id(point), point, 1.0)
+	return points
+
+func connectCaveCells(points, grid, aStarGrid = false):
+	for point in points:
+		var pointIndex = id(point)
+		var pointsRelative
+		if aStarGrid:
+			pointsRelative = PoolVector2Array([
+				Vector2(point.x, point.y - 1),
+				Vector2(point.x + 1, point.y),
+				Vector2(point.x, point.y + 1),
+				Vector2(point.x - 1, point.y)
+			])
+		else:
+			pointsRelative = PoolVector2Array([
+				Vector2(point.x, point.y - 1),
+				Vector2(point.x + 1, point.y - 1),
+				Vector2(point.x + 1, point.y),
+				Vector2(point.x + 1, point.y + 1),
+				Vector2(point.x, point.y + 1),
+				Vector2(point.x - 1, point.y + 1),
+				Vector2(point.x - 1, point.y),
+				Vector2(point.x - 1, point.y - 1)
+			])
+		for pointRelative in pointsRelative:
+			var pointRelativeIndex = id(pointRelative)
+			if isOutSideTileMap(pointRelative, grid):
+				continue
+			if not caveAstarNode.has_point(pointRelativeIndex):
+				continue
+			caveAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
+
+func addCaveDividers(_grid):
+	var _verticalDividers = [
+		{
+			"length": randi() % 10 + 10,
+			"startPos": Vector2(randi() % 10 + 0, 12)
+		},
+		{
+			"length": randi() % 9 + 13,
+			"startPos": Vector2(randi() % 14 + 14, 12)
+		},
+		{
+			"length": randi() % 4 + 8,
+			"startPos": Vector2(randi() % 3 + 40, 12)
+		}
+	]
+	var _horizontalDividers = [
+		{
+			"length": randi() % 3 + 10,
+			"startPos": Vector2(20, randi() % 7 + 0)
+		},
+		{
+			"length": randi() % 3 + 7,
+			"startPos": Vector2(20, randi() % 3 + 12)
+		},
+		{
+			"length": randi() % 3 + 10,
+			"startPos": Vector2(40, randi() % 7 + 0)
+		},
+		{
+			"length": randi() % 3 + 7,
+			"startPos": Vector2(40, randi() % 3 + 12)
+		}
+	]
+	for _verticalDivider in _verticalDividers:
+		for _number in range(_verticalDivider.length):
+			var _point = id(Vector2(_verticalDivider.startPos.x + _number, _verticalDivider.startPos.y))
+			if caveAstarNode.has_point(_point):
+				caveAstarNode.remove_point(_point)
+	for _horizontalDivider in _horizontalDividers :
+		for _number in range(_horizontalDivider.length):
+			var _point = id(Vector2(_horizontalDivider.startPos.x, _horizontalDivider.startPos.y + _number))
+			if caveAstarNode.has_point(_point):
+				caveAstarNode.remove_point(_point)

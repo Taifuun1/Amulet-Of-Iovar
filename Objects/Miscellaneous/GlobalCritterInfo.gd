@@ -212,7 +212,7 @@ var globalCritterInfo = {
 		"population": 40,
 		"crittersInPlay": 0
 	},
-	"Outlaw Watcher": {
+	"Outlaw watcher": {
 		"population": 70,
 		"crittersInPlay": 0
 	},

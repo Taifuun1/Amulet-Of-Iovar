@@ -43,6 +43,8 @@ margin_top = 6.0
 margin_right = 28.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 28, 0 )
+hint_tooltip = "Health points"
+mouse_filter = 1
 text = "HP"
 
 [node name="HPAmount" type="TextureProgress" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HPContainer"]
@@ -66,6 +68,8 @@ margin_top = 6.0
 margin_right = 28.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 28, 0 )
+hint_tooltip = "Magic points"
+mouse_filter = 1
 text = "MP"
 
 [node name="MPAmount" type="TextureProgress" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/MPContainer"]
@@ -85,18 +89,23 @@ margin_bottom = 92.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="LevelText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer"]
-margin_right = 250.0
+margin_right = 186.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Level"
+mouse_filter = 1
 text = "Level"
+clip_text = true
 
 [node name="Level" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer"]
-margin_left = 254.0
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "0"
 align = 2
+clip_text = true
 
 [node name="ExperienceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 96.0
@@ -105,38 +114,48 @@ margin_bottom = 116.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="ExperienceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer"]
-margin_right = 250.0
+margin_right = 186.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Experience"
+mouse_filter = 1
 text = "Experience"
+clip_text = true
 
 [node name="Experience" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer"]
-margin_left = 254.0
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "0"
 align = 2
+clip_text = true
 
-[node name="CritterNameContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+[node name="NameContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 120.0
 margin_right = 377.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 377, 0 )
 
-[node name="CritterNameText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/CritterNameContainer"]
-margin_right = 250.0
+[node name="NameText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer"]
+margin_right = 186.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Name"
+mouse_filter = 1
 text = "Name"
+clip_text = true
 
-[node name="CritterName" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/CritterNameContainer"]
-margin_left = 254.0
+[node name="Name" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer"]
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="RaceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 144.0
@@ -145,18 +164,23 @@ margin_bottom = 164.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="RaceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer"]
-margin_right = 250.0
+margin_right = 186.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Race"
+mouse_filter = 1
 text = "Race"
+clip_text = true
 
 [node name="Race" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer"]
-margin_left = 254.0
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="AlignmentContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 168.0
@@ -165,18 +189,23 @@ margin_bottom = 188.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer"]
-margin_right = 250.0
+margin_right = 186.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Alignment"
+mouse_filter = 1
 text = "Alignment"
+clip_text = true
 
 [node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer"]
-margin_left = 254.0
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="ACContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 192.0
@@ -185,18 +214,23 @@ margin_bottom = 212.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="ACText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ACContainer"]
-margin_right = 250.0
+margin_right = 186.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Armor class"
+mouse_filter = 1
 text = "AC"
+clip_text = true
 
 [node name="AC" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ACContainer"]
-margin_left = 254.0
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="AttacksContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 visible = false
@@ -208,37 +242,47 @@ rect_min_size = Vector2( 377, 0 )
 [node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AttacksContainer"]
 margin_right = 250.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Alignment"
+mouse_filter = 1
 text = "Alignment"
+clip_text = true
 
 [node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AttacksContainer"]
 margin_left = 254.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="HitsContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 visible = false
-margin_top = 192.0
+margin_top = 216.0
 margin_right = 377.0
-margin_bottom = 212.0
+margin_bottom = 236.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HitsContainer"]
-margin_right = 250.0
+margin_right = 186.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Your hits pattern"
+mouse_filter = 1
 text = "Alignment"
+clip_text = true
 
 [node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HitsContainer"]
-margin_left = 254.0
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="DungeonLevelContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 216.0
@@ -247,18 +291,23 @@ margin_bottom = 236.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="DungeonLevelText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer"]
-margin_right = 250.0
+margin_right = 186.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 186, 0 )
+hint_tooltip = "Current dungeon level"
+mouse_filter = 1
 text = "Dungeon Level"
+clip_text = true
 
 [node name="DungeonLevel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer"]
-margin_left = 254.0
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="StatsContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_left = 381.0
@@ -275,15 +324,19 @@ rect_min_size = Vector2( 377, 0 )
 margin_right = 250.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 250, 0 )
+mouse_filter = 1
 text = "Strength"
+clip_text = true
 
 [node name="Strength" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer"]
 margin_left = 254.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 123, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="LegerityContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
 margin_top = 24.0
@@ -295,15 +348,19 @@ rect_min_size = Vector2( 377, 0 )
 margin_right = 250.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 250, 0 )
+mouse_filter = 1
 text = "Legerity"
+clip_text = true
 
 [node name="Legerity" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/LegerityContainer"]
 margin_left = 254.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 123, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="BalanceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
 margin_top = 48.0
@@ -315,15 +372,19 @@ rect_min_size = Vector2( 377, 0 )
 margin_right = 250.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 250, 0 )
+mouse_filter = 1
 text = "Balance"
+clip_text = true
 
 [node name="Balance" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BalanceContainer"]
 margin_left = 254.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 123, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="BeliefContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
 margin_top = 72.0
@@ -335,15 +396,19 @@ rect_min_size = Vector2( 377, 0 )
 margin_right = 250.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 250, 0 )
+mouse_filter = 1
 text = "Belief"
+clip_text = true
 
 [node name="Belief" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BeliefContainer"]
 margin_left = 254.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 123, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="VisageContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
 margin_top = 96.0
@@ -355,15 +420,19 @@ rect_min_size = Vector2( 377, 0 )
 margin_right = 250.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 250, 0 )
+mouse_filter = 1
 text = "Visage"
+clip_text = true
 
 [node name="Visage" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/VisageContainer"]
 margin_left = 254.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 123, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="WisdomContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
 margin_top = 120.0
@@ -375,15 +444,19 @@ rect_min_size = Vector2( 377, 0 )
 margin_right = 250.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 250, 0 )
+mouse_filter = 1
 text = "Wisdom"
+clip_text = true
 
 [node name="Wisdom" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer"]
 margin_left = 254.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 123, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
+clip_text = true
 
 [node name="ResistancesContainer" type="GridContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_left = 762.0

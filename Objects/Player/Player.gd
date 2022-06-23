@@ -13,6 +13,9 @@ var beliefIncrease = 0
 var visageIncrease = 0
 var wisdomIncrease = 0
 
+var calories
+var previousCalories
+
 var skills = {
 	"sword": {
 		"skill": 0,
@@ -83,12 +86,15 @@ func create(_class):
 	abilities = []
 	resistances = []
 	
-	updatePlayerStats(1)
+	updatePlayerStats()
+	
+	calories = 1000
+	previousCalories = calories
 	
 	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
 
 func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
-	if(_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter != null):
+	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter != null:
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
 		if _critter.aI.aI == "Aggressive":
 			if hits[currentHit] == 1:
@@ -106,6 +112,8 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			checkIfItemsHere(_level, _tileToMoveTo)
 		else:
 			return false
+	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.CLOSED_DOOR:
+		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.OPEN_DOOR
 	else:
 		moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 		checkIfItemsHere(_level, _tileToMoveTo)
@@ -151,7 +159,7 @@ func gainLevel():
 	
 	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
 
-func updatePlayerStats(dungeonLevel = null):
+func updatePlayerStats():
 	Globals.gameStats.updateStats({
 		maxhp = maxhp,
 		hp = hp,
@@ -167,7 +175,7 @@ func updatePlayerStats(dungeonLevel = null):
 		attacks = attacks,
 		currentHit = currentHit,
 		hits = hits,
-		dungeonLevel = dungeonLevel,
+		dungeonLevel = Globals.currentDungeonLevelName,
 		strength = stats.strength,
 		legerity = stats.legerity,
 		balance = stats.balance,
@@ -213,6 +221,12 @@ func calculateEquipmentStats():
 				}
 			}
 		]
+
+func checkAllItemsIdentification():
+	for _item in $"/root/World/Items".get_children():
+		if _item.name == "Items":
+			continue
+		_item.checkItemIdentification()
 
 func takeDamage(_attacks, _crittername):
 	var _attacksLog = []
@@ -266,6 +280,18 @@ func dropItem(_playerTile, _item, _grid):
 	$Inventory.dropFromInventory(_item)
 	get_node("/root/World/Items/{id}".format({ "id": _item })).show()
 	$"/root/World/UI/Equipment".checkIfWearingEquipment(_item)
+
+func processPlayerSpecificEffects():
+	calories -= 1
+	if previousCalories >= 400 and calories < 400 and calories > 200:
+		Globals.gameConsole.addLog("You are beginning to feel hungry.")
+	elif previousCalories >= 200 and calories < 200 and calories > 100:
+		Globals.gameConsole.addLog("You feel very hungry.")
+	elif previousCalories >= 100 and calories < 100 and calories > 0:
+		Globals.gameConsole.addLog("You are starving!")
+	elif calories <= 0:
+		Globals.gameConsole.addLog("You die...")
+	previousCalories = calories
 
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -375,9 +401,13 @@ func readItem(_id):
 						Vector2(-1, 1),
 						Vector2(-1, 0)
 					]):
+						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
 						if (
 							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
 						):
 							var newItem = load("res://Objects/Item/Item.tscn").instance()
 							var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
@@ -419,9 +449,13 @@ func readItem(_id):
 						Vector2(-1, 1),
 						Vector2(-1, 0)
 					]):
+						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
 						if (
 							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
 						):
 							var newItem = load("res://Objects/Item/Item.tscn").instance()
 							var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
@@ -450,9 +484,13 @@ func readItem(_id):
 						Vector2(-1, 1),
 						Vector2(-1, 0)
 					]):
+						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
 						if (
 							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
 						):
 							if _critterName == null:
 								_critterName = $"/root/World/Critters/Critters".spawnRandomCritter(_playerPosition + _direction)
@@ -476,9 +514,15 @@ func readItem(_id):
 					_directions.shuffle()
 					var _critterName = null
 					for _direction in _directions:
+						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
 						if (
 							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+							(
+								$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON or
+								$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND or
+								$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
+								$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
+							)
 						):
 							_critterName = $"/root/World/Critters/Critters".spawnRandomCritter(_playerPosition + _direction)
 							if _critterName != null:
@@ -502,9 +546,13 @@ func readItem(_id):
 					var _critterName = null
 					var _critter = neutralCritters[randi() % neutralCritters.size()]
 					for _direction in _directions:
+						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
 						if (
 							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.WALL
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
+							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
 						):
 							_critterName = $"/root/World/Critters/Critters".spawnCritter($"/root/World/Critters/Critters".getCritterByName(_critter), _playerPosition + _direction)
 							if _critterName != null:
@@ -523,10 +571,7 @@ func readItem(_id):
 				_additionalChoices = true
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
-		for _item in $"/root/World/Items".get_children():
-			if _item.name == "Items":
-				continue
-			_item.checkItemIdentification()
+		checkAllItemsIdentification()
 		if !_readItem.identifiedItemName.to_lower().matchn("blank scroll"):
 			$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 			get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
@@ -561,7 +606,7 @@ func quaffItem(_id):
 				if _quaffedItem.alignment.matchn("uncursed"):
 					Globals.gameConsole.addLog("This tastes like water.")
 				if _quaffedItem.alignment.matchn("cursed"):
-					Globals.gameConsole.addLog("This doesn't taste very good...")
+					Globals.gameConsole.addLog("This doesn't taste very good. Ughhhh...")
 			"soda bottle":
 				if _quaffedItem.alignment.matchn("blessed"):
 					Globals.gameConsole.addLog("Its orange juice! Its really good!")
@@ -587,6 +632,24 @@ func quaffItem(_id):
 					hp = maxhp
 				else:
 					hp += _amountToHeal
+			"potion of healaga":
+				var _amountToHeal = 0
+				if _quaffedItem.alignment.matchn("blessed"):
+					_amountToHeal = 14 + (level * 8)
+					Globals.gameConsole.addLog("The {potion} heals you alot. That felt good!".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.alignment.matchn("uncursed"):
+					_amountToHeal = 9 + (level * 6)
+					Globals.gameConsole.addLog("The {potion} heals you alot.".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.alignment.matchn("cursed"):
+					_amountToHeal = 4 + (level * 4)
+					Globals.gameConsole.addLog("The {potion} heals you alot. That felt a little off.".format({ "potion": _quaffedItem.itemName }))
+				if hp + _amountToHeal >= maxhp:
+					if _quaffedItem.alignment.matchn("blessed"):
+						maxhp = maxhp + 2
+						Globals.gameConsole.addLog("You feel a little more vigorous.")
+					hp = maxhp
+				else:
+					hp += _amountToHeal
 			"potion of gain level":
 				if _quaffedItem.alignment.matchn("blessed"):
 					addExp(experienceNeededForLevelGainAmount)
@@ -597,13 +660,30 @@ func quaffItem(_id):
 				if _quaffedItem.alignment.matchn("cursed"):
 					addExp(experienceNeededForPreviousLevelGainAmount - experiencePoints)
 					Globals.gameConsole.addLog("You somehow feel less experienced.")
+			"potion of hunger":
+				if _quaffedItem.alignment.matchn("blessed"):
+					calories += 100
+					Globals.gameConsole.addLog("You feel nourished.")
+				if _quaffedItem.alignment.matchn("uncursed"):
+					calories += -100
+					Globals.gameConsole.addLog("You feel malnourished.")
+				if _quaffedItem.alignment.matchn("cursed"):
+					calories += -250
+					Globals.gameConsole.addLog("You feel like you lost half your weight!")
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
-		for _item in $"/root/World/Items".get_children():
-			if _item.name == "Items":
-				continue
-			_item.checkItemIdentification()
+		checkAllItemsIdentification()
 #		if !quaffedItem.identifiedItemName.to_lower().matchn("blank scroll"):
 		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 	$"/root/World".closeMenu(_additionalChoices)
+
+func consumeItem(_id):
+	var _eatenItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
+	if _eatenItem.type.matchn("comestible"):
+		calories += _eatenItem.value
+		checkAllItemsIdentification()
+		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
+		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+		Globals.gameConsole.addLog("You eat the {comestible}.".format({ "comestible": _eatenItem.itemName }))
+	$"/root/World".closeMenu()

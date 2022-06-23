@@ -47,6 +47,12 @@ var critterGenerationList = {
 			"newts": ["River newt", "Mine newt"],
 			"orcs": ["Goblin", "Flatlands orc"]
 		}
+	},
+	"beach": {
+		"amount": [5, 5],
+		"critters": {
+			"aquaticLife": ["Fiddler crab", "Ringed seal"]
+		}
 	}
 }
 
@@ -161,7 +167,7 @@ func spawnCritter(_critter, _position = null, _byName = false, _level = null):
 		_spawnedLevel.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
 		$"/root/World/Critters".add_child(newCritter, true)
 		_spawnedLevel.critters.append(newCritter.id)
-		_spawnedLevel.removePointFromEnemyPathfinding(_gridPosition, _spawnedLevel.grid)
+		_spawnedLevel.removePointFromEnemyPathfinding(_gridPosition)
 		GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
 		return _newCritter.critterName
 	return null
@@ -188,7 +194,7 @@ func spawnRandomCritter(_position, _level = null):
 			_spawnedLevel.grid[_position.x][_position.y].critter = newCritter.id
 			$"/root/World/Critters".add_child(newCritter, true)
 			_spawnedLevel.critters.append(newCritter.id)
-			_spawnedLevel.removePointFromEnemyPathfinding(_position, _spawnedLevel.grid)
+			_spawnedLevel.removePointFromEnemyPathfinding(_position)
 			GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
 			return _critter.critterName
 	return null

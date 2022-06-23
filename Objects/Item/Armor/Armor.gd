@@ -350,7 +350,7 @@ var armors = {
 			"rarity": "Rare"
 		},
 		{
-			"itemName": "Helm of Ego",
+			"itemName": "Helm of ego",
 			"unidentifiedItemName": "Pompous-looking hat",
 			"texture": load("res://Assets/Armor/HelmetOfEgo.png"),
 			"unIdentifiedTexture": load("res://Assets/Armor/HelmetOfEgo.png"),

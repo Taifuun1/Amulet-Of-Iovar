@@ -15,169 +15,7 @@ var weapons = preload("res://Objects/Item/Weapons/Weapons.gd").new()
 var miscellaneous = preload("res://Objects/Item/Miscellaneous/Miscellaneous.gd").new()
 
 var randomItemList = preload("res://Objects/Item/RandomItemList.gd").new()
-
-var itemGeneration = {
-	"dungeon1": {
-		"amount": 8,
-		"type": {
-			"amulet": 25,
-			"armor": 100,
-			"comestible": 200,
-			"potion": 150,
-			"ring": 50,
-			"scroll": 200,
-			"tool": 100,
-			"wand": 75,
-			"weapon": 100
-		},
-		"rarity": {
-			"common": 800,
-			"uncommon": 150,
-			"rare": 49,
-			"legendary": 1
-		}
-	},
-	"minesOfTidoh": {
-		"amount": 10,
-		"type": {
-			"amulet": 25,
-			"armor": 175,
-			"comestible": 100,
-			"potion": 0,
-			"ring": 100,
-			"scroll": 100,
-			"tool": 250,
-			"wand": 75,
-			"weapon": 175
-		},
-		"rarity": {
-			"common": 750,
-			"uncommon": 150,
-			"rare": 75,
-			"legendary": 25
-		}
-	},
-	"dungeon2": {
-		"amount": 8,
-		"type": {
-			"amulet": 25,
-			"armor": 100,
-			"comestible": 200,
-			"potion": 150,
-			"ring": 50,
-			"scroll": 200,
-			"tool": 100,
-			"wand": 75,
-			"weapon": 100
-		},
-		"rarity": {
-			"common": 800,
-			"uncommon": 150,
-			"rare": 49,
-			"legendary": 1
-		}
-	},
-	"beach": {
-		"amount": 14,
-		"type": {
-			"amulet": 100,
-			"armor": 150,
-			"comestible": 150,
-			"potion": 50,
-			"ring": 150,
-			"scroll": 0,
-			"tool": 150,
-			"wand": 100,
-			"weapon": 150
-		},
-		"rarity": {
-			"common": 500,
-			"uncommon": 300,
-			"rare": 150,
-			"legendary": 50
-		}
-	},
-	"dungeon3": {
-		"amount": 8,
-		"type": {
-			"amulet": 25,
-			"armor": 100,
-			"comestible": 200,
-			"potion": 150,
-			"ring": 50,
-			"scroll": 200,
-			"tool": 100,
-			"wand": 75,
-			"weapon": 100
-		},
-		"rarity": {
-			"common": 800,
-			"uncommon": 150,
-			"rare": 49,
-			"legendary": 1
-		}
-	},
-	"library": {
-		"amount": 24,
-		"type": {
-			"amulet": 50,
-			"armor": 0,
-			"comestible": 50,
-			"potion": 50,
-			"ring": 150,
-			"scroll": 500,
-			"tool": 50,
-			"wand": 150,
-			"weapon": 0
-		},
-		"rarity": {
-			"common": 500,
-			"uncommon": 290,
-			"rare": 200,
-			"legendary": 10
-		}
-	},
-	"dungeon4": {
-		"amount": 8,
-		"type": {
-			"amulet": 25,
-			"armor": 100,
-			"comestible": 200,
-			"potion": 150,
-			"ring": 50,
-			"scroll": 200,
-			"tool": 100,
-			"wand": 75,
-			"weapon": 100
-		},
-		"rarity": {
-			"common": 800,
-			"uncommon": 150,
-			"rare": 49,
-			"legendary": 1
-		}
-	},
-	"banditWarcamp": {
-		"amount": 20,
-		"type": {
-			"amulet": 0,
-			"armor": 300,
-			"comestible": 200,
-			"potion": 0,
-			"ring": 0,
-			"scroll": 0,
-			"tool": 200,
-			"wand": 0,
-			"weapon": 300
-		},
-		"rarity": {
-			"common": 500,
-			"uncommon": 250,
-			"rare": 200,
-			"legendary": 50
-		}
-	}
-}
+var itemGeneration = preload("res://Objects/Item/ItemGeneration.gd").new()
 
 var items = {}
 var miscellaneousItems = []
@@ -197,7 +35,7 @@ func create():
 	miscellaneousItems = miscellaneous.miscellaneous.other
 
 func generateItemsForLevel(_level):
-	var _itemGeneration = itemGeneration[_level.dungeonType]
+	var _itemGeneration = itemGeneration.itemGeneration[_level.dungeonType]
 	var _items = []
 	
 	for _i in range(_itemGeneration.amount):
@@ -224,16 +62,20 @@ func returnRandomItem(_itemGeneration):
 	for _key in _itemGeneration["type"].keys():
 		for _i in range(_itemGeneration["type"][_key]):
 			randomType.append(_key)
+	for _nmb in range(1000 - randomType.size()):
+		randomType.append(null)
 	
 	var randomRarity = []
 	for _key in _itemGeneration["rarity"].keys():
 		for _i in range(_itemGeneration["rarity"][_key]):
 			randomRarity.append(_key)
+	for _nmb in range(1000 - randomRarity.size()):
+		randomRarity.append(null)
 	
 	type = randomType[randi() % 1000]
 	rarity = randomRarity[randi() % 1000]
 	
-	if items[type].has(rarity):
+	if type != null and items[type].has(rarity):
 		return items[type][rarity][randi() % items[type][rarity].size() - 1]
 	else:
 		return null

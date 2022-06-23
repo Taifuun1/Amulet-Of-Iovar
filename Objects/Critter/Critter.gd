@@ -48,7 +48,9 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	expDropAmount = _critter.expDropAmount
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
-	var _path = aI.getCritterMove(_critterTile, _playerTile, _level)
+	var _path
+	if _critterTile != null:
+		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
 	if _path.size() != 0:
 		var _moveCritterTo = _path[1]
 		if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
@@ -61,8 +63,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			currentHit += 1
 		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
 			moveCritter(_critterTile, _moveCritterTo, _critter, _level)
-			_level.addPointToEnemyPathding(_critterTile, _level.grid)
-			_level.removePointFromEnemyPathfinding(_moveCritterTo, _level.grid)
+			_level.addPointToEnemyPathding(_critterTile)
+			_level.removePointFromEnemyPathfinding(_moveCritterTo)
 		else:
 			return false
 
@@ -121,7 +123,7 @@ func despawn(_critterTile = null, createCorpse = true):
 		$"/root/World/Items".add_child(_corpse)
 		_level.grid[_gridPosition.x][_gridPosition.y].items.append(_corpse.id)
 	_level.grid[_gridPosition.x][_gridPosition.y].critter = null
-	_level.addPointToEnemyPathding(_gridPosition, _level.grid)
+	_level.addPointToEnemyPathding(_gridPosition)
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
 	queue_free()
