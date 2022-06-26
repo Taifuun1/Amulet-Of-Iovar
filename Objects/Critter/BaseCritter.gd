@@ -33,7 +33,17 @@ var stats = {
 var abilities
 var resistances
 
-var statusEffects = []
+var statusEffects = {
+	"stun": 0,
+	"confusion": 0,
+	"hungerification": 0,
+	"slow digestion": 0,
+	"regen": 0,
+	"fumbling": 0,
+	"sleep": 0,
+	"blindness": 0,
+	"invisibility": 0
+}
 
 var hpRegenTimer = 0
 var mpRegenTimer = 0
@@ -46,7 +56,11 @@ func moveCritter(_moveFrom, _moveTo, _movingCritter, _level, _movedCritter = nul
 		_level.grid[_moveFrom.x][_moveFrom.y].critter = _movedCritter
 		_level.grid[_moveTo.x][_moveTo.y].critter = _movingCritter
 
-func processEffects():
+func processCritterEffects():
+	for _status in statusEffects.keys():
+		if statusEffects[_status] > 0:
+			statusEffects[_status] -= 1
+	
 	if hpRegenTimer > 25 - ( stats.legerity / 2 ):
 		if hp < maxhp:
 			hp += 1

@@ -1,92 +1,50 @@
 extends BaseLevel
 
-var isDouble
-
 func createNewLevel(_isDouble = false):
-	isDouble = _isDouble
-	
 	createGrid()
 	
-	createDungeon()
+	createDungeon(_isDouble)
 	
 	enemyPathfinding(grid)
 	
 	return self
 
-func createDungeon():
+func createDungeon(_isDouble):
 	createRooms()
-	
-	# Create corridors
-	pathfindDungeonCorridors()
-	for room in rooms:
-		for door in room:
-			var randomEndPointRoom
-			var endPointDoor
-			while(true):
-				randomEndPointRoom = rooms[randi() % rooms.size()]
-				endPointDoor = randomEndPointRoom[randi() % randomEndPointRoom.size()]
-				if(door != endPointDoor and randomEndPointRoom != room):
-					break
-			var path = calculateCorridorsPath(door, endPointDoor)
-			for point in path:
-				if grid[point.x][point.y].tile != Globals.tiles.CLOSED_DOOR:
-					grid[point.x][point.y].tile = Globals.tiles.CORRIDOR
-	
-	placeStairs("DUNGEON", isDouble)
+	placeStairs("DUNGEON", _isDouble)
+	connectRooms()
 
 func createRooms():
-	for _room in range(randi() % 2 + 5):
-		for _createAttempts in range(100):
-			var roomPlacement = Vector2(randi() % (int(Globals.gridSize.x) - 1) + 1, randi() % (int(Globals.gridSize.y) - 1) + 1)
-			var roomSize = Vector2(randi() % 8 + 6, randi() % 8 + 6)
-			if (
-				(
-					int(roomPlacement.x) - (int(roomSize.x / 2) + 1) > 0 and
-					int(roomPlacement.x) + (int(roomSize.x / 2)) < Globals.gridSize.x and
-					int(roomPlacement.y) - (int(roomSize.y / 2) + 1) > 0 and
-					int(roomPlacement.y) + (int(roomSize.y / 2)) < Globals.gridSize.y
-				)
-			):
-				if checkIfRoomIsInvalid(roomPlacement, roomSize):
-					continue
-				for x in range(int(roomPlacement.x) - ((int(roomSize.x) / 2) - 1), int(roomPlacement.x) + ((int(roomSize.x) / 2) - 1)):
-					for y in range(int(roomPlacement.y) - ((int(roomSize.y) / 2) - 1), int(roomPlacement.y) + ((int(roomSize.y) / 2) - 1)):
-						grid[x][y].tile = Globals.tiles.FLOOR_DUNGEON
-						spawnableFloors.append(Vector2(x, y))
-				for x in range(int(roomPlacement.x) - (int(roomSize.x) / 2), int(roomPlacement.x) + (int(roomSize.x) / 2)):
-					for y in range(int(roomPlacement.y) - (int(roomSize.y) / 2), int(roomPlacement.y) + (int(roomSize.y) / 2)):
-						if grid[x][y].tile != Globals.tiles.FLOOR_DUNGEON:
-							grid[x][y].tile = Globals.tiles.WALL_DUNGEON
-				if !placeDoors({
-					"roomPlacement": roomPlacement,
-					"roomSize": roomSize,
-				}):
-					continue
-				break
-			else:
-				continue
+	for _roomCount in range(randi() % 2 + 5):
+		var _legibleRoomTiles = getAllLegibleRoomLocations([Globals.tiles.EMPTY], Vector2(4,4), Vector2(9,9))
+		var _room = _legibleRoomTiles[randi() % _legibleRoomTiles.size()]
+		placeRoom(_room.position, _room.size, { "wall": "WALL_DUNGEON", "floor": "FLOOR_DUNGEON" }, true)
+		placeDoors([1,3])
 
-func placeDoors(room):
-	var placement
-	rooms.append([])
-	for _door in range(randi() % 3 + 1):
-		if randi() % 2 == 1:
-			if randi() % 2 == 1:
-				placement = Vector2(randi() % (int(room.roomSize.x) - 3) + (int(room.roomPlacement.x) - ((int(room.roomSize.x) / 2) - 1)), int(room.roomPlacement.y) - (int(room.roomSize.y) / 2))
-			else:
-				placement = Vector2(randi() % (int(room.roomSize.x) - 3) + (int(room.roomPlacement.x) - ((int(room.roomSize.x) / 2) - 1)), int(room.roomPlacement.y) + ((int(room.roomSize.y) / 2) - 1))
+func connectRooms():
+	pathfindDungeonCorridors()
+	
+	for _i in range(20):
+		for room in rooms:
+			for door in room.doors:
+				var randomEndPointRoom
+				var endPointDoor
+				while(true):
+					randomEndPointRoom = rooms[randi() % rooms.size()]
+					endPointDoor = randomEndPointRoom.doors[randi() % randomEndPointRoom.doors.size()]
+					if(door != endPointDoor and randomEndPointRoom != room):
+						break
+				var path = calculateCorridorsPath(door, endPointDoor)
+				for point in path:
+					if grid[point.x][point.y].tile != Globals.tiles.DOOR_CLOSED and grid[point.x][point.y].tile != Globals.tiles.DOOR_OPEN:
+						grid[point.x][point.y].tile = Globals.tiles.CORRIDOR
+		pathFind([Globals.tiles.EMPTY, Globals.tiles.WALL_DUNGEON])
+		if calculatePath(getTilePosition(Globals.tiles.UP_STAIR_DUNGEON), getTilePosition(Globals.tiles.DOWN_STAIR_DUNGEON)).size() == 0:
+			for x in range(grid.size()):
+				for y in range(grid[x].size()):
+					if grid[x][y].tile == Globals.tiles.CORRIDOR:
+						grid[x][y].tile = Globals.tiles.EMPTY
 		else:
-			if randi() % 2 == 1:
-				placement = Vector2(int(room.roomPlacement.x) - (int(room.roomSize.x) / 2), randi() % (int(room.roomSize.y) - 3) + (int(room.roomPlacement.y) - ((int(room.roomSize.y) / 2) - 1)))
-			else:
-				placement = Vector2(int(room.roomPlacement.x) + ((int(room.roomSize.x) / 2) - 1), randi() % (int(room.roomSize.y) - 3) + (int(room.roomPlacement.y) - ((int(room.roomSize.y) / 2) - 1)))
-		grid[placement.x][placement.y].tile = Globals.tiles.CLOSED_DOOR
-		rooms.back().append(placement)
-	return true
-
-func checkIfRoomIsInvalid(roomPlacement, roomSize):
-	for x in range(int(roomPlacement.x) - ((int(roomSize.x) / 2) + 1), int(roomPlacement.x) + ((int(roomSize.x) / 2) + 1)):
-		for y in range(int(roomPlacement.y) - ((int(roomSize.y) / 2) + 1), int(roomPlacement.y) + ((int(roomSize.y) / 2) + 1)):
-			if grid[x][y].tile == Globals.tiles.FLOOR_DUNGEON or grid[x][y].tile == Globals.tiles.WALL_DUNGEON:
-				return true
-	return false
+			return
+	
+	push_error("Dungeon 1 generation failed, can't connect rooms")

@@ -236,7 +236,7 @@ var globalCritterInfo = {
 		"population": 21,
 		"crittersInPlay": 0
 	},
-	"Half lich": {
+	"Half-lich": {
 		"population": 42,
 		"crittersInPlay": 0
 	},

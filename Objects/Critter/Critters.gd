@@ -94,7 +94,7 @@ func generateCrittersForLevel(_level):
 	
 	for _critter in _critters:
 		if _critter != null:
-			spawnCritter(_critter, null, false, _level)
+			spawnCritter(_critter, null, _level)
 
 func returnRandomCritter(_critterGeneration = null):
 	if _critterGeneration != null:
@@ -134,7 +134,7 @@ func returnRandomCritter(_critterGeneration = null):
 #	else:
 #		return null
 
-func spawnCritter(_critter, _position = null, _byName = false, _level = null):
+func spawnCritter(_critter, _position = null, _level = null):
 	var _spawnedLevel
 	var _newCritter
 	var _gridPosition
@@ -152,7 +152,7 @@ func spawnCritter(_critter, _position = null, _byName = false, _level = null):
 		_gridPosition = _position
 	
 	# Name
-	if _byName:
+	if typeof(_critter) == TYPE_STRING:
 		_newCritter = getCritterByName(_critter)
 	else:
 		_newCritter = _critter
@@ -201,7 +201,7 @@ func spawnRandomCritter(_position, _level = null):
 
 func checkNewCritterSpawn(_level):
 	var _randomCritter = spawnableCritters[randi() % spawnableCritters.size() - 1]
-	spawnCritter(_randomCritter, null, true)
+	spawnCritter(_randomCritter)
 
 func checkSpawnableCrittersLevel():
 	for _species in critters.values():

@@ -3,8 +3,7 @@ class_name Beach
 
 func createNewLevel():
 	createGrid()
-	
-	pathFind()
+	pathFind([])
 	
 	createDungeon()
 	

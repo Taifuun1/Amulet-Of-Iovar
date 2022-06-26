@@ -86,6 +86,8 @@ func create(_class):
 	abilities = []
 	resistances = []
 	
+	statusEffects["stun"] = 3
+	
 	updatePlayerStats()
 	
 	calories = 1000
@@ -108,12 +110,13 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			currentHit += 1
 		elif _critter.aI.aI == "Neutral":
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level, _critter.id)
-			Globals.gameConsole.addLog("You switch places with the {critter}.".format({ "critter": _critter.critterName }))
+			Globals.gameConsole.addLog("You swap places with the {critter}.".format({ "critter": _critter.critterName }))
 			checkIfItemsHere(_level, _tileToMoveTo)
 		else:
 			return false
-	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.CLOSED_DOOR:
-		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.OPEN_DOOR
+	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.DOOR_CLOSED:
+		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.DOOR_OPEN
+		_level.addPointToEnemyPathding(_tileToMoveTo, _level.grid)
 	else:
 		moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 		checkIfItemsHere(_level, _tileToMoveTo)
@@ -155,7 +158,7 @@ func gainLevel():
 	stats.wisdom += wisdomIncrease
 	
 	experienceNeededForPreviousLevelGainAmount = experienceNeededForLevelGainAmount
-	experienceNeededForLevelGainAmount += experienceNeededForLevelGainAmount + (experienceNeededForLevelGainAmount / 3)
+	experienceNeededForLevelGainAmount = experienceNeededForLevelGainAmount + (experienceNeededForLevelGainAmount / 2)
 	
 	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
 
@@ -283,6 +286,13 @@ func dropItem(_playerTile, _item, _grid):
 
 func processPlayerSpecificEffects():
 	calories -= 1
+	if previousCalories <= 400 and calories > 400:
+		Globals.gameConsole.addLog("You are no longer hungry.")
+	elif previousCalories <= 200 and calories > 200 and calories < 400:
+		Globals.gameConsole.addLog("You only feel hungry.")
+	elif previousCalories <= 100 and calories > 100 and calories < 200:
+		Globals.gameConsole.addLog("You are still very hungry.")
+	
 	if previousCalories >= 400 and calories < 400 and calories > 200:
 		Globals.gameConsole.addLog("You are beginning to feel hungry.")
 	elif previousCalories >= 200 and calories < 200 and calories > 100:
@@ -308,7 +318,7 @@ func readItem(_id):
 			"blank scroll":
 				Globals.gameConsole.addLog("Its a blank scroll. Wow.")
 			"official mail":
-				Globals.gameConsole.addLog("Its a grocery list of milk, eggs and carrots. Riveting. WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
+				Globals.gameConsole.addLog("Its a grocery list of milk, eggs and carrots. Riveting.")
 				Globals.gameConsole.addLog("The mail disappears!")
 			"scroll of identify":
 				var _items = $"/root/World/Critters/0/Inventory".inventory.duplicate(true)
@@ -376,45 +386,16 @@ func readItem(_id):
 								_items.erase(_item)
 			"scroll of create food":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
-				if _readItem.alignment.matchn("cursed"):
-					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					newItem.createItem($"/root/World/Items/Items".getItemByName("orange"))
-					$"/root/World/Items".add_child(newItem, true)
-					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("An {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
-				elif _readItem.alignment.matchn("uncursed"):
-					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
-					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
-					newItem.createItem(_item)
-					$"/root/World/Items".add_child(newItem, true)
-					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("A {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
-				elif _readItem.alignment.matchn("blessed"):
-					for _direction in PoolVector2Array([
-						Vector2(-1, -1),
-						Vector2(0, -1),
-						Vector2(1, -1),
-						Vector2(1, 0),
-						Vector2(1, 1),
-						Vector2(0, 1),
-						Vector2(-1, 1),
-						Vector2(-1, 0)
-					]):
-						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
-						if (
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
-						):
+				if _readItem.alignment.matchn("blessed"):
+					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition)
+					if !_tiles.empty():
+						for _tile in _tiles:
 							var newItem = load("res://Objects/Item/Item.tscn").instance()
 							var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
 							var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
 							newItem.createItem(_item)
 							$"/root/World/Items".add_child(newItem, true)
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].items.append(newItem.id)
+							$"/root/World".level.grid[_tile.x][_tile.y].items.append(newItem.id)
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
 					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
@@ -422,14 +403,39 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("A bucketload of items appears around you!")
-			"scroll of create potion":
-				var _playerPosition = $"/root/World".level.getCritterTile(0)
-				if _readItem.alignment.matchn("cursed"):
+				elif _readItem.alignment.matchn("uncursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					newItem.createItem($"/root/World/Items/Items".getItemByName("potion of toxix"))
+					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
+					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("A {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				elif _readItem.alignment.matchn("cursed"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					newItem.createItem($"/root/World/Items/Items".getItemByName("orange"))
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("An {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+			"scroll of create potion":
+				var _playerPosition = $"/root/World".level.getCritterTile(0)
+				if _readItem.alignment.matchn("blessed"):
+					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition)
+					if !_tiles.empty():
+						for _tile in _tiles:
+							var newItem = load("res://Objects/Item/Item.tscn").instance()
+							var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
+							var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
+							newItem.createItem(_item)
+							$"/root/World/Items".add_child(newItem, true)
+							$"/root/World".level.grid[_tile.x][_tile.y].items.append(newItem.id)
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
+					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("A bucketload of items appears around you!")
 				elif _readItem.alignment.matchn("uncursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
@@ -438,133 +444,41 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("A {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
-				elif _readItem.alignment.matchn("blessed"):
-					for _direction in PoolVector2Array([
-						Vector2(-1, -1),
-						Vector2(0, -1),
-						Vector2(1, -1),
-						Vector2(1, 0),
-						Vector2(1, 1),
-						Vector2(0, 1),
-						Vector2(-1, 1),
-						Vector2(-1, 0)
-					]):
-						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
-						if (
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
-						):
-							var newItem = load("res://Objects/Item/Item.tscn").instance()
-							var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
-							var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
-							newItem.createItem(_item)
-							$"/root/World/Items".add_child(newItem, true)
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].items.append(newItem.id)
+				elif _readItem.alignment.matchn("cursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
-					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
-					newItem.createItem(_item)
+					newItem.createItem($"/root/World/Items/Items".getItemByName("potion of toxix"))
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("A bucketload of items appears around you!")
-			"scroll of create critter":
+					Globals.gameConsole.addLog("An {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+			"scroll of summon critter":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
-				if _readItem.alignment.matchn("cursed"):
-					var _critterName = null
-					for _direction in PoolVector2Array([
-						Vector2(-1, -1),
-						Vector2(0, -1),
-						Vector2(1, -1),
-						Vector2(1, 0),
-						Vector2(1, 1),
-						Vector2(0, 1),
-						Vector2(-1, 1),
-						Vector2(-1, 0)
-					]):
-						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
-						if (
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
-						):
-							if _critterName == null:
-								_critterName = $"/root/World/Critters/Critters".spawnRandomCritter(_playerPosition + _direction)
-							else:
-								$"/root/World/Critters/Critters".spawnRandomCritter(_playerPosition + _direction)
-					if _critterName != null:
-						Globals.gameConsole.addLog("A bucketload of critters appear around you!")
+				if _readItem.alignment.matchn("blessed"):
+					var _critter = neutralCritters[randi() % neutralCritters.size()]
+					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
+					if !_tiles.empty():
+						for _tile in _tiles:
+							Globals.gameConsole.addLog("A {critterName} appears beside you. It seems friendly.".format({ "critterName": $"/root/World/Critters/Critters".spawnCritter(_critter, _tile) }))
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
 				elif _readItem.alignment.matchn("uncursed"):
-					var _directions = [
-						Vector2(-1, -1),
-						Vector2(0, -1),
-						Vector2(1, -1),
-						Vector2(1, 0),
-						Vector2(1, 1),
-						Vector2(0, 1),
-						Vector2(-1, 1),
-						Vector2(-1, 0)
-					]
-					_directions.shuffle()
-					var _critterName = null
-					for _direction in _directions:
-						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
-						if (
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							(
-								$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON or
-								$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND or
-								$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
-								$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
-							)
-						):
-							_critterName = $"/root/World/Critters/Critters".spawnRandomCritter(_playerPosition + _direction)
-							if _critterName != null:
-								break
-					if _critterName != null:
-						Globals.gameConsole.addLog("A {critterName} appears beside you!".format({ "critterName": _critterName }))
+					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
+					if !_tiles.empty():
+						for _tile in _tiles:
+							Globals.gameConsole.addLog("A {critterName} appears beside you!".format({ "critterName": $"/root/World/Critters/Critters".spawnRandomCritter(_tile) }))
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
-				elif _readItem.alignment.matchn("blessed"):
-					var _directions = [
-						Vector2(-1, -1),
-						Vector2(0, -1),
-						Vector2(1, -1),
-						Vector2(1, 0),
-						Vector2(1, 1),
-						Vector2(0, 1),
-						Vector2(-1, 1),
-						Vector2(-1, 0)
-					]
-					_directions.shuffle()
-					var _critterName = null
-					var _critter = neutralCritters[randi() % neutralCritters.size()]
-					for _direction in _directions:
-						var _checkedTile = Vector2(_playerPosition.x + _direction.x, _playerPosition.y + _direction.y)
-						if (
-							$"/root/World".level.grid[_playerPosition.x + _direction.x][_playerPosition.y + _direction.y].tile != Globals.tiles.EMPTY and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_DUNGEON and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_SAND and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
-							$"/root/World".level.grid[_checkedTile.x][_checkedTile.y].tile != Globals.tiles.WALL_BOARD
-						):
-							_critterName = $"/root/World/Critters/Critters".spawnCritter($"/root/World/Critters/Critters".getCritterByName(_critter), _playerPosition + _direction)
-							if _critterName != null:
-								break
-					if _critterName != null:
-						Globals.gameConsole.addLog("A {critterName} appears beside you...".format({ "critterName": _critterName }))
+				elif _readItem.alignment.matchn("cursed"):
+					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, false, true)
+					if !_tiles.empty():
+						for _tile in _tiles:
+							$"/root/World/Critters/Critters".spawnRandomCritter(_tile)
+						Globals.gameConsole.addLog("A bucketload of critters appear around you!")
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of genocide":
 				var _aliveCritters = []
 				for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
-					if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0 and GlobalCritterInfo.globalCritterInfo[_critterName].crittersInPlay != 0:
+					if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0:
 						_aliveCritters.append(_critterName)
 				$"/root/World/UI/ListMenu".showListMenuList("Genocide what?", _aliveCritters)
 				$"/root/World/UI/ListMenu".show()
@@ -673,7 +587,6 @@ func quaffItem(_id):
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
 		checkAllItemsIdentification()
-#		if !quaffedItem.identifiedItemName.to_lower().matchn("blank scroll"):
 		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 	$"/root/World".closeMenu(_additionalChoices)
@@ -686,4 +599,50 @@ func consumeItem(_id):
 		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 		Globals.gameConsole.addLog("You eat the {comestible}.".format({ "comestible": _eatenItem.itemName }))
+	$"/root/World".closeMenu()
+
+func zapItem(_id):
+	var _zappedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
+	var _additionalChoices = false
+	if _zappedItem.type.matchn("wand"):
+		Globals.gameConsole.addLog("You zap the {itemName}.".format({ "itemName": _zappedItem.itemName }))
+		if (
+			GlobalItemInfo.globalItemInfo.has(_zappedItem.identifiedItemName) and
+			GlobalItemInfo.globalItemInfo[_zappedItem.identifiedItemName].identified == false
+		):
+			GlobalItemInfo.globalItemInfo[_zappedItem.identifiedItemName].identified = true
+			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _zappedItem.identifiedItemName, "unidentifiedItemName": _zappedItem.unidentifiedItemName }))
+		if !_zappedItem.value == 0:
+			match _zappedItem.identifiedItemName.to_lower():
+				"wand of summon critter":
+					var _playerPosition = $"/root/World".level.getCritterTile(0)
+					if _zappedItem.alignment.matchn("blessed"):
+						var _critter = neutralCritters[randi() % neutralCritters.size()]
+						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
+						if !_tiles.empty():
+							for _tile in _tiles:
+								Globals.gameConsole.addLog("A {critterName} appears beside you. It seems friendly.".format({ "critterName": $"/root/World/Critters/Critters".spawnCritter(_critter, _tile) }))
+						else:
+							Globals.gameConsole.addLog("Nothing happens...")
+					elif _zappedItem.alignment.matchn("uncursed"):
+						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
+						if !_tiles.empty():
+							for _tile in _tiles:
+								Globals.gameConsole.addLog("A {critterName} appears beside you!".format({ "critterName": $"/root/World/Critters/Critters".spawnRandomCritter(_tile) }))
+						else:
+							Globals.gameConsole.addLog("Nothing happens...")
+					elif _zappedItem.alignment.matchn("cursed"):
+						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, false, true)
+						if !_tiles.empty():
+							for _tile in _tiles:
+								$"/root/World/Critters/Critters".spawnRandomCritter(_tile)
+							Globals.gameConsole.addLog("A bucketload of critters appear around you!")
+						else:
+							Globals.gameConsole.addLog("Nothing happens...")
+				_:
+					Globals.gameConsole.addLog("Thats not a wand...")
+			_zappedItem.value -= 1
+			checkAllItemsIdentification()
+		else:
+			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
 	$"/root/World".closeMenu()

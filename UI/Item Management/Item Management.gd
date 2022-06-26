@@ -29,16 +29,20 @@ func hideItemManagementList():
 
 func _on_Item_Management_List_Clicked(_id):
 	if chooseOnClick:
-		if $"/root/World".uIState == $"/root/World".uI.READ:
+		if $"/root/World".currentGameState == $"/root/World".gameState.READ:
 			$"/root/World/Critters/0".readItem(_id)
 			$"/root/World".processGameTurn()
 			return
-		if $"/root/World".uIState == $"/root/World".uI.QUAFF:
+		if $"/root/World".currentGameState == $"/root/World".gameState.QUAFF:
 			$"/root/World/Critters/0".quaffItem(_id)
 			$"/root/World".processGameTurn()
 			return
-		if $"/root/World".uIState == $"/root/World".uI.CONSUME:
+		if $"/root/World".currentGameState == $"/root/World".gameState.CONSUME:
 			$"/root/World/Critters/0".consumeItem(_id)
+			$"/root/World".processGameTurn()
+			return
+		if $"/root/World".currentGameState == $"/root/World".gameState.ZAP:
+			$"/root/World/Critters/0".zapItem(_id)
 			$"/root/World".processGameTurn()
 			return
 	var clickedItem = get_node("ItemManagementList/{id}".format({ "id": _id }))

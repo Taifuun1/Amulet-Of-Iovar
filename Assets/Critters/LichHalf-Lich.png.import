@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LichHalfLich.png-00ba6bf4ec6d6c695cd293dd681307d3.stex"
+path="res://.import/LichHalf-Lich.png-1a628c146f79ad3ac17a7b6db84cd760.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Critters/LichHalfLich.png"
-dest_files=[ "res://.import/LichHalfLich.png-00ba6bf4ec6d6c695cd293dd681307d3.stex" ]
+source_file="res://Assets/Critters/LichHalf-Lich.png"
+dest_files=[ "res://.import/LichHalf-Lich.png-1a628c146f79ad3ac17a7b6db84cd760.stex" ]
 
 [params]
 

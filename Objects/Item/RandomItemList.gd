@@ -68,7 +68,7 @@ var randomItemList = {
 			"Thunder resistance",
 			"Gleeie'er resitance",
 			"Toxix resistance",
-			"armor",
+			"protection",
 			"seeing",
 			"hunger",
 			"slow digestion",
@@ -103,8 +103,8 @@ var randomItemList = {
 			"enchant armor",
 			"remove curse",
 			"destroy armor",
+			"summon critter",
 			"create food",
-			"create critter",
 			"create potion",
 			"teleport",
 			"genocide",
@@ -121,7 +121,8 @@ var randomItemList = {
 			"AARGTH PLERBQ",
 			"kings groceries",
 			"create gold",
-			"summon void monster"
+			"summon void monster",
+			"the lusty centaur maid"
 		]
 	},
 	"wand": {

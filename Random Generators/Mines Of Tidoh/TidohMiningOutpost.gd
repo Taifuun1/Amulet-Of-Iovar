@@ -60,7 +60,7 @@ func createDungeon():
 				var outpostEndpointDoor = outpostDoors[side][0]
 				var path = calculateCorridorsPath(door, outpostEndpointDoor)
 				for point in path:
-					if grid[point.x][point.y].tile != Globals.tiles.CLOSED_DOOR:
+					if grid[point.x][point.y].tile != Globals.tiles.DOOR_CLOSED:
 						grid[point.x][point.y].tile = Globals.tiles.CORRIDOR
 
 func createOutpostAreas():
@@ -274,7 +274,7 @@ func createCaveArea(_side, _stair):
 			"roomPlacement": _roomPlacement,
 			"roomSize": _roomSize,
 		}, _side)
-		placeStair(_availableStairFloors, _stair)
+		placeStair2(_availableStairFloors, _stair)
 	else:
 		for _room in range(_rooms):
 			var _roomPlacement = Vector2(randi() % 5 + caveAreas[_side][_room].x, randi() % 4 + caveAreas[_side][_room].y )
@@ -285,7 +285,7 @@ func createCaveArea(_side, _stair):
 				"roomSize": _roomSize,
 			}, _side)
 			if _room + 1 == 1:
-				placeStair(_availableStairFloors, _stair)
+				placeStair2(_availableStairFloors, _stair)
 
 func createRoom(_roomPlacement, _roomSize):
 	var _availableStairFloors = []
@@ -300,7 +300,7 @@ func createRoom(_roomPlacement, _roomSize):
 				grid[x][y].tile = Globals.tiles.WALL_DUNGEON
 	return _availableStairFloors
 
-func placeStair(_availableStairFloors, _stair):
+func placeStair2(_availableStairFloors, _stair):
 	var _randomFloor = _availableStairFloors[randi() % _availableStairFloors.size()]
 	grid[_randomFloor.x][_randomFloor.y].tile = _stair
 	if _stair == Globals.tiles.UP_STAIR_DUNGEON:
@@ -322,7 +322,7 @@ func placeDoors2(room, _side):
 				placement = Vector2(int(room.roomPlacement.x), randi() % int(room.roomSize.y - 2) + int(room.roomPlacement.y + 1))
 			else:
 				placement = Vector2(int(room.roomPlacement.x) + int(room.roomSize.x - 1), randi() % int(room.roomSize.y - 2) + int(room.roomPlacement.y + 1))
-		grid[placement.x][placement.y].tile = Globals.tiles.CLOSED_DOOR
+		grid[placement.x][placement.y].tile = Globals.tiles.DOOR_CLOSED
 		rooms[_side].back().append(placement)
 
 func placeOutpostDoors():
@@ -330,8 +330,8 @@ func placeOutpostDoors():
 		var _y = randi() % int(outpostArea[2].y) + outpostArea[1].y
 		var _x = outpostArea[_door + 1].x
 		if _door == 0:
-			grid[_x - 2][_y].tile = Globals.tiles.CLOSED_DOOR
+			grid[_x - 2][_y].tile = Globals.tiles.DOOR_CLOSED
 			outpostDoors[0].append(Vector2(_x - 2, _y))
 		else:
-			grid[_x + 2][_y].tile = Globals.tiles.CLOSED_DOOR
+			grid[_x + 2][_y].tile = Globals.tiles.DOOR_CLOSED
 			outpostDoors[1].append(Vector2(_x + 2, _y))

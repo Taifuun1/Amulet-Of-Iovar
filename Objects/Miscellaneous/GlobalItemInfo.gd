@@ -322,7 +322,7 @@ var globalItemInfo = {
 	"Scroll of destroy armor": {
 		"identified": false
 	},
-	"Scroll of create critter": {
+	"Scroll of summon critter": {
 		"identified": false
 	},
 	"Scroll of create potion": {
@@ -418,7 +418,7 @@ var globalItemInfo = {
 	"Wand of item polymorph": {
 		"identified": false
 	},
-	"Wand of critter summon": {
+	"Wand of summon critter": {
 		"identified": false
 	},
 	"Wand of wishing": {

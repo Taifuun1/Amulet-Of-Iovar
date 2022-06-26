@@ -107,7 +107,7 @@ var scrolls = {
 			"identified": false
 		},
 		{
-			"itemName": "Scroll of create critter",
+			"itemName": "Scroll of summon critter",
 			"unidentifiedItemName": null,
 			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
 			"unIdentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),

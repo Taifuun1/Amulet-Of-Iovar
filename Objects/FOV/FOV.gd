@@ -1,5 +1,10 @@
 extends TileMap
 
+enum {
+	HIDDEN
+	GREY
+}
+
 var currentFOVLevel = []
 var fovLevels = []
 
@@ -17,7 +22,7 @@ func buildFOVLevel():
 		grid.append([])
 		for _y in range(Globals.gridSize.y):
 			grid[_x].append(0)
-			set_cell(_x, _y, 0)
+			set_cell(_x, _y, HIDDEN)
 	return grid
 
 func moveLevel(_level):
@@ -28,5 +33,5 @@ func seeCell(_x, _y):
 	set_cell(_x, _y, -1)
 
 func greyCell(_x, _y):
-	currentFOVLevel[_x][_y] = 1
-	set_cell(_x, _y, 1)
+	currentFOVLevel[_x][_y] = GREY
+	set_cell(_x, _y, GREY)

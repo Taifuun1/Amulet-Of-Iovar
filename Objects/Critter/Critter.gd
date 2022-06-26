@@ -48,25 +48,29 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	expDropAmount = _critter.expDropAmount
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
-	var _path
-	if _critterTile != null:
-		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
-	if _path.size() != 0:
-		var _moveCritterTo = _path[1]
-		if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
-			if hits[currentHit] == 1:
-				$"/root/World/Critters/0".takeDamage(attacks, critterName)
+	if statusEffects["stun"] > 0:
+		Globals.gameConsole.addLog("The {critter} cant move!".format({ "critter": critterName.capitalize() }))
+		return false
+	else:
+		var _path
+		if _critterTile != null:
+			_path = aI.getCritterMove(_critterTile, _playerTile, _level)
+		if _path.size() != 0:
+			var _moveCritterTo = _path[1]
+			if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
+				if hits[currentHit] == 1:
+					$"/root/World/Critters/0".takeDamage(attacks, critterName)
+				else:
+					Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
+				if currentHit == 15:
+					currentHit = 0
+				currentHit += 1
+			elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
+				moveCritter(_critterTile, _moveCritterTo, _critter, _level)
+				_level.addPointToEnemyPathding(_critterTile)
+				_level.removePointFromEnemyPathfinding(_moveCritterTo)
 			else:
-				Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
-			if currentHit == 15:
-				currentHit = 0
-			currentHit += 1
-		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
-			moveCritter(_critterTile, _moveCritterTo, _critter, _level)
-			_level.addPointToEnemyPathding(_critterTile)
-			_level.removePointFromEnemyPathfinding(_moveCritterTo)
-		else:
-			return false
+				return false
 
 func takeDamage(_attacks, _critterTile, _items, _level):
 	var _didCritterDespawn = null

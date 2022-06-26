@@ -29,7 +29,7 @@ func hideListMenuList():
 	hide()
 
 func _on_List_Menu_Item_Clicked(_id):
-#	if $"/root/World".uIState == $"/root/World".uI.READ:
+#	if $"/root/World".currentGameState == $"/root/World".gameState.READ:
 	$"/root/World/Critters/0".dealWithScrollOfGenocide(_id)
 	$"/root/World".processGameTurn()
 #	return

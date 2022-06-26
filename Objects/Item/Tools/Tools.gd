@@ -147,7 +147,7 @@ var tools = {
 	],
 	"rare": [
 		{
-			"itemName": "Bag of Disenchantment",
+			"itemName": "Bag of disenchantment",
 			"unidentifiedItemName": "Bag",
 			"texture": load("res://Assets/Tools/BagOfDisenchantment.png"),
 			"unIdentifiedTexture": load("res://Assets/Tools/BagLeather.png"),
@@ -160,7 +160,7 @@ var tools = {
 			"identified": false
 		},
 		{
-			"itemName": "Bag of Holding",
+			"itemName": "Bag of holding",
 			"unidentifiedItemName": "Bag",
 			"texture": load("res://Assets/Tools/BagOfHolding.png"),
 			"unIdentifiedTexture": load("res://Assets/Tools/BagLeather.png"),
@@ -186,7 +186,7 @@ var tools = {
 			"identified": false
 		},
 		{
-			"itemName": "Magic Marker",
+			"itemName": "Magic marker",
 			"unidentifiedItemName": "Marker",
 			"texture": load("res://Assets/Tools/MarkerMagic.png"),
 			"unIdentifiedTexture": load("res://Assets/Tools/Marker.png"),
@@ -199,7 +199,7 @@ var tools = {
 			"identified": false
 		},
 		{
-			"itemName": "Magic Key",
+			"itemName": "Magic key",
 			"unidentifiedItemName": "Key",
 			"texture": load("res://Assets/Tools/KeyMagic.png"),
 			"unIdentifiedTexture": load("res://Assets/Tools/Key.png"),

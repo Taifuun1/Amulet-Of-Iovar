@@ -8,12 +8,20 @@ func _ready():
 	pass
 
 
-# Critters pathfinding
+
+############################
+### Critters pathfinding ###
+############################
+
 func calculatePathFindingPath(pathStartPosition, pathEndPosition):
 	return pathFindingAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
 
 
-# Enemy pathfinding
+
+#########################
+### Enemy pathfinding ###
+#########################
+
 func enemyPathfinding(grid):
 	pathFindingAstarNode.clear()
 	var walkableTiles = addWalkableTiles(grid)
@@ -26,6 +34,7 @@ func addWalkableTiles(grid):
 			var point = Vector2(x, y)
 			if (
 				grid[point.x][point.y].tile == Globals.tiles.EMPTY or
+				grid[point.x][point.y].tile == Globals.tiles.DOOR_CLOSED or
 				grid[point.x][point.y].tile == Globals.tiles.WALL_DUNGEON or
 				grid[point.x][point.y].tile == Globals.tiles.WALL_SAND or
 				grid[point.x][point.y].tile == Globals.tiles.WALL_BRICK_SAND or
@@ -57,14 +66,39 @@ func connectWalkableCells(points, grid):
 				continue
 			pathFindingAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
 
-func addPointToEnemyPathding(point):
-	pathFindingAstarNode.set_point_disabled(id(point), false)
+func addPointToEnemyPathding(point, grid = null):
+	var _pointId = id(point)
+	if pathFindingAstarNode.has_point(_pointId):
+		pathFindingAstarNode.set_point_disabled(_pointId, false)
+	else:
+		pathFindingAstarNode.add_point(_pointId, point, 1.0)
+		var pointsRelative = PoolVector2Array([
+			Vector2(point.x, point.y - 1),
+			Vector2(point.x + 1, point.y - 1),
+			Vector2(point.x + 1, point.y),
+			Vector2(point.x + 1, point.y + 1),
+			Vector2(point.x, point.y + 1),
+			Vector2(point.x - 1, point.y + 1),
+			Vector2(point.x - 1, point.y),
+			Vector2(point.x - 1, point.y - 1)
+		])
+		for pointRelative in pointsRelative:
+			var pointRelativeIndex = id(pointRelative)
+			if isOutSideTileMap(pointRelative, grid):
+				continue
+			if not pathFindingAstarNode.has_point(pointRelativeIndex):
+				continue
+			pathFindingAstarNode.connect_points(_pointId, pointRelativeIndex, true)
 
 func removePointFromEnemyPathfinding(point):
 	pathFindingAstarNode.set_point_disabled(id(point), true)
 
 
-# Helper functions
+
+########################
+### Helper functions ###
+########################
+
 func isOutSideTileMap(point, grid):
 	return point.x < 0 or point.y < 0 or point.x >= grid.size() or point.y >= grid[0].size()
 

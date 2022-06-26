@@ -6,7 +6,7 @@ var liches = {
 			"race": "Lich",
 			"class": "Ancient",
 			"aI": "Aggresive",
-			"texture": load("res://Assets/Critters/LichHalfLich.png"),
+			"texture": load("res://Assets/Critters/LichHalf-Lich.png"),
 			"alignment": "Neutral",
 			"level": 15,
 			"expDropAmount": 1100,

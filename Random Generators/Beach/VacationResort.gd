@@ -2,7 +2,7 @@ extends Beach
 
 func createNewLevel():
 	createGrid()
-	pathFind()
+	pathFind([])
 	
 	createDungeon()
 	createResortShack()
@@ -16,4 +16,3 @@ func createResortShack():
 	var _room = _legibleRoomTiles[randi() % _legibleRoomTiles.size()]
 	placeRoom(_room.position, _room.size, { "wall": "WALL_BOARD", "floor": "FLOOR_SAND" }, false)
 	placeDoors([1,1])
-#	placeStairs()
