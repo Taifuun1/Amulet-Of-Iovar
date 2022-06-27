@@ -26,6 +26,7 @@ enum gameState {
 	EQUIPMENT
 	INTERACT
 	ZAP
+	USE
 }
 
 var level = null
@@ -52,11 +53,12 @@ var levels = {
 var tile_size = get_cell_size()
 var half_tile_size = tile_size / 2
 
-var keepMoving = false
 
+var thread
 var inStartScreen = true
 var inGame = false
 var currentGameState = gameState.GAME
+var keepMoving = false
 
 func _ready():
 	set_process(true)
@@ -73,6 +75,8 @@ func _ready():
 	$UI/ItemManagement.create()
 	$UI/Equipment.create()
 	$UI/PopupMenu.create()
+	for _node in $UI.get_children():
+		_node.hide()
 	
 	# Dungeon 1
 	var firstLevel = dungeon1.instance()
@@ -127,6 +131,10 @@ func _ready():
 		else:
 			levelCount += levels[section].size()
 	$FOV.createFOVLevels(levelCount)
+
+func _on_Game_Start():
+	thread = Thread.new()
+	thread.start(self, "create", null, Thread.PRIORITY_HIGH)
 
 func create():
 	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
@@ -186,7 +194,7 @@ func create():
 	$Critters/"0"/Inventory.addToInventory(newItem3.id)
 	
 	var newItem333 = load("res://Objects/Item/Item.tscn").instance()
-	newItem333.createItem($"/root/World/Items/Items".getItemByName("potion of hunger"), { "alignment": "uncursed" })
+	newItem333.createItem($"/root/World/Items/Items".getItemByName("oil lamp"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem333, true)
 	$Critters/"0"/Inventory.addToInventory(newItem333.id)
 	
@@ -206,7 +214,7 @@ func create():
 	$Critters/"0"/Inventory.addToInventory(newItem156.id)
 	
 	var newItem4 = load("res://Objects/Item/Item.tscn").instance()
-	newItem4.createItem($"/root/World/Items/Items".getItemByName("battered buckler"), { "alignment": "uncursed" })
+	newItem4.createItem($"/root/World/Items/Items".getItemByName("candle"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem4, true)
 	$Critters/"0"/Inventory.addToInventory(newItem4.id)
 	
@@ -216,18 +224,25 @@ func create():
 	$Critters/"0"/Inventory.addToInventory(newItem10.id)
 	
 	updateTiles()
+	drawLevel()
+	
+	for _node in $UI.get_children():
+		if _node.name == "GameConsole":
+			_node.show()
+		if _node.name == "GameStats":
+			_node.show()
+	$UI/StartScreen.queue_free()
 	
 	inStartScreen = false
 	inGame = true
+	
+	show()
 
 func _process(_delta):
 	if inGame and $Critters/"0".statusEffects["stun"] > 0:
 		processGameTurn()
 
 func _input(_event):
-	if (Input.is_action_just_pressed("START") and level == null):
-		create()
-		drawLevel()
 	if !inStartScreen:
 		var _playerTile = level.getCritterTile(0)
 		if (
@@ -352,6 +367,8 @@ func _input(_event):
 		elif Input.is_action_just_pressed("INTERACT") and currentGameState == gameState.GAME and inGame:
 			currentGameState = gameState.INTERACT
 			Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
+		elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME and inGame:
+			openMenu("use")
 		elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME and inGame:
 			keepMoving = true
 		$"Critters/0".updatePlayerStats()
@@ -440,6 +457,7 @@ func drawFOV():
 	var playerTile = level.getCritterTile(0)
 	var playerCenter = Vector2((playerTile.x + 0.5) * 32, (playerTile.y + 0.5) * 32)
 	var spaceState = get_world_2d().get_direct_space_state()
+	var _playerNode = $Critters/"0"
 	for _x in range(Globals.gridSize.x):
 		for _y in range(Globals.gridSize.y):
 			var x_dir = 1 if _x < playerTile.x else -1
@@ -447,11 +465,18 @@ func drawFOV():
 			var testPoint = Vector2((_x + 0.5) * 32, (_y + 0.5) * 32) + Vector2(x_dir, y_dir) * 32 / 2
 			var occlusion = spaceState.intersect_ray(playerCenter, testPoint)
 			if (
+				_playerNode.playerVisibility != 0 and
 				(
 					!occlusion or
 					(occlusion.position - testPoint).length() < 1
 				) and
-				(playerCenter - testPoint).length() < level.visibility * 32
+				(
+					(playerCenter - testPoint).length() < level.visibility * 32 or
+					(
+						(playerCenter - testPoint).length() < _playerNode.playerVisibility * 32 and
+						_playerNode.playerVisibility != -1
+					)
+				)
 			):
 				$FOV.seeCell(_x, _y)
 			elif (
@@ -459,7 +484,8 @@ func drawFOV():
 				level.grid[_x][_y].tile != Globals.tiles.EMPTY and
 				(
 					occlusion or
-					(playerCenter - testPoint).length() > level.visibility * 32
+					(playerCenter - testPoint).length() > level.visibility * 32 or
+					(playerCenter - testPoint).length() > _playerNode.playerVisibility * 32
 				)
 			):
 				$FOV.greyCell(_x, _y)
@@ -649,6 +675,12 @@ func openMenu(_menu, _playerTile = null):
 				$UI/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.ZAP
 				inGame = false
+		"use":
+			if currentGameState == gameState.GAME:
+				$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"])
+				$UI/ItemManagement.showItemManagementList(true)
+				currentGameState = gameState.USE
+				inGame = false
 
 func interactWith(_tileToInteractWith):
 #			Globals.gameConsole.addLog("You cant interact with the {critter}".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
@@ -686,7 +718,8 @@ func closeMenu(_additionalChoices = false):
 			currentGameState == gameState.READ or
 			currentGameState == gameState.QUAFF or
 			currentGameState == gameState.CONSUME or
-			currentGameState == gameState.ZAP
+			currentGameState == gameState.ZAP or
+			currentGameState == gameState.USE
 		):
 			$UI/ItemManagement.hideItemManagementList()
 		if currentGameState == gameState.EQUIPMENT:
@@ -702,3 +735,7 @@ func resetToDefaulGameState():
 		currentGameState = gameState.GAME
 		inGame = true
 		keepMoving = false
+
+func _exit_tree():
+	print("gone")
+	thread.wait_to_finish()

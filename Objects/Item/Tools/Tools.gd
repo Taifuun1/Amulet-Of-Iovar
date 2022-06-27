@@ -46,7 +46,11 @@ var tools = {
 			"unIdentifiedTexture": load("res://Assets/Tools/Candle.png"),
 			"type": "Tool",
 			"category": null,
-			"value": null,
+			"value": {
+				"turnedOn": null,
+				"charges": [150, 100],
+				"value": 3
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common",
@@ -86,7 +90,11 @@ var tools = {
 			"unIdentifiedTexture": load("res://Assets/Tools/LampOil.png"),
 			"type": "Tool",
 			"category": null,
-			"value": null,
+			"value": {
+				"turnedOn": null,
+				"charges": [500, 750],
+				"value": 5
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common",
@@ -179,7 +187,11 @@ var tools = {
 			"unIdentifiedTexture": load("res://Assets/Tools/LampOil.png"),
 			"type": "Tool",
 			"category": null,
-			"value": null,
+			"value": {
+				"turnedOn": null,
+				"charges": -1,
+				"value": 7
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Rare",

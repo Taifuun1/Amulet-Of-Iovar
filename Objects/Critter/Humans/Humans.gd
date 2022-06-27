@@ -98,7 +98,7 @@ var humans = {
 			"resistances": []
 		},
 		{
-			"critterName": "Outlaw fusie'er",
+			"critterName": "Outlaw fusiee'er",
 			"race": "Human",
 			"class": "Humanoid",
 			"aI": "Aggressive",

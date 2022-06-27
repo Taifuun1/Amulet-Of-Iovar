@@ -59,6 +59,18 @@ func createItem(_item, _extraData = {}):
 	else:
 		enchantment = 0
 	
+	if typeof(_item.value) == TYPE_DICTIONARY and _item.value.has("charges"):
+		var charges 
+		if typeof(_item.value.charges) != TYPE_ARRAY and _item.value.charges == -1:
+			charges = -1
+		else:
+			charges = randi() % _item.value.charges[1] + _item.value.charges[0]
+		value = {
+			"turnedOn": false,
+			"charges": charges,
+			"value": _item.value.value
+		}
+	
 	stackable = _item.stackable
 	
 	$ItemSprite.texture = _item.texture

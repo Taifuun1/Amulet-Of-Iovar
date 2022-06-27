@@ -1,5 +1,7 @@
 extends BaseCritter
 
+var playerVisibility = -1
+
 var experiencePoints = 0
 var experienceNeededForPreviousLevelGainAmount = 0
 var experienceNeededForLevelGainAmount = 20
@@ -15,6 +17,8 @@ var wisdomIncrease = 0
 
 var calories
 var previousCalories
+
+var itemsTurnedOn = []
 
 var skills = {
 	"sword": {
@@ -86,8 +90,6 @@ func create(_class):
 	abilities = []
 	resistances = []
 	
-	statusEffects["stun"] = 3
-	
 	updatePlayerStats()
 	
 	calories = 1000
@@ -128,6 +130,148 @@ func checkIfItemsHere(_level, _tileToMoveTo):
 		Globals.gameConsole.addLog("You see some items here.")
 	elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
 		Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
+
+func takeDamage(_attacks, _crittername):
+	var _attacksLog = []
+	if _attacks.size() != 0:
+		for _attack in _attacks:
+			var armorReduction = _attack - ( ac / 3 )
+			if armorReduction <= 1 and armorReduction >= -2:
+				hp -= 1
+				_attacksLog.append("{crittername} hits you for 1 damage.".format({ "crittername": _crittername }))
+			elif armorReduction < -2:
+				_attacksLog.append("{crittername}s attack bounces off!".format({ "crittername": _crittername }))
+			else:
+				hp -= armorReduction
+				_attacksLog.append("{crittername} hits you for {dmg} damage.".format({ "crittername": _crittername, "dmg": armorReduction }))
+			if hp <= 0:
+				_attacksLog.append("You die...")
+				break
+		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
+		Globals.gameConsole.addLog(_attacksLogString)
+	else:
+		Globals.gameConsole.addLog("{critter} looks unsure!".format({ "critter": _crittername }))
+
+func pickUpItems(_playerTile, _items, _grid):
+	var itemsLog = []
+	if _items.size() != 0:
+		for _item in _items:
+			pickUpItem(_playerTile, _item, _grid)
+			itemsLog.append("You pickup {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
+	var itemsLogString = PoolStringArray(itemsLog).join(" ")
+	Globals.gameConsole.addLog(itemsLogString)
+
+func pickUpItem(_playerTile, _item, _grid):
+	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
+		if _grid[_playerTile.x][_playerTile.y].items[_itemOnGround] == _item:
+			_grid[_playerTile.x][_playerTile.y].items.remove(_itemOnGround)
+			$Inventory.addToInventory(get_node("/root/World/Items/{id}".format({ "id": _item })).id)
+			get_node("/root/World/Items/{id}".format({ "id": _item })).hide()
+			return
+
+func dropItems(_playerTile, _items, _grid):
+	var itemsLog = []
+	if _items.size() != 0:
+		for _item in _items:
+			dropItem(_playerTile, _item, _grid)
+			itemsLog.append("You drop {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
+	var itemsLogString = PoolStringArray(itemsLog).join(" ")
+	Globals.gameConsole.addLog(itemsLogString)
+
+func dropItem(_playerTile, _item, _grid):
+	_grid[_playerTile.x][_playerTile.y].items.append(_item)
+	$Inventory.dropFromInventory(_item)
+	get_node("/root/World/Items/{id}".format({ "id": _item })).show()
+	$"/root/World/UI/Equipment".checkIfWearingEquipment(_item)
+
+
+
+####################
+### Player stats ###
+####################
+
+func processPlayerSpecificEffects():
+	calories -= 1
+	if previousCalories <= 400 and calories > 400:
+		Globals.gameConsole.addLog("You are no longer hungry.")
+	elif previousCalories <= 200 and calories > 200 and calories < 400:
+		Globals.gameConsole.addLog("You only feel hungry.")
+	elif previousCalories <= 100 and calories > 100 and calories < 200:
+		Globals.gameConsole.addLog("You are still very hungry.")
+	
+	if previousCalories >= 400 and calories < 400 and calories > 200:
+		Globals.gameConsole.addLog("You are beginning to feel hungry.")
+	elif previousCalories >= 200 and calories < 200 and calories > 100:
+		Globals.gameConsole.addLog("You feel very hungry.")
+	elif previousCalories >= 100 and calories < 100 and calories > 0:
+		Globals.gameConsole.addLog("You are starving!")
+	elif calories <= 0:
+		Globals.gameConsole.addLog("You die...")
+	previousCalories = calories
+	
+	if statusEffects["blindness"] > 0:
+		playerVisibility = -1
+	
+	for _item in itemsTurnedOn:
+		match _item.identifiedItemName.to_lower():
+			"candle":
+				if _item.value.charges > 0:
+					_item.value.charges -= 1
+				else:
+					if playerVisibility != 0:
+						playerVisibility = -1
+					_item.value.turnedOn = false
+					itemsTurnedOn.erase(_item)
+					Globals.gameConsole.addLog("Your candle has run out of wax.")
+			"oil lamp":
+				if _item.value.charges > 0:
+					_item.value.charges -= 1
+				else:
+					if playerVisibility != 0:
+						playerVisibility = -1
+					_item.value.turnedOn = false
+					itemsTurnedOn.erase(_item)
+					Globals.gameConsole.addLog("Your lamp has run out of oil.")
+			_:
+				Globals.gameConsole.addLog("Thats not something that can be turned on.")
+
+func calculateEquipmentStats():
+	# Armor class
+	ac = $"/root/World/UI/Equipment".getArmorClass()
+	
+	attacks = []
+	# Attacks
+	if (
+		$"/root/World/UI/Equipment".hands["lefthand"] != null and
+		$"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]
+	):
+		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
+	elif (
+		$"/root/World/UI/Equipment".hands["lefthand"] != null or
+		$"/root/World/UI/Equipment".hands["righthand"] != null
+	):
+		if (
+			$"/root/World/UI/Equipment".hands["lefthand"] != null and
+			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).category.matchn("shield")
+		):
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
+		if (
+			$"/root/World/UI/Equipment".hands["righthand"] != null and
+			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).category.matchn("shield")
+		):
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks(stats))
+	else:
+		attacks = [
+			{
+				"dmg": [stats.strength * 1 / 6, 1 + stats.strength * 1 / 6],
+				"enchantment": 0,
+				"ap": 0,
+				"bonusDmg": {
+					"dmg": 0,
+					"element": null
+				}
+			}
+		]
 
 func addExp(_expAmount):
 	experiencePoints += _expAmount
@@ -187,121 +331,11 @@ func updatePlayerStats():
 		wisdom = stats.wisdom
 	})
 
-func calculateEquipmentStats():
-	# Armor class
-	ac = $"/root/World/UI/Equipment".getArmorClass()
-	
-	attacks = []
-	# Attacks
-	if (
-		$"/root/World/UI/Equipment".hands["lefthand"] != null and
-		$"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]
-	):
-		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
-	elif (
-		$"/root/World/UI/Equipment".hands["lefthand"] != null or
-		$"/root/World/UI/Equipment".hands["righthand"] != null
-	):
-		if (
-			$"/root/World/UI/Equipment".hands["lefthand"] != null and
-			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).category.matchn("shield")
-		):
-			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
-		if (
-			$"/root/World/UI/Equipment".hands["righthand"] != null and
-			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).category.matchn("shield")
-		):
-			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks(stats))
-	else:
-		attacks = [
-			{
-				"dmg": [stats.strength * 1 / 6, 1 + stats.strength * 1 / 6],
-				"enchantment": 0,
-				"ap": 0,
-				"bonusDmg": {
-					"dmg": 0,
-					"element": null
-				}
-			}
-		]
 
-func checkAllItemsIdentification():
-	for _item in $"/root/World/Items".get_children():
-		if _item.name == "Items":
-			continue
-		_item.checkItemIdentification()
 
-func takeDamage(_attacks, _crittername):
-	var _attacksLog = []
-	if _attacks.size() != 0:
-		for _attack in _attacks:
-			var armorReduction = _attack - ( ac / 3 )
-			if armorReduction <= 1 and armorReduction >= -2:
-				hp -= 1
-				_attacksLog.append("{crittername} hits you for 1 damage.".format({ "crittername": _crittername }))
-			elif armorReduction < -2:
-				_attacksLog.append("{crittername}s attack bounces off!".format({ "crittername": _crittername }))
-			else:
-				hp -= armorReduction
-				_attacksLog.append("{crittername} hits you for {dmg} damage.".format({ "crittername": _crittername, "dmg": armorReduction }))
-			if hp <= 0:
-				_attacksLog.append("You die...")
-				break
-		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
-		Globals.gameConsole.addLog(_attacksLogString)
-	else:
-		Globals.gameConsole.addLog("{critter} looks unsure!".format({ "critter": _crittername }))
-
-func pickUpItems(_playerTile, _items, _grid):
-	var itemsLog = []
-	if _items.size() != 0:
-		for _item in _items:
-			pickUpItem(_playerTile, _item, _grid)
-			itemsLog.append("You pickup {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
-	var itemsLogString = PoolStringArray(itemsLog).join(" ")
-	Globals.gameConsole.addLog(itemsLogString)
-
-func pickUpItem(_playerTile, _item, _grid):
-	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
-		if _grid[_playerTile.x][_playerTile.y].items[_itemOnGround] == _item:
-			_grid[_playerTile.x][_playerTile.y].items.remove(_itemOnGround)
-			$Inventory.addToInventory(get_node("/root/World/Items/{id}".format({ "id": _item })).id)
-			get_node("/root/World/Items/{id}".format({ "id": _item })).hide()
-			return
-
-func dropItems(_playerTile, _items, _grid):
-	var itemsLog = []
-	if _items.size() != 0:
-		for _item in _items:
-			dropItem(_playerTile, _item, _grid)
-			itemsLog.append("You drop {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
-	var itemsLogString = PoolStringArray(itemsLog).join(" ")
-	Globals.gameConsole.addLog(itemsLogString)
-
-func dropItem(_playerTile, _item, _grid):
-	_grid[_playerTile.x][_playerTile.y].items.append(_item)
-	$Inventory.dropFromInventory(_item)
-	get_node("/root/World/Items/{id}".format({ "id": _item })).show()
-	$"/root/World/UI/Equipment".checkIfWearingEquipment(_item)
-
-func processPlayerSpecificEffects():
-	calories -= 1
-	if previousCalories <= 400 and calories > 400:
-		Globals.gameConsole.addLog("You are no longer hungry.")
-	elif previousCalories <= 200 and calories > 200 and calories < 400:
-		Globals.gameConsole.addLog("You only feel hungry.")
-	elif previousCalories <= 100 and calories > 100 and calories < 200:
-		Globals.gameConsole.addLog("You are still very hungry.")
-	
-	if previousCalories >= 400 and calories < 400 and calories > 200:
-		Globals.gameConsole.addLog("You are beginning to feel hungry.")
-	elif previousCalories >= 200 and calories < 200 and calories > 100:
-		Globals.gameConsole.addLog("You feel very hungry.")
-	elif previousCalories >= 100 and calories < 100 and calories > 0:
-		Globals.gameConsole.addLog("You are starving!")
-	elif calories <= 0:
-		Globals.gameConsole.addLog("You die...")
-	previousCalories = calories
+######################
+### Player actions ###
+######################
 
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -646,3 +680,88 @@ func zapItem(_id):
 		else:
 			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
 	$"/root/World".closeMenu()
+
+func useItem(_id):
+	var _usedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
+	var _additionalChoices = false
+	if _usedItem.type.matchn("tool"):
+		if (
+			GlobalItemInfo.globalItemInfo.has(_usedItem.identifiedItemName) and
+			GlobalItemInfo.globalItemInfo[_usedItem.identifiedItemName].identified == false
+		):
+			GlobalItemInfo.globalItemInfo[_usedItem.identifiedItemName].identified = true
+			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _usedItem.identifiedItemName, "unidentifiedItemName": _usedItem.unidentifiedItemName }))
+		match _usedItem.identifiedItemName.to_lower():
+			"candle":
+				if playerVisibility < 1:
+					if _usedItem.value.charges > 0:
+						if _usedItem.value.turnedOn:
+							if playerVisibility != 0:
+								playerVisibility = -1
+							_usedItem.value.turnedOn = false
+							itemsTurnedOn.erase(_usedItem)
+							Globals.gameConsole.addLog("You turn off the {itemName}.".format({ "itemName": _usedItem.itemName }))
+						else:
+							if playerVisibility != 0:
+								playerVisibility = _usedItem.value.value
+							_usedItem.value.turnedOn = true
+							itemsTurnedOn.append(_usedItem)
+							Globals.gameConsole.addLog("You turn on the {itemName}.".format({ "itemName": _usedItem.itemName }))
+					else:
+						Globals.gameConsole.addLog("Your candle is spent.")
+				else:
+					Globals.gameConsole.addLog("You already have a lightsource on.")
+			"oil lamp":
+				if playerVisibility < 1:
+					if _usedItem.value.charges > 0:
+						if _usedItem.value.turnedOn:
+							if playerVisibility != 0:
+								playerVisibility = -1
+							_usedItem.value.turnedOn = false
+							itemsTurnedOn.erase(_usedItem)
+							Globals.gameConsole.addLog("You turn off the {itemName}.".format({ "itemName": _usedItem.itemName }))
+						else:
+							if playerVisibility != 0:
+								playerVisibility = _usedItem.value.value
+							_usedItem.value.turnedOn = true
+							itemsTurnedOn.append(_usedItem)
+							Globals.gameConsole.addLog("You turn on the {itemName}.".format({ "itemName": _usedItem.itemName }))
+					else:
+						Globals.gameConsole.addLog("Your lamp is spent.")
+				else:
+					Globals.gameConsole.addLog("You already have a lightsource on.")
+			"magic lamp":
+				if playerVisibility < 1:
+					if _usedItem.value.charges > 0:
+						if _usedItem.value.turnedOn:
+							if playerVisibility != 0:
+								playerVisibility = _usedItem.value.value
+							_usedItem.value.turnedOn = false
+							itemsTurnedOn.erase(_usedItem)
+							Globals.gameConsole.addLog("You turn off the {itemName}.".format({ "itemName": _usedItem.itemName }))
+						else:
+							if playerVisibility != 0:
+								playerVisibility = -1
+							_usedItem.value.turnedOn = true
+							itemsTurnedOn.append(_usedItem)
+							Globals.gameConsole.addLog("You turn on the {itemName}.".format({ "itemName": _usedItem.itemName }))
+					else:
+						Globals.gameConsole.addLog("Your lamp is spent.")
+				else:
+					Globals.gameConsole.addLog("You already have a lightsource on.")
+			_:
+				Globals.gameConsole.addLog("Thats not a tool...")
+		checkAllItemsIdentification()
+	$"/root/World".closeMenu()
+
+
+
+########################
+### Helper functions ###
+########################
+
+func checkAllItemsIdentification():
+	for _item in $"/root/World/Items".get_children():
+		if _item.name == "Items":
+			continue
+		_item.checkItemIdentification()

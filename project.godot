@@ -49,6 +49,7 @@ config/icon="res://Assets/Amulets/AmuletRainbow.png"
 Globals="*res://Objects/Miscellaneous/Globals.gd"
 GlobalItemInfo="*res://Objects/Miscellaneous/GlobalItemInfo.gd"
 GlobalCritterInfo="*res://Objects/Miscellaneous/GlobalCritterInfo.gd"
+ResourceQueue="*res://Objects/Miscellaneous/ResourceQueue.gd"
 
 [debug]
 
@@ -192,7 +193,7 @@ RIGHT_CLICK={
 }
 START={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":61,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 ACCEPT={
@@ -270,6 +271,11 @@ INTERACT={
 ZAP={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+USE={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":85,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
