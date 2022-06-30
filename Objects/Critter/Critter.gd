@@ -60,6 +60,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 				if hits[currentHit] == 1:
 					$"/root/World/Critters/0".takeDamage(attacks, critterName)
+					return true
 				else:
 					Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
 				if currentHit == 15:

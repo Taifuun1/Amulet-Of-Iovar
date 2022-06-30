@@ -26,6 +26,12 @@ enum tiles {
 	WALL_BOARD
 }
 
+
+enum interactables {
+	LOCKED
+	HIDDEN_ITEM
+}
+
 var currentDungeonLevel = 1
 var currentDungeonLevelName = "Dungeon hallways 1"
 

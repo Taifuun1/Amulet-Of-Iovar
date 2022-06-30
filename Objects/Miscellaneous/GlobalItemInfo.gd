@@ -352,6 +352,12 @@ var globalItemInfo = {
 	"Credit card": {
 		"identified": false
 	},
+	"Shovel": {
+		"identified": false
+	},
+	"Message in a bottle": {
+		"identified": false
+	},
 	"Fancy whistle": {
 		"identified": false
 	},

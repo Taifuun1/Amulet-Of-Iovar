@@ -49,7 +49,6 @@ config/icon="res://Assets/Amulets/AmuletRainbow.png"
 Globals="*res://Objects/Miscellaneous/Globals.gd"
 GlobalItemInfo="*res://Objects/Miscellaneous/GlobalItemInfo.gd"
 GlobalCritterInfo="*res://Objects/Miscellaneous/GlobalCritterInfo.gd"
-ResourceQueue="*res://Objects/Miscellaneous/ResourceQueue.gd"
 
 [debug]
 
@@ -59,9 +58,8 @@ gdscript/warnings/integer_division=false
 
 window/size/width=1920
 window/size/height=1080
-window/size/resizable=false
 window/size/fullscreen=true
-window/stretch/mode="2d"
+window/stretch/mode="viewport"
 
 [importer_defaults]
 
@@ -240,7 +238,7 @@ PICK_UP={
 }
 DROP={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":74,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 EQUIPMENT={
@@ -276,6 +274,16 @@ ZAP={
 USE={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":85,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+MOVE_TO_LEVEL={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+KICK={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

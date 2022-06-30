@@ -27,6 +27,7 @@ enum gameState {
 	INTERACT
 	ZAP
 	USE
+	KICK
 }
 
 var level = null
@@ -169,7 +170,7 @@ func create():
 	$Critters/"0"/Inventory.addToInventory(newItem.id)
 	
 	var newItem2 = load("res://Objects/Item/Item.tscn").instance()
-	newItem2.createItem($"/root/World/Items/Items".getItemByName("scroll of create food"), { "alignment": "blessed" })
+	newItem2.createItem($"/root/World/Items/Items".getItemByName("magic key"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem2, true)
 	$Critters/"0"/Inventory.addToInventory(newItem2.id)
 	
@@ -179,7 +180,7 @@ func create():
 	$Critters/"0"/Inventory.addToInventory(newItem5.id)
 	
 	var newItem6 = load("res://Objects/Item/Item.tscn").instance()
-	newItem6.createItem($"/root/World/Items/Items".getItemByName("scroll of summon critter"), { "alignment": "blessed" })
+	newItem6.createItem($"/root/World/Items/Items".getItemByName("shovel"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem6, true)
 	$Critters/"0"/Inventory.addToInventory(newItem6.id)
 	
@@ -199,7 +200,7 @@ func create():
 	$Critters/"0"/Inventory.addToInventory(newItem333.id)
 	
 	var newItem33 = load("res://Objects/Item/Item.tscn").instance()
-	newItem33.createItem($"/root/World/Items/Items".getItemByName("scroll of summon critter"), { "alignment": "uncursed" })
+	newItem33.createItem($"/root/World/Items/Items".getItemByName("key"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem33, true)
 	$Critters/"0"/Inventory.addToInventory(newItem33.id)
 	
@@ -295,7 +296,8 @@ func _input(_event):
 				Input.is_action_just_pressed("MOVE_LEFT") or
 				Input.is_action_just_pressed("MOVE_UP_LEFT")
 			) and
-			currentGameState == gameState.INTERACT
+			currentGameState == gameState.INTERACT and
+			inGame
 		):
 			var _tileToInteractWith
 			if Input.is_action_just_pressed("MOVE_UP"):
@@ -315,6 +317,38 @@ func _input(_event):
 			elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
 				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y - 1)
 			interactWith(_tileToInteractWith)
+		elif (
+			(
+				Input.is_action_just_pressed("MOVE_UP") or
+				Input.is_action_just_pressed("MOVE_UP_RIGHT") or
+				Input.is_action_just_pressed("MOVE_RIGHT") or
+				Input.is_action_just_pressed("MOVE_DOWN_RIGHT") or
+				Input.is_action_just_pressed("MOVE_DOWN") or
+				Input.is_action_just_pressed("MOVE_DOWN_LEFT") or
+				Input.is_action_just_pressed("MOVE_LEFT") or
+				Input.is_action_just_pressed("MOVE_UP_LEFT")
+			) and
+			currentGameState == gameState.KICK and
+			inGame
+		):
+			var _tileToInteractWith
+			if Input.is_action_just_pressed("MOVE_UP"):
+				_tileToInteractWith = Vector2(_playerTile.x, _playerTile.y - 1)
+			elif Input.is_action_just_pressed("MOVE_UP_RIGHT"):
+				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y - 1)
+			elif Input.is_action_just_pressed("MOVE_RIGHT"):
+				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y)
+			elif Input.is_action_just_pressed("MOVE_DOWN_RIGHT"):
+				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y + 1)
+			elif Input.is_action_just_pressed("MOVE_DOWN"):
+				_tileToInteractWith = Vector2(_playerTile.x, _playerTile.y + 1)
+			elif Input.is_action_just_pressed("MOVE_DOWN_LEFT"):
+				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y + 1)
+			elif Input.is_action_just_pressed("MOVE_LEFT"):
+				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y)
+			elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
+				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y - 1)
+			kickAt(_tileToInteractWith)
 		elif (
 			Input.is_action_just_pressed("WAIT") and
 			currentGameState == gameState.GAME and
@@ -344,7 +378,7 @@ func _input(_event):
 			inGame
 		):
 			moveLevel(1)
-		elif Input.is_action_just_pressed("ACCEPT"):
+		elif Input.is_action_just_pressed("ACCEPT") and currentGameState != gameState.OUT_OF_PLAYERS_HANDS and currentGameState != gameState.GAME and !inGame:
 			processGameTurn(_playerTile)
 		elif (Input.is_action_just_pressed("BACK")):
 			closeMenu()
@@ -367,8 +401,13 @@ func _input(_event):
 		elif Input.is_action_just_pressed("INTERACT") and currentGameState == gameState.GAME and inGame:
 			currentGameState = gameState.INTERACT
 			Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
+		elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME and inGame:
+			$"UI/Debug Menu".show()
 		elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME and inGame:
 			openMenu("use")
+		elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME and inGame:
+			currentGameState = gameState.KICK
+			Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
 		elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME and inGame:
 			keepMoving = true
 		$"Critters/0".updatePlayerStats()
@@ -381,6 +420,17 @@ func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	processCrittersSpawnStatus()
 	drawLevel()
 	updateTiles()
+
+func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
+	for _turn in _turnAmount:
+		processPlayerEffects()
+		var _isPlayerHit = processEnemyActions()
+		processCrittersSpawnStatus()
+		drawLevel()
+		updateTiles()
+		if _isPlayerHit:
+			return false
+	return true
 
 func processPlayerAction(_playerTile, _tileToMoveTo):
 	if (
@@ -415,11 +465,14 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 
 func processEnemyActions():
 	var _playerTile = level.getCritterTile(0)
+	var _isPlayerHit = false
 	if level.critters.size() != 0:
 		for _enemy in level.critters:
 			var _critterTile = level.getCritterTile(_enemy)
-			get_node("Critters/{id}".format({ "id": _enemy })).processCritterAction(_critterTile, _playerTile, _enemy, level)
+			if get_node("Critters/{id}".format({ "id": _enemy })).processCritterAction(_critterTile, _playerTile, _enemy, level):
+				_isPlayerHit = true
 			get_node("Critters/{id}".format({ "id": _enemy })).processCritterEffects()
+	return _isPlayerHit
 
 func processCrittersSpawnStatus():
 	if checkNewCritterSpawn >= 30:
@@ -438,6 +491,10 @@ func updateTiles():
 		for y in (level.grid[x].size()):
 			set_cellv(Vector2(x, y), level.grid[x][y].tile)
 			$FOV.set_cellv(Vector2(x, y), $FOV.currentFOVLevel[x][y])
+			if level.grid[x][y].interactable != null:
+				$Interactables.set_cellv(Vector2(x, y), level.grid[x][y].interactable)
+			else:
+				$Interactables.set_cellv(Vector2(x, y), -1)
 
 func drawLevel():
 	yield(get_tree().create_timer(0.01), "timeout")
@@ -447,6 +504,7 @@ func drawLevel():
 		
 		for _item in $Items.get_children():
 			_item.hide()
+		
 		hideObjectsWhenDrawingNextFrame = false
 	
 	drawFOV()
@@ -683,20 +741,76 @@ func openMenu(_menu, _playerTile = null):
 				inGame = false
 
 func interactWith(_tileToInteractWith):
-#			Globals.gameConsole.addLog("You cant interact with the {critter}".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
-	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_OPEN:
+#	Globals.gameConsole.addLog("You cant interact with the {critter}".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
+	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
+		if (
+			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM and
+			$Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel")
+		):
+#			if randi() % 3 == 0:
+			$Items/Items.createItem($Items/Items.returnRandomItem(), _tileToInteractWith)
+#			else:
+#				$Items/Items.createItem("message in a bottle", _tileToInteractWith)
+			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.LOCKED:
+			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				Globals.gameConsole.addLog("You unlock the door with your magic key.")
+				processGameTurn()
+			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("key"):
+				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(2):
+					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+					Globals.gameConsole.addLog("You unlock the door with your key.")
+			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("lockpick"):
+				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(3):
+					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+					Globals.gameConsole.addLog("You unlock the door with your lockpick.")
+			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("credit card"):
+				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(4):
+					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+					Globals.gameConsole.addLog("You unlock the door with your credit card.")
+	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_CLOSED:
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == null:
+			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
+				Globals.gameConsole.addLog("You lock the door with your magic key.")
+				processGameTurn()
+			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("key"):
+				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(2):
+					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
+					Globals.gameConsole.addLog("You lock the door with your key.")
+			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("lockpick"):
+				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(3):
+					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
+					Globals.gameConsole.addLog("You lock the door with your lockpick.")
+	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_OPEN:
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
 			Globals.gameConsole.addLog("The {critter} is blocking the door.".format({ "critter": get_node("Critters/{critter}".format({ "critter": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter })).critterName }))
 		elif !level.grid[_tileToInteractWith.x][_tileToInteractWith.y].items.empty():
-			Globals.gameConsole.addLog("Theres some items blocking the door.")
+			Globals.gameConsole.addLog("There's some items blocking the door.")
 		else:
 			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile = Globals.tiles.DOOR_CLOSED
 			level.removePointFromEnemyPathfinding(_tileToInteractWith)
 			Globals.gameConsole.addLog("You close the door.")
 			processGameTurn()
 	else:
-		Globals.gameConsole.addLog("There doesnt seem to be anything to interact with there.")
+		Globals.gameConsole.addLog("There doesn't seem to be anything to interact with there.")
+	drawLevel()
+	updateTiles()
 	resetToDefaulGameState()
+
+func kickAt(_tileToKickAt):
+	if level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
+		if randi () % 20 == 0:
+			level.grid[_tileToKickAt.x][_tileToKickAt.y].tile = Globals.tiles.DOOR_OPEN
+			level.grid[_tileToKickAt.x][_tileToKickAt.y].interactable = null
+			Globals.gameConsole.addLog("CRASH!")
+		else:
+			Globals.gameConsole.addLog("WHAM!")
+	else:
+		Globals.gameConsole.addLog("You kick nothing!")
+	resetToDefaulGameState()
+	processGameTurn()
 
 func processAccept():
 	var _playerTile = level.getCritterTile(0)
@@ -708,7 +822,6 @@ func processAccept():
 		$Critters/"0".dropItems(_playerTile, _items, level.grid)
 	
 	closeMenu()
-	$"/root/World".processGameTurn()
 
 func closeMenu(_additionalChoices = false):
 	if !_additionalChoices:
@@ -736,6 +849,27 @@ func resetToDefaulGameState():
 		inGame = true
 		keepMoving = false
 
+func _debug__go_to_level(_level):
+	$"/root/World".hide()
+	hideObjectsWhenDrawingNextFrame = true
+	
+	Globals.currentDungeonLevel = _level
+	
+	level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
+	$FOV.moveLevel(Globals.currentDungeonLevel - 1)
+	updateTiles()
+	
+	var _upStairTile1 = level.getTilePosition(Globals.tiles.UP_STAIR_DUNGEON)
+	var _upStairTile2 = level.getTilePosition(Globals.tiles.UP_STAIR_SAND)
+	Globals.currentDungeonLevelName = level.dungeonLevelName
+	if !typeof(_upStairTile1) == TYPE_BOOL:
+		level.grid[_upStairTile1.x][_upStairTile1.y].critter = 0
+	else:
+		level.grid[_upStairTile2.x][_upStairTile2.y].critter = 0
+	drawLevel()
+	$"UI/Debug Menu".hide()
+	$"/root/World".show()
+
 func _exit_tree():
-	print("gone")
+	print("exited")
 	thread.wait_to_finish()

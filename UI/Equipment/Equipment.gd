@@ -226,6 +226,14 @@ func getArmorClass():
 		_ac += checkWhatRingIsWorn(get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })))
 	return _ac
 
+func checkIfWieldingItem(_itemName):
+	var _isWearingEquipment = false
+	var _item = $"/root/World/Items".getItemByName(_itemName)
+	for _hand in hands.keys():
+		if hands[_hand] != null and hands[_hand] == _item.id:
+			return true
+	return false
+
 func checkWhatRingIsWorn(_ring):
 	match _ring.identifiedItemName.to_lower():
 		"ring of protection":

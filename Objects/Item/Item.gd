@@ -65,11 +65,16 @@ func createItem(_item, _extraData = {}):
 			charges = -1
 		else:
 			charges = randi() % _item.value.charges[1] + _item.value.charges[0]
-		value = {
-			"turnedOn": false,
-			"charges": charges,
-			"value": _item.value.value
-		}
+		if _item.value.has("turnedOn"):
+			value = {
+				"turnedOn": false,
+				"charges": charges,
+				"value": _item.value.value
+			}
+		else:
+			value = {
+				"charges": charges
+			}
 	
 	stackable = _item.stackable
 	

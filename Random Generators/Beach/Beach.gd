@@ -84,6 +84,10 @@ func createSea():
 				else:
 					grid[x][y].tile = Globals.tiles.SAND
 					spawnableFloors.append(Vector2(x, y))
+					if randi() % 22 == 0:
+						grid[x][y].interactable = Globals.interactables.HIDDEN_ITEM
+						if spawnableFloors.has(Vector2(x, y)):
+							spawnableFloors.erase(Vector2(x, y))
 			_isSeaTile = !_isSeaTile
 	else:
 		if _seaSide == "north":
@@ -99,6 +103,10 @@ func createSea():
 				else:
 					grid[x][y].tile = Globals.tiles.SAND
 					spawnableFloors.append(Vector2(x, y))
+					if randi() % 22 == 0:
+						grid[x][y].interactable = Globals.interactables.HIDDEN_ITEM
+						if spawnableFloors.has(Vector2(x, y)):
+							spawnableFloors.erase(Vector2(x, y))
 			_isSeaTile = !_isSeaTile
 	
 	for _point in _path:
@@ -106,66 +114,111 @@ func createSea():
 			grid[_point.x][_point.y].tile = Globals.tiles.SEA
 			if spawnableFloors.has(Vector2(_point.x, _point.y)):
 				spawnableFloors.erase(Vector2(_point.x, _point.y))
+			grid[_point.x][_point.y].interactable = null
 		else:
 			grid[_point.x][_point.y].tile = Globals.tiles.SAND
 			spawnableFloors.append(Vector2(_point.x, _point.y))
+			if randi() % 22 == 0:
+				grid[_point.x][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
+				if spawnableFloors.has(Vector2(_point.x, _point.y)):
+					spawnableFloors.erase(Vector2(_point.x, _point.y))
 		if _seaSide == "north":
 			if randi() % 6 == 0:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SAND
 				spawnableFloors.append(Vector2(_point.x, _point.y))
+				if randi() % 22 == 0:
+					grid[_point.x][_point.y - 1].interactable = Globals.interactables.HIDDEN_ITEM
+					if spawnableFloors.has(Vector2(_point.x, _point.y)):
+						spawnableFloors.erase(Vector2(_point.x, _point.y))
 			else:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SEA
 				if spawnableFloors.has(Vector2(_point.x, _point.y)):
 					spawnableFloors.erase(Vector2(_point.x, _point.y))
+				grid[_point.x][_point.y - 1].interactable = null
 			if !randi() % 6 == 0:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SAND
 				spawnableFloors.append(Vector2(_point.x, _point.y))
+				if randi() % 22 == 0:
+					grid[_point.x][_point.y + 1].interactable = Globals.interactables.HIDDEN_ITEM
+					if spawnableFloors.has(Vector2(_point.x, _point.y)):
+						spawnableFloors.erase(Vector2(_point.x, _point.y))
 			else:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SEA
 				if spawnableFloors.has(Vector2(_point.x, _point.y)):
 					spawnableFloors.erase(Vector2(_point.x, _point.y))
+				grid[_point.x][_point.y + 1].interactable = null
 		elif _seaSide == "south":
 			if !randi() % 6 == 0:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SAND
 				spawnableFloors.append(Vector2(_point.x, _point.y))
+				if randi() % 22 == 0:
+					grid[_point.x][_point.y - 1].interactable = Globals.interactables.HIDDEN_ITEM
+					if spawnableFloors.has(Vector2(_point.x, _point.y)):
+						spawnableFloors.erase(Vector2(_point.x, _point.y))
 			else:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SEA
 				if spawnableFloors.has(Vector2(_point.x, _point.y)):
 					spawnableFloors.erase(Vector2(_point.x, _point.y))
+				grid[_point.x][_point.y - 1].interactable = null
 			if randi() % 6 == 0:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SAND
 				spawnableFloors.append(Vector2(_point.x, _point.y))
+				if randi() % 22 == 0:
+					grid[_point.x][_point.y + 1].interactable = Globals.interactables.HIDDEN_ITEM
+					if spawnableFloors.has(Vector2(_point.x, _point.y)):
+						spawnableFloors.erase(Vector2(_point.x, _point.y))
 			else:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SEA
 				if spawnableFloors.has(Vector2(_point.x, _point.y)):
 					spawnableFloors.erase(Vector2(_point.x, _point.y))
+				grid[_point.x][_point.y + 1].interactable = null
 		elif _seaSide == "west":
 			if randi() % 6 == 0:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SAND
 				spawnableFloors.append(Vector2(_point.x, _point.y))
+				if randi() % 22 == 0:
+					grid[_point.x - 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
+					if spawnableFloors.has(Vector2(_point.x, _point.y)):
+						spawnableFloors.erase(Vector2(_point.x, _point.y))
 			else:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SEA
 				if spawnableFloors.has(Vector2(_point.x, _point.y)):
 					spawnableFloors.erase(Vector2(_point.x, _point.y))
+				grid[_point.x - 1][_point.y].interactable = null
 			if !randi() % 6 == 0:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SAND
 				spawnableFloors.append(Vector2(_point.x, _point.y))
+				if randi() % 22 == 0:
+					grid[_point.x + 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
+					if spawnableFloors.has(Vector2(_point.x, _point.y)):
+						spawnableFloors.erase(Vector2(_point.x, _point.y))
 			else:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SEA
 				if spawnableFloors.has(Vector2(_point.x, _point.y)):
 					spawnableFloors.erase(Vector2(_point.x, _point.y))
+				grid[_point.x + 1][_point.y].interactable = null
 		elif _seaSide == "east":
 			if !randi() % 6 == 0:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SAND
 				spawnableFloors.append(Vector2(_point.x, _point.y))
+				if randi() % 22 == 0:
+					grid[_point.x - 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
+					if spawnableFloors.has(Vector2(_point.x, _point.y)):
+						spawnableFloors.erase(Vector2(_point.x, _point.y))
 			else:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SEA
 				if spawnableFloors.has(Vector2(_point.x, _point.y)):
 					spawnableFloors.erase(Vector2(_point.x, _point.y))
+				grid[_point.x - 1][_point.y].interactable = null
 			if randi() % 6 == 0:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SAND
 				spawnableFloors.append(Vector2(_point.x, _point.y))
+				if randi() % 22 == 0:
+					grid[_point.x + 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
+					if spawnableFloors.has(Vector2(_point.x, _point.y)):
+						spawnableFloors.erase(Vector2(_point.x, _point.y))
 			else:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SEA
 				if spawnableFloors.has(Vector2(_point.x, _point.y)):
 					spawnableFloors.erase(Vector2(_point.x, _point.y))
+				grid[_point.x + 1][_point.y].interactable = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Objects/World/World.gd" type="Script" id=1]
 [ext_resource path="res://Objects/World/World.tres" type="TileSet" id=2]
@@ -9,13 +9,16 @@
 [ext_resource path="res://UI/Game Stats/Game Stats.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/List Menu/List Menu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/Start Screen/Start Screen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Interactables/Interactables.tscn" type="PackedScene" id=10]
+[ext_resource path="res://UI/Debug Menu/Debug Menu.tscn" type="PackedScene" id=11]
 
 [node name="World" type="TileMap"]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 786479, 1, 0 )
 script = ExtResource( 1 )
+
+[node name="Interactables" parent="." instance=ExtResource( 10 )]
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -28,13 +31,20 @@ script = ExtResource( 1 )
 [node name="StartScreen" parent="UI" instance=ExtResource( 9 )]
 
 [node name="GameConsole" parent="UI" instance=ExtResource( 4 )]
+visible = false
 
 [node name="GameStats" parent="UI" instance=ExtResource( 7 )]
+visible = false
 
 [node name="Equipment" parent="UI" instance=ExtResource( 6 )]
+visible = false
 
 [node name="ItemManagement" parent="UI" instance=ExtResource( 5 )]
+visible = false
 
 [node name="PopupMenu" parent="UI" instance=ExtResource( 8 )]
+visible = false
+
+[node name="Debug Menu" parent="UI" instance=ExtResource( 11 )]
 
 [node name="Levels" type="Node2D" parent="."]

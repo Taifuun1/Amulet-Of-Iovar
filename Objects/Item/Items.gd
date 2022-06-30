@@ -34,18 +34,24 @@ func create():
 	
 	miscellaneousItems = miscellaneous.miscellaneous.other
 
+
+
+##################################
+### Item generation for levels ###
+##################################
+
 func generateItemsForLevel(_level):
 	var _itemGeneration = itemGeneration.itemGeneration[_level.dungeonType]
 	var _items = []
 	
 	for _i in range(_itemGeneration.amount):
-		var _item = returnRandomItem(_itemGeneration)
+		var _item = returnRandomItemForItemGeneration(_itemGeneration)
 		if _item != null:
 			_items.append(_item)
 	
 	for _item in _items:
 		if _item != null:
-			var gridPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size() - 1)]
+			var gridPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size())]
 			var newItem = item.instance()
 #			if randomItemLists.has(_item.type):
 #				newItem.createItem(_item, "_extraData")
@@ -54,7 +60,7 @@ func generateItemsForLevel(_level):
 			_level.grid[gridPosition.x][gridPosition.y].items.append(newItem.id)
 			$"/root/World/Items".add_child(newItem, true)
 
-func returnRandomItem(_itemGeneration):
+func returnRandomItemForItemGeneration(_itemGeneration):
 	var type
 	var rarity
 	
@@ -76,9 +82,65 @@ func returnRandomItem(_itemGeneration):
 	rarity = randomRarity[randi() % 1000]
 	
 	if type != null and items[type].has(rarity):
-		return items[type][rarity][randi() % items[type][rarity].size() - 1]
+		return items[type][rarity][randi() % items[type][rarity].size()]
 	else:
 		return null
+
+
+
+########################
+### Helper functions ###
+########################
+
+func createItem(_item, _position = null, _level = $"/root/World".level):
+	var _itemPosition
+	if _position == null:
+		_itemPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size())]
+	else:
+		_itemPosition = _position
+	
+	if typeof(_item) == TYPE_STRING:
+		var newItem = item.instance()
+		newItem.createItem(getItemByName(_item))
+		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
+		$"/root/World/Items".add_child(newItem, true)
+	else:
+		var newItem = item.instance()
+		newItem.createItem(_item)
+		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
+		$"/root/World/Items".add_child(newItem, true)
+
+func getItemByName(_itemName, _type = null, _rarity = null):
+	if _type != null and _rarity != null:
+		for _item in items[_type][_rarity]:
+			if _item.itemName.matchn(_itemName):
+				return _item
+	else:
+		for _types in items.values():
+			for _rarity in _types.values():
+				for _item in _rarity:
+					if _item.itemName.matchn(_itemName):
+						return _item
+
+func returnRandomItem(_type = null):
+	if _type == null:
+		var _randomType = items.keys()[randi() % items.keys().size()]
+		var _rarity = items[_randomType].keys()[randi() % items[_randomType].keys().size()]
+		var _pick = randi() % items[_randomType][_rarity].size()
+		print(_randomType)
+		print(_rarity)
+		print(_pick)
+		print(items[_randomType][_rarity][_pick])
+		return items[_randomType][_rarity][_pick]
+	else:
+		var _rarity = items[_type].keys()[randi() % items[_type].keys().size()]
+		return items[_type][_rarity][randi() % items[_type][_rarity].size()]
+
+
+
+###############################
+### Miscellaneous functions ###
+###############################
 
 func randomizeRandomItems():
 	var _randomItemList = randomItemList.randomItemList.duplicate(true)
@@ -125,15 +187,3 @@ func randomizeRandomItems():
 						if !_itemType.matchn("scroll"):
 							_item.texture = _shuffledItems[_itemType][_item.itemName].texture
 							_item.unIdentifiedTexture = _shuffledItems[_itemType][_item.itemName].texture
-
-func getItemByName(_itemName, _type = null, _rarity = null):
-	if _type != null and _rarity != null:
-		for _item in items[_type][_rarity]:
-			if _item.itemName.matchn(_itemName):
-				return _item
-	else:
-		for _types in items.values():
-			for _rarity in _types.values():
-				for _item in _rarity:
-					if _item.itemName.matchn(_itemName):
-						return _item

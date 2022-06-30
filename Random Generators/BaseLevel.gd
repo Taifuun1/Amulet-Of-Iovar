@@ -38,7 +38,8 @@ func createGrid(_tile = Globals.tiles.EMPTY):
 			grid[_x].append({
 				"tile": _tile,
 				"critter": null,
-				"items": []
+				"items": [],
+				"interactable": null
 			})
 
 func placeCritter(_tile, _critter):
@@ -65,6 +66,7 @@ func getTilePosition(_tile):
 func placeRoom(_position, _size, _tileset = { "wall": "WALL_DUNGEON", "floor": "FLOOR_DUNGEON" }, isSpawnable = false):
 	for x in range(_position.x, _position.x + _size.x):
 		for y in range(_position.y, _position.y + _size.y):
+			grid[x][y].interactable = null
 			if (
 				(
 					x == _position.x and 
@@ -156,10 +158,12 @@ func placeStairs(_stairType = "DUNGEON", _isDouble = false):
 	if _isDouble:
 		stairs["secondDownStair"] = placeStair("secondDownStair", "DOWN_STAIR_", _stairType)
 	stairs["upStair"] = placeStair("secondDownStair", "UP_STAIR_", _stairType)
+	for _stair in stairs:
+		grid[_stair.x][_stair.y].interactable = null
 
 func placeStair(_stairName, _stairTileString, _stairType):
 	for _i in range(20):
-		var _stair = spawnableFloors[randi() % spawnableFloors.size() - 1]
+		var _stair = spawnableFloors[randi() % spawnableFloors.size()]
 		if !isTileAStair(_stair):
 			grid[_stair.x][_stair.y].tile = Globals.tiles[_stairTileString + "{type}".format({ "type": _stairType })]
 			return _stair

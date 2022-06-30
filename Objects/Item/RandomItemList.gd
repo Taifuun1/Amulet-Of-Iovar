@@ -7,7 +7,9 @@ var randomItemList = {
 			"backscattering",
 			"strangulation",
 			"sleep",
-			"Toxix"
+			"Toxix",
+			"Thunderous roar",
+			"Cold breeze"
 		],
 		"appearance": [
 			"Black",
@@ -66,7 +68,7 @@ var randomItemList = {
 			"Fleir resistance",
 			"Frost resistance",
 			"Thunder resistance",
-			"Gleeie'er resitance",
+			"Gleeie'er resistance",
 			"Toxix resistance",
 			"protection",
 			"seeing",

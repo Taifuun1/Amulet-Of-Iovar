@@ -117,8 +117,11 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		else:
 			return false
 	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.DOOR_CLOSED:
-		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.DOOR_OPEN
-		_level.addPointToEnemyPathding(_tileToMoveTo, _level.grid)
+		if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.LOCKED:
+			Globals.gameConsole.addLog("The door won't budge!")
+		else:
+			_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.DOOR_OPEN
+			_level.addPointToEnemyPathding(_tileToMoveTo, _level.grid)
 	else:
 		moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 		checkIfItemsHere(_level, _tileToMoveTo)
@@ -425,13 +428,13 @@ func readItem(_id):
 					if !_tiles.empty():
 						for _tile in _tiles:
 							var newItem = load("res://Objects/Item/Item.tscn").instance()
-							var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
+							var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
 							var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
 							newItem.createItem(_item)
 							$"/root/World/Items".add_child(newItem, true)
 							$"/root/World".level.grid[_tile.x][_tile.y].items.append(newItem.id)
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
+					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
 					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
 					newItem.createItem(_item)
 					$"/root/World/Items".add_child(newItem, true)
@@ -439,7 +442,7 @@ func readItem(_id):
 					Globals.gameConsole.addLog("A bucketload of items appears around you!")
 				elif _readItem.alignment.matchn("uncursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size() - 1]
+					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
 					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
 					newItem.createItem(_item)
 					$"/root/World/Items".add_child(newItem, true)
@@ -458,13 +461,13 @@ func readItem(_id):
 					if !_tiles.empty():
 						for _tile in _tiles:
 							var newItem = load("res://Objects/Item/Item.tscn").instance()
-							var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
+							var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
 							var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
 							newItem.createItem(_item)
 							$"/root/World/Items".add_child(newItem, true)
 							$"/root/World".level.grid[_tile.x][_tile.y].items.append(newItem.id)
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
+					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
 					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
 					newItem.createItem(_item)
 					$"/root/World/Items".add_child(newItem, true)
@@ -472,7 +475,7 @@ func readItem(_id):
 					Globals.gameConsole.addLog("A bucketload of items appears around you!")
 				elif _readItem.alignment.matchn("uncursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size() - 1]
+					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
 					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
 					newItem.createItem(_item)
 					$"/root/World/Items".add_child(newItem, true)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FOVGrey.png-ea80f1bf9cd724e588f445c5a1d1ae87.stex"
+path="res://.import/HiddenItem.png-2e1c7d70d10e8f0175ef6e8a83638232.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Miscellaneous/FOVGrey.png"
-dest_files=[ "res://.import/FOVGrey.png-ea80f1bf9cd724e588f445c5a1d1ae87.stex" ]
+source_file="res://Assets/Interactables/HiddenItem.png"
+dest_files=[ "res://.import/HiddenItem.png-2e1c7d70d10e8f0175ef6e8a83638232.stex" ]
 
 [params]
 

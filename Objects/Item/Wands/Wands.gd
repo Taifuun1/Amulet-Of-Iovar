@@ -7,7 +7,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common",
@@ -20,7 +22,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common",
@@ -33,7 +37,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Common",
@@ -48,7 +54,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon",
@@ -61,7 +69,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon",
@@ -74,7 +84,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon",
@@ -87,7 +99,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon",
@@ -100,20 +114,24 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
 		},
 		{
-			"itemName": "Backwards wand of Magic sphere",
+			"itemName": "Wand of backwards magic sphere",
 			"unidentifiedItemName": null,
 			"texture": null,
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon",
@@ -128,7 +146,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Rare",
@@ -141,7 +161,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Rare",
@@ -154,7 +176,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Rare",
@@ -169,7 +193,9 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
-			"value": randi() % 11 + 3,
+			"value": {
+				"charges": [4, 8]
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Legendary",

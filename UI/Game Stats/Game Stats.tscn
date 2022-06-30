@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Miscellaneous/barOutline.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/BarOutline.png" type="Texture" id=1]
 [ext_resource path="res://UI/Game Stats/Game Stats.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Miscellaneous/Theme.tres" type="Theme" id=3]
-[ext_resource path="res://Assets/Miscellaneous/hpBar.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Miscellaneous/mpBar.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/HPBar.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/BarOutline.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/MPBar.png" type="Texture" id=6]
 
 [node name="GameStats" type="Control"]
 anchor_right = 1.0
@@ -53,7 +54,7 @@ margin_right = 377.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 345, 0 )
 value = 50.0
-texture_under = ExtResource( 1 )
+texture_under = ExtResource( 5 )
 texture_over = ExtResource( 1 )
 texture_progress = ExtResource( 4 )
 
@@ -79,8 +80,8 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 345, 0 )
 value = 50.0
 texture_under = ExtResource( 1 )
-texture_over = ExtResource( 1 )
-texture_progress = ExtResource( 5 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
 
 [node name="LevelContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 72.0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mpBar.png-6ecfed19f637e2357eb78dac64602754.stex"
+path="res://.import/FOVGrey.png-0f2762598d071b6efc07e570a5cd89a2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Miscellaneous/mpBar.png"
-dest_files=[ "res://.import/mpBar.png-6ecfed19f637e2357eb78dac64602754.stex" ]
+source_file="res://Assets/Tiles/FOVGrey.png"
+dest_files=[ "res://.import/FOVGrey.png-0f2762598d071b6efc07e570a5cd89a2.stex" ]
 
 [params]
 

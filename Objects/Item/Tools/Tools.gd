@@ -68,6 +68,19 @@ var tools = {
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
+		},
+		{
+			"itemName": "Shovel",
+			"unidentifiedItemName": "Shovel",
+			"texture": load("res://Assets/Tools/Shovel.png"),
+			"unIdentifiedTexture": load("res://Assets/Tools/Shovel.png"),
+			"type": "Tool",
+			"category": null,
+			"value": null,
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Common",
+			"identified": false
 		}
 #		{
 #			"itemName": "Fancy whistle",
@@ -144,6 +157,19 @@ var tools = {
 			"unidentifiedItemName": "Key",
 			"texture": load("res://Assets/Tools/Key.png"),
 			"unIdentifiedTexture": load("res://Assets/Tools/Key.png"),
+			"type": "Tool",
+			"category": null,
+			"value": null,
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Uncommon",
+			"identified": false
+		},
+		{
+			"itemName": "Message in a bottle",
+			"unidentifiedItemName": "Message in a bottle",
+			"texture": load("res://Assets/Tools/MessageInABottle.png"),
+			"unIdentifiedTexture": load("res://Assets/Tools/MessageInABottle.png"),
 			"type": "Tool",
 			"category": null,
 			"value": null,

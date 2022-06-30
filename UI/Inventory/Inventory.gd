@@ -69,3 +69,9 @@ func getItemsOfType(_types):
 			if get_node("/root/World/Items/{id}".format({ "id": _item })).type.matchn(_type):
 				_items.append(_item)
 	return _items
+
+func checkIfItemInInventoryByName(_itemName):
+	for _item in inventory:
+		if get_node("/root/World/Items/{id}".format({ "id": _item })).identifiedItemName.matchn(_itemName):
+			return true
+	return false

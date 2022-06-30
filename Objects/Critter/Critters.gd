@@ -98,16 +98,16 @@ func generateCrittersForLevel(_level):
 
 func returnRandomCritter(_critterGeneration = null):
 	if _critterGeneration != null:
-		var _generatedSpecies = _critterGeneration.critters[_critterGeneration.critters.keys()[randi() % _critterGeneration.critters.keys().size() - 1]]
-		var _generatedCritter = _generatedSpecies[randi() % _generatedSpecies.size() - 1]
+		var _generatedSpecies = _critterGeneration.critters[_critterGeneration.critters.keys()[randi() % _critterGeneration.critters.keys().size()]]
+		var _generatedCritter = _generatedSpecies[randi() % _generatedSpecies.size()]
 
 		if GlobalCritterInfo.globalCritterInfo.has(_generatedCritter) and GlobalCritterInfo.globalCritterInfo[_generatedCritter].population != 0:
 			return getCritterByName(_generatedCritter)#critters[_generatedSpecies][_generatedCritter]
 		else:
 			return null
 	else:
-		var _generatedSpecies = _critterGeneration.critters[_critterGeneration.critters.keys()[randi() % _critterGeneration.critters.keys().size() - 1]]
-		var _generatedCritter = _generatedSpecies[randi() % _generatedSpecies.size() - 1]
+		var _generatedSpecies = _critterGeneration.critters[_critterGeneration.critters.keys()[randi() % _critterGeneration.critters.keys().size()]]
+		var _generatedCritter = _generatedSpecies[randi() % _generatedSpecies.size()]
 		
 		if GlobalCritterInfo.globalCritterInfo.has(_generatedCritter) and GlobalCritterInfo.globalCritterInfo[_generatedCritter].population != 0:
 			return getCritterByName(_generatedCritter)#critters[_generatedSpecies][_generatedCritter]
@@ -130,7 +130,7 @@ func returnRandomCritter(_critterGeneration = null):
 #	rarity = randomRarity[randi() % 1000]
 #
 #	if critters[type].has(rarity):
-#		return critters[type][rarity][randi() % critters[type][rarity].size() - 1]
+#		return critters[type][rarity][randi() % critters[type][rarity].size()]
 #	else:
 #		return null
 
@@ -147,7 +147,7 @@ func spawnCritter(_critter, _position = null, _level = null):
 	
 	# Position
 	if _position == null:
-		_gridPosition = _spawnedLevel.spawnableFloors[randi() % _spawnedLevel.spawnableFloors.size() - 1]
+		_gridPosition = _spawnedLevel.spawnableFloors[randi() % _spawnedLevel.spawnableFloors.size()]
 	else:
 		_gridPosition = _position
 	
@@ -200,7 +200,7 @@ func spawnRandomCritter(_position, _level = null):
 	return null
 
 func checkNewCritterSpawn(_level):
-	var _randomCritter = spawnableCritters[randi() % spawnableCritters.size() - 1]
+	var _randomCritter = spawnableCritters[randi() % spawnableCritters.size()]
 	spawnCritter(_randomCritter)
 
 func checkSpawnableCrittersLevel():
