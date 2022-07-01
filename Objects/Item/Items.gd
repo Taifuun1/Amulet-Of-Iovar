@@ -92,23 +92,23 @@ func returnRandomItemForItemGeneration(_itemGeneration):
 ### Helper functions ###
 ########################
 
-func createItem(_item, _position = null, _level = $"/root/World".level):
+func createItem(_item, _position = null, _toInventory = false, _level = $"/root/World".level):
 	var _itemPosition
 	if _position == null:
 		_itemPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size())]
 	else:
 		_itemPosition = _position
 	
+	var newItem = item.instance()
 	if typeof(_item) == TYPE_STRING:
-		var newItem = item.instance()
 		newItem.createItem(getItemByName(_item))
-		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
-		$"/root/World/Items".add_child(newItem, true)
 	else:
-		var newItem = item.instance()
 		newItem.createItem(_item)
+	if _toInventory:
+		$"/root/World/Critters/0/Inventory".addToInventory(newItem)
+	else:
 		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
-		$"/root/World/Items".add_child(newItem, true)
+	$"/root/World/Items".add_child(newItem, true)
 
 func getItemByName(_itemName, _type = null, _rarity = null):
 	if _type != null and _rarity != null:
@@ -127,10 +127,6 @@ func returnRandomItem(_type = null):
 		var _randomType = items.keys()[randi() % items.keys().size()]
 		var _rarity = items[_randomType].keys()[randi() % items[_randomType].keys().size()]
 		var _pick = randi() % items[_randomType][_rarity].size()
-		print(_randomType)
-		print(_rarity)
-		print(_pick)
-		print(items[_randomType][_rarity][_pick])
 		return items[_randomType][_rarity][_pick]
 	else:
 		var _rarity = items[_type].keys()[randi() % items[_type].keys().size()]

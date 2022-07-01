@@ -1,5 +1,7 @@
 extends BaseCritter
 
+var weight
+
 var aI = load("res://Objects/AI/AI.tscn").instance()
 
 var expDropAmount
@@ -17,6 +19,8 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	
 	critterName = _critter.critterName
 	race = _critter.race
+	critterClass = _critter.class
+	weight = _critter.weight
 	alignment = _critter.alignment
 	
 	aI.aI = _critter.aI
@@ -124,7 +128,7 @@ func despawn(_critterTile = null, createCorpse = true):
 	
 	if createCorpse:
 		var _corpse = load("res://Objects/Item/Item.tscn").instance()
-		_corpse.createCorpse(critterName, $"/root/World/Items/Items")
+		_corpse.createCorpse(critterName, weight)
 		$"/root/World/Items".add_child(_corpse)
 		_level.grid[_gridPosition.x][_gridPosition.y].items.append(_corpse.id)
 	_level.grid[_gridPosition.x][_gridPosition.y].critter = null

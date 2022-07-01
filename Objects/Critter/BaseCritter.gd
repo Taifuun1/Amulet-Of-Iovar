@@ -7,6 +7,7 @@ var id
 
 var critterName
 var race
+var critterClass
 var alignment
 
 var level

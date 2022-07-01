@@ -6,6 +6,8 @@ var itemName
 var type
 var category
 
+var weight
+
 var value
 
 var alignment
@@ -38,6 +40,8 @@ func createItem(_item, _extraData = {}):
 	type = _item.type
 	category = _item.category
 	
+	weight = _item.weight
+	
 	value = _item.value
 	
 	if _extraData.has("alignment"):
@@ -59,54 +63,37 @@ func createItem(_item, _extraData = {}):
 	else:
 		enchantment = 0
 	
-	if typeof(_item.value) == TYPE_DICTIONARY and _item.value.has("charges"):
-		var charges 
-		if typeof(_item.value.charges) != TYPE_ARRAY and _item.value.charges == -1:
-			charges = -1
-		else:
-			charges = randi() % _item.value.charges[1] + _item.value.charges[0]
-		if _item.value.has("turnedOn"):
+	if typeof(_item.value) == TYPE_DICTIONARY:
+		if _item.value.has("charges"):
+			var charges 
+			if typeof(_item.value.charges) != TYPE_ARRAY and _item.value.charges == -1:
+				charges = -1
+			else:
+				charges = randi() % _item.value.charges[1] + _item.value.charges[0]
+			if _item.value.has("turnedOn"):
+				value = {
+					"turnedOn": false,
+					"charges": charges,
+					"value": _item.value.value
+				}
+			else:
+				value = {
+					"charges": charges
+				}
+		elif _item.value.has("worn"):
 			value = {
-				"turnedOn": false,
-				"charges": charges,
-				"value": _item.value.value
-			}
-		else:
-			value = {
-				"charges": charges
+				"worn": false
 			}
 	
 	stackable = _item.stackable
 	
 	$ItemSprite.texture = _item.texture
 
-func createCorpse(_critterName, _items):
-	var _item = _items.miscellaneousItems[0]
-	
-	id = Globals.itemId
-	name = str(id)
-	Globals.itemId += 1
-	
-	itemName = "{critterName} {itemName}".format({ "critterName": _critterName, "itemName": "corpse"})
-	
-	type = _item.type
-	category = _item.category
-	
-	value = _item.value
-	
-	if randi() % 5 + 0 == 5:
-		if randi() % 2 == 1:
-			alignment = "blessed"
-		else:
-			alignment = "cursed"
-	else:
-		alignment = "uncursed"
-	
-	enchantment = 0
-	
-	stackable = _item.stackable
-	
-	$ItemSprite.texture = _item.texture
+
+
+###########################################
+### Weapon damage calculation functions ###
+###########################################
 
 func getAttacks(_stats):
 	var attacks = []
@@ -161,6 +148,29 @@ func calculateWeaponAttackIncrease(_stats):
 			"d": 0
 		}
 
+
+
+###############################
+### Miscellaneous functions ###
+###############################
+
+func createCorpse(_critterName, _weight):
+	var _item = $"/root/World/Items/Items".miscellaneousItems[0]
+	
+	id = Globals.itemId
+	name = str(id)
+	Globals.itemId += 1
+	
+	itemName = "{critterName} {itemName}".format({ "critterName": _critterName, "itemName": "corpse"})
+	
+	type = _item.type
+	
+	weight = _weight
+	
+	stackable = _item.stackable
+	
+	$ItemSprite.texture = _item.texture
+
 func getTexture():
 	return $ItemSprite.texture
 
@@ -169,3 +179,4 @@ func checkItemIdentification():
 		itemName = identifiedItemName
 		notIdentified.alignment = true
 		notIdentified.enchantment = true
+

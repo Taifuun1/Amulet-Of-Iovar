@@ -7,6 +7,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -22,6 +23,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -37,6 +39,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -54,6 +57,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -69,6 +73,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -84,6 +89,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -99,6 +105,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -114,6 +121,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -129,6 +137,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -146,6 +155,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -161,6 +171,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -176,6 +187,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},
@@ -193,6 +205,7 @@ var wands = {
 			"unIdentifiedTexture": null,
 			"type": "Wand",
 			"category": null,
+			"weight": 10,
 			"value": {
 				"charges": [4, 8]
 			},

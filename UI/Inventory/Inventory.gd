@@ -3,14 +3,15 @@ extends CanvasLayer
 onready var inventoryItem = preload("res://UI/Inventory/InventoryItem.tscn")
 
 var inventory = []
+var currentWeight = 0
 
 func create():
 	name = "Inventory"
 	$InventoryContainer.hide()
 
 func addToInventory(_item):
-	inventory.append(_item)
-	return
+	inventory.append(_item.id)
+	currentWeight += _item.weight
 
 #	for item in inventory:
 #		if item.itemName == _item.itemName:
@@ -32,8 +33,8 @@ func addToInventory(_item):
 #		Globals.inventory = inventory
 
 func dropFromInventory(_item):
-	inventory.erase(_item)
-	return
+	inventory.erase(_item.id)
+	currentWeight -= _item.weight
 
 #	for item in inventory:
 #		if item.itemName == _item.itemName:

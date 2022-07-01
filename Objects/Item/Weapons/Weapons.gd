@@ -7,6 +7,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordChippedSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [2,4],
 				"d": 1,
@@ -28,6 +29,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderDullTwohander.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
+			"weight": 50,
 			"value": {
 				"dmg": [4,7],
 				"d": 1,
@@ -49,6 +51,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerCutDagger.png"),
 			"type": "Weapon",
 			"category": "Dagger",
+			"weight": 50,
 			"value": {
 				"dmg": [1,3],
 				"d": 2,
@@ -70,6 +73,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceWornMace.png"),
 			"type": "Weapon",
 			"category": "Mace",
+			"weight": 50,
 			"value": {
 				"dmg": [3,5],
 				"d": 1,
@@ -91,6 +95,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailRigidFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
+			"weight": 50,
 			"value": {
 				"dmg": [1,3],
 				"d": 3,
@@ -114,6 +119,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerOrcDagger.png"),
 			"type": "Weapon",
 			"category": "Dagger",
+			"weight": 50,
 			"value": {
 				"dmg": [3,5],
 				"d": 1,
@@ -135,6 +141,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailSharpFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
+			"weight": 50,
 			"value": {
 				"dmg": [2,4],
 				"d": 3,
@@ -156,6 +163,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordDwarvishLaysword.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [5,8],
 				"d": 1,
@@ -177,6 +185,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordOrcSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [5,7],
 				"d": 1,
@@ -198,6 +207,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordElvishSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [5,7],
 				"d": 1,
@@ -221,6 +231,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerGlowingDagger.png"),
 			"type": "Weapon",
 			"category": "Dagger",
+			"weight": 50,
 			"value": {
 				"dmg": [2,5],
 				"d": 2,
@@ -242,6 +253,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceMorningStar.png"),
 			"type": "Weapon",
 			"category": "Mace",
+			"weight": 50,
 			"value": {
 				"dmg": [7,10],
 				"d": 1,
@@ -263,6 +275,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordAdornedSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [7,10],
 				"d": 1,
@@ -284,6 +297,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderMithrilTwohander.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
+			"weight": 50,
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
@@ -307,6 +321,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerKrakagOrraig.png"),
 			"type": "Weapon",
 			"category": "Dagger",
+			"weight": 50,
 			"value": {
 				"dmg": [5,7],
 				"d": 2,
@@ -328,6 +343,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerOfElbier.png"),
 			"type": "Weapon",
 			"category": "Dagger",
+			"weight": 50,
 			"value": {
 				"dmg": [5,7],
 				"d": 2,
@@ -349,6 +365,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailCrustelFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
+			"weight": 50,
 			"value": {
 				"dmg": [5,7],
 				"d": 4,
@@ -370,6 +387,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailLoperielsDestiny.png"),
 			"type": "Weapon",
 			"category": "Flail",
+			"weight": 50,
 			"value": {
 				"dmg": [3,6],
 				"d": 4,
@@ -391,6 +409,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceDumpelPompel.png"),
 			"type": "Weapon",
 			"category": "Mace",
+			"weight": 50,
 			"value": {
 				"dmg": [9,12],
 				"d": 1,
@@ -412,6 +431,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceFinalDawn.png"),
 			"type": "Weapon",
 			"category": "Mace",
+			"weight": 50,
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
@@ -433,6 +453,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceTitanSlayer.png"),
 			"type": "Weapon",
 			"category": "Mace",
+			"weight": 50,
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
@@ -454,6 +475,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordFleirflare.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
@@ -475,6 +497,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordFrostfury.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
@@ -496,6 +519,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
@@ -517,6 +541,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordStormbringer.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [5,8],
 				"d": 1,
@@ -538,6 +563,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordVorpalSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
+			"weight": 50,
 			"value": {
 				"dmg": [13,18],
 				"d": 1,
@@ -559,6 +585,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderGiantslayer.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
+			"weight": 50,
 			"value": {
 				"dmg": [18,26],
 				"d": 1,
@@ -580,6 +607,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderBrittleLeaf.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
+			"weight": 50,
 			"value": {
 				"dmg": [6,9],
 				"d": 2,
@@ -601,6 +629,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderIcesplitter.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
+			"weight": 50,
 			"value": {
 				"dmg": [12,15],
 				"d": 1,

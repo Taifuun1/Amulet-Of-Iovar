@@ -167,62 +167,62 @@ func create():
 	var newItem = load("res://Objects/Item/Item.tscn").instance()
 	newItem.createItem($"/root/World/Items/Items".getItemByName("scroll of identify"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem, true)
-	$Critters/"0"/Inventory.addToInventory(newItem.id)
+	$Critters/"0"/Inventory.addToInventory(newItem)
 	
 	var newItem2 = load("res://Objects/Item/Item.tscn").instance()
-	newItem2.createItem($"/root/World/Items/Items".getItemByName("magic key"), { "alignment": "blessed" })
+	newItem2.createItem($"/root/World/Items/Items".getItemByName("blindfold"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem2, true)
-	$Critters/"0"/Inventory.addToInventory(newItem2.id)
+	$Critters/"0"/Inventory.addToInventory(newItem2)
 	
 	var newItem5 = load("res://Objects/Item/Item.tscn").instance()
 	newItem5.createItem($"/root/World/Items/Items".getItemByName("scroll of genocide"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem5, true)
-	$Critters/"0"/Inventory.addToInventory(newItem5.id)
+	$Critters/"0"/Inventory.addToInventory(newItem5)
 	
 	var newItem6 = load("res://Objects/Item/Item.tscn").instance()
 	newItem6.createItem($"/root/World/Items/Items".getItemByName("shovel"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem6, true)
-	$Critters/"0"/Inventory.addToInventory(newItem6.id)
+	$Critters/"0"/Inventory.addToInventory(newItem6)
 	
 	var newItem13 = load("res://Objects/Item/Item.tscn").instance()
 	newItem13.createItem($"/root/World/Items/Items".getItemByName("potion of hunger"), { "alignment": "blessed" })
 	$"/root/World/Items".add_child(newItem13, true)
-	$Critters/"0"/Inventory.addToInventory(newItem13.id)
+	$Critters/"0"/Inventory.addToInventory(newItem13)
 	
 	var newItem3 = load("res://Objects/Item/Item.tscn").instance()
 	newItem3.createItem($"/root/World/Items/Items".getItemByName("ring of protection"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem3, true)
-	$Critters/"0"/Inventory.addToInventory(newItem3.id)
+	$Critters/"0"/Inventory.addToInventory(newItem3)
 	
 	var newItem333 = load("res://Objects/Item/Item.tscn").instance()
 	newItem333.createItem($"/root/World/Items/Items".getItemByName("oil lamp"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem333, true)
-	$Critters/"0"/Inventory.addToInventory(newItem333.id)
+	$Critters/"0"/Inventory.addToInventory(newItem333)
 	
 	var newItem33 = load("res://Objects/Item/Item.tscn").instance()
 	newItem33.createItem($"/root/World/Items/Items".getItemByName("key"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem33, true)
-	$Critters/"0"/Inventory.addToInventory(newItem33.id)
+	$Critters/"0"/Inventory.addToInventory(newItem33)
 	
 	var newItem16 = load("res://Objects/Item/Item.tscn").instance()
 	newItem16.createItem($"/root/World/Items/Items".getItemByName("scroll of summon critter"), { "alignment": "cursed" })
 	$"/root/World/Items".add_child(newItem16, true)
-	$Critters/"0"/Inventory.addToInventory(newItem16.id)
+	$Critters/"0"/Inventory.addToInventory(newItem16)
 	
 	var newItem156 = load("res://Objects/Item/Item.tscn").instance()
 	newItem156.createItem($"/root/World/Items/Items".getItemByName("wand of summon critter"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem156, true)
-	$Critters/"0"/Inventory.addToInventory(newItem156.id)
+	$Critters/"0"/Inventory.addToInventory(newItem156)
 	
 	var newItem4 = load("res://Objects/Item/Item.tscn").instance()
 	newItem4.createItem($"/root/World/Items/Items".getItemByName("candle"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem4, true)
-	$Critters/"0"/Inventory.addToInventory(newItem4.id)
+	$Critters/"0"/Inventory.addToInventory(newItem4)
 	
 	var newItem10 = load("res://Objects/Item/Item.tscn").instance()
 	newItem10.createItem($"/root/World/Items/Items".getItemByName("dwarvish laysword"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem10, true)
-	$Critters/"0"/Inventory.addToInventory(newItem10.id)
+	$Critters/"0"/Inventory.addToInventory(newItem10)
 	
 	updateTiles()
 	drawLevel()
@@ -553,7 +553,7 @@ func drawCrittersAndItems():
 	for x in (Globals.gridSize.x):
 		for y in (Globals.gridSize.y):
 			if level.grid[x][y].critter != null:
-				if $FOV.currentFOVLevel[x][y] == -1:
+				if $FOV.currentFOVLevel[x][y] == -1 or level.grid[x][y].critter == 0:
 					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).set_position(map_to_world(Vector2(x, y)) + half_tile_size)
 					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).show()
 				else:
@@ -747,10 +747,13 @@ func interactWith(_tileToInteractWith):
 			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM and
 			$Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel")
 		):
-#			if randi() % 3 == 0:
-			$Items/Items.createItem($Items/Items.returnRandomItem(), _tileToInteractWith)
-#			else:
-#				$Items/Items.createItem("message in a bottle", _tileToInteractWith)
+			Globals.gameConsole.addLog("You dig up the item from the sand.")
+			if randi() % 3 == 0:
+				$Items/Items.createItem("message in a bottle", _tileToInteractWith)
+				Globals.gameConsole.addLog("You discover a message in a bottle!")
+			else:
+				$Items/Items.createItem($Items/Items.returnRandomItem(), _tileToInteractWith)
+				Globals.gameConsole.addLog("You discover an item!")
 			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.LOCKED:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):
