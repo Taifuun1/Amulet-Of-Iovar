@@ -14,12 +14,12 @@ var accessories = {
 }
 
 var equipment = {
-	"head": null,
-	"chest": null,
-	"hands": null,
+	"helmet": null,
+	"plate": null,
+	"gauntlets": null,
 	"belt": null,
-	"legs": null,
-	"feet": null
+	"greaves": null,
+	"boots": null
 }
 
 var dualWielding = false
@@ -46,12 +46,12 @@ func _process(_delta):
 			if accessories[hoveredEquipment.to_lower()] != null:
 				_item = get_node("/root/World/Items/{id}".format({ "id": accessories[hoveredEquipment.to_lower()] }))
 		elif (
-			hoveredEquipment.matchn("head") or
-			hoveredEquipment.matchn("chest") or
-			hoveredEquipment.matchn("hands") or
+			hoveredEquipment.matchn("helmet") or
+			hoveredEquipment.matchn("plate") or
+			hoveredEquipment.matchn("gauntlets") or
 			hoveredEquipment.matchn("belt") or
-			hoveredEquipment.matchn("legs") or
-			hoveredEquipment.matchn("feet")
+			hoveredEquipment.matchn("greaves") or
+			hoveredEquipment.matchn("boots")
 		):
 			if equipment[hoveredEquipment.to_lower()] != null:
 				_item = get_node("/root/World/Items/{id}".format({ "id": equipment[hoveredEquipment.to_lower()] }))
@@ -146,8 +146,11 @@ func setEquipment(_id):
 	if _changed:
 		$"/root/World".processGameTurn()
 
-func checkIfWearingEquipment(_id):
-	var _isWearingEquipment = false
+func takeOfEquipmentWhenDroppingItem(_id):
+	checkIfEquipmentNeedsToBeUnequipped(_id)
+	$"/root/World/Critters/0".calculateEquipmentStats()
+
+func checkIfEquipmentNeedsToBeUnequipped(_id):
 	for _hand in hands.keys():
 		if hands[_hand] == _id:
 			hands[_hand] = null
@@ -155,64 +158,59 @@ func checkIfWearingEquipment(_id):
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = null
 			else:
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = null
-			_isWearingEquipment = true
-			break
-	if _isWearingEquipment:
+			return
 		for _accessory in accessories.keys():
 			if accessories[_accessory] == _id:
 				accessories[_accessory] = null
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory.capitalize() })).texture = null
-				_isWearingEquipment = true
-				break
-	if _isWearingEquipment:
+				return
 		for _equipment in equipment.keys():
 			if equipment[_equipment] == _id:
 				equipment[_equipment] = null
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = null
-				break
-	$"/root/World/Critters/0".calculateEquipmentStats()
+				return
 
 func getSlot(_item):
 	if (
-		_item._category.matchn("Sword") or
-		_item._category.matchn("Two-hander") or
-		_item._category.matchn("Dagger") or
-		_item._category.matchn("Mace") or
-		_item._category.matchn("Flail") or
-		_item._category.matchn("Shield")
+		_item._category.matchn("sword") or
+		_item._category.matchn("two-hander") or
+		_item._category.matchn("dagger") or
+		_item._category.matchn("mace") or
+		_item._category.matchn("flail") or
+		_item._category.matchn("shield")
 	):
 		return "Weapon"
 	if (
-		_item._category.matchn("Ring") or
-		_item._category.matchn("Amulet")
+		_item._category.matchn("ring") or
+		_item._category.matchn("amulet")
 	):
 		return "Accessory"
 	if (
-		_item._category.matchn("Boots") or
-		_item._category.matchn("Greaves") or
-		_item._category.matchn("Belt") or
-		_item._category.matchn("Gauntlets") or
-		_item._category.matchn("Plate") or
-		_item._category.matchn("Helmet")
+		_item._category.matchn("helmet") or
+		_item._category.matchn("plate") or
+		_item._category.matchn("gauntlets") or
+		_item._category.matchn("belt") or
+		_item._category.matchn("greaves") or
+		_item._category.matchn("boots")
 	):
 		return "Armor"
 
 func getArmorClass():
 	var _ac = 0
-	if equipment["head"] != null:
-		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["head"] }))
+	if equipment["helmet"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["helmet"] }))
 		_ac += (_item.value.ac + _item.enchantment)
-	if equipment["chest"] != null:
-		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["chest"] }))
+	if equipment["plate"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["plate"] }))
 		_ac += (_item.value.ac + _item.enchantment)
-	if equipment["hands"] != null:
-		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["hands"] }))
+	if equipment["gauntlets"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["gauntlets"] }))
 		_ac += (_item.value.ac + _item.enchantment)
-	if equipment["legs"] != null:
-		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["legs"] }))
+	if equipment["greaves"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["greaves"] }))
 		_ac += (_item.value.ac + _item.enchantment)
-	if equipment["feet"] != null:
-		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["feet"] }))
+	if equipment["boots"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["boots"] }))
 		_ac += (_item.value.ac + _item.enchantment)
 	if hands["lefthand"] != null and get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] })).category.matchn("shield"):
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] }))
@@ -270,43 +268,43 @@ func checkIfMatchingEquipmentAndSlot(_type, _category):
 			hoveredEquipment.matchn("amulet")
 		):
 			return "Accessory"
-	elif _type.matchn("Armor"):
+	elif _type.matchn("armor"):
 		if (
-			_category.matchn("Helmet") and
-			hoveredEquipment.matchn("Head")
+			_category.matchn("helmet") and
+			hoveredEquipment.matchn("helmet")
 		):
 			return "Armor"
 		if (
-			_category.matchn("Plate") and
-			hoveredEquipment.matchn("Chest")
+			_category.matchn("plate") and
+			hoveredEquipment.matchn("plate")
 		):
 			return "Armor"
 		if (
-			_category.matchn("Gauntlets") and
-			hoveredEquipment.matchn("Hands")
+			_category.matchn("gauntlets") and
+			hoveredEquipment.matchn("gauntlets")
 		):
 			return "Armor"
 		if (
-			_category.matchn("Shield") and
+			_category.matchn("shield") and
 			(
-				hoveredEquipment.matchn("LeftHand") or
-				hoveredEquipment.matchn("RightHand")
+				hoveredEquipment.matchn("lefthand") or
+				hoveredEquipment.matchn("righthand")
 			)
 		):
 			return "Weapon"
 		if (
-			_category.matchn("Belt") and
-			hoveredEquipment.matchn("Belt")
+			_category.matchn("belt") and
+			hoveredEquipment.matchn("belt")
 		):
 			return "Armor"
 		if (
-			_category.matchn("Greaves") and
-			hoveredEquipment.matchn("Legs")
+			_category.matchn("greaves") and
+			hoveredEquipment.matchn("greaves")
 		):
 			return "Armor"
 		if (
-			_category.matchn("Boots") and
-			hoveredEquipment.matchn("Feet")
+			_category.matchn("boots") and
+			hoveredEquipment.matchn("boots")
 		):
 			return "Armor"
 	return null

@@ -154,8 +154,8 @@ func calculateWeaponAttackIncrease(_stats):
 ### Miscellaneous functions ###
 ###############################
 
-func createCorpse(_critterName, _weight):
-	var _item = $"/root/World/Items/Items".miscellaneousItems[0]
+func createCorpse(_critterName, _weight, _items):
+	var _item = _items.miscellaneousItems[0]
 	
 	id = Globals.itemId
 	name = str(id)

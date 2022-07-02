@@ -18,7 +18,17 @@ var wisdomIncrease = 0
 var calories
 var previousCalories
 
-var maxCarryWeight
+var maxCarryWeight = {
+	"overEncumbured": 0,
+	"burdened": 1,
+	"flattened": 2
+}
+var carryWeightBounds = {
+	"min": 0,
+	"max": 1
+}
+
+var turnsUntilAction = 0
 
 var itemsTurnedOn = []
 
@@ -92,10 +102,12 @@ func create(_class):
 	abilities = []
 	resistances = []
 	
-	updatePlayerStats()
-	
 	calories = 1000
 	previousCalories = calories
+	
+	calculateWeightStats()
+	
+	updatePlayerStats()
 	
 	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
 
@@ -188,7 +200,7 @@ func dropItem(_playerTile, _item, _grid):
 	_grid[_playerTile.x][_playerTile.y].items.append(_item.id)
 	$Inventory.dropFromInventory(_item)
 	get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
-	$"/root/World/UI/Equipment".checkIfWearingEquipment(_item.id)
+	$"/root/World/UI/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
 
 
 
@@ -215,7 +227,7 @@ func processPlayerSpecificEffects():
 		Globals.gameConsole.addLog("You die...")
 	previousCalories = calories
 	
-	maxCarryWeight = (stats.strength / 2) * 50
+	calculateWeightStats()
 	
 	if statusEffects["blindness"] > 0:
 		playerVisibility = -1
@@ -242,6 +254,45 @@ func processPlayerSpecificEffects():
 					Globals.gameConsole.addLog("Your lamp has run out of oil.")
 			_:
 				Globals.gameConsole.addLog("Thats not something that can be turned on.")
+
+func calculateWeightStats():
+	maxCarryWeight = {
+		"overEncumbured": (stats.strength / 2) * 50,
+		"burdened": (stats.strength / 2) * 70,
+		"flattened": (stats.strength / 2) * 90
+	}
+	
+	var _weight = $Inventory.currentWeight
+	
+	if _weight <= maxCarryWeight.overEncumbured:
+		turnsUntilAction = 0
+	elif _weight > maxCarryWeight.overEncumbured and _weight <= maxCarryWeight.burdened:
+		turnsUntilAction = 1
+	elif _weight > maxCarryWeight.burdened and _weight <= maxCarryWeight.flattened:
+		turnsUntilAction = 2
+	elif _weight > maxCarryWeight.flattened:
+		turnsUntilAction = 3
+	
+	if _weight > 0 and _weight <= maxCarryWeight.overEncumbured:
+		carryWeightBounds = {
+			"min": 0,
+			"max": maxCarryWeight.overEncumbured
+		}
+	elif _weight > maxCarryWeight.overEncumbured and _weight <= maxCarryWeight.burdened:
+		carryWeightBounds = {
+			"min": maxCarryWeight.overEncumbured,
+			"max": maxCarryWeight.burdened
+		}
+	elif _weight > maxCarryWeight.burdened and _weight <= maxCarryWeight.flattened:
+		carryWeightBounds = {
+			"min": maxCarryWeight.burdened,
+			"max": maxCarryWeight.flattened
+		}
+	elif _weight > maxCarryWeight.flattened:
+		carryWeightBounds = {
+			"min": maxCarryWeight.flattened,
+			"max": 99999
+		}
 
 func calculateEquipmentStats():
 	# Armor class
@@ -331,6 +382,8 @@ func updatePlayerStats():
 		currentHit = currentHit,
 		hits = hits,
 		dungeonLevel = Globals.currentDungeonLevelName,
+		weight = $Inventory.currentWeight,
+		weightBounds = carryWeightBounds,
 		strength = stats.strength,
 		legerity = stats.legerity,
 		balance = stats.balance,

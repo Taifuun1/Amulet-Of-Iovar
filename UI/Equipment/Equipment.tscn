@@ -21,7 +21,7 @@ rect_min_size = Vector2( 550, 720 )
 mouse_filter = 2
 color = Color( 0.0196078, 0.0392157, 0.188235, 1 )
 
-[node name="Head" type="ColorRect" parent="EquipmentBackground"]
+[node name="Helmet" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 50.0
 margin_right = 325.0
@@ -30,13 +30,13 @@ rect_min_size = Vector2( 75, 75 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
-[node name="Area2D" type="Area2D" parent="EquipmentBackground/Head"]
+[node name="Area2D" type="Area2D" parent="EquipmentBackground/Helmet"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Head/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Helmet/Area2D"]
 position = Vector2( 37.5, 37.5 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="EquipmentBackground/Head"]
+[node name="Sprite" type="Sprite" parent="EquipmentBackground/Helmet"]
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
@@ -59,7 +59,7 @@ shape = SubResource( 1 )
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
-[node name="Chest" type="ColorRect" parent="EquipmentBackground"]
+[node name="Plate" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 250.0
 margin_right = 325.0
@@ -68,13 +68,13 @@ rect_min_size = Vector2( 75, 75 )
 mouse_filter = 2
 color = Color( 0, 0.0156863, 1, 1 )
 
-[node name="Area2D" type="Area2D" parent="EquipmentBackground/Chest"]
+[node name="Area2D" type="Area2D" parent="EquipmentBackground/Plate"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Chest/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Plate/Area2D"]
 position = Vector2( 37.5, 37.5 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="EquipmentBackground/Chest"]
+[node name="Sprite" type="Sprite" parent="EquipmentBackground/Plate"]
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
@@ -116,7 +116,7 @@ shape = SubResource( 1 )
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
-[node name="Hands" type="ColorRect" parent="EquipmentBackground"]
+[node name="Gauntlets" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 125.0
 margin_top = 250.0
 margin_right = 200.0
@@ -125,13 +125,13 @@ rect_min_size = Vector2( 75, 75 )
 mouse_filter = 2
 color = Color( 0.592157, 1, 0, 1 )
 
-[node name="Area2D" type="Area2D" parent="EquipmentBackground/Hands"]
+[node name="Area2D" type="Area2D" parent="EquipmentBackground/Gauntlets"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Hands/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Gauntlets/Area2D"]
 position = Vector2( 37.5, 37.5 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="EquipmentBackground/Hands"]
+[node name="Sprite" type="Sprite" parent="EquipmentBackground/Gauntlets"]
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
@@ -192,7 +192,7 @@ shape = SubResource( 1 )
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
-[node name="Legs" type="ColorRect" parent="EquipmentBackground"]
+[node name="Greaves" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 450.0
 margin_right = 325.0
@@ -201,17 +201,17 @@ rect_min_size = Vector2( 75, 75 )
 mouse_filter = 2
 color = Color( 1, 0.141176, 0, 1 )
 
-[node name="Area2D" type="Area2D" parent="EquipmentBackground/Legs"]
+[node name="Area2D" type="Area2D" parent="EquipmentBackground/Greaves"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Legs/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Greaves/Area2D"]
 position = Vector2( 37.5, 37.5 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="EquipmentBackground/Legs"]
+[node name="Sprite" type="Sprite" parent="EquipmentBackground/Greaves"]
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
-[node name="Feet" type="ColorRect" parent="EquipmentBackground"]
+[node name="Boots" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 550.0
 margin_right = 325.0
@@ -220,13 +220,13 @@ rect_min_size = Vector2( 75, 75 )
 mouse_filter = 2
 color = Color( 0.686275, 0, 1, 1 )
 
-[node name="Area2D" type="Area2D" parent="EquipmentBackground/Feet"]
+[node name="Area2D" type="Area2D" parent="EquipmentBackground/Boots"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Feet/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Boots/Area2D"]
 position = Vector2( 37.5, 37.5 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="EquipmentBackground/Feet"]
+[node name="Sprite" type="Sprite" parent="EquipmentBackground/Boots"]
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
@@ -250,25 +250,25 @@ mouse_filter = 2
 
 [node name="DragSprite" type="Sprite" parent="."]
 
-[connection signal="mouse_entered" from="EquipmentBackground/Head/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Head" ]]
-[connection signal="mouse_exited" from="EquipmentBackground/Head/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Head" ]]
+[connection signal="mouse_entered" from="EquipmentBackground/Helmet/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Helmet" ]]
+[connection signal="mouse_exited" from="EquipmentBackground/Helmet/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Helmet" ]]
 [connection signal="mouse_entered" from="EquipmentBackground/Amulet/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Amulet" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/Amulet/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Amulet" ]]
-[connection signal="mouse_entered" from="EquipmentBackground/Chest/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Chest" ]]
-[connection signal="mouse_exited" from="EquipmentBackground/Chest/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Chest" ]]
+[connection signal="mouse_entered" from="EquipmentBackground/Plate/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Plate" ]]
+[connection signal="mouse_exited" from="EquipmentBackground/Plate/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Plate" ]]
 [connection signal="mouse_entered" from="EquipmentBackground/Ring1/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Ring1" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/Ring1/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Ring1" ]]
 [connection signal="mouse_entered" from="EquipmentBackground/Ring2/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Ring2" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/Ring2/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Ring2" ]]
-[connection signal="mouse_entered" from="EquipmentBackground/Hands/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Hands" ]]
-[connection signal="mouse_exited" from="EquipmentBackground/Hands/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Hands" ]]
+[connection signal="mouse_entered" from="EquipmentBackground/Gauntlets/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Gauntlets" ]]
+[connection signal="mouse_exited" from="EquipmentBackground/Gauntlets/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Gauntlets" ]]
 [connection signal="mouse_entered" from="EquipmentBackground/LeftHand/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "LeftHand" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/LeftHand/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "LeftHand" ]]
 [connection signal="mouse_entered" from="EquipmentBackground/RightHand/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "RightHand" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/RightHand/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "RightHand" ]]
 [connection signal="mouse_entered" from="EquipmentBackground/Belt/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Belt" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/Belt/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Belt" ]]
-[connection signal="mouse_entered" from="EquipmentBackground/Legs/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Legs" ]]
-[connection signal="mouse_exited" from="EquipmentBackground/Legs/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Legs" ]]
-[connection signal="mouse_entered" from="EquipmentBackground/Feet/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Feet" ]]
-[connection signal="mouse_exited" from="EquipmentBackground/Feet/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Feet" ]]
+[connection signal="mouse_entered" from="EquipmentBackground/Greaves/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Greaves" ]]
+[connection signal="mouse_exited" from="EquipmentBackground/Greaves/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Greaves" ]]
+[connection signal="mouse_entered" from="EquipmentBackground/Boots/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Boots" ]]
+[connection signal="mouse_exited" from="EquipmentBackground/Boots/Area2D" to="." method="_on_mouse_exited_equipment_slot" binds= [ "Boots" ]]

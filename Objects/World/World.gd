@@ -75,7 +75,7 @@ func _ready():
 	$UI/GameConsole.create()
 	$UI/ItemManagement.create()
 	$UI/Equipment.create()
-	$UI/PopupMenu.create()
+	$UI/ListMenu.create()
 	for _node in $UI.get_children():
 		_node.hide()
 	
@@ -354,7 +354,7 @@ func _input(_event):
 			currentGameState == gameState.GAME and
 			inGame
 		):
-			processGameTurn()
+			processGameTurn(_playerTile)
 		elif (
 			Input.is_action_just_pressed("ASCEND") and
 			(
@@ -410,16 +410,26 @@ func _input(_event):
 			Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
 		elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME and inGame:
 			keepMoving = true
-		$"Critters/0".updatePlayerStats()
+		
+		updateUI()
 
 func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	if _playerTile != null:
+		processManyGameTurnsWithoutPlayerActionsAndWithoutSafety()
 		processPlayerAction(_playerTile, _tileToMoveTo)
 	processPlayerEffects()
 	processEnemyActions()
 	processCrittersSpawnStatus()
 	drawLevel()
 	updateTiles()
+
+func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
+	for _turn in $Critters/"0".turnsUntilAction:
+		processPlayerEffects()
+		processEnemyActions()
+		processCrittersSpawnStatus()
+		drawLevel()
+		updateTiles()
 
 func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
 	for _turn in _turnAmount:
@@ -561,6 +571,9 @@ func drawCrittersAndItems():
 			if level.grid[x][y].items.size() != 0:
 				get_node("Items/{id}".format({ "id": level.grid[x][y].items.back() })).set_position(map_to_world(Vector2(x, y)) + half_tile_size)
 				get_node("Items/{id}".format({ "id": level.grid[x][y].items.back() })).show()
+
+func updateUI():
+	$"Critters/0".updatePlayerStats()
 
 func keepMovingLoop(_playerTile, _tileToMoveTo):
 	var _currentTile = _playerTile
@@ -743,18 +756,19 @@ func openMenu(_menu, _playerTile = null):
 func interactWith(_tileToInteractWith):
 #	Globals.gameConsole.addLog("You cant interact with the {critter}".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
 	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
-		if (
-			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM and
-			$Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel")
-		):
-			Globals.gameConsole.addLog("You dig up the item from the sand.")
-			if randi() % 3 == 0:
-				$Items/Items.createItem("message in a bottle", _tileToInteractWith)
-				Globals.gameConsole.addLog("You discover a message in a bottle!")
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
+			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
+				Globals.gameConsole.addLog("You dig up the item from the sand.")
+				if randi() % 3 == 0:
+					$Items/Items.createItem("message in a bottle", _tileToInteractWith)
+					Globals.gameConsole.addLog("You discover a message in a bottle!")
+				else:
+					$Items/Items.createItem($Items/Items.returnRandomItem(), _tileToInteractWith)
+					Globals.gameConsole.addLog("You discover an item!")
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				processGameTurn()
 			else:
-				$Items/Items.createItem($Items/Items.returnRandomItem(), _tileToInteractWith)
-				Globals.gameConsole.addLog("You discover an item!")
-			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.LOCKED:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):
 				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null

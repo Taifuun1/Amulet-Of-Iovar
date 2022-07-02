@@ -128,7 +128,7 @@ func despawn(_critterTile = null, createCorpse = true):
 	
 	if createCorpse:
 		var _corpse = load("res://Objects/Item/Item.tscn").instance()
-		_corpse.createCorpse(critterName, weight)
+		_corpse.createCorpse(critterName, weight, $"/root/World/Items/Items")
 		$"/root/World/Items".add_child(_corpse)
 		_level.grid[_gridPosition.x][_gridPosition.y].items.append(_corpse.id)
 	_level.grid[_gridPosition.x][_gridPosition.y].critter = null

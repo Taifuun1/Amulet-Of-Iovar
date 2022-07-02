@@ -19,7 +19,8 @@ func setValues(_item):
 	name = str(_item.id)
 	
 	$Name.text = _item.itemName
-	$Alignment.text = _item.alignment
+	if _item.alignment != null:
+		$Alignment.text = _item.alignment
 	if _item.enchantment != null:
 		$Enchantment.text = str(_item.enchantment)
 

@@ -97,7 +97,7 @@ var tools = {
 #			"unIdentifiedTexture": load("res://Assets/Tools/WhistleFancy.png"),
 #			"type": "Tool",
 #			"category": null,
-			"weight": 5,
+#			"weight": 5,
 #			"value": null,
 #			"enchantment": true,
 #			"stackable": false,

@@ -395,7 +395,7 @@ var armors = {
 #			"unIdentifiedTexture": load("res://Assets/Armor/CloakAdornedCloak.png"),
 #			"type": "Armor",
 #			"category": "Cloak",
-			"weight": 75,
+#			"weight": 75,
 #			"value": {
 #				"ac": 4,
 #				"resistance": null

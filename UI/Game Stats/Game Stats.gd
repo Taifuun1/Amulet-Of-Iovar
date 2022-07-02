@@ -21,6 +21,8 @@ func updateStats(stats = {
 	currentHit = null,
 	hits = null,
 	dungeonLevel = null,
+	weight = null,
+	weightBounds = null,
 	strength = null,
 	legerity = null,
 	balance = null,
@@ -62,6 +64,15 @@ func updateStats(stats = {
 	if stats.dungeonLevel != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.text = str(stats.dungeonLevel)
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.set_tooltip(str(stats.dungeonLevel))
+	if stats.weight != null and stats.weightBounds != null:
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth.value = stats.weight
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth.min_value = stats.weightBounds.min
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth.max_value = stats.weightBounds.max
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth.set_tooltip("Current carried weight: " + str(stats.weight))
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/PreviousWeightBound.text = str(stats.weightBounds.min)
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/PreviousWeightBound.set_tooltip("Previous weight bound: " + str(stats.weightBounds.min))
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/NextWeightBound.text = str(stats.weightBounds.max)
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/NextWeightBound.set_tooltip("Next weight bound: " + str(stats.weightBounds.max))
 	if stats.strength != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer/Strength.text = str(stats.strength)
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer/Strength.set_tooltip(str(stats.strength))

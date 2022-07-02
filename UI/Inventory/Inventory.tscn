@@ -18,7 +18,5 @@ margin_bottom = 720.0
 color = Color( 0.0509804, 0.109804, 0.247059, 1 )
 
 [node name="InventoryList" type="VBoxContainer" parent="InventoryContainer"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1520.0
-margin_bottom = 700.0
+margin_right = 1540.0
+margin_bottom = 720.0
