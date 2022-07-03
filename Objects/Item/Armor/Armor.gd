@@ -1,10 +1,10 @@
 var armors = {
 	"common": [
 		{
-			"itemName": "Hemp mail",
-			"unidentifiedItemName": "Hemp mail",
-			"texture": load("res://Assets/Armor/PlateHempMail.png"),
-			"unIdentifiedTexture": load("res://Assets/Armor/PlateHempMail.png"),
+			"itemName": "Leather mail",
+			"unidentifiedItemName": "Leather mail",
+			"texture": load("res://Assets/Armor/PlateLeatherMail.png"),
+			"unIdentifiedTexture": load("res://Assets/Armor/PlateLeatherMail.png"),
 			"type": "Armor",
 			"category": "Plate",
 			"weight": 75,
@@ -17,10 +17,10 @@ var armors = {
 			"rarity": "Common"
 		},
 		{
-			"itemName": "Hemp cap",
-			"unidentifiedItemName": "Hemp cap",
-			"texture": load("res://Assets/Armor/HelmetHempCap.png"),
-			"unIdentifiedTexture": load("res://Assets/Armor/HelmetHempCap.png"),
+			"itemName": "Leather cap",
+			"unidentifiedItemName": "Leather cap",
+			"texture": load("res://Assets/Armor/HelmetLeatherCap.png"),
+			"unIdentifiedTexture": load("res://Assets/Armor/HelmetLeatherCap.png"),
 			"type": "Armor",
 			"category": "Helmet",
 			"weight": 75,
@@ -81,10 +81,10 @@ var armors = {
 			"rarity": "Common"
 		},
 		{
-			"itemName": "Hemp cloak",
-			"unidentifiedItemName": "Hemp cloak",
-			"texture": load("res://Assets/Armor/CloakHempCloak.png"),
-			"unIdentifiedTexture": load("res://Assets/Armor/CloakHempCloak.png"),
+			"itemName": "Leather cloak",
+			"unidentifiedItemName": "Leather cloak",
+			"texture": load("res://Assets/Armor/CloakLeatherCloak.png"),
+			"unIdentifiedTexture": load("res://Assets/Armor/CloakLeatherCloak.png"),
 			"type": "Armor",
 			"category": "Cloak",
 			"weight": 75,
@@ -113,10 +113,10 @@ var armors = {
 			"rarity": "Common"
 		},
 		{
-			"itemName": "Hemp pants",
-			"unidentifiedItemName": "Hemp pants",
-			"texture": load("res://Assets/Armor/GreavesHempPants.png"),
-			"unIdentifiedTexture": load("res://Assets/Armor/GreavesHempPants.png"),
+			"itemName": "Leather pants",
+			"unidentifiedItemName": "Leather pants",
+			"texture": load("res://Assets/Armor/GreavesLeatherPants.png"),
+			"unIdentifiedTexture": load("res://Assets/Armor/GreavesLeatherPants.png"),
 			"type": "Armor",
 			"category": "Greaves",
 			"weight": 75,

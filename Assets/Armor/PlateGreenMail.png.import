@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CloakHempCloak.png-fd29b68a97c92d535a9429803324514d.stex"
+path="res://.import/PlateGreenMail.png-13db9607772235bdbbc8e38efda6d15f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Armor/CloakHempCloak.png"
-dest_files=[ "res://.import/CloakHempCloak.png-fd29b68a97c92d535a9429803324514d.stex" ]
+source_file="res://Assets/Armor/PlateGreenMail.png"
+dest_files=[ "res://.import/PlateGreenMail.png-13db9607772235bdbbc8e38efda6d15f.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=false
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

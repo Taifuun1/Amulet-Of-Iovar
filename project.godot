@@ -39,6 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Amulet of Iovar"
+config/description="Nethack-inspired roguelike"
 run/main_scene="res://Objects/World/World.tscn"
 config/use_custom_user_dir=true
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
@@ -59,6 +60,8 @@ gdscript/warnings/integer_division=false
 window/size/width=1920
 window/size/height=1080
 window/size/fullscreen=true
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [importer_defaults]
 
@@ -71,7 +74,7 @@ texture={
 "detect_3d": false,
 "flags/anisotropic": false,
 "flags/filter": false,
-"flags/mipmaps": false,
+"flags/mipmaps": true,
 "flags/repeat": 0,
 "flags/srgb": 2,
 "process/HDR_as_SRGB": false,
@@ -292,4 +295,5 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_clear_color=Color( 0, 0, 0, 1 )

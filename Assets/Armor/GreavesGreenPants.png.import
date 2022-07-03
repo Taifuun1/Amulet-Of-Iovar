@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GreavesHempPants.png-63803c0dd58ce8386227cabe2d0956ce.stex"
+path="res://.import/GreavesGreenPants.png-39606c745828da130e6e9d161807bfe9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Armor/GreavesHempPants.png"
-dest_files=[ "res://.import/GreavesHempPants.png-63803c0dd58ce8386227cabe2d0956ce.stex" ]
+source_file="res://Assets/Armor/GreavesGreenPants.png"
+dest_files=[ "res://.import/GreavesGreenPants.png-39606c745828da130e6e9d161807bfe9.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=false
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

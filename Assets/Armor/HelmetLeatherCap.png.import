@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PlateHempMail.png-795b89f8fb7d6908c0c5ae22c7397f70.stex"
+path="res://.import/HelmetLeatherCap.png-ed7c58fbc6f24c0ff3372fa2d36b0178.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Armor/PlateHempMail.png"
-dest_files=[ "res://.import/PlateHempMail.png-795b89f8fb7d6908c0c5ae22c7397f70.stex" ]
+source_file="res://Assets/Armor/HelmetLeatherCap.png"
+dest_files=[ "res://.import/HelmetLeatherCap.png-ed7c58fbc6f24c0ff3372fa2d36b0178.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=false
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

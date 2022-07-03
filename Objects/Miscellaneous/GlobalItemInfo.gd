@@ -28,7 +28,7 @@ var globalItemInfo = {
 	"Cold breeze": {
 		"identified": false
 	},
-	"Hemp mail": {
+	"Leather mail": {
 		"identified": false
 	},
 	"Orc mail": {
@@ -76,7 +76,7 @@ var globalItemInfo = {
 	"Bubbly mail": {
 		"identified": false
 	},
-	"Hemp cap": {
+	"Leather cap": {
 		"identified": false
 	},
 	"Bucket helmet": {
@@ -130,7 +130,7 @@ var globalItemInfo = {
 	"Belt of Symmetry": {
 		"identified": false
 	},
-	"Hemp cloak": {
+	"Leather cloak": {
 		"identified": false,
 	},
 	"Orc cloak": {
@@ -169,7 +169,7 @@ var globalItemInfo = {
 	"Burning shield": {
 		"identified": false,
 	},
-	"Hemp pants": {
+	"Leather pants": {
 		"identified": false,
 	},
 	"Scale ring mail chausses": {
