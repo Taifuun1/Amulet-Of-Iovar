@@ -1,9 +1,37 @@
 extends Control
 
+onready var statusEffectItem = preload("res://UI/Game Stats/Status Effect Item.tscn")
+
 func _ready():
-	addResistance("MR")
-	addResistance("SR")
-	addResistance("CC")
+	addStatusEffect("blindness")
+	addStatusEffect("fumbling")
+	addStatusEffect("hungry")
+	addStatusEffect("malnourished")
+	addStatusEffect("famished")
+	addStatusEffect("overEncumbured")
+	addStatusEffect("burdened")
+	addStatusEffect("flattened")
+	addStatusEffect("confusion")
+	addStatusEffect("displacement")
+
+func addStatusEffect(_statusEffect):
+	var _newStatusEffect = statusEffectItem.instance()
+	_newStatusEffect.create(_statusEffect)
+	$Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer.add_child(_newStatusEffect)
+
+func _on_Weigth_value_changed(value):
+	var _min = $Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth.min_value
+	var _max = $Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth.max_value
+	var _r = range_lerp(value, _min, _max, 0, 1)
+	var _g = range_lerp(value, _min, _max, 1, 0)
+#	progress_bar.get("custom_styles/fg").set_bg_color(Color(red_amnt, green_amnt, 0.00, 1.00))
+	$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth.tint_progress = Color(_r, _g, 0)
+
+
+
+#################################
+### Update player stats in UI ###
+#################################
 
 func updateStats(stats = {
 	maxhp = null,
@@ -91,21 +119,3 @@ func updateStats(stats = {
 	if stats.wisdom != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer/Wisdom.text = str(stats.wisdom)
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer/Wisdom.set_tooltip(str(stats.wisdom))
-
-func addResistance(_resistance):
-#	var label = RichTextLabel.new()
-	var label = Label.new()
-	label.text = _resistance
-#	label.syntax_highlighting(true)
-	label.add_color_override("font_color", Color8(0,128,0))
-#	label.add_color_override("background_color", Color8(0,255,0))
-#	syntax_highlighting [default: false]set_syntax_coloring(value) setteris_syntax_coloring_enabled() getter
-
-#	label.set("custom_colors/background_color",Color8(0,0,255))
-	
-#	my_style.set_bg_color(Color(0,1,1,1))
-#	label.set_bg_color(Color8(0,255,0))
-	$Background/GameStatsContainer/GameStatsColumns/ResistancesContainer.add_child(label)
-	
-	# Set the "normal" style to be your newly created style.
-#	set("custom_styles/normal", my_style)

@@ -315,7 +315,7 @@ clip_text = true
 margin_top = 240.0
 margin_right = 377.0
 margin_bottom = 260.0
-rect_min_size = Vector2( 377, 0 )
+rect_min_size = Vector2( 377, 20 )
 
 [node name="PreviousWeightBound" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer"]
 margin_right = 84.0
@@ -327,16 +327,16 @@ text = "0"
 
 [node name="Weigth" type="TextureProgress" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer"]
 margin_left = 88.0
-margin_top = 2.0
 margin_right = 288.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 200, 16 )
+margin_bottom = 20.0
+rect_min_size = Vector2( 200, 20 )
 hint_tooltip = "Current carried weight"
 size_flags_vertical = 0
 value = 50.0
+rounded = true
 texture_over = ExtResource( 7 )
 texture_progress = ExtResource( 1 )
-tint_progress = Color( 0.407843, 0.384314, 0.894118, 1 )
+tint_progress = Color( 0.478431, 0.113725, 0.729412, 1 )
 
 [node name="NextWeightBound" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer"]
 margin_left = 292.0
@@ -497,9 +497,11 @@ text = "-"
 align = 2
 clip_text = true
 
-[node name="ResistancesContainer" type="GridContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
+[node name="StatusEffectsContainer" type="GridContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_left = 762.0
 margin_right = 1122.0
 margin_bottom = 312.0
 rect_min_size = Vector2( 360, 0 )
-columns = 8
+columns = 3
+
+[connection signal="value_changed" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth" to="." method="_on_Weigth_value_changed"]

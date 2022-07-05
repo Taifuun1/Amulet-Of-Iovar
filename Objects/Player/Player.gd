@@ -95,7 +95,7 @@ func create(_class):
 	basemp = _playerClass.mp
 	maxhp = _playerClass.hp
 	maxmp = _playerClass.mp
-	ac = $"/root/World/UI/Equipment".getArmorClass()
+	ac = $"/root/World/UITheme/UI/Equipment".getArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 	
@@ -200,7 +200,7 @@ func dropItem(_playerTile, _item, _grid):
 	_grid[_playerTile.x][_playerTile.y].items.append(_item.id)
 	$Inventory.dropFromInventory(_item)
 	get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
-	$"/root/World/UI/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
+	$"/root/World/UITheme/UI/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
 
 
 
@@ -296,29 +296,29 @@ func calculateWeightStats():
 
 func calculateEquipmentStats():
 	# Armor class
-	ac = $"/root/World/UI/Equipment".getArmorClass()
+	ac = $"/root/World/UITheme/UI/Equipment".getArmorClass()
 	
 	attacks = []
 	# Attacks
 	if (
-		$"/root/World/UI/Equipment".hands["lefthand"] != null and
-		$"/root/World/UI/Equipment".hands["lefthand"] == $"/root/World/UI/Equipment".hands["righthand"]
+		$"/root/World/UITheme/UI/Equipment".hands["lefthand"] != null and
+		$"/root/World/UITheme/UI/Equipment".hands["lefthand"] == $"/root/World/UITheme/UI/Equipment".hands["righthand"]
 	):
-		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
+		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
 	elif (
-		$"/root/World/UI/Equipment".hands["lefthand"] != null or
-		$"/root/World/UI/Equipment".hands["righthand"] != null
+		$"/root/World/UITheme/UI/Equipment".hands["lefthand"] != null or
+		$"/root/World/UITheme/UI/Equipment".hands["righthand"] != null
 	):
 		if (
-			$"/root/World/UI/Equipment".hands["lefthand"] != null and
-			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).category.matchn("shield")
+			$"/root/World/UITheme/UI/Equipment".hands["lefthand"] != null and
+			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["lefthand"] })).category.matchn("shield")
 		):
-			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
 		if (
-			$"/root/World/UI/Equipment".hands["righthand"] != null and
-			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).category.matchn("shield")
+			$"/root/World/UITheme/UI/Equipment".hands["righthand"] != null and
+			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["righthand"] })).category.matchn("shield")
 		):
-			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/Equipment".hands["righthand"] })).getAttacks(stats))
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["righthand"] })).getAttacks(stats))
 	else:
 		attacks = [
 			{
@@ -575,8 +575,8 @@ func readItem(_id):
 				for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
 					if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0:
 						_aliveCritters.append(_critterName)
-				$"/root/World/UI/ListMenu".showListMenuList("Genocide what?", _aliveCritters)
-				$"/root/World/UI/ListMenu".show()
+				$"/root/World/UITheme/UI/ListMenu".showListMenuList("Genocide what?", _aliveCritters)
+				$"/root/World/UITheme/UI/ListMenu".show()
 				_additionalChoices = true
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
@@ -822,6 +822,8 @@ func useItem(_id):
 			"message in a bottle":
 				var _newItem = $"/root/World/Items/Items".returnRandomItem("scroll")
 				$"/root/World/Items/Items".createItem(_newItem, null, true)
+				$"/root/World/Critters/0/Inventory".inventory.erase(_id)
+				get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 				Globals.gameConsole.addLog("You pull a {itemName} out of the bottle.".format({ "itemName": _newItem.itemName }))
 			_:
 				Globals.gameConsole.addLog("Thats not a tool...")

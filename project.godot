@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "EnemyPathfinding",
 "class": "BaseLevel",
 "language": "GDScript",
-"path": "res://Random Generators/BaseLevel.gd"
+"path": "res://Random Generators/Miscellaneous/BaseLevel.gd"
 }, {
 "base": "BaseLevel",
 "class": "Beach",

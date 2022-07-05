@@ -72,12 +72,13 @@ func _ready():
 	critters.create()
 	$Critters.add_child(critters)
 	
-	$UI/GameConsole.create()
-	$UI/ItemManagement.create()
-	$UI/Equipment.create()
-	$UI/ListMenu.create()
-	for _node in $UI.get_children():
+	$UITheme/UI/GameConsole.create()
+	$UITheme/UI/ItemManagement.create()
+	$UITheme/UI/Equipment.create()
+	$UITheme/UI/ListMenu.create()
+	for _node in $UITheme/UI.get_children():
 		_node.hide()
+	$UITheme/UI/StartScreen.show()
 	
 	# Dungeon 1
 	var firstLevel = dungeon1.instance()
@@ -227,12 +228,14 @@ func create():
 	updateTiles()
 	drawLevel()
 	
-	for _node in $UI.get_children():
+	for _node in $UITheme/UI.get_children():
 		if _node.name == "GameConsole":
 			_node.show()
 		if _node.name == "GameStats":
 			_node.show()
-	$UI/StartScreen.queue_free()
+	$UITheme/UI/StartScreen.hide()
+	
+#	$Critters/"0".processPlayerSpecificEffects()
 	
 	inStartScreen = false
 	inGame = true
@@ -262,25 +265,30 @@ func _input(_event):
 		):
 			var _openTiles = level.checkAdjacentTilesForOpenSpace(_playerTile)
 			var _tileToMoveTo
-			if Input.is_action_just_pressed("MOVE_UP"):
-				_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y - 1)
-			elif Input.is_action_just_pressed("MOVE_UP_RIGHT"):
-				_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y - 1)
-			elif Input.is_action_just_pressed("MOVE_RIGHT"):
-				_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y)
-			elif Input.is_action_just_pressed("MOVE_DOWN_RIGHT"):
-				_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_DOWN"):
-				_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_DOWN_LEFT"):
-				_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_LEFT"):
-				_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y)
-			elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
-				_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
+			if $Critters/"0".statusEffects["confusion"] > 0 and randi() % 3 == 0:
+				var _randomOpenTiles = _openTiles.duplicate(true)
+				_randomOpenTiles.shuffle()
+				_tileToMoveTo = _randomOpenTiles[0]
+			else:
+				if Input.is_action_just_pressed("MOVE_UP"):
+					_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y - 1)
+				elif Input.is_action_just_pressed("MOVE_UP_RIGHT"):
+					_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y - 1)
+				elif Input.is_action_just_pressed("MOVE_RIGHT"):
+					_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y)
+				elif Input.is_action_just_pressed("MOVE_DOWN_RIGHT"):
+					_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y + 1)
+				elif Input.is_action_just_pressed("MOVE_DOWN"):
+					_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y + 1)
+				elif Input.is_action_just_pressed("MOVE_DOWN_LEFT"):
+					_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y + 1)
+				elif Input.is_action_just_pressed("MOVE_LEFT"):
+					_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y)
+				elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
+					_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
 			for _openTile in _openTiles:
 				if _openTile == _tileToMoveTo:
-					if keepMoving and _tileToMoveTo != null:
+					if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null:
 						keepMovingLoop(_playerTile, _tileToMoveTo)
 					else:
 						processGameTurn(_playerTile, _tileToMoveTo)
@@ -402,7 +410,7 @@ func _input(_event):
 			currentGameState = gameState.INTERACT
 			Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
 		elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME and inGame:
-			$"UI/Debug Menu".show()
+			$"UITheme/UI/Debug Menu".show()
 		elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME and inGame:
 			openMenu("use")
 		elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME and inGame:
@@ -707,49 +715,49 @@ func openMenu(_menu, _playerTile = null):
 				$Critters/"0".pickUpItems(_playerTile, level.grid[_playerTile.x][_playerTile.y].items, level.grid)
 				$"/root/World".processGameTurn()
 			elif level.grid[_playerTile.x][_playerTile.y].items.size() != 0 and currentGameState == gameState.GAME:
-				$UI/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
-				$UI/ItemManagement.showItemManagementList()
+				$UITheme/UI/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
+				$UITheme/UI/ItemManagement.showItemManagementList()
 				currentGameState = gameState.PICK_UP_ITEMS
 				inGame = false
 		"drop":
 			if currentGameState == gameState.GAME:
-				$UI/ItemManagement.items = $Critters/"0"/Inventory.inventory
-				$UI/ItemManagement.showItemManagementList()
+				$UITheme/UI/ItemManagement.items = $Critters/"0"/Inventory.inventory
+				$UITheme/UI/ItemManagement.showItemManagementList()
 				currentGameState = gameState.DROP_ITEMS
 				inGame = false
 		"equipment":
 			if currentGameState == gameState.GAME:
-				$UI/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["weapon", "accessory", "armor"]))
+				$UITheme/UI/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["weapon", "accessory", "armor"]))
 				currentGameState = gameState.EQUIPMENT     
 				inGame = false
 		"read":
 			if currentGameState == gameState.GAME:
-				$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["scroll"])
-				$UI/ItemManagement.showItemManagementList(true)
+				$UITheme/UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["scroll"])
+				$UITheme/UI/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.READ
 				inGame = false
 		"quaff":
 			if currentGameState == gameState.GAME:
-				$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["potion"])
-				$UI/ItemManagement.showItemManagementList(true)
+				$UITheme/UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["potion"])
+				$UITheme/UI/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.QUAFF
 				inGame = false
 		"consume":
 			if currentGameState == gameState.GAME:
-				$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["comestible"])
-				$UI/ItemManagement.showItemManagementList(true)
+				$UITheme/UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["comestible"])
+				$UITheme/UI/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.CONSUME
 				inGame = false
 		"zap":
 			if currentGameState == gameState.GAME:
-				$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["wand"])
-				$UI/ItemManagement.showItemManagementList(true)
+				$UITheme/UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["wand"])
+				$UITheme/UI/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.ZAP
 				inGame = false
 		"use":
 			if currentGameState == gameState.GAME:
-				$UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"])
-				$UI/ItemManagement.showItemManagementList(true)
+				$UITheme/UI/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"])
+				$UITheme/UI/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.USE
 				inGame = false
 
@@ -831,7 +839,7 @@ func kickAt(_tileToKickAt):
 
 func processAccept():
 	var _playerTile = level.getCritterTile(0)
-	var _items = $UI/ItemManagement.selectedItems
+	var _items = $UITheme/UI/ItemManagement.selectedItems
 	
 	if currentGameState == gameState.PICK_UP_ITEMS:
 		$Critters/"0".pickUpItems(_playerTile, _items, level.grid)
@@ -851,12 +859,12 @@ func closeMenu(_additionalChoices = false):
 			currentGameState == gameState.ZAP or
 			currentGameState == gameState.USE
 		):
-			$UI/ItemManagement.hideItemManagementList()
+			$UITheme/UI/ItemManagement.hideItemManagementList()
 		if currentGameState == gameState.EQUIPMENT:
-			$UI/Equipment.hideEquipment()
+			$UITheme/UI/Equipment.hideEquipment()
 		if currentGameState == gameState.INVENTORY:
 			$Critters/"0"/Inventory.hideInventory()
-		$UI/ListMenu.hideListMenuList()
+		$UITheme/UI/ListMenu.hideListMenuList()
 		resetToDefaulGameState()
 	else:
 		pass

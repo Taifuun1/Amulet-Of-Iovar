@@ -217,17 +217,15 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="DancingDragonsPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../UI/DancingDragonsContainer")
+root_node = NodePath("../DancingDragonsContainer")
 "anims/Dancing Dragons" = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="StartContainer" type="CenterContainer" parent="UI"]
+[node name="StartContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Button" type="Button" parent="UI/StartContainer"]
+[node name="Button" type="Button" parent="StartContainer"]
 margin_left = 810.0
 margin_top = 490.0
 margin_right = 1110.0
@@ -236,77 +234,77 @@ rect_min_size = Vector2( 300, 100 )
 text = "Start"
 icon = ExtResource( 2 )
 
-[node name="DancingDragonsContainer" type="VBoxContainer" parent="UI"]
+[node name="DancingDragonsContainer" type="VBoxContainer" parent="."]
 visible = false
 anchor_top = 0.25
 anchor_right = 1.0
 anchor_bottom = 0.75
 
-[node name="LoadingText" type="Label" parent="UI/DancingDragonsContainer"]
+[node name="LoadingText" type="Label" parent="DancingDragonsContainer"]
 margin_right = 1920.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 1920, 200 )
 text = "Generating dungeon..."
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/DancingDragonsContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DancingDragonsContainer"]
 margin_top = 204.0
 margin_right = 1920.0
 margin_bottom = 236.0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/DancingDragonsContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="DancingDragonsContainer/HBoxContainer"]
 margin_left = 890.0
 margin_right = 922.0
 margin_bottom = 32.0
 texture = ExtResource( 7 )
 
-[node name="TextureRect2" type="TextureRect" parent="UI/DancingDragonsContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="DancingDragonsContainer/HBoxContainer"]
 margin_left = 926.0
 margin_right = 958.0
 margin_bottom = 32.0
 texture = ExtResource( 6 )
 
-[node name="TextureRect3" type="TextureRect" parent="UI/DancingDragonsContainer/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="DancingDragonsContainer/HBoxContainer"]
 margin_left = 962.0
 margin_right = 994.0
 margin_bottom = 32.0
 texture = ExtResource( 9 )
 
-[node name="TextureRect4" type="TextureRect" parent="UI/DancingDragonsContainer/HBoxContainer"]
+[node name="TextureRect4" type="TextureRect" parent="DancingDragonsContainer/HBoxContainer"]
 margin_left = 998.0
 margin_right = 1030.0
 margin_bottom = 32.0
 texture = ExtResource( 8 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/DancingDragonsContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="DancingDragonsContainer"]
 margin_top = 240.0
 margin_right = 1920.0
 margin_bottom = 272.0
 alignment = 1
 
-[node name="TextureRect5" type="TextureRect" parent="UI/DancingDragonsContainer/HBoxContainer2"]
+[node name="TextureRect5" type="TextureRect" parent="DancingDragonsContainer/HBoxContainer2"]
 margin_left = 890.0
 margin_right = 922.0
 margin_bottom = 32.0
 texture = ExtResource( 4 )
 
-[node name="TextureRect6" type="TextureRect" parent="UI/DancingDragonsContainer/HBoxContainer2"]
+[node name="TextureRect6" type="TextureRect" parent="DancingDragonsContainer/HBoxContainer2"]
 margin_left = 926.0
 margin_right = 958.0
 margin_bottom = 32.0
 texture = ExtResource( 5 )
 
-[node name="TextureRect7" type="TextureRect" parent="UI/DancingDragonsContainer/HBoxContainer2"]
+[node name="TextureRect7" type="TextureRect" parent="DancingDragonsContainer/HBoxContainer2"]
 margin_left = 962.0
 margin_right = 994.0
 margin_bottom = 32.0
 texture = ExtResource( 3 )
 
-[node name="TextureRect8" type="TextureRect" parent="UI/DancingDragonsContainer/HBoxContainer2"]
+[node name="TextureRect8" type="TextureRect" parent="DancingDragonsContainer/HBoxContainer2"]
 margin_left = 998.0
 margin_right = 1030.0
 margin_bottom = 32.0
 texture = ExtResource( 10 )
 
-[connection signal="pressed" from="UI/StartContainer/Button" to="." method="_on_Start_Button_pressed"]
+[connection signal="pressed" from="StartContainer/Button" to="." method="_on_Start_Button_pressed"]
