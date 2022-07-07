@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tomato.png-2d09e143c2d7bbc027938e484b01f57a.stex"
+path="res://.import/StatusEffectMalnourished.png-5a1624dcf66cfb2b0c2ab622053abb20.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Comestibles/Tomato.png"
-dest_files=[ "res://.import/Tomato.png-2d09e143c2d7bbc027938e484b01f57a.stex" ]
+source_file="res://Assets/Status Effects/StatusEffectMalnourished.png"
+dest_files=[ "res://.import/StatusEffectMalnourished.png-5a1624dcf66cfb2b0c2ab622053abb20.stex" ]
 
 [params]
 

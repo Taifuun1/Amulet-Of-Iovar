@@ -2,22 +2,17 @@ extends Control
 
 onready var statusEffectItem = preload("res://UI/Game Stats/Status Effect Item.tscn")
 
-func _ready():
-	addStatusEffect("blindness")
-	addStatusEffect("fumbling")
-	addStatusEffect("hungry")
-	addStatusEffect("malnourished")
-	addStatusEffect("famished")
-	addStatusEffect("overEncumbured")
-	addStatusEffect("burdened")
-	addStatusEffect("flattened")
-	addStatusEffect("confusion")
-	addStatusEffect("displacement")
-
-func addStatusEffect(_statusEffect):
-	var _newStatusEffect = statusEffectItem.instance()
-	_newStatusEffect.create(_statusEffect)
-	$Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer.add_child(_newStatusEffect)
+#func _ready():
+#	addStatusEffect("blindness")
+#	addStatusEffect("fumbling")
+#	addStatusEffect("hungry")
+#	addStatusEffect("malnourished")
+#	addStatusEffect("famished")
+#	addStatusEffect("overEncumbured")
+#	addStatusEffect("burdened")
+#	addStatusEffect("flattened")
+#	addStatusEffect("confusion")
+#	addStatusEffect("displacement")
 
 func _on_Weigth_value_changed(value):
 	var _min = $Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth.min_value
@@ -119,3 +114,17 @@ func updateStats(stats = {
 	if stats.wisdom != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer/Wisdom.text = str(stats.wisdom)
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer/Wisdom.set_tooltip(str(stats.wisdom))
+
+func isStatusEffectInGameStats(_statusEffect):
+	for _node in $Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer.get_children():
+		if _node.name.matchn(_statusEffect):
+			return true
+	return false
+
+func addStatusEffect(_statusEffect):
+	var _newStatusEffect = statusEffectItem.instance()
+	_newStatusEffect.create(_statusEffect)
+	$Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer.add_child(_newStatusEffect)
+
+func removeStatusEffect(_statusEffect):
+	get_node("Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer/{statusEffect}".format({ "statusEffect": _statusEffect })).queue_free()

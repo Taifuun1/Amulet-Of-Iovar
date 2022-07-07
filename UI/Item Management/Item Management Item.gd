@@ -26,4 +26,4 @@ func setValues(_item):
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		$"/root/World/UITheme/UI/ItemManagement"._on_Item_Management_List_Clicked(id)
+		$"/root/World/UI/UITheme/ItemManagement"._on_Item_Management_List_Clicked(id)

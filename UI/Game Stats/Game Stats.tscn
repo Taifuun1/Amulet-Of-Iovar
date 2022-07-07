@@ -27,7 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="GameStatsColumns" type="HBoxContainer" parent="Background/GameStatsContainer"]
-margin_right = 1122.0
+margin_right = 1120.0
 margin_bottom = 312.0
 
 [node name="DetailsContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
@@ -499,9 +499,9 @@ clip_text = true
 
 [node name="StatusEffectsContainer" type="GridContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_left = 762.0
-margin_right = 1122.0
+margin_right = 1120.0
 margin_bottom = 312.0
-rect_min_size = Vector2( 360, 0 )
+rect_min_size = Vector2( 358, 0 )
 columns = 3
 
 [connection signal="value_changed" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/Weigth" to="." method="_on_Weigth_value_changed"]

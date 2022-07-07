@@ -1,6 +1,12 @@
 extends Control
 
 var statusEffects = {
+#	"stun": {
+#		"label": "stn",
+#		"description": "You are stunned. (-1 bal and 0 visibility)",
+#		"color": "#ffff5a",
+#		"texture": load("res://Assets/Status Effects/StatusEffectBlindness.png")
+#	},
 	"blindness": {
 		"label": "blnd",
 		"description": "You cant see. (-1 bal and 0 visibility)",
@@ -23,7 +29,7 @@ var statusEffects = {
 		"label": "hng",
 		"description": "Youre hungry. (-1 str)",
 		"color": "#d9b518",
-		"texture": load("res://Assets/Status Effects/StatusEffectHungry.png")
+		"texture": load("res://Assets/Status Effects/StatusEffectHunger.png")
 	},
 	"malnourished": {
 		"label": "mlno",
@@ -34,14 +40,14 @@ var statusEffects = {
 	"famished": {
 		"label": "famh",
 		"description": "You are starving. (-2 str, -1 bal and -1 leg)",
-		"color": "#a38705",
+		"color": "#ab8e09",
 		"texture": load("res://Assets/Status Effects/StatusEffectFamished.png")
 	},
 	"overEncumbured": {
 		"label": "oecb",
 		"description": "You are overencumbured. (+1 turn on move or attack)",
 		"color": "#2357db",
-		"texture": load("res://Assets/Status Effects/StatusEffectOverEncumbered.png")
+		"texture": load("res://Assets/Status Effects/StatusEffectOverEncumbured.png")
 	},
 	"burdened": {
 		"label": "brdn",
@@ -68,7 +74,7 @@ var statusEffects = {
 		"texture": load("res://Assets/Status Effects/StatusEffectRegen.png")
 	},
 	"displacement": {
-		"label": "dplc",
+		"label": "dlc",
 		"description": "You feel ambigious. (Enemy attacks have a 25% chance of missing.)",
 		"color": "#e800f0",
 		"texture": load("res://Assets/Status Effects/StatusEffectDisplacement.png")
@@ -76,7 +82,7 @@ var statusEffects = {
 }
 
 func create(_statusEffect):
-	name = _statusEffect
+	name = str(_statusEffect)
 	$StatusEffectContainer/StatusEffectText.append_bbcode("[center][color=%s]%s[/color][/center]" % [statusEffects[_statusEffect].color, statusEffects[_statusEffect].label.to_upper()])
 	$StatusEffectContainer.hint_tooltip = statusEffects[_statusEffect].description
 #	$Background.color = Color(statusEffects[_statusEffect].color).darkened(0.5)

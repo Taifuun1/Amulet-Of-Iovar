@@ -43,6 +43,12 @@ func createGrid(_tile = Globals.tiles.EMPTY):
 			})
 
 func placeCritter(_tile, _critter):
+	if grid[_tile.x][_tile.y].critter == null:
+		grid[_tile.x][_tile.y].critter = _critter
+		return true
+	return false
+
+func placeCritterOnTypeOfTile(_tile, _critter):
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):
 			if _tile == grid[x][y].tile:
@@ -346,6 +352,11 @@ func connectAllCells(points):
 ################################
 ### General helper functions ###
 ################################
+
+func isTileFree(_tile):
+	if grid[_tile.x][_tile.y].critter == null:
+		return true
+	return false
 
 func checkAdjacentTilesForOpenSpace(_position, _checkForSingleOpenSpace = false, checkForCritters = false, _shuffleDirections = true):
 	var _openTiles = []

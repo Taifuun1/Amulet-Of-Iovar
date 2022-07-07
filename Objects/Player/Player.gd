@@ -95,7 +95,7 @@ func create(_class):
 	basemp = _playerClass.mp
 	maxhp = _playerClass.hp
 	maxmp = _playerClass.mp
-	ac = $"/root/World/UITheme/UI/Equipment".getArmorClass()
+	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 	
@@ -104,6 +104,8 @@ func create(_class):
 	
 	calories = 1000
 	previousCalories = calories
+	
+	statusEffects["blindness"] = 3
 	
 	calculateWeightStats()
 	
@@ -200,7 +202,7 @@ func dropItem(_playerTile, _item, _grid):
 	_grid[_playerTile.x][_playerTile.y].items.append(_item.id)
 	$Inventory.dropFromInventory(_item)
 	get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
-	$"/root/World/UITheme/UI/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
+	$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
 
 
 
@@ -230,7 +232,17 @@ func processPlayerSpecificEffects():
 	calculateWeightStats()
 	
 	if statusEffects["blindness"] > 0:
+		playerVisibility = 0
+	else:
 		playerVisibility = -1
+	
+	for _statusEffect in statusEffects.keys():
+		if statusEffects[_statusEffect] > 0:
+			if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
+				$"/root/World/UI/UITheme/GameStats".addStatusEffect(_statusEffect)
+		else:
+			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
+				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_statusEffect)
 	
 	for _item in itemsTurnedOn:
 		match _item.identifiedItemName.to_lower():
@@ -296,29 +308,29 @@ func calculateWeightStats():
 
 func calculateEquipmentStats():
 	# Armor class
-	ac = $"/root/World/UITheme/UI/Equipment".getArmorClass()
+	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	
 	attacks = []
 	# Attacks
 	if (
-		$"/root/World/UITheme/UI/Equipment".hands["lefthand"] != null and
-		$"/root/World/UITheme/UI/Equipment".hands["lefthand"] == $"/root/World/UITheme/UI/Equipment".hands["righthand"]
+		$"/root/World/UI/UITheme/Equipment".hands["lefthand"] != null and
+		$"/root/World/UI/UITheme/Equipment".hands["lefthand"] == $"/root/World/UI/UITheme/Equipment".hands["righthand"]
 	):
-		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
+		attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands["lefthand"] })).getAttacks(stats))
 	elif (
-		$"/root/World/UITheme/UI/Equipment".hands["lefthand"] != null or
-		$"/root/World/UITheme/UI/Equipment".hands["righthand"] != null
+		$"/root/World/UI/UITheme/Equipment".hands["lefthand"] != null or
+		$"/root/World/UI/UITheme/Equipment".hands["righthand"] != null
 	):
 		if (
-			$"/root/World/UITheme/UI/Equipment".hands["lefthand"] != null and
-			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["lefthand"] })).category.matchn("shield")
+			$"/root/World/UI/UITheme/Equipment".hands["lefthand"] != null and
+			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands["lefthand"] })).category.matchn("shield")
 		):
-			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["lefthand"] })).getAttacks(stats))
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands["lefthand"] })).getAttacks(stats))
 		if (
-			$"/root/World/UITheme/UI/Equipment".hands["righthand"] != null and
-			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["righthand"] })).category.matchn("shield")
+			$"/root/World/UI/UITheme/Equipment".hands["righthand"] != null and
+			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands["righthand"] })).category.matchn("shield")
 		):
-			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UITheme/UI/Equipment".hands["righthand"] })).getAttacks(stats))
+			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands["righthand"] })).getAttacks(stats))
 	else:
 		attacks = [
 			{
@@ -575,9 +587,14 @@ func readItem(_id):
 				for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
 					if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0:
 						_aliveCritters.append(_critterName)
-				$"/root/World/UITheme/UI/ListMenu".showListMenuList("Genocide what?", _aliveCritters)
-				$"/root/World/UITheme/UI/ListMenu".show()
+				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters)
+				$"/root/World/UI/UITheme/ListMenu".show()
 				_additionalChoices = true
+			"scroll of teleport":
+				if dealWithScrollOfTeleport(_readItem.alignment):
+					Globals.gameConsole.addLog("Whoosh! You reappear somewhere!")
+				else:
+					Globals.gameConsole.addLog("It doesn't seem you have space to teleport...")
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		checkAllItemsIdentification()
@@ -596,6 +613,36 @@ func dealWithScrollOfGenocide(_critterName):
 	GlobalCritterInfo.globalCritterInfo[_critterName].population = 0
 	Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _critterName.capitalize() }))
 	$"/root/World".closeMenu()
+
+func dealWithScrollOfTeleport(_alignment):
+	var _world = $"/root/World"
+	if _alignment.matchn("uncursed") or _alignment.matchn("blessed"):
+		var _playerPosition = _world.level.getCritterTile(0)
+		var _level = _world.level
+		var _spawnableFloors = _level.spawnableFloors.duplicate(true)
+		for _spawnableFloor in _spawnableFloors:
+			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
+			if _level.placeCritter(_randomTile, 0):
+				$"/root/World/Critters/0".moveCritter(_playerPosition, _randomTile, 0, _level)
+				return true
+			else:
+				_spawnableFloors.erase(_spawnableFloor)
+	elif _alignment.matchn("cursed"):
+		var _randomDungeonPart = _world.levels.keys()[randi() % _world.levels.keys().size()]
+		var _randomLevel
+		if _randomDungeonPart.matchn("firstlevel"):
+			_randomLevel = _world.levels[_randomDungeonPart]
+		else:
+			_randomLevel = _world.levels[_randomDungeonPart][randi() % _world.levels[_randomDungeonPart].size()]
+		var _spawnableFloors = _randomLevel.spawnableFloors.duplicate(true)
+		for _spawnableFloor in _spawnableFloors:
+			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
+			if _randomLevel.isTileFree(_randomTile):
+				_world.goToLevel(_randomTile, _randomLevel)
+				return true
+			else:
+				_spawnableFloors.erase(_spawnableFloor)
+	return false
 
 func quaffItem(_id):
 	var _quaffedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))

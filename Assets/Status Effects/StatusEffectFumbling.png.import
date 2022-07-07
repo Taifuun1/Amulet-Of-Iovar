@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ComestiblePotatoOnionMeatRation.png-b1a1797f1c28d5d4c94210e8b7865747.stex"
+path="res://.import/StatusEffectFumbling.png-eb161f9b2301e1247827290021dcf055.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Comestibles/ComestiblePotatoOnionMeatRation.png"
-dest_files=[ "res://.import/ComestiblePotatoOnionMeatRation.png-b1a1797f1c28d5d4c94210e8b7865747.stex" ]
+source_file="res://Assets/Status Effects/StatusEffectFumbling.png"
+dest_files=[ "res://.import/StatusEffectFumbling.png-eb161f9b2301e1247827290021dcf055.stex" ]
 
 [params]
 
