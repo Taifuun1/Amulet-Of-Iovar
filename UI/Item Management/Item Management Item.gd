@@ -1,10 +1,10 @@
-extends Node
+extends HBoxContainer
 
 var id
 var itemName
 var unidentifiedItemName
 var type
-var alignment
+var itemAlignment
 var enchantment
 var stackable
 

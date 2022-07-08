@@ -181,12 +181,12 @@ func create():
 	$Critters/"0"/Inventory.addToInventory(newItem5)
 	
 	var newItem6 = load("res://Objects/Item/Item.tscn").instance()
-	newItem6.createItem($"/root/World/Items/Items".getItemByName("shovel"), { "alignment": "blessed" })
+	newItem6.createItem($"/root/World/Items/Items".getItemByName("scroll of genocide"), { "alignment": "uncursed" })
 	$"/root/World/Items".add_child(newItem6, true)
 	$Critters/"0"/Inventory.addToInventory(newItem6)
 	
 	var newItem13 = load("res://Objects/Item/Item.tscn").instance()
-	newItem13.createItem($"/root/World/Items/Items".getItemByName("potion of hunger"), { "alignment": "blessed" })
+	newItem13.createItem($"/root/World/Items/Items".getItemByName("scroll of genocide"), { "alignment": "cursed" })
 	$"/root/World/Items".add_child(newItem13, true)
 	$Critters/"0"/Inventory.addToInventory(newItem13)
 	
@@ -556,16 +556,23 @@ func drawFOV():
 			var testPoint = Vector2((_x + 0.5) * 32, (_y + 0.5) * 32) + Vector2(x_dir, y_dir) * 32 / 2
 			var occlusion = spaceState.intersect_ray(playerCenter, testPoint)
 			if (
-				_playerNode.playerVisibility != 0 and
+				_playerNode.playerVisibility == 0 and
+				playerTile == Vector2(_x, _y)
+			):
+				$FOV.greyCell(_x, _y)
+			elif (
 				(
-					!occlusion or
-					(occlusion.position - testPoint).length() < 1
-				) and
-				(
-					(playerCenter - testPoint).length() < level.visibility * 32 or
+					_playerNode.playerVisibility != 0 and
 					(
-						(playerCenter - testPoint).length() < _playerNode.playerVisibility * 32 and
-						_playerNode.playerVisibility != -1
+						!occlusion or
+						(occlusion.position - testPoint).length() < 1
+					) and
+					(
+						(playerCenter - testPoint).length() < level.visibility * 32 or
+						(
+							(playerCenter - testPoint).length() < _playerNode.playerVisibility * 32 and
+							_playerNode.playerVisibility != -1
+						)
 					)
 				)
 			):

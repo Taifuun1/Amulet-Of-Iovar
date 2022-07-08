@@ -14,9 +14,6 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	Globals.critterId += 1
 	levelId = _levelId
 	
-	add_child(inventory)
-	$Inventory.create()
-	
 	critterName = _critter.critterName
 	race = _critter.race
 	critterClass = _critter.class
@@ -59,7 +56,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		var _path
 		if _critterTile != null:
 			_path = aI.getCritterMove(_critterTile, _playerTile, _level)
-		if _path.size() != 0:
+		if _path.size() > 1:
 			var _moveCritterTo = _path[1]
 			if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 				if hits[currentHit] == 1:

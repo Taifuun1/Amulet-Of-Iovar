@@ -1,8 +1,6 @@
 extends Node2D
 class_name BaseCritter
 
-var inventory = load("res://UI/Inventory/Inventory.tscn").instance()
-
 var id
 
 var critterName

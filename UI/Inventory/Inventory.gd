@@ -8,6 +8,8 @@ var currentWeight = 0
 func create():
 	name = "Inventory"
 	$InventoryContainer.hide()
+	
+	layer = 10
 
 func addToInventory(_item):
 	inventory.append(_item.id)
@@ -54,12 +56,11 @@ func showInventory():
 		var _newItem = inventoryItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
 		_newItem.setValues(_item)
-		_newItem.get_node("Checked").connect("pressed", self, "_on_Inventory_List_Clicked", [{ "id": _item.id }])
-		$InventoryContainer/InventoryList.add_child(_newItem)
+		$InventoryContainer/InventoryListMargin/InventoryListContainer/ListMenuContent.add_child(_newItem)
 	$InventoryContainer.show()
 
 func hideInventory():
-	for item in $InventoryContainer/InventoryList.get_children():
+	for item in $InventoryContainer/InventoryListMargin/InventoryListContainer/ListMenuContent.get_children():
 		item.queue_free()
 	$InventoryContainer.hide()
 

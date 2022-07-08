@@ -42,12 +42,6 @@ func createGrid(_tile = Globals.tiles.EMPTY):
 				"interactable": null
 			})
 
-func placeCritter(_tile, _critter):
-	if grid[_tile.x][_tile.y].critter == null:
-		grid[_tile.x][_tile.y].critter = _critter
-		return true
-	return false
-
 func placeCritterOnTypeOfTile(_tile, _critter):
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):

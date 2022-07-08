@@ -7,13 +7,16 @@ var items = []
 
 #var chooseOnClick = false
 
+var alignment
+
 func create():
 	name = "ListMenu"
 	hide()
 
-func showListMenuList(_title, _items):
+func showListMenuList(_title, _items, _alignment):
 	$Title.text = _title
 	items = _items
+	alignment = _alignment
 	for _item in items:
 		var newItem = listItem.instance()
 #		var _item = get_node("/root/World/Critters/{id}".format({ "id": item }))
@@ -30,7 +33,7 @@ func hideListMenuList():
 
 func _on_List_Menu_Item_Clicked(_id):
 #	if $"/root/World".currentGameState == $"/root/World".gameState.READ:
-	$"/root/World/Critters/0".dealWithScrollOfGenocide(_id)
+	$"/root/World/Critters/0".dealWithScrollOfGenocide(_id, alignment)
 	$"/root/World".processGameTurn()
 #	return
 

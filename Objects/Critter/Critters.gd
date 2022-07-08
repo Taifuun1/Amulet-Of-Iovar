@@ -145,17 +145,27 @@ func spawnCritter(_critter, _position = null, _level = null):
 	else:
 		_spawnedLevel = _level
 	
-	# Position
-	if _position == null:
-		_gridPosition = _spawnedLevel.spawnableFloors[randi() % _spawnedLevel.spawnableFloors.size()]
-	else:
-		_gridPosition = _position
-	
 	# Name
 	if typeof(_critter) == TYPE_STRING:
 		_newCritter = getCritterByName(_critter)
 	else:
 		_newCritter = _critter
+	
+	# Position
+	if _position == null:
+		var _spawnableFloors = _spawnedLevel.spawnableFloors.duplicate(true)
+		for _spawnableFloor in _spawnableFloors:
+			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
+			if _spawnedLevel.isTileFree(_randomTile):
+				_gridPosition = _randomTile
+				break
+			else:
+				_spawnableFloors.erase(_randomTile)
+		if _spawnableFloors.empty():
+			return false
+#			push_error("Couldn't find space for critter: %s, on level: %s" % [_newCritter.critterName, _spawnedLevel])
+	else:
+		_gridPosition = _position
 	
 	if (
 		_spawnedLevel.grid[_gridPosition.x][_gridPosition.y].critter == null and
@@ -170,7 +180,7 @@ func spawnCritter(_critter, _position = null, _level = null):
 		_spawnedLevel.removePointFromEnemyPathfinding(_gridPosition)
 		GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
 		return _newCritter.critterName
-	return null
+	return false
 
 func spawnRandomCritter(_position, _level = null):
 	

@@ -208,7 +208,7 @@ var globalCritterInfo = {
 		"population": 40,
 		"crittersInPlay": 0
 	},
-	"Outlaw mechandiee'er": {
+	"Outlaw merchandiee'er": {
 		"population": 40,
 		"crittersInPlay": 0
 	},

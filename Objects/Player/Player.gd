@@ -1,5 +1,7 @@
 extends BaseCritter
 
+var inventory = load("res://UI/Inventory/Inventory.tscn").instance()
+
 var playerVisibility = -1
 
 var experiencePoints = 0
@@ -105,13 +107,17 @@ func create(_class):
 	calories = 1000
 	previousCalories = calories
 	
-	statusEffects["blindness"] = 3
-	
 	calculateWeightStats()
 	
 	updatePlayerStats()
 	
 	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
+
+
+
+#####################################
+### Player basic action functions ###
+#####################################
 
 func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter != null:
@@ -141,14 +147,6 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 	else:
 		moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 		checkIfItemsHere(_level, _tileToMoveTo)
-
-func checkIfItemsHere(_level, _tileToMoveTo):
-	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 10:
-		Globals.gameConsole.addLog("There are alot of items here.")
-	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 1:
-		Globals.gameConsole.addLog("You see some items here.")
-	elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
-		Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
 
 func takeDamage(_attacks, _crittername):
 	var _attacksLog = []
@@ -206,9 +204,9 @@ func dropItem(_playerTile, _item, _grid):
 
 
 
-####################
-### Player stats ###
-####################
+####################################
+### Player stat update functions ###
+####################################
 
 func processPlayerSpecificEffects():
 	calories -= 1
@@ -246,6 +244,8 @@ func processPlayerSpecificEffects():
 	
 	for _item in itemsTurnedOn:
 		match _item.identifiedItemName.to_lower():
+			"blindfold":
+				statusEffects["blindness"] = 2
 			"candle":
 				if _item.value.charges > 0:
 					_item.value.charges -= 1
@@ -584,10 +584,17 @@ func readItem(_id):
 						Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of genocide":
 				var _aliveCritters = []
-				for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
-					if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0:
-						_aliveCritters.append(_critterName)
-				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters)
+				if _readItem.alignment.matchn("blessed"):
+					for _critterRace in $"/root/World/Critters/Critters".critters.keys():
+						for _critterName in $"/root/World/Critters/Critters".critters[_critterRace].critterTypes:
+							if GlobalCritterInfo.globalCritterInfo[_critterName.critterName].population != 0:
+								_aliveCritters.append(_critterRace)
+								break
+				elif _readItem.alignment.matchn("uncursed") or _readItem.alignment.matchn("cursed"):
+					for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
+						if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0:
+							_aliveCritters.append(_critterName)
+				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters, _readItem.alignment)
 				$"/root/World/UI/UITheme/ListMenu".show()
 				_additionalChoices = true
 			"scroll of teleport":
@@ -603,15 +610,30 @@ func readItem(_id):
 			get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 	$"/root/World".closeMenu(_additionalChoices)
 
-func dealWithScrollOfGenocide(_critterName):
-	for _critter in $"/root/World/Critters".get_children():
-		if _critter.name == "Critters":
-			continue
-		if _critter.critterName == _critterName:
-			_critter.despawn(null, false)
-	GlobalCritterInfo.globalCritterInfo[_critterName].crittersInPlay = 0
-	GlobalCritterInfo.globalCritterInfo[_critterName].population = 0
-	Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _critterName.capitalize() }))
+func dealWithScrollOfGenocide(_genocidableName, _alignment):
+	if _alignment.matchn("blessed"):
+		for _genocidableCritter in $"/root/World/Critters/Critters".critters[_genocidableName].critterTypes:
+			for _critter in $"/root/World/Critters".get_children():
+				if _critter.name == "Critters":
+					continue
+				if _critter.critterName == _genocidableCritter.critterName:
+					_critter.despawn(null, false)
+			GlobalCritterInfo.globalCritterInfo[_genocidableCritter.critterName].population = 0
+			Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _genocidableCritter.critterName.capitalize() }))
+	if _alignment.matchn("uncursed"):
+		for _critter in $"/root/World/Critters".get_children():
+			if _critter.name == "Critters":
+				continue
+			if _critter.critterName == _genocidableName:
+				_critter.despawn(null, false)
+		GlobalCritterInfo.globalCritterInfo[_genocidableName].population = 0
+		Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _genocidableName.capitalize() }))
+	if _alignment.matchn("cursed"):
+		var _level = $"/root/World".level
+		for _populationCount in range(GlobalCritterInfo.globalCritterInfo[_genocidableName].population):
+			if !$"/root/World/Critters/Critters".spawnCritter(_genocidableName):
+				break
+		Globals.gameConsole.addLog("RUMMMMMBLE!!!")
 	$"/root/World".closeMenu()
 
 func dealWithScrollOfTeleport(_alignment):
@@ -622,11 +644,11 @@ func dealWithScrollOfTeleport(_alignment):
 		var _spawnableFloors = _level.spawnableFloors.duplicate(true)
 		for _spawnableFloor in _spawnableFloors:
 			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
-			if _level.placeCritter(_randomTile, 0):
+			if _level.isTileFree(_randomTile):
 				$"/root/World/Critters/0".moveCritter(_playerPosition, _randomTile, 0, _level)
 				return true
 			else:
-				_spawnableFloors.erase(_spawnableFloor)
+				_spawnableFloors.erase(_randomTile)
 	elif _alignment.matchn("cursed"):
 		var _randomDungeonPart = _world.levels.keys()[randi() % _world.levels.keys().size()]
 		var _randomLevel
@@ -803,11 +825,13 @@ func useItem(_id):
 			"blindfold":
 				if _usedItem.value.worn:
 					_usedItem.value.worn = false
-					playerVisibility = -1
+					statusEffects["blindness"] = 0
+					itemsTurnedOn.erase(_usedItem)
 					Globals.gameConsole.addLog("You take off the blindfold.")
 				else:
 					_usedItem.value.worn = true
-					playerVisibility = 0
+					statusEffects["blindness"] = 2
+					itemsTurnedOn.append(_usedItem)
 					Globals.gameConsole.addLog("You wear the blindfold.")
 			"candle":
 				if playerVisibility < 1:
@@ -882,6 +906,14 @@ func useItem(_id):
 ########################
 ### Helper functions ###
 ########################
+
+func checkIfItemsHere(_level, _tileToMoveTo):
+	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 10:
+		Globals.gameConsole.addLog("There are alot of items here.")
+	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 1:
+		Globals.gameConsole.addLog("You see some items here.")
+	elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
+		Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
 
 func checkAllItemsIdentification():
 	for _item in $"/root/World/Items".get_children():
