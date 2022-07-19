@@ -8,20 +8,19 @@ var alignment
 var enchantment
 var stackable
 
-var notIdentified = {
-	"use": false,
-	"alignment": false,
-	"enchantment": false
-}
-
 func setValues(_item):
 	id = _item.id
 	name = str(_item.id)
 	
-	get_node("Name").text = _item.itemName
-	get_node("Alignment").text = _item.alignment
-	if enchantment == true:
-		get_node("Enchantment").text = str(_item.enchantment)
+	$Name.text = _item.itemName
+	if _item.notIdentified.alignment:
+		$Alignment.text = _item.alignment
+	else:
+		$Alignment.text = "Unknown"
+	if _item.notIdentified.enchantment:
+		$Enchantment.text = str(_item.enchantment)
+	else:
+		$Enchantment.text = "Unknown"
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:

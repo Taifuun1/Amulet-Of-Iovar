@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://UI/Inventory/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Miscellaneous/Theme.tres" type="Theme" id=2]
 
 [node name="Inventory" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -11,6 +12,7 @@ margin_top = 180.0
 margin_right = 230.0
 margin_bottom = 220.0
 rect_min_size = Vector2( 1540, 720 )
+theme = ExtResource( 2 )
 
 [node name="Background" type="ColorRect" parent="InventoryContainer"]
 margin_right = 1540.0

@@ -62,7 +62,7 @@ var statusEffects = {
 		"texture": load("res://Assets/Status Effects/StatusEffectFlattened.png")
 	},
 	"slow digestion": {
-		"label": "swd",
+		"label": "sld",
 		"description": "You feel like youre saving energy. (Lose hunger points only every other turn)",
 		"color": "#c4047b",
 		"texture": load("res://Assets/Status Effects/StatusEffectSlowDigestion.png")
@@ -78,6 +78,12 @@ var statusEffects = {
 		"description": "You feel ambigious. (Enemy attacks have a 25% chance of missing.)",
 		"color": "#e800f0",
 		"texture": load("res://Assets/Status Effects/StatusEffectDisplacement.png")
+	},
+	"seeing": {
+		"label": "see",
+		"description": "You can see magically. (You enemies through walls.)",
+		"color": "#ffbb1c",
+		"texture": load("res://Assets/Status Effects/StatusEffectSeeing.png")
 	}
 }
 

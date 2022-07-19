@@ -85,6 +85,8 @@ func _process(_delta):
 					_changed = true
 				accessories[hoveredEquipment.to_lower()] = null
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
+				if _item.category.matchn("ring"):
+					checkWhatRingIsWorn(_item)
 			$"/root/World/Critters/0".calculateEquipmentStats()
 			if _changed:
 				$"/root/World".processGameTurn()
@@ -100,15 +102,6 @@ func hideEquipment():
 	for _item in $ItemsBackground/ItemContainer/ItemList.get_children():
 		_item.queue_free()
 	hide()
-
-func emptyWeapon(_slot):
-	hands[_slot] = null
-
-func emptyAccessory(_slot):
-	accessories[_slot] = null
-
-func emptyEquipment(_slot):
-	equipment[_slot] = null
 
 func setEquipment(_id):
 	var _item = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -137,6 +130,8 @@ func setEquipment(_id):
 	elif _matchingType.matchn("accessory"):
 		accessories[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
+		if _item.category.matchn("ring"):
+			checkWhatRingIsWorn(_item)
 		_changed = true
 	elif _matchingType.matchn("armor"):
 		equipment[hoveredEquipment.to_lower()] = _item.id
@@ -219,9 +214,9 @@ func getArmorClass():
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] }))
 		_ac += (_item.value.ac + _item.enchantment)
 	if accessories["ring1"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).category.matchn("ring"):
-		_ac += checkWhatRingIsWorn(get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })))
+		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })))
 	if accessories["ring2"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).category.matchn("ring"):
-		_ac += checkWhatRingIsWorn(get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })))
+		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })))
 	return _ac
 
 func checkIfWieldingItem(_itemName):
@@ -232,11 +227,69 @@ func checkIfWieldingItem(_itemName):
 			return true
 	return false
 
-func checkWhatRingIsWorn(_ring):
+func checkIfRingIsRingOfProtection(_ring):
 	match _ring.identifiedItemName.to_lower():
 		"ring of protection":
 			return _ring.value
-	return 0
+		_:
+			return 0
+
+func checkWhatRingIsWorn(_ring):
+#	Globals.gameConsole.addLog("You quaff a {itemName}.".format({ "itemName": _quaffedItem.itemName }))
+	if (
+		GlobalItemInfo.globalItemInfo.has(_ring.identifiedItemName) and
+		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified == false
+	):
+		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified = true
+		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _ring.identifiedItemName, "unidentifiedItemName": _ring.unidentifiedItemName }))
+	var _playerNode = $"/root/World/Critters/0"
+	match _ring.identifiedItemName.to_lower():
+		"ring of slow digestion":
+			if _playerNode.itemsTurnedOn.has(_ring):
+				_playerNode.statusEffects["slow digestion"] = 0
+				_playerNode.itemsTurnedOn.erase(_ring)
+				Globals.gameConsole.addLog("Your belly feels faster.")
+			else:
+				_playerNode.statusEffects["slow digestion"] = -1
+				_playerNode.itemsTurnedOn.append(_ring)
+				Globals.gameConsole.addLog("Your belly feels constant.")
+		"ring of hunger":
+			if _playerNode.itemsTurnedOn.has(_ring):
+				_playerNode.statusEffects["hunger"] = 0
+				_playerNode.itemsTurnedOn.erase(_ring)
+				Globals.gameConsole.addLog("Your belly feels nourished.")
+			else:
+				_playerNode.statusEffects["hunger"] = -1
+				_playerNode.itemsTurnedOn.append(_ring)
+				Globals.gameConsole.addLog("Your belly feels like it has a hole.")
+		"ring of regen":
+			if _playerNode.itemsTurnedOn.has(_ring):
+				_playerNode.statusEffects["regen"] = 0
+				_playerNode.itemsTurnedOn.erase(_ring)
+				Globals.gameConsole.addLog("Your skin more stable.")
+			else:
+				_playerNode.statusEffects["regen"] = -1
+				_playerNode.itemsTurnedOn.append(_ring)
+				Globals.gameConsole.addLog("Your skin tingles.")
+		"ring of fumbling":
+			if _playerNode.itemsTurnedOn.has(_ring):
+				_playerNode.statusEffects["fumbling"] = 0
+				_playerNode.itemsTurnedOn.erase(_ring)
+				Globals.gameConsole.addLog("Your legs feel steady.")
+			else:
+				_playerNode.statusEffects["fumbling"] = -1
+				_playerNode.itemsTurnedOn.append(_ring)
+				Globals.gameConsole.addLog("Your legs feel like jelly.")
+		"ring of seeing":
+			if _playerNode.itemsTurnedOn.has(_ring):
+				_playerNode.statusEffects["seeing"] = 0
+				_playerNode.itemsTurnedOn.erase(_ring)
+				Globals.gameConsole.addLog("It feels like you cant see at all.")
+			else:
+				_playerNode.statusEffects["seeing"] = -1
+				_playerNode.itemsTurnedOn.append(_ring)
+				Globals.gameConsole.addLog("You can see everything!")
+	_playerNode.checkAllItemsIdentification()
 
 func checkIfMatchingEquipmentAndSlot(_type, _category):
 	if _type.matchn("weapon"):

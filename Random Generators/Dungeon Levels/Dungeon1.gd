@@ -13,6 +13,7 @@ func createDungeon(_isDouble):
 	createRooms()
 	placeStairs("DUNGEON", _isDouble)
 	connectRooms()
+	placeRandomInteractables(["altar"])
 
 func createRooms():
 	for _roomCount in range(randi() % 2 + 5):

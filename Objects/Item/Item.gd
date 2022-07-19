@@ -180,3 +180,10 @@ func checkItemIdentification():
 		notIdentified.alignment = true
 		notIdentified.enchantment = true
 
+func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
+	if _identifyName:
+		itemName = identifiedItemName
+	if _identifyAlignment:
+		notIdentified.alignment = true
+	if _identifyEnchantment:
+		notIdentified.enchantment = true

@@ -3,9 +3,9 @@
 [ext_resource path="res://UI/Debug Menu/Debug Menu.gd" type="Script" id=1]
 
 [node name="Debug Menu" type="CenterContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
 
 [node name="DebugMenuPopup" type="Popup" parent="."]
@@ -13,10 +13,12 @@ margin_left = 960.0
 margin_top = 540.0
 margin_right = 960.0
 margin_bottom = 540.0
+mouse_filter = 2
 
 [node name="DebugMenuContainer" type="HBoxContainer" parent="DebugMenuPopup"]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="LineEdit" type="LineEdit" parent="DebugMenuPopup/DebugMenuContainer"]
 margin_right = 100.0

@@ -62,6 +62,9 @@ var currentGameState = gameState.GAME
 var keepMoving = false
 
 func _ready():
+#	OS.window_size = Vector2(1280, 900)
+#	get_tree().set_screen_stretch(2,1,Vector2(960, 540),.5)
+	
 	set_process(true)
 	
 	randomize()
@@ -425,7 +428,7 @@ func _input(_event):
 			currentGameState = gameState.INTERACT
 			Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
 		elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME and inGame:
-			$"UI/UITheme/Debug Menu".show()
+			$"UI/UITheme/Debug Menu".showMenu()
 		elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME and inGame:
 			openMenu("use")
 		elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME and inGame:
@@ -555,6 +558,7 @@ func drawFOV():
 			var y_dir = 1 if _y < playerTile.y else -1
 			var testPoint = Vector2((_x + 0.5) * 32, (_y + 0.5) * 32) + Vector2(x_dir, y_dir) * 32 / 2
 			var occlusion = spaceState.intersect_ray(playerCenter, testPoint)
+#			$FOV.seeCell(_x, _y)
 			if (
 				_playerNode.playerVisibility == 0 and
 				playerTile == Vector2(_x, _y)
@@ -589,11 +593,17 @@ func drawFOV():
 				$FOV.greyCell(_x, _y)
 
 func drawCrittersAndItems():
-	# Critters, items and Globals.tiles
+	# Critters and items
 	for x in (Globals.gridSize.x):
 		for y in (Globals.gridSize.y):
 			if level.grid[x][y].critter != null:
-				if $FOV.currentFOVLevel[x][y] == -1 or level.grid[x][y].critter == 0:
+				if (
+					$FOV.currentFOVLevel[x][y] == -1 or level.grid[x][y].critter == 0 or
+					(
+						$Critters/"0".checkIfStatusEffectIsInEffect("seeing") and
+						$Critters/"0".position.distance_to(map_to_world(Vector2(x,y))) < 32 * 12
+					)
+				):
 					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).set_position(map_to_world(Vector2(x, y)) + half_tile_size)
 					get_node("Critters/{id}".format({ "id": level.grid[x][y].critter })).show()
 				else:

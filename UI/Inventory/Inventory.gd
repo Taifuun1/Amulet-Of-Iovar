@@ -54,8 +54,7 @@ func dropFromInventory(_item):
 func showInventory():
 	for item in inventory:
 		var _newItem = inventoryItem.instance()
-		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
-		_newItem.setValues(_item)
+		_newItem.setValues(get_node("/root/World/Items/{id}".format({ "id": item })))
 		$InventoryContainer/InventoryListMargin/InventoryListContainer/ListMenuContent.add_child(_newItem)
 	$InventoryContainer.show()
 

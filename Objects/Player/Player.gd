@@ -109,6 +109,8 @@ func create(_class):
 	
 	calculateWeightStats()
 	
+	statusEffects["seeing"] = 100
+	
 	updatePlayerStats()
 	
 	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
@@ -135,7 +137,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		elif _critter.aI.aI == "Neutral":
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level, _critter.id)
 			Globals.gameConsole.addLog("You swap places with the {critter}.".format({ "critter": _critter.critterName }))
-			checkIfItemsHere(_level, _tileToMoveTo)
+			checkIfThereIsSomethingOnTheGroundHere(_level, _tileToMoveTo)
 		else:
 			return false
 	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.DOOR_CLOSED:
@@ -145,8 +147,11 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.DOOR_OPEN
 			_level.addPointToEnemyPathding(_tileToMoveTo, _level.grid)
 	else:
-		moveCritter(_playerTile, _tileToMoveTo, 0, _level)
-		checkIfItemsHere(_level, _tileToMoveTo)
+		if checkIfStatusEffectIsInEffect("fumbling") and randi() % 4 == 0:
+			Globals.gameConsole.addLog("You fumble on your feet.")
+		else:
+			moveCritter(_playerTile, _tileToMoveTo, 0, _level)
+			checkIfThereIsSomethingOnTheGroundHere(_level, _tileToMoveTo)
 
 func takeDamage(_attacks, _crittername):
 	var _attacksLog = []
@@ -187,20 +192,29 @@ func pickUpItem(_playerTile, _item, _grid):
 			return
 
 func dropItems(_playerTile, _items, _grid):
-	var itemsLog = []
+	var _itemsLog = []
 	if _items.size() != 0:
 		for _id in _items:
 			var _item = get_node("/root/World/Items/{id}".format({ "id": _id }))
-			dropItem(_playerTile, _item, _grid)
-			itemsLog.append("You drop {item}.".format({ "item": _item.itemName }))
-	var itemsLogString = PoolStringArray(itemsLog).join(" ")
-	Globals.gameConsole.addLog(itemsLogString)
+			_itemsLog.append(dropItem(_playerTile, _item, _grid))
+	var _itemsLogString = PoolStringArray(_itemsLog).join(" ")
+	Globals.gameConsole.addLog(_itemsLogString)
 
 func dropItem(_playerTile, _item, _grid):
+	var _dropLog = []
 	_grid[_playerTile.x][_playerTile.y].items.append(_item.id)
 	$Inventory.dropFromInventory(_item)
 	get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
 	$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
+	_dropLog.append("You drop {item}.".format({ "item": _item.itemName }))
+	if _grid[_playerTile.x][_playerTile.y].interactable == Globals.interactables.ALTAR:
+		_item.identifyItem(false, true, false)
+		if _item.alignment.matchn("blessed"):
+			_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
+		elif _item.alignment.matchn("cursed"):
+			_dropLog.append("The {item} flashes with a black light.".format({ "item": _item.itemName }))
+	var _dropLogString = PoolStringArray(_dropLog).join(" ")
+	return _dropLogString
 
 
 
@@ -209,7 +223,18 @@ func dropItem(_playerTile, _item, _grid):
 ####################################
 
 func processPlayerSpecificEffects():
-	calories -= 1
+	############
+	## Hunger ##
+	############
+	if checkIfStatusEffectIsInEffect("hunger"):
+		calories -= 3
+	elif checkIfStatusEffectIsInEffect("slow digestion"):
+		calories -= 1
+	else:
+		calories -= 2
+	previousCalories = calories
+	
+	# Check if player becomes less hungry
 	if previousCalories <= 400 and calories > 400:
 		Globals.gameConsole.addLog("You are no longer hungry.")
 	elif previousCalories <= 200 and calories > 200 and calories < 400:
@@ -217,6 +242,7 @@ func processPlayerSpecificEffects():
 	elif previousCalories <= 100 and calories > 100 and calories < 200:
 		Globals.gameConsole.addLog("You are still very hungry.")
 	
+	# Check if player becomes more hungry
 	if previousCalories >= 400 and calories < 400 and calories > 200:
 		Globals.gameConsole.addLog("You are beginning to feel hungry.")
 	elif previousCalories >= 200 and calories < 200 and calories > 100:
@@ -225,27 +251,34 @@ func processPlayerSpecificEffects():
 		Globals.gameConsole.addLog("You are starving!")
 	elif calories <= 0:
 		Globals.gameConsole.addLog("You die...")
-	previousCalories = calories
 	
+	############
+	## Weight ##
+	############
 	calculateWeightStats()
 	
-	if statusEffects["blindness"] > 0:
+	####################
+	## Status effects ##
+	####################
+	if checkIfStatusEffectIsInEffect("blindness"):
 		playerVisibility = 0
 	else:
 		playerVisibility = -1
 	
+	# Check game stats status effects visibility
 	for _statusEffect in statusEffects.keys():
-		if statusEffects[_statusEffect] > 0:
+		if (statusEffects[_statusEffect] > 0 or statusEffects[_statusEffect] == -1):
 			if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".addStatusEffect(_statusEffect)
 		else:
 			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_statusEffect)
 	
+	###########
+	## Tools ##
+	###########
 	for _item in itemsTurnedOn:
 		match _item.identifiedItemName.to_lower():
-			"blindfold":
-				statusEffects["blindness"] = 2
 			"candle":
 				if _item.value.charges > 0:
 					_item.value.charges -= 1
@@ -264,8 +297,6 @@ func processPlayerSpecificEffects():
 					_item.value.turnedOn = false
 					itemsTurnedOn.erase(_item)
 					Globals.gameConsole.addLog("Your lamp has run out of oil.")
-			_:
-				Globals.gameConsole.addLog("Thats not something that can be turned on.")
 
 func calculateWeightStats():
 	maxCarryWeight = {
@@ -743,10 +774,10 @@ func quaffItem(_id):
 					calories += 100
 					Globals.gameConsole.addLog("You feel nourished.")
 				if _quaffedItem.alignment.matchn("uncursed"):
-					calories += -100
+					calories += -150
 					Globals.gameConsole.addLog("You feel malnourished.")
 				if _quaffedItem.alignment.matchn("cursed"):
-					calories += -250
+					calories += -400
 					Globals.gameConsole.addLog("You feel like you lost half your weight!")
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
@@ -776,7 +807,7 @@ func zapItem(_id):
 		):
 			GlobalItemInfo.globalItemInfo[_zappedItem.identifiedItemName].identified = true
 			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _zappedItem.identifiedItemName, "unidentifiedItemName": _zappedItem.unidentifiedItemName }))
-		if !_zappedItem.value == 0:
+		if _zappedItem.value.charges > 0:
 			match _zappedItem.identifiedItemName.to_lower():
 				"wand of summon critter":
 					var _playerPosition = $"/root/World".level.getCritterTile(0)
@@ -803,9 +834,19 @@ func zapItem(_id):
 							Globals.gameConsole.addLog("A bucketload of critters appear around you!")
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
+				"wand of backwards magic sphere":
+					var _playerPosition = $"/root/World".level.getCritterTile(0)
+					if _zappedItem.alignment.matchn("blessed"):
+						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
+					elif _zappedItem.alignment.matchn("uncursed"):
+						takeDamage([8], "Wand of backwards magic sphere")
+						Globals.gameConsole.addLog("{itemName} hits you!".format({ "itemName": _zappedItem.itemName }))
+					elif _zappedItem.alignment.matchn("cursed"):
+						takeDamage([18], "Wand of backwards magic sphere")
+						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
-			_zappedItem.value -= 1
+			_zappedItem.value.charges -= 1
 			checkAllItemsIdentification()
 		else:
 			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
@@ -830,7 +871,7 @@ func useItem(_id):
 					Globals.gameConsole.addLog("You take off the blindfold.")
 				else:
 					_usedItem.value.worn = true
-					statusEffects["blindness"] = 2
+					statusEffects["blindness"] = -1
 					itemsTurnedOn.append(_usedItem)
 					Globals.gameConsole.addLog("You wear the blindfold.")
 			"candle":
@@ -907,13 +948,16 @@ func useItem(_id):
 ### Helper functions ###
 ########################
 
-func checkIfItemsHere(_level, _tileToMoveTo):
-	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 10:
+func checkIfThereIsSomethingOnTheGroundHere(_level, _tile):
+	if _level.grid[_tile.x][_tile.y].items.size() > 10:
 		Globals.gameConsole.addLog("There are alot of items here.")
-	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.size() > 1:
+	elif _level.grid[_tile.x][_tile.y].items.size() > 1:
 		Globals.gameConsole.addLog("You see some items here.")
-	elif !_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.empty():
-		Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].items.back() })).itemName }))
+	elif !_level.grid[_tile.x][_tile.y].items.empty():
+		Globals.gameConsole.addLog("You see {item}.".format({ "item": get_node("/root/World/Items/{item}".format({ "item": _level.grid[_tile.x][_tile.y].items.back() })).itemName }))
+	
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.ALTAR:
+		Globals.gameConsole.addLog("You see an altar here.")
 
 func checkAllItemsIdentification():
 	for _item in $"/root/World/Items".get_children():

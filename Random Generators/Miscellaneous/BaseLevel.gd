@@ -175,6 +175,16 @@ func isTileAStair(_newStair):
 			return true
 	return false
 
+func placeRandomInteractables(_interactables):
+	for _interactable in _interactables:
+		match _interactable:
+			"altar":
+				if randi() % 13 == 0:
+					for _i in range(randi() % 2 + 1):
+						var _randomSpawnableTile = spawnableFloors[randi() % spawnableFloors.size()]
+						if grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable == null:
+							grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable = Globals.interactables.ALTAR
+
 # Get locations and sizes of legible rooms on level
 func getAllLegibleRoomLocations(_legibleTiles, _roomSizeMin, _roomSizeMax):
 	var _legibleLocations = []

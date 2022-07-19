@@ -41,7 +41,9 @@ var statusEffects = {
 	"fumbling": 0,
 	"sleep": 0,
 	"blindness": 0,
-	"invisibility": 0
+	"invisibility": 0,
+	"seeing": 0,
+	"hunger": 0
 }
 
 var hpRegenTimer = 0
@@ -55,6 +57,12 @@ func moveCritter(_moveFrom, _moveTo, _movingCritter, _level, _movedCritter = nul
 		_level.grid[_moveFrom.x][_moveFrom.y].critter = _movedCritter
 		_level.grid[_moveTo.x][_moveTo.y].critter = _movingCritter
 
+
+
+###############################
+### Status effect functions ###
+###############################
+
 func processCritterEffects():
 	for _status in statusEffects.keys():
 		if statusEffects[_status] > 0:
@@ -62,7 +70,10 @@ func processCritterEffects():
 	
 	if hpRegenTimer > 25 - ( stats.legerity / 2 ):
 		if hp < maxhp:
-			hp += 1
+			if checkIfStatusEffectIsInEffect("regen"):
+				hp += 3
+			else:
+				hp += 1
 		hpRegenTimer = 0
 	else:
 		hpRegenTimer += 1
@@ -73,3 +84,13 @@ func processCritterEffects():
 		mpRegenTimer = 0
 	else:
 		mpRegenTimer += 1
+
+func checkIfStatusEffectIsPermanent(_statusEffect):
+	if statusEffects[_statusEffect] == -1:
+		return true
+	return false
+
+func checkIfStatusEffectIsInEffect(_statusEffect):
+	if statusEffects[_statusEffect] > 0 or statusEffects[_statusEffect] == -1:
+		return true
+	return false

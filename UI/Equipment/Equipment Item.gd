@@ -5,15 +5,19 @@ var id
 var selected = false
 var equipmentTexture
 
-#func _ready():
-#	var _catchWarning1 = connect("mouse_entered", self, "_mouse_over", [true])
-#	var _catchWarning2 = connect("mouse_exited", self, "_mouse_over", [false])
-
 func setValues(_item):
 	id = _item.id
+	
 	$EquipmentItemArea/ItemContainer/Name.text = str(_item.itemName)
-	$EquipmentItemArea/ItemContainer/Alignment.text = str(_item.alignment)
-	$EquipmentItemArea/ItemContainer/Enchantment.text = str(_item.enchantment)
+	if _item.notIdentified.alignment:
+		$EquipmentItemArea/ItemContainer/Alignment.text = str(_item.alignment)
+	else:
+		$EquipmentItemArea/ItemContainer/Alignment.text = "Unknown"
+	if _item.notIdentified.enchantment:
+		$EquipmentItemArea/ItemContainer/Enchantment.text = str(_item.enchantment)
+	else:
+		$EquipmentItemArea/ItemContainer/Enchantment.text = "Unknown"
+	
 	equipmentTexture = _item.getTexture()
 
 func _process(_delta):

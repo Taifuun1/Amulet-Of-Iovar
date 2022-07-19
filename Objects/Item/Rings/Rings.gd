@@ -134,7 +134,9 @@ var rings = {
 			"type": "Accessory",
 			"category": "Ring",
 			"weight": 10,
-			"value": null,
+			"value": {
+				"turnedOn": null
+			},
 			"enchantment": true,
 			"stackable": false,
 			"rarity": "Uncommon",

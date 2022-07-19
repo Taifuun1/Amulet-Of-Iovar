@@ -1,11 +1,12 @@
 extends Control
 
-func show():
+func showMenu():
 	show()
 	$DebugMenuPopup.show()
 
 func _on_Go_pressed():
-	$"/root/World"._debug__go_to_level(int($DebugMenuContainer/LineEdit.text))
+	$"/root/World"._debug__go_to_level(int($DebugMenuPopup/DebugMenuContainer/LineEdit.text))
 
 func _on_Hide_pressed():
 	hide()
+	$DebugMenuPopup.hide()

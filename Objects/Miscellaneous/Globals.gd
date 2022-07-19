@@ -30,6 +30,7 @@ enum tiles {
 enum interactables {
 	LOCKED
 	HIDDEN_ITEM
+	ALTAR
 }
 
 var currentDungeonLevel = 1
