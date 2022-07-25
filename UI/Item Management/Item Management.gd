@@ -27,11 +27,12 @@ func hideItemManagementList():
 	selectedItems = []
 	hide()
 
-func _on_Item_Management_List_Clicked(_id):
+func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 	if chooseOnClick:
 		if $"/root/World".currentGameState == $"/root/World".gameState.READ:
 			$"/root/World/Critters/0".readItem(_id)
-			$"/root/World".processGameTurn()
+			if _processGameTurn:
+				$"/root/World".processGameTurn()
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.QUAFF:
 			$"/root/World/Critters/0".quaffItem(_id)

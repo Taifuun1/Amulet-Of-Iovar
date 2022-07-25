@@ -11,6 +11,7 @@ var stackable
 func setValues(_item):
 	id = _item.id
 	name = str(_item.id)
+	itemName = _item.itemName
 	
 	$Name.text = _item.itemName
 	if _item.notIdentified.alignment:
@@ -24,4 +25,6 @@ func setValues(_item):
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		$"/root/World/UI/UITheme/ItemManagement"._on_Item_Management_List_Clicked(id)
+		if itemName.matchn("scroll of genocide"):
+			$"../.."._on_Item_Management_List_Clicked(id, false)
+		$"../.."._on_Item_Management_List_Clicked(id)

@@ -107,12 +107,6 @@ func create(_class):
 	calories = 1000
 	previousCalories = calories
 	
-	calculateWeightStats()
-	
-	statusEffects["seeing"] = 100
-	
-	updatePlayerStats()
-	
 	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
 
 
@@ -958,6 +952,9 @@ func checkIfThereIsSomethingOnTheGroundHere(_level, _tile):
 	
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.ALTAR:
 		Globals.gameConsole.addLog("You see an altar here.")
+		
+	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.HIDDEN_ITEM:
+		Globals.gameConsole.addLog("There's something hidden in the ground here.")
 
 func checkAllItemsIdentification():
 	for _item in $"/root/World/Items".get_children():

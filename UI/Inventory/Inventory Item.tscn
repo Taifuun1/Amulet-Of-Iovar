@@ -5,8 +5,7 @@
 [node name="InventoryItemContainer" type="HBoxContainer"]
 anchor_right = 1.0
 margin_right = -480.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 1440, 24 )
+rect_min_size = Vector2( 1440, 25 )
 mouse_filter = 0
 script = ExtResource( 1 )
 

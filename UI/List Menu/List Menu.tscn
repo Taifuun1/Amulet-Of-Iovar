@@ -2,7 +2,7 @@
 
 [ext_resource path="res://UI/List Menu/List Menu.gd" type="Script" id=1]
 
-[node name="List Menu" type="Control"]
+[node name="ListMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 190.0
@@ -16,17 +16,28 @@ script = ExtResource( 1 )
 rect_min_size = Vector2( 1540, 720 )
 color = Color( 0.0509804, 0.109804, 0.247059, 1 )
 
-[node name="Title" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 200, 22 )
+[node name="ListMenuMargin" type="Control" parent="."]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 1490.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 1440, 620 )
 
-[node name="ListMenuContainer" type="ScrollContainer" parent="."]
-margin_top = 22.0
-margin_bottom = 698.0
-rect_min_size = Vector2( 1540, 698 )
+[node name="Title" type="Label" parent="ListMenuMargin"]
+margin_right = 200.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 250, 50 )
 
-[node name="ListMenuContent" type="VBoxContainer" parent="ListMenuContainer"]
-margin_right = 1540.0
-margin_bottom = 698.0
-rect_min_size = Vector2( 1540, 698 )
+[node name="ListMenuScrollMargin" type="Control" parent="ListMenuMargin"]
+margin_top = 50.0
+rect_min_size = Vector2( 1440, 570 )
+
+[node name="ListMenuContainer" type="ScrollContainer" parent="ListMenuMargin/ListMenuScrollMargin"]
+margin_right = 1440.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 1440, 570 )
+
+[node name="ListMenuContent" type="VBoxContainer" parent="ListMenuMargin/ListMenuScrollMargin/ListMenuContainer"]
+margin_right = 1440.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 1440, 570 )

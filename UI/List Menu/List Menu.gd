@@ -3,6 +3,7 @@ extends Control
 onready var listItem = preload("res://UI/List Menu/List Menu Item.tscn")
 
 var items = []
+
 #var selectedItems = []
 
 #var chooseOnClick = false
@@ -14,18 +15,18 @@ func create():
 	hide()
 
 func showListMenuList(_title, _items, _alignment):
-	$Title.text = _title
+	$ListMenuMargin/Title.text = _title
 	items = _items
 	alignment = _alignment
 	for _item in items:
 		var newItem = listItem.instance()
 #		var _item = get_node("/root/World/Critters/{id}".format({ "id": item }))
 		newItem.setValues(_item)
-		$ListMenuContainer/ListMenuContent.add_child(newItem)
+		$ListMenuMargin/ListMenuScrollMargin/ListMenuContainer/ListMenuContent.add_child(newItem)
 	show()
 
 func hideListMenuList():
-	for _item in $ListMenuContainer/ListMenuContent.get_children():
+	for _item in $ListMenuMargin/ListMenuScrollMargin/ListMenuContainer/ListMenuContent.get_children():
 		_item.queue_free()
 	items = []
 #	selectedItems = []

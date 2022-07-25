@@ -40,7 +40,7 @@ func create():
 ### Item generation ###
 #######################
 
-func createItem(_item, _position = null, _toInventory = false, _level = $"/root/World".level):
+func createItem(_item, _position = null, _toInventory = false, _extraData = {  }, _level = $"/root/World".level):
 	var _itemPosition
 	if _position == null:
 		_itemPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size())]
@@ -49,9 +49,9 @@ func createItem(_item, _position = null, _toInventory = false, _level = $"/root/
 	
 	var newItem = item.instance()
 	if typeof(_item) == TYPE_STRING:
-		newItem.createItem(getItemByName(_item))
+		newItem.createItem(getItemByName(_item, _extraData))
 	else:
-		newItem.createItem(_item)
+		newItem.createItem(_item, _extraData)
 	if _toInventory:
 		$"/root/World/Critters/0/Inventory".addToInventory(newItem)
 	else:
