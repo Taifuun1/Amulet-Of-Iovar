@@ -168,80 +168,21 @@ func create():
 	for _level in $Levels.get_children():
 		$Critters/Critters.generateCrittersForLevel(_level)
 	
-	var newItem = load("res://Objects/Item/Item.tscn").instance()
-	newItem.createItem($"/root/World/Items/Items".getItemByName("scroll of identify"), { "alignment": "blessed" })
-	$"/root/World/Items".add_child(newItem, true)
-	$Critters/"0"/Inventory.addToInventory(newItem)
-	
-	var newItem2 = load("res://Objects/Item/Item.tscn").instance()
-	newItem2.createItem($"/root/World/Items/Items".getItemByName("blindfold"), { "alignment": "blessed" })
-	$"/root/World/Items".add_child(newItem2, true)
-	$Critters/"0"/Inventory.addToInventory(newItem2)
-	
-	var newItem5 = load("res://Objects/Item/Item.tscn").instance()
-	newItem5.createItem($"/root/World/Items/Items".getItemByName("scroll of genocide"), { "alignment": "blessed" })
-	$"/root/World/Items".add_child(newItem5, true)
-	$Critters/"0"/Inventory.addToInventory(newItem5)
-	
-	var newItem6 = load("res://Objects/Item/Item.tscn").instance()
-	newItem6.createItem($"/root/World/Items/Items".getItemByName("scroll of genocide"), { "alignment": "uncursed" })
-	$"/root/World/Items".add_child(newItem6, true)
-	$Critters/"0"/Inventory.addToInventory(newItem6)
-	
-	var newItem13 = load("res://Objects/Item/Item.tscn").instance()
-	newItem13.createItem($"/root/World/Items/Items".getItemByName("scroll of genocide"), { "alignment": "cursed" })
-	$"/root/World/Items".add_child(newItem13, true)
-	$Critters/"0"/Inventory.addToInventory(newItem13)
-	
-	var newItem3 = load("res://Objects/Item/Item.tscn").instance()
-	newItem3.createItem($"/root/World/Items/Items".getItemByName("ring of protection"), { "alignment": "uncursed" })
-	$"/root/World/Items".add_child(newItem3, true)
-	$Critters/"0"/Inventory.addToInventory(newItem3)
-	
-	var newItem333 = load("res://Objects/Item/Item.tscn").instance()
-	newItem333.createItem($"/root/World/Items/Items".getItemByName("oil lamp"), { "alignment": "uncursed" })
-	$"/root/World/Items".add_child(newItem333, true)
-	$Critters/"0"/Inventory.addToInventory(newItem333)
-	
-	var newItem33 = load("res://Objects/Item/Item.tscn").instance()
-	newItem33.createItem($"/root/World/Items/Items".getItemByName("key"), { "alignment": "uncursed" })
-	$"/root/World/Items".add_child(newItem33, true)
-	$Critters/"0"/Inventory.addToInventory(newItem33)
-	
-	var newItem16 = load("res://Objects/Item/Item.tscn").instance()
-	newItem16.createItem($"/root/World/Items/Items".getItemByName("scroll of summon critter"), { "alignment": "cursed" })
-	$"/root/World/Items".add_child(newItem16, true)
-	$Critters/"0"/Inventory.addToInventory(newItem16)
-	
-	var newItem156 = load("res://Objects/Item/Item.tscn").instance()
-	newItem156.createItem($"/root/World/Items/Items".getItemByName("wand of summon critter"), { "alignment": "uncursed" })
-	$"/root/World/Items".add_child(newItem156, true)
-	$Critters/"0"/Inventory.addToInventory(newItem156)
-	
-	var newItem4 = load("res://Objects/Item/Item.tscn").instance()
-	newItem4.createItem($"/root/World/Items/Items".getItemByName("scroll of teleport"), { "alignment": "uncursed" })
-	$"/root/World/Items".add_child(newItem4, true)
-	$Critters/"0"/Inventory.addToInventory(newItem4)
-	
-	var newItem4321 = load("res://Objects/Item/Item.tscn").instance()
-	newItem4321.createItem($"/root/World/Items/Items".getItemByName("scroll of teleport"), { "alignment": "uncursed" })
-	$"/root/World/Items".add_child(newItem4321, true)
-	$Critters/"0"/Inventory.addToInventory(newItem4321)
-	
-	var newItem412 = load("res://Objects/Item/Item.tscn").instance()
-	newItem412.createItem($"/root/World/Items/Items".getItemByName("scroll of teleport"), { "alignment": "cursed" })
-	$"/root/World/Items".add_child(newItem412, true)
-	$Critters/"0"/Inventory.addToInventory(newItem412)
-	
-	var newItem411 = load("res://Objects/Item/Item.tscn").instance()
-	newItem411.createItem($"/root/World/Items/Items".getItemByName("scroll of teleport"), { "alignment": "cursed" })
-	$"/root/World/Items".add_child(newItem411, true)
-	$Critters/"0"/Inventory.addToInventory(newItem411)
-	
-	var newItem10 = load("res://Objects/Item/Item.tscn").instance()
-	newItem10.createItem($"/root/World/Items/Items".getItemByName("dwarvish laysword"), { "alignment": "uncursed" })
-	$"/root/World/Items".add_child(newItem10, true)
-	$Critters/"0"/Inventory.addToInventory(newItem10)
+	$"/root/World/Items/Items".createItem("scroll of identify", null, true, { "alignment": "blessed" })
+	$"/root/World/Items/Items".createItem("blindfold", null, true, { "alignment": "uncursed" })
+	$"/root/World/Items/Items".createItem("scroll of genocide", null, true, { "alignment": "blessed" })
+	$"/root/World/Items/Items".createItem("scroll of genocide", null, true, { "alignment": "uncursed" })
+	$"/root/World/Items/Items".createItem("scroll of genocide", null, true, { "alignment": "cursed" })
+	$"/root/World/Items/Items".createItem("ring of protection", null, true, { "alignment": "uncursed" })
+	$"/root/World/Items/Items".createItem("oil lamp", null, true, { "alignment": "uncursed" })
+	$"/root/World/Items/Items".createItem("key", null, true, { "alignment": "uncursed" })
+	$"/root/World/Items/Items".createItem("scroll of summon critter", null, true, { "alignment": "cursed" })
+	$"/root/World/Items/Items".createItem("wand of summon critter", null, true, { "alignment": "uncursed" })
+	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
+	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
+	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "cursed" })
+	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "cursed" })
+	$"/root/World/Items/Items".createItem("dwarvish laysword", null, true, { "alignment": "uncursed" })
 	
 	updateTiles()
 	drawLevel()
@@ -253,7 +194,8 @@ func create():
 			_node.show()
 	$UI/UITheme/StartScreen.hide()
 	
-	$Critters/"0".processPlayerSpecificEffects()
+	$Critters/"0".calculateWeightStats()
+	$Critters/"0".updatePlayerStats()
 	
 	inStartScreen = false
 	inGame = true
