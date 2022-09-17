@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 old_color:hint_color;
+uniform vec4 new_color:hint_color;
+
+void fragment() {
+    vec4 current_pixel = texture(TEXTURE, UV);
+
+    if (current_pixel == old_color)
+        COLOR = new_color;
+    else
+        COLOR = current_pixel;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/old_color = Color( 0, 1, 0.109804, 1 )
+shader_param/new_color = Color( 0.145098, 0.819608, 1, 1 )
