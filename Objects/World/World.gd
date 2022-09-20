@@ -5,11 +5,12 @@ onready var player = preload("res://Objects/Player/Player.tscn").instance()
 onready var critters = preload("res://Objects/Critter/Critters.tscn").instance()
 onready var items = preload("res://Objects/Item/Items.tscn").instance()
 
-onready var dungeon1 = preload("res://Random Generators/Dungeon Levels/Dungeon1.tscn")
-onready var minesOfTidoh = preload("res://Random Generators/Mines Of Tidoh/MinesOfTidoh.tscn")
-onready var tidohMiningOutpost = preload("res://Random Generators/Mines Of Tidoh/TidohMiningOutpost.tscn")
-onready var beach = preload("res://Random Generators/Beach/Beach.tscn")
-onready var vacationResort = preload("res://Random Generators/Beach/VacationResort.tscn")
+onready var dungeon = preload("res://Random Generators/Generic Generation/Dungeon Levels/Dungeon.tscn")
+onready var minesOfTidoh = preload("res://Random Generators/Generic Generation/Mines Of Tidoh/MinesOfTidoh.tscn")
+onready var tidohMiningOutpost = preload("res://Random Generators/Generic Generation/Mines Of Tidoh/TidohMiningOutpost.tscn")
+onready var beach = preload("res://Random Generators/Generic Generation/Beach/Beach.tscn")
+onready var vacationResort = preload("res://Random Generators/Generic Generation/Beach/VacationResort.tscn")
+onready var labyrinth = preload("res://Random Generators/WFC Generation/Labyrinth/Labyrinth.tscn")
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -21,11 +22,13 @@ enum gameState {
 	PICK_UP_ITEMS
 	DROP_ITEMS
 	READ
+	RUNES
 	QUAFF
 	CONSUME
 	EQUIPMENT
 	INTERACT
 	ZAP
+	CAST
 	USE
 	KICK
 }
@@ -36,19 +39,21 @@ var levels = {
 	"dungeon1": [],
 	"minesOfTidoh": [],
 	"dungeon2": [],
-	"beach": []
-#	"dungeon3": [],
-#	"library": [],
-#	"dungeon4": [],
-#	"banditWarcamp": [],
-#
-#	"arena": [],
-#	"fortress": [],
-#	"theGreatShadows": [],
-#	"halls1": [],
-#	"halls2": [],
-#	"dragonsPeak": [],
-#	"halls3": []
+	"beach": [],
+	"dungeon3": [],
+	"library": [],
+	"dungeon4": [],
+	"banditWarcamp": [],
+
+	"arena": [],
+	"fortress": [],
+	"labyrinth": [],
+	"theGreatShadows": [],
+	"halls1": [],
+	"halls2": [],
+	"dragonsPeak": [],
+	"halls3": [],
+	"iovarsLair": []
 }
 
 var tile_size = get_cell_size()
@@ -83,51 +88,7 @@ func _ready():
 		_node.hide()
 	$UI/UITheme/StartScreen.show()
 	
-	# Dungeon 1
-	var firstLevel = dungeon1.instance()
-	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
-	levels.firstLevel = firstLevel
-	$Levels.add_child(firstLevel)
-	for _level in range(2):
-		var newDungeon = dungeon1.instance()
-		newDungeon.create("dungeon1", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
-		levels.dungeon1.append(newDungeon)
-		$Levels.add_child(newDungeon)
-	# Mines of Tidoh
-	for _level in range(3):
-		var newCave = minesOfTidoh.instance()
-		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 2)
-		levels.minesOfTidoh.append(newCave)
-		$Levels.add_child(newCave)
-	var newMiningOutpost = tidohMiningOutpost.instance()
-	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
-	levels.minesOfTidoh.append(newMiningOutpost)
-	$Levels.add_child(newMiningOutpost)
-	for _level in range(3):
-		var newCave = minesOfTidoh.instance()
-		newCave.create("minesOfTidoh", "Mines of Tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 1)
-		levels.minesOfTidoh.append(newCave)
-		$Levels.add_child(newCave)
-	# Dungeon 2
-	for _level in range(3):
-		var newDungeon = dungeon1.instance()
-		newDungeon.create("dungeon1", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
-		levels.dungeon2.append(newDungeon)
-		$Levels.add_child(newDungeon)
-	# Beach
-	var newBeach = beach.instance()
-	newBeach.create("beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
-	levels.beach.append(newBeach)
-	$Levels.add_child(newBeach)
-	var newVacationResort = vacationResort.instance()
-	newVacationResort.create("beach", "Vacation resort", 10000)
-	levels.beach.append(newVacationResort)
-	$Levels.add_child(newVacationResort)
-	for _level in range(3):
-		var newBeach2 = beach.instance()
-		newBeach2.create("beach", "Beach {level}".format({ "level": levels.beach.size() }), 10000)
-		levels.beach.append(newBeach2)
-		$Levels.add_child(newBeach2)
+	createDungeon()
 	
 	var levelCount = 0
 	for section in levels:
@@ -135,6 +96,7 @@ func _ready():
 			levelCount += 1
 		else:
 			levelCount += levels[section].size()
+	
 	$FOV.createFOVLevels(levelCount)
 
 func _on_Game_Start():
@@ -143,7 +105,7 @@ func _on_Game_Start():
 
 func create():
 	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
-	for _level in range(levels.dungeon1.size()):
+	for _level in levels.dungeon1.size():
 		if levels.dungeon1[_level] == levels.dungeon1.back():
 			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel(true)
 		else:
@@ -153,6 +115,8 @@ func create():
 	for _level in levels.dungeon2:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	for _level in levels.beach:
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	for _level in levels.labyrinth:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
 	$Critters.add_child(player, true)
@@ -183,6 +147,9 @@ func create():
 	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "cursed" })
 	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "cursed" })
 	$"/root/World/Items/Items".createItem("dwarvish laysword", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("eario of toxix", null, true)
+	$Items/Items.createItem("luirio of cone", null, true)
+	$Items/Items.createItem("heario of flow", null, true)
 	
 	updateTiles()
 	drawLevel()
@@ -202,183 +169,189 @@ func create():
 	
 	show()
 
+func createDungeon():
+	### Dungeon 1
+	var firstLevel = dungeon.instance()
+	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
+	levels.firstLevel = firstLevel
+	$Levels.add_child(firstLevel)
+	for _level in range(2):
+		var newDungeon = dungeon.instance()
+		newDungeon.create("dungeon1", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
+		levels.dungeon1.append(newDungeon)
+		$Levels.add_child(newDungeon)
+	
+	### Mines of Tidoh
+	for _level in range(3):
+		var newCave = minesOfTidoh.instance()
+		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 2)
+		levels.minesOfTidoh.append(newCave)
+		$Levels.add_child(newCave)
+	var newMiningOutpost = tidohMiningOutpost.instance()
+	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
+	levels.minesOfTidoh.append(newMiningOutpost)
+	$Levels.add_child(newMiningOutpost)
+	for _level in range(3):
+		var newCave = minesOfTidoh.instance()
+		newCave.create("minesOfTidoh", "Mines of Tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 1)
+		levels.minesOfTidoh.append(newCave)
+		$Levels.add_child(newCave)
+	
+	### Dungeon 2
+	for _level in range(3):
+		var newDungeon = dungeon.instance()
+		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
+		levels.dungeon2.append(newDungeon)
+		$Levels.add_child(newDungeon)
+
+	### Beach
+	var newBeach = beach.instance()
+	newBeach.create("beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
+	levels.beach.append(newBeach)
+	$Levels.add_child(newBeach)
+	var newVacationResort = vacationResort.instance()
+	newVacationResort.create("beach", "Vacation resort", 10000)
+	levels.beach.append(newVacationResort)
+	$Levels.add_child(newVacationResort)
+	for _level in range(3):
+		var newBeach2 = beach.instance()
+		newBeach2.create("beach", "Beach {level}".format({ "level": levels.beach.size() }), 10000)
+		levels.beach.append(newBeach2)
+		$Levels.add_child(newBeach2)
+
+	### Labyrinth
+	for _level in range(3):
+		var newlabyrinth = labyrinth.instance()
+		newlabyrinth.create("labyrinth", "Labyrinth {level}".format({ "level": levels.labyrinth.size() }), 10000)
+		levels.labyrinth.append(newlabyrinth)
+		$Levels.add_child(newlabyrinth)
+
 func _process(_delta):
-	if inGame and $Critters/"0".statusEffects["stun"] > 0:
-		processGameTurn()
+	if inGame:
+		if $Critters/"0".statusEffects["stun"] > 0:
+			processGameTurn()
 
 func _input(_event):
 	if !inStartScreen:
-		var _playerTile = level.getCritterTile(0)
-		if (
-			(
-				Input.is_action_just_pressed("MOVE_UP") or
-				Input.is_action_just_pressed("MOVE_UP_RIGHT") or
-				Input.is_action_just_pressed("MOVE_RIGHT") or
-				Input.is_action_just_pressed("MOVE_DOWN_RIGHT") or
-				Input.is_action_just_pressed("MOVE_DOWN") or
-				Input.is_action_just_pressed("MOVE_DOWN_LEFT") or
-				Input.is_action_just_pressed("MOVE_LEFT") or
-				Input.is_action_just_pressed("MOVE_UP_LEFT")
-			) and
-			currentGameState == gameState.GAME and
-			inGame
-		):
-			var _openTiles = level.checkAdjacentTilesForOpenSpace(_playerTile)
-			var _tileToMoveTo
-			if $Critters/"0".statusEffects["confusion"] > 0 and randi() % 3 == 0:
-				var _randomOpenTiles = _openTiles.duplicate(true)
-				_randomOpenTiles.shuffle()
-				_tileToMoveTo = _randomOpenTiles[0]
-			else:
-				if Input.is_action_just_pressed("MOVE_UP"):
-					_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y - 1)
-				elif Input.is_action_just_pressed("MOVE_UP_RIGHT"):
-					_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y - 1)
-				elif Input.is_action_just_pressed("MOVE_RIGHT"):
-					_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y)
-				elif Input.is_action_just_pressed("MOVE_DOWN_RIGHT"):
-					_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y + 1)
-				elif Input.is_action_just_pressed("MOVE_DOWN"):
-					_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y + 1)
-				elif Input.is_action_just_pressed("MOVE_DOWN_LEFT"):
-					_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y + 1)
-				elif Input.is_action_just_pressed("MOVE_LEFT"):
-					_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y)
-				elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
-					_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
-			for _openTile in _openTiles:
-				if _openTile == _tileToMoveTo:
-					if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null:
-						keepMovingLoop(_playerTile, _tileToMoveTo)
-					else:
-						processGameTurn(_playerTile, _tileToMoveTo)
-					break
-		elif (
-			(
-				Input.is_action_just_pressed("MOVE_UP") or
-				Input.is_action_just_pressed("MOVE_UP_RIGHT") or
-				Input.is_action_just_pressed("MOVE_RIGHT") or
-				Input.is_action_just_pressed("MOVE_DOWN_RIGHT") or
-				Input.is_action_just_pressed("MOVE_DOWN") or
-				Input.is_action_just_pressed("MOVE_DOWN_LEFT") or
-				Input.is_action_just_pressed("MOVE_LEFT") or
-				Input.is_action_just_pressed("MOVE_UP_LEFT")
-			) and
-			currentGameState == gameState.INTERACT and
-			inGame
-		):
-			var _tileToInteractWith
-			if Input.is_action_just_pressed("MOVE_UP"):
-				_tileToInteractWith = Vector2(_playerTile.x, _playerTile.y - 1)
-			elif Input.is_action_just_pressed("MOVE_UP_RIGHT"):
-				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y - 1)
-			elif Input.is_action_just_pressed("MOVE_RIGHT"):
-				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y)
-			elif Input.is_action_just_pressed("MOVE_DOWN_RIGHT"):
-				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_DOWN"):
-				_tileToInteractWith = Vector2(_playerTile.x, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_DOWN_LEFT"):
-				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_LEFT"):
-				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y)
-			elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
-				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y - 1)
-			interactWith(_tileToInteractWith)
-		elif (
-			(
-				Input.is_action_just_pressed("MOVE_UP") or
-				Input.is_action_just_pressed("MOVE_UP_RIGHT") or
-				Input.is_action_just_pressed("MOVE_RIGHT") or
-				Input.is_action_just_pressed("MOVE_DOWN_RIGHT") or
-				Input.is_action_just_pressed("MOVE_DOWN") or
-				Input.is_action_just_pressed("MOVE_DOWN_LEFT") or
-				Input.is_action_just_pressed("MOVE_LEFT") or
-				Input.is_action_just_pressed("MOVE_UP_LEFT")
-			) and
-			currentGameState == gameState.KICK and
-			inGame
-		):
-			var _tileToInteractWith
-			if Input.is_action_just_pressed("MOVE_UP"):
-				_tileToInteractWith = Vector2(_playerTile.x, _playerTile.y - 1)
-			elif Input.is_action_just_pressed("MOVE_UP_RIGHT"):
-				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y - 1)
-			elif Input.is_action_just_pressed("MOVE_RIGHT"):
-				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y)
-			elif Input.is_action_just_pressed("MOVE_DOWN_RIGHT"):
-				_tileToInteractWith = Vector2(_playerTile.x + 1, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_DOWN"):
-				_tileToInteractWith = Vector2(_playerTile.x, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_DOWN_LEFT"):
-				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y + 1)
-			elif Input.is_action_just_pressed("MOVE_LEFT"):
-				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y)
-			elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
-				_tileToInteractWith = Vector2(_playerTile.x - 1, _playerTile.y - 1)
-			kickAt(_tileToInteractWith)
-		elif (
-			Input.is_action_just_pressed("WAIT") and
-			currentGameState == gameState.GAME and
-			inGame
-		):
-			processGameTurn(_playerTile)
-		elif (
-			Input.is_action_just_pressed("ASCEND") and
-			(
-				level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.UP_STAIR_DUNGEON or
-				level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.UP_STAIR_SAND
-			) and
-			Globals.currentDungeonLevel > 1 and
-			currentGameState == gameState.GAME and
-			inGame
-		):
-			moveLevel(-1)
-		elif (
-			Input.is_action_just_pressed("DESCEND") and
-			(
-				level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_DUNGEON or
-				level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_SAND
-			) and
-			levels.minesOfTidoh.back().levelId != Globals.currentDungeonLevel and
-			levels.beach.back().levelId != Globals.currentDungeonLevel and
-			currentGameState == gameState.GAME and
-			inGame
-		):
-			moveLevel(1)
-		elif Input.is_action_just_pressed("ACCEPT") and currentGameState != gameState.OUT_OF_PLAYERS_HANDS and currentGameState != gameState.GAME and !inGame:
-			processGameTurn(_playerTile)
-		elif (Input.is_action_just_pressed("BACK")):
-			closeMenu()
-		elif (Input.is_action_just_pressed("INVENTORY") and currentGameState == gameState.GAME and inGame):
-			openMenu("inventory")
-		elif (Input.is_action_just_pressed("PICK_UP") and currentGameState == gameState.GAME and inGame):
-			openMenu("pick up", _playerTile)
-		elif (Input.is_action_just_pressed("DROP") and currentGameState == gameState.GAME and inGame):
-			openMenu("drop")
-		elif (Input.is_action_just_pressed("EQUIPMENT") and currentGameState == gameState.GAME and inGame):
-			openMenu("equipment")
-		elif (Input.is_action_just_pressed("READ") and currentGameState == gameState.GAME and inGame):
-			openMenu("read")
-		elif (Input.is_action_just_pressed("QUAFF") and currentGameState == gameState.GAME and inGame):
-			openMenu("quaff")
-		elif (Input.is_action_just_pressed("CONSUME") and currentGameState == gameState.GAME and inGame):
-			openMenu("consume")
-		elif (Input.is_action_just_pressed("ZAP") and currentGameState == gameState.GAME and inGame):
-			openMenu("zap")
-		elif Input.is_action_just_pressed("INTERACT") and currentGameState == gameState.GAME and inGame:
-			currentGameState = gameState.INTERACT
-			Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
-		elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME and inGame:
-			$"UI/UITheme/Debug Menu".showMenu()
-		elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME and inGame:
-			openMenu("use")
-		elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME and inGame:
-			currentGameState = gameState.KICK
-			Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
-		elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME and inGame:
-			keepMoving = true
-		
+		if inGame:
+			var _playerTile = level.getCritterTile(0)
+			if (
+				(
+					Input.is_action_just_pressed("MOVE_UP") or
+					Input.is_action_just_pressed("MOVE_UP_RIGHT") or
+					Input.is_action_just_pressed("MOVE_RIGHT") or
+					Input.is_action_just_pressed("MOVE_DOWN_RIGHT") or
+					Input.is_action_just_pressed("MOVE_DOWN") or
+					Input.is_action_just_pressed("MOVE_DOWN_LEFT") or
+					Input.is_action_just_pressed("MOVE_LEFT") or
+					Input.is_action_just_pressed("MOVE_UP_LEFT")
+				) and
+				(
+					currentGameState == gameState.GAME or
+					currentGameState == gameState.INTERACT or
+					currentGameState == gameState.KICK or
+					currentGameState == gameState.CAST
+				)
+			):
+					var _tileToMoveTo
+					if Input.is_action_just_pressed("MOVE_UP"):
+						_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y - 1)
+					elif Input.is_action_just_pressed("MOVE_UP_RIGHT"):
+						_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y - 1)
+					elif Input.is_action_just_pressed("MOVE_RIGHT"):
+						_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y)
+					elif Input.is_action_just_pressed("MOVE_DOWN_RIGHT"):
+						_tileToMoveTo = Vector2(_playerTile.x + 1, _playerTile.y + 1)
+					elif Input.is_action_just_pressed("MOVE_DOWN"):
+						_tileToMoveTo = Vector2(_playerTile.x, _playerTile.y + 1)
+					elif Input.is_action_just_pressed("MOVE_DOWN_LEFT"):
+						_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y + 1)
+					elif Input.is_action_just_pressed("MOVE_LEFT"):
+						_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y)
+					elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
+						_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
+					if currentGameState == gameState.GAME:
+						var _openTiles = level.checkAdjacentTilesForOpenSpace(_playerTile)
+						if $Critters/"0".statusEffects["confusion"] > 0 and randi() % 3 == 0:
+							var _randomOpenTiles = _openTiles.duplicate(true)
+							_randomOpenTiles.shuffle()
+							_tileToMoveTo = _randomOpenTiles[0]
+						for _openTile in _openTiles:
+							if _openTile == _tileToMoveTo:
+								if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null:
+									keepMovingLoop(_playerTile, _tileToMoveTo)
+								else:
+									processGameTurn(_playerTile, _tileToMoveTo)
+								break
+					elif currentGameState == gameState.INTERACT:
+						interactWith(_tileToMoveTo)
+					elif currentGameState == gameState.KICK:
+						kickAt(_tileToMoveTo)
+					elif currentGameState == gameState.CAST:
+						castAt(_playerTile, _tileToMoveTo)
+			elif (
+				Input.is_action_just_pressed("WAIT") and
+				currentGameState == gameState.GAME
+			):
+				processGameTurn(_playerTile)
+			elif (
+				Input.is_action_just_pressed("ASCEND") and
+				(
+					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.UP_STAIR_DUNGEON or
+					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.UP_STAIR_SAND
+				) and
+				Globals.currentDungeonLevel > 1 and
+				currentGameState == gameState.GAME
+			):
+				moveLevel(-1)
+			elif (
+				Input.is_action_just_pressed("DESCEND") and
+				(
+					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_DUNGEON or
+					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_SAND
+				) and
+				levels.minesOfTidoh.back().levelId != Globals.currentDungeonLevel and
+				levels.beach.back().levelId != Globals.currentDungeonLevel and
+				currentGameState == gameState.GAME
+			):
+				moveLevel(1)
+			elif Input.is_action_just_pressed("ACCEPT") and (currentGameState == gameState.PICK_UP_ITEMS or currentGameState == gameState.DROP_ITEMS):
+				processGameTurn(_playerTile)
+			elif (Input.is_action_just_pressed("BACK")):
+				closeMenu()
+			elif (Input.is_action_just_pressed("INVENTORY") and currentGameState == gameState.GAME):
+				openMenu("inventory")
+			elif (Input.is_action_just_pressed("PICK_UP") and currentGameState == gameState.GAME):
+				openMenu("pick up", _playerTile)
+			elif (Input.is_action_just_pressed("DROP") and currentGameState == gameState.GAME):
+				openMenu("drop")
+			elif (Input.is_action_just_pressed("EQUIPMENT") and currentGameState == gameState.GAME):
+				openMenu("equipment")
+			elif (Input.is_action_just_pressed("RUNES") and currentGameState == gameState.GAME):
+				openMenu("runes")
+			elif (Input.is_action_just_pressed("READ") and currentGameState == gameState.GAME):
+				openMenu("read")
+			elif (Input.is_action_just_pressed("QUAFF") and currentGameState == gameState.GAME):
+				openMenu("quaff")
+			elif (Input.is_action_just_pressed("CONSUME") and currentGameState == gameState.GAME):
+				openMenu("consume")
+			elif (Input.is_action_just_pressed("ZAP") and currentGameState == gameState.GAME):
+				openMenu("zap")
+			elif (Input.is_action_just_pressed("CAST") and currentGameState == gameState.GAME):
+				castWith(_playerTile)
+			elif Input.is_action_just_pressed("INTERACT") and currentGameState == gameState.GAME:
+				currentGameState = gameState.INTERACT
+				Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
+			elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME:
+				$"UI/UITheme/Debug Menu".showMenu()
+			elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME:
+				openMenu("use")
+			elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME:
+				currentGameState = gameState.KICK
+				Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
+			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
+				keepMoving = true
+			
 		updateUI()
 
 func processGameTurn(_playerTile = null, _tileToMoveTo = null):
@@ -434,11 +407,10 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_SAND and
 			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_SAND and
 			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BOARD
-		) and
-		inGame
+		)
 	):
 		$"Critters/0".processPlayerAction(_playerTile, _tileToMoveTo, $Items/Items, level)
-	elif (Input.is_action_pressed("ACCEPT") and !inGame):
+	elif Input.is_action_pressed("ACCEPT"):
 		processAccept()
 
 func processEnemyActions():
@@ -494,18 +466,18 @@ func drawFOV():
 	var playerCenter = Vector2((playerTile.x + 0.5) * 32, (playerTile.y + 0.5) * 32)
 	var spaceState = get_world_2d().get_direct_space_state()
 	var _playerNode = $Critters/"0"
-	for _x in range(Globals.gridSize.x):
-		for _y in range(Globals.gridSize.y):
-			var x_dir = 1 if _x < playerTile.x else -1
-			var y_dir = 1 if _y < playerTile.y else -1
-			var testPoint = Vector2((_x + 0.5) * 32, (_y + 0.5) * 32) + Vector2(x_dir, y_dir) * 32 / 2
+	for x in range(Globals.gridSize.x):
+		for y in range(Globals.gridSize.y):
+			var x_dir = 1 if x < playerTile.x else -1
+			var y_dir = 1 if y < playerTile.y else -1
+			var testPoint = Vector2((x + 0.5) * 32, (y + 0.5) * 32) + Vector2(x_dir, y_dir) * 32 / 2
 			var occlusion = spaceState.intersect_ray(playerCenter, testPoint)
-#			$FOV.seeCell(_x, _y)
+			
 			if (
 				_playerNode.playerVisibility == 0 and
-				playerTile == Vector2(_x, _y)
+				playerTile == Vector2(x, y)
 			):
-				$FOV.greyCell(_x, _y)
+				$FOV.greyCell(x, y)
 			elif (
 				(
 					_playerNode.playerVisibility != 0 and
@@ -522,17 +494,17 @@ func drawFOV():
 					)
 				)
 			):
-				$FOV.seeCell(_x, _y)
+				$FOV.seeCell(x, y)
 			elif (
-				$FOV.currentFOVLevel[_x][_y] == -1 and
-				level.grid[_x][_y].tile != Globals.tiles.EMPTY and
+				$FOV.currentFOVLevel[x][y] == -1 and
+				level.grid[x][y].tile != Globals.tiles.EMPTY and
 				(
 					occlusion or
 					(playerCenter - testPoint).length() > level.visibility * 32 or
 					(playerCenter - testPoint).length() > _playerNode.playerVisibility * 32
 				)
 			):
-				$FOV.greyCell(_x, _y)
+				$FOV.greyCell(x, y)
 
 func drawCrittersAndItems():
 	# Critters and items
@@ -621,8 +593,7 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 					_currentTile.x - 1 < 0 or
 					_currentTile.y - 1 < 0
 				)
-			) and
-			inGame
+			)
 		):
 			$"Critters/0".processPlayerAction(_currentTile, _nextTile, $Items/Items, level)
 			processGameTurn()
@@ -635,9 +606,11 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 func moveLevel(_direction):
 	$"/root/World".hide()
 	hideObjectsWhenDrawingNextFrame = true
+	var _playerPosition = level.getCritterTile(0)
 	
-	var _placePlayerOnStair = whichLevelAndStairIsPlayerPlacedUpon(_direction)
+	var _placePlayerOnStair = whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition)
 	
+	level.grid[_playerPosition.x][_playerPosition.y].critter = null
 	level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
 	$FOV.moveLevel(Globals.currentDungeonLevel - 1)
 	updateTiles()
@@ -650,6 +623,9 @@ func goToLevel(_tile, _level):
 	$"/root/World".hide()
 	hideObjectsWhenDrawingNextFrame = true
 	
+	var _playerPosition = level.getCritterTile(0)
+	level.grid[_playerPosition.x][_playerPosition.y].critter = null
+	
 	Globals.currentDungeonLevel = _level.levelId
 	
 	level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
@@ -660,15 +636,14 @@ func goToLevel(_tile, _level):
 	drawLevel()
 	$"/root/World".show()
 
-func whichStairIsPlayerOn():
-	var _playerTile = level.getCritterTile(0)
+func whichStairIsPlayerOn(_playerTile):
 	for stair in level.stairs.keys():
 		if level.stairs[stair] == _playerTile:
 			return stair
 	return false
 
-func whichLevelAndStairIsPlayerPlacedUpon(_direction):
-	var _stair = whichStairIsPlayerOn()
+func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
+	var _stair = whichStairIsPlayerOn(_playerPosition)
 	if _direction == 1:
 		if levels.dungeon1.back().levelId == Globals.currentDungeonLevel:
 			if _stair.matchn("secondDownStair"):
@@ -697,7 +672,6 @@ func openMenu(_menu, _playerTile = null):
 			if currentGameState == gameState.GAME:
 				$Critters/"0"/Inventory.showInventory()
 				currentGameState = gameState.INVENTORY
-				inGame = false
 		"pick up":
 			if level.grid[_playerTile.x][_playerTile.y].items.size() == 1 and currentGameState == gameState.GAME:
 				$Critters/"0".pickUpItems(_playerTile, level.grid[_playerTile.x][_playerTile.y].items, level.grid)
@@ -706,48 +680,55 @@ func openMenu(_menu, _playerTile = null):
 				$UI/UITheme/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
 				$UI/UITheme/ItemManagement.showItemManagementList()
 				currentGameState = gameState.PICK_UP_ITEMS
-				inGame = false
 		"drop":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.inventory
 				$UI/UITheme/ItemManagement.showItemManagementList()
 				currentGameState = gameState.DROP_ITEMS
-				inGame = false
 		"equipment":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["weapon", "accessory", "armor"]))
 				currentGameState = gameState.EQUIPMENT     
-				inGame = false
 		"read":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["scroll"])
 				$UI/UITheme/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.READ
-				inGame = false
+		"runes":
+			if currentGameState == gameState.GAME:
+				$UI/UITheme/Runes.showRunes($Critters/"0"/Inventory.getItemsOfType(["rune"]))
+				currentGameState = gameState.RUNES
 		"quaff":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["potion"])
 				$UI/UITheme/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.QUAFF
-				inGame = false
 		"consume":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["comestible"])
 				$UI/UITheme/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.CONSUME
-				inGame = false
 		"zap":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["wand"])
 				$UI/UITheme/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.ZAP
-				inGame = false
 		"use":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"])
 				$UI/UITheme/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.USE
-				inGame = false
+
+func castWith(_playerTile):
+	match $UI/UITheme/Runes.isCastableRunes():
+		"direction":
+			currentGameState = gameState.CAST
+			Globals.gameConsole.addLog("Cast towards what? (Pick a direction with numpad)")
+		"directionless":
+			yield($UI/UITheme/Runes.castSpell(_playerTile), "completed")
+			processGameTurn()
+		"notCastable":
+			Globals.gameConsole.addLog("Your currently worn runes are not enough to cast a spell.")
 
 func interactWith(_tileToInteractWith):
 #	Globals.gameConsole.addLog("You cant interact with the {critter}".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
@@ -825,6 +806,11 @@ func kickAt(_tileToKickAt):
 	resetToDefaulGameState()
 	processGameTurn()
 
+func castAt(_playerTile, _tileToCastAt):
+	yield($UI/UITheme/Runes.castSpell(_playerTile, _tileToCastAt, level.grid), "completed")
+	resetToDefaulGameState()
+	processGameTurn()
+
 func processAccept():
 	var _playerTile = level.getCritterTile(0)
 	var _items = $UI/UITheme/ItemManagement.selectedItems
@@ -850,6 +836,8 @@ func closeMenu(_additionalChoices = false):
 			$UI/UITheme/ItemManagement.hideItemManagementList()
 		if currentGameState == gameState.EQUIPMENT:
 			$UI/UITheme/Equipment.hideEquipment()
+		if currentGameState == gameState.RUNES:
+			$UI/UITheme/Runes.hideRunes()
 		if currentGameState == gameState.INVENTORY:
 			$Critters/"0"/Inventory.hideInventory()
 		$UI/UITheme/ListMenu.hideListMenuList()
@@ -858,9 +846,9 @@ func closeMenu(_additionalChoices = false):
 		pass
 
 func resetToDefaulGameState():
-		currentGameState = gameState.GAME
-		inGame = true
-		keepMoving = false
+	currentGameState = gameState.GAME
+	inGame = true
+	keepMoving = false
 
 func _debug__go_to_level(_level):
 	$"/root/World".hide()
@@ -884,5 +872,4 @@ func _debug__go_to_level(_level):
 	$"/root/World".show()
 
 func _exit_tree():
-	print("exited")
 	thread.wait_to_finish()

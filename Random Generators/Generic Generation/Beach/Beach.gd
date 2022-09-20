@@ -1,4 +1,4 @@
-extends BaseLevel
+extends GenericLevel
 class_name Beach
 
 func createNewLevel():
@@ -12,8 +12,13 @@ func createNewLevel():
 	return self
 
 func createDungeon():
-	createSea()
-	placeStairs("SAND", false)
+	for _in in range(10):
+		createSea()
+		placeStairs("SAND", false)
+		if areAllStairsConnected():
+			return
+		resetLevel()
+	push_error("Cant create beach")
 
 func createSea():
 	var _connectionPoints = []

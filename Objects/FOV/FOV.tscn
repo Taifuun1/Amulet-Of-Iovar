@@ -6,5 +6,6 @@
 [node name="FOV" type="TileMap"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
+collision_mask = 0
 format = 1
 script = ExtResource( 2 )

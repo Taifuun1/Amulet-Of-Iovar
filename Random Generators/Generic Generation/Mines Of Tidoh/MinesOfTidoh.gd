@@ -1,4 +1,6 @@
-extends BaseLevel
+extends GenericLevel
+
+onready var caveAstarNode = AStar2D.new()
 
 var spawnPoints = []
 
@@ -12,11 +14,16 @@ func createNewLevel():
 	return self
 
 func createDungeon():
-	createCave()
-	connectSpawnAreas()
-	expandSpawnAreas()
-	fattenCorridors()
-	placeStairs()
+	for _i in range(10):
+		createCave()
+		connectSpawnAreas()
+		expandSpawnAreas()
+		fattenCorridors()
+		placeStairs()
+		if areAllStairsConnected():
+			return
+		resetLevel()
+	push_error("Cant create mines")
 
 func createCave():
 	var _spawnAreas = {

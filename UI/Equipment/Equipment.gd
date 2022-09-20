@@ -106,7 +106,6 @@ func hideEquipment():
 func setEquipment(_id):
 	var _item = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	var _matchingType = checkIfMatchingEquipmentAndSlot(_item.type, _item.category)
-	var _changed = false
 	if _matchingType == null:
 		pass
 	elif _matchingType.matchn("weapon"):
@@ -126,19 +125,19 @@ func setEquipment(_id):
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		if hands["lefthand"] != null and hands["righthand"] != null and !(hands["lefthand"] == hands["righthand"]):
 			dualWielding = true
-		_changed = true
+		$"/root/World/Critters/0".calculateEquipmentStats()
+		$"/root/World".processGameTurn()
 	elif _matchingType.matchn("accessory"):
 		accessories[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		if _item.category.matchn("ring"):
 			checkWhatRingIsWorn(_item)
-		_changed = true
+		$"/root/World/Critters/0".calculateEquipmentStats()
+		$"/root/World".processGameTurn()
 	elif _matchingType.matchn("armor"):
 		equipment[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
-		_changed = true
-	$"/root/World/Critters/0".calculateEquipmentStats()
-	if _changed:
+		$"/root/World/Critters/0".calculateEquipmentStats()
 		$"/root/World".processGameTurn()
 
 func takeOfEquipmentWhenDroppingItem(_id):
@@ -164,31 +163,6 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 				equipment[_equipment] = null
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = null
 				return
-
-func getSlot(_item):
-	if (
-		_item._category.matchn("sword") or
-		_item._category.matchn("two-hander") or
-		_item._category.matchn("dagger") or
-		_item._category.matchn("mace") or
-		_item._category.matchn("flail") or
-		_item._category.matchn("shield")
-	):
-		return "Weapon"
-	if (
-		_item._category.matchn("ring") or
-		_item._category.matchn("amulet")
-	):
-		return "Accessory"
-	if (
-		_item._category.matchn("helmet") or
-		_item._category.matchn("plate") or
-		_item._category.matchn("gauntlets") or
-		_item._category.matchn("belt") or
-		_item._category.matchn("greaves") or
-		_item._category.matchn("boots")
-	):
-		return "Armor"
 
 func getArmorClass():
 	var _ac = 0
@@ -218,14 +192,6 @@ func getArmorClass():
 	if accessories["ring2"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).category.matchn("ring"):
 		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })))
 	return _ac
-
-func checkIfWieldingItem(_itemName):
-	var _isWearingEquipment = false
-	var _item = $"/root/World/Items".getItemByName(_itemName)
-	for _hand in hands.keys():
-		if hands[_hand] != null and hands[_hand] == _item.id:
-			return true
-	return false
 
 func checkIfRingIsRingOfProtection(_ring):
 	match _ring.identifiedItemName.to_lower():
@@ -365,5 +331,5 @@ func checkIfMatchingEquipmentAndSlot(_type, _category):
 func _on_mouse_entered_equipment_slot(_equipmentSlot):
 	hoveredEquipment = _equipmentSlot
 
-func _on_mouse_exited_equipment_slot(_equipmentSlot):
+func _on_mouse_exited_equipment_slot():
 	hoveredEquipment = null

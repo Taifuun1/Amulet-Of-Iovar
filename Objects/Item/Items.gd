@@ -7,6 +7,7 @@ var armors = preload("res://Objects/Item/Armor/Armor.gd").new()
 var comestibles = preload("res://Objects/Item/Comestibles/Comestibles.gd").new()
 var potions = preload("res://Objects/Item/Potions/Potions.gd").new()
 var rings = preload("res://Objects/Item/Rings/Rings.gd").new()
+var runes = preload("res://Objects/Item/Runes/Runes.gd").new()
 var scrolls = preload("res://Objects/Item/Scrolls/Scrolls.gd").new()
 var tools = preload("res://Objects/Item/Tools/Tools.gd").new()
 var wands = preload("res://Objects/Item/Wands/Wands.gd").new()
@@ -27,6 +28,7 @@ func create():
 	items["comestible"] = comestibles.comestibles
 	items["potion"] = potions.potions
 	items["ring"] = rings.rings
+	items["rune"] = runes.runes
 	items["scroll"] = scrolls.scrolls
 	items["tool"] = tools.tools
 	items["wand"] = wands.wands

@@ -5,7 +5,7 @@ onready var gameStats = $"/root/World/UI/UITheme/GameStats"
 
 var gridSize = Vector2(60, 24)
 
-enum tiles { 
+enum tiles {
 	EMPTY
 	CORRIDOR
 	WALL_DUNGEON

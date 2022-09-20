@@ -1,4 +1,4 @@
-extends BaseLevel
+extends GenericLevel
 
 #var rooms = [
 #	[],
@@ -50,18 +50,15 @@ func createNewLevel():
 	return self
 
 func createDungeon():
-	createOutpostAreas()
-	createCaveAreas()
-	
-	pathfindDungeonCorridors()
-	for side in range(rooms.size()):
-		for room in rooms[side]:
-			for door in room:
-				var outpostEndpointDoor = outpostDoors[side][0]
-				var path = calculateCorridorsPath(door, outpostEndpointDoor)
-				for point in path:
-					if grid[point.x][point.y].tile != Globals.tiles.DOOR_CLOSED:
-						grid[point.x][point.y].tile = Globals.tiles.CORRIDOR
+	for _i in range(10):
+		createOutpostAreas()
+		createCaveAreas()
+		pathfindDungeonCorridors()
+		connectDoors()
+		if areAllStairsConnected():
+			return
+		resetLevel()
+	push_error("Cant create mining outpost")
 
 func createOutpostAreas():
 	for _x in range(Globals.gridSize.x):
@@ -335,3 +332,13 @@ func placeOutpostDoors():
 		else:
 			grid[_x + 2][_y].tile = Globals.tiles.DOOR_CLOSED
 			outpostDoors[1].append(Vector2(_x + 2, _y))
+
+func connectDoors():
+	for side in range(rooms.size()):
+		for room in rooms[side]:
+			for door in room:
+				var outpostEndpointDoor = outpostDoors[side][0]
+				var path = calculateCorridorsPath(door, outpostEndpointDoor)
+				for point in path:
+					if grid[point.x][point.y].tile != Globals.tiles.DOOR_CLOSED:
+						grid[point.x][point.y].tile = Globals.tiles.CORRIDOR

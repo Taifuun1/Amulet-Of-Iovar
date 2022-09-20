@@ -2,7 +2,6 @@ extends TileMap
 class_name EnemyPathfinding
 
 onready var pathFindingAstarNode = AStar2D.new()
-onready var caveAstarNode = AStar2D.new()
 
 func _ready():
 	pass

@@ -200,6 +200,7 @@ func dropItem(_playerTile, _item, _grid):
 	$Inventory.dropFromInventory(_item)
 	get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
 	$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
+	$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
 	_dropLog.append("You drop {item}.".format({ "item": _item.itemName }))
 	if _grid[_playerTile.x][_playerTile.y].interactable == Globals.interactables.ALTAR:
 		_item.identifyItem(false, true, false)
@@ -953,7 +954,7 @@ func checkIfThereIsSomethingOnTheGroundHere(_level, _tile):
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.ALTAR:
 		Globals.gameConsole.addLog("You see an altar here.")
 		
-	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.HIDDEN_ITEM:
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.HIDDEN_ITEM:
 		Globals.gameConsole.addLog("There's something hidden in the ground here.")
 
 func checkAllItemsIdentification():

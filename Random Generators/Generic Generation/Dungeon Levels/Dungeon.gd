@@ -1,4 +1,4 @@
-extends BaseLevel
+extends GenericLevel
 
 func createNewLevel(_isDouble = false):
 	createGrid()
@@ -10,10 +10,15 @@ func createNewLevel(_isDouble = false):
 	return self
 
 func createDungeon(_isDouble):
-	createRooms()
-	placeStairs("DUNGEON", _isDouble)
-	connectRooms()
-	placeRandomInteractables(["altar"])
+	for _i in range(10):
+		createRooms()
+		placeStairs("DUNGEON", _isDouble)
+		connectRooms()
+		if areAllStairsConnected():
+			placeRandomInteractables(["altar"])
+			return
+		resetLevel()
+	push_error("Cant create dungeon")
 
 func createRooms():
 	for _roomCount in range(randi() % 2 + 5):
@@ -39,13 +44,6 @@ func connectRooms():
 				for point in path:
 					if grid[point.x][point.y].tile != Globals.tiles.DOOR_CLOSED and grid[point.x][point.y].tile != Globals.tiles.DOOR_OPEN:
 						grid[point.x][point.y].tile = Globals.tiles.CORRIDOR
-		pathFind([Globals.tiles.EMPTY, Globals.tiles.WALL_DUNGEON])
-		if calculatePath(getTilePosition(Globals.tiles.UP_STAIR_DUNGEON), getTilePosition(Globals.tiles.DOWN_STAIR_DUNGEON)).size() == 0:
-			for x in range(grid.size()):
-				for y in range(grid[x].size()):
-					if grid[x][y].tile == Globals.tiles.CORRIDOR:
-						grid[x][y].tile = Globals.tiles.EMPTY
-		else:
-			return
+		return
 	
-	push_error("Dungeon 1 generation failed, can't connect rooms")
+	push_error("Dungeon generation failed, can't connect rooms")

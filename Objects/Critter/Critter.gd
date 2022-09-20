@@ -54,7 +54,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		return false
 	else:
 		var _path
-		if _critterTile != null:
+		if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
 			_path = aI.getCritterMove(_critterTile, _playerTile, _level)
 		if _path.size() > 1:
 			var _moveCritterTo = _path[1]
