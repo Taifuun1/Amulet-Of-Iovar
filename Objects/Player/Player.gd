@@ -670,7 +670,7 @@ func dealWithScrollOfTeleport(_alignment):
 		var _spawnableFloors = _level.spawnableFloors.duplicate(true)
 		for _spawnableFloor in _spawnableFloors:
 			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
-			if _level.isTileFree(_randomTile):
+			if _level.isTileFreeOfCritters(_randomTile):
 				$"/root/World/Critters/0".moveCritter(_playerPosition, _randomTile, 0, _level)
 				return true
 			else:
@@ -685,7 +685,7 @@ func dealWithScrollOfTeleport(_alignment):
 		var _spawnableFloors = _randomLevel.spawnableFloors.duplicate(true)
 		for _spawnableFloor in _spawnableFloors:
 			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
-			if _randomLevel.isTileFree(_randomTile):
+			if _randomLevel.isTileFreeOfCritters(_randomTile):
 				_world.goToLevel(_randomTile, _randomLevel)
 				return true
 			else:

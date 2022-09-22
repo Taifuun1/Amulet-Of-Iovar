@@ -156,7 +156,7 @@ func spawnCritter(_critter, _position = null, _level = null):
 		var _spawnableFloors = _spawnedLevel.spawnableFloors.duplicate(true)
 		for _spawnableFloor in _spawnableFloors:
 			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
-			if _spawnedLevel.isTileFree(_randomTile):
+			if _spawnedLevel.isTileFreeOfCritters(_randomTile):
 				_gridPosition = _randomTile
 				break
 			else:

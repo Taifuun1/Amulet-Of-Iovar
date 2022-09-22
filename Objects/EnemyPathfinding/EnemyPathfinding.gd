@@ -31,14 +31,7 @@ func addWalkableTiles(grid):
 	for x in (grid.size()):
 		for y in (grid[x].size()):
 			var point = Vector2(x, y)
-			if (
-				grid[point.x][point.y].tile == Globals.tiles.EMPTY or
-				grid[point.x][point.y].tile == Globals.tiles.DOOR_CLOSED or
-				grid[point.x][point.y].tile == Globals.tiles.WALL_DUNGEON or
-				grid[point.x][point.y].tile == Globals.tiles.WALL_SAND or
-				grid[point.x][point.y].tile == Globals.tiles.WALL_BRICK_SAND or
-				grid[point.x][point.y].tile == Globals.tiles.WALL_BOARD
-			):
+			if !Globals.isTileFree(point, grid) or grid[point.x][point.y].tile == Globals.tiles.DOOR_CLOSED:
 				continue
 			points.append(point)
 			pathFindingAstarNode.add_point(id(point), point, 1.0)

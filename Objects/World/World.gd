@@ -5,12 +5,14 @@ onready var player = preload("res://Objects/Player/Player.tscn").instance()
 onready var critters = preload("res://Objects/Critter/Critters.tscn").instance()
 onready var items = preload("res://Objects/Item/Items.tscn").instance()
 
-onready var dungeon = preload("res://Random Generators/Generic Generation/Dungeon Levels/Dungeon.tscn")
-onready var minesOfTidoh = preload("res://Random Generators/Generic Generation/Mines Of Tidoh/MinesOfTidoh.tscn")
-onready var tidohMiningOutpost = preload("res://Random Generators/Generic Generation/Mines Of Tidoh/TidohMiningOutpost.tscn")
-onready var beach = preload("res://Random Generators/Generic Generation/Beach/Beach.tscn")
-onready var vacationResort = preload("res://Random Generators/Generic Generation/Beach/VacationResort.tscn")
-onready var labyrinth = preload("res://Random Generators/WFC Generation/Labyrinth/Labyrinth.tscn")
+onready var dungeon = preload("res://Level Generation/Generic Generation/Dungeon Levels/Dungeon.tscn")
+onready var minesOfTidoh = preload("res://Level Generation/Generic Generation/Mines Of Tidoh/MinesOfTidoh.tscn")
+onready var tidohMiningOutpost = preload("res://Level Generation/Generic Generation/Mines Of Tidoh/TidohMiningOutpost.tscn")
+onready var beach = preload("res://Level Generation/Generic Generation/Beach/Beach.tscn")
+onready var vacationResort = preload("res://Level Generation/Generic Generation/Beach/VacationResort.tscn")
+onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
+onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
+onready var tidohMiningOutpost1 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost1.tscn")
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -118,6 +120,8 @@ func create():
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	for _level in levels.labyrinth:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	for _level in levels.library:
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
 	$Critters.add_child(player, true)
 	player.create("mercenary")
@@ -171,8 +175,8 @@ func create():
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = dungeon.instance()
-	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
+	var firstLevel = tidohMiningOutpost1.instance()
+	firstLevel.create("minesOfTidoh", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(2):
@@ -218,13 +222,21 @@ func createDungeon():
 		newBeach2.create("beach", "Beach {level}".format({ "level": levels.beach.size() }), 10000)
 		levels.beach.append(newBeach2)
 		$Levels.add_child(newBeach2)
-
+	
+	### Library
+	for _level in range(3):
+		var newlibrary= library.instance()
+		newlibrary.create("library", "Library {level}".format({ "level": levels.library.size() }), 10000)
+		levels.library.append(newlibrary)
+		$Levels.add_child(newlibrary)
+	
 	### Labyrinth
 	for _level in range(3):
 		var newlabyrinth = labyrinth.instance()
 		newlabyrinth.create("labyrinth", "Labyrinth {level}".format({ "level": levels.labyrinth.size() }), 10000)
 		levels.labyrinth.append(newlabyrinth)
 		$Levels.add_child(newlabyrinth)
+	
 
 func _process(_delta):
 	if inGame:
@@ -401,13 +413,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 			_tileToMoveTo.x >= 0 and
 			_tileToMoveTo.x < level.grid.size()
 		) and
-		(
-			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.EMPTY and
-			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_DUNGEON and
-			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_SAND and
-			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_SAND and
-			level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BOARD
-		)
+		Globals.isTileFree(_tileToMoveTo, level.grid)
 	):
 		$"Critters/0".processPlayerAction(_playerTile, _tileToMoveTo, $Items/Items, level)
 	elif Input.is_action_pressed("ACCEPT"):
@@ -541,15 +547,7 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 				_nextTile.y >= 0 and
 				_nextTile.y < level.grid[0].size()
 			) and
-			(
-				level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.EMPTY and
-				level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.WALL_DUNGEON and
-				level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.WALL_SAND and
-				level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.WALL_BRICK_SAND and
-				level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.WALL_BOARD and
-				level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.DOOR_CLOSED and
-				level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.DOOR_OPEN
-			) and
+			Globals.isTileFree(_nextTile, level.grid) and
 			(
 				level.grid[_currentTile.x][_currentTile.y - 1].critter == null or
 				_currentTile.y - 1 < 0

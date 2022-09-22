@@ -17,12 +17,12 @@ _global_script_classes=[ {
 "base": "EnemyPathfinding",
 "class": "BaseLevel",
 "language": "GDScript",
-"path": "res://Random Generators/BaseLevel.gd"
+"path": "res://Level Generation/BaseLevel.gd"
 }, {
 "base": "GenericLevel",
 "class": "Beach",
 "language": "GDScript",
-"path": "res://Random Generators/Generic Generation/Beach/Beach.gd"
+"path": "res://Level Generation/Generic Generation/Beach/Beach.gd"
 }, {
 "base": "TileMap",
 "class": "EnemyPathfinding",
@@ -32,17 +32,17 @@ _global_script_classes=[ {
 "base": "BaseLevel",
 "class": "GenericLevel",
 "language": "GDScript",
-"path": "res://Random Generators/Generic Generation/GenericLevel.gd"
+"path": "res://Level Generation/Generic Generation/GenericLevel.gd"
 }, {
 "base": "BaseLevel",
 "class": "WaveFunctionCollapse",
 "language": "GDScript",
-"path": "res://Random Generators/WFC Generation/WaveFunctionCollapse.gd"
+"path": "res://Level Generation/WFC Generation/WaveFunctionCollapse.gd"
 }, {
 "base": "TileMap",
 "class": "WaveFunctionCollapseTemplate",
 "language": "GDScript",
-"path": "res://Random Generators/WFC Generation/InputTemplate.gd"
+"path": "res://Level Generation/WFC Generation/InputTemplate.gd"
 } ]
 _global_script_class_icons={
 "BaseCritter": "",

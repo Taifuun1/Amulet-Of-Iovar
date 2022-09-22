@@ -69,7 +69,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				currentHit += 1
 			elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
 				moveCritter(_critterTile, _moveCritterTo, _critter, _level)
-				_level.addPointToEnemyPathding(_critterTile)
+				_level.addPointToEnemyPathding(_critterTile, _level.grid)
 				_level.removePointFromEnemyPathfinding(_moveCritterTo)
 			else:
 				return false
@@ -129,7 +129,7 @@ func despawn(_critterTile = null, createCorpse = true):
 		$"/root/World/Items".add_child(_corpse)
 		_level.grid[_gridPosition.x][_gridPosition.y].items.append(_corpse.id)
 	_level.grid[_gridPosition.x][_gridPosition.y].critter = null
-	_level.addPointToEnemyPathding(_gridPosition)
+	_level.addPointToEnemyPathding(_gridPosition, _level.grid)
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
 	queue_free()
