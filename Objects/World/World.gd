@@ -12,7 +12,7 @@ onready var beach = preload("res://Level Generation/Generic Generation/Beach/Bea
 onready var vacationResort = preload("res://Level Generation/Generic Generation/Beach/VacationResort.tscn")
 onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
-onready var tidohMiningOutpost1 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost1.tscn")
+onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -67,6 +67,7 @@ var inStartScreen = true
 var inGame = false
 var currentGameState = gameState.GAME
 var keepMoving = false
+var totalLevelCount = 0
 
 func _ready():
 #	OS.window_size = Vector2(1280, 900)
@@ -107,20 +108,35 @@ func _on_Game_Start():
 
 func create():
 	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
+	
 	for _level in levels.dungeon1.size():
 		if levels.dungeon1[_level] == levels.dungeon1.back():
 			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel(true)
 		else:
 			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel()
+	
 	for _level in levels.minesOfTidoh:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	
 	for _level in levels.dungeon2:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	
 	for _level in levels.beach:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-	for _level in levels.labyrinth:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	
+	for _level in levels.dungeon3.size():
+		if levels.dungeon3[_level] == levels.dungeon3.back():
+			get_node("Levels/{level}".format({ "level": levels.dungeon3[_level] })).createNewLevel(true)
+		else:
+			get_node("Levels/{level}".format({ "level": levels.dungeon3[_level] })).createNewLevel()
+	
 	for _level in levels.library:
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	
+	for _level in levels.dungeon4:
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	
+	for _level in levels.labyrinth:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
 	$Critters.add_child(player, true)
@@ -175,18 +191,18 @@ func create():
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = tidohMiningOutpost1.instance()
+	var firstLevel = tidohMiningOutpost2.instance()
 	firstLevel.create("minesOfTidoh", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
-	for _level in range(2):
+	for _level in range(1):
 		var newDungeon = dungeon.instance()
 		newDungeon.create("dungeon1", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
 	### Mines of Tidoh
-	for _level in range(3):
+	for _level in range(1):
 		var newCave = minesOfTidoh.instance()
 		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 2)
 		levels.minesOfTidoh.append(newCave)
@@ -195,14 +211,14 @@ func createDungeon():
 	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
 	levels.minesOfTidoh.append(newMiningOutpost)
 	$Levels.add_child(newMiningOutpost)
-	for _level in range(3):
+	for _level in range(1):
 		var newCave = minesOfTidoh.instance()
 		newCave.create("minesOfTidoh", "Mines of Tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 1)
 		levels.minesOfTidoh.append(newCave)
 		$Levels.add_child(newCave)
 	
 	### Dungeon 2
-	for _level in range(3):
+	for _level in range(1):
 		var newDungeon = dungeon.instance()
 		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
 		levels.dungeon2.append(newDungeon)
@@ -217,18 +233,32 @@ func createDungeon():
 	newVacationResort.create("beach", "Vacation resort", 10000)
 	levels.beach.append(newVacationResort)
 	$Levels.add_child(newVacationResort)
-	for _level in range(3):
+	for _level in range(1):
 		var newBeach2 = beach.instance()
 		newBeach2.create("beach", "Beach {level}".format({ "level": levels.beach.size() }), 10000)
 		levels.beach.append(newBeach2)
 		$Levels.add_child(newBeach2)
 	
+	### Dungeon 3
+	for _level in range(1):
+		var newDungeon = dungeon.instance()
+		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + 1 }), 10000)
+		levels.dungeon3.append(newDungeon)
+		$Levels.add_child(newDungeon)
+	
 	### Library
-	for _level in range(3):
+	for _level in range(1):
 		var newlibrary= library.instance()
 		newlibrary.create("library", "Library {level}".format({ "level": levels.library.size() }), 10000)
 		levels.library.append(newlibrary)
 		$Levels.add_child(newlibrary)
+	
+	### Dungeon 4
+	for _level in range(3):
+		var newDungeon = dungeon.instance()
+		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() + 1 }), 10000)
+		levels.dungeon4.append(newDungeon)
+		$Levels.add_child(newDungeon)
 	
 	### Labyrinth
 	for _level in range(3):
@@ -237,6 +267,11 @@ func createDungeon():
 		levels.labyrinth.append(newlabyrinth)
 		$Levels.add_child(newlabyrinth)
 	
+	for _levelSection in levels:
+		if typeof(_levelSection) == TYPE_STRING:
+			totalLevelCount += 1
+		else:
+			totalLevelCount += _levelSection.size()
 
 func _process(_delta):
 	if inGame:
@@ -323,7 +358,8 @@ func _input(_event):
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_SAND
 				) and
 				levels.minesOfTidoh.back().levelId != Globals.currentDungeonLevel and
-				levels.beach.back().levelId != Globals.currentDungeonLevel and
+				levels.library.back().levelId != Globals.currentDungeonLevel and
+				Globals.currentDungeonLevel < Globals.generatedLevels and
 				currentGameState == gameState.GAME
 			):
 				moveLevel(1)
@@ -650,6 +686,13 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 			if _stair.matchn("downStair"):
 				Globals.currentDungeonLevel = levels.dungeon2.front().levelId
 				return "upStair"
+		elif levels.dungeon3.back().levelId == Globals.currentDungeonLevel:
+			if _stair.matchn("secondDownStair"):
+				Globals.currentDungeonLevel = levels.library.front().levelId
+				return "upStair"
+			if _stair.matchn("downStair"):
+				Globals.currentDungeonLevel = levels.dungeon4.front().levelId
+				return "upStair"
 		else:
 			Globals.currentDungeonLevel += _direction
 			return "upStair"
@@ -659,6 +702,12 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 			return "downStair"
 		elif levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon1.back().levelId
+			return "secondDownStair"
+		elif levels.dungeon4.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
+			return "downStair"
+		elif levels.library.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
 			return "secondDownStair"
 		else:
 			Globals.currentDungeonLevel += _direction
@@ -854,19 +903,23 @@ func _debug__go_to_level(_level):
 	
 	Globals.currentDungeonLevel = _level
 	
+	var _playerPosition = level.getCritterTile(0)
+	level.grid[_playerPosition.x][_playerPosition.y].critter = null
+	
 	level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
 	$FOV.moveLevel(Globals.currentDungeonLevel - 1)
 	updateTiles()
 	
 	var _upStairTile1 = level.getTilePosition(Globals.tiles.UP_STAIR_DUNGEON)
 	var _upStairTile2 = level.getTilePosition(Globals.tiles.UP_STAIR_SAND)
+	
 	Globals.currentDungeonLevelName = level.dungeonLevelName
-	if !typeof(_upStairTile1) == TYPE_BOOL:
+	if typeof(_upStairTile1) != TYPE_BOOL:
 		level.grid[_upStairTile1.x][_upStairTile1.y].critter = 0
 	else:
 		level.grid[_upStairTile2.x][_upStairTile2.y].critter = 0
 	drawLevel()
-	$"UI/Debug Menu".hide()
+	$"UI/UITheme/Debug Menu".hide()
 	$"/root/World".show()
 
 func _exit_tree():

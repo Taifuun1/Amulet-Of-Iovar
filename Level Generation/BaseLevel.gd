@@ -31,6 +31,8 @@ func create(_dungeonType, _dungeonLevelName, _visibility):
 ###########################################
 
 func createGrid(_tile = Globals.tiles.EMPTY):
+	Globals.generatedLevels += 1
+	$"/root/World/UI/UITheme/StartScreen".setLoadingText("Generating level... \n{generatedLevels}".format({ "generatedLevels": Globals.generatedLevels }))
 	for _x in range(Globals.gridSize.x):
 		grid.append([])
 		for _y in range(Globals.gridSize.y):
@@ -88,6 +90,7 @@ func placeStair(_stairName, _stairTile, _stairType):
 		var _stair = spawnableFloors[randi() % spawnableFloors.size()]
 		if !isTileAStair(_stair):
 			grid[_stair.x][_stair.y].tile = Globals.tiles[_stairTile + "{type}".format({ "type": _stairType })]
+			spawnableFloors.erase(_stair)
 			return _stair
 	push_error("Dungeon generation failed, can't place stairs")
 
@@ -101,6 +104,8 @@ func areAllStairsConnected():
 		Globals.tiles.WALL_BOARD
 	])
 	
+	if stairs.values().size() == 0 or stairs["downStair"] == null or stairs["upStair"] == null:
+		return false
 	for startStair in stairs.values():
 		for endStair in stairs.values():
 			if startStair == endStair:

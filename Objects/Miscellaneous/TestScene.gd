@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var beach = preload("res://Random Generators/Beach/Beach.tscn").instance()
+onready var beach = preload("res://Level Generation/Beach/Beach.tscn").instance()
 
 func _ready():
 	randomize()

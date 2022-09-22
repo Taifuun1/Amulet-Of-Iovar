@@ -20,12 +20,15 @@ func sortToLowestEntropy(a, b):
 	return a.matches.size() < b.matches.size()
 
 func resetGeneration():
+	edgeTiles.clear()
+	allInputs.clear()
+	nonLegibleTiles.clear()
 	for x in range(gridSize.x):
 		for y in range(gridSize.y):
 			set_cellv(Vector2(x, y), -1)
 
 func generateMap(_entropyVariation = null):
-	if entropyVariation != null:
+	if _entropyVariation != null:
 		entropyVariation = _entropyVariation
 	
 	allInputs = getAllInputs()
@@ -424,7 +427,7 @@ func addInputs(_name, _path):
 				inputs.append(fileName)
 			fileName = dir.get_next()
 	for fileName in inputs:
-		$Inputs.add_child(load("res://Random Generators/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
+		$Inputs.add_child(load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
 
 func trimGenerationEdges():
 	var grid = []

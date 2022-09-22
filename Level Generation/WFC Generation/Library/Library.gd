@@ -17,8 +17,8 @@ func createDungeon():
 		trimGenerationEdges()
 		getGenerationGrid()
 		changeReplaceables(["BOOKCASE1", "BOOKCASE2", "BOOKCASE3"])
-		placeStairs()
 		getSpawnableFloors(["FLOOR_BOARD"])
+		placeStairs()
 		if areAllStairsConnected():
 			return
 		resetLevel()

@@ -16,8 +16,8 @@ func createDungeon():
 		createLabyrinth()
 		trimGenerationEdges()
 		getGenerationGrid()
-		placeStairs()
 		getSpawnableFloors(["CORRIDOR_DUNGEON"])
+		placeStairs()
 		if areAllStairsConnected():
 			return
 		resetLevel()
