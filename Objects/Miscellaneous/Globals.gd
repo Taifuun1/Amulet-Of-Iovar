@@ -26,11 +26,30 @@ enum tiles {
 	UP_STAIR_SAND
 	CORRIDOR_SAND
 	WALL_BOARD
-	FLOOR_BOARD
+	WALL_BRICK_LARGE
 	BOOKCASE1
 	BOOKCASE2
 	BOOKCASE3
-	REPLACEABLE
+	GRASS
+	GRASS_TREE
+	GRASS_DARK
+	GRASS_LIGHT
+	GRASS_YELLOW
+	REPLACEABLE1
+	REPLACEABLE2
+	REPLACEABLE3
+	REPLACEABLE4
+	REPLACEABLE5
+	ROAD_DUNGEON
+	VILLAGE_WALL_HORIZONTAL
+	VILLAGE_WALL_CORNER
+	VILLAGE_WALL_VERTICAL
+	ROAD_GRASS
+	WALL_BRICK_SMALL
+	FLOOR_BRICK_SMALL
+	VILLAGE_WALL_HALFWALL
+	FLOOR_BRICK
+	GRASS_DEAD_TREE
 }
 
 
@@ -55,10 +74,22 @@ func isTileFree(_tileToMoveTo, grid):
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_SAND and
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_SAND and
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BOARD and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_LARGE and
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.BOOKCASE1 and
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.BOOKCASE2 and
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.BOOKCASE3 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.GRASS_TREE and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE1 and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE2 and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE3 and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE4 and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE5 and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_HORIZONTAL and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_CORNER and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_VERTICAL and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_SMALL and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_HALFWALL and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.GRASS_DEAD_TREE
 	):
 		return true
 	return false

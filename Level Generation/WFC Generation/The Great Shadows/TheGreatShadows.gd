@@ -12,22 +12,22 @@ func createNewLevel():
 
 func createDungeon():
 	for _i in range(10):
-		addInputs("Library", get_script().get_path().get_base_dir() + "/Inputs")
-		createLibrary()
+		addInputs("The Great Shadows", get_script().get_path().get_base_dir() + "/Inputs")
+		createTheGreatShadows()
 		trimGenerationEdges()
 		getGenerationGrid()
-		changeReplaceables(["BOOKCASE1", "BOOKCASE2", "BOOKCASE3"])
-		fillEmptyTiles("CORRIDOR_SAND")
-		getSpawnableFloors(["CORRIDOR_SAND"])
+		changeReplaceables(["GRASS_DEAD_TREE"])
+		fillEmptyTiles("GRASS_DARK")
+		getSpawnableFloors(["GRASS_DARK"])
 		placeStairs()
 		if areAllStairsConnected():
 			return
 		resetLevel()
 		resetGeneration()
-	push_error("Couldn't generate library")
+	push_error("Couldn't generate the great shadows")
 
-func createLibrary():
+func createTheGreatShadows():
 	for _i in range(40):
-		if generateMap(randi() % 11) and get_used_cells().size() > 1350:
+		if generateMap() and get_used_cells().size() > 1350:
 			return
 		resetGeneration()

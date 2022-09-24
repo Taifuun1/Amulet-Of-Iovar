@@ -16,11 +16,13 @@ func createDungeon():
 		createLabyrinth()
 		trimGenerationEdges()
 		getGenerationGrid()
+		fillEmptyTiles("CORRIDOR_DUNGEON")
 		getSpawnableFloors(["CORRIDOR_DUNGEON"])
 		placeStairs()
 		if areAllStairsConnected():
 			return
 		resetLevel()
+		resetGeneration()
 	push_error("Couldn't generate labyrinth")
 
 func createLabyrinth():

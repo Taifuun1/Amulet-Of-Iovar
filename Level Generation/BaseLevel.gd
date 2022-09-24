@@ -38,6 +38,10 @@ func createGrid(_tile = Globals.tiles.EMPTY):
 		for _y in range(Globals.gridSize.y):
 			grid[_x].append({
 				"tile": _tile,
+				"tileMetaData": {
+					"xFlip": false,
+					"yFlip": false
+				},
 				"critter": null,
 				"items": [],
 				"interactable": null
@@ -47,6 +51,10 @@ func getGenerationGrid():
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):
 			grid[x][y].tile = get_cellv(Vector2(x,y))
+			grid[x][y].tileMetaData = {
+				"xFlip": is_cell_x_flipped(x, y),
+				"yFlip": is_cell_y_flipped(x, y)
+			}
 
 func placeCritterOnTypeOfTile(_tile, _critter):
 	for x in range(grid.size()):
@@ -101,7 +109,15 @@ func areAllStairsConnected():
 		Globals.tiles.WALL_DUNGEON,
 		Globals.tiles.WALL_SAND,
 		Globals.tiles.WALL_BRICK_SAND,
-		Globals.tiles.WALL_BOARD
+		Globals.tiles.WALL_BOARD,
+		Globals.tiles.WALL_BRICK_LARGE,
+		Globals.tiles.GRASS_TREE,
+		Globals.tiles.VILLAGE_WALL_HORIZONTAL,
+		Globals.tiles.VILLAGE_WALL_CORNER,
+		Globals.tiles.VILLAGE_WALL_VERTICAL,
+		Globals.tiles.WALL_BRICK_SMALL,
+		Globals.tiles.VILLAGE_WALL_HALFWALL,
+		Globals.tiles.GRASS_DEAD_TREE
 	])
 	
 	if stairs.values().size() == 0 or stairs["downStair"] == null or stairs["upStair"] == null:
@@ -113,6 +129,12 @@ func areAllStairsConnected():
 			if calculatePath(startStair, endStair).size() == 0:
 				return false
 	return true
+
+func fillEmptyTiles(_tile):
+	for x in range(grid.size()):
+		for y in range(grid[x].size()):
+			if grid[x][y].tile == -1:
+				grid[x][y].tile = Globals.tiles[_tile]
 
 func placeRandomInteractables(_interactables):
 	for _interactable in _interactables:

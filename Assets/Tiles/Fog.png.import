@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FOVGrey.png-0f2762598d071b6efc07e570a5cd89a2.stex"
+path="res://.import/Fog.png-870029b53e35509c5898942505587215.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/FOVGrey.png"
-dest_files=[ "res://.import/FOVGrey.png-0f2762598d071b6efc07e570a5cd89a2.stex" ]
+source_file="res://Assets/Tiles/Fog.png"
+dest_files=[ "res://.import/Fog.png-870029b53e35509c5898942505587215.stex" ]
 
 [params]
 

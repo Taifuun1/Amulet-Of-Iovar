@@ -10,9 +10,13 @@ onready var minesOfTidoh = preload("res://Level Generation/Generic Generation/Mi
 onready var tidohMiningOutpost = preload("res://Level Generation/Generic Generation/Mines Of Tidoh/TidohMiningOutpost.tscn")
 onready var beach = preload("res://Level Generation/Generic Generation/Beach/Beach.tscn")
 onready var vacationResort = preload("res://Level Generation/Generic Generation/Beach/VacationResort.tscn")
+
 onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
+onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
+
 onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
+onready var banditWarcamp1 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp1.tscn")
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -46,15 +50,16 @@ var levels = {
 	"library": [],
 	"dungeon4": [],
 	"banditWarcamp": [],
-
-	"arena": [],
-	"fortress": [],
-	"labyrinth": [],
-	"theGreatShadows": [],
+	"storageArea": [],
 	"halls1": [],
+	"labyrinth": [],
 	"halls2": [],
-	"dragonsPeak": [],
+	"arena": [],
 	"halls3": [],
+	"dragonsPeak": [],
+	"halls4": [],
+	"fortress": [],
+	"theGreatShadows": [],
 	"iovarsLair": []
 }
 
@@ -139,6 +144,9 @@ func create():
 	for _level in levels.labyrinth:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
+	for _level in levels.theGreatShadows:
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	
 	$Critters.add_child(player, true)
 	player.create("mercenary")
 	level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
@@ -191,7 +199,7 @@ func create():
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = tidohMiningOutpost2.instance()
+	var firstLevel = banditWarcamp1.instance()
 	firstLevel.create("minesOfTidoh", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
@@ -248,7 +256,7 @@ func createDungeon():
 	
 	### Library
 	for _level in range(1):
-		var newlibrary= library.instance()
+		var newlibrary = library.instance()
 		newlibrary.create("library", "Library {level}".format({ "level": levels.library.size() }), 10000)
 		levels.library.append(newlibrary)
 		$Levels.add_child(newlibrary)
@@ -261,11 +269,18 @@ func createDungeon():
 		$Levels.add_child(newDungeon)
 	
 	### Labyrinth
-	for _level in range(3):
+	for _level in range(1):
 		var newlabyrinth = labyrinth.instance()
 		newlabyrinth.create("labyrinth", "Labyrinth {level}".format({ "level": levels.labyrinth.size() }), 10000)
 		levels.labyrinth.append(newlabyrinth)
 		$Levels.add_child(newlabyrinth)
+	
+	### The Great Shadows
+	for _level in range(3):
+		var newGreatShadows = theGreatShadows.instance()
+		newGreatShadows.create("theGreatShadows", "The Great Shadows {level}".format({ "level": levels.labyrinth.size() }), 10000)
+		levels.theGreatShadows.append(newGreatShadows)
+		$Levels.add_child(newGreatShadows)
 	
 	for _levelSection in levels:
 		if typeof(_levelSection) == TYPE_STRING:
@@ -481,7 +496,7 @@ func processPlayerEffects():
 func updateTiles():
 	for x in (level.grid.size()):
 		for y in (level.grid[x].size()):
-			set_cellv(Vector2(x, y), level.grid[x][y].tile)
+			set_cellv(Vector2(x, y), level.grid[x][y].tile, level.grid[x][y].tileMetaData.xFlip, level.grid[x][y].tileMetaData.yFlip)
 			$FOV.set_cellv(Vector2(x, y), $FOV.currentFOVLevel[x][y])
 			if level.grid[x][y].interactable != null:
 				$Interactables.set_cellv(Vector2(x, y), level.grid[x][y].interactable)
@@ -919,7 +934,7 @@ func _debug__go_to_level(_level):
 	else:
 		level.grid[_upStairTile2.x][_upStairTile2.y].critter = 0
 	drawLevel()
-	$"UI/UITheme/Debug Menu".hide()
+	$"UI/UITheme/Debug Menu"._on_Hide_pressed()
 	$"/root/World".show()
 
 func _exit_tree():

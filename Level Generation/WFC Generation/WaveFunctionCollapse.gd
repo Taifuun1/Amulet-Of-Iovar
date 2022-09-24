@@ -254,7 +254,7 @@ func drawPatternWithGrid(_grid):
 func changeReplaceables(_replaceables):
 	for x in Globals.gridSize.x:
 		for y in Globals.gridSize.y:
-			if grid[x][y].tile == Globals.tiles.REPLACEABLE:
+			if grid[x][y].tile == Globals.tiles.REPLACEABLE1:
 				grid[x][y].tile = Globals.tiles[_replaceables[randi() % _replaceables.size()]]
 
 

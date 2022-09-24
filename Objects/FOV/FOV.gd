@@ -2,7 +2,7 @@ extends TileMap
 
 enum {
 	HIDDEN
-	GREY
+	FOG
 }
 
 var currentFOVLevel = []
@@ -33,5 +33,5 @@ func seeCell(_x, _y):
 	set_cell(_x, _y, -1)
 
 func greyCell(_x, _y):
-	currentFOVLevel[_x][_y] = GREY
-	set_cell(_x, _y, GREY)
+	currentFOVLevel[_x][_y] = FOG
+	set_cell(_x, _y, FOG)

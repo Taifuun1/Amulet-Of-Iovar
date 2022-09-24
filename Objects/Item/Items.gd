@@ -51,7 +51,7 @@ func createItem(_item, _position = null, _toInventory = false, _extraData = {  }
 	
 	var newItem = item.instance()
 	if typeof(_item) == TYPE_STRING:
-		newItem.createItem(getItemByName(_item, _extraData))
+		newItem.createItem(getItemByName(_item), _extraData)
 	else:
 		newItem.createItem(_item, _extraData)
 	if _toInventory:
