@@ -102,9 +102,9 @@ func getAttacks(_stats):
 		attacks.append(
 			{
 				"dmg": [value.dmg[0] + damageIncrease.dmg, value.dmg[1] + damageIncrease.dmg],
-				"enchantment": enchantment,
-				"ap": value.ap,
-				"bonusDmg": value.bonusDmg
+				"bonusDmg": value.bonusDmg.append(enchantment),
+				"armorPen": value.armorPen,
+				"magicDmg": value.magicDmg
 			}
 		)
 	return attacks

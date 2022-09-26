@@ -75,43 +75,40 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				return false
 
 func takeDamage(_attacks, _critterTile, _items, _level):
-	var _didCritterDespawn = null
+	var _didCritterDie = null
 	var _attacksLog = []
 	if _attacks.size() != 0:
 		for _attack in _attacks:
-			var _damageAfterArmorReduction = calculateDmg(_attack)
-			if _damageAfterArmorReduction <= 1 and _damageAfterArmorReduction >= -2:
+			var _damage = calculateDmg(_attack)
+			var _attackLog = ""
+			
+			# Total
+			if _damage.dmg < 1 and _damage.dmg >= -2:
 				hp -= 1
-				_attacksLog.append("You hit the {critter} for 1 damage...".format({ "critter": critterName }))
-			elif _damageAfterArmorReduction < -2:
-				_attacksLog.append("Your attack bounces off!")
+				_attackLog += "You hit the {critter} for 1 damage...".format({ "critter": critterName })
+			elif _damage.dmg < -2:
+				_attackLog += "Your attack bounces off!"
 			else:
-				hp -= _damageAfterArmorReduction
-				_attacksLog.append("You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damageAfterArmorReduction }))
+				hp -= _damage.dmg + _damage.magicDmg
+				_attackLog += "You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damage.dmg + _damage.magicDmg })
+			
+			# Magic
+			if _damage.magicDmg != 0:
+				hp -= _damage.magicDmg
+				_attackLog += " ({magicDmg} magic damage)".format({ "magicDmg": _damage.magicDmg })
+			
+			_attacksLog.append(_attackLog)
+			
 			if hp <= 0:
 				despawn(_critterTile)
-				_didCritterDespawn = expDropAmount
+				_didCritterDie = expDropAmount
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))
 				break
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
 	else:
 		Globals.gameConsole.addLog("Looks like you cant attack...")
-	return _didCritterDespawn
-
-func calculateDmg(_attack):
-	var _armorPenetration = ac - _attack.ap
-	if _armorPenetration < 0: _armorPenetration = 0
-	var _lowerDmg = int(_attack.dmg[0])
-	var _upperDmg = int(_attack.dmg[1]) - _attack.dmg[0]
-	if _upperDmg + _lowerDmg == 0:
-		return (_attack.enchantment + _attack.bonusDmg.dmg) - _armorPenetration
-	var _baseDmgVariance
-	if _upperDmg == 0:
-		_baseDmgVariance = _lowerDmg
-	else:
-		_baseDmgVariance = randi() % int(_upperDmg) + _lowerDmg
-	return ((_baseDmgVariance + _attack.enchantment) + _attack.bonusDmg.dmg) - _armorPenetration
+	return _didCritterDie
 
 func despawn(_critterTile = null, createCorpse = true):
 	var _level = get_node("/root/World/Levels/{level}".format({ "level": levelId }))

@@ -59,6 +59,46 @@ func moveCritter(_moveFrom, _moveTo, _movingCritter, _level, _movedCritter = nul
 
 
 
+####################################
+### Damage calculation functions ###
+####################################
+
+func calculateDmg(_attack):
+	var damage = {
+		"dmg": 0,
+		"magicDmg": 0
+	}
+	
+	var _armorClassAfterArmorPen = ac - _attack.armorPen
+	if _armorClassAfterArmorPen < 0: _armorClassAfterArmorPen = 0
+	
+	var _floorDmg = int(_attack.dmg[0])
+	var _dmgVariation = int(_attack.dmg[1]) - _attack.dmg[0]
+	
+	var _totalBonusDamage = 0
+	for _bonusDamage in _attack.bonusDmg:
+		_totalBonusDamage += _bonusDamage
+#	if _upperDmg + _lowerDmg == 0:
+#		damage.dmg = _totalBonusDamage - _armorPenetration
+#	else:
+
+	var _baseDmg
+	if _dmgVariation == 0:
+		_baseDmg = _floorDmg
+	else:
+		_baseDmg = randi() % int(_dmgVariation) + _floorDmg
+	damage.dmg = (_baseDmg + _totalBonusDamage) - _armorClassAfterArmorPen
+	
+	var _magicDmg = _attack.magicDmg.dmg
+	if _attack.magicDmg.element != null and resistances.has(_attack.magicDmg.element.to_lower()):
+		_magicDmg /= 2
+	damage.magicDmg = _magicDmg
+	
+	if damage.dmg < 0: damage.dmg = 0
+	return damage
+
+
+
 ###############################
 ### Status effect functions ###
 ###############################

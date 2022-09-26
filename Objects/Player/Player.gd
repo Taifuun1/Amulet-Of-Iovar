@@ -336,8 +336,8 @@ func calculateEquipmentStats():
 	# Armor class
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	
-	attacks = []
 	# Attacks
+	attacks = []
 	if (
 		$"/root/World/UI/UITheme/Equipment".hands["lefthand"] != null and
 		$"/root/World/UI/UITheme/Equipment".hands["lefthand"] == $"/root/World/UI/UITheme/Equipment".hands["righthand"]
@@ -360,10 +360,10 @@ func calculateEquipmentStats():
 	else:
 		attacks = [
 			{
-				"dmg": [stats.strength * 1 / 6, 1 + stats.strength * 1 / 6],
-				"enchantment": 0,
-				"ap": 0,
-				"bonusDmg": {
+				"dmg": [1 + stats.strength / 6, 1 + stats.strength / 6],
+				"bonusDmg": [],
+				"armorPen": 0,
+				"magicDmg": {
 					"dmg": 0,
 					"element": null
 				}

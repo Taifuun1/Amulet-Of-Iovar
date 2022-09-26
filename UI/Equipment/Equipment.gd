@@ -156,7 +156,7 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 		for _accessory in accessories.keys():
 			if accessories[_accessory] == _id:
 				accessories[_accessory] = null
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory.capitalize() })).texture = null
+				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = null
 				return
 		for _equipment in equipment.keys():
 			if equipment[_equipment] == _id:
