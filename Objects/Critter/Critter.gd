@@ -74,7 +74,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			else:
 				return false
 
-func takeDamage(_attacks, _critterTile, _items, _level):
+func takeDamage(_attacks, _critterTile, _items = $"/root/World/Items/Items", _level = $"/root/World".level):
 	var _didCritterDie = null
 	var _attacksLog = []
 	if _attacks.size() != 0:
@@ -82,20 +82,26 @@ func takeDamage(_attacks, _critterTile, _items, _level):
 			var _damage = calculateDmg(_attack)
 			var _attackLog = ""
 			
-			# Total
-			if _damage.dmg < 1 and _damage.dmg >= -2:
-				hp -= 1
-				_attackLog += "You hit the {critter} for 1 damage...".format({ "critter": critterName })
-			elif _damage.dmg < -2:
-				_attackLog += "Your attack bounces off!"
-			else:
-				hp -= _damage.dmg + _damage.magicDmg
-				_attackLog += "You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damage.dmg + _damage.magicDmg })
-			
-			# Magic
-			if _damage.magicDmg != 0:
+			# Magic spell
+			if _damage.dmg == 0 and _damage.magicDmg != 0:
 				hp -= _damage.magicDmg
-				_attackLog += " ({magicDmg} magic damage)".format({ "magicDmg": _damage.magicDmg })
+				_attackLog += "{critter} gets hit for {magicDmg} magic damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg })
+			# Physical attack
+			else:
+				# Physical damage
+				if _damage.dmg < 1 and _damage.dmg >= -2:
+					hp -= 1
+					_attackLog += "You hit the {critter} for 1 damage...".format({ "critter": critterName })
+				elif _damage.dmg < -2:
+					_attackLog += "Your attack bounces off!"
+				else:
+					hp -= _damage.dmg
+					_attackLog += "You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damage.dmg + _damage.magicDmg })
+				
+				# Magic damage
+				if _damage.magicDmg != 0:
+					hp -= _damage.magicDmg
+					_attackLog += " ({magicDmg} magic damage)".format({ "magicDmg": _damage.magicDmg })
 			
 			_attacksLog.append(_attackLog)
 			

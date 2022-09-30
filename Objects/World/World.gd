@@ -160,23 +160,26 @@ func create():
 	for _level in $Levels.get_children():
 		$Critters/Critters.generateCrittersForLevel(_level)
 	
-	$"/root/World/Items/Items".createItem("scroll of identify", null, true, { "alignment": "blessed" })
-	$"/root/World/Items/Items".createItem("blindfold", null, true, { "alignment": "uncursed" })
-	$"/root/World/Items/Items".createItem("scroll of genocide", null, true, { "alignment": "blessed" })
-	$"/root/World/Items/Items".createItem("frostfury", null, true, { "alignment": "uncursed" })
-	$"/root/World/Items/Items".createItem("scroll of genocide", null, true, { "alignment": "cursed" })
-	$"/root/World/Items/Items".createItem("ring of protection", null, true, { "alignment": "uncursed" })
-	$"/root/World/Items/Items".createItem("oil lamp", null, true, { "alignment": "uncursed" })
-	$"/root/World/Items/Items".createItem("key", null, true, { "alignment": "uncursed" })
-	$"/root/World/Items/Items".createItem("vorpal sword", null, true, { "alignment": "cursed" })
-	$"/root/World/Items/Items".createItem("wand of summon critter", null, true, { "alignment": "uncursed" })
-	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
-	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
-	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "cursed" })
-	$"/root/World/Items/Items".createItem("scroll of teleport", null, true, { "alignment": "cursed" })
-	$"/root/World/Items/Items".createItem("dwarvish laysword", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("scroll of identify", null, true, { "alignment": "blessed" })
+	$Items/Items.createItem("blindfold", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("scroll of genocide", null, true, { "alignment": "blessed" })
+	$Items/Items.createItem("frostfury", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("scroll of genocide", null, true, { "alignment": "cursed" })
+	$Items/Items.createItem("ring of protection", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("oil lamp", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("key", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("vorpal sword", null, true, { "alignment": "cursed" })
+	$Items/Items.createItem("wand of summon critter", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "cursed" })
+	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "cursed" })
+	$Items/Items.createItem("dwarvish laysword", null, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("eario of toxix", null, true)
+	$Items/Items.createItem("eario of fleir", null, true)
+	$Items/Items.createItem("eario of frost", null, true)
 	$Items/Items.createItem("luirio of cone", null, true)
+	$Items/Items.createItem("luirio of point", null, true)
 	$Items/Items.createItem("heario of flow", null, true)
 	
 	updateTiles()
@@ -295,7 +298,7 @@ func _process(_delta):
 
 func _input(_event):
 	if !inStartScreen:
-		if inGame:
+		if inGame and currentGameState != gameState.OUT_OF_PLAYERS_HANDS:
 			var _playerTile = level.getCritterTile(0)
 			if (
 				(
@@ -414,7 +417,6 @@ func _input(_event):
 				Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
 			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
 				keepMoving = true
-			
 		updateUI()
 
 func processGameTurn(_playerTile = null, _tileToMoveTo = null):
@@ -787,8 +789,8 @@ func castWith(_playerTile):
 			currentGameState = gameState.CAST
 			Globals.gameConsole.addLog("Cast towards what? (Pick a direction with numpad)")
 		"directionless":
-			yield($UI/UITheme/Runes.castSpell(_playerTile), "completed")
-			processGameTurn()
+			$UI/UITheme/Runes.castSpell(_playerTile)
+#			yield($UI/UITheme/Runes.castSpell(_playerTile), "completed")
 		"notCastable":
 			Globals.gameConsole.addLog("Your currently worn runes are not enough to cast a spell.")
 
@@ -869,9 +871,9 @@ func kickAt(_tileToKickAt):
 	processGameTurn()
 
 func castAt(_playerTile, _tileToCastAt):
-	yield($UI/UITheme/Runes.castSpell(_playerTile, _tileToCastAt, level.grid), "completed")
-	resetToDefaulGameState()
-	processGameTurn()
+	currentGameState = gameState.OUT_OF_PLAYERS_HANDS
+#	yield($UI/UITheme/Runes.castSpell(_playerTile, _tileToCastAt, level.grid), "completed")
+	$UI/UITheme/Runes.castSpell(_playerTile, _tileToCastAt, level.grid)
 
 func processAccept():
 	var _playerTile = level.getCritterTile(0)
@@ -904,13 +906,15 @@ func closeMenu(_additionalChoices = false):
 			$Critters/"0"/Inventory.hideInventory()
 		$UI/UITheme/ListMenu.hideListMenuList()
 		resetToDefaulGameState()
-	else:
-		pass
 
 func resetToDefaulGameState():
 	currentGameState = gameState.GAME
 	inGame = true
 	keepMoving = false
+
+func _on_Player_Animation_done():
+	processGameTurn()
+	resetToDefaulGameState()
 
 func _debug__go_to_level(_level):
 	$"/root/World".hide()

@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Level Generation/Generic Generation/GenericLevel.gd"
 }, {
+"base": "BaseCritter",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Objects/Player/Player.gd"
+}, {
 "base": "BaseLevel",
 "class": "WaveFunctionCollapse",
 "language": "GDScript",
@@ -50,6 +55,7 @@ _global_script_class_icons={
 "Beach": "",
 "EnemyPathfinding": "",
 "GenericLevel": "",
+"Player": "",
 "WaveFunctionCollapse": "",
 "WaveFunctionCollapseTemplate": ""
 }

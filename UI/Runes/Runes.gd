@@ -4,11 +4,22 @@ var runeItem = load("res://UI/Runes/Rune Item.tscn")
 var spell = load("res://Objects/Spell/Spell.tscn")
 
 var runeData = load("res://Objects/Spell/RuneData.gd").new()
+var spellData = load("res://Objects/Spell/SpellData.gd").new()
 
 var runes = {
 	"eario": null,
 	"luirio": null,
 	"heario": null
+}
+
+var spellDamage = {
+	"dmg": null,
+	"bonusDmg": [],
+	"armorPen": 0,
+	"magicDmg": {
+		"dmg": 0,
+		"element": null
+	}
 }
 
 var hoveredEquipment = null
@@ -47,8 +58,8 @@ func setRunes(_id):
 		runes[hoveredEquipment.to_lower()] = _rune
 		get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _rune.getTexture()
 		checkWhatRuneIsEquipped(_rune)
+		calculateMagicDamage()
 		$"/root/World".processGameTurn()
-#	$"/root/World/Critters/0".calculateEquipmentStats()
 
 func _process(_delta):
 	if Input.is_action_just_released("RIGHT_CLICK") and hoveredEquipment != null:
@@ -57,7 +68,7 @@ func _process(_delta):
 			runes[hoveredEquipment.to_lower()] = null
 			get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
 			checkWhatRuneIsEquipped(_rune)
-#			$"/root/World/Critters/0".calculateEquipmentStats()
+			calculateMagicDamage()
 			$"/root/World".processGameTurn()
 
 
@@ -81,8 +92,8 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 		if runeData.runeData[_rune] != null and runes[_rune] != null:
 			_runeData[_rune] = runeData.runeData[_rune][runes[_rune].value.to_lower()]
 	
-	if runes["heario"] == null:
-		_runeData["heario"] = {
+	if runes.heario == null:
+		_runeData.heario = {
 			"dmgMultiplier": 0.5,
 			"effectMultiplier": 0.5,
 			"texture": load("res://Assets/Spells/NoHeario.png")
@@ -101,12 +112,14 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 			var _checkedTile = _playerTile + _direction
 			for _i in range(_runeData.luirio.distance):
 				if (
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.EMPTY or
+					!Globals.isTileFree(_checkedTile, grid) or
 					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.DOOR_CLOSED or
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.WALL_DUNGEON or
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.WALL_SAND or
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.WALL_BRICK_SAND or
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.WALL_BOARD
+					(
+						_checkedTile.x < 0 or
+						_checkedTile.y < 0 or
+						_checkedTile.x > Globals.gridSize.x - 1 or
+						_checkedTile.y > Globals.gridSize.y - 1
+					)
 				):
 					_tiles.append([{ "tile": _previousTile, "angle": 0 }])
 					break
@@ -119,12 +132,14 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 			var _checkedTile = _playerTile + _direction
 			for _i in range(_runeData.luirio.distance):
 				if (
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.EMPTY or
+					!Globals.isTileFree(_checkedTile, grid) or
 					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.DOOR_CLOSED or
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.WALL_DUNGEON or
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.WALL_SAND or
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.WALL_BRICK_SAND or
-					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.WALL_BOARD
+					(
+						_checkedTile.x < 0 or
+						_checkedTile.y < 0 or
+						_checkedTile.x > Globals.gridSize.x - 1 or
+						_checkedTile.y > Globals.gridSize.y - 1
+					)
 				):
 					break
 				elif grid[_checkedTile.x][_checkedTile.y].critter != null:# and !get_node("/root/World/Critters/{critter}".format({ "critter": grid[_checkedTile.x][_checkedTile.y].critter })).aI.aI.matchn("neutral"):
@@ -133,24 +148,26 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 				else:
 					_tiles.append([{ "tile": _checkedTile, "angle": 0 }])
 					_checkedTile += _direction
-		elif runes["luirio"].value.to_lower().matchn("cone") or runes["luirio"].value.to_lower().matchn("fourway"):
+		elif runes.luirio.value.to_lower().matchn("cone") or runes.luirio.value.to_lower().matchn("fourway"):
 			var _spellDirections = _runeData.luirio.spellDirections[_direction].duplicate(true)
 			for _i in range(_runeData.luirio.distance):
 				var _lineTiles = []
 				for _index in _spellDirections.size():
 					if typeof(_spellDirections[_index].direction) != TYPE_BOOL:
-						var _tile = _playerTile + _spellDirections[_index].direction
+						var _checkedTile = _playerTile + _spellDirections[_index].direction
 						if (
-							grid[_tile.x][_tile.y].tile == Globals.tiles.EMPTY or
-							grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED or
-							grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_DUNGEON or
-							grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_SAND or
-							grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_BRICK_SAND or
-							grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_BOARD
+							!Globals.isTileFree(_checkedTile, grid) or
+							grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.DOOR_CLOSED or
+							(
+								_checkedTile.x < 0 or
+								_checkedTile.y < 0 or
+								_checkedTile.x > Globals.gridSize.x - 1 or
+								_checkedTile.y > Globals.gridSize.y - 1
+							)
 						):
 							_spellDirections[_index].direction = false
 						else:
-							_lineTiles.append({ "tile": _tile, "angle": _spellDirections[_index].angle })
+							_lineTiles.append({ "tile": _checkedTile, "angle": _spellDirections[_index].angle })
 							_spellDirections[_index].direction += _runeData.luirio.spellDirections[_direction][_index].direction
 				if _lineTiles.empty():
 					break
@@ -158,6 +175,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	
 	_newSpell.create(_tiles, _runeData)
 	$"/root/World/Animations".add_child(_newSpell)
+	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 
 
@@ -248,6 +266,7 @@ func takeOfRuneWhenDroppingItem(_id):
 		if runes[_rune] != null and runes[_rune].id == _id:
 			runes[_rune] = null
 			get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = null
+			calculateMagicDamage()
 			return
 
 func isCastableRunes():
@@ -256,6 +275,39 @@ func isCastableRunes():
 			return "direction"
 		return "directionless"
 	return "notCastable"
+
+func calculateMagicDamage():
+	if isCastableRunes() == "notCastable":
+		spellDamage = [{
+			"dmg": null,
+			"bonusDmg": [],
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": 0,
+				"element": null
+			}
+		}]
+	elif runes.heario == null:
+		spellDamage = [{
+			"dmg": null,
+			"bonusDmg": [],
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": int(spellData.spellData[runes.eario.value.to_lower()].dmg * 0.5),
+				"element": runes.eario.value
+			}
+		}]
+#	"effect": runeData.heario[runes.heario].effectMultiplier
+	else:
+		spellDamage = [{
+			"dmg": null,
+			"bonusDmg": [],
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": int(spellData.spellData[runes.eario.value.to_lower()].dmg * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier),
+				"element": runes.eario.value
+			}
+		}]
 
 
 

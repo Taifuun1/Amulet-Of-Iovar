@@ -47,8 +47,8 @@ func createItem(_item, _extraData = {}):
 	if _extraData.has("alignment"):
 		alignment = _extraData.alignment
 	else:
-		if randi() % 5 + 0 == 5:
-			if randi() % 2 == 1:
+		if randi() % 5 == 0:
+			if randi() % 2 == 0:
 				alignment = "blessed"
 			else:
 				alignment = "cursed"

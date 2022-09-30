@@ -40,7 +40,7 @@ var runeData = {
 			}
 		},
 		"cone": {
-			"distance": 5,
+			"distance": 4,
 			"spellDirections": {
 				Vector2(0,-1): [
 					{
