@@ -15,7 +15,7 @@ enum tiles {
 	UP_STAIR_DUNGEON
 	DOOR_CLOSED
 	DOOR_OPEN
-	GRASS
+	GRASS_SIMPLE
 	SEA
 	SAND
 	SOIL
@@ -48,8 +48,11 @@ enum tiles {
 	WALL_BRICK_SMALL
 	FLOOR_BRICK_SMALL
 	VILLAGE_WALL_HALFWALL
-	FLOOR_BRICK
+	FLOOR_WOOD_BRICK
 	GRASS_DEAD_TREE
+	WALL_STONE_BRICK
+	WALL_WOOD_PLANK
+	FLOOR_STONE_BRICK
 }
 
 
@@ -89,7 +92,9 @@ func isTileFree(_tileToMoveTo, grid):
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_VERTICAL and
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_SMALL and
 		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_HALFWALL and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.GRASS_DEAD_TREE
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.GRASS_DEAD_TREE and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_STONE_BRICK and
+		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_WOOD_PLANK
 	):
 		return true
 	return false

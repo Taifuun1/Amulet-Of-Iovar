@@ -155,12 +155,19 @@ func placeDoors(_doors):
 						int(_room.position.x) + int(_room.size.x) - 1,
 						randi() % (int(_room.size.y) - 2) + (int(_room.position.y) + 1)
 					)
-			if isTileADoor(_position):
+			if isTileADoor2(_position):
 				continue
 			else:
 				grid[_position.x][_position.y].tile = Globals.tiles.DOOR_CLOSED
 				rooms.back().doors.append(_position)
 				break
+
+func isTileADoor2(_position):
+	for _room in rooms:
+		for _door in _room.doors:
+			if _door == _position:
+				return true
+	return false
 
 
 
@@ -206,7 +213,7 @@ func connectCorridorCells(points):
 		])
 		for pointRelative in pointsRelative:
 			var pointRelativeIndex = id(pointRelative)
-			if isOutSideTileMap(pointRelative, grid):
+			if isOutSideTileMap(pointRelative):
 				continue
 			if not corridorsAstarNode.has_point(pointRelativeIndex):
 				continue

@@ -237,7 +237,7 @@ func calculateCavePath(pathStartPosition, pathEndPosition):
 func pathFindCave(grid):
 	caveAstarNode.clear()
 	var caveTiles = addCavetiles(grid)
-	connectCaveCells(caveTiles, grid, true)
+	connectCaveCells(caveTiles, true)
 	addCaveDividers(grid)
 
 func addCavetiles(grid):
@@ -249,7 +249,7 @@ func addCavetiles(grid):
 			caveAstarNode.add_point(id(point), point, 1.0)
 	return points
 
-func connectCaveCells(points, grid, aStarGrid = false):
+func connectCaveCells(points, aStarGrid = false):
 	for point in points:
 		var pointIndex = id(point)
 		var pointsRelative
@@ -273,7 +273,7 @@ func connectCaveCells(points, grid, aStarGrid = false):
 			])
 		for pointRelative in pointsRelative:
 			var pointRelativeIndex = id(pointRelative)
-			if isOutSideTileMap(pointRelative, grid):
+			if isOutSideTileMap(pointRelative):
 				continue
 			if not caveAstarNode.has_point(pointRelativeIndex):
 				continue

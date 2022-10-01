@@ -175,6 +175,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	
 	_newSpell.create(_tiles, _runeData)
 	$"/root/World/Animations".add_child(_newSpell)
+	# warning-ignore:return_value_discarded
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 

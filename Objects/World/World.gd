@@ -14,6 +14,7 @@ onready var vacationResort = preload("res://Level Generation/Generic Generation/
 onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
 onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
+onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
 
 onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
 onready var banditWarcamp1 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp1.tscn")
@@ -126,26 +127,26 @@ func create():
 	for _level in levels.dungeon2:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
-	for _level in levels.beach:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-	
-	for _level in levels.dungeon3.size():
-		if levels.dungeon3[_level] == levels.dungeon3.back():
-			get_node("Levels/{level}".format({ "level": levels.dungeon3[_level] })).createNewLevel(true)
-		else:
-			get_node("Levels/{level}".format({ "level": levels.dungeon3[_level] })).createNewLevel()
-	
-	for _level in levels.library:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-	
-	for _level in levels.dungeon4:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-	
-	for _level in levels.labyrinth:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-	
-	for _level in levels.theGreatShadows:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+#	for _level in levels.beach:
+#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+#
+#	for _level in levels.dungeon3.size():
+#		if levels.dungeon3[_level] == levels.dungeon3.back():
+#			get_node("Levels/{level}".format({ "level": levels.dungeon3[_level] })).createNewLevel(true)
+#		else:
+#			get_node("Levels/{level}".format({ "level": levels.dungeon3[_level] })).createNewLevel()
+#
+#	for _level in levels.library:
+#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+#
+#	for _level in levels.dungeon4:
+#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+#
+#	for _level in levels.labyrinth:
+#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+#
+#	for _level in levels.theGreatShadows:
+#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
 	$Critters.add_child(player, true)
 	player.create("mercenary")
@@ -202,8 +203,8 @@ func create():
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = banditWarcamp1.instance()
-	firstLevel.create("minesOfTidoh", "Dungeon hallways 1", 10000)
+	var firstLevel = banditWarcamp.instance()
+	firstLevel.create("dungeon", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(1):
@@ -235,61 +236,61 @@ func createDungeon():
 		levels.dungeon2.append(newDungeon)
 		$Levels.add_child(newDungeon)
 
-	### Beach
-	var newBeach = beach.instance()
-	newBeach.create("beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
-	levels.beach.append(newBeach)
-	$Levels.add_child(newBeach)
-	var newVacationResort = vacationResort.instance()
-	newVacationResort.create("beach", "Vacation resort", 10000)
-	levels.beach.append(newVacationResort)
-	$Levels.add_child(newVacationResort)
-	for _level in range(1):
-		var newBeach2 = beach.instance()
-		newBeach2.create("beach", "Beach {level}".format({ "level": levels.beach.size() }), 10000)
-		levels.beach.append(newBeach2)
-		$Levels.add_child(newBeach2)
-	
-	### Dungeon 3
-	for _level in range(1):
-		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + 1 }), 10000)
-		levels.dungeon3.append(newDungeon)
-		$Levels.add_child(newDungeon)
-	
-	### Library
-	for _level in range(1):
-		var newlibrary = library.instance()
-		newlibrary.create("library", "Library {level}".format({ "level": levels.library.size() }), 10000)
-		levels.library.append(newlibrary)
-		$Levels.add_child(newlibrary)
-	
-	### Dungeon 4
-	for _level in range(3):
-		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() + 1 }), 10000)
-		levels.dungeon4.append(newDungeon)
-		$Levels.add_child(newDungeon)
-	
-	### Labyrinth
-	for _level in range(1):
-		var newlabyrinth = labyrinth.instance()
-		newlabyrinth.create("labyrinth", "Labyrinth {level}".format({ "level": levels.labyrinth.size() }), 10000)
-		levels.labyrinth.append(newlabyrinth)
-		$Levels.add_child(newlabyrinth)
-	
-	### The Great Shadows
-	for _level in range(3):
-		var newGreatShadows = theGreatShadows.instance()
-		newGreatShadows.create("theGreatShadows", "The Great Shadows {level}".format({ "level": levels.labyrinth.size() }), 10000)
-		levels.theGreatShadows.append(newGreatShadows)
-		$Levels.add_child(newGreatShadows)
-	
-	for _levelSection in levels:
-		if typeof(_levelSection) == TYPE_STRING:
-			totalLevelCount += 1
-		else:
-			totalLevelCount += _levelSection.size()
+#	### Beach
+#	var newBeach = beach.instance()
+#	newBeach.create("beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
+#	levels.beach.append(newBeach)
+#	$Levels.add_child(newBeach)
+#	var newVacationResort = vacationResort.instance()
+#	newVacationResort.create("beach", "Vacation resort", 10000)
+#	levels.beach.append(newVacationResort)
+#	$Levels.add_child(newVacationResort)
+#	for _level in range(1):
+#		var newBeach2 = beach.instance()
+#		newBeach2.create("beach", "Beach {level}".format({ "level": levels.beach.size() }), 10000)
+#		levels.beach.append(newBeach2)
+#		$Levels.add_child(newBeach2)
+#
+#	### Dungeon 3
+#	for _level in range(1):
+#		var newDungeon = dungeon.instance()
+#		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + 1 }), 10000)
+#		levels.dungeon3.append(newDungeon)
+#		$Levels.add_child(newDungeon)
+#
+#	### Library
+#	for _level in range(1):
+#		var newlibrary = library.instance()
+#		newlibrary.create("library", "Library {level}".format({ "level": levels.library.size() }), 10000)
+#		levels.library.append(newlibrary)
+#		$Levels.add_child(newlibrary)
+#
+#	### Dungeon 4
+#	for _level in range(3):
+#		var newDungeon = dungeon.instance()
+#		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() + 1 }), 10000)
+#		levels.dungeon4.append(newDungeon)
+#		$Levels.add_child(newDungeon)
+#
+#	### Labyrinth
+#	for _level in range(1):
+#		var newlabyrinth = labyrinth.instance()
+#		newlabyrinth.create("labyrinth", "Labyrinth {level}".format({ "level": levels.labyrinth.size() }), 10000)
+#		levels.labyrinth.append(newlabyrinth)
+#		$Levels.add_child(newlabyrinth)
+#
+#	### The Great Shadows
+#	for _level in range(3):
+#		var newGreatShadows = theGreatShadows.instance()
+#		newGreatShadows.create("theGreatShadows", "The Great Shadows {level}".format({ "level": levels.labyrinth.size() }), 10000)
+#		levels.theGreatShadows.append(newGreatShadows)
+#		$Levels.add_child(newGreatShadows)
+#
+#	for _levelSection in levels:
+#		if typeof(_levelSection) == TYPE_STRING:
+#			totalLevelCount += 1
+#		else:
+#			totalLevelCount += _levelSection.size()
 
 func _process(_delta):
 	if inGame:
@@ -703,13 +704,13 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 			if _stair.matchn("downStair"):
 				Globals.currentDungeonLevel = levels.dungeon2.front().levelId
 				return "upStair"
-		elif levels.dungeon3.back().levelId == Globals.currentDungeonLevel:
-			if _stair.matchn("secondDownStair"):
-				Globals.currentDungeonLevel = levels.library.front().levelId
-				return "upStair"
-			if _stair.matchn("downStair"):
-				Globals.currentDungeonLevel = levels.dungeon4.front().levelId
-				return "upStair"
+#		elif levels.dungeon3.back().levelId == Globals.currentDungeonLevel:
+#			if _stair.matchn("secondDownStair"):
+#				Globals.currentDungeonLevel = levels.library.front().levelId
+#				return "upStair"
+#			if _stair.matchn("downStair"):
+#				Globals.currentDungeonLevel = levels.dungeon4.front().levelId
+#				return "upStair"
 		else:
 			Globals.currentDungeonLevel += _direction
 			return "upStair"
@@ -720,12 +721,12 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 		elif levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon1.back().levelId
 			return "secondDownStair"
-		elif levels.dungeon4.front().levelId == Globals.currentDungeonLevel:
-			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
-			return "downStair"
-		elif levels.library.front().levelId == Globals.currentDungeonLevel:
-			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
-			return "secondDownStair"
+#		elif levels.dungeon4.front().levelId == Globals.currentDungeonLevel:
+#			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
+#			return "downStair"
+#		elif levels.library.front().levelId == Globals.currentDungeonLevel:
+#			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
+#			return "secondDownStair"
 		else:
 			Globals.currentDungeonLevel += _direction
 			return "downStair"

@@ -24,7 +24,7 @@ func calculatePathFindingPath(pathStartPosition, pathEndPosition):
 func enemyPathfinding(grid):
 	pathFindingAstarNode.clear()
 	var walkableTiles = addWalkableTiles(grid)
-	connectWalkableCells(walkableTiles, grid)
+	connectWalkableCells(walkableTiles)
 
 func addWalkableTiles(grid):
 	var points = []
@@ -37,7 +37,7 @@ func addWalkableTiles(grid):
 			pathFindingAstarNode.add_point(id(point), point, 1.0)
 	return points
 
-func connectWalkableCells(points, grid):
+func connectWalkableCells(points):
 	for point in points:
 		var pointIndex = id(point)
 		var pointsRelative = PoolVector2Array([
@@ -52,13 +52,13 @@ func connectWalkableCells(points, grid):
 		])
 		for pointRelative in pointsRelative:
 			var pointRelativeIndex = id(pointRelative)
-			if isOutSideTileMap(pointRelative, grid):
+			if isOutSideTileMap(pointRelative):
 				continue
 			if not pathFindingAstarNode.has_point(pointRelativeIndex):
 				continue
 			pathFindingAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
 
-func addPointToEnemyPathding(point, grid = null):
+func addPointToEnemyPathding(point):
 	var _pointId = id(point)
 	if pathFindingAstarNode.has_point(_pointId):
 		pathFindingAstarNode.set_point_disabled(_pointId, false)
@@ -76,7 +76,7 @@ func addPointToEnemyPathding(point, grid = null):
 		])
 		for pointRelative in pointsRelative:
 			var pointRelativeIndex = id(pointRelative)
-			if isOutSideTileMap(pointRelative, grid):
+			if isOutSideTileMap(pointRelative):
 				continue
 			if not pathFindingAstarNode.has_point(pointRelativeIndex):
 				continue
@@ -91,8 +91,8 @@ func removePointFromEnemyPathfinding(point):
 ### Helper functions ###
 ########################
 
-func isOutSideTileMap(point, grid):
-	return point.x < 0 or point.y < 0 or point.x >= grid.size() or point.y >= grid[0].size()
+func isOutSideTileMap(point):
+	return point.x < 0 or point.y < 0 or point.x >= Globals.gridSize.x or point.y >= Globals.gridSize.y
 
 func hasPoint(point):
 	return pathFindingAstarNode.has_point(id(point))

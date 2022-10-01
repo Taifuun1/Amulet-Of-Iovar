@@ -140,7 +140,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			Globals.gameConsole.addLog("The door won't budge!")
 		else:
 			_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.DOOR_OPEN
-			_level.addPointToEnemyPathding(_tileToMoveTo, _level.grid)
+			_level.addPointToEnemyPathding(_tileToMoveTo)
 	else:
 		if checkIfStatusEffectIsInEffect("fumbling") and randi() % 4 == 0:
 			Globals.gameConsole.addLog("You fumble on your feet.")
