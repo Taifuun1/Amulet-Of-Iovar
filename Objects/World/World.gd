@@ -15,9 +15,12 @@ onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
 onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
 onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
+onready var dungeonHallways = preload("res://Level Generation/WFC Generation/Dungeon Halls/DungeonHalls.tscn")
 
 onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
 onready var banditWarcamp1 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp1.tscn")
+onready var storageArea1 = preload("res://Level Generation/Premade Levels/Storage Area/StorageArea1.tscn")
+onready var storageArea2 = preload("res://Level Generation/Premade Levels/Storage Area/StorageArea2.tscn")
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -52,13 +55,13 @@ var levels = {
 	"dungeon4": [],
 	"banditWarcamp": [],
 	"storageArea": [],
-	"halls1": [],
+	"dungeonhalls1": [],
 	"labyrinth": [],
-	"halls2": [],
+	"dungeonhalls2": [],
 	"arena": [],
-	"halls3": [],
+	"dungeonhalls3": [],
 	"dragonsPeak": [],
-	"halls4": [],
+	"dungeonhalls4": [],
 	"fortress": [],
 	"theGreatShadows": [],
 	"iovarsLair": []
@@ -113,6 +116,8 @@ func _on_Game_Start():
 	thread.start(self, "create", null, Thread.PRIORITY_HIGH)
 
 func create():
+	$Items/Items.randomizeRandomItems()
+	
 	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
 	
 	for _level in levels.dungeon1.size():
@@ -153,8 +158,6 @@ func create():
 	level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
 	player.calculateEquipmentStats()
 	
-	$Items/Items.randomizeRandomItems()
-	
 	for _level in $Levels.get_children():
 		$Items/Items.generateItemsForLevel(_level)
 	
@@ -169,7 +172,6 @@ func create():
 	$Items/Items.createItem("ring of protection", null, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("oil lamp", null, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("key", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("vorpal sword", null, true, { "alignment": "cursed" })
 	$Items/Items.createItem("wand of summon critter", null, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
@@ -203,7 +205,7 @@ func create():
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = banditWarcamp.instance()
+	var firstLevel = storageArea1.instance()
 	firstLevel.create("dungeon", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
@@ -376,8 +378,8 @@ func _input(_event):
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_DUNGEON or
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_SAND
 				) and
-				levels.minesOfTidoh.back().levelId != Globals.currentDungeonLevel and
-				levels.library.back().levelId != Globals.currentDungeonLevel and
+#				levels.minesOfTidoh.back().levelId != Globals.currentDungeonLevel and
+#				levels.library.back().levelId != Globals.currentDungeonLevel and
 				Globals.currentDungeonLevel < Globals.generatedLevels and
 				currentGameState == gameState.GAME
 			):
@@ -485,9 +487,9 @@ func processEnemyActions():
 	return _isPlayerHit
 
 func processCrittersSpawnStatus():
-	if checkNewCritterSpawn >= 30:
+	if checkNewCritterSpawn >= 50:
 		$Critters/Critters.checkSpawnableCrittersLevel()
-		$Critters/Critters.checkNewCritterSpawn(level)
+		$Critters/Critters.checkNewCritterSpawn(level, level.getCritterTile(0))
 		checkNewCritterSpawn = 0
 	else:
 		checkNewCritterSpawn += 1
@@ -805,7 +807,7 @@ func interactWith(_tileToInteractWith):
 					$Items/Items.createItem("message in a bottle", _tileToInteractWith)
 					Globals.gameConsole.addLog("You discover a message in a bottle!")
 				else:
-					$Items/Items.createItem($Items/Items.returnRandomItem(), _tileToInteractWith)
+					$Items/Items.createItem($Items/Items.getRandomItem(), _tileToInteractWith)
 					Globals.gameConsole.addLog("You discover an item!")
 				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 				processGameTurn()

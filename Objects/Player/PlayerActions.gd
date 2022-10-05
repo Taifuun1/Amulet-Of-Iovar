@@ -482,7 +482,7 @@ func useItem(_id):
 				else:
 					Globals.gameConsole.addLog("You already have a lightsource on.")
 			"message in a bottle":
-				var _newItem = $"/root/World/Items/Items".returnRandomItem("scroll")
+				var _newItem = $"/root/World/Items/Items".getRandomItem("scroll")
 				$"/root/World/Items/Items".createItem(_newItem, null, true)
 				$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 				get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()

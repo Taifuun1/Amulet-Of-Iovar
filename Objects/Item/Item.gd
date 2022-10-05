@@ -29,7 +29,7 @@ func createItem(_item, _extraData = {}):
 	
 	if (
 		(GlobalItemInfo.globalItemInfo.has(itemName) and GlobalItemInfo.globalItemInfo[itemName].identified) or
-		_item.type == "comestible"
+		_item.type.to_lower() == "comestible"
 	):
 		itemName = _item.itemName
 	else:

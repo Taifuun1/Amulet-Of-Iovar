@@ -223,9 +223,9 @@ var globalItemInfo = {
 	"Potion of invisibility": {
 		"identified": false
 	},
-	"Potion of levitation": {
-		"identified": false
-	},
+#	"Potion of levitation": {
+#		"identified": false
+#	},
 	"Potion of paralysis": {
 		"identified": false
 	},
@@ -268,9 +268,9 @@ var globalItemInfo = {
 	"Ring of hunger": {
 		"identified": false
 	},
-	"Ring of levitation": {
-		"identified": false
-	},
+#	"Ring of levitation": {
+#		"identified": false
+#	},
 	"Ring of slow digestion": {
 		"identified": false
 	},
@@ -400,9 +400,6 @@ var globalItemInfo = {
 	"Wand of digging": {
 		"identified": false
 	},
-	"Wand of Magic sphere": {
-		"identified": false
-	},
 	"Wand of Frost": {
 		"identified": false
 	},
@@ -415,7 +412,10 @@ var globalItemInfo = {
 	"Wand of sleep": {
 		"identified": false
 	},
-	"Backwards wand of Magic sphere": {
+	"Wand of magic sphere": {
+		"identified": false
+	},
+	"Wand of backwards magic sphere": {
 		"identified": false
 	},
 	"Wand of teleport": {

@@ -7,6 +7,7 @@ func createNewLevel():
 	createDungeon()
 	createResortShack()
 	
+	pathFind(Globals.blockedTiles)
 	enemyPathfinding(grid)
 	
 	return self

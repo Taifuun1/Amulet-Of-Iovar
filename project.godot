@@ -330,6 +330,13 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_2="FOV"
 2d_physics/layer_3="Inputs"
 
+[network]
+
+limits/debugger_stdout/max_chars_per_second=100000
+limits/debugger_stdout/max_messages_per_frame=50
+limits/debugger_stdout/max_errors_per_second=1000
+limits/debugger_stdout/max_warnings_per_second=1000
+
 [rendering]
 
 2d/snapping/use_gpu_pixel_snap=true

@@ -51,7 +51,7 @@ var wands = {
 	],
 	"uncommon": [
 		{
-			"itemName": "Wand of Magic sphere",
+			"itemName": "Wand of magic sphere",
 			"unidentifiedItemName": null,
 			"texture": null,
 			"unIdentifiedTexture": null,
@@ -165,7 +165,7 @@ var wands = {
 			"identified": false
 		},
 		{
-			"itemName": "Wand of polymorph",
+			"itemName": "Wand of item polymorph",
 			"unidentifiedItemName": null,
 			"texture": null,
 			"unIdentifiedTexture": null,

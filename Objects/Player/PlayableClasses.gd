@@ -401,7 +401,7 @@ var sage = {
 		"Springy boots": 1,
 		"Wand of Thunder": 1,
 		"Amulet of magic power": 1,
-		"Potion of levitation": 1,
+#		"Potion of levitation": 1,
 		"Scroll of remove curse": 1,
 		"Scroll of identify": [2, 3],
 		"Lamp": 1,

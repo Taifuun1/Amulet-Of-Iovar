@@ -55,6 +55,31 @@ enum tiles {
 	FLOOR_STONE_BRICK
 }
 
+var blockedTiles = [
+	tiles.EMPTY,
+	tiles.WALL_DUNGEON,
+	tiles.WALL_SAND,
+	tiles.WALL_BRICK_SAND,
+	tiles.WALL_BOARD,
+	tiles.WALL_BRICK_LARGE,
+	tiles.BOOKCASE1,
+	tiles.BOOKCASE2,
+	tiles.BOOKCASE3,
+	tiles.GRASS_TREE,
+	tiles.REPLACEABLE1,
+	tiles.REPLACEABLE2,
+	tiles.REPLACEABLE3,
+	tiles.REPLACEABLE4,
+	tiles.REPLACEABLE5,
+	tiles.VILLAGE_WALL_HORIZONTAL,
+	tiles.VILLAGE_WALL_CORNER,
+	tiles.VILLAGE_WALL_VERTICAL,
+	tiles.WALL_BRICK_SMALL,
+	tiles.VILLAGE_WALL_HALFWALL,
+	tiles.GRASS_DEAD_TREE,
+	tiles.WALL_STONE_BRICK,
+	tiles.WALL_WOOD_PLANK
+]
 
 enum interactables {
 	LOCKED
@@ -71,30 +96,7 @@ var itemId = 0
 var critterId = 1
 
 func isTileFree(_tileToMoveTo, grid):
-	if (
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.EMPTY and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_DUNGEON and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_SAND and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_SAND and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BOARD and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_LARGE and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.BOOKCASE1 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.BOOKCASE2 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.BOOKCASE3 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.GRASS_TREE and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE1 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE2 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE3 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE4 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.REPLACEABLE5 and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_HORIZONTAL and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_CORNER and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_VERTICAL and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_BRICK_SMALL and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.VILLAGE_WALL_HALFWALL and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.GRASS_DEAD_TREE and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_STONE_BRICK and
-		grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.WALL_WOOD_PLANK
-	):
-		return true
-	return false
+	for blockingTile in blockedTiles:
+		if grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == blockingTile:
+			return false
+	return true

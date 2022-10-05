@@ -15,11 +15,11 @@ func createNewLevel():
 
 func createDungeon():
 	stairs = {
-		"downStair": Vector2(57,21),
-		"upStair": Vector2(2,10)
+		"downStair": Vector2(46,14),
+		"upStair": Vector2(13,21)
 	}
 	getGenerationGrid()
-	getSpawnableFloors(["GRASS", "GRASS_DARK", "GRASS_LIGHT", "FLOOR_BRICK"])
+	getSpawnableFloors(["FLOOR_BRICK_SMALL", "FLOOR_STONE_BRICK"])
 #	for _i in range(10):
 #		createCave()
 #		connectSpawnAreas()

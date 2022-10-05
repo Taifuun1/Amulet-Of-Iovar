@@ -209,9 +209,12 @@ func spawnRandomCritter(_position, _level = null):
 			return _critter.critterName
 	return null
 
-func checkNewCritterSpawn(_level):
-	var _randomCritter = spawnableCritters[randi() % spawnableCritters.size()]
-	spawnCritter(_randomCritter)
+func checkNewCritterSpawn(_level, _playerTile):
+	var _randomSpawnableTile = _level.spawnableFloors[randi() % _level.spawnableFloors.size()]
+	var _critterSpawnDistance = _level.calculatePath(_randomSpawnableTile, _playerTile).size()
+	if _randomSpawnableTile != null and _critterSpawnDistance > 16:
+		var _randomCritter = spawnableCritters[randi() % spawnableCritters.size()]
+		spawnCritter(_randomCritter, _randomSpawnableTile)
 
 func checkSpawnableCrittersLevel():
 	for _species in critters.values():

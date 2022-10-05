@@ -106,35 +106,8 @@ func placeDoors(_doors):
 	for _room in rooms:
 		for _door in range(randi() % (_doors.max - _doors.min + 1) + _doors.min):
 			placeDoor(_room)
-		
-#		var _minPos
-#		var _maxPos
-#		var _size
-#		for _floorTile in _room:
-#			if _minPos == null:
-#				_minPos = _floorTile
-#			if _maxPos == null:
-#				_maxPos = _floorTile
-#
-#			if _minPos.x > _floorTile.x:
-#				_minPos.x = _floorTile.x
-#			if _maxPos.x < _floorTile.x:
-#				_maxPos.x = _floorTile.x
-#
-#			if _minPos.y > _floorTile.y:
-#				_minPos.y = _floorTile.y
-#			if _maxPos.y < _floorTile.y:
-#				_maxPos.y = _floorTile.y
-#
-#		_size = Vector2(_maxPos.x - _minPos.x, _maxPos.y - _minPos.y)
-#
-#		print(_minPos)
-#		print(_maxPos)
-#		print(_size)
-#		for _door in range(randi() % (_doors.max + 1) + _doors.min):
-#			placeDoor(_minPos, _maxPos, _size)
 
-func placeDoor(_room):#_minPos, _maxPos, _size):
+func placeDoor(_room):
 	for _i in range(20):
 		var _tile = _room.walls[randi() % _room.walls.size()]
 		if isTileADoor(_tile):
@@ -143,35 +116,6 @@ func placeDoor(_room):#_minPos, _maxPos, _size):
 			grid[_tile.x][_tile.y].tile = Globals.tiles.DOOR_CLOSED
 			_room.walls.erase(_tile)
 			return
-#		var _position
-#		if randi() % 2 == 0:
-#			if randi() % 2 == 0:
-#				_position = Vector2(
-#					randi() % (int(_size.x) + 1) + int(_minPos.x),
-#					int(_minPos.y)
-#				)
-#			else:
-#				_position = Vector2(
-#					randi() % (int(_size.x) + 1) + int(_minPos.x),
-#					int(_minPos.y) + int(_size.y)
-#				)
-#		else:
-#			if randi() % 2 == 0:
-#				_position = Vector2(
-#					int(_minPos.x),
-#					randi() % (int(_size.y) + 1) + int(_minPos.y)
-#				)
-#			else:
-#				_position = Vector2(
-#					int(_minPos.x) + int(_size.x),
-#					randi() % (int(_size.y) + 1) + int(_minPos.y)
-#				)
-#		if isTileADoor(_position):
-#			continue
-#		else:
-#			print("get doored")
-#			grid[_position.x][_position.y].tile = Globals.tiles.DOOR_CLOSED
-#			break
 	push_error("Cant place doors")
 
 func areAllStairsConnected():
@@ -215,6 +159,7 @@ func getAndCleanUpRooms(_tileTypes):
 						"walls": []
 					})
 					break
+	
 	# Clean up missing walls
 	for _room in rooms:
 		for _floorTile in _room.floors:
@@ -223,6 +168,7 @@ func getAndCleanUpRooms(_tileTypes):
 					for _adjacentTile in checkAdjacentTilesForTile(_floorTile, [_tileType.floor, _tileType.wall], false):
 						if !isTileAlreadyInARoom(_adjacentTile):
 							grid[_adjacentTile.x][_adjacentTile.y].tile = Globals.tiles[_tileType.wall]
+	
 	# Get walls
 	for _room in rooms:
 		var _walls = []
@@ -244,11 +190,24 @@ func getRoom(_tile, _tileType):
 				_roomTiles.append(_adjacentTile)
 	return _roomTiles
 
-func fillEmptyTiles(_tile):
+func fillEmptyTiles(_tile, _fillEdges = null):
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):
 			if grid[x][y].tile == -1:
 				grid[x][y].tile = Globals.tiles[_tile]
+	if _fillEdges != null:
+		for x in range(grid.size()):
+			if grid[x][0].tile == Globals.tiles.DOOR_CLOSED:
+				grid[x][0].tile = Globals.tiles[_fillEdges]
+		for x in range(grid.size()):
+			if grid[x][grid[x].size() - 1].tile == Globals.tiles.DOOR_CLOSED:
+				grid[x][grid[x].size() - 1].tile = Globals.tiles[_fillEdges]
+		for y in range(1, grid[0].size() - 1):
+			if grid[0][y].tile == Globals.tiles.DOOR_CLOSED:
+				grid[0][y].tile = Globals.tiles[_fillEdges]
+		for y in range(1, grid[0].size() - 1):
+			if grid[grid.size() - 1][y].tile == Globals.tiles.DOOR_CLOSED:
+				grid[grid.size() - 1][y].tile = Globals.tiles[_fillEdges]
 
 func placeRandomInteractables(_interactables):
 	for _interactable in _interactables:
@@ -302,24 +261,18 @@ func calculatePath(pathStartPosition, pathEndPosition):
 
 func pathFind(_illegibleTiles):
 	astarNode.clear()
-	connectAllCells(addLegibletiles(_illegibleTiles))
+	connectAllCells(addLegibleTiles(_illegibleTiles))
 
-func addLegibletiles(_illegibleTiles):
+func addLegibleTiles(_illegibleTiles):
 	var points = []
 	for x in (grid.size()):
 		for y in (grid[x].size()):
 			var point = Vector2(x, y)
-			if isTileIllegibleInGeneralPathfind(point, _illegibleTiles):
+			if isTileIllegibleInPathfind(point, _illegibleTiles):
 				continue
 			points.append(point)
 			astarNode.add_point(id(point), point, 1.0)
 	return points
-
-func isTileIllegibleInGeneralPathfind(_point, _illegibleTiles):
-	for _illegibleTile in _illegibleTiles:
-		if grid[_point.x][_point.y].tile == _illegibleTile:
-			return true
-	return false
 
 func connectAllCells(points):
 	for point in points:
@@ -342,11 +295,22 @@ func connectAllCells(points):
 				continue
 			astarNode.connect_points(pointIndex, pointRelativeIndex, true)
 
+func isTileIllegibleInPathfind(_point, _illegibleTiles):
+	for _illegibleTile in _illegibleTiles:
+		if grid[_point.x][_point.y].tile == _illegibleTile:
+			return true
+	return false
+
 
 
 ################################
 ### General helper functions ###
 ################################
+
+func updateTilemapToGrid():
+	for x in range(grid.size()):
+		for y in range(grid[x].size()):
+			set_cellv(Vector2(x, y), Globals.tiles[grid[x][y].tile])
 
 func checkAdjacentTilesForOpenSpace(_position, _checkForSingleOpenSpace = false, checkForCritters = false, _shuffleDirections = true):
 	var _openTiles = []
@@ -404,6 +368,56 @@ func isTileOneOfTypes(_checkedTilePosition, _tileTypes):
 		if grid[_checkedTilePosition.x][_checkedTilePosition.y].tile == Globals.tiles[_tileType]:
 			return true
 	return false
+
+func placePresetItems(_items, _level):
+	for _item in _items:
+		if _item.items.types != null:
+			if typeof(_item.tiles) == TYPE_VECTOR2_ARRAY:
+				for x in range(_item.tiles[0].x, _item.tiles[1].x + 1):
+					for y in range(_item.tiles[0].y, _item.tiles[1].y + 1):
+						if randi() % 101 <= _item.chance:
+							$"/root/World/Items/Items".createItem(
+								$"/root/World/Items/Items".getRandomItemByItemTypes(_item.items.types, _item.items.randomByRarity),
+								Vector2(x, y),
+								false,
+								{},
+								_level,
+								grid
+							)
+			else:
+				if randi() % 101 <= _item.chance:
+					$"/root/World/Items/Items".createItem(
+						$"/root/World/Items/Items".getRandomItemByItemTypes(_item.items.types, _item.items.randomByRarity),
+						_item.tiles,
+						false,
+						{},
+						_level,
+						grid
+					)
+		
+		if _item.items.names != null:
+			if typeof(_item.tiles) == TYPE_VECTOR2_ARRAY:
+				for x in range(_item.tiles[0].x, _item.tiles[1].x + 1):
+					for y in range(_item.tiles[0].y, _item.tiles[1].y + 1):
+						if randi() % 101 <= _item.chance:
+							$"/root/World/Items/Items".createItem(
+								_item.items.names[randi() % _item.items.names.size()],
+								Vector2(x, y),
+								false,
+								{},
+								_level,
+								grid
+							)
+			else:
+				if randi() % 101 <= _item.chance:
+					$"/root/World/Items/Items".createItem(
+						_item.items.names[randi() % _item.items.names.size()],
+						_item.tiles,
+						false,
+						{},
+						_level,
+						grid
+					)
 
 func isTileAlreadyInARoom(_tile):
 	for _room in rooms:

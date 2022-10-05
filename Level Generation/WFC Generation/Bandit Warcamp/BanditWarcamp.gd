@@ -6,6 +6,7 @@ func createNewLevel():
 	
 	createDungeon()
 	
+	pathFind(Globals.blockedTiles)
 	enemyPathfinding(grid)
 	
 	return self
@@ -44,6 +45,3 @@ func createBanditWarcamp():
 		if generateMap(randi() % 5 + 3) and get_used_cells().size() > 1350:
 			return
 		resetGeneration()
-
-#	getGenerationGrid()
-#	getSpawnableFloors(["GRASS", "GRASS_DARK", "GRASS_LIGHT", "FLOOR_BRICK"])

@@ -112,20 +112,20 @@ var rings = {
 			"rarity": "Uncommon",
 			"identified": false
 		},
-		{
-			"itemName": "Ring of levitation",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unIdentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 10,
-			"value": null,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
-		},
+#		{
+#			"itemName": "Ring of levitation",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unIdentifiedTexture": null,
+#			"type": "Accessory",
+#			"category": "Ring",
+#			"weight": 10,
+#			"value": null,
+#			"enchantment": true,
+#			"stackable": false,
+#			"rarity": "Uncommon",
+#			"identified": false
+#		},
 		{
 			"itemName": "Ring of slow digestion",
 			"unidentifiedItemName": null,

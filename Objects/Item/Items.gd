@@ -42,7 +42,7 @@ func create():
 ### Item generation ###
 #######################
 
-func createItem(_item, _position = null, _toInventory = false, _extraData = {  }, _level = $"/root/World".level):
+func createItem(_item, _position = null, _toInventory = false, _extraData = {  }, _level = $"/root/World".level, _grid = $"/root/World".level):
 	var _itemPosition
 	if _position == null:
 		_itemPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size())]
@@ -54,10 +54,12 @@ func createItem(_item, _position = null, _toInventory = false, _extraData = {  }
 		newItem.createItem(getItemByName(_item), _extraData)
 	else:
 		newItem.createItem(_item, _extraData)
+	
 	if _toInventory:
 		$"/root/World/Critters/0/Inventory".addToInventory(newItem)
 	else:
-		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
+		_grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
+	
 	$"/root/World/Items".add_child(newItem, true)
 
 func generateItemsForLevel(_level):
@@ -112,19 +114,14 @@ func returnRandomItemForItemGeneration(_itemGeneration):
 ### Helper functions ###
 ########################
 
-func getItemByName(_itemName, _type = null, _rarity = null):
-	if _type != null and _rarity != null:
-		for _item in items[_type][_rarity]:
-			if _item.itemName.matchn(_itemName):
-				return _item
-	else:
-		for _types in items.values():
-			for _rarity in _types.values():
-				for _item in _rarity:
-					if _item.itemName.matchn(_itemName):
-						return _item
+func getItemByName(_itemName):
+	for _types in items.values():
+		for _rarity in _types.values():
+			for _item in _rarity:
+				if _item.itemName.matchn(_itemName):
+					return _item
 
-func returnRandomItem(_type = null):
+func getRandomItem(_type = null):
 	if _type == null:
 		var _randomType = items.keys()[randi() % items.keys().size()]
 		var _rarity = items[_randomType].keys()[randi() % items[_randomType].keys().size()]
@@ -133,6 +130,31 @@ func returnRandomItem(_type = null):
 	else:
 		var _rarity = items[_type].keys()[randi() % items[_type].keys().size()]
 		return items[_type][_rarity][randi() % items[_type][_rarity].size()]
+
+func getRandomItemByItemTypes(_types, _randomByRarity = false):
+	var _items = []
+	if _randomByRarity:
+		for _type in _types.keys():
+			for _rarity in _types[_type]:
+				for _item in items[_type][_rarity]:
+					if _rarity == "common":
+						for _i in range(50):
+							_items.append(_item)
+					elif _rarity == "uncommon":
+						for _i in range(25):
+							_items.append(_item)
+					if _rarity == "rare":
+						for _i in range(10):
+							_items.append(_item)
+					if _rarity == "legendary":
+						for _i in range(1):
+							_items.append(_item)
+	else:
+		for _type in _types.keys():
+			for _rarity in _types[_type]:
+				for _item in items[_type][_rarity]:
+					_items.append(_item)
+	return _items[randi() % _items.size()]
 
 
 
