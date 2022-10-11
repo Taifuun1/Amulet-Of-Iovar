@@ -105,7 +105,7 @@ func create(_class):
 	abilities = []
 	resistances = []
 	
-	calories = 1000
+	calories = 3000
 	previousCalories = calories
 	
 	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
@@ -231,19 +231,19 @@ func processPlayerSpecificEffects():
 		calories -= 2
 	
 	# Check if player becomes less hungry
-	if previousCalories <= 400 and calories > 400:
+	if previousCalories <= 800 and calories > 800:
 		Globals.gameConsole.addLog("You are no longer hungry.")
-	elif previousCalories <= 200 and calories > 200 and calories < 400:
+	elif previousCalories <= 400 and calories > 400 and calories < 800:
 		Globals.gameConsole.addLog("You only feel hungry.")
-	elif previousCalories <= 100 and calories > 100 and calories < 200:
+	elif previousCalories <= 200 and calories > 200 and calories < 400:
 		Globals.gameConsole.addLog("You are still very hungry.")
 	
 	# Check if player becomes more hungry
-	if previousCalories >= 400 and calories < 400 and calories > 200:
+	if previousCalories >= 800 and calories < 800 and calories > 400:
 		Globals.gameConsole.addLog("You are beginning to feel hungry.")
-	elif previousCalories >= 200 and calories < 200 and calories > 100:
+	elif previousCalories >= 400 and calories < 400 and calories > 200:
 		Globals.gameConsole.addLog("You feel very hungry.")
-	elif previousCalories >= 100 and calories < 100 and calories > 0:
+	elif previousCalories >= 200 and calories < 200 and calories > 0:
 		Globals.gameConsole.addLog("You are starving!")
 	elif calories <= 0:
 		Globals.gameConsole.addLog("You die...")

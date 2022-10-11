@@ -3,7 +3,7 @@
 [ext_resource path="res://Objects/World/World.tres" type="TileSet" id=1]
 [ext_resource path="res://Level Generation/Premade Levels/Storage Area/StorageArea.gd" type="Script" id=2]
 
-[node name="Storage Area 2" type="TileMap" groups=["Storage Area 2"]]
+[node name="Storage Area" type="TileMap" groups=["Storage Area 2"]]
 visible = false
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )

@@ -5,22 +5,43 @@ onready var player = preload("res://Objects/Player/Player.tscn").instance()
 onready var critters = preload("res://Objects/Critter/Critters.tscn").instance()
 onready var items = preload("res://Objects/Item/Items.tscn").instance()
 
+##################################
+### Generic dungeon generation ###
+##################################
 onready var dungeon = preload("res://Level Generation/Generic Generation/Dungeon Levels/Dungeon.tscn")
-onready var minesOfTidoh = preload("res://Level Generation/Generic Generation/Mines Of Tidoh/MinesOfTidoh.tscn")
 onready var tidohMiningOutpost = preload("res://Level Generation/Generic Generation/Mines Of Tidoh/TidohMiningOutpost.tscn")
 onready var beach = preload("res://Level Generation/Generic Generation/Beach/Beach.tscn")
 onready var vacationResort = preload("res://Level Generation/Generic Generation/Beach/VacationResort.tscn")
 
-onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
+######################
+### WFC Generation ###
+######################
+onready var minesOfTidoh = preload("res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn")
+onready var depthsOfTidoh = preload("res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn")
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
-onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
+onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
 onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
 onready var dungeonHallways = preload("res://Level Generation/WFC Generation/Dungeon Halls/DungeonHalls.tscn")
+onready var dragonsPeak = preload("res://Level Generation/WFC Generation/Dragons Peak/DragonsPeak.tscn")
+onready var fortressEntrance = preload("res://Level Generation/WFC Generation/Fortress Entrance/FortressEntrance.tscn")
+onready var fortress = preload("res://Level Generation/WFC Generation/Fortress/Fortress.tscn")
+onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
 
-onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
+#####################
+### Premade level ###
+#####################
+onready var banditCompound1 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound1.tscn")
+onready var banditCompound2 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound2.tscn")
 onready var banditWarcamp1 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp1.tscn")
+onready var banditWarcamp2 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp2.tscn")
+onready var elderDragonsLair1 = preload("res://Level Generation/Premade Levels/Elder Dragons Lair/ElderDragonsLair1.tscn")
+onready var elderDragonsLair2 = preload("res://Level Generation/Premade Levels/Elder Dragons Lair/ElderDragonsLair2.tscn")
 onready var storageArea1 = preload("res://Level Generation/Premade Levels/Storage Area/StorageArea1.tscn")
 onready var storageArea2 = preload("res://Level Generation/Premade Levels/Storage Area/StorageArea2.tscn")
+onready var tidohMinesEnd1 = preload("res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd1.tscn")
+onready var tidohMinesEnd2 = preload("res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd2.tscn")
+onready var tidohMiningOutpost1 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost1.tscn")
+onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -58,8 +79,8 @@ var levels = {
 	"dungeonhalls1": [],
 	"labyrinth": [],
 	"dungeonhalls2": [],
-	"arena": [],
-	"dungeonhalls3": [],
+#	"arena": [],
+#	"dungeonhalls3": [],
 	"dragonsPeak": [],
 	"dungeonhalls4": [],
 	"fortress": [],
@@ -205,13 +226,13 @@ func create():
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = storageArea1.instance()
-	firstLevel.create("dungeon", "Dungeon hallways 1", 10000)
+	var firstLevel = fortressEntrance.instance()
+	firstLevel.create("elderDragonsLair", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(1):
 		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon1", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
+		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
@@ -221,7 +242,7 @@ func createDungeon():
 		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 2)
 		levels.minesOfTidoh.append(newCave)
 		$Levels.add_child(newCave)
-	var newMiningOutpost = tidohMiningOutpost.instance()
+	var newMiningOutpost = tidohMiningOutpost2.instance()
 	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
 	levels.minesOfTidoh.append(newMiningOutpost)
 	$Levels.add_child(newMiningOutpost)

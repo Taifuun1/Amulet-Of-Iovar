@@ -12,6 +12,11 @@ func createNewLevel(_isDouble = false):
 func createDungeon(_isDouble):
 	for _i in range(10):
 		createRooms()
+		getSpawnableTiles(
+			["FLOOR_DUNGEON", "CORRIDOR_DUNGEON"],
+			["FLOOR_DUNGEON"],
+			["FLOOR_DUNGEON", "CORRIDOR_DUNGEON"]
+		)
 		placeStairs("DUNGEON", _isDouble)
 		connectRooms()
 		if areAllStairsConnected():
@@ -24,7 +29,7 @@ func createRooms():
 	for _roomCount in range(randi() % 2 + 5):
 		var _legibleRoomTiles = getAllLegibleRoomLocations([Globals.tiles.EMPTY], Vector2(4,4), Vector2(9,9))
 		var _room = _legibleRoomTiles[randi() % _legibleRoomTiles.size()]
-		placeRoom(_room.position, _room.size, { "wall": "WALL_DUNGEON", "floor": "FLOOR_DUNGEON" }, true)
+		placeRoom(_room.position, _room.size, { "wall": "WALL_DUNGEON", "floor": "FLOOR_DUNGEON" })
 		placeDoors([1,3])
 
 func connectRooms():

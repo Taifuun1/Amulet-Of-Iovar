@@ -9,7 +9,7 @@ onready var corridorsAstarNode = AStar2D.new()
 ### Dungeon generation helper functions ###
 ###########################################
 
-func placeRoom(_position, _size, _tileset = { "wall": "WALL_DUNGEON", "floor": "FLOOR_DUNGEON" }, isSpawnable = false):
+func placeRoom(_position, _size, _tileset = { "wall": "WALL_DUNGEON", "floor": "FLOOR_DUNGEON" }):
 	for x in range(_position.x, _position.x + _size.x):
 		for y in range(_position.y, _position.y + _size.y):
 			grid[x][y].interactable = null
@@ -44,14 +44,8 @@ func placeRoom(_position, _size, _tileset = { "wall": "WALL_DUNGEON", "floor": "
 				)
 			):
 				grid[x][y].tile = Globals.tiles[_tileset.wall]
-				if spawnableFloors.has(Vector2(x, y)):
-					spawnableFloors.erase(Vector2(x, y))
 			else:
 				grid[x][y].tile = Globals.tiles[_tileset.floor]
-				if isSpawnable:
-					spawnableFloors.append(Vector2(x, y))
-				elif spawnableFloors.has(Vector2(x, y)):
-					spawnableFloors.erase(Vector2(x, y))
 	rooms.append({
 		"position": _position,
 		"size": _size,

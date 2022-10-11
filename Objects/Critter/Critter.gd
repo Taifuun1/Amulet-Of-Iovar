@@ -53,11 +53,22 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		Globals.gameConsole.addLog("The {critter} cant move!".format({ "critter": critterName.capitalize() }))
 		return false
 	else:
-		var _path
+		var _path = []
+		
+		# Get critter move
 		if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
 			_path = aI.getCritterMove(_critterTile, _playerTile, _level)
 		if _path.size() > 1:
+			# Tile to move to
 			var _moveCritterTo = _path[1]
+			
+			# Confused check
+			if statusEffects["confusion"] > 0 and randi() % 3 == 0:
+				var _randomOpenTiles = level.checkAdjacentTilesForOpenSpace(_critterTile)
+				_randomOpenTiles.shuffle()
+				_moveCritterTo = _randomOpenTiles[0]
+			
+			# Player hit check
 			if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 				if hits[currentHit] == 1:
 					$"/root/World/Critters/0".takeDamage(attacks, critterName)
@@ -67,6 +78,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				if currentHit == 15:
 					currentHit = 0
 				currentHit += 1
+			# Movement check
 			elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
 				moveCritter(_critterTile, _moveCritterTo, _critter, _level)
 				_level.addPointToEnemyPathding(_critterTile)
@@ -85,7 +97,7 @@ func takeDamage(_attacks, _critterTile, _items = $"/root/World/Items/Items", _le
 			# Magic spell
 			if _damage.dmg == 0 and _damage.magicDmg != 0:
 				hp -= _damage.magicDmg
-				_attackLog += "{critter} gets hit for {magicDmg} magic damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg })
+				_attackLog += "{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
 			# Physical attack
 			else:
 				# Physical damage
@@ -101,7 +113,7 @@ func takeDamage(_attacks, _critterTile, _items = $"/root/World/Items/Items", _le
 				# Magic damage
 				if _damage.magicDmg != 0:
 					hp -= _damage.magicDmg
-					_attackLog += " ({magicDmg} magic damage)".format({ "magicDmg": _damage.magicDmg })
+					_attackLog += " ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
 			
 			_attacksLog.append(_attackLog)
 			

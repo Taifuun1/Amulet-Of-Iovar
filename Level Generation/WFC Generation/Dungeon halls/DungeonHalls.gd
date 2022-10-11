@@ -1,7 +1,5 @@
 extends WaveFunctionCollapse
 
-onready var weightedAstarNode = AStar2D.new()
-
 func createNewLevel():
 	createGrid()
 	pathFind([])
@@ -21,7 +19,11 @@ func createDungeon():
 		getGenerationGrid()
 		fillEmptyTiles("WALL_DUNGEON", "WALL_DUNGEON")
 		getAndCleanUpDungeonHallsRooms()
-		getSpawnableFloors(["FLOOR_DUNGEON"])
+		getSpawnableTiles(
+			["FLOOR_DUNGEON", "CORRIDOR_DUNGEON"],
+			["FLOOR_DUNGEON"],
+			["FLOOR_DUNGEON", "CORRIDOR_DUNGEON"]
+		)
 		placeStairs()
 		checkAllRoomsAreAccessible()
 		if areAllStairsConnected():
@@ -100,54 +102,3 @@ func checkAllRoomsAreAccessible():
 			updateTilemapToGrid()
 			pathFind([Globals.tiles.WALL_DUNGEON])
 			pathFindWeightedPath([], [{ "tile": "WALL_DUNGEON", "weighting": 15 }])
-
-
-
-#######################
-### Astar functions ###
-#######################
-
-# General pathfinding
-func calculateWeightedPath(pathStartPosition, pathEndPosition):
-	return weightedAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
-
-func pathFindWeightedPath(_illegibleTiles, _pointWeighting):
-	weightedAstarNode.clear()
-	connectAllWeightedCells(addLegibleWeighedTiles(_illegibleTiles, _pointWeighting))
-
-func addLegibleWeighedTiles(_illegibleTiles, _pointWeighting):
-	var points = []
-	for x in (grid.size()):
-		for y in (grid[x].size()):
-			var point = Vector2(x, y)
-			if isTileIllegibleInPathfind(point, _illegibleTiles):
-				continue
-			else:
-				var _weight = 1.0
-				for _weighting in _pointWeighting:
-					if grid[x][y].tile == Globals.tiles[_weighting.tile]:
-						_weight = _weighting.weighting
-				points.append(point)
-				weightedAstarNode.add_point(id(point), point, _weight)
-	return points
-
-func connectAllWeightedCells(points):
-	for point in points:
-		var pointIndex = id(point)
-		var pointsRelative = PoolVector2Array([
-			Vector2(point.x, point.y - 1),
-			Vector2(point.x + 1, point.y - 1),
-			Vector2(point.x + 1, point.y),
-			Vector2(point.x + 1, point.y + 1),
-			Vector2(point.x, point.y + 1),
-			Vector2(point.x - 1, point.y + 1),
-			Vector2(point.x - 1, point.y),
-			Vector2(point.x - 1, point.y - 1)
-		])
-		for pointRelative in pointsRelative:
-			var pointRelativeIndex = id(pointRelative)
-			if isOutSideTileMap(pointRelative):
-				continue
-			if not weightedAstarNode.has_point(pointRelativeIndex):
-				continue
-			weightedAstarNode.connect_points(pointIndex, pointRelativeIndex, true)

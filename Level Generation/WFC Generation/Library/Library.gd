@@ -19,7 +19,11 @@ func createDungeon():
 		getGenerationGrid()
 		changeReplaceables(["BOOKCASE1", "BOOKCASE2", "BOOKCASE3"])
 		fillEmptyTiles("CORRIDOR_SAND")
-		getSpawnableFloors(["CORRIDOR_SAND"])
+		getSpawnableTiles(
+			["CORRIDOR_SAND"],
+			["CORRIDOR_SAND"],
+			["CORRIDOR_SAND"]
+		)
 		placeStairs()
 		if areAllStairsConnected():
 			return

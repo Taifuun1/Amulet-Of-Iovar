@@ -55,6 +55,7 @@ func createDungeon():
 		createCaveAreas()
 		pathfindDungeonCorridors()
 		connectDoors()
+#		getSpawnableFlosors(["FLOOR_DUNGEON"])
 		if areAllStairsConnected():
 			return
 		resetLevel()
@@ -290,7 +291,6 @@ func createRoom(_roomPlacement, _roomSize):
 		for y in range(int(_roomPlacement.y) + 1, int(_roomPlacement.y) + (int(_roomSize.y) - 1)):
 			grid[x][y].tile = Globals.tiles.FLOOR_DUNGEON
 			_availableStairFloors.append(Vector2(x,y))
-			spawnableFloors.append(Vector2(x,y))
 	for x in range(int(_roomPlacement.x), int(_roomPlacement.x) + int(_roomSize.x)):
 		for y in range(int(_roomPlacement.y), int(_roomPlacement.y) + int(_roomSize.y)):
 			if grid[x][y].tile != Globals.tiles.FLOOR_DUNGEON:

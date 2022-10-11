@@ -223,7 +223,7 @@ func checkWhatRingIsWorn(_ring):
 			if _playerNode.itemsTurnedOn.has(_ring):
 				_playerNode.statusEffects["hunger"] = 0
 				_playerNode.itemsTurnedOn.erase(_ring)
-				Globals.gameConsole.addLog("Your belly feels nourished.")
+				Globals.gameConsole.addLog("Your belly feels normal.")
 			else:
 				_playerNode.statusEffects["hunger"] = -1
 				_playerNode.itemsTurnedOn.append(_ring)
@@ -232,7 +232,7 @@ func checkWhatRingIsWorn(_ring):
 			if _playerNode.itemsTurnedOn.has(_ring):
 				_playerNode.statusEffects["regen"] = 0
 				_playerNode.itemsTurnedOn.erase(_ring)
-				Globals.gameConsole.addLog("Your skin more stable.")
+				Globals.gameConsole.addLog("Your skin feels more stable.")
 			else:
 				_playerNode.statusEffects["regen"] = -1
 				_playerNode.itemsTurnedOn.append(_ring)

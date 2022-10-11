@@ -1,5 +1,7 @@
 extends BaseLevel
 
+onready var tidohMiningOutpostSpawns = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpostSpawns.gd").new()
+
 func createNewLevel():
 	createGrid()
 	pathFind([])
@@ -14,19 +16,23 @@ func createNewLevel():
 	return self
 
 func createDungeon():
-	stairs = {
-		"downStair": Vector2(55,20),
-		"upStair": Vector2(4,2)
-	}
 	getGenerationGrid()
-	getSpawnableFloors(["CORRIDOR_DUNGEON"])
-#	for _i in range(10):
-#		createCave()
-#		connectSpawnAreas()
-#		expandSpawnAreas()
-#		fattenCorridors()
-#		placeStairs()
-#		if areAllStairsConnected():
-#			return
-#		resetLevel()
-#	push_error("Cant create premade mining outpost")
+	getSpawnableTiles(
+		["GRASS", "GRASS_LIGHT", "SIDEWALK", "FLOOR_DUNGEON", "FLOOR_CAVE"],
+		["FLOOR_DUNGEON", "FLOOR_CAVE"],
+		["FLOOR_CAVE"]
+	)
+	
+	var _groups = get_groups()
+	if _groups[0] == "Tidoh Mining Outpost 1":
+		stairs = {
+			"downStair": Vector2(1,4),
+			"upStair": Vector2(26,11)
+		}
+		placePresetItems(tidohMiningOutpostSpawns.tidohMiningOutpostSpawn1, self)
+	if _groups[0] == "Tidoh Mining Outpost 2":
+		stairs = {
+			"downStair": Vector2(55,20),
+			"upStair": Vector2(4,2)
+		}
+		placePresetItems(tidohMiningOutpostSpawns.tidohMiningOutpostSpawn2, self)

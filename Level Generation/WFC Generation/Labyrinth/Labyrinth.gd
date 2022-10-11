@@ -1,24 +1,30 @@
 extends WaveFunctionCollapse
 
-func createNewLevel():
+func createNewLevel(_isLast = false):
 	createGrid()
 	pathFind([])
 	
-	createDungeon()
+	createDungeon(_isLast)
 	
 	pathFind(Globals.blockedTiles)
 	enemyPathfinding(grid)
 	
 	return self
 
-func createDungeon():
+func createDungeon(_isLast):
 	for _i in range(10):
 		addInputs("Labyrinth", get_script().get_path().get_base_dir() + "/Inputs")
 		createLabyrinth()
 		trimGenerationEdges()
 		getGenerationGrid()
 		fillEmptyTiles("CORRIDOR_DUNGEON")
-		getSpawnableFloors(["CORRIDOR_DUNGEON"])
+		if _isLast:
+			generateBossRoom()
+		getSpawnableTiles(
+			["CORRIDOR_DUNGEON"],
+			["CORRIDOR_DUNGEON"],
+			["CORRIDOR_DUNGEON"]
+		)
 		placeStairs()
 		if areAllStairsConnected():
 			return
@@ -31,3 +37,32 @@ func createLabyrinth():
 		if generateMap() and get_used_cells().size() > 1350:
 			return
 		resetGeneration()
+
+func generateBossRoom():
+	var _randomTile = Vector2(randi() % int(Globals.gridSize.x), randi() % int(Globals.gridSize.y))
+	for x in range(_randomTile.x - 4, _randomTile.x + 5):
+		for y in range(_randomTile.y - 4, _randomTile.y + 5):
+			if isOutSideTileMap(Vector2(x,y)):
+				continue
+			elif (
+				x == _randomTile.x - 4 and
+				grid[x - 1][y].tile == Globals.tiles.EMPTY
+			):
+				grid[x][y].tile = Globals.tiles.WALL_DUNGEON
+			elif (
+				x == _randomTile.x + 4 and
+				grid[x + 1][y].tile == Globals.tiles.EMPTY
+			):
+				grid[x][y].tile = Globals.tiles.WALL_DUNGEON
+			elif (
+				y == _randomTile.y - 4 and
+				grid[x][y - 1].tile == Globals.tiles.EMPTY
+			):
+				grid[x][y].tile = Globals.tiles.WALL_DUNGEON
+			elif (
+				y == _randomTile.y + 4 and
+				grid[x][y + 1].tile == Globals.tiles.EMPTY
+			):
+				grid[x][y].tile = Globals.tiles.WALL_DUNGEON
+			else:
+				grid[x][y].tile = Globals.tiles.CORRIDOR_DUNGEON

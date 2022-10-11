@@ -167,5 +167,26 @@ var itemGeneration = {
 			"rare": 200,
 			"legendary": 50
 		}
+	},
+	"elderDragonsLair": {
+		"amount": 20,
+		"type": {
+			"amulet": 50,
+			"armor": 600,
+			"comestible": 0,
+			"potion": 0,
+			"ring": 50,
+			"rune": 0,
+			"scroll": 0,
+			"tool": 0,
+			"wand": 50,
+			"weapon": 250
+		},
+		"rarity": {
+			"common": 10,
+			"uncommon": 90,
+			"rare": 400,
+			"legendary": 500
+		}
 	}
 }

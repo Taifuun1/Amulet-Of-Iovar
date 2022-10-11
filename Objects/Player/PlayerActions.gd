@@ -237,14 +237,14 @@ func dealWithScrollOfTeleport(_alignment):
 	if _alignment.matchn("uncursed") or _alignment.matchn("blessed"):
 		var _playerPosition = _world.level.getCritterTile(0)
 		var _level = _world.level
-		var _spawnableFloors = _level.spawnableFloors.duplicate(true)
-		for _spawnableFloor in _spawnableFloors:
-			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
+		var _openTiles = _level.openTiles.duplicate(true)
+		for _openTile in _openTiles:
+			var _randomTile = _openTiles[randi() % _openTiles.size()]
 			if _level.isTileFreeOfCritters(_randomTile):
 				$"/root/World/Critters/0".moveCritter(_playerPosition, _randomTile, 0, _level)
 				return true
 			else:
-				_spawnableFloors.erase(_randomTile)
+				_openTiles.erase(_randomTile)
 	elif _alignment.matchn("cursed"):
 		var _randomDungeonPart = _world.levels.keys()[randi() % _world.levels.keys().size()]
 		var _randomLevel
@@ -252,14 +252,14 @@ func dealWithScrollOfTeleport(_alignment):
 			_randomLevel = _world.levels[_randomDungeonPart]
 		else:
 			_randomLevel = _world.levels[_randomDungeonPart][randi() % _world.levels[_randomDungeonPart].size()]
-		var _spawnableFloors = _randomLevel.spawnableFloors.duplicate(true)
-		for _spawnableFloor in _spawnableFloors:
-			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
+		var _openTiles = _randomLevel.openTiles.duplicate(true)
+		for _openTile in _openTiles:
+			var _randomTile = _openTiles[randi() % _openTiles.size()]
 			if _randomLevel.isTileFreeOfCritters(_randomTile):
 				_world.goToLevel(_randomTile, _randomLevel)
 				return true
 			else:
-				_spawnableFloors.erase(_spawnableFloor)
+				_openTiles.erase(_randomTile)
 	return false
 
 func quaffItem(_id):

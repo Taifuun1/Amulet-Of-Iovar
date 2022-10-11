@@ -42,10 +42,10 @@ func create():
 ### Item generation ###
 #######################
 
-func createItem(_item, _position = null, _toInventory = false, _extraData = {  }, _level = $"/root/World".level, _grid = $"/root/World".level):
+func createItem(_item, _position = null, _toInventory = false, _extraData = {  }, _level = $"/root/World".level):
 	var _itemPosition
 	if _position == null:
-		_itemPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size())]
+		_itemPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
 	else:
 		_itemPosition = _position
 	
@@ -58,7 +58,7 @@ func createItem(_item, _position = null, _toInventory = false, _extraData = {  }
 	if _toInventory:
 		$"/root/World/Critters/0/Inventory".addToInventory(newItem)
 	else:
-		_grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
+		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
 	
 	$"/root/World/Items".add_child(newItem, true)
 
@@ -73,7 +73,7 @@ func generateItemsForLevel(_level):
 	
 	for _item in _items:
 		if _item != null:
-			var gridPosition = _level.spawnableFloors[randi() % (_level.spawnableFloors.size())]
+			var gridPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
 			var newItem = item.instance()
 #			if randomItemLists.has(_item.type):
 #				newItem.createItem(_item, "_extraData")

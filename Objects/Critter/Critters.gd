@@ -1,6 +1,8 @@
 extends Node
 
 onready var critter = preload("res://Objects/Critter/Critter.tscn")
+onready var critterSpawnBehaviour = preload("res://Objects/Critter/CritterSpawnBehaviour.gd").new()
+onready var critterGenerationList = preload("res://Objects/Critter/CritterLevelGenerationList.gd").new()
 
 var ants = preload("res://Objects/Critter/Ants/Ants.gd").new()
 var aquaticLife = preload("res://Objects/Critter/Aquatic life/Aquatic life.gd").new()
@@ -25,36 +27,6 @@ var quadrapeds = preload("res://Objects/Critter/Quadrapeds/Quadrapeds.gd").new()
 var rats = preload("res://Objects/Critter/Rats/Rats.gd").new()
 var snakes = preload("res://Objects/Critter/Snakes/Snakes.gd").new()
 var wraiths = preload("res://Objects/Critter/Wraiths/Wraiths.gd").new()
-
-var critterGenerationList = {
-	"dungeon1": {
-		"amount": [3, 3],
-		"critters": {
-			"ants": ["Sugar ant"],
-			"kobolds": ["Tiny kobold"],
-			"newts": ["River newt"],
-			"orcs": ["Goblin"]
-		}
-	},
-	"minesOfTidoh": {
-		"amount": [3, 3],
-		"critters": {
-			"ants": ["Sugar ant", "Soldier ant"],
-			"bats": ["Dark bat"],
-			"dwarves": ["Dwarf miner"],
-			"giants": ["Hill giant"],
-			"kobolds": ["Tiny kobold"],
-			"newts": ["River newt", "Mine newt"],
-			"orcs": ["Goblin", "Flatlands orc"]
-		}
-	},
-	"beach": {
-		"amount": [5, 5],
-		"critters": {
-			"aquaticLife": ["Fiddler crab", "Ringed seal"]
-		}
-	}
-}
 
 var critters = {}
 var spawnableCritters = ["Sugar ant", "Tiny kobold", "River newt", "Goblin"]
@@ -94,7 +66,7 @@ func generateCrittersForLevel(_level):
 	
 	for _critter in _critters:
 		if _critter != null:
-			spawnCritter(_critter, null, _level)
+			spawnCritters(_critter, null, _level)
 
 func returnRandomCritter(_critterGeneration = null):
 	if _critterGeneration != null:
@@ -113,37 +85,44 @@ func returnRandomCritter(_critterGeneration = null):
 			return getCritterByName(_generatedCritter)#critters[_generatedSpecies][_generatedCritter]
 		else:
 			return null
-	
-#	var type
-#	var rarity
-#
-#	var randomType = []
-#	for _key in _critterGeneration["type"].keys():
-#		for _i in range(_critterGeneration["type"][_key]):
-#			randomType.append(_key)
-#	type = randomType[randi() % 1000]
-#
-#	var randomRarity = []
-#	for _key in _critterGeneration["rarity"].keys():
-#		for _i in range(_critterGeneration["rarity"][_key]):
-#			randomRarity.append(_key)
-#	rarity = randomRarity[randi() % 1000]
-#
-#	if critters[type].has(rarity):
-#		return critters[type][rarity][randi() % critters[type][rarity].size()]
-#	else:
-#		return null
 
-func spawnCritter(_critter, _position = null, _level = null):
-	var _spawnedLevel
+func getCritterSpawns(_spawnData, _level):
+	if _spawnData.amount[0] == 0:
+		return []
+	var _tiles = []
+	var _tile = _level.spawnableCritterTiles[randi() % _level.spawnableCritterTiles.size()]
+	var _distance = _spawnData.distance
+	var _legibleTiles = []
+	for _spawnableFloor in _level.spawnableCritterTiles:
+		if (
+			_spawnableFloor.x <= _tile.x + _distance and
+			_spawnableFloor.x >= _tile.x - _distance and
+			_spawnableFloor.y <= _tile.y + _distance and
+			_spawnableFloor.y >= _tile.y - _distance and
+			_level.isTileFreeOfCritters(_tile)
+		):
+			_legibleTiles.append(_spawnableFloor)
+	var _minAmount = _spawnData.amount[0]
+	var _randomChange = _spawnData.amount[1] - _spawnData.amount[0] + 1
+	if _spawnData.amount[0] == _spawnData.amount[1]:
+		_randomChange = 1
+		_minAmount = _spawnData.amount[0]
+	for _critterIndex in randi() % _randomChange + _minAmount:
+		if _legibleTiles.empty():
+			break
+		var _randomTile = _legibleTiles[randi() % _legibleTiles.size()]
+		_tiles.append(_randomTile)
+		_legibleTiles.erase(_randomTile)
+	return _tiles
+
+func spawnCritters(_critterName, _position = null, _level = $"/root/World".level):
+	var _spawnTiles = getCritterSpawns(critterSpawnBehaviour.critterSpawnBehaviour[_critterName], _level)
+	for _spawnTile in _spawnTiles:
+		spawnCritter(_critterName, _spawnTile)
+
+func spawnCritter(_critter, _position = null, _level = $"/root/World".level):
 	var _newCritter
 	var _gridPosition
-	
-	# Level
-	if _level == null:
-		_spawnedLevel = $"/root/World".level
-	else:
-		_spawnedLevel = _level
 	
 	# Name
 	if typeof(_critter) == TYPE_STRING:
@@ -153,31 +132,31 @@ func spawnCritter(_critter, _position = null, _level = null):
 	
 	# Position
 	if _position == null:
-		var _spawnableFloors = _spawnedLevel.spawnableFloors.duplicate(true)
-		for _spawnableFloor in _spawnableFloors:
-			var _randomTile = _spawnableFloors[randi() % _spawnableFloors.size()]
-			if _spawnedLevel.isTileFreeOfCritters(_randomTile):
+		var _spawnableTiles = _level.spawnableCritterTiles.duplicate(true)
+		for _spawnableTile in _spawnableTiles:
+			var _randomTile = _spawnableTiles[randi() % _spawnableTiles.size()]
+			if _level.isTileFreeOfCritters(_randomTile):
 				_gridPosition = _randomTile
 				break
 			else:
-				_spawnableFloors.erase(_randomTile)
-		if _spawnableFloors.empty():
+				_spawnableTiles.erase(_randomTile)
+		if _spawnableTiles.empty():
+			push_warning("Couldn't find space for critter: %s, on level: %s" % [_newCritter.critterName, _level.name])
 			return false
-#			push_error("Couldn't find space for critter: %s, on level: %s" % [_newCritter.critterName, _spawnedLevel])
 	else:
 		_gridPosition = _position
 	
 	if (
-		_spawnedLevel.grid[_gridPosition.x][_gridPosition.y].critter == null and
+		_level.grid[_gridPosition.x][_gridPosition.y].critter == null and
 		GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].population != 0 and
 		GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].population
 	):
 		var newCritter = critter.instance()
-		newCritter.createCritter(_newCritter, _spawnedLevel.levelId)
-		_spawnedLevel.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
+		newCritter.createCritter(_newCritter, _level.levelId)
+		_level.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
 		$"/root/World/Critters".add_child(newCritter, true)
-		_spawnedLevel.critters.append(newCritter.id)
-		_spawnedLevel.removePointFromEnemyPathfinding(_gridPosition)
+		_level.critters.append(newCritter.id)
+		_level.removePointFromEnemyPathfinding(_gridPosition)
 		GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
 		return _newCritter.critterName
 	return false
@@ -210,11 +189,11 @@ func spawnRandomCritter(_position, _level = null):
 	return null
 
 func checkNewCritterSpawn(_level, _playerTile):
-	var _randomSpawnableTile = _level.spawnableFloors[randi() % _level.spawnableFloors.size()]
+	var _randomSpawnableTile = _level.spawnableCritterTiles[randi() % _level.spawnableCritterTiles.size()]
 	var _critterSpawnDistance = _level.calculatePath(_randomSpawnableTile, _playerTile).size()
-	if _randomSpawnableTile != null and _critterSpawnDistance > 16:
+	if _randomSpawnableTile != null and _critterSpawnDistance > 16 and _level.critters.size() < 20:
 		var _randomCritter = spawnableCritters[randi() % spawnableCritters.size()]
-		spawnCritter(_randomCritter, _randomSpawnableTile)
+		spawnCritters(_randomCritter, _randomSpawnableTile)
 
 func checkSpawnableCrittersLevel():
 	for _species in critters.values():

@@ -108,7 +108,7 @@ func processCritterEffects():
 		if statusEffects[_status] > 0:
 			statusEffects[_status] -= 1
 	
-	if hpRegenTimer > 25 - ( stats.legerity / 2 ):
+	if hpRegenTimer >= 20 - ( stats.legerity / 2 ):
 		if hp < maxhp:
 			if checkIfStatusEffectIsInEffect("regen"):
 				hp += 3
@@ -118,7 +118,7 @@ func processCritterEffects():
 	else:
 		hpRegenTimer += 1
 	
-	if mpRegenTimer > 25 - ( stats.belief / 2 ):
+	if mpRegenTimer >= 20 - ( stats.belief / 2 ):
 		if mp < maxmp:
 			mp += 1
 		mpRegenTimer = 0

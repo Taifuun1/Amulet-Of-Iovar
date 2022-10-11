@@ -28,7 +28,11 @@ func createDungeon():
 				"wall": "WALL_STONE_BRICK"
 			}
 		])
-		getSpawnableFloors(["FLOOR_STONE_BRICK", "FLOOR_WOOD_BRICK"])
+		getSpawnableTiles(
+			["GRASS", "FLOOR_STONE_BRICK", "FLOOR_WOOD_BRICK"],
+			["FLOOR_STONE_BRICK", "FLOOR_WOOD_BRICK"],
+			["GRASS"]
+		)
 		placeStairs()
 		placeDoors({
 			"min": 1,
