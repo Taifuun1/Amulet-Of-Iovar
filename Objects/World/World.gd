@@ -139,7 +139,7 @@ func _on_Game_Start():
 func create():
 	$Items/Items.randomizeRandomItems()
 	
-	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
+	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel(true)
 	
 	for _level in levels.dungeon1.size():
 		if levels.dungeon1[_level] == levels.dungeon1.back():
@@ -226,7 +226,7 @@ func create():
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = fortressEntrance.instance()
+	var firstLevel = library.instance()
 	firstLevel.create("elderDragonsLair", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)

@@ -13,13 +13,14 @@ func createNewLevel(_isLast = false):
 
 func createDungeon(_isLast):
 	for _i in range(10):
+		var _bossRoomCenter = null
 		addInputs("Labyrinth", get_script().get_path().get_base_dir() + "/Inputs")
 		createLabyrinth()
 		trimGenerationEdges()
 		getGenerationGrid()
 		fillEmptyTiles("CORRIDOR_DUNGEON")
 		if _isLast:
-			generateBossRoom()
+			_bossRoomCenter = generateBossRoom()
 		getSpawnableTiles(
 			["CORRIDOR_DUNGEON"],
 			["CORRIDOR_DUNGEON"],
@@ -27,6 +28,10 @@ func createDungeon(_isLast):
 		)
 		placeStairs()
 		if areAllStairsConnected():
+			if _bossRoomCenter != null:
+				pathFind([Globals.blockedTiles])
+				if calculatePath(stairs.downStair, _bossRoomCenter) == 0:
+					continue
 			return
 		resetLevel()
 		resetGeneration()
@@ -66,3 +71,4 @@ func generateBossRoom():
 				grid[x][y].tile = Globals.tiles.WALL_DUNGEON
 			else:
 				grid[x][y].tile = Globals.tiles.CORRIDOR_DUNGEON
+	return _randomTile
