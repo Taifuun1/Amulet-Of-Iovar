@@ -27,7 +27,7 @@ var archeologist = {
 		"Lamp": 1,
 		"Candle": [1, 3]
 	},
-	gold = 275,
+	goldPieces = 275,
 	skills = {
 		"sword": {
 			"skill": 0,
@@ -49,7 +49,8 @@ var archeologist = {
 			"skill": 1,
 			"skillCap": 3
 		}
-	}
+	},
+	"texture": load("res://Assets/Classes/Archeologist.png")
 }
 
 var banker = {
@@ -83,7 +84,7 @@ var banker = {
 		"Marker": 1,
 		"Ink": 1
 	},
-	gold = 2475,
+	goldPieces = 2475,
 	skills = {
 		"sword": {
 			"skill": 0,
@@ -105,7 +106,8 @@ var banker = {
 			"skill": 0,
 			"skillCap": 1
 		}
-	}
+	},
+	"texture": load("res://Assets/Classes/Banker.png")
 }
 
 var freedomFighter = {
@@ -136,7 +138,7 @@ var freedomFighter = {
 		"Blindfold": 1,
 		"Potion of blindness": [2, 3]
 	},
-	gold = 8,
+	goldPieces = 8,
 	skills = {
 		"sword": {
 			"skill": 1,
@@ -158,7 +160,8 @@ var freedomFighter = {
 			"skill": 0,
 			"skillCap": 1
 		}
-	}
+	},
+	"texture": load("res://Assets/Classes/FreedomFighter.png")
 }
 
 var herbalogue = {
@@ -189,7 +192,7 @@ var herbalogue = {
 		"Wand of Frost": 1,
 		"Wand of polymorph": 1
 	},
-	gold = 20,
+	goldPieces = 20,
 	skills = {
 		"sword": {
 			"skill": 0,
@@ -211,7 +214,8 @@ var herbalogue = {
 			"skill": 0,
 			"skillCap": 2
 		}
-	}
+	},
+	"texture": load("res://Assets/Classes/Herbalogue.png")
 }
 
 var mercenary = {
@@ -247,7 +251,7 @@ var mercenary = {
 		"Wand of sleep": 1,
 		"Candle": [1, 3]
 	},
-	gold = 350,
+	goldPieces = 350,
 	skills = {
 		"sword": {
 			"skill": 0,
@@ -269,7 +273,8 @@ var mercenary = {
 			"skill": 0,
 			"skillCap": 2
 		}
-	}
+	},
+	"texture": load("res://Assets/Classes/Mercenary.png")
 }
 
 var perry = {
@@ -294,7 +299,7 @@ var perry = {
 		"Cotton pants": 1,
 		"Low boots": 1
 	},
-	gold = 45,
+	goldPieces = 45,
 	skills = {
 		"sword": {
 			"skill": 0,
@@ -316,7 +321,8 @@ var perry = {
 			"skill": 0,
 			"skillCap": 3
 		}
-	}
+	},
+	"texture": load("res://Assets/Classes/Perry.png")
 }
 
 var rogue = {
@@ -338,21 +344,21 @@ var rogue = {
 	wisdomIncrease = 1,
 	items = {
 		"Cut dagger": 1,
-		"Cotton cap": 1,
-		"Tattered cloak cloak": 1,
-		"Leather armor": 1,
+		"Leather cap": 1,
+#		"Tattered cloak cloak": 1,
+		"Leather mail": 1,
 		"Leather belt": 1,
 		"Leather gloves": 1,
-		"Cotton pants": 1,
+		"Leather pants": 1,
 		"Low boots": 1,
 		"Candle": 1,
-		"Magical key": 1,
+		"Magic key": 1,
 		"Potion of blindness": 1,
 		"Potion of paralysis": 1,
 		"Marker": 1,
-		"Ink": 1
+		"Ink bottle": 1
 	},
-	gold = 701,
+	goldPieces = 701,
 	skills = {
 		"sword": {
 			"skill": 0,
@@ -374,7 +380,8 @@ var rogue = {
 			"skill": 0,
 			"skillCap": 1
 		}
-	}
+	},
+	"texture": load("res://Assets/Classes/Rogue.png")
 }
 
 var sage = {
@@ -397,7 +404,7 @@ var sage = {
 	items = {
 		"Worn mace": 1,
 		"Roman robe": 1,
-		"Fabric glove": 1,
+		"Fabric gloves": 1,
 		"Springy boots": 1,
 		"Wand of Thunder": 1,
 		"Amulet of magic power": 1,
@@ -405,9 +412,9 @@ var sage = {
 		"Scroll of remove curse": 1,
 		"Scroll of identify": [2, 3],
 		"Lamp": 1,
-		"Magical marker": 1
+		"Magic marker": 1
 	},
-	gold = 110,
+	goldPieces = 110,
 	skills = {
 		"sword": {
 			"skill": 0,
@@ -429,5 +436,6 @@ var sage = {
 			"skill": 0,
 			"skillCap": 3
 		}
-	}
+	},
+	"texture": load("res://Assets/Classes/Savant.png")
 }

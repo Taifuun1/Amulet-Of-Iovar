@@ -2,12 +2,13 @@ extends Node
 
 onready var critter = preload("res://Objects/Critter/Critter.tscn")
 onready var critterSpawnBehaviour = preload("res://Objects/Critter/CritterSpawnBehaviour.gd").new()
-onready var critterGenerationList = preload("res://Objects/Critter/CritterLevelGenerationList.gd").new()
+onready var critterLevelGenerationList = preload("res://Objects/Critter/CritterLevelGenerationList.gd").new()
 
 var ants = preload("res://Objects/Critter/Ants/Ants.gd").new()
 var aquaticLife = preload("res://Objects/Critter/Aquatic life/Aquatic life.gd").new()
 var bats = preload("res://Objects/Critter/Bats/Bats.gd").new()
 var blobs = preload("res://Objects/Critter/Blobs/Blobs.gd").new()
+var bosses = preload("res://Objects/Critter/Bosses/Bosses.gd").new()
 var canines = preload("res://Objects/Critter/Canines/Canines.gd").new()
 var centaurs = preload("res://Objects/Critter/Centaurs/Centaurs.gd").new()
 var dragons = preload("res://Objects/Critter/Dragons/Dragons.gd").new()
@@ -37,6 +38,7 @@ func create():
 	critters["aquaticLife"] = aquaticLife.aquaticLife
 	critters["bats"] = bats.bats
 	critters["blobs"] = blobs.blobs
+	critters["bosses"] = bosses.bosses
 	critters["canines"] = canines.canines
 	critters["centaurs"] = centaurs.centaurs
 	critters["dragons"] = dragons.dragons
@@ -58,11 +60,17 @@ func create():
 	critters["wraiths"] = wraiths.wraiths
 
 func generateCrittersForLevel(_level):
-	var _levelCritterGeneration = critterGenerationList[_level.dungeonType]
+	var _levelCritterGeneration = critterLevelGenerationList.critterLevelGenerationList[_level.dungeonType]
 	var _critters = []
 	
-	for _i in range(randi() % _levelCritterGeneration.amount[1] + _levelCritterGeneration.amount[0]):
+	var _minAmount = _levelCritterGeneration.amount[0]
+	var _randomChange = _levelCritterGeneration.amount[1] - _levelCritterGeneration.amount[0] + 1
+	if _levelCritterGeneration.amount[0] == _levelCritterGeneration.amount[1]:
+		_randomChange = 1
+		_minAmount = _levelCritterGeneration.amount[0]
+	for _i in range(randi() % _randomChange + _minAmount):
 		_critters.append(returnRandomCritter(_levelCritterGeneration))
+	print(_critters)
 	
 	for _critter in _critters:
 		if _critter != null:
@@ -74,7 +82,8 @@ func returnRandomCritter(_critterGeneration = null):
 		var _generatedCritter = _generatedSpecies[randi() % _generatedSpecies.size()]
 
 		if GlobalCritterInfo.globalCritterInfo.has(_generatedCritter) and GlobalCritterInfo.globalCritterInfo[_generatedCritter].population != 0:
-			return getCritterByName(_generatedCritter)#critters[_generatedSpecies][_generatedCritter]
+			return _generatedCritter
+#			return getCritterByName(_generatedCritter)#critters[_generatedSpecies][_generatedCritter]
 		else:
 			return null
 	else:
@@ -82,7 +91,8 @@ func returnRandomCritter(_critterGeneration = null):
 		var _generatedCritter = _generatedSpecies[randi() % _generatedSpecies.size()]
 		
 		if GlobalCritterInfo.globalCritterInfo.has(_generatedCritter) and GlobalCritterInfo.globalCritterInfo[_generatedCritter].population != 0:
-			return getCritterByName(_generatedCritter)#critters[_generatedSpecies][_generatedCritter]
+			return _generatedCritter
+#			return getCritterByName(_generatedCritter)#critters[_generatedSpecies][_generatedCritter]
 		else:
 			return null
 
@@ -99,7 +109,8 @@ func getCritterSpawns(_spawnData, _level):
 			_spawnableFloor.x >= _tile.x - _distance and
 			_spawnableFloor.y <= _tile.y + _distance and
 			_spawnableFloor.y >= _tile.y - _distance and
-			_level.isTileFreeOfCritters(_tile)
+			_level.isTileFreeOfCritters(_tile) and
+			Globals.isTileFree(_tile, _level.grid)
 		):
 			_legibleTiles.append(_spawnableFloor)
 	var _minAmount = _spawnData.amount[0]
@@ -118,12 +129,12 @@ func getCritterSpawns(_spawnData, _level):
 func spawnCritters(_critterName, _position = null, _level = $"/root/World".level):
 	var _spawnTiles = getCritterSpawns(critterSpawnBehaviour.critterSpawnBehaviour[_critterName], _level)
 	for _spawnTile in _spawnTiles:
-		spawnCritter(_critterName, _spawnTile)
+		spawnCritter(_critterName, _spawnTile, false, _level)
 
-func spawnCritter(_critter, _position = null, _level = $"/root/World".level):
+func spawnCritter(_critter, _position = null, _isDeactivated = false, _level = $"/root/World".level):
 	var _newCritter
 	var _gridPosition
-	
+	var _extraData = {}
 	# Name
 	if typeof(_critter) == TYPE_STRING:
 		_newCritter = getCritterByName(_critter)
@@ -146,13 +157,19 @@ func spawnCritter(_critter, _position = null, _level = $"/root/World".level):
 	else:
 		_gridPosition = _position
 	
+	# Extradata
+	if typeof(_isDeactivated) == TYPE_INT:
+		_extraData.isDeactivated = _isDeactivated
+	else:
+		_extraData = {}
+	
 	if (
 		_level.grid[_gridPosition.x][_gridPosition.y].critter == null and
 		GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].population != 0 and
 		GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].population
 	):
 		var newCritter = critter.instance()
-		newCritter.createCritter(_newCritter, _level.levelId)
+		newCritter.createCritter(_newCritter, _level.levelId, _extraData)
 		_level.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
 		$"/root/World/Critters".add_child(newCritter, true)
 		_level.critters.append(newCritter.id)

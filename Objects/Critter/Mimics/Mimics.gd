@@ -23,8 +23,15 @@ var mimics = {
 				"visage": 6,
 				"wisdom": 7
 			},
-			"abilities": ["mimic chest"],
-			"resistances": ["thunder", "sleep"]
+			"abilities": ["mimic box"],
+			"resistances": ["thunder", "sleep"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				}
+			]
 		},
 		{
 			"critterName": "Humongous mimic",
@@ -49,7 +56,14 @@ var mimics = {
 				"wisdom": 13
 			},
 			"abilities": ["mimic chest"],
-			"resistances": ["thunder", "sleep"]
+			"resistances": ["thunder", "sleep"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				}
+			]
 		}
 	]
 }

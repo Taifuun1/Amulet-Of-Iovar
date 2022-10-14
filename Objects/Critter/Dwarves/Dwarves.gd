@@ -24,7 +24,54 @@ var dwarves = {
 				"wisdom": 2
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Studded boots",
+						"Scale ring mail chausses",
+						"Studded belt",
+						"Dwarvish coat",
+						"Leather cloak",
+						"Dwarvish laysword"
+					],
+					"chance": 25,
+					"amount": [1, 1]
+				},
+				{
+					"names": [
+						"Black glass",
+						"Blue glass",
+						"Green glass",
+						"Pink glass",
+						"Red glass",
+						"Turqoise glass",
+						"White glass",
+						"Yellow glass"
+					],
+					"chance": 75,
+					"amount": [1, 2]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 5,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Dwarf engineer",
@@ -49,7 +96,14 @@ var dwarves = {
 				"wisdom": 2
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [100, 200]
+				}
+			]
 		},
 		{
 			"critterName": "Dwarf smith",
@@ -74,7 +128,26 @@ var dwarves = {
 				"wisdom": 2
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Studded boots",
+						"Scale ring mail chausses",
+						"Studded belt",
+						"Dwarvish coat",
+						"Leather cloak",
+						"Dwarvish laysword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Dwarven contirer",
@@ -99,7 +172,41 @@ var dwarves = {
 				"wisdom": 1
 			},
 			"abilities": [],
-			"resistances": ["frost", "thunder", "toxix"]
+			"resistances": ["frost", "thunder", "toxix"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Studded boots",
+						"Scale ring mail chausses",
+						"Studded belt",
+						"Dwarvish coat",
+						"Leather cloak",
+						"Dwarvish laysword"
+					],
+					"chance": 100,
+					"amount": [1, 1],
+					"tries": 2
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 35,
+					"amount": [2, 11]
+				}
+			]
 		}
 	]
 }

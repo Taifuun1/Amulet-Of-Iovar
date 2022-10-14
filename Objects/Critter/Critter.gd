@@ -1,12 +1,13 @@
 extends BaseCritter
 
-var weight
-
 var aI = load("res://Objects/AI/AI.tscn").instance()
 
-var expDropAmount
-
 var levelId
+var weight
+var expDropAmount
+var drops
+var activationDistance = null
+
 
 func createCritter(_critter, _levelId, _extraData = {}):
 	id = Globals.critterId
@@ -20,7 +21,11 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	weight = _critter.weight
 	alignment = _critter.alignment
 	
-	aI.aI = _critter.aI
+	if _extraData.has("isDeactivated"):
+		aI.aI = "Deactivated"
+		activationDistance = _extraData.isDeactivated
+	else:
+		aI.aI = _critter.aI
 	
 	stats.strength = _critter.stats.strength
 	stats.legerity = _critter.stats.legerity
@@ -47,6 +52,20 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	$CritterSprite.texture = _critter.texture
 	
 	expDropAmount = _critter.expDropAmount
+	drops = _critter.drops
+
+func isCritterAwakened(_critterTile, _playerTile, _level):
+	if activationDistance != null:
+		if _level.calculatePath(_critterTile, _playerTile).size() <= activationDistance:
+			awakeCritter()
+			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
+
+func awakeCritter(_level = $"/root/World".level):
+	aI.aI = "Aggressive"
+	activationDistance = null
+	for _critter in _level.critters:
+		if get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).aI.aI.matchn("Deactivated"):
+			get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).awakeCritter()
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	if statusEffects["stun"] > 0:
@@ -124,6 +143,9 @@ func takeDamage(_attacks, _critterTile, _items = $"/root/World/Items/Items", _le
 				break
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
+		if aI.aI.matchn("Deactivated"):
+			awakeCritter()
+			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
 	else:
 		Globals.gameConsole.addLog("Looks like you cant attack...")
 	return _didCritterDie
@@ -143,6 +165,25 @@ func despawn(_critterTile = null, createCorpse = true):
 		_corpse.createCorpse(critterName, weight, $"/root/World/Items/Items")
 		$"/root/World/Items".add_child(_corpse)
 		_level.grid[_gridPosition.x][_gridPosition.y].items.append(_corpse.id)
+	
+	for _drop in drops:
+		var _dropTries = 1
+		if _drop.has("tries"):
+			_dropTries = _drop.tries
+		for _index in range(_dropTries):
+			if randi() % 101 <= _drop.chance:
+				var _minAmount = _drop.amount[0]
+				var _randomChange = _drop.amount[1] - _drop.amount[0] + 1
+				if _drop.amount[0] == _drop.amount[1]:
+					_randomChange = 1
+					_minAmount = _drop.amount[0]
+				var _amount = randi() % _randomChange + _minAmount
+				if typeof(_drop.names) == TYPE_ARRAY:
+					$"/root/World/Items/Items".createItem(_drop.names[randi() % _drop.names.size()], _gridPosition, _amount)
+				else:
+					$"/root/World/Items/Items".createItem(_drop.names, _gridPosition, _amount)
+	
+	$"/root/World".hideObjectsWhenDrawingNextFrame = true
 	_level.grid[_gridPosition.x][_gridPosition.y].critter = null
 	_level.addPointToEnemyPathding(_gridPosition)
 	_level.critters.erase(id)

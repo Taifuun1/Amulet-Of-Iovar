@@ -15,6 +15,7 @@ var accessories = {
 
 var equipment = {
 	"helmet": null,
+	"cloak": null,
 	"plate": null,
 	"gauntlets": null,
 	"belt": null,
@@ -47,6 +48,7 @@ func _process(_delta):
 				_item = get_node("/root/World/Items/{id}".format({ "id": accessories[hoveredEquipment.to_lower()] }))
 		elif (
 			hoveredEquipment.matchn("helmet") or
+			hoveredEquipment.matchn("cloak") or
 			hoveredEquipment.matchn("plate") or
 			hoveredEquipment.matchn("gauntlets") or
 			hoveredEquipment.matchn("belt") or
@@ -169,6 +171,9 @@ func getArmorClass():
 	if equipment["helmet"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["helmet"] }))
 		_ac += (_item.value.ac + _item.enchantment)
+	if equipment["cloak"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["cloak"] }))
+		_ac += (_item.value.ac + _item.enchantment)
 	if equipment["plate"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["plate"] }))
 		_ac += (_item.value.ac + _item.enchantment)
@@ -201,7 +206,6 @@ func checkIfRingIsRingOfProtection(_ring):
 			return 0
 
 func checkWhatRingIsWorn(_ring):
-#	Globals.gameConsole.addLog("You quaff a {itemName}.".format({ "itemName": _quaffedItem.itemName }))
 	if (
 		GlobalItemInfo.globalItemInfo.has(_ring.identifiedItemName) and
 		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified == false
@@ -291,6 +295,11 @@ func checkIfMatchingEquipmentAndSlot(_type, _category):
 		if (
 			_category.matchn("helmet") and
 			hoveredEquipment.matchn("helmet")
+		):
+			return "Armor"
+		if (
+			_category.matchn("cloak") and
+			hoveredEquipment.matchn("cloak")
 		):
 			return "Armor"
 		if (

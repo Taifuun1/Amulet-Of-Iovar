@@ -24,7 +24,14 @@ var others = {
 				"wisdom": 3
 			},
 			"abilities": ["grid movement"],
-			"resistances": ["thunder"]
+			"resistances": ["thunder"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [10, 20]
+				}
+			]
 		},
 		{
 			"critterName": "Chicken",
@@ -49,7 +56,8 @@ var others = {
 				"wisdom": 12
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		}
 	]
 }

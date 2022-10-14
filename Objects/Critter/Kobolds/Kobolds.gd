@@ -24,7 +24,28 @@ var kobolds = {
 				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [5, 15]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Large kobold",
@@ -49,7 +70,28 @@ var kobolds = {
 				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		}
 	]
 }

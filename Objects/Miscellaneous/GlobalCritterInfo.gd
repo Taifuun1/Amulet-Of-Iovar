@@ -8,6 +8,30 @@ func removeCritterFromPlay(_critterName):
 	globalCritterInfo[_critterName].crittersInPlay -= 1
 
 var globalCritterInfo = {
+	"Iovar": {
+		"population": 1,
+		"crittersInPlay": 0
+	},
+	"Elder Dragon": {
+		"population": 1,
+		"crittersInPlay": 0
+	},
+	"Mad Banana-hunter Ogre": {
+		"population": 1,
+		"crittersInPlay": 0
+	},
+	"Shin'kor Leve'er": {
+		"population": 1,
+		"crittersInPlay": 0
+	},
+	"Elhybar": {
+		"population": 1,
+		"crittersInPlay": 0
+	},
+	"Tidoh Tel'hydrad": {
+		"population": 1,
+		"crittersInPlay": 0
+	},
 	"Double-pattern ant": {
 		"population": 64,
 		"crittersInPlay": 0

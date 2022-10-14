@@ -24,7 +24,8 @@ var felines = {
 				"wisdom": 9
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Lynx",
@@ -49,7 +50,8 @@ var felines = {
 				"wisdom": 9
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Tiger",
@@ -74,7 +76,8 @@ var felines = {
 				"wisdom": 9
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		}
 	]
 }

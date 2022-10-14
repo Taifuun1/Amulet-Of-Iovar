@@ -43,7 +43,8 @@ func updateStats(stats = {
 	balance = null,
 	belief = null,
 	visage = null,
-	wisdom = null
+	wisdom = null,
+	goldPieces = null
 }):
 	if stats.maxhp != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HPContainer/HPAmount.max_value = stats.maxhp
@@ -69,25 +70,28 @@ func updateStats(stats = {
 	if stats.alignment != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.text = str(stats.alignment)
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.set_tooltip(str(stats.alignment))
-	if stats.ac != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ACContainer/AC.text = str(stats.ac)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ACContainer/AC.set_tooltip(str(stats.ac))
-#	if stats.alignment != null:
-#		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.text = str(stats.alignment)
-#	if stats.alignment != null:
-#		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.text = str(stats.alignment)
 	if stats.dungeonLevel != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.text = str(stats.dungeonLevel)
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.set_tooltip(str(stats.dungeonLevel))
+	if stats.goldPieces != null:
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/GoldPiecesContainer/GoldPieces.text = str(stats.goldPieces)
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/GoldPiecesContainer/GoldPiecesText.set_tooltip(str(stats.goldPieces))
+#	if stats.alignment != null:
+#		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.text = str(stats.alignment)
+#	if stats.alignment != null:
+#		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.text = str(stats.alignment)
 	if stats.weight != null and stats.weightBounds != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/Weigth.value = stats.weight
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/Weigth.min_value = stats.weightBounds.min
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/Weigth.max_value = stats.weightBounds.max
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/Weigth.set_tooltip("Current carried weight: " + str(stats.weight))
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/PreviousWeightBound.text = str(stats.weightBounds.min)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/PreviousWeightBound.set_tooltip("Previous weight bound: " + str(stats.weightBounds.min))
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/NextWeightBound.text = str(stats.weightBounds.max)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/NextWeightBound.set_tooltip("Next weight bound: " + str(stats.weightBounds.max))
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = stats.weight
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value = stats.weightBounds.min
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.max_value = stats.weightBounds.max
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.set_tooltip("Current carried weight: " + str(stats.weight))
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/PreviousWeightBound.text = str(stats.weightBounds.min)
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/PreviousWeightBound.set_tooltip("Previous weight bound: " + str(stats.weightBounds.min))
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/NextWeightBound.text = str(stats.weightBounds.max)
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/NextWeightBound.set_tooltip("Next weight bound: " + str(stats.weightBounds.max))
+	if stats.ac != null:
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer/AC.text = str(stats.ac)
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer/AC.set_tooltip(str(stats.ac))
 	if stats.strength != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer/Strength.text = str(stats.strength)
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer/Strength.set_tooltip(str(stats.strength))
@@ -108,12 +112,12 @@ func updateStats(stats = {
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer/Wisdom.set_tooltip(str(stats.wisdom))
 
 func _on_Weigth_value_changed(value):
-	var _min = $Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/Weigth.min_value
-	var _max = $Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/Weigth.max_value
+	var _min = $Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value
+	var _max = $Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.max_value
 	var _r = range_lerp(value, _min, _max, 0, 1)
 	var _g = range_lerp(value, _min, _max, 1, 0)
 #	progress_bar.get("custom_styles/fg").set_bg_color(Color(red_amnt, green_amnt, 0.00, 1.00))
-	$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WeightContainer/WeightBarContainer/Weigth.tint_progress = Color(_r, _g, 0)
+	$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.tint_progress = Color(_r, _g, 0)
 
 func isStatusEffectInGameStats(_statusEffect):
 	for _node in $Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer.get_children():

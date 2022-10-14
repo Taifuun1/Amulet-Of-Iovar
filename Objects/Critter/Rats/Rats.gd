@@ -24,7 +24,8 @@ var rats = {
 				"wisdom": 2
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Sewer rat",
@@ -49,7 +50,8 @@ var rats = {
 				"wisdom": 4
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Cave rat",
@@ -74,7 +76,8 @@ var rats = {
 				"wisdom": 6
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		}
 	]
 }

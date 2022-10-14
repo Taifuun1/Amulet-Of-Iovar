@@ -24,7 +24,14 @@ var aquaticLife = {
 				"wisdom": 15
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 25,
+					"amount": [5, 10]
+				}
+			]
 		},
 		{
 			"critterName": "Ringed seal",
@@ -49,7 +56,14 @@ var aquaticLife = {
 				"wisdom": 14
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 25,
+					"amount": [5, 10]
+				}
+			]
 		},
 		{
 			"critterName": "Eyebrow seal",
@@ -74,7 +88,14 @@ var aquaticLife = {
 				"wisdom": 22
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 25,
+					"amount": [5, 10]
+				}
+			]
 		},
 		{
 			"critterName": "Tonatuna",
@@ -99,7 +120,14 @@ var aquaticLife = {
 				"wisdom": 25
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 25,
+					"amount": [50, 100]
+				}
+			]
 		},
 	]
 }

@@ -3,6 +3,8 @@ class_name Player
 
 var inventory = load("res://UI/Inventory/Inventory.tscn").instance()
 
+var playerClass = load("res://Objects/Player/PlayableClasses.gd").new()
+
 var playerVisibility = -1
 
 var experiencePoints = 0
@@ -20,6 +22,8 @@ var wisdomIncrease = 0
 
 var calories
 var previousCalories
+
+var goldPieces
 
 var maxCarryWeight = {
 	"overEncumbured": 0,
@@ -60,18 +64,18 @@ var skills = {
 
 var neutralCritters = ["Sugar ant", "Shopkeeper"]
 
-func create(_class):
+func create(_className):
 	id = 0
 	name = str(0)
 	
 	add_child(inventory)
 	$Inventory.create()
 	
-	var _playerClass = load("res://Objects/Player/PlayableClasses.gd").new()[_class]
-	
 	critterName = "Player"
 	race = "Human"
 	alignment = "Neutral"
+	
+	var _playerClass = playerClass[(_className[0].to_lower() + _className.substr(1,-1)).replace(" ", "")]
 	
 	stats.strength = _playerClass.strength
 	stats.legerity = _playerClass.legerity
@@ -108,7 +112,12 @@ func create(_class):
 	calories = 3000
 	previousCalories = calories
 	
-	$PlayerSprite.texture = load("res://Assets/Classes/Mercenary.png")
+	goldPieces = _playerClass.goldPieces
+	
+	for _item in _playerClass.items.keys():
+		$"/root/World/Items/Items".createItem(_item, null, _playerClass.items[_item], true)
+	
+	$PlayerSprite.texture = _playerClass.texture
 
 
 
@@ -132,7 +141,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		elif _critter.aI.aI == "Neutral":
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level, _critter.id)
 			Globals.gameConsole.addLog("You swap places with the {critter}.".format({ "critter": _critter.critterName }))
-			checkIfThereIsSomethingOnTheGroundHere(_level, _tileToMoveTo)
+			checkIfThereIsSomethingOnTheGroundHere(_tileToMoveTo, _level)
 		else:
 			return false
 	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.DOOR_CLOSED:
@@ -146,7 +155,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			Globals.gameConsole.addLog("You fumble on your feet.")
 		else:
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level)
-			checkIfThereIsSomethingOnTheGroundHere(_level, _tileToMoveTo)
+			checkIfThereIsSomethingOnTheGroundHere(_tileToMoveTo, _level)
 
 func takeDamage(_attacks, _crittername):
 	var _attacksLog = []
@@ -178,12 +187,17 @@ func pickUpItems(_playerTile, _items, _grid):
 	var itemsLogString = PoolStringArray(itemsLog).join(" ")
 	Globals.gameConsole.addLog(itemsLogString)
 
-func pickUpItem(_playerTile, _item, _grid):
+func pickUpItem(_playerTile, _itemId, _grid):
 	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
-		if _grid[_playerTile.x][_playerTile.y].items[_itemOnGround] == _item:
+		if _grid[_playerTile.x][_playerTile.y].items[_itemOnGround] == _itemId:
+			var _item = get_node("/root/World/Items/{id}".format({ "id": _itemId }))
 			_grid[_playerTile.x][_playerTile.y].items.remove(_itemOnGround)
-			$Inventory.addToInventory(get_node("/root/World/Items/{id}".format({ "id": _item })))
-			get_node("/root/World/Items/{id}".format({ "id": _item })).hide()
+			if _item.itemName.matchn("Gold pieces"):
+				goldPieces += _item.amount
+				_item.queue_free()
+			else:
+				$Inventory.addToInventory(_item)
+				_item.hide()
 			return
 
 func dropItems(_playerTile, _items, _grid):
@@ -435,7 +449,8 @@ func updatePlayerStats():
 		balance = stats.balance,
 		belief = stats.belief,
 		visage = stats.visage,
-		wisdom = stats.wisdom
+		wisdom = stats.wisdom,
+		goldPieces = goldPieces
 	})
 
 
@@ -444,7 +459,11 @@ func updatePlayerStats():
 ### Helper functions ###
 ########################
 
-func checkIfThereIsSomethingOnTheGroundHere(_level, _tile):
+func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
+	for _itemId in _level.grid[_tile.x][_tile.y].items:
+		if get_node("/root/World/Items/{item}".format({ "item": _itemId })).itemName.matchn("Gold pieces"):
+			pickUpItems(_tile, [_itemId], _level.grid)
+	
 	if _level.grid[_tile.x][_tile.y].items.size() > 10:
 		Globals.gameConsole.addLog("There are alot of items here.")
 	elif _level.grid[_tile.x][_tile.y].items.size() > 1:

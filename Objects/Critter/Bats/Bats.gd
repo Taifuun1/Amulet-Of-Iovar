@@ -24,7 +24,8 @@ var bats = {
 				"wisdom": 2
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Squinting bat",
@@ -49,7 +50,8 @@ var bats = {
 				"wisdom": 4
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Spooky bat",
@@ -74,7 +76,8 @@ var bats = {
 				"wisdom": 6
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Vampire bat",
@@ -98,8 +101,9 @@ var bats = {
 				"visage": 3,
 				"wisdom": 3
 			},
-			"abilities": [],
-			"resistances": []
+			"abilities": ["life steal"],
+			"resistances": [],
+			"drops": [  ]
 		}
 	]
 }

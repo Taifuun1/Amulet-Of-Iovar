@@ -24,7 +24,28 @@ var elves = {
 				"wisdom": 10
 			},
 			"abilities": [],
-			"resistances": ["Gleeie'er"]
+			"resistances": ["Gleeie'er"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Elf assassin",
@@ -49,7 +70,28 @@ var elves = {
 				"wisdom": 14
 			},
 			"abilities": [],
-			"resistances": ["Gleeie'er"]
+			"resistances": ["Gleeie'er"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Elf noble",
@@ -74,7 +116,28 @@ var elves = {
 				"wisdom": 18
 			},
 			"abilities": [],
-			"resistances": ["Gleeie'er"]
+			"resistances": ["Gleeie'er"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [500, 1500]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Elf king",
@@ -99,7 +162,28 @@ var elves = {
 				"wisdom": 22
 			},
 			"abilities": [],
-			"resistances": ["Gleeie'er"]
+			"resistances": ["Gleeie'er"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		}
 	]
 }

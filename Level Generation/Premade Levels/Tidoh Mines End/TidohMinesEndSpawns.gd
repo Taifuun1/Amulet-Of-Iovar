@@ -1,6 +1,15 @@
 
 var tidohMinesEndSpawn1 = [
 	{
+		"tiles": Vector2(56,21),
+		"critters": {
+			"races": null,
+			"names": "Tidoh Tel'hydrad"
+		},
+		"chance": 100,
+		"isDeactivated": 6
+	},
+	{
 		"tiles": PoolVector2Array([
 			Vector2(2,20),
 			Vector2(3,21),
@@ -144,6 +153,15 @@ var tidohMinesEndSpawn1 = [
 ]
 
 var tidohMinesEndSpawn2 = [
+	{
+		"tiles": Vector2(25,13),
+		"critters": {
+			"races": null,
+			"names": "Tidoh Tel'hydrad"
+		},
+		"chance": 100,
+		"isDeactivated": 6
+	},
 	{
 		"tiles": PoolVector2Array([
 			Vector2(16,2),

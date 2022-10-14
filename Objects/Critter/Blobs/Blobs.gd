@@ -24,7 +24,14 @@ var blobs = {
 				"wisdom": 1
 			},
 			"abilities": ["toxix"],
-			"resistances": ["fleir", "frost", "toxix"]
+			"resistances": ["fleir", "frost", "toxix"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 25,
+					"amount": [5, 10]
+				}
+			]
 		},
 		{
 			"critterName": "Sluerp",
@@ -49,7 +56,14 @@ var blobs = {
 				"wisdom": 1
 			},
 			"abilities": ["corrosion"],
-			"resistances": ["fleir", "frost", "toxix"]
+			"resistances": ["fleir", "frost", "toxix"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 25,
+					"amount": [5, 10]
+				}
+			]
 		}
 	]
 }

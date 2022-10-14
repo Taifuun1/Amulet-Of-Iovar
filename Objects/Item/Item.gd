@@ -9,6 +9,7 @@ var category
 var weight
 
 var value
+var amount = 1
 
 var alignment
 var enchantment = null
@@ -22,7 +23,7 @@ var notIdentified = {
 
 var stackable
 
-func createItem(_item, _extraData = {}):
+func createItem(_item, _extraData = {}, _amount = 1):
 	id = Globals.itemId
 	name = str(id)
 	Globals.itemId += 1
@@ -43,6 +44,7 @@ func createItem(_item, _extraData = {}):
 	weight = _item.weight
 	
 	value = _item.value
+	amount = _amount
 	
 	if _extraData.has("alignment"):
 		alignment = _extraData.alignment
@@ -87,6 +89,14 @@ func createItem(_item, _extraData = {}):
 	
 	stackable = _item.stackable
 	
+	if _item.itemName.matchn("goldPieces"):
+		if _item.amount < 48:
+			$ItemSprite.texture = load("res://Assets/Miscellaneous/GoldPiecesLow.png")
+		elif _item.amount < 320:
+			$ItemSprite.texture = _item.texture
+		else:
+			$ItemSprite.texture = load("res://Assets/Miscellaneous/GoldPiecesHigh.png")
+		return
 	$ItemSprite.texture = _item.texture
 
 
@@ -155,7 +165,7 @@ func calculateWeaponAttackIncrease(_stats):
 ###############################
 
 func createCorpse(_critterName, _weight, _items):
-	var _item = _items.miscellaneousItems[0]
+	var _item = _items.miscellaneousItems.corpse
 	
 	id = Globals.itemId
 	name = str(id)

@@ -24,7 +24,8 @@ var wraiths = {
 				"wisdom": 1
 			},
 			"abilities": ["ghost touch", "etherealness"],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Spooky ghost",
@@ -49,7 +50,8 @@ var wraiths = {
 				"wisdom": 1
 			},
 			"abilities": ["ghost touch", "etherealness"],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		}
 	]
 }

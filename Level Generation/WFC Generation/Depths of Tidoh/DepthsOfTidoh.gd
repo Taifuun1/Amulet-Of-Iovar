@@ -8,8 +8,7 @@ func createNewLevel():
 	
 	createDungeon()
 	
-	pathFind(Globals.blockedTiles)
-	enemyPathfinding(grid)
+	doFinalPathfinding()
 	
 	return self
 

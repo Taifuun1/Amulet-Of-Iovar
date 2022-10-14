@@ -24,7 +24,14 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				}
+			]
 		},
 		{
 			"critterName": "Mine newt",
@@ -49,7 +56,14 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				}
+			]
 		},
 		{
 			"critterName": "Highlands newt",
@@ -74,7 +88,14 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				}
+			]
 		},
 		{
 			"critterName": "Paper newt",
@@ -99,7 +120,14 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				}
+			]
 		},
 		{
 			"critterName": "Arctic newt",
@@ -124,7 +152,14 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": ["frost"]
+			"resistances": ["frost"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				}
+			]
 		}
 	]
 }

@@ -1,6 +1,15 @@
 
 var elderDragonsLairSpawn1 = [
 	{
+		"tiles": Vector2(30,10),
+		"critters": {
+			"races": null,
+			"names": "Elder Dragon"
+		},
+		"chance": 100,
+		"isDeactivated": 7
+	},
+	{
 		"tiles": Vector2(4,9),
 		"items": {
 			"types": null,
@@ -73,6 +82,15 @@ var elderDragonsLairSpawn1 = [
 ]
 
 var elderDragonsLairSpawn2 = [
+	{
+		"tiles": Vector2(22,6),
+		"critters": {
+			"races": null,
+			"names": "Elder Dragon"
+		},
+		"chance": 100,
+		"isDeactivated": 3
+	},
 	{
 		"tiles": PoolVector2Array([
 			Vector2(22,3),

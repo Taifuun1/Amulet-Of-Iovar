@@ -24,7 +24,8 @@ var quadrapeds = {
 				"wisdom": 9
 			},
 			"abilities": ["charge"],
-			"resistances": ["fleir", "thunder"]
+			"resistances": ["fleir", "thunder"],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Brontotheridae",
@@ -49,7 +50,8 @@ var quadrapeds = {
 				"wisdom": 13
 			},
 			"abilities": ["charge"],
-			"resistances": ["fleir", "thunder"]
+			"resistances": ["fleir", "thunder"],
+			"drops": [  ]
 		}
 	]
 }

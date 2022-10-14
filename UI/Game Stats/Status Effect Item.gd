@@ -81,7 +81,7 @@ var statusEffects = {
 	},
 	"seeing": {
 		"label": "see",
-		"description": "You can see magically. (You enemies through walls.)",
+		"description": "You can see magically. (You can see enemies through walls.)",
 		"color": "#ffbb1c",
 		"texture": load("res://Assets/Status Effects/StatusEffectSeeing.png")
 	}

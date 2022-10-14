@@ -212,6 +212,14 @@ var critterSpawnBehaviour = {
 		"amount": [2, 3],
 		"distance": 4
 	},
+	"Iovars cultist acolyte": {
+		"amount": [2, 3],
+		"distance": 4
+	},
+	"Iovars cultist": {
+		"amount": [2, 3],
+		"distance": 4
+	},
 	"Tiny kobold": {
 		"amount": [2, 3],
 		"distance": 3

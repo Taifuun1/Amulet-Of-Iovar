@@ -24,7 +24,28 @@ var liches = {
 				"wisdom": 27
 			},
 			"abilities": ["summon critter"],
-			"resistances": ["gleeie'er", "toxix", "blindness", "confusion", "fumbling", "sleep"]
+			"resistances": ["gleeie'er", "toxix", "blindness", "confusion", "fumbling", "sleep"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Lich",
@@ -49,7 +70,28 @@ var liches = {
 				"wisdom": 29
 			},
 			"abilities": ["summon critter"],
-			"resistances": ["fleir", "frost", "gleeie'er", "toxix", "blindness", "confusion", "fumbling", "sleep"]
+			"resistances": ["fleir", "frost", "gleeie'er", "toxix", "blindness", "confusion", "fumbling", "sleep"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Grand lich",
@@ -74,7 +116,28 @@ var liches = {
 				"wisdom": 45
 			},
 			"abilities": ["summon critter"],
-			"resistances": ["fleir", "frost", "gleeie'er", "toxix", "stun", "blindness", "confusion", "fumbling", "sleep"]
+			"resistances": ["fleir", "frost", "gleeie'er", "toxix", "stun", "blindness", "confusion", "fumbling", "sleep"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Arch-lich",
@@ -99,7 +162,28 @@ var liches = {
 				"wisdom": 70
 			},
 			"abilities": ["summon critter"],
-			"resistances": ["fleir", "frost", "thunder", "gleeie'er", "toxix", "stun", "blindness", "confusion", "fumbling", "sleep"]
+			"resistances": ["fleir", "frost", "thunder", "gleeie'er", "toxix", "stun", "blindness", "confusion", "fumbling", "sleep"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		}
 	]
 }

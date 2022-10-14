@@ -5,7 +5,7 @@ func createNewLevel(_isDouble = false):
 	
 	createDungeon(_isDouble)
 	
-	enemyPathfinding(grid)
+	doFinalPathfinding()
 	
 	return self
 

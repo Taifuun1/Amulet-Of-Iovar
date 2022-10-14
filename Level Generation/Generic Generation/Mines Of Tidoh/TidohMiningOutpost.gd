@@ -45,7 +45,7 @@ func createNewLevel():
 	
 	createDungeon()
 	
-	enemyPathfinding(grid)
+	doFinalPathfinding()
 	
 	return self
 

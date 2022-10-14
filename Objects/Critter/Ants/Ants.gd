@@ -24,7 +24,8 @@ var ants = {
 				"wisdom": 3
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Leaf ant",
@@ -49,7 +50,8 @@ var ants = {
 				"wisdom": 13
 			},
 			"abilities": [],
-			"resistances": ["Gleeie'er"]
+			"resistances": ["Gleeie'er"],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Soldier ant",
@@ -74,7 +76,8 @@ var ants = {
 				"wisdom": 7
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Double-pattern ant",
@@ -99,7 +102,8 @@ var ants = {
 				"wisdom": 15
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		}
 	]
 }

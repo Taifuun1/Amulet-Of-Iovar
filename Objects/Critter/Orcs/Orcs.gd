@@ -21,10 +21,31 @@ var orcs = {
 				"balance": 5,
 				"belief": 0,
 				"visage": -2,
-				"wisdom": -1
+				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Flatlands orc",
@@ -46,10 +67,31 @@ var orcs = {
 				"balance": 8,
 				"belief": 0,
 				"visage": -2,
-				"wisdom": -1
+				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Mountain orc",
@@ -71,10 +113,31 @@ var orcs = {
 				"balance": 12,
 				"belief": 0,
 				"visage": -2,
-				"wisdom": -1
+				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Dungeon orc",
@@ -96,10 +159,31 @@ var orcs = {
 				"balance": 14,
 				"belief": 0,
 				"visage": -2,
-				"wisdom": -1
+				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Yrak-i",
@@ -120,11 +204,32 @@ var orcs = {
 				"legerity": 16,
 				"balance": 18,
 				"belief": 0,
-				"visage": -2,
-				"wisdom": -1
+				"visage": 3,
+				"wisdom": 0
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		}
 	]
 }

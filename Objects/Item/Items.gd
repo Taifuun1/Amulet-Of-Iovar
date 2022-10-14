@@ -5,6 +5,7 @@ onready var item = preload("res://Objects/Item/Item.tscn")
 var amulets = preload("res://Objects/Item/Amulets/Amulets.gd").new()
 var armors = preload("res://Objects/Item/Armor/Armor.gd").new()
 var comestibles = preload("res://Objects/Item/Comestibles/Comestibles.gd").new()
+var gems = preload("res://Objects/Item/Gems/Gems.gd").new()
 var potions = preload("res://Objects/Item/Potions/Potions.gd").new()
 var rings = preload("res://Objects/Item/Rings/Rings.gd").new()
 var runes = preload("res://Objects/Item/Runes/Runes.gd").new()
@@ -26,6 +27,7 @@ func create():
 	items["amulet"] = amulets.amulets
 	items["armor"] = armors.armors
 	items["comestible"] = comestibles.comestibles
+	items["gem"] = gems.gems
 	items["potion"] = potions.potions
 	items["ring"] = rings.rings
 	items["rune"] = runes.runes
@@ -34,7 +36,7 @@ func create():
 	items["wand"] = wands.wands
 	items["weapon"] = weapons.weapons
 	
-	miscellaneousItems = miscellaneous.miscellaneous.other
+	miscellaneousItems = miscellaneous.miscellaneous
 
 
 
@@ -42,7 +44,7 @@ func create():
 ### Item generation ###
 #######################
 
-func createItem(_item, _position = null, _toInventory = false, _extraData = {  }, _level = $"/root/World".level):
+func createItem(_item, _position = null, _amount = 1, _toInventory = false, _extraData = {  }, _level = $"/root/World".level):
 	var _itemPosition
 	if _position == null:
 		_itemPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
@@ -51,7 +53,10 @@ func createItem(_item, _position = null, _toInventory = false, _extraData = {  }
 	
 	var newItem = item.instance()
 	if typeof(_item) == TYPE_STRING:
-		newItem.createItem(getItemByName(_item), _extraData)
+		if _item.matchn("goldPieces"):
+			newItem.createItem(miscellaneousItems.goldPieces, _extraData, _amount)
+		else:
+			newItem.createItem(getItemByName(_item), _extraData)
 	else:
 		newItem.createItem(_item, _extraData)
 	

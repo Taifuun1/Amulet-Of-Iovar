@@ -387,6 +387,10 @@ func updateTilemapToGrid():
 		for y in range(grid[x].size()):
 			set_cellv(Vector2(x, y), Globals.tiles[grid[x][y].tile])
 
+func doFinalPathfinding():
+	pathFind(Globals.blockedTiles)
+	enemyPathfinding(grid)
+
 func checkAdjacentTilesForOpenSpace(_position, _checkForSingleOpenSpace = false, checkForCritters = false, _shuffleDirections = true):
 	var _openTiles = []
 	var _directions = [
@@ -455,6 +459,7 @@ func placePresetItems(_items, _level):
 								$"/root/World/Items/Items".createItem(
 									$"/root/World/Items/Items".getRandomItemByItemTypes(_item.items.types, _item.items.randomByRarity),
 									Vector2(x, y),
+									1,
 									false,
 									{},
 									_level
@@ -464,6 +469,7 @@ func placePresetItems(_items, _level):
 						$"/root/World/Items/Items".createItem(
 							$"/root/World/Items/Items".getRandomItemByItemTypes(_item.items.types, _item.items.randomByRarity),
 							_item.tiles,
+							1,
 							false,
 							{},
 							_level
@@ -476,6 +482,7 @@ func placePresetItems(_items, _level):
 								$"/root/World/Items/Items".createItem(
 									_item.items.names[randi() % _item.items.names.size()],
 									Vector2(x, y),
+									1,
 									false,
 									{},
 									_level
@@ -483,8 +490,9 @@ func placePresetItems(_items, _level):
 				else:
 					if randi() % 101 <= _item.chance and Globals.isTileFree(_item.tiles, grid) and grid[_item.tiles.x][_item.tiles.y].tile != Globals.tiles.DOOR_CLOSED:
 						$"/root/World/Items/Items".createItem(
-							_item.items.names[randi() % _item.items.names.size()],
+							_item.items.names,
 							_item.tiles,
+							1,
 							false,
 							{},
 							_level
@@ -521,16 +529,22 @@ func placePresetCritters(_critters, _level):
 					for x in range(_critter.tiles[0].x, _critter.tiles[1].x + 1):
 						for y in range(_critter.tiles[0].y, _critter.tiles[1].y + 1):
 							if randi() % 101 <= _critter.chance and Globals.isTileFree(Vector2(x, y), grid) and grid[x][y].tile != Globals.tiles.DOOR_CLOSED:
+								var _isDeactivated = false
+								if _critter.has("isDeactivated"): _isDeactivated = _critter.isDeactivated
 								$"/root/World/Critters/Critters".spawnCritter(
 									_critter.critters.names[randi() % _critter.critters.names.size()],
 									Vector2(x, y),
+									_isDeactivated,
 									_level
 								)
 				else:
 					if randi() % 101 <= _critter.chance and Globals.isTileFree(_critter.tiles, grid) and grid[_critter.tiles.x][_critter.tiles.y].tile != Globals.tiles.DOOR_CLOSED:
+						var _isDeactivated = false
+						if _critter.has("isDeactivated"): _isDeactivated = _critter.isDeactivated
 						$"/root/World/Critters/Critters".spawnCritter(
-							_critter.critters.names[randi() % _critter.critters.names.size()],
+							_critter.critters.names,
 							_critter.tiles,
+							_isDeactivated,
 							_level
 						)
 

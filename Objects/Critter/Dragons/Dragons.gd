@@ -24,7 +24,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		},
 		{
 			"critterName": "Blue dragon",
@@ -49,7 +84,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": [],
-			"resistances": ["frost"]
+			"resistances": ["frost"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		},
 		{
 			"critterName": "Cyan dragon",
@@ -74,7 +144,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": [],
-			"resistances": ["confusion"]
+			"resistances": ["confusion"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		},
 		{
 			"critterName": "Green dragon",
@@ -99,7 +204,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": [],
-			"resistances": ["fumbling"]
+			"resistances": ["fumbling"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		},
 		{
 			"critterName": "Red dragon",
@@ -124,7 +264,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": [],
-			"resistances": ["fleir"]
+			"resistances": ["fleir"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		},
 		{
 			"critterName": "Silver dragon",
@@ -149,7 +324,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": ["reflection"],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		},
 		{
 			"critterName": "Violet dragon",
@@ -174,7 +384,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": [],
-			"resistances": ["stun"]
+			"resistances": ["stun"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		},
 		{
 			"critterName": "White dragon",
@@ -199,7 +444,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": [],
-			"resistances": ["stun"]
+			"resistances": ["stun"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		},
 		{
 			"critterName": "Yellow dragon",
@@ -224,7 +504,42 @@ var dragons = {
 				"wisdom": 48
 			},
 			"abilities": [],
-			"resistances": ["thunder"]
+			"resistances": ["thunder"],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [2500, 5000]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 100,
+					"amount": [3, 8]
+				},
+				{
+					"names": [
+						"Apatite",
+						"Citrine",
+						"Moonstone",
+						"Morganite",
+						"Onyx",
+						"Peridot",
+						"Ruby",
+						"Sapphire"
+					],
+					"chance": 25,
+					"amount": [2, 4]
+				}
+			]
 		}
 	]
 }

@@ -69,6 +69,7 @@ var levels = {
 	"firstLevel": null,
 	"dungeon1": [],
 	"minesOfTidoh": [],
+	"depthsOfTidoh": [],
 	"dungeon2": [],
 	"beach": [],
 	"dungeon3": [],
@@ -82,9 +83,9 @@ var levels = {
 #	"arena": [],
 #	"dungeonhalls3": [],
 	"dragonsPeak": [],
-	"dungeonhalls4": [],
-	"fortress": [],
+	"dungeonhalls3": [],
 	"theGreatShadows": [],
+	"fortress": [],
 	"iovarsLair": []
 }
 
@@ -117,6 +118,7 @@ func _ready():
 	$UI/UITheme/ItemManagement.create()
 	$UI/UITheme/Equipment.create()
 	$UI/UITheme/ListMenu.create()
+	$UI/UITheme/DialogMenu.create()
 	for _node in $UI/UITheme.get_children():
 		_node.hide()
 	$UI/UITheme/StartScreen.show()
@@ -132,14 +134,14 @@ func _ready():
 	
 	$FOV.createFOVLevels(levelCount)
 
-func _on_Game_Start():
+func _on_Game_Start(_className):
 	thread = Thread.new()
-	thread.start(self, "create", null, Thread.PRIORITY_HIGH)
+	thread.start(self, "create", _className, Thread.PRIORITY_HIGH)
 
-func create():
+func create(_className):
 	$Items/Items.randomizeRandomItems()
 	
-	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel(true)
+	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
 	
 	for _level in levels.dungeon1.size():
 		if levels.dungeon1[_level] == levels.dungeon1.back():
@@ -148,6 +150,9 @@ func create():
 			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel()
 	
 	for _level in levels.minesOfTidoh:
+		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	
+	for _level in levels.depthsOfTidoh:
 		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
 	for _level in levels.dungeon2:
@@ -175,9 +180,10 @@ func create():
 #		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
 	$Critters.add_child(player, true)
-	player.create("mercenary")
+	player.create(_className)
 	level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
 	player.calculateEquipmentStats()
+	
 	
 	for _level in $Levels.get_children():
 		$Items/Items.generateItemsForLevel(_level)
@@ -185,26 +191,26 @@ func create():
 	for _level in $Levels.get_children():
 		$Critters/Critters.generateCrittersForLevel(_level)
 	
-	$Items/Items.createItem("scroll of identify", null, true, { "alignment": "blessed" })
-	$Items/Items.createItem("blindfold", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("scroll of genocide", null, true, { "alignment": "blessed" })
-	$Items/Items.createItem("frostfury", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("scroll of genocide", null, true, { "alignment": "cursed" })
-	$Items/Items.createItem("ring of protection", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("oil lamp", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("key", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("wand of summon critter", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "cursed" })
-	$Items/Items.createItem("scroll of teleport", null, true, { "alignment": "cursed" })
-	$Items/Items.createItem("dwarvish laysword", null, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("eario of toxix", null, true)
-	$Items/Items.createItem("eario of fleir", null, true)
-	$Items/Items.createItem("eario of frost", null, true)
-	$Items/Items.createItem("luirio of cone", null, true)
-	$Items/Items.createItem("luirio of point", null, true)
-	$Items/Items.createItem("heario of flow", null, true)
+#	$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
+#	$Items/Items.createItem("blindfold", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
+#	$Items/Items.createItem("frostfury", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
+#	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("key", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("wand of summon critter", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
+#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
+#	$Items/Items.createItem("dwarvish laysword", null, 1, true, { "alignment": "uncursed" })
+#	$Items/Items.createItem("eario of toxix", null, 1, true)
+#	$Items/Items.createItem("eario of fleir", null, 1, true)
+#	$Items/Items.createItem("eario of frost", null, 1, true)
+#	$Items/Items.createItem("luirio of cone", null, 1, true)
+#	$Items/Items.createItem("luirio of point", null, 1, true)
+#	$Items/Items.createItem("heario of flow", null, 1, true)
 	
 	updateTiles()
 	drawLevel()
@@ -226,13 +232,13 @@ func create():
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = library.instance()
-	firstLevel.create("elderDragonsLair", "Dungeon hallways 1", 10000)
+	var firstLevel = banditWarcamp1.instance()
+	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(1):
 		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
+		newDungeon.create("dungeon1", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
@@ -247,15 +253,15 @@ func createDungeon():
 	levels.minesOfTidoh.append(newMiningOutpost)
 	$Levels.add_child(newMiningOutpost)
 	for _level in range(1):
-		var newCave = minesOfTidoh.instance()
-		newCave.create("minesOfTidoh", "Mines of Tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 1)
+		var newCave = depthsOfTidoh.instance()
+		newCave.create("depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": levels.depthsOfTidoh.size() + 1 }), 1)
 		levels.minesOfTidoh.append(newCave)
 		$Levels.add_child(newCave)
 	
 	### Dungeon 2
 	for _level in range(1):
 		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
+		newDungeon.create("dungeon2", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
 		levels.dungeon2.append(newDungeon)
 		$Levels.add_child(newDungeon)
 
@@ -445,8 +451,8 @@ func _input(_event):
 
 func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	if _playerTile != null:
-		processManyGameTurnsWithoutPlayerActionsAndWithoutSafety()
 		processPlayerAction(_playerTile, _tileToMoveTo)
+		processManyGameTurnsWithoutPlayerActionsAndWithoutSafety()
 	processPlayerEffects()
 	processEnemyActions()
 	processCrittersSpawnStatus()
@@ -502,9 +508,11 @@ func processEnemyActions():
 	if level.critters.size() != 0:
 		for _enemy in level.critters:
 			var _critterTile = level.getCritterTile(_enemy)
-			if get_node("Critters/{id}".format({ "id": _enemy })).processCritterAction(_critterTile, _playerTile, _enemy, level):
+			var _critter = get_node("Critters/{id}".format({ "id": _enemy }))
+			_critter.isCritterAwakened(_critterTile, _playerTile, level)
+			if _critter.processCritterAction(_critterTile, _playerTile, _enemy, level):
 				_isPlayerHit = true
-			get_node("Critters/{id}".format({ "id": _enemy })).processCritterEffects()
+			_critter.processCritterEffects()
 	return _isPlayerHit
 
 func processCrittersSpawnStatus():

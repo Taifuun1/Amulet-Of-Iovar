@@ -47,7 +47,7 @@ margin_right = 325.0
 margin_bottom = 225.0
 rect_min_size = Vector2( 75, 75 )
 mouse_filter = 2
-color = Color( 1, 0.913725, 0, 1 )
+color = Color( 1, 0, 0.960784, 1 )
 
 [node name="Area2D" type="Area2D" parent="EquipmentBackground/Amulet"]
 
@@ -56,6 +56,25 @@ position = Vector2( 37.5, 37.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="EquipmentBackground/Amulet"]
+position = Vector2( 37.5, 37.5 )
+scale = Vector2( 2.5, 2.5 )
+
+[node name="Cloak" type="ColorRect" parent="EquipmentBackground"]
+margin_left = 375.0
+margin_top = 250.0
+margin_right = 450.0
+margin_bottom = 325.0
+rect_min_size = Vector2( 75, 75 )
+mouse_filter = 2
+color = Color( 1, 0.913725, 0, 1 )
+
+[node name="Area2D" type="Area2D" parent="EquipmentBackground/Cloak"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EquipmentBackground/Cloak/Area2D"]
+position = Vector2( 37.5, 37.5 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="EquipmentBackground/Cloak"]
 position = Vector2( 37.5, 37.5 )
 scale = Vector2( 2.5, 2.5 )
 
@@ -254,6 +273,8 @@ mouse_filter = 2
 [connection signal="mouse_exited" from="EquipmentBackground/Helmet/Area2D" to="." method="_on_mouse_exited_equipment_slot"]
 [connection signal="mouse_entered" from="EquipmentBackground/Amulet/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Amulet" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/Amulet/Area2D" to="." method="_on_mouse_exited_equipment_slot"]
+[connection signal="mouse_entered" from="EquipmentBackground/Cloak/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Cloak" ]]
+[connection signal="mouse_exited" from="EquipmentBackground/Cloak/Area2D" to="." method="_on_mouse_exited_equipment_slot"]
 [connection signal="mouse_entered" from="EquipmentBackground/Plate/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Plate" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/Plate/Area2D" to="." method="_on_mouse_exited_equipment_slot"]
 [connection signal="mouse_entered" from="EquipmentBackground/Ring1/Area2D" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Ring1" ]]

@@ -24,7 +24,8 @@ var canines = {
 				"wisdom": 6
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Warg",
@@ -49,7 +50,8 @@ var canines = {
 				"wisdom": 9
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Gearh",
@@ -74,7 +76,8 @@ var canines = {
 				"wisdom": 12
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		}
 	]
 }

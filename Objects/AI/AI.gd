@@ -3,11 +3,13 @@ extends Node
 var aI = "Aggressive"
 
 func getCritterMove(_critterTile, _playerTile, _level):
-	if aI == "Aggressive":
+	if aI.matchn("Aggressive"):
 		var _path = _level.calculatePathFindingPath(_critterTile, _playerTile)
 		if _path.size() == 0:
 			return getNeutralCritterMove(_critterTile, _level)
 		return _path
+	elif aI.matchn("Deactivated"):
+		return []
 #	elif aI == "Neutral":
 	else:
 		return getNeutralCritterMove(_critterTile, _level)

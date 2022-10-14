@@ -1,14 +1,13 @@
 
 var banditWarcampSpawn1 = [
 	{
-		"tiles": Vector2(56,15),
+		"tiles": Vector2(56,14),
 		"critters": {
 			"races": null,
-			"names": [
-				"Outlaw merchandiee'er"
-			]
+			"names": "Shin'kor Leve'er"
 		},
-		"chance": 100
+		"chance": 100,
+		"isDeactivated": 3
 	},
 	{
 		"tiles": PoolVector2Array([
@@ -163,6 +162,15 @@ var banditWarcampSpawn1 = [
 ]
 
 var banditWarcampSpawn2 = [
+	{
+		"tiles": Vector2(31,11),
+		"critters": {
+			"races": null,
+			"names": "Shin'kor Leve'er"
+		},
+		"chance": 100,
+		"isDeactivated": 6
+	},
 	{
 		"tiles": Vector2(31,12),
 		"critters": {

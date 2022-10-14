@@ -24,7 +24,8 @@ var snakes = {
 				"wisdom": 7
 			},
 			"abilities": ["poison bite"],
-			"resistances": ["toxix"]
+			"resistances": ["toxix"],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Marsh snake",
@@ -49,7 +50,8 @@ var snakes = {
 				"wisdom": 9
 			},
 			"abilities": ["poison bite", "displace self"],
-			"resistances": ["toxix"]
+			"resistances": ["toxix"],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Sawtooth-pattern snake",
@@ -74,7 +76,8 @@ var snakes = {
 				"wisdom": 12
 			},
 			"abilities": ["poison bite", "displace self"],
-			"resistances": ["toxix"]
+			"resistances": ["toxix"],
+			"drops": [  ]
 		}
 	]
 }

@@ -24,7 +24,8 @@ var floatingSpheres = {
 				"wisdom": 13
 			},
 			"abilities": ["reflect stun"],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Unstable floating sphere",
@@ -48,8 +49,9 @@ var floatingSpheres = {
 				"visage": 1,
 				"wisdom": 17
 			},
-			"abilities": ["exploding selfdestruct"],
-			"resistances": []
+			"abilities": ["selfdestruct"],
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Freezing floating sphere",
@@ -74,7 +76,8 @@ var floatingSpheres = {
 				"wisdom": 17
 			},
 			"abilities": ["frost touch"],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		},
 		{
 			"critterName": "Thunderous floating sphere",
@@ -99,7 +102,8 @@ var floatingSpheres = {
 				"wisdom": 17
 			},
 			"abilities": ["thunder touch"],
-			"resistances": []
+			"resistances": [],
+			"drops": [  ]
 		}
 	]
 }

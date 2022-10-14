@@ -24,7 +24,31 @@ var centaurs = {
 				"wisdom": 15
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [25, 150]
+				},
+				{
+					"names": [
+						"Leather cap",
+						"Leather cloak",
+						"Studded belt"
+					],
+					"chance": 25,
+					"amount": [1, 1]
+				},
+				{
+					"names": [
+						"Chipped sword",
+						"Elvish sword"
+					],
+					"chance": 25,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Gryonem centaur",
@@ -49,7 +73,31 @@ var centaurs = {
 				"wisdom": 24
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 100,
+					"amount": [250, 350]
+				},
+				{
+					"names": [
+						"Scale ring mail chausses",
+						"Adorned helmet",
+						"Studded boots"
+					],
+					"chance": 25,
+					"amount": [1, 1]
+				},
+				{
+					"names": [
+						"Adorned sword",
+						"Elvish sword"
+					],
+					"chance": 25,
+					"amount": [1, 1]
+				}
+			]
 		}
 	]
 }

@@ -1,13 +1,14 @@
 extends WaveFunctionCollapse
 
+onready var librarySpawns = preload("res://Level Generation/WFC Generation/Library/LibrarySpawns.gd").new()
+
 func createNewLevel(_isLast = false):
 	createGrid()
 	pathFind([])
 	
 	createDungeon(_isLast)
 	
-	pathFind(Globals.blockedTiles)
-	enemyPathfinding(grid)
+	doFinalPathfinding()
 	
 	return self
 
@@ -22,6 +23,8 @@ func createDungeon(_isLast):
 		fillEmptyTiles("CORRIDOR_SAND")
 		if _isLast:
 			_bossRoomCenter = generateBossRoom()
+			librarySpawns.librarySpawns[0].tiles = _bossRoomCenter
+			placePresetCritters(librarySpawns.librarySpawns, self)
 		getSpawnableTiles(
 			["CORRIDOR_SAND"],
 			["CORRIDOR_SAND"],
@@ -31,9 +34,8 @@ func createDungeon(_isLast):
 		if areAllStairsConnected():
 			if _bossRoomCenter != null:
 				pathFind([Globals.blockedTiles])
-				if calculatePath(stairs.downStair, _bossRoomCenter) == 0:
-					continue
-			return
+				if calculatePath(stairs.downStair, _bossRoomCenter) != 0:
+					return
 		resetLevel()
 		resetGeneration()
 	push_error("Couldn't generate library")

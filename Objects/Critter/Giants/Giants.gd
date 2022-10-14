@@ -24,7 +24,28 @@ var giants = {
 				"wisdom": 2
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Balding giant",
@@ -49,7 +70,28 @@ var giants = {
 				"wisdom": 3
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Parched giant",
@@ -74,7 +116,28 @@ var giants = {
 				"wisdom": 5
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "One-eyed ogre",
@@ -99,7 +162,28 @@ var giants = {
 				"wisdom": 6
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		}
 	]
 }

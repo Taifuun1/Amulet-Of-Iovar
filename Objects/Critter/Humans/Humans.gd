@@ -24,7 +24,14 @@ var humans = {
 				"wisdom": 8
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [500, 1500]
+				}
+			]
 		},
 		{
 			"critterName": "Guard",
@@ -49,7 +56,28 @@ var humans = {
 				"wisdom": 8
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Guard captain",
@@ -74,7 +102,28 @@ var humans = {
 				"wisdom": 10
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Outlaw watcher",
@@ -99,7 +148,28 @@ var humans = {
 				"wisdom": 7
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Outlaw fusiee'er",
@@ -124,7 +194,28 @@ var humans = {
 				"wisdom": 9
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		},
 		{
 			"critterName": "Outlaw merchandiee'er",
@@ -149,7 +240,120 @@ var humans = {
 				"wisdom": 10
 			},
 			"abilities": [],
-			"resistances": []
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
+		},
+		{
+			"critterName": "Iovars cultist acolyte",
+			"race": "Human",
+			"class": "Humanoid",
+			"weight": 200,
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/HumanIovarsCultistAcolyte.png"),
+			"alignment": "Neutral",
+			"level": 13,
+			"expDropAmount": 650,
+			"hp": 44,
+			"mp": 48,
+			"ac": 5,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 12,
+				"legerity": 10,
+				"balance": 11,
+				"belief": 16,
+				"visage": 14,
+				"wisdom": 16
+			},
+			"abilities": [],
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
+		},
+		{
+			"critterName": "Iovars cultist",
+			"race": "Human",
+			"class": "Humanoid",
+			"weight": 200,
+			"aI": "Aggressive",
+			"texture": load("res://Assets/Critters/HumanIovarsCultist.png"),
+			"alignment": "Neutral",
+			"level": 16,
+			"expDropAmount": 1120,
+			"hp": 55,
+			"mp": 67,
+			"ac": 6,
+			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"stats": {
+				"strength": 13,
+				"legerity": 13,
+				"balance": 12,
+				"belief": 21,
+				"visage": 18,
+				"wisdom": 18
+			},
+			"abilities": [],
+			"resistances": [],
+			"drops": [
+				{
+					"names": "goldPieces",
+					"chance": 50,
+					"amount": [50, 150]
+				},
+				{
+					"names": [
+						"Leather mail",
+						"Leather cap",
+						"Leather gloves",
+						"Leather belt",
+						"Leather cloak",
+						"Leather pants",
+						"Low boots",
+						"Elvish sword"
+					],
+					"chance": 100,
+					"amount": [1, 1]
+				}
+			]
 		}
 	]
 }
