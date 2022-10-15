@@ -90,7 +90,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			# Player hit check
 			if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 				if hits[currentHit] == 1:
-					$"/root/World/Critters/0".takeDamage(attacks, critterName)
+					$"/root/World/Critters/0".takeDamage(attacks, critterName, _moveCritterTo)
 					return true
 				else:
 					Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
@@ -112,6 +112,10 @@ func takeDamage(_attacks, _critterTile, _items = $"/root/World/Items/Items", _le
 		for _attack in _attacks:
 			var _damage = calculateDmg(_attack)
 			var _attackLog = ""
+			
+			var _damageNumber = damageNumber.instance()
+			_damageNumber.create(_critterTile, _damage.dmg + _damage.magicDmg, "#00F")
+			$"/root/World/Animations".add_child(_damageNumber)
 			
 			# Magic spell
 			if _damage.dmg == 0 and _damage.magicDmg != 0:

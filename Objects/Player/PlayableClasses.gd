@@ -295,8 +295,9 @@ var perry = {
 	visageIncrease = 1.4,
 	wisdomIncrease = 1.4,
 	items = {
-		"Leather armor": 1,
-		"Cotton pants": 1,
+		"Chipped sword": 1,
+		"Leather mail": 1,
+		"Leather pants": 1,
 		"Low boots": 1
 	},
 	goldPieces = 45,

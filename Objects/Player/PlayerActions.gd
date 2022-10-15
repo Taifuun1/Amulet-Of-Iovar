@@ -404,10 +404,10 @@ func zapItem(_id):
 					if _zappedItem.alignment.matchn("blessed"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("uncursed"):
-						takeDamage([8], "Wand of backwards magic sphere")
+						takeDamage([8], "Wand of backwards magic sphere", _playerPosition)
 						Globals.gameConsole.addLog("{itemName} hits you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("cursed"):
-						takeDamage([18], "Wand of backwards magic sphere")
+						takeDamage([18], "Wand of backwards magic sphere", _playerPosition)
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")

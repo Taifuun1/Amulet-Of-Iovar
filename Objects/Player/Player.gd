@@ -157,11 +157,16 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 			checkIfThereIsSomethingOnTheGroundHere(_tileToMoveTo, _level)
 
-func takeDamage(_attacks, _crittername):
+func takeDamage(_attacks, _crittername, _moveCritterTo):
 	var _attacksLog = []
 	if _attacks.size() != 0:
 		for _attack in _attacks:
 			var armorReduction = _attack - ( ac / 3 )
+			
+			var _damageNumber = damageNumber.instance()
+			_damageNumber.create(_moveCritterTo, armorReduction, "#00F")
+			$"/root/World/Animations".add_child(_damageNumber)
+			
 			if armorReduction <= 1 and armorReduction >= -2:
 				hp -= 1
 				_attacksLog.append("{crittername} hits you for 1 damage.".format({ "crittername": _crittername }))

@@ -70,7 +70,6 @@ func generateCrittersForLevel(_level):
 		_minAmount = _levelCritterGeneration.amount[0]
 	for _i in range(randi() % _randomChange + _minAmount):
 		_critters.append(returnRandomCritter(_levelCritterGeneration))
-	print(_critters)
 	
 	for _critter in _critters:
 		if _critter != null:
