@@ -14,6 +14,17 @@ var quadrapeds = {
 			"hp": 67,
 			"mp": 8,
 			"ac": 4,
+			"attacks": [
+				{
+					"dmg": [12,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0],
 			"stats": {
 				"strength": 18,
@@ -23,7 +34,14 @@ var quadrapeds = {
 				"visage": 9,
 				"wisdom": 9
 			},
-			"abilities": ["charge"],
+			"abilities": [
+				{
+					"abilityName": "charge",
+					"abilityType": "spell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,0,0,0],
 			"resistances": ["fleir", "thunder"],
 			"drops": [  ]
 		},
@@ -40,6 +58,17 @@ var quadrapeds = {
 			"hp": 82,
 			"mp": 21,
 			"ac": 7,
+			"attacks": [
+				{
+					"dmg": [16,17],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0],
 			"stats": {
 				"strength": 23,
@@ -49,7 +78,14 @@ var quadrapeds = {
 				"visage": 11,
 				"wisdom": 13
 			},
-			"abilities": ["charge"],
+			"abilities": [
+				{
+					"abilityName": "charge",
+					"abilityType": "spell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,0,0,0],
 			"resistances": ["fleir", "thunder"],
 			"drops": [  ]
 		}

@@ -11,7 +11,7 @@ var weapons = {
 			"value": {
 				"dmg": [2,4],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -34,7 +34,7 @@ var weapons = {
 			"value": {
 				"dmg": [4,7],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -57,7 +57,9 @@ var weapons = {
 			"value": {
 				"dmg": [1,3],
 				"d": 2,
-				"bonusDmg": [1],
+				"bonusDmg": {
+					"baseWeapon": 1
+				},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -80,7 +82,7 @@ var weapons = {
 			"value": {
 				"dmg": [3,5],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 1,
 				"magicDmg": {
 					"dmg": 0,
@@ -103,7 +105,7 @@ var weapons = {
 			"value": {
 				"dmg": [1,3],
 				"d": 3,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -128,7 +130,9 @@ var weapons = {
 			"value": {
 				"dmg": [3,5],
 				"d": 1,
-				"bonusDmg": [1],
+				"bonusDmg": {
+					"baseWeapon": 1
+				},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -151,7 +155,7 @@ var weapons = {
 			"value": {
 				"dmg": [2,4],
 				"d": 3,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -174,7 +178,9 @@ var weapons = {
 			"value": {
 				"dmg": [5,8],
 				"d": 1,
-				"bonusDmg": [2],
+				"bonusDmg": {
+					"baseWeapon": 2
+				},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -197,7 +203,9 @@ var weapons = {
 			"value": {
 				"dmg": [5,7],
 				"d": 1,
-				"bonusDmg": [1],
+				"bonusDmg": {
+					"baseWeapon": 1
+				},
 				"armorPen": 1,
 				"magicDmg": {
 					"dmg": 0,
@@ -220,10 +228,12 @@ var weapons = {
 			"value": {
 				"dmg": [5,7],
 				"d": 1,
-				"bonusDmg": [1],
+				"bonusDmg": {
+					"baseWeapon": 1
+				},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 1,
+					"dmg": [1,1],
 					"element": "Gleeie'er"
 				}
 			},
@@ -245,10 +255,12 @@ var weapons = {
 			"value": {
 				"dmg": [2,5],
 				"d": 2,
-				"bonusDmg": [1],
+				"bonusDmg": {
+					"baseWeapon": 1
+				},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 2,
+					"dmg": [2,2],
 					"element": "Thunder"
 				}
 			},
@@ -268,7 +280,7 @@ var weapons = {
 			"value": {
 				"dmg": [7,10],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 3,
 				"magicDmg": {
 					"dmg": 0,
@@ -291,7 +303,9 @@ var weapons = {
 			"value": {
 				"dmg": [7,10],
 				"d": 1,
-				"bonusDmg": [1],
+				"bonusDmg": {
+					"baseWeapon": 1
+				},
 				"armorPen": 1,
 				"magicDmg": {
 					"dmg": 0,
@@ -314,7 +328,9 @@ var weapons = {
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
-				"bonusDmg": [3],
+				"bonusDmg": {
+					"baseWeapon": 3
+				},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -339,10 +355,10 @@ var weapons = {
 			"value": {
 				"dmg": [5,7],
 				"d": 2,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 1,
 				"magicDmg": {
-					"dmg": 5,
+					"dmg": [5,6],
 					"element": "Toxix"
 				}
 			},
@@ -362,10 +378,10 @@ var weapons = {
 			"value": {
 				"dmg": [5,7],
 				"d": 2,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 3,
+					"dmg": [3,3],
 					"element": "Thunder"
 				}
 			},
@@ -385,10 +401,10 @@ var weapons = {
 			"value": {
 				"dmg": [5,7],
 				"d": 4,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 5,
+					"dmg": [5, 7],
 					"element": "Gleeie'er"
 				}
 			},
@@ -408,10 +424,10 @@ var weapons = {
 			"value": {
 				"dmg": [3,6],
 				"d": 4,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 2,
+					"dmg": [2,4],
 					"element": "Toxix"
 				}
 			},
@@ -431,7 +447,7 @@ var weapons = {
 			"value": {
 				"dmg": [9,12],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 6,
 				"magicDmg": {
 					"dmg": 0,
@@ -454,10 +470,10 @@ var weapons = {
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 5,
 				"magicDmg": {
-					"dmg": 8,
+					"dmg": [8,12],
 					"element": "Fleir"
 				}
 			},
@@ -477,7 +493,9 @@ var weapons = {
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {
+					"giants": 5
+				},
 				"armorPen": 5,
 				"magicDmg": {
 					"dmg": 0,
@@ -500,10 +518,10 @@ var weapons = {
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 6,
+					"dmg": [6,8],
 					"element": "Fleir"
 				}
 			},
@@ -523,10 +541,10 @@ var weapons = {
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 6,
+					"dmg": [6,8],
 					"element": "Frost"
 				}
 			},
@@ -546,7 +564,7 @@ var weapons = {
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,
@@ -569,10 +587,10 @@ var weapons = {
 			"value": {
 				"dmg": [5,8],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 5,
+					"dmg": [5,7],
 					"element": "Gleeie'er"
 				}
 			},
@@ -592,7 +610,7 @@ var weapons = {
 			"value": {
 				"dmg": [13,18],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 3,
 				"magicDmg": {
 					"dmg": 0,
@@ -615,7 +633,9 @@ var weapons = {
 			"value": {
 				"dmg": [18,26],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {
+					"giants": 5
+				},
 				"armorPen": 3,
 				"magicDmg": {
 					"dmg": 0,
@@ -638,10 +658,10 @@ var weapons = {
 			"value": {
 				"dmg": [6,9],
 				"d": 2,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 3,
+					"dmg": [3,8],
 					"element": "Gleeie'er"
 				}
 			},
@@ -661,10 +681,10 @@ var weapons = {
 			"value": {
 				"dmg": [12,15],
 				"d": 1,
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 6,
+					"dmg": [5,6],
 					"element": "Frost"
 				}
 			},

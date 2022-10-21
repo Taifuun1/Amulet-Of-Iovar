@@ -9,11 +9,22 @@ var liches = {
 			"aI": "Aggresive",
 			"texture": load("res://Assets/Critters/LichHalf-Lich.png"),
 			"alignment": "Neutral",
-			"level": 15,
+			"level": 12,
 			"expDropAmount": 1100,
 			"hp": 42,
 			"mp": 68,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [3,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 5,
@@ -23,7 +34,19 @@ var liches = {
 				"visage": 8,
 				"wisdom": 27
 			},
-			"abilities": ["summon critter"],
+			"abilities": [
+				{
+					"abilityName": "fleirpoint",
+					"abilityType": "rangedSpell",
+					"chance": 6
+				},
+				{
+					"abilityName": "createShield",
+					"abilityType": "selfCastSpell",
+					"chance": 2
+				}
+			],
+			"abilityHits": [1,0,0,0,1,1,0,0],
 			"resistances": ["gleeie'er", "toxix", "blindness", "confusion", "fumbling", "sleep"],
 			"drops": [
 				{
@@ -55,11 +78,22 @@ var liches = {
 			"aI": "Aggresive",
 			"texture": load("res://Assets/Critters/LichLich.png"),
 			"alignment": "Neutral",
-			"level": 18,
+			"level": 15,
 			"expDropAmount": 8888,
 			"hp": 57,
 			"mp": 84,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [3,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 4,
@@ -69,7 +103,14 @@ var liches = {
 				"visage": 7,
 				"wisdom": 29
 			},
-			"abilities": ["summon critter"],
+			"abilityHits": [1,0,1,0,1,1,0,0],
+			"abilities": [
+				{
+					"abilityName": "summonCritter",
+					"abilityType": "spell",
+					"chance": 8
+				}
+			],
 			"resistances": ["fleir", "frost", "gleeie'er", "toxix", "blindness", "confusion", "fumbling", "sleep"],
 			"drops": [
 				{
@@ -106,6 +147,17 @@ var liches = {
 			"hp": 74,
 			"mp": 99,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [3,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 3,
@@ -115,7 +167,14 @@ var liches = {
 				"visage": 6,
 				"wisdom": 45
 			},
-			"abilities": ["summon critter"],
+			"abilities": [
+				{
+					"abilityName": "summonCritters",
+					"abilityType": "spell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,1,0,1,1,0,1],
 			"resistances": ["fleir", "frost", "gleeie'er", "toxix", "stun", "blindness", "confusion", "fumbling", "sleep"],
 			"drops": [
 				{
@@ -152,6 +211,7 @@ var liches = {
 			"hp": 106,
 			"mp": 204,
 			"ac": 0,
+			"attacks": [  ],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 1,
@@ -161,7 +221,14 @@ var liches = {
 				"visage": 5,
 				"wisdom": 70
 			},
-			"abilities": ["summon critter"],
+			"abilities": [
+				{
+					"abilityName": "summonCritters",
+					"abilityType": "spell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,1,1,1,1,1,0],
 			"resistances": ["fleir", "frost", "thunder", "gleeie'er", "toxix", "stun", "blindness", "confusion", "fumbling", "sleep"],
 			"drops": [
 				{

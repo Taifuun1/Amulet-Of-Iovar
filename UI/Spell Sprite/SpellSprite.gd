@@ -1,6 +1,6 @@
 extends Sprite
 
-func setTexture(_texture, _color, _position, _angle):
+func create(_texture, _color, _position, _angle):
 	texture = _texture
 	position = Vector2(_position.x * 32 + 16, _position.y * 32 + 16)
 	rotation_degrees = _angle

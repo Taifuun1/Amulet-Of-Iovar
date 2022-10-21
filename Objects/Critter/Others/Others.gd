@@ -14,6 +14,17 @@ var others = {
 			"hp": 4,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [1,1],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 4,
@@ -23,7 +34,13 @@ var others = {
 				"visage": 4,
 				"wisdom": 3
 			},
-			"abilities": ["grid movement"],
+			"abilities": [
+				{
+					"abilityName": "gridMovement",
+					"abilityType": "skill"
+				}
+			],
+			"abilityHits": [1],
 			"resistances": ["thunder"],
 			"drops": [
 				{
@@ -46,6 +63,17 @@ var others = {
 			"hp": 6,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [1,2],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 3,
@@ -56,6 +84,7 @@ var others = {
 				"wisdom": 12
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		}

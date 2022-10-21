@@ -14,7 +14,7 @@ var runes = {
 
 var spellDamage = {
 	"dmg": null,
-	"bonusDmg": [],
+	"bonusDmg": {},
 	"armorPen": 0,
 	"magicDmg": {
 		"dmg": 0,
@@ -281,7 +281,7 @@ func calculateMagicDamage():
 	if isCastableRunes() == "notCastable":
 		spellDamage = [{
 			"dmg": null,
-			"bonusDmg": [],
+			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": 0,
@@ -291,7 +291,7 @@ func calculateMagicDamage():
 	elif runes.heario == null:
 		spellDamage = [{
 			"dmg": null,
-			"bonusDmg": [],
+			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": int(spellData.spellData[runes.eario.value.to_lower()].dmg * 0.5),
@@ -302,7 +302,7 @@ func calculateMagicDamage():
 	else:
 		spellDamage = [{
 			"dmg": null,
-			"bonusDmg": [],
+			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": int(spellData.spellData[runes.eario.value.to_lower()].dmg * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier),

@@ -435,7 +435,7 @@ fit_content_height = true
 position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
-[node name="Perry" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
+[node name="Exterminator" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
 margin_left = 480.0
 margin_top = 409.0
 margin_right = 956.0
@@ -443,7 +443,7 @@ margin_bottom = 814.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Perry"]
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Exterminator"]
 margin_right = 476.0
 margin_bottom = 380.0
 rect_min_size = Vector2( 476, 380 )
@@ -452,19 +452,19 @@ size_flags_vertical = 3
 texture = ExtResource( 17 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Perry"]
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Exterminator"]
 margin_top = 384.0
 margin_right = 476.0
 margin_bottom = 405.0
 mouse_filter = 2
 bbcode_enabled = true
-bbcode_text = "[center]Perry[/center]"
-text = "Perry"
+bbcode_text = "[center]Exterminator[/center]"
+text = "Exterminator"
 fit_content_height = true
 
-[node name="Area2D6" type="Area2D" parent="CharacterCreationContainer/ClassesContainer/Perry"]
+[node name="Area2D6" type="Area2D" parent="CharacterCreationContainer/ClassesContainer/Exterminator"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterCreationContainer/ClassesContainer/Perry/Area2D6"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterCreationContainer/ClassesContainer/Exterminator/Area2D6"]
 position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
@@ -541,6 +541,7 @@ margin_right = 985.0
 margin_bottom = 993.0
 mouse_filter = 1
 size_flags_horizontal = 4
+disabled = true
 action_mode = 0
 text = "Okay"
 
@@ -623,7 +624,7 @@ texture = ExtResource( 10 )
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/FreedomFighter/Area2D3" to="." method="_on_Classes_Pick_input_event" binds= [ "Freedom Fighter" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Herbalogue/Area2D4" to="." method="_on_Classes_Pick_input_event" binds= [ "Herbalogue" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Mercenary/Area2D5" to="." method="_on_Classes_Pick_input_event" binds= [ "Mercenary" ]]
-[connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Perry/Area2D6" to="." method="_on_Classes_Pick_input_event" binds= [ "Perry" ]]
+[connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Exterminator/Area2D6" to="." method="_on_Classes_Pick_input_event" binds= [ "Exterminator" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Rogue/Area2D7" to="." method="_on_Classes_Pick_input_event" binds= [ "Rogue" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Savant/Area2D8" to="." method="_on_Classes_Pick_input_event" binds= [ "Savant" ]]
 [connection signal="pressed" from="CharacterCreationContainer/Button" to="." method="_on_Start_Game_pressed"]

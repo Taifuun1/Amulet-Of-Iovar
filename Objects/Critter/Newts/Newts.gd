@@ -14,6 +14,17 @@ var newts = {
 			"hp": 5,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [2,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 5,
@@ -24,6 +35,7 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -46,6 +58,17 @@ var newts = {
 			"hp": 15,
 			"mp": 0,
 			"ac": 1,
+			"attacks": [
+				{
+					"dmg": [4,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 8,
@@ -56,6 +79,7 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -78,6 +102,17 @@ var newts = {
 			"hp": 31,
 			"mp": 0,
 			"ac": 4,
+			"attacks": [
+				{
+					"dmg": [7,9],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 12,
@@ -88,6 +123,7 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -110,6 +146,17 @@ var newts = {
 			"hp": 42,
 			"mp": 0,
 			"ac": 3,
+			"attacks": [
+				{
+					"dmg": [12,15],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 12,
@@ -120,6 +167,7 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -142,6 +190,26 @@ var newts = {
 			"hp": 51,
 			"mp": 0,
 			"ac": 6,
+			"attacks": [
+				{
+					"dmg": [15,18],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 18,
@@ -152,6 +220,7 @@ var newts = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": ["frost"],
 			"drops": [
 				{

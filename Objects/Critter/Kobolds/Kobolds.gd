@@ -14,6 +14,17 @@ var kobolds = {
 			"hp": 6,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [1,2],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1],
 			"stats": {
 				"strength": 2,
@@ -24,6 +35,7 @@ var kobolds = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -60,6 +72,17 @@ var kobolds = {
 			"hp": 16,
 			"mp": 0,
 			"ac": 1,
+			"attacks": [
+				{
+					"dmg": [4,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1],
 			"stats": {
 				"strength": 5,
@@ -70,6 +93,7 @@ var kobolds = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{

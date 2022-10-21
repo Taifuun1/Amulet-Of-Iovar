@@ -14,6 +14,17 @@ var bats = {
 			"hp": 8,
 			"mp": 2,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [2,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
 			"stats": {
 				"strength": 4,
@@ -24,6 +35,7 @@ var bats = {
 				"wisdom": 2
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -40,6 +52,26 @@ var bats = {
 			"hp": 13,
 			"mp": 4,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [2,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [2,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
 			"stats": {
 				"strength": 7,
@@ -50,6 +82,7 @@ var bats = {
 				"wisdom": 4
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -66,6 +99,26 @@ var bats = {
 			"hp": 21,
 			"mp": 2,
 			"ac": 2,
+			"attacks": [
+				{
+					"dmg": [4,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [4,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
 			"stats": {
 				"strength": 10,
@@ -76,6 +129,7 @@ var bats = {
 				"wisdom": 6
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -92,6 +146,26 @@ var bats = {
 			"hp": 16,
 			"mp": 2,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [3,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [3,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
 			"stats": {
 				"strength": 8,
@@ -101,7 +175,13 @@ var bats = {
 				"visage": 3,
 				"wisdom": 3
 			},
-			"abilities": ["life steal"],
+			"abilities": [
+				{
+					"abilityName": "lifesteal",
+					"abilityType": "onAttack"
+				}
+			],
+			"abilityHits": [1],
 			"resistances": [],
 			"drops": [  ]
 		}

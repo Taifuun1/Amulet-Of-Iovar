@@ -3,7 +3,9 @@ class_name Player
 
 var inventory = load("res://UI/Inventory/Inventory.tscn").instance()
 
-var playerClass = load("res://Objects/Player/PlayableClasses.gd").new()
+var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
+
+var playerClass
 
 var playerVisibility = -1
 
@@ -71,11 +73,11 @@ func create(_className):
 	add_child(inventory)
 	$Inventory.create()
 	
-	critterName = "Player"
-	race = "Human"
-	alignment = "Neutral"
+	var _playerClass = playerClasses[(_className[0].to_lower() + _className.substr(1,-1)).replace(" ", "")]
 	
-	var _playerClass = playerClass[(_className[0].to_lower() + _className.substr(1,-1)).replace(" ", "")]
+	critterName = _playerClass.critterName
+	race = _playerClass.race
+	justice = _playerClass.justice
 	
 	stats.strength = _playerClass.strength
 	stats.legerity = _playerClass.legerity
@@ -102,6 +104,7 @@ func create(_className):
 	basemp = _playerClass.mp
 	maxhp = _playerClass.hp
 	maxmp = _playerClass.mp
+	shields = 0
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
@@ -130,7 +133,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
 		if _critter.aI.aI == "Aggressive":
 			if hits[currentHit] == 1:
-				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo, _items, _level)
+				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo)
 				if _didCritterDespawn != null:
 					addExp(_didCritterDespawn)
 			else:
@@ -157,27 +160,41 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 			checkIfThereIsSomethingOnTheGroundHere(_tileToMoveTo, _level)
 
-func takeDamage(_attacks, _crittername, _moveCritterTo):
+func takeDamage(_attacks, _critterTile, _crittername):
 	var _attacksLog = []
 	if _attacks.size() != 0:
 		for _attack in _attacks:
-			var armorReduction = _attack - ( ac / 3 )
+			var _damage = calculateDmg(_attack)
 			
 			var _damageNumber = damageNumber.instance()
-			_damageNumber.create(_moveCritterTo, armorReduction, "#00F")
+			_damageNumber.create(_critterTile, _damage.dmg + _damage.magicDmg, "#00F")
 			$"/root/World/Animations".add_child(_damageNumber)
 			
-			if armorReduction <= 1 and armorReduction >= -2:
-				hp -= 1
-				_attacksLog.append("{crittername} hits you for 1 damage.".format({ "crittername": _crittername }))
-			elif armorReduction < -2:
-				_attacksLog.append("{crittername}s attack bounces off!".format({ "crittername": _crittername }))
+			# Magic spell
+			if _damage.dmg == 0 and _damage.magicDmg != 0:
+				hp -= _damage.magicDmg
+				_attacksLog.append("{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
+			# Physical attack
 			else:
-				hp -= armorReduction
-				_attacksLog.append("{crittername} hits you for {dmg} damage.".format({ "crittername": _crittername, "dmg": armorReduction }))
+				# Physical damage
+				if _damage.dmg < 1 and _damage.dmg >= -2:
+					hp -= 1
+					_attacksLog.append("{crittername} hits you for 1 damage.".format({ "crittername": _crittername }))
+				elif _damage.dmg < -2:
+					_attacksLog.append("{crittername}s attack bounces off!".format({ "crittername": _crittername }))
+				else:
+					hp -= _damage.dmg
+					_attacksLog.append("{crittername} hits you for {dmg} damage.".format({ "crittername": _crittername, "dmg": _damage.dmg + _damage.magicDmg }))
+				
+				# Magic damage
+				if _damage.magicDmg != 0:
+					hp -= _damage.magicDmg
+					_attacksLog.append(" ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
+			
 			if hp <= 0:
 				_attacksLog.append("You die...")
 				break
+			
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
 	else:
@@ -388,7 +405,7 @@ func calculateEquipmentStats():
 		attacks = [
 			{
 				"dmg": [1 + stats.strength / 6, 1 + stats.strength / 6],
-				"bonusDmg": [],
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": 0,

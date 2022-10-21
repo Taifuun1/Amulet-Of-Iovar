@@ -14,6 +14,26 @@ var aquaticLife = {
 			"hp": 16,
 			"mp": 13,
 			"ac": 2,
+			"attacks": [
+				{
+					"dmg": [6,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [2,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 6,
@@ -24,6 +44,7 @@ var aquaticLife = {
 				"wisdom": 15
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -46,6 +67,17 @@ var aquaticLife = {
 			"hp": 32,
 			"mp": 16,
 			"ac": 2,
+			"attacks": [
+				{
+					"dmg": [7,10],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 8,
@@ -56,6 +88,7 @@ var aquaticLife = {
 				"wisdom": 14
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -78,6 +111,17 @@ var aquaticLife = {
 			"hp": 40,
 			"mp": 18,
 			"ac": 3,
+			"attacks": [
+				{
+					"dmg": [10,12],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 8,
@@ -88,6 +132,7 @@ var aquaticLife = {
 				"wisdom": 22
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -110,6 +155,26 @@ var aquaticLife = {
 			"hp": 88,
 			"mp": 32,
 			"ac": 1,
+			"attacks": [
+				{
+					"dmg": [14,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [14,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 15,
@@ -120,6 +185,7 @@ var aquaticLife = {
 				"wisdom": 25
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{

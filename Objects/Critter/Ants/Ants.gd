@@ -14,6 +14,26 @@ var ants = {
 			"hp": 8,
 			"mp": 7,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [1,2],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [1,2],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 3,
@@ -24,6 +44,7 @@ var ants = {
 				"wisdom": 3
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -40,6 +61,35 @@ var ants = {
 			"hp": 14,
 			"mp": 7,
 			"ac": 1,
+			"attacks": [
+				{
+					"dmg": [3,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [3,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [3,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 8,
@@ -50,6 +100,7 @@ var ants = {
 				"wisdom": 13
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": ["Gleeie'er"],
 			"drops": [  ]
 		},
@@ -66,6 +117,35 @@ var ants = {
 			"hp": 28,
 			"mp": 7,
 			"ac": 2,
+			"attacks": [
+				{
+					"dmg": [5,7],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,7],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,7],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 13,
@@ -76,6 +156,7 @@ var ants = {
 				"wisdom": 7
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -92,6 +173,44 @@ var ants = {
 			"hp": 35,
 			"mp": 7,
 			"ac": 3,
+			"attacks": [
+				{
+					"dmg": [6,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [6,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [6,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [6,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 16,
@@ -102,6 +221,7 @@ var ants = {
 				"wisdom": 15
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		}

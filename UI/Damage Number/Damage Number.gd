@@ -11,8 +11,6 @@ func create(_position, _number, _color):
 #	$Tween.interpolate_property(self, "scale", scale, scale, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 #	$Tween.start()
 	movement = Vector2(randi() % 6 - 5, 48)
-	print($Text.get_line_count())
-	print($Text.get_visible_line_count())
 
 func _on_Tween_tween_all_completed():
 	queue_free()

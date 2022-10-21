@@ -14,6 +14,17 @@ var rats = {
 			"hp": 9,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [2,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 7,
@@ -24,6 +35,7 @@ var rats = {
 				"wisdom": 2
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -40,6 +52,17 @@ var rats = {
 			"hp": 17,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [4,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 8,
@@ -50,6 +73,7 @@ var rats = {
 				"wisdom": 4
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -65,7 +89,27 @@ var rats = {
 			"expDropAmount": 60,
 			"hp": 30,
 			"mp": 0,
-			"ac": 1,
+			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [1,1],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
 			"stats": {
 				"strength": 12,
@@ -76,6 +120,7 @@ var rats = {
 				"wisdom": 6
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		}

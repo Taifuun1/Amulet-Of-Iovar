@@ -3,7 +3,7 @@ extends Node2D
 onready var SpellShaderMaterial = preload("res://Assets/Spells/SpellShaderMaterial.tres")
 onready var SpellShader = preload("res://Assets/Spells/SpellShader.shader")
 
-onready var spellTextureNode = preload("res://Objects/Spell/SpellTexture.tscn")
+onready var spell = preload("res://UI/Spell Sprite/SpellSprite.tscn")
 
 signal playerAnimationDone
 
@@ -28,9 +28,9 @@ func animateCycle():
 	$Timer.start()
 
 func animateTile(_position, _angle):
-	var _spellTexture = spellTextureNode.instance()
-	_spellTexture.setTexture(spellTexture, color, _position, _angle)
-	add_child(_spellTexture)
+	var _spell = spell.instance()
+	_spell.create(spellTexture, color, _position, _angle)
+	add_child(_spell)
 
 func checkIfCritterIsHit(_tile):
 	var _hitCritter = $"/root/World".level.grid[_tile.x][_tile.y].critter

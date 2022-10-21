@@ -14,6 +14,17 @@ var orcs = {
 			"hp": 12,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [2,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,0,0,1,0,1,0,1,1,0,0,1,0],
 			"stats": {
 				"strength": 5,
@@ -24,6 +35,7 @@ var orcs = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -60,6 +72,17 @@ var orcs = {
 			"hp": 12,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [3,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,0,0,1,0,1,0,1,1,0,0,1,0],
 			"stats": {
 				"strength": 9,
@@ -70,6 +93,7 @@ var orcs = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -106,6 +130,17 @@ var orcs = {
 			"hp": 26,
 			"mp": 0,
 			"ac": 3,
+			"attacks": [
+				{
+					"dmg": [6,12],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,0,0,1,0,1,0,1,1,0,0,1,0],
 			"stats": {
 				"strength": 13,
@@ -116,6 +151,7 @@ var orcs = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -152,6 +188,17 @@ var orcs = {
 			"hp": 44,
 			"mp": 0,
 			"ac": 6,
+			"attacks": [
+				{
+					"dmg": [8,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,0,0,1,0,1,0,1,1,0,0,1,0],
 			"stats": {
 				"strength": 16,
@@ -162,6 +209,7 @@ var orcs = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -198,6 +246,26 @@ var orcs = {
 			"hp": 72,
 			"mp": 0,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [21,33],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [2,14],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,0,1,1,0,1,1,0,1,0,1,1,0],
 			"stats": {
 				"strength": 22,
@@ -208,6 +276,7 @@ var orcs = {
 				"wisdom": 0
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{

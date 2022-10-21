@@ -14,6 +14,17 @@ var giants = {
 			"hp": 36,
 			"mp": 0,
 			"ac": 3,
+			"attacks": [
+				{
+					"dmg": [8,10],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1],
 			"stats": {
 				"strength": 16,
@@ -24,6 +35,7 @@ var giants = {
 				"wisdom": 2
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -60,6 +72,17 @@ var giants = {
 			"hp": 48,
 			"mp": 0,
 			"ac": 4,
+			"attacks": [
+				{
+					"dmg": [13,19],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1],
 			"stats": {
 				"strength": 22,
@@ -70,6 +93,7 @@ var giants = {
 				"wisdom": 3
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -106,6 +130,26 @@ var giants = {
 			"hp": 71,
 			"mp": 0,
 			"ac": 6,
+			"attacks": [
+				{
+					"dmg": [17,29],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
 			"stats": {
 				"strength": 25,
@@ -116,6 +160,7 @@ var giants = {
 				"wisdom": 5
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -152,6 +197,17 @@ var giants = {
 			"hp": 88,
 			"mp": 0,
 			"ac": 8,
+			"attacks": [
+				{
+					"dmg": [23,41],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],
 			"stats": {
 				"strength": 33,
@@ -162,6 +218,7 @@ var giants = {
 				"wisdom": 6
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{

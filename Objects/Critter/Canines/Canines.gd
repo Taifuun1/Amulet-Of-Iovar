@@ -14,6 +14,17 @@ var canines = {
 			"hp": 11,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [3,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
 			"stats": {
 				"strength": 7,
@@ -24,6 +35,7 @@ var canines = {
 				"wisdom": 6
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -40,6 +52,17 @@ var canines = {
 			"hp": 25,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [6,9],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
 			"stats": {
 				"strength": 12,
@@ -50,6 +73,7 @@ var canines = {
 				"wisdom": 9
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -66,6 +90,26 @@ var canines = {
 			"hp": 38,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [7,9],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [7,9],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1],
 			"stats": {
 				"strength": 15,
@@ -76,6 +120,7 @@ var canines = {
 				"wisdom": 12
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		}

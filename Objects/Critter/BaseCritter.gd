@@ -7,8 +7,7 @@ var id
 
 var critterName
 var race
-var critterClass
-var alignment
+var justice
 
 var level
 var hp
@@ -17,6 +16,7 @@ var basehp
 var basemp
 var maxhp
 var maxmp
+var shields
 var ac
 var attacks
 var currentHit
@@ -80,7 +80,7 @@ func calculateDmg(_attack):
 		
 		var _totalBonusDamage = 0
 		if _attack.bonusDmg != null:
-			for _bonusDamage in _attack.bonusDmg:
+			for _bonusDamage in _attack.bonusDmg.values():
 				_totalBonusDamage += _bonusDamage
 		
 		var _baseDmg
@@ -90,10 +90,17 @@ func calculateDmg(_attack):
 			_baseDmg = randi() % int(_dmgVariation) + _floorDmg
 		damage.dmg = (_baseDmg + _totalBonusDamage) - _armorClassAfterArmorPen
 	
-	var _magicDmg = _attack.magicDmg.dmg
-	if _attack.magicDmg.element != null and resistances.has(_attack.magicDmg.element.to_lower()):
-		_magicDmg /= 2
-	damage.magicDmg = _magicDmg
+	if typeof(_attack.magicDmg.dmg) == TYPE_ARRAY:
+		var _magicFloorDmg = int(_attack.magicDmg.dmg[0])
+		var _magicDmgVariation = int(_attack.magicDmg.dmg[1]) - _attack.magicDmg.dmg[0]
+		var _magicDmg
+		if _magicDmgVariation == 0:
+			_magicDmg = _magicFloorDmg
+		else:
+			_magicDmg = randi() % int(_magicDmgVariation) + _magicFloorDmg
+		if _attack.magicDmg.element != null and resistances.has(_attack.magicDmg.element.to_lower()):
+			_magicDmg /= 2
+		damage.magicDmg = _magicDmg
 	
 	if damage.dmg < 0: damage.dmg = 0
 	if damage.magicDmg < 0: damage.magicDmg = 0

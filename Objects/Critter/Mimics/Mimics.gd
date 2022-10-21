@@ -10,6 +10,26 @@ var mimics = {
 			"texture": load("res://Assets/Critters/MimicMimic.png"),
 			"alignment": "Neutral",
 			"level": 8,
+			"attacks": [
+				{
+					"dmg": [8,10],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [4,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"expDropAmount": 145,
 			"hp": 23,
 			"mp": 13,
@@ -23,7 +43,13 @@ var mimics = {
 				"visage": 6,
 				"wisdom": 7
 			},
-			"abilities": ["mimic box"],
+			"abilities": [
+				{
+					"abilityName": "mimicBox",
+					"abilityType": "selfCastSpell"
+				}
+			],
+			"abilityHits": [0,0,0,0,0,0,0,1],
 			"resistances": ["thunder", "sleep"],
 			"drops": [
 				{
@@ -46,6 +72,26 @@ var mimics = {
 			"hp": 38,
 			"mp": 23,
 			"ac": 7,
+			"attacks": [
+				{
+					"dmg": [13,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,7],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1],
 			"stats": {
 				"strength": 19,
@@ -55,7 +101,13 @@ var mimics = {
 				"visage": 12,
 				"wisdom": 13
 			},
-			"abilities": ["mimic chest"],
+			"abilities": [
+				{
+					"abilityName": "mimicChest",
+					"abilityType": "selfCastSpell"
+				}
+			],
+			"abilityHits": [0,0,0,0,0,0,0,1],
 			"resistances": ["thunder", "sleep"],
 			"drops": [
 				{

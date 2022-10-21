@@ -14,6 +14,7 @@ var floatingSpheres = {
 			"hp": 8,
 			"mp": 4,
 			"ac": 0,
+			"attacks": [  ],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			"stats": {
 				"strength": 1,
@@ -23,7 +24,13 @@ var floatingSpheres = {
 				"visage": 1,
 				"wisdom": 13
 			},
-			"abilities": ["reflect stun"],
+			"abilities": [
+				{
+					"abilityName": "reflectStun",
+					"abilityType": "onHit"
+				}
+			],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -40,6 +47,7 @@ var floatingSpheres = {
 			"hp": 13,
 			"mp": 2,
 			"ac": 0,
+			"attacks": [  ],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			"stats": {
 				"strength": 1,
@@ -49,7 +57,13 @@ var floatingSpheres = {
 				"visage": 1,
 				"wisdom": 17
 			},
-			"abilities": ["selfdestruct"],
+			"abilities": [
+				{
+					"abilityName": "selfdestruct",
+					"abilityType": "onAttack"
+				}
+			],
+			"abilityHits": [1],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -66,6 +80,7 @@ var floatingSpheres = {
 			"hp": 13,
 			"mp": 2,
 			"ac": 0,
+			"attacks": [  ],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			"stats": {
 				"strength": 1,
@@ -75,7 +90,13 @@ var floatingSpheres = {
 				"visage": 1,
 				"wisdom": 17
 			},
-			"abilities": ["frost touch"],
+			"abilities": [
+				{
+					"abilityName": "frostSelfdestruct",
+					"abilityType": "onAttack"
+				}
+			],
+			"abilityHits": [1],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -92,6 +113,7 @@ var floatingSpheres = {
 			"hp": 13,
 			"mp": 2,
 			"ac": 0,
+			"attacks": [  ],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			"stats": {
 				"strength": 1,
@@ -101,7 +123,13 @@ var floatingSpheres = {
 				"visage": 1,
 				"wisdom": 17
 			},
-			"abilities": ["thunder touch"],
+			"abilities": [
+				{
+					"abilityName": "thunderSelfdestruct",
+					"abilityType": "onAttack"
+				}
+			],
+			"abilityHits": [1],
 			"resistances": [],
 			"drops": [  ]
 		}

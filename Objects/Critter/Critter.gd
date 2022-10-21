@@ -1,11 +1,15 @@
 extends BaseCritter
 
-var aI = load("res://Objects/AI/AI.tscn").instance()
+var spellData = load("res://Objects/Spell/SpellData.gd").new()
+var critterSpellData = load("res://Objects/Spell/CritterSpells.gd").new()
 
 var levelId
+var aI
 var weight
 var expDropAmount
 var drops
+var abilityHits
+var currentCritterAbilityHit
 var activationDistance = null
 
 
@@ -21,12 +25,6 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	weight = _critter.weight
 	alignment = _critter.alignment
 	
-	if _extraData.has("isDeactivated"):
-		aI.aI = "Deactivated"
-		activationDistance = _extraData.isDeactivated
-	else:
-		aI.aI = _critter.aI
-	
 	stats.strength = _critter.stats.strength
 	stats.legerity = _critter.stats.legerity
 	stats.balance = _critter.stats.balance
@@ -41,12 +39,16 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	basemp = _critter.mp
 	maxhp = _critter.hp
 	maxmp = _critter.mp
+	shields = 0
 	ac = _critter.ac
-	attacks = [ stats.strength * 1 / 2 ]
+	attacks = _critter.attacks
 	currentHit = 0
 	hits = _critter.hits
 	
 	abilities = _critter.abilities
+	abilityHits = _critter.abilityHits
+	if _critter.abilityHits.size() != 0:
+		currentCritterAbilityHit = randi() % _critter.abilityHits.size()
 	resistances = _critter.resistances
 	
 	$CritterSprite.texture = _critter.texture
@@ -54,15 +56,21 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	expDropAmount = _critter.expDropAmount
 	drops = _critter.drops
 
+func createAi(_aI = "aggressive", _activationDistance = null):
+	var _critterAi = load("res://Objects/AI/AI.tscn").instance()
+	_critterAi.create(_aI, _activationDistance)
+	add_child(_critterAi)
+	aI = $aI
+
 func isCritterAwakened(_critterTile, _playerTile, _level):
-	if activationDistance != null:
-		if _level.calculatePath(_critterTile, _playerTile).size() <= activationDistance:
+	if aI.activationDistance != null:
+		if _level.calculatePath(_critterTile, _playerTile).size() <= aI.activationDistance:
 			awakeCritter()
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
 
 func awakeCritter(_level = $"/root/World".level):
 	aI.aI = "Aggressive"
-	activationDistance = null
+	aI.activationDistance = null
 	for _critter in _level.critters:
 		if get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).aI.aI.matchn("Deactivated"):
 			get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).awakeCritter()
@@ -71,41 +79,155 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	if statusEffects["stun"] > 0:
 		Globals.gameConsole.addLog("The {critter} cant move!".format({ "critter": critterName.capitalize() }))
 		return false
-	else:
-		var _path = []
+	
+	var _path = []
+	
+	# Get critter move
+	if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
+		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
+	
+	if currentCritterAbilityHit != null:
+		if currentCritterAbilityHit == abilityHits.size() - 1:
+			currentCritterAbilityHit = -1
+		currentCritterAbilityHit += 1
+	
+	var _pickedAbility
+	if abilityHits.size() != 0 and abilityHits[currentCritterAbilityHit] == 1:
+		var _abilities = []
+		for _ability in abilities:
+			if _ability.has("chance"):
+				for _abilityChance in _ability.chance:
+					_abilities.append(_ability)
+		if _abilities.size() != 0:
+			_pickedAbility = _abilities[randi() % _abilities.size()]
+			_pickedAbility.data = critterSpellData[_pickedAbility.abilityName]
+		if _pickedAbility != null and _path.size() <= _pickedAbility.data.distance and _path.size() != 0:
+			match _pickedAbility.abilityType:
+				"rangedSpell":
+					var _directions = [
+						Vector2(-1, -1),
+						Vector2(0, -1),
+						Vector2(1, -1),
+						Vector2(1, 0),
+						Vector2(1, 1),
+						Vector2(0, 1),
+						Vector2(-1, 1),
+						Vector2(-1, 0)
+					]
+					for _direction in _directions:
+						var _critters = []
+						var _distance = 0
+						for _i in _pickedAbility.data.distance:
+							_distance += 1
+							var _tile = _critterTile + (_direction * _distance)
+							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid):
+								break
+							if _tile == _playerTile:
+								_critters.append([_level.grid[_tile.x][_tile.y].critter, _tile])
+								var _critterData = _critters.front()
+								var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterData[0] }))
+								_critterNode.takeDamage(_pickedAbility.data.attacks, _critterData[1], critterName)
+								return true
+							match _pickedAbility.abilityName:
+								"rockThrow", "crackerThrow", "dragonBreath", "frostBreath", "gleeieerBreath", "fleirBreath", "thunderBreath", "frostBite", "fleirnado", "elderDragonBreath", "voidBlast":
+									if _level.grid[_tile.x][_tile.y].critter != null:
+										_critters.append([_level.grid[_tile.x][_tile.y].critter, _tile])
+				"selfCastSpell":
+					match _pickedAbility.abilityName:
+						"createShield":
+							if shields > 17:
+								shields = 20
+							else:
+								shields += 3
+							Globals.gameConsole.addLog("{critter}s aura grows stronger!".format({ "critter": critterName.capitalize() }))
+							return false
+						"sharpenSword":
+							for _attack in attacks:
+								if !_attack.bonusDmg.has("bonusDmg"):
+									_attack.bonusDmg.bonusDmg = 1
+								elif _attack.bonusDmg.bonusDmg < 5:
+									_attack.bonusDmg.bonusDmg += 1
+								else:
+									Globals.gameConsole.addLog("{critter} sharpens its sword. SSHhhrrrr...".format({ "critter": critterName.capitalize() }))
+									continue
+							Globals.gameConsole.addLog("{critter} sharpens its sword. SKKRRrrr!".format({ "critter": critterName.capitalize() }))
+							return false
+						"mimicBox":
+							return false
+						"mimicChest":
+							return false
+						"displaceSelf":
+							return false
+				"spell":
+					match _pickedAbility.abilityName:
+						"fireMiasma":
+							var _tiles = []
+							var _legibleTiles = []
+							for x in range(_critterTile.x - _pickedAbility.data.distance, _critterTile.x + _pickedAbility.data.distance + 1):
+								for y in range(_critterTile.y - _pickedAbility.data.distance, _critterTile.y + _pickedAbility.data.distance + 1):
+									if !_level.isOutSideTileMap(Vector2(x,y)) and Globals.isTileFree(Vector2(x,y), _level.grid):
+										_legibleTiles.append(Vector2(x,y))
+							if _legibleTiles.size() > 5:
+								for _i in 5:
+									_tiles.append(_legibleTiles.pop_at(randi() % _legibleTiles.size()))
+							else:
+								_tiles = _legibleTiles
+							var _effect = load("res://UI/Effect/Effect.tscn")
+							for _tile in _tiles:
+								var _miasmaNode = _effect.instance()
+								_miasmaNode.create(load("res://Assets/Spells/Gas.png"), [_pickedAbility.data.attacks[0].magicDmg.element], _tile, 0, _pickedAbility.duration)
+								_miasmaNode.setTurnDuration(_pickedAbility.duration)
+								$"/root/World/Effects".add_child(_miasmaNode)
+								_level.grid[_tile.x][_tile.y].effects.append("fire miasma")
+							return false
+						"summonCritter", "summonCritters":
+							var _tiles = []
+							var _legibleTiles = _level.whichTilesAreOpenAndFreeOfCritters(_critterTile, _pickedAbility.data.distance)
+							if _legibleTiles.size() > 5:
+								for _i in randi() % 3 + 2:
+									_tiles.append(_legibleTiles.pop_at(randi() % _legibleTiles.size()))
+									if _pickedAbility.abilityName.matchn("summonCritter"):
+										break
+							else:
+								_tiles = _legibleTiles
+							for _tile in _tiles:
+								_level.spawnRandomCritter(_tile)
+							Globals.gameConsole.addLog("{critter} summons critters!".format({ "critter": critterName.capitalize() }))
+							return false
+	
+	# Critter move
+	if _path.size() > 1:
+		# Tile to move to
+		var _moveCritterTo = _path[1]
 		
-		# Get critter move
-		if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
-			_path = aI.getCritterMove(_critterTile, _playerTile, _level)
-		if _path.size() > 1:
-			# Tile to move to
-			var _moveCritterTo = _path[1]
-			
-			# Confused check
-			if statusEffects["confusion"] > 0 and randi() % 3 == 0:
-				var _randomOpenTiles = level.checkAdjacentTilesForOpenSpace(_critterTile)
-				_randomOpenTiles.shuffle()
-				_moveCritterTo = _randomOpenTiles[0]
-			
-			# Player hit check
-			if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
-				if hits[currentHit] == 1:
-					$"/root/World/Critters/0".takeDamage(attacks, critterName, _moveCritterTo)
-					return true
-				else:
-					Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
-				if currentHit == 15:
-					currentHit = 0
-				currentHit += 1
-			# Movement check
-			elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
-				moveCritter(_critterTile, _moveCritterTo, _critter, _level)
-				_level.addPointToEnemyPathding(_critterTile)
-				_level.removePointFromEnemyPathfinding(_moveCritterTo)
+		# Confused check
+		if statusEffects["confusion"] > 0 and randi() % 3 == 0:
+			var _randomOpenTiles = level.checkAdjacentTilesForOpenSpace(_critterTile)
+			_randomOpenTiles.shuffle()
+			_moveCritterTo = _randomOpenTiles[0]
+		
+		# Player hit check
+		if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
+			if abilityHits.size() != 0 and  abilityHits[currentCritterAbilityHit] == 1 and _pickedAbility != null and _pickedAbility.abilityType.matchn("meleeSpell"):
+				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
+				return true
+			elif hits[currentHit] == 1:
+				$"/root/World/Critters/0".takeDamage(attacks, _moveCritterTo, critterName)
+				return true
 			else:
-				return false
+				Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
+			if currentHit == 15:
+				currentHit = 0
+			currentHit += 1
+		# Movement check
+		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
+			moveCritter(_critterTile, _moveCritterTo, _critter, _level)
+			_level.addPointToEnemyPathding(_critterTile)
+			_level.removePointFromEnemyPathfinding(_moveCritterTo)
+		else:
+			return false
 
-func takeDamage(_attacks, _critterTile, _items = $"/root/World/Items/Items", _level = $"/root/World".level):
+func takeDamage(_attacks, _critterTile, _critterName = null):
 	var _didCritterDie = null
 	var _attacksLog = []
 	if _attacks.size() != 0:

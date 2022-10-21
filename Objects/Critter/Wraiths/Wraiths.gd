@@ -14,6 +14,17 @@ var wraiths = {
 			"hp": 8,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [1,1],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],
 			"stats": {
 				"strength": 1,
@@ -23,7 +34,17 @@ var wraiths = {
 				"visage": 1,
 				"wisdom": 1
 			},
-			"abilities": ["ghost touch", "etherealness"],
+			"abilities": [
+				{
+					"abilityName": "ghostTouch",
+					"abilityType": "onAttack",
+				},
+				{
+					"abilityName": "etherealness",
+					"abilityType": "onHit"
+				}
+			],
+			"abilityHits": [0,0,0,0,0,1],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -40,6 +61,17 @@ var wraiths = {
 			"hp": 16,
 			"mp": 0,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [1,1],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],
 			"stats": {
 				"strength": 1,
@@ -49,7 +81,17 @@ var wraiths = {
 				"visage": 1,
 				"wisdom": 1
 			},
-			"abilities": ["ghost touch", "etherealness"],
+			"abilities": [
+				{
+					"abilityName": "ghostTouch",
+					"abilityType": "onAttack",
+				},
+				{
+					"abilityName": "etherealness",
+					"abilityType": "onHit"
+				}
+			],
+			"abilityHits": [0,0,0,0,1],
 			"resistances": [],
 			"drops": [  ]
 		}

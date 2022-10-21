@@ -95,6 +95,7 @@ var half_tile_size = tile_size / 2
 
 var thread
 var inStartScreen = true
+var generationDone = false
 var inGame = false
 var currentGameState = gameState.GAME
 var keepMoving = false
@@ -184,7 +185,6 @@ func create(_className):
 	level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
 	player.calculateEquipmentStats()
 	
-	
 	for _level in $Levels.get_children():
 		$Items/Items.generateItemsForLevel(_level)
 	
@@ -212,9 +212,6 @@ func create(_className):
 #	$Items/Items.createItem("luirio of point", null, 1, true)
 #	$Items/Items.createItem("heario of flow", null, 1, true)
 	
-	updateTiles()
-	drawLevel()
-	
 	for _node in $UI/UITheme.get_children():
 		if _node.name == "GameConsole":
 			_node.show()
@@ -222,18 +219,12 @@ func create(_className):
 			_node.show()
 	$UI/UITheme/StartScreen.hide()
 	
-	$Critters/"0".calculateWeightStats()
-	$Critters/"0".updatePlayerStats()
-	
-	inStartScreen = false
-	inGame = true
-	
-	show()
+	generationDone = true
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = banditWarcamp1.instance()
-	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
+	var firstLevel = tidohMinesEnd2.instance()
+	firstLevel.create("test", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(1):
@@ -325,6 +316,20 @@ func _process(_delta):
 	if inGame:
 		if $Critters/"0".statusEffects["stun"] > 0:
 			processGameTurn()
+	if generationDone:
+		yield(get_tree().create_timer(0.1), "timeout")
+		updateTiles()
+		drawLevel()
+		
+		$Critters/"0".calculateWeightStats()
+		$Critters/"0".updatePlayerStats()
+		
+		inStartScreen = false
+		inGame = true
+		
+		show()
+		
+		generationDone = false
 
 func _input(_event):
 	if !inStartScreen:
@@ -455,6 +460,7 @@ func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 		processManyGameTurnsWithoutPlayerActionsAndWithoutSafety()
 	processPlayerEffects()
 	processEnemyActions()
+	processEffects()
 	processCrittersSpawnStatus()
 	drawLevel()
 	updateTiles()
@@ -463,6 +469,7 @@ func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
 	for _turn in $Critters/"0".turnsUntilAction:
 		processPlayerEffects()
 		processEnemyActions()
+		processEffects()
 		processCrittersSpawnStatus()
 		drawLevel()
 		updateTiles()
@@ -471,6 +478,7 @@ func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
 	for _turn in _turnAmount:
 		processPlayerEffects()
 		var _isPlayerHit = processEnemyActions()
+		processEffects()
 		processCrittersSpawnStatus()
 		drawLevel()
 		updateTiles()
@@ -526,6 +534,10 @@ func processCrittersSpawnStatus():
 func processPlayerEffects():
 	$"/root/World/Critters/0".processCritterEffects()
 	$"/root/World/Critters/0".processPlayerSpecificEffects()
+
+func processEffects():
+	for _effect in $Effects.get_children():
+		_effect.tickTurn()
 
 func updateTiles():
 	for x in (level.grid.size()):

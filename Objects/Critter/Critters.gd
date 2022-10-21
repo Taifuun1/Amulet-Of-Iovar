@@ -128,17 +128,19 @@ func getCritterSpawns(_spawnData, _level):
 func spawnCritters(_critterName, _position = null, _level = $"/root/World".level):
 	var _spawnTiles = getCritterSpawns(critterSpawnBehaviour.critterSpawnBehaviour[_critterName], _level)
 	for _spawnTile in _spawnTiles:
-		spawnCritter(_critterName, _spawnTile, false, _level)
+		spawnCritter(_critterName, _spawnTile, null, _level)
 
-func spawnCritter(_critter, _position = null, _isDeactivated = false, _level = $"/root/World".level):
+func spawnCritter(_critter, _position = null, _isDeactivated = null, _level = $"/root/World".level):
 	var _newCritter
 	var _gridPosition
+	var _aI
 	var _extraData = {}
+	
 	# Name
 	if typeof(_critter) == TYPE_STRING:
-		_newCritter = getCritterByName(_critter)
+		_newCritter = getCritterByName(_critter).duplicate(true)
 	else:
-		_newCritter = _critter
+		_newCritter = _critter.duplicate(true)
 	
 	# Position
 	if _position == null:
@@ -158,9 +160,9 @@ func spawnCritter(_critter, _position = null, _isDeactivated = false, _level = $
 	
 	# Extradata
 	if typeof(_isDeactivated) == TYPE_INT:
-		_extraData.isDeactivated = _isDeactivated
+		_aI = "Deactivated"
 	else:
-		_extraData = {}
+		_aI = _newCritter.aI
 	
 	if (
 		_level.grid[_gridPosition.x][_gridPosition.y].critter == null and
@@ -169,37 +171,30 @@ func spawnCritter(_critter, _position = null, _isDeactivated = false, _level = $
 	):
 		var newCritter = critter.instance()
 		newCritter.createCritter(_newCritter, _level.levelId, _extraData)
-		_level.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
+		newCritter.createAi(_aI, _isDeactivated)
 		$"/root/World/Critters".add_child(newCritter, true)
+		_level.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
 		_level.critters.append(newCritter.id)
 		_level.removePointFromEnemyPathfinding(_gridPosition)
 		GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
 		return _newCritter.critterName
 	return false
 
-func spawnRandomCritter(_position, _level = null):
-	
-	var _spawnedLevel
-	
-	# Level
-	if _level == null:
-		_spawnedLevel = $"/root/World".level
-	else:
-		_spawnedLevel = _level
-	
-	if _spawnedLevel.grid[_position.x][_position.y].critter == null:
+func spawnRandomCritter(_position, _level = $"/root/World".level):
+	if _level.grid[_position.x][_position.y].critter == null:
 		var _species = critters.keys()[randi() % critters.keys().size()]
-		var _critter = critters[_species].critterTypes[randi() % critters[_species].critterTypes.size()]
+		var _critter = critters[_species].critterTypes[randi() % critters[_species].critterTypes.size()].duplicate(true)
 		if (
 			GlobalCritterInfo.globalCritterInfo[_critter.critterName].population != 0 and
 			GlobalCritterInfo.globalCritterInfo[_critter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_critter.critterName].population
 		):
 			var newCritter = critter.instance()
-			newCritter.createCritter(_critter, _spawnedLevel.levelId)
-			_spawnedLevel.grid[_position.x][_position.y].critter = newCritter.id
+			newCritter.createCritter(_critter, _level.levelId)
+			newCritter.createAi(_critter.aI)
+			_level.grid[_position.x][_position.y].critter = newCritter.id
 			$"/root/World/Critters".add_child(newCritter, true)
-			_spawnedLevel.critters.append(newCritter.id)
-			_spawnedLevel.removePointFromEnemyPathfinding(_position)
+			_level.critters.append(newCritter.id)
+			_level.removePointFromEnemyPathfinding(_position)
 			GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
 			return _critter.critterName
 	return null

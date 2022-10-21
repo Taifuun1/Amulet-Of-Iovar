@@ -14,6 +14,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -23,7 +34,14 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "dragonBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": [],
 			"drops": [
 				{
@@ -74,6 +92,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -83,7 +112,14 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "frostBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": ["frost"],
 			"drops": [
 				{
@@ -134,6 +170,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -143,7 +190,14 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "dragonBeath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": ["confusion"],
 			"drops": [
 				{
@@ -194,6 +248,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -203,7 +268,14 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "gleeieerBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": ["fumbling"],
 			"drops": [
 				{
@@ -254,6 +326,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -263,7 +346,14 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "fleirBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": ["fleir"],
 			"drops": [
 				{
@@ -314,6 +404,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -323,7 +424,18 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": ["reflection"],
+			"abilities": [
+				{
+					"abilityName": "dragonBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				},
+				{
+					"abilityName": "reflection",
+					"abilityType": "onHit",
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": [],
 			"drops": [
 				{
@@ -374,6 +486,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -383,7 +506,14 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "dragonBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": ["stun"],
 			"drops": [
 				{
@@ -434,6 +564,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -443,7 +584,14 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "dragonBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": ["stun"],
 			"drops": [
 				{
@@ -494,6 +642,17 @@ var dragons = {
 			"hp": 160,
 			"mp": 60,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [22,28],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -503,7 +662,14 @@ var dragons = {
 				"visage": 30,
 				"wisdom": 48
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "thunderBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0],
 			"resistances": ["thunder"],
 			"drops": [
 				{

@@ -13,7 +13,18 @@ var humans = {
 			"expDropAmount": 105,
 			"hp": 29,
 			"mp": 11,
-			"ac": 1,
+			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [2,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 9,
@@ -24,6 +35,7 @@ var humans = {
 				"wisdom": 8
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -46,6 +58,17 @@ var humans = {
 			"hp": 33,
 			"mp": 8,
 			"ac": 5,
+			"attacks": [
+				{
+					"dmg": [8,11],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 12,
@@ -56,6 +79,7 @@ var humans = {
 				"wisdom": 8
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -92,6 +116,26 @@ var humans = {
 			"hp": 45,
 			"mp": 10,
 			"ac": 7,
+			"attacks": [
+				{
+					"dmg": [9,12],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 14,
@@ -102,6 +146,7 @@ var humans = {
 				"wisdom": 10
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -138,6 +183,17 @@ var humans = {
 			"hp": 23,
 			"mp": 3,
 			"ac": 2,
+			"attacks": [
+				{
+					"dmg": [4,7],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 10,
@@ -148,6 +204,7 @@ var humans = {
 				"wisdom": 7
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -184,6 +241,26 @@ var humans = {
 			"hp": 45,
 			"mp": 10,
 			"ac": 3,
+			"attacks": [
+				{
+					"dmg": [3,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [3,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 12,
@@ -193,7 +270,14 @@ var humans = {
 				"visage": 9,
 				"wisdom": 9
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "crackerThrow",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,0,0,1,0],
 			"resistances": [],
 			"drops": [
 				{
@@ -230,6 +314,17 @@ var humans = {
 			"hp": 45,
 			"mp": 21,
 			"ac": 6,
+			"attacks": [
+				{
+					"dmg": [9,12],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 14,
@@ -240,6 +335,7 @@ var humans = {
 				"wisdom": 10
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -276,6 +372,26 @@ var humans = {
 			"hp": 44,
 			"mp": 48,
 			"ac": 5,
+			"attacks": [
+				{
+					"dmg": [3,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [3,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 12,
@@ -285,7 +401,14 @@ var humans = {
 				"visage": 14,
 				"wisdom": 16
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "frostBite",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,0,1,0],
 			"resistances": [],
 			"drops": [
 				{
@@ -322,6 +445,26 @@ var humans = {
 			"hp": 55,
 			"mp": 67,
 			"ac": 6,
+			"attacks": [
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 13,
@@ -331,7 +474,14 @@ var humans = {
 				"visage": 18,
 				"wisdom": 18
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "thundersplit",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,0,1,0],
 			"resistances": [],
 			"drops": [
 				{

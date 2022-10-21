@@ -14,6 +14,17 @@ var dwarves = {
 			"hp": 22,
 			"mp": 5,
 			"ac": 2,
+			"attacks": [
+				{
+					"dmg": [4,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 9,
@@ -23,7 +34,13 @@ var dwarves = {
 				"visage": 4,
 				"wisdom": 2
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "mining",
+					"abilityType": "skill"
+				}
+			],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -86,6 +103,17 @@ var dwarves = {
 			"hp": 22,
 			"mp": 5,
 			"ac": 2,
+			"attacks": [
+				{
+					"dmg": [6,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 8,
@@ -96,6 +124,7 @@ var dwarves = {
 				"wisdom": 2
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -118,6 +147,17 @@ var dwarves = {
 			"hp": 29,
 			"mp": 5,
 			"ac": 4,
+			"attacks": [
+				{
+					"dmg": [8,12],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 14,
@@ -128,6 +168,7 @@ var dwarves = {
 				"wisdom": 2
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -162,6 +203,17 @@ var dwarves = {
 			"hp": 62,
 			"mp": 5,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [18,20],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 21,
@@ -172,6 +224,7 @@ var dwarves = {
 				"wisdom": 1
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": ["frost", "thunder", "toxix"],
 			"drops": [
 				{

@@ -8,6 +8,7 @@ func _ready():
 func setLoadingText(_text):
 	$DancingDragonsContainer/LoadingText.text = _text
 
+
 func _on_Start_Button_pressed():
 	$CharacterCreationContainer.show()
 	$StartContainer.hide()
@@ -25,3 +26,4 @@ func _on_Start_Game_pressed():
 func _on_Classes_Pick_input_event(_viewport, _event, _shape_idx, _className):
 	if Input.is_action_pressed("LEFT_CLICK"):
 		className = _className
+		$CharacterCreationContainer/Button.disabled = false

@@ -14,6 +14,17 @@ var felines = {
 			"hp": 9,
 			"mp": 5,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],
 			"stats": {
 				"strength": 6,
@@ -24,6 +35,7 @@ var felines = {
 				"wisdom": 9
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -40,6 +52,26 @@ var felines = {
 			"hp": 32,
 			"mp": 5,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [3,4],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],
 			"stats": {
 				"strength": 9,
@@ -50,6 +82,7 @@ var felines = {
 				"wisdom": 9
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		},
@@ -66,6 +99,26 @@ var felines = {
 			"hp": 32,
 			"mp": 5,
 			"ac": 0,
+			"attacks": [
+				{
+					"dmg": [5,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [5,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],
 			"stats": {
 				"strength": 10,
@@ -76,6 +129,7 @@ var felines = {
 				"wisdom": 9
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [  ]
 		}

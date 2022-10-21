@@ -14,6 +14,26 @@ var elves = {
 			"hp": 15,
 			"mp": 15,
 			"ac": 1,
+			"attacks": [
+				{
+					"dmg": [2,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [2,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 7,
@@ -24,6 +44,7 @@ var elves = {
 				"wisdom": 10
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": ["Gleeie'er"],
 			"drops": [
 				{
@@ -60,6 +81,35 @@ var elves = {
 			"hp": 30,
 			"mp": 22,
 			"ac": 2,
+			"attacks": [
+				{
+					"dmg": [5,6],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [3,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [2,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 10,
@@ -70,6 +120,7 @@ var elves = {
 				"wisdom": 14
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": ["Gleeie'er"],
 			"drops": [
 				{
@@ -106,6 +157,26 @@ var elves = {
 			"hp": 48,
 			"mp": 37,
 			"ac": 4,
+			"attacks": [
+				{
+					"dmg": [12,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [12,13],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			"stats": {
 				"strength": 12,
@@ -116,6 +187,7 @@ var elves = {
 				"wisdom": 18
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": ["Gleeie'er"],
 			"drops": [
 				{
@@ -152,6 +224,44 @@ var elves = {
 			"hp": 72,
 			"mp": 55,
 			"ac": 7,
+			"attacks": [
+				{
+					"dmg": [12,14],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [12,14],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [6,14],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [4,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			"stats": {
 				"strength": 16,
@@ -162,6 +272,7 @@ var elves = {
 				"wisdom": 22
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": ["Gleeie'er"],
 			"drops": [
 				{

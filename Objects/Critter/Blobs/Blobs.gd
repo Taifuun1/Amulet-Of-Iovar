@@ -14,7 +14,18 @@ var blobs = {
 			"hp": 9,
 			"mp": 0,
 			"ac": 0,
-			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			"attacks": [
+				{
+					"dmg": [0,2],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
+			"hits": [0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,1],
 			"stats": {
 				"strength": 1,
 				"legerity": 1,
@@ -23,7 +34,13 @@ var blobs = {
 				"visage": 1,
 				"wisdom": 1
 			},
-			"abilities": ["toxix"],
+			"abilities": [
+				{
+					"abilityName": "toxixSplash",
+					"abilityType": "onHit"
+				}
+			],
+			"abilityHits": [1],
 			"resistances": ["fleir", "frost", "toxix"],
 			"drops": [
 				{
@@ -46,7 +63,18 @@ var blobs = {
 			"hp": 9,
 			"mp": 0,
 			"ac": 0,
-			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+			"attacks": [
+				{
+					"dmg": [0,2],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
+			"hits": [0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,1],
 			"stats": {
 				"strength": 1,
 				"legerity": 1,
@@ -55,7 +83,13 @@ var blobs = {
 				"visage": 1,
 				"wisdom": 1
 			},
-			"abilities": ["corrosion"],
+			"abilities": [
+				{
+					"abilityName": "corrosion",
+					"abilityType": "onHit"
+				}
+			],
+			"abilityHits": [1],
 			"resistances": ["fleir", "frost", "toxix"],
 			"drops": [
 				{

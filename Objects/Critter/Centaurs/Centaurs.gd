@@ -14,6 +14,17 @@ var centaurs = {
 			"hp": 29,
 			"mp": 13,
 			"ac": 1,
+			"attacks": [
+				{
+					"dmg": [5,8],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,0,1,1,0,1,1,0,1,1,0,1,1,1,0,1],
 			"stats": {
 				"strength": 13,
@@ -24,6 +35,7 @@ var centaurs = {
 				"wisdom": 15
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -63,6 +75,26 @@ var centaurs = {
 			"hp": 67,
 			"mp": 36,
 			"ac": 5,
+			"attacks": [
+				{
+					"dmg": [15,17],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [15,17],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1],
 			"stats": {
 				"strength": 17,
@@ -73,6 +105,7 @@ var centaurs = {
 				"wisdom": 24
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{

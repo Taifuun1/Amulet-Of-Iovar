@@ -1,6 +1,12 @@
 extends Node
 
 var aI = "Aggressive"
+var activationDistance
+
+func create(_aI, _activationDistance = null):
+	name = "aI"
+	aI = _aI
+	activationDistance = _activationDistance
 
 func getCritterMove(_critterTile, _playerTile, _level):
 	if aI.matchn("Aggressive"):

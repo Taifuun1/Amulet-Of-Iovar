@@ -1,5 +1,7 @@
 extends BaseLevel
 
+onready var tidohMinesEndtSpawns = preload("res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEndSpawns.gd").new()
+
 func createNewLevel():
 	createGrid()
 	pathFind([])
@@ -19,7 +21,16 @@ func createDungeon():
 		["FLOOR_CAVE"]
 	)
 	
-	stairs = {
-		"downStair": Vector2(55,20),
-		"upStair": Vector2(4,2)
-	}
+	var _groups = get_groups()
+	if _groups[0] == "Tidoh Mines End 1":
+		stairs = {
+			"upStair": Vector2(21,12)
+		}
+		placePresetItems(tidohMinesEndtSpawns.tidohMinesEndSpawn1, self)
+		placePresetCritters(tidohMinesEndtSpawns.tidohMinesEndSpawn1, self)
+	if _groups[0] == "Tidoh Mines End 2":
+		stairs = {
+			"upStair": Vector2(28,11)
+		}
+		placePresetItems(tidohMinesEndtSpawns.tidohMinesEndSpawn2, self)
+		placePresetCritters(tidohMinesEndtSpawns.tidohMinesEndSpawn2, self)

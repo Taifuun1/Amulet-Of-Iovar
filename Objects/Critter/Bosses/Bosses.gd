@@ -14,6 +14,26 @@ var bosses = {
 			"hp": 55,
 			"mp": 67,
 			"ac": 6,
+			"attacks": [
+				{
+					"dmg": [3,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [3,5],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 13,
@@ -23,7 +43,24 @@ var bosses = {
 				"visage": 18,
 				"wisdom": 18
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "rockThrow",
+					"abilityType": "rangedSpell",
+					"chance": 5
+				},
+				{
+					"abilityName": "frostBite",
+					"abilityType": "rangedSpell",
+					"chance": 2
+				},
+				{
+					"abilityName": "createShield",
+					"abilityType": "selfCastspell",
+					"chance": 1
+				}
+			],
+			"abilityHits": [1,0,1,0,0],
 			"resistances": [],
 			"drops": [
 				{
@@ -60,6 +97,17 @@ var bosses = {
 			"hp": 55,
 			"mp": 67,
 			"ac": 6,
+			"attacks": [
+				{
+					"dmg": [2,3],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 13,
@@ -69,7 +117,34 @@ var bosses = {
 				"visage": 18,
 				"wisdom": 18
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "fleirnado",
+					"abilityType": "rangedSpell",
+					"chance": 2
+				},
+				{
+					"abilityName": "frostBite",
+					"abilityType": "rangedSpell",
+					"chance": 2
+				},
+				{
+					"abilityName": "thundersplit",
+					"abilityType": "rangedSpell",
+					"chance": 2
+				},
+				{
+					"abilityName": "createShield",
+					"abilityType": "selfCastSpell",
+					"chance": 1
+				},
+				{
+					"abilityName": "fleirMiasma",
+					"abilityType": "spell",
+					"chance": 1
+				}
+			],
+			"abilityHits": [1,1,0,1],
 			"resistances": [],
 			"drops": [
 				{
@@ -106,6 +181,26 @@ var bosses = {
 			"hp": 55,
 			"mp": 67,
 			"ac": 6,
+			"attacks": [
+				{
+					"dmg": [12,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [12,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 13,
@@ -115,7 +210,14 @@ var bosses = {
 				"visage": 18,
 				"wisdom": 18
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "sharpenSword",
+					"abilityType": "selfCastSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,0,0,0,0,0,0,0],
 			"resistances": [],
 			"drops": [
 				{
@@ -152,7 +254,18 @@ var bosses = {
 			"hp": 55,
 			"mp": 67,
 			"ac": 6,
-			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+			"attacks": [
+				{
+					"dmg": [20,25],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
+			"hits": [1,0,0,1,1,1,1,0,0,1,1,1,0,1,1,0],
 			"stats": {
 				"strength": 13,
 				"legerity": 13,
@@ -162,6 +275,7 @@ var bosses = {
 				"wisdom": 18
 			},
 			"abilities": [],
+			"abilityHits": [],
 			"resistances": [],
 			"drops": [
 				{
@@ -198,6 +312,26 @@ var bosses = {
 			"hp": 138,
 			"mp": 89,
 			"ac": 15,
+			"attacks": [
+				{
+					"dmg": [26,32],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [12,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 25,
@@ -207,7 +341,14 @@ var bosses = {
 				"visage": 50,
 				"wisdom": 30
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "elderDragonBreath",
+					"abilityType": "rangedSpell",
+					"chance": 8
+				}
+			],
+			"abilityHits": [1,1,0,1,0,0],
 			"resistances": [],
 			"drops": [
 				{
@@ -244,6 +385,26 @@ var bosses = {
 			"hp": 220,
 			"mp": 476,
 			"ac": 10,
+			"attacks": [
+				{
+					"dmg": [16,16],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				},
+				{
+					"dmg": [11,11],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": 0,
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 			"stats": {
 				"strength": 18,
@@ -253,7 +414,29 @@ var bosses = {
 				"visage": 30,
 				"wisdom": 80
 			},
-			"abilities": [],
+			"abilities": [
+				{
+					"abilityName": "summonCritters",
+					"abilityType": "spell",
+					"chance": 4
+				},
+				{
+					"abilityName": "voidBlast",
+					"abilityType": "rangedSpell",
+					"chance": 2
+				},
+				{
+					"abilityName": "frostTouch",
+					"abilityType": "meleeSpell",
+					"chance": 1
+				},
+				{
+					"abilityName": "thunderPoint",
+					"abilityType": "rangedSpell",
+					"chance": 1
+				}
+			],
+			"abilityHits": [1,1,1,1,0],
 			"resistances": [],
 			"drops": [
 				{

@@ -1,5 +1,8 @@
 
 var archeologist = {
+	name = "Archeologist",
+	race = "Human",
+	justice = "Grilling",
 	hp = 14,
 	mp = 8,
 	strength = 9,
@@ -54,6 +57,9 @@ var archeologist = {
 }
 
 var banker = {
+	name = "Banker",
+	race = "Human",
+	justice = "Laissez-faire",
 	hp = 11,
 	mp = 12,
 	strength = 5,
@@ -111,6 +117,9 @@ var banker = {
 }
 
 var freedomFighter = {
+	name = "Banker",
+	race = "Human",
+	justice = "Draconian",
 	hp = 18,
 	mp = 8,
 	strength = 8,
@@ -165,6 +174,9 @@ var freedomFighter = {
 }
 
 var herbalogue = {
+	name = "Herbalogue",
+	race = "Human",
+	justice = "Grilling",
 	hp = 10,
 	mp = 14,
 	strength = 4,
@@ -219,6 +231,9 @@ var herbalogue = {
 }
 
 var mercenary = {
+	name = "Mercenary",
+	race = "Human",
+	justice = "Grilling",
 	hp = 20,
 	mp = 10,
 	strength = 12,
@@ -277,7 +292,10 @@ var mercenary = {
 	"texture": load("res://Assets/Classes/Mercenary.png")
 }
 
-var perry = {
+var exterminator = {
+	name = "Exterminator",
+	race = "Human",
+	justice = "Draconian",
 	hp = 8,
 	mp = 8,
 	strength = 5,
@@ -296,9 +314,6 @@ var perry = {
 	wisdomIncrease = 1.4,
 	items = {
 		"Chipped sword": 1,
-		"Leather mail": 1,
-		"Leather pants": 1,
-		"Low boots": 1
 	},
 	goldPieces = 45,
 	skills = {
@@ -327,6 +342,9 @@ var perry = {
 }
 
 var rogue = {
+	name = "Rogue",
+	race = "Human",
+	justice = "Laissez-faire",
 	hp = 12,
 	mp = 12,
 	strength = 7,
@@ -385,7 +403,10 @@ var rogue = {
 	"texture": load("res://Assets/Classes/Rogue.png")
 }
 
-var sage = {
+var savant = {
+	name = "Savant",
+	race = "Human",
+	justice = "Grilling",
 	hp = 8,
 	mp = 18,
 	strength = 4,

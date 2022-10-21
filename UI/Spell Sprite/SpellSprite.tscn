@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Spells/Adjacent.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Spells/SpellShaderMaterial.tres" type="Material" id=2]
+[ext_resource path="res://UI/Spell Sprite/SpellSprite.gd" type="Script" id=3]
+
+[node name="SpellTexture" type="Sprite"]
+material = ExtResource( 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
