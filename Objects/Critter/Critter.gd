@@ -23,7 +23,7 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	race = _critter.race
 	critterClass = _critter.class
 	weight = _critter.weight
-	alignment = _critter.alignment
+#	justice = _critter.justice
 	
 	stats.strength = _critter.stats.strength
 	stats.legerity = _critter.stats.legerity
@@ -127,6 +127,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								var _critterData = _critters.front()
 								var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterData[0] }))
 								_critterNode.takeDamage(_pickedAbility.data.attacks, _critterData[1], critterName)
+								Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.abilityName }))
 								return true
 							match _pickedAbility.abilityName:
 								"rockThrow", "crackerThrow", "dragonBreath", "frostBreath", "gleeieerBreath", "fleirBreath", "thunderBreath", "frostBite", "fleirnado", "elderDragonBreath", "voidBlast":
@@ -137,9 +138,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 						"createShield":
 							if shields > 17:
 								shields = 20
+								Globals.gameConsole.addLog("{critter}s aura reverberates!".format({ "critter": critterName.capitalize() }))
 							else:
 								shields += 3
-							Globals.gameConsole.addLog("{critter}s aura grows stronger!".format({ "critter": critterName.capitalize() }))
+								Globals.gameConsole.addLog("{critter}s aura grows stronger!".format({ "critter": critterName.capitalize() }))
 							return false
 						"sharpenSword":
 							for _attack in attacks:
@@ -179,6 +181,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_miasmaNode.setTurnDuration(_pickedAbility.duration)
 								$"/root/World/Effects".add_child(_miasmaNode)
 								_level.grid[_tile.x][_tile.y].effects.append("fire miasma")
+							Globals.gameConsole.addLog("Fire appears around {critterName} casts!".format({ "critterName": critterName.capitalize() }))
 							return false
 						"summonCritter", "summonCritters":
 							var _tiles = []

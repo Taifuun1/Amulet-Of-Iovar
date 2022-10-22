@@ -43,8 +43,8 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 			$"/root/World".processGameTurn()
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.ZAP:
-			$"/root/World/Critters/0".zapItem(_id)
-			$"/root/World".processGameTurn()
+			$"/root/World/Critters/0".selectedItem = _id
+			$"/root/World".closeMenu(false, true)
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.USE:
 			$"/root/World/Critters/0".useItem(_id)

@@ -59,6 +59,7 @@ enum gameState {
 	EQUIPMENT
 	INTERACT
 	ZAP
+	ZAP_DIRECTION
 	CAST
 	USE
 	KICK
@@ -192,7 +193,7 @@ func create(_className):
 		$Critters/Critters.generateCrittersForLevel(_level)
 	
 #	$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-#	$Items/Items.createItem("blindfold", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("wand of item polymorph", null, 1, true, { "alignment": "blessed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
 #	$Items/Items.createItem("frostfury", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
@@ -223,8 +224,8 @@ func create(_className):
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = tidohMinesEnd2.instance()
-	firstLevel.create("test", "Dungeon hallways 1", 10000)
+	var firstLevel = dungeonHallways.instance()
+	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(1):
@@ -350,7 +351,8 @@ func _input(_event):
 					currentGameState == gameState.GAME or
 					currentGameState == gameState.INTERACT or
 					currentGameState == gameState.KICK or
-					currentGameState == gameState.CAST
+					currentGameState == gameState.CAST or
+					currentGameState == gameState.ZAP_DIRECTION
 				)
 			):
 					var _tileToMoveTo
@@ -389,6 +391,9 @@ func _input(_event):
 						kickAt(_tileToMoveTo)
 					elif currentGameState == gameState.CAST:
 						castAt(_playerTile, _tileToMoveTo)
+					elif currentGameState == gameState.ZAP_DIRECTION:
+						$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
+						$"/root/World".processGameTurn()
 			elif (
 				Input.is_action_just_pressed("WAIT") and
 				currentGameState == gameState.GAME
@@ -911,8 +916,8 @@ func kickAt(_tileToKickAt):
 			Globals.gameConsole.addLog("WHAM!")
 	else:
 		Globals.gameConsole.addLog("You kick nothing!")
-	resetToDefaulGameState()
 	processGameTurn()
+	resetToDefaulGameState()
 
 func castAt(_playerTile, _tileToCastAt):
 	currentGameState = gameState.OUT_OF_PLAYERS_HANDS
@@ -930,15 +935,14 @@ func processAccept():
 	
 	closeMenu()
 
-func closeMenu(_additionalChoices = false):
-	if !_additionalChoices:
+func closeMenu(_additionalChoices = false, _pickDirection = false):
+	if !_additionalChoices and !_pickDirection:
 		if (
 			currentGameState == gameState.PICK_UP_ITEMS or
 			currentGameState == gameState.DROP_ITEMS or
 			currentGameState == gameState.READ or
 			currentGameState == gameState.QUAFF or
 			currentGameState == gameState.CONSUME or
-			currentGameState == gameState.ZAP or
 			currentGameState == gameState.USE
 		):
 			$UI/UITheme/ItemManagement.hideItemManagementList()
@@ -950,8 +954,14 @@ func closeMenu(_additionalChoices = false):
 			$Critters/"0"/Inventory.hideInventory()
 		$UI/UITheme/ListMenu.hideListMenuList()
 		resetToDefaulGameState()
+	if _pickDirection:
+		if currentGameState == gameState.ZAP:
+			$UI/UITheme/ItemManagement.hideItemManagementList()
+			currentGameState = gameState.ZAP_DIRECTION
+			Globals.gameConsole.addLog("Zap at what? (Pick a direction with numpad)")
 
 func resetToDefaulGameState():
+	$"Critters/0".selectedItem = null
 	currentGameState = gameState.GAME
 	inGame = true
 	keepMoving = false

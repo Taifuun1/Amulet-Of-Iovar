@@ -39,6 +39,7 @@ var carryWeightBounds = {
 
 var turnsUntilAction = 0
 
+var selectedItem = null
 var itemsTurnedOn = []
 
 var skills = {
@@ -76,6 +77,7 @@ func create(_className):
 	var _playerClass = playerClasses[(_className[0].to_lower() + _className.substr(1,-1)).replace(" ", "")]
 	
 	critterName = _playerClass.critterName
+	critterClass = "Humanoid"
 	race = _playerClass.race
 	justice = _playerClass.justice
 	
@@ -234,7 +236,7 @@ func dropItems(_playerTile, _items, _grid):
 func dropItem(_playerTile, _item, _grid):
 	var _dropLog = []
 	_grid[_playerTile.x][_playerTile.y].items.append(_item.id)
-	$Inventory.dropFromInventory(_item)
+	$Inventory.removeFromInventory(_item)
 	get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
 	$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
 	$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
@@ -458,7 +460,7 @@ func updatePlayerStats():
 		experienceLevelGainAmount = experienceNeededForLevelGainAmount,
 		critterName = critterName,
 		race = race,
-		alignment = alignment,
+		justice = justice,
 		ac = ac,
 		attacks = attacks,
 		currentHit = currentHit,

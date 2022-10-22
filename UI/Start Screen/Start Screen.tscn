@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://UI/Start Screen/Start Screen.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Amulets/AmuletRainbow.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Critters/DragonWhiteDragon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Critters/DragonSilverDragon.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Critters/DragonVioletDragon.png" type="Texture" id=5]
@@ -251,7 +250,6 @@ margin_right = 1110.0
 margin_bottom = 590.0
 rect_min_size = Vector2( 300, 100 )
 text = "Start"
-icon = ExtResource( 2 )
 
 [node name="CharacterCreationContainer" type="VBoxContainer" parent="."]
 visible = false

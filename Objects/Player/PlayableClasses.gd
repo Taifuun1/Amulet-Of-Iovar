@@ -1,6 +1,6 @@
 
 var archeologist = {
-	name = "Archeologist",
+	critterName = "Archeologist",
 	race = "Human",
 	justice = "Grilling",
 	hp = 14,
@@ -57,7 +57,7 @@ var archeologist = {
 }
 
 var banker = {
-	name = "Banker",
+	critterName = "Banker",
 	race = "Human",
 	justice = "Laissez-faire",
 	hp = 11,
@@ -78,17 +78,17 @@ var banker = {
 	wisdomIncrease = 1,
 	items = {
 		"Orc dagger": 1,
-		"Orc cloak": 1,
-		"Orc mail": 1,
-		"Leather belt": 1,
-		"Cotton pants": 1,
-		"Low boots": 1,
+#		"Orc cloak": 1,
+#		"Orc mail": 1,
+#		"Leather belt": 1,
+#		"Leather pants": 1,
+#		"Low boots": 1,
 		"Credit card": 1,
-		"Mail": [4, 10],
-		"Ring of Frost resistance": 1,
-		"Ring of Fleir resistance": 1,
-		"Marker": 1,
-		"Ink": 1
+#		"Mail": [4, 10],
+#		"Ring of Frost resistance": 1,
+#		"Ring of Fleir resistance": 1,
+#		"Marker": 1,
+#		"Ink bottle": 1
 	},
 	goldPieces = 2475,
 	skills = {
@@ -117,7 +117,7 @@ var banker = {
 }
 
 var freedomFighter = {
-	name = "Banker",
+	critterName = "Freedom fighter",
 	race = "Human",
 	justice = "Draconian",
 	hp = 18,
@@ -174,7 +174,7 @@ var freedomFighter = {
 }
 
 var herbalogue = {
-	name = "Herbalogue",
+	critterName = "Herbalogue",
 	race = "Human",
 	justice = "Grilling",
 	hp = 10,
@@ -195,14 +195,14 @@ var herbalogue = {
 	wisdomIncrease = 2,
 	items = {
 		"Chipped sword": 1,
-		"Leather armor": 1,
-		"Cotton pants": 1,
+		"Leather mail": 1,
+		"Leather pants": 1,
 		"Low boots": 1,
-		"Potion of heala": 2,
-		"Ring of Toxix resistance": 1,
-		"Wand of Fleir": 1,
-		"Wand of Frost": 1,
-		"Wand of polymorph": 1
+#		"Potion of heala": 2,
+#		"Ring of Toxix resistance": 1,
+#		"Wand of Fleir": 1,
+#		"Wand of Frost": 1,
+#		"Wand of item polymorph": 1
 	},
 	goldPieces = 20,
 	skills = {
@@ -231,7 +231,7 @@ var herbalogue = {
 }
 
 var mercenary = {
-	name = "Mercenary",
+	critterName = "Mercenary",
 	race = "Human",
 	justice = "Grilling",
 	hp = 20,
@@ -252,19 +252,19 @@ var mercenary = {
 	wisdomIncrease = 1,
 	items = {
 		"Mithril two-hander": 1,
-		"Adorned helmet": 1,
-		"Adorned cloak": 1,
-		"Ring mail": 1,
-		"Studded belt": 1,
-		"Leather gloves": 1,
-		"Scale-ring greaves": 1,
-		"Low boots": 1,
-		"Potion of heala": [2, 4],
-		"Potion of blindness": 1,
-		"Potion of gain level": 1,
-		"Amulet of life power": 1,
-		"Wand of sleep": 1,
-		"Candle": [1, 3]
+#		"Adorned helmet": 1,
+#		"Adorned cloak": 1,
+#		"Ring mail": 1,
+#		"Studded belt": 1,
+#		"Leather gloves": 1,
+#		"Scale-ring greaves": 1,
+#		"Low boots": 1,
+#		"Potion of heala": [2, 4],
+#		"Potion of blindness": 1,
+#		"Potion of gain level": 1,
+#		"Amulet of life power": 1,
+#		"Wand of sleep": 1,
+#		"Candle": [1, 3]
 	},
 	goldPieces = 350,
 	skills = {
@@ -293,7 +293,7 @@ var mercenary = {
 }
 
 var exterminator = {
-	name = "Exterminator",
+	critterName = "Exterminator",
 	race = "Human",
 	justice = "Draconian",
 	hp = 8,
@@ -342,7 +342,7 @@ var exterminator = {
 }
 
 var rogue = {
-	name = "Rogue",
+	critterName = "Rogue",
 	race = "Human",
 	justice = "Laissez-faire",
 	hp = 12,
@@ -404,7 +404,7 @@ var rogue = {
 }
 
 var savant = {
-	name = "Savant",
+	critterName = "Savant",
 	race = "Human",
 	justice = "Grilling",
 	hp = 8,
@@ -425,16 +425,16 @@ var savant = {
 	wisdomIncrease = 3,
 	items = {
 		"Worn mace": 1,
-		"Roman robe": 1,
-		"Fabric gloves": 1,
-		"Springy boots": 1,
-		"Wand of Thunder": 1,
-		"Amulet of magic power": 1,
+#		"Roman robe": 1,
+#		"Fabric gloves": 1,
+#		"Springy boots": 1,
+#		"Wand of Thunder": 1,
+#		"Amulet of magic power": 1,
 #		"Potion of levitation": 1,
-		"Scroll of remove curse": 1,
-		"Scroll of identify": [2, 3],
-		"Lamp": 1,
-		"Magic marker": 1
+#		"Scroll of remove curse": 1,
+#		"Scroll of identify": [2, 3],
+#		"Lamp": 1,
+#		"Magic marker": 1
 	},
 	goldPieces = 110,
 	skills = {

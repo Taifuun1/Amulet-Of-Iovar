@@ -22,6 +22,8 @@ var itemGeneration = preload("res://Objects/Item/ItemGeneration.gd").new()
 var items = {}
 var miscellaneousItems = []
 
+var randomizedItemsByRarity = []
+
 func create():
 	name = "Items"
 	items["amulet"] = amulets.amulets
@@ -37,6 +39,8 @@ func create():
 	items["weapon"] = weapons.weapons
 	
 	miscellaneousItems = miscellaneous.miscellaneous
+	
+	getRandomizedItemsByRarity()
 
 
 
@@ -87,6 +91,81 @@ func generateItemsForLevel(_level):
 			_level.grid[gridPosition.x][gridPosition.y].items.append(newItem.id)
 			$"/root/World/Items".add_child(newItem, true)
 
+
+
+########################
+### Helper functions ###
+########################
+
+func getItemByName(_itemName):
+	for _types in items.values():
+		for _rarity in _types.values():
+			for _item in _rarity:
+				if _item.itemName.matchn(_itemName):
+					return _item
+
+func getRandomItem(_randomByRarity = true):
+	var _items = []
+	if _randomByRarity:
+		return randomizedItemsByRarity[randi() % randomizedItemsByRarity.size()]
+	else:
+		var _randomType = items.keys()[randi() % items.keys().size()]
+		var _rarity = items[_randomType].keys()[randi() % items[_randomType].keys().size()]
+		var _pick = randi() % items[_randomType][_rarity].size()
+		return items[_randomType][_rarity][_pick]
+
+func getRandomItemByItemTypes(_types, _randomByRarity = false):
+	var _items = []
+	if _randomByRarity:
+		for _type in _types.keys():
+			for _rarity in _types[_type]:
+				for _item in items[_type][_rarity]:
+					if _rarity == "common":
+						for _i in range(75):
+							_items.append(_item)
+					elif _rarity == "uncommon":
+						for _i in range(25):
+							_items.append(_item)
+					if _rarity == "rare":
+						for _i in range(10):
+							_items.append(_item)
+					if _rarity == "legendary":
+						for _i in range(1):
+							_items.append(_item)
+	else:
+		for _type in _types.keys():
+			for _rarity in _types[_type]:
+				for _item in items[_type][_rarity]:
+					_items.append(_item)
+	return _items[randi() % _items.size()]
+
+func removeItem(_itemId, _position = null, _grid = $"/root/World".level.grid):
+	var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+	if _position != null:
+		_grid[_position.x][_position.y].items.erase(_itemId)
+	else:
+		$"/root/World/Critters/0/Inventory".removeFromInventory(_item)
+		$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
+		$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
+	_item.queue_free()
+
+func getRandomizedItemsByRarity():
+	for _type in items:
+		for _rarity in items[_type]:
+			for _item in items[_type][_rarity]:
+				if _rarity == "common":
+					for _i in range(75):
+						randomizedItemsByRarity.append(_item)
+				elif _rarity == "uncommon":
+					for _i in range(25):
+						randomizedItemsByRarity.append(_item)
+				if _rarity == "rare":
+					for _i in range(10):
+						randomizedItemsByRarity.append(_item)
+				if _rarity == "legendary":
+					for _i in range(1):
+						randomizedItemsByRarity.append(_item)
+
 func returnRandomItemForItemGeneration(_itemGeneration):
 	var type
 	var rarity
@@ -112,60 +191,6 @@ func returnRandomItemForItemGeneration(_itemGeneration):
 		return items[type][rarity][randi() % items[type][rarity].size()]
 	else:
 		return null
-
-
-
-########################
-### Helper functions ###
-########################
-
-func getItemByName(_itemName):
-	for _types in items.values():
-		for _rarity in _types.values():
-			for _item in _rarity:
-				if _item.itemName.matchn(_itemName):
-					return _item
-
-func getRandomItem(_type = null):
-	if _type == null:
-		var _randomType = items.keys()[randi() % items.keys().size()]
-		var _rarity = items[_randomType].keys()[randi() % items[_randomType].keys().size()]
-		var _pick = randi() % items[_randomType][_rarity].size()
-		return items[_randomType][_rarity][_pick]
-	else:
-		var _rarity = items[_type].keys()[randi() % items[_type].keys().size()]
-		return items[_type][_rarity][randi() % items[_type][_rarity].size()]
-
-func getRandomItemByItemTypes(_types, _randomByRarity = false):
-	var _items = []
-	if _randomByRarity:
-		for _type in _types.keys():
-			for _rarity in _types[_type]:
-				for _item in items[_type][_rarity]:
-					if _rarity == "common":
-						for _i in range(50):
-							_items.append(_item)
-					elif _rarity == "uncommon":
-						for _i in range(25):
-							_items.append(_item)
-					if _rarity == "rare":
-						for _i in range(10):
-							_items.append(_item)
-					if _rarity == "legendary":
-						for _i in range(1):
-							_items.append(_item)
-	else:
-		for _type in _types.keys():
-			for _rarity in _types[_type]:
-				for _item in items[_type][_rarity]:
-					_items.append(_item)
-	return _items[randi() % _items.size()]
-
-
-
-###############################
-### Miscellaneous functions ###
-###############################
 
 func randomizeRandomItems():
 	var _randomItemList = randomItemList.randomItemList.duplicate(true)

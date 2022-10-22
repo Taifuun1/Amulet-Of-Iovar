@@ -6,6 +6,7 @@ var damageNumber = load("res://UI/Damage Number/Damage Number.tscn")
 var id
 
 var critterName
+var critterClass
 var race
 var justice
 

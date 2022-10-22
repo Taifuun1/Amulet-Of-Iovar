@@ -1,11 +1,5 @@
 
 var critterLevelGenerationList = {
-	"test": {
-		"amount": [8, 10],
-		"critters": {
-			"humans": ["Iovars cultist"],
-		}
-	},
 	"dungeon1": {
 		"amount": [3, 6],
 		"critters": {

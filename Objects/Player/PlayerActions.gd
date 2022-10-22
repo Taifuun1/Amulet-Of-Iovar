@@ -361,8 +361,10 @@ func consumeItem(_id):
 		Globals.gameConsole.addLog("You eat the {comestible}.".format({ "comestible": _eatenItem.itemName }))
 	$"/root/World".closeMenu()
 
-func zapItem(_id):
-	var _zappedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
+func zapItem(_direction):
+	var _playerPosition = $"/root/World".level.getCritterTile(0)
+	var _zappedItem = get_node("/root/World/Items/{id}".format({ "id": selectedItem }))
+	selectedItem = null
 	var _additionalChoices = false
 	if _zappedItem.type.matchn("wand"):
 		Globals.gameConsole.addLog("You zap the {itemName}.".format({ "itemName": _zappedItem.itemName }))
@@ -375,7 +377,6 @@ func zapItem(_id):
 		if _zappedItem.value.charges > 0:
 			match _zappedItem.identifiedItemName.to_lower():
 				"wand of summon critter":
-					var _playerPosition = $"/root/World".level.getCritterTile(0)
 					if _zappedItem.alignment.matchn("blessed"):
 						var _critter = neutralCritters[randi() % neutralCritters.size()]
 						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
@@ -400,15 +401,68 @@ func zapItem(_id):
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
 				"wand of backwards magic sphere":
-					var _playerPosition = $"/root/World".level.getCritterTile(0)
 					if _zappedItem.alignment.matchn("blessed"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("uncursed"):
-						takeDamage([8], "Wand of backwards magic sphere", _playerPosition)
+						takeDamage([
+							{
+								"dmg": [8,12],
+								"bonusDmg": {},
+								"armorPen": 0,
+								"magicDmg": {
+									"dmg": 0,
+									"element": null
+								}
+							}
+						], "Wand of backwards magic sphere", _playerPosition)
 						Globals.gameConsole.addLog("{itemName} hits you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("cursed"):
-						takeDamage([18], "Wand of backwards magic sphere", _playerPosition)
+						takeDamage([
+							{
+								"dmg": [18,22],
+								"bonusDmg": {},
+								"armorPen": 0,
+								"magicDmg": {
+									"dmg": 0,
+									"element": null
+								}
+							}
+						], "Wand of backwards magic sphere", _playerPosition)
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
+				"wand of item polymorph":
+					var _grid = $"/root/World".level.grid
+					for i in range(1, 6):
+						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
+							break
+						var _itemCount = 0
+						if _zappedItem.alignment.matchn("blessed"):
+							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
+								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items:
+									$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
+									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), _playerPosition + _direction * i)
+									_itemCount += 1
+								if _itemCount == 1:
+									Globals.gameConsole.addLog("Item on the ground vibrates.")
+									continue
+								Globals.gameConsole.addLog("Items on the ground vibrate.")
+						elif _zappedItem.alignment.matchn("uncursed"):
+							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
+								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items:
+									if randi() % 2 == 0:
+										$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
+										$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), _playerPosition + _direction * i)
+										_itemCount += 1
+								if _itemCount > 0:
+									Globals.gameConsole.addLog("Some items on the ground vibrate.")
+						elif _zappedItem.alignment.matchn("cursed"):
+							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
+								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items:
+									if randi() % 4 == 0:
+										$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
+										$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), _playerPosition + _direction * i)
+										_itemCount += 1
+							if _itemCount > 0:
+								Globals.gameConsole.addLog("A few items on the ground vibrate.")
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
 			_zappedItem.value.charges -= 1
@@ -482,7 +536,7 @@ func useItem(_id):
 				else:
 					Globals.gameConsole.addLog("You already have a lightsource on.")
 			"message in a bottle":
-				var _newItem = $"/root/World/Items/Items".getRandomItem("scroll")
+				var _newItem = $"/root/World/Items/Items".getRandomItemByItemTypes(["scroll"], true)
 				$"/root/World/Items/Items".createItem(_newItem, null, 1, true)
 				$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 				get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
@@ -490,4 +544,4 @@ func useItem(_id):
 			_:
 				Globals.gameConsole.addLog("Thats not a tool...")
 		checkAllItemsIdentification()
-	$"/root/World".closeMenu()
+		$"/root/World".closeMenu()

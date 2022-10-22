@@ -34,7 +34,7 @@ func addToInventory(_item):
 #	if isPlayerInventory:
 #		Globals.inventory = inventory
 
-func dropFromInventory(_item):
+func removeFromInventory(_item):
 	inventory.erase(_item.id)
 	currentWeight -= _item.weight
 

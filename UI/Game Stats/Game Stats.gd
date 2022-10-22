@@ -30,7 +30,7 @@ func updateStats(stats = {
 	experienceLevelGainAmount = null,
 	critterName = null,
 	race = null,
-	alignment = null,
+	justice = null,
 	ac = null,
 	attacks = null,
 	currentHit = null,
@@ -67,9 +67,9 @@ func updateStats(stats = {
 	if stats.race != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer/Race.text = str(stats.race)
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer/Race.set_tooltip(str(stats.race))
-	if stats.alignment != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.text = str(stats.alignment)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer/Alignment.set_tooltip(str(stats.alignment))
+	if stats.justice != null:
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer/Justice.text = str(stats.justice)
+		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer/Justice.set_tooltip(str(stats.justice))
 	if stats.dungeonLevel != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.text = str(stats.dungeonLevel)
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.set_tooltip(str(stats.dungeonLevel))

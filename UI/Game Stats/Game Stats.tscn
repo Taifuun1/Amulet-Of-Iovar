@@ -206,22 +206,22 @@ text = "-"
 align = 2
 clip_text = true
 
-[node name="AlignmentContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+[node name="JusticeContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 168.0
 margin_right = 377.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 377, 0 )
 
-[node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer"]
+[node name="JusticeText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer"]
 margin_right = 186.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 186, 0 )
 hint_tooltip = "Alignment"
 mouse_filter = 1
-text = "Alignment"
+text = "Justice"
 clip_text = true
 
-[node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AlignmentContainer"]
+[node name="Justice" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer"]
 margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
