@@ -182,19 +182,30 @@ func readItem(_id):
 				var _aliveCritters = []
 				if _readItem.alignment.matchn("blessed"):
 					for _critterRace in $"/root/World/Critters/Critters".critters.keys():
-						for _critterName in $"/root/World/Critters/Critters".critters[_critterRace].critterTypes:
-							if GlobalCritterInfo.globalCritterInfo[_critterName.critterName].population != 0:
-								_aliveCritters.append(_critterRace)
-								break
+						if !_critterRace.matchn("bosses"):
+							for _critterName in $"/root/World/Critters/Critters".critters[_critterRace].critterTypes:
+								if GlobalCritterInfo.globalCritterInfo[_critterName.critterName].population != 0:
+									_aliveCritters.append(_critterRace)
+									break
 				elif _readItem.alignment.matchn("uncursed") or _readItem.alignment.matchn("cursed"):
 					for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
-						if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0:
+						if (
+							GlobalCritterInfo.globalCritterInfo[_critterName].population != 0 and
+							!(
+								_critterName.matchn("Iovar") or
+								_critterName.matchn("Elder Dragon") or
+								_critterName.matchn("Mad Banana-hunter Ogre") or
+								_critterName.matchn("Shin'kor Leve'er") or
+								_critterName.matchn("Elhybar") or
+								_critterName.matchn("Tidoh Tel'hydrad")
+							)
+						):
 							_aliveCritters.append(_critterName)
-				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters, _readItem.alignment)
+				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters, _readItem)
 				$"/root/World/UI/UITheme/ListMenu".show()
 				_additionalChoices = true
 			"scroll of teleport":
-				if dealWithScrollOfTeleport(_readItem.alignment):
+				if dealWithTeleport(0, _readItem.alignment):
 					Globals.gameConsole.addLog("Whoosh! You reappear somewhere!")
 				else:
 					Globals.gameConsole.addLog("It doesn't seem you have space to teleport...")
@@ -205,62 +216,6 @@ func readItem(_id):
 			$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 			get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 	$"/root/World".closeMenu(_additionalChoices)
-
-func dealWithScrollOfGenocide(_genocidableName, _alignment):
-	if _alignment.matchn("blessed"):
-		for _genocidableCritter in $"/root/World/Critters/Critters".critters[_genocidableName].critterTypes:
-			for _critter in $"/root/World/Critters".get_children():
-				if _critter.name == "Critters":
-					continue
-				if _critter.critterName == _genocidableCritter.critterName:
-					_critter.despawn(null, false)
-			GlobalCritterInfo.globalCritterInfo[_genocidableCritter.critterName].population = 0
-			Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _genocidableCritter.critterName.capitalize() }))
-	if _alignment.matchn("uncursed"):
-		for _critter in $"/root/World/Critters".get_children():
-			if _critter.name == "Critters":
-				continue
-			if _critter.critterName == _genocidableName:
-				_critter.despawn(null, false)
-		GlobalCritterInfo.globalCritterInfo[_genocidableName].population = 0
-		Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _genocidableName.capitalize() }))
-	if _alignment.matchn("cursed"):
-		var _level = $"/root/World".level
-		for _populationCount in range(GlobalCritterInfo.globalCritterInfo[_genocidableName].population):
-			if !$"/root/World/Critters/Critters".spawnCritter(_genocidableName):
-				break
-		Globals.gameConsole.addLog("RUMMMMMBLE!!!")
-	$"/root/World".closeMenu()
-
-func dealWithScrollOfTeleport(_alignment):
-	var _world = $"/root/World"
-	if _alignment.matchn("uncursed") or _alignment.matchn("blessed"):
-		var _playerPosition = _world.level.getCritterTile(0)
-		var _level = _world.level
-		var _openTiles = _level.openTiles.duplicate(true)
-		for _openTile in _openTiles:
-			var _randomTile = _openTiles[randi() % _openTiles.size()]
-			if _level.isTileFreeOfCritters(_randomTile):
-				$"/root/World/Critters/0".moveCritter(_playerPosition, _randomTile, 0, _level)
-				return true
-			else:
-				_openTiles.erase(_randomTile)
-	elif _alignment.matchn("cursed"):
-		var _randomDungeonPart = _world.levels.keys()[randi() % _world.levels.keys().size()]
-		var _randomLevel
-		if _randomDungeonPart.matchn("firstlevel"):
-			_randomLevel = _world.levels[_randomDungeonPart]
-		else:
-			_randomLevel = _world.levels[_randomDungeonPart][randi() % _world.levels[_randomDungeonPart].size()]
-		var _openTiles = _randomLevel.openTiles.duplicate(true)
-		for _openTile in _openTiles:
-			var _randomTile = _openTiles[randi() % _openTiles.size()]
-			if _randomLevel.isTileFreeOfCritters(_randomTile):
-				_world.goToLevel(_randomTile, _randomLevel)
-				return true
-			else:
-				_openTiles.erase(_randomTile)
-	return false
 
 func quaffItem(_id):
 	var _quaffedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -336,13 +291,13 @@ func quaffItem(_id):
 					Globals.gameConsole.addLog("You somehow feel less experienced.")
 			"potion of hunger":
 				if _quaffedItem.alignment.matchn("blessed"):
-					calories += 100
+					calories += 300
 					Globals.gameConsole.addLog("You feel nourished.")
 				if _quaffedItem.alignment.matchn("uncursed"):
-					calories += -150
+					calories += -450
 					Globals.gameConsole.addLog("You feel malnourished.")
 				if _quaffedItem.alignment.matchn("cursed"):
-					calories += -400
+					calories += -1000
 					Globals.gameConsole.addLog("You feel like you lost half your weight!")
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
@@ -376,6 +331,41 @@ func zapItem(_direction):
 			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _zappedItem.identifiedItemName, "unidentifiedItemName": _zappedItem.unidentifiedItemName }))
 		if _zappedItem.value.charges > 0:
 			match _zappedItem.identifiedItemName.to_lower():
+				"wand of light":
+					if _zappedItem.alignment.matchn("blessed"):
+						playerVisibility = {
+							"distance": 10,
+							"duration": 20
+						}
+						Globals.gameConsole.addLog("The light illuminates your surroundings brightly!")
+					elif _zappedItem.alignment.matchn("uncursed"):
+						playerVisibility = {
+							"distance": 7,
+							"duration": 15
+						}
+						Globals.gameConsole.addLog("The light illuminates your surroundings.")
+					elif _zappedItem.alignment.matchn("cursed"):
+						playerVisibility = {
+							"distance": 4,
+							"duration": 10
+						}
+						Globals.gameConsole.addLog("The light illuminates your surroundings dimly.")
+				"wand of teleport":
+					var _grid = $"/root/World".level.grid
+#					if _zappedItem.alignment.matchn("blessed"):
+					for i in range(1, 7):
+						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
+							break
+						if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter != null:
+							dealWithTeleport(_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter, _zappedItem.alignment, _zappedItem.type)
+							Globals.gameConsole.addLog("The {critterName} disappears!".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter })).critterName }))
+							break
+#					elif _zappedItem.alignment.matchn("uncursed"):
+#						dealWithTeleport(_zappedItem.id, _zappedItem.alignment, _zappedItem.type)
+#						Globals.gameConsole.addLog("The light illuminates your surroundings.")
+#					elif _zappedItem.alignment.matchn("cursed"):
+#						dealWithTeleport(_zappedItem.id, _zappedItem.alignment, _zappedItem.type)
+#						Globals.gameConsole.addLog("The light illuminates your surroundings dimly.")
 				"wand of summon critter":
 					if _zappedItem.alignment.matchn("blessed"):
 						var _critter = neutralCritters[randi() % neutralCritters.size()]
@@ -437,39 +427,69 @@ func zapItem(_direction):
 						var _itemCount = 0
 						if _zappedItem.alignment.matchn("blessed"):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
-								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items:
+								var _newItems = []
+								var _newItemIds = []
+								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
+									_newItems.append($"/root/World/Items/Items".getRandomItem())
 									$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
-									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), _playerPosition + _direction * i)
 									_itemCount += 1
+								for _item in _newItems:
+									$"/root/World/Items/Items".createItem(_item, _playerPosition + _direction * i)
+									_newItemIds.append(Globals.itemId - 1)
+								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 								if _itemCount == 1:
 									Globals.gameConsole.addLog("Item on the ground vibrates.")
 									continue
 								Globals.gameConsole.addLog("Items on the ground vibrate.")
 						elif _zappedItem.alignment.matchn("uncursed"):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
-								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items:
+								var _newItems = []
+								var _newItemIds = []
+								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
 									if randi() % 2 == 0:
+										_newItems.append($"/root/World/Items/Items".getRandomItem())
 										$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
-										$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), _playerPosition + _direction * i)
 										_itemCount += 1
+								for _item in _newItems:
+									$"/root/World/Items/Items".createItem(_item, _playerPosition + _direction * i)
+									_newItemIds.append(Globals.itemId - 1)
+								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 								if _itemCount > 0:
 									Globals.gameConsole.addLog("Some items on the ground vibrate.")
 						elif _zappedItem.alignment.matchn("cursed"):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
-								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items:
+								var _newItems = []
+								var _newItemIds = []
+								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
 									if randi() % 4 == 0:
+										_newItems.append($"/root/World/Items/Items".getRandomItem())
 										$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
-										$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), _playerPosition + _direction * i)
 										_itemCount += 1
+								for _item in _newItems:
+									$"/root/World/Items/Items".createItem(_item, _playerPosition + _direction * i)
+									_newItemIds.append(Globals.itemId - 1)
+								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 							if _itemCount > 0:
 								Globals.gameConsole.addLog("A few items on the ground vibrate.")
+				"wand of wishing":
+					var _itemTypes = []
+#					if _readItem.alignment.matchn("blessed"):
+					for _type in $"/root/World/Items/Items".items:
+						_itemTypes.append(_type)
+#					elif _readItem.alignment.matchn("uncursed") or _readItem.alignment.matchn("cursed"):
+#						for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
+#							if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0:
+#								_aliveCritters.append(_critterName)
+					$"/root/World/UI/UITheme/ListMenu".showListMenuList("Wish for what item type?", _itemTypes, _zappedItem, true)
+					$"/root/World/UI/UITheme/ListMenu".show()
+					_additionalChoices = true
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
 			_zappedItem.value.charges -= 1
 			checkAllItemsIdentification()
 		else:
 			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
-	$"/root/World".closeMenu()
+	$"/root/World".closeMenu(_additionalChoices)
 
 func useItem(_id):
 	var _usedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -545,3 +565,75 @@ func useItem(_id):
 				Globals.gameConsole.addLog("Thats not a tool...")
 		checkAllItemsIdentification()
 		$"/root/World".closeMenu()
+
+
+
+########################
+### Helper functions ###
+########################
+
+func dealWithTeleport(_critterId, _alignment, _itemType = "scroll"):
+	var _world = $"/root/World"
+	var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterId }))
+	if _alignment.matchn("uncursed") or _alignment.matchn("blessed") or _itemType.matchn("wand"):
+		var _playerPosition = _world.level.getCritterTile(_critter)
+		var _level = _world.level
+		var _openTiles = _level.openTiles.duplicate(true)
+		for _openTile in _openTiles:
+			var _randomTile = _openTiles[randi() % _openTiles.size()]
+			if _level.isTileFreeOfCritters(_randomTile):
+				_critter.moveCritter(_playerPosition, _randomTile, _critterId, _level)
+				return true
+			else:
+				_openTiles.erase(_randomTile)
+	elif _alignment.matchn("cursed"):
+		var _randomDungeonPart = _world.levels.keys()[randi() % _world.levels.keys().size()]
+		var _randomLevel
+		if _randomDungeonPart.matchn("firstlevel"):
+			_randomLevel = _world.levels[_randomDungeonPart]
+		else:
+			_randomLevel = _world.levels[_randomDungeonPart][randi() % _world.levels[_randomDungeonPart].size()]
+		var _openTiles = _randomLevel.openTiles.duplicate(true)
+		for _openTile in _openTiles:
+			var _randomTile = _openTiles[randi() % _openTiles.size()]
+			if _randomLevel.isTileFreeOfCritters(_randomTile):
+				_world.goToLevel(_randomTile, _randomLevel)
+				return true
+			else:
+				_openTiles.erase(_randomTile)
+	return false
+
+func dealWithScrollOfGenocide(_name, _alignment):
+	if _alignment.matchn("blessed"):
+		for _genocidableCritter in $"/root/World/Critters/Critters".critters[_name].critterTypes:
+			for _critter in $"/root/World/Critters".get_children():
+				if _critter.name.matchn("Critters"):
+					continue
+				if _critter.critterName == _genocidableCritter.critterName:
+					_critter.despawn(null, false)
+			GlobalCritterInfo.globalCritterInfo[_genocidableCritter.critterName].population = 0
+			Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _genocidableCritter.critterName.capitalize() }))
+	if _alignment.matchn("uncursed"):
+		for _critter in $"/root/World/Critters".get_children():
+			if _critter.name.matchn("Critters"):
+				continue
+			if _critter.critterName.matchn(_name):
+				_critter.despawn(null, false)
+		GlobalCritterInfo.globalCritterInfo[_name].population = 0
+		Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _name.capitalize() }))
+	if _alignment.matchn("cursed"):
+		var _level = $"/root/World".level
+		for _populationCount in range(GlobalCritterInfo.globalCritterInfo[_name].population):
+			if !$"/root/World/Critters/Critters".spawnCritter(_name):
+				break
+		Globals.gameConsole.addLog("RUMMMMMBLE!!!")
+	$"/root/World".closeMenu()
+
+func dealWithWandOfWishing(_name, _alignment):
+	if _alignment.matchn("blessed"):
+		$"/root/World/Items/Items".createItem(_name, null, 1, true)
+		Globals.gameConsole.addLog("An item appears in your inventory.")
+	else:
+		$"/root/World/Items/Items".createItem(_name, $"/root/World".level.getCritterTile(0))
+		Globals.gameConsole.addLog("An item appears at your feet.")
+	$"/root/World".closeMenu()

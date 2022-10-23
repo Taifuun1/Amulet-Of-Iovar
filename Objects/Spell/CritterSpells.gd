@@ -108,7 +108,8 @@ var frostTouch = {
 				"element": "frost"
 			}
 		}
-	]
+	],
+	"distance": 1
 }
 
 var thunderPoint = {
@@ -155,7 +156,8 @@ var poisonBite = {
 				"element": "toxix"
 			}
 		}
-	]
+	],
+	"distance": 7
 }
 
 var elderDragonBreath = {

@@ -228,6 +228,10 @@ var globalCritterInfo = {
 		"population": 24,
 		"crittersInPlay": 0
 	},
+	"Outlaw watcher": {
+		"population": 70,
+		"crittersInPlay": 0
+	},
 	"Outlaw fusiee'er": {
 		"population": 40,
 		"crittersInPlay": 0
@@ -236,8 +240,12 @@ var globalCritterInfo = {
 		"population": 40,
 		"crittersInPlay": 0
 	},
-	"Outlaw watcher": {
-		"population": 70,
+	"Iovars cultist acolyte": {
+		"population": 64,
+		"crittersInPlay": 0
+	},
+	"Iovars cultist": {
+		"population": 38,
 		"crittersInPlay": 0
 	},
 	"Shopkeeper": {

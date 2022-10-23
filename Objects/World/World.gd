@@ -194,7 +194,10 @@ func create(_className):
 	
 #	$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("wand of item polymorph", null, 1, true, { "alignment": "blessed" })
-#	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
+	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
+	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("wand of wishing", null, 1, true, { "alignment": "blessed" })
+	$Items/Items.createItem("wand of wishing", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("frostfury", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
 #	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
@@ -393,7 +396,7 @@ func _input(_event):
 						castAt(_playerTile, _tileToMoveTo)
 					elif currentGameState == gameState.ZAP_DIRECTION:
 						$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
-						$"/root/World".processGameTurn()
+						resetToDefaulGameState()
 			elif (
 				Input.is_action_just_pressed("WAIT") and
 				currentGameState == gameState.GAME
@@ -582,13 +585,13 @@ func drawFOV():
 			var occlusion = spaceState.intersect_ray(playerCenter, testPoint)
 			
 			if (
-				_playerNode.playerVisibility == 0 and
+				_playerNode.playerVisibility.distance == 0 and
 				playerTile == Vector2(x, y)
 			):
 				$FOV.greyCell(x, y)
 			elif (
 				(
-					_playerNode.playerVisibility != 0 and
+					_playerNode.playerVisibility.distance != 0 and
 					(
 						!occlusion or
 						(occlusion.position - testPoint).length() < 1
@@ -596,8 +599,8 @@ func drawFOV():
 					(
 						(playerCenter - testPoint).length() < level.visibility * 32 or
 						(
-							(playerCenter - testPoint).length() < _playerNode.playerVisibility * 32 and
-							_playerNode.playerVisibility != -1
+							(playerCenter - testPoint).length() < _playerNode.playerVisibility.distance * 32 and
+							_playerNode.playerVisibility.distance != -1
 						)
 					)
 				)
@@ -609,7 +612,7 @@ func drawFOV():
 				(
 					occlusion or
 					(playerCenter - testPoint).length() > level.visibility * 32 or
-					(playerCenter - testPoint).length() > _playerNode.playerVisibility * 32
+					(playerCenter - testPoint).length() > _playerNode.playerVisibility.distance * 32
 				)
 			):
 				$FOV.greyCell(x, y)
@@ -936,6 +939,13 @@ func processAccept():
 	closeMenu()
 
 func closeMenu(_additionalChoices = false, _pickDirection = false):
+	if currentGameState == gameState.ZAP:
+		$UI/UITheme/ItemManagement.hideItemManagementList()
+		if _pickDirection:
+			currentGameState = gameState.ZAP_DIRECTION
+			Globals.gameConsole.addLog("Zap at what? (Pick a direction with numpad)")
+			return
+		resetToDefaulGameState()
 	if !_additionalChoices and !_pickDirection:
 		if (
 			currentGameState == gameState.PICK_UP_ITEMS or
@@ -954,11 +964,6 @@ func closeMenu(_additionalChoices = false, _pickDirection = false):
 			$Critters/"0"/Inventory.hideInventory()
 		$UI/UITheme/ListMenu.hideListMenuList()
 		resetToDefaulGameState()
-	if _pickDirection:
-		if currentGameState == gameState.ZAP:
-			$UI/UITheme/ItemManagement.hideItemManagementList()
-			currentGameState = gameState.ZAP_DIRECTION
-			Globals.gameConsole.addLog("Zap at what? (Pick a direction with numpad)")
 
 func resetToDefaulGameState():
 	$"Critters/0".selectedItem = null

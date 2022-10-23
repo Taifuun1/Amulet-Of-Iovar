@@ -7,7 +7,10 @@ var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
 
 var playerClass
 
-var playerVisibility = -1
+var playerVisibility = {
+	"distance": -1,
+	"duration": -1
+}
 
 var experiencePoints = 0
 var experienceNeededForPreviousLevelGainAmount = 0
@@ -261,7 +264,7 @@ func processPlayerSpecificEffects():
 	## Hunger ##
 	############
 	previousCalories = calories
-	if checkIfStatusEffectIsInEffect("hunger"):
+	if checkIfStatusEffectIsInEffect("fast digestion"):
 		calories -= 3
 	elif checkIfStatusEffectIsInEffect("slow digestion"):
 		calories -= 1
@@ -294,10 +297,22 @@ func processPlayerSpecificEffects():
 	####################
 	## Status effects ##
 	####################
+	if playerVisibility.duration > 0:
+		playerVisibility.duration -= 1
+	else:
+		playerVisibility.distance = -1
+	
 	if checkIfStatusEffectIsInEffect("blindness"):
-		playerVisibility = 0
+		playerVisibility.distance = 0
 	elif !checkIfLightSourceIsTurnedOn():
-		playerVisibility = -1
+		playerVisibility.distance = -1
+	
+	if checkIfStatusEffectIsInEffect("toxix"):
+		hp -= 1
+		if hp > 12:
+			Globals.gameConsole.addlog("You take damage from the poison.")
+		else:
+			Globals.gameConsole.addlog("You take damage from the poison!")
 	
 	# Deal with status effects in the UI
 	for _statusEffect in statusEffects.keys():
@@ -313,31 +328,46 @@ func processPlayerSpecificEffects():
 	###########
 	for _item in itemsTurnedOn:
 		match _item.identifiedItemName.to_lower():
+			"amulet of seeing":
+				statusEffects["seeing"] = -1
+			"amulet of strangulation":
+				hp -= 5
+				Globals.gameConsole.addLog("You are strangled by the amulet!")
+			"amulet of toxix":
+				statusEffects["toxix"] = -1
+			"ring of fast digestion":
+				statusEffects["fast digestion"] = -1
+			"ring of slow digestion":
+				statusEffects["slow digestion"] = -1
+			"ring of regen":
+				statusEffects["regen"] = -1
+			"ring of fumbling":
+				statusEffects["fumbling"] = -1
 			"candle":
 				if _item.value.charges > 0:
 					_item.value.charges -= 1
-					if playerVisibility != 0:
-						playerVisibility = _item.value.value
+					if playerVisibility.distance != 0:
+						playerVisibility.distance = _item.value.value
 				else:
-					if playerVisibility != 0:
-						playerVisibility = -1
+					if playerVisibility.distance != 0:
+						playerVisibility.distance = -1
 						Globals.gameConsole.addLog("Your candle has run out of wax.")
 					_item.value.turnedOn = false
 					itemsTurnedOn.erase(_item)
 			"oil lamp":
 				if _item.value.charges > 0:
 					_item.value.charges -= 1
-					if playerVisibility != 0:
-						playerVisibility = _item.value.value
+					if playerVisibility.distance != 0:
+						playerVisibility.distance = _item.value.value
 				else:
-					if playerVisibility != 0:
-						playerVisibility = -1
+					if playerVisibility.distance != 0:
+						playerVisibility.distance = -1
 						Globals.gameConsole.addLog("Your lamp has run out of oil.")
 					_item.value.turnedOn = false
 					itemsTurnedOn.erase(_item)
 			"magic lamp":
-				if playerVisibility != 0:
-					playerVisibility = _item.value.value
+				if playerVisibility.distance != 0:
+					playerVisibility.distance = _item.value.value
 
 func calculateWeightStats():
 	maxCarryWeight = {
@@ -511,7 +541,8 @@ func checkIfLightSourceIsTurnedOn():
 	for _item in itemsTurnedOn:
 		if (
 			_item.identifiedItemName.to_lower() == "candle" or
-			_item.identifiedItemName.to_lower() == "oil lamp"
+			_item.identifiedItemName.to_lower() == "oil lamp" or
+			_item.identifiedItemName.to_lower() == "magic lamp"
 		):
 			return true
 	return false

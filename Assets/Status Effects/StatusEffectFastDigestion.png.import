@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/StatusEffectHungry.png-b98616191a1642adcc7f245c2d68a1b6.stex"
+path="res://.import/StatusEffectFastDigestion.png-89117b0bd45a35259359e2ef8c50e79f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Status Effects/StatusEffectHungry.png"
-dest_files=[ "res://.import/StatusEffectHungry.png-b98616191a1642adcc7f245c2d68a1b6.stex" ]
+source_file="res://Assets/Status Effects/StatusEffectFastDigestion.png"
+dest_files=[ "res://.import/StatusEffectFastDigestion.png-89117b0bd45a35259359e2ef8c50e79f.stex" ]
 
 [params]
 

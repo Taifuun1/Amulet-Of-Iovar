@@ -61,9 +61,15 @@ var statusEffects = {
 		"color": "#031e63",
 		"texture": load("res://Assets/Status Effects/StatusEffectFlattened.png")
 	},
+	"fast digestion": {
+		"label": "fsd",
+		"description": "You feel like youre wasting energy. (Lose an extra hunger point every turn)",
+		"color": "#c4047b",
+		"texture": load("res://Assets/Status Effects/StatusEffectSlowDigestion.png")
+	},
 	"slow digestion": {
 		"label": "sld",
-		"description": "You feel like youre saving energy. (Lose hunger points only every other turn)",
+		"description": "You feel like youre saving energy. (Lose a hunger point less every turn)",
 		"color": "#c4047b",
 		"texture": load("res://Assets/Status Effects/StatusEffectSlowDigestion.png")
 	},

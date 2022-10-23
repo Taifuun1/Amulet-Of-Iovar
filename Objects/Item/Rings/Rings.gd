@@ -84,20 +84,20 @@ var rings = {
 			"rarity": "Uncommon",
 			"identified": false
 		},
-		{
-			"itemName": "Ring of seeing",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unIdentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 10,
-			"value": null,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
-		},
+#		{
+#			"itemName": "Ring of seeing",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unIdentifiedTexture": null,
+#			"type": "Accessory",
+#			"category": "Ring",
+#			"weight": 10,
+#			"value": null,
+#			"enchantment": true,
+#			"stackable": false,
+#			"rarity": "Uncommon",
+#			"identified": false
+#		},
 		{
 			"itemName": "Ring of hunger",
 			"unidentifiedItemName": null,

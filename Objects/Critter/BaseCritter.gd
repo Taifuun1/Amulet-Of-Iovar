@@ -20,6 +20,10 @@ var maxmp
 var shields
 var ac
 var attacks
+var bonusDamage = {
+	"dmg": 0,
+	"magicDmg": 0
+}
 var currentHit
 var hits
 
@@ -38,7 +42,7 @@ var resistances
 var statusEffects = {
 	"stun": 0,
 	"confusion": 0,
-	"hungerification": 0,
+	"fast digestion": 0,
 	"slow digestion": 0,
 	"regen": 0,
 	"fumbling": 0,
@@ -46,7 +50,12 @@ var statusEffects = {
 	"blindness": 0,
 	"invisibility": 0,
 	"seeing": 0,
-	"hunger": 0
+	"toxix": 0
+}
+
+var statusStates = {
+	"hunger": 0,
+	"weight": 0
 }
 
 var hpRegenTimer = 0
@@ -77,12 +86,13 @@ func calculateDmg(_attack):
 		if _armorClassAfterArmorPen < 0: _armorClassAfterArmorPen = 0
 		
 		var _floorDmg = int(_attack.dmg[0])
-		var _dmgVariation = int(_attack.dmg[1]) - _attack.dmg[0]
+		var _dmgVariation = int(_attack.dmg[1] - _attack.dmg[0])
 		
 		var _totalBonusDamage = 0
 		if _attack.bonusDmg != null:
 			for _bonusDamage in _attack.bonusDmg.values():
 				_totalBonusDamage += _bonusDamage
+		_totalBonusDamage += bonusDamage.dmg
 		
 		var _baseDmg
 		if _dmgVariation == 0:
@@ -99,6 +109,7 @@ func calculateDmg(_attack):
 			_magicDmg = _magicFloorDmg
 		else:
 			_magicDmg = randi() % int(_magicDmgVariation) + _magicFloorDmg
+		_magicDmg += bonusDamage.magicDmg
 		if _attack.magicDmg.element != null and resistances.has(_attack.magicDmg.element.to_lower()):
 			_magicDmg /= 2
 		damage.magicDmg = _magicDmg

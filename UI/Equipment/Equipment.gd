@@ -205,6 +205,62 @@ func checkIfRingIsRingOfProtection(_ring):
 		_:
 			return 0
 
+func checkWhatAmuletIsWorn(_amulet):
+	if (
+		GlobalItemInfo.globalItemInfo.has(_amulet.identifiedItemName) and
+		GlobalItemInfo.globalItemInfo[_amulet.identifiedItemName].identified == false
+	):
+		GlobalItemInfo.globalItemInfo[_amulet.identifiedItemName].identified = true
+		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _amulet.identifiedItemName, "unidentifiedItemName": _amulet.unidentifiedItemName }))
+	var _playerNode = $"/root/World/Critters/0"
+	match _amulet.identifiedItemName.to_lower():
+		"amulet of seeing":
+			if _playerNode.itemsTurnedOn.has(_amulet):
+				_playerNode.statusEffects["seeing"] = 0
+				_playerNode.itemsTurnedOn.erase(_amulet)
+				Globals.gameConsole.addLog("It feels like you cant see at all.")
+			else:
+				_playerNode.statusEffects["seeing"] = -1
+				_playerNode.itemsTurnedOn.append(_amulet)
+				Globals.gameConsole.addLog("You can see everything!")
+		"amulet of magic power":
+			if _playerNode.itemsTurnedOn.has(_amulet):
+				$"/root/World/Critters/0".bonusDmg.magicDmg -= 3
+				_playerNode.itemsTurnedOn.erase(_amulet)
+				Globals.gameConsole.addLog("Your magic energy feels weaker.")
+			else:
+				$"/root/World/Critters/0".bonusDmg.magicDmg += 3
+				_playerNode.itemsTurnedOn.append(_amulet)
+				Globals.gameConsole.addLog("Your magic energy feels stronger.")
+		"amulet of life power":
+			if _playerNode.itemsTurnedOn.has(_amulet):
+				$"/root/World/Critters/0".maxhp -= 20
+				if $"/root/World/Critters/0".hp > $"/root/World/Critters/0".maxhp:
+					$"/root/World/Critters/0".hp = $"/root/World/Critters/0".maxhp
+				_playerNode.itemsTurnedOn.erase(_amulet)
+				Globals.gameConsole.addLog("Your life energy feels weaker.")
+			else:
+				$"/root/World/Critters/0".maxhp += 20
+				_playerNode.itemsTurnedOn.append(_amulet)
+				Globals.gameConsole.addLog("Your life energy feels stronger.")
+		"amulet of strangulation":
+			if _playerNode.itemsTurnedOn.has(_amulet):
+				_playerNode.itemsTurnedOn.erase(_amulet)
+				Globals.gameConsole.addLog("You can breath agane.")
+			else:
+				_playerNode.itemsTurnedOn.append(_amulet)
+				Globals.gameConsole.addLog("The amulet strangles you!")
+		"amulet of toxix":
+			if _playerNode.itemsTurnedOn.has(_amulet):
+				_playerNode.itemsTurnedOn.erase(_amulet)
+				_playerNode.statusEffects.toxix = 0
+				Globals.gameConsole.addLog("You dont feel sick anymore.")
+			else:
+				_playerNode.itemsTurnedOn.append(_amulet)
+				_playerNode.statusEffects.toxix = -1
+				Globals.gameConsole.addLog("You feel terrible!")
+	_playerNode.checkAllItemsIdentification()
+
 func checkWhatRingIsWorn(_ring):
 	if (
 		GlobalItemInfo.globalItemInfo.has(_ring.identifiedItemName) and
@@ -223,13 +279,13 @@ func checkWhatRingIsWorn(_ring):
 				_playerNode.statusEffects["slow digestion"] = -1
 				_playerNode.itemsTurnedOn.append(_ring)
 				Globals.gameConsole.addLog("Your belly feels constant.")
-		"ring of hunger":
+		"ring of fast digestion":
 			if _playerNode.itemsTurnedOn.has(_ring):
-				_playerNode.statusEffects["hunger"] = 0
+				_playerNode.statusEffects["fast digestion"] = 0
 				_playerNode.itemsTurnedOn.erase(_ring)
 				Globals.gameConsole.addLog("Your belly feels normal.")
 			else:
-				_playerNode.statusEffects["hunger"] = -1
+				_playerNode.statusEffects["fast digestion"] = -1
 				_playerNode.itemsTurnedOn.append(_ring)
 				Globals.gameConsole.addLog("Your belly feels like it has a hole.")
 		"ring of regen":
@@ -250,15 +306,15 @@ func checkWhatRingIsWorn(_ring):
 				_playerNode.statusEffects["fumbling"] = -1
 				_playerNode.itemsTurnedOn.append(_ring)
 				Globals.gameConsole.addLog("Your legs feel like jelly.")
-		"ring of seeing":
-			if _playerNode.itemsTurnedOn.has(_ring):
-				_playerNode.statusEffects["seeing"] = 0
-				_playerNode.itemsTurnedOn.erase(_ring)
-				Globals.gameConsole.addLog("It feels like you cant see at all.")
-			else:
-				_playerNode.statusEffects["seeing"] = -1
-				_playerNode.itemsTurnedOn.append(_ring)
-				Globals.gameConsole.addLog("You can see everything!")
+#		"ring of seeing":
+#			if _playerNode.itemsTurnedOn.has(_ring):
+#				_playerNode.statusEffects["seeing"] = 0
+#				_playerNode.itemsTurnedOn.erase(_ring)
+#				Globals.gameConsole.addLog("It feels like you cant see at all.")
+#			else:
+#				_playerNode.statusEffects["seeing"] = -1
+#				_playerNode.itemsTurnedOn.append(_ring)
+#				Globals.gameConsole.addLog("You can see everything!")
 	_playerNode.checkAllItemsIdentification()
 
 func checkIfMatchingEquipmentAndSlot(_type, _category):
