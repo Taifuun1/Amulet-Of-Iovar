@@ -21,6 +21,8 @@ var notIdentified = {
 	"enchantment": false
 }
 
+var container = null
+
 var stackable
 
 func createItem(_item, _extraData = {}, _amount = 1):
@@ -40,6 +42,9 @@ func createItem(_item, _extraData = {}, _amount = 1):
 	
 	type = _item.type
 	category = _item.category
+	
+	if category != null and category.matchn("container"):
+		addContainer()
 	
 	weight = _item.weight
 	
@@ -197,3 +202,6 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 		notIdentified.alignment = true
 	if _identifyEnchantment:
 		notIdentified.enchantment = true
+
+func addContainer():
+	container = []

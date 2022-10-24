@@ -253,6 +253,15 @@ func dropItem(_playerTile, _item, _grid):
 	var _dropLogString = PoolStringArray(_dropLog).join(" ")
 	return _dropLogString
 
+func addToInventory(_items):
+	for _itemId in _items:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": _itemId }))
+		$Inventory.addToInventory(_item)
+
+func removeFromInventory(_items):
+	for _itemId in _items:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": _itemId }))
+		$Inventory.removeFromInventory(_item)
 
 
 ####################################

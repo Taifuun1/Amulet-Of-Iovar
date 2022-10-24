@@ -63,12 +63,16 @@ func hideInventory():
 		item.queue_free()
 	$InventoryContainer.hide()
 
-func getItemsOfType(_types):
+func getItemsOfType(_types, _category = null):
 	var _items = []
 	for _type in _types:
 		for _item in inventory:
 			if get_node("/root/World/Items/{id}".format({ "id": _item })).type.matchn(_type):
 				_items.append(_item)
+	if _category:
+		for _item in _items:
+			if get_node("/root/World/Items/{id}".format({ "id": _item })).category == null or get_node("/root/World/Items/{id}".format({ "id": _item })).category.matchn(_category):
+				_items.erase(_item)
 	return _items
 
 func checkIfItemInInventoryByName(_itemName):

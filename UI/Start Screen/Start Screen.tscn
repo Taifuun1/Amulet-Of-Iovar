@@ -252,25 +252,24 @@ rect_min_size = Vector2( 300, 100 )
 text = "Start"
 
 [node name="CharacterCreationContainer" type="VBoxContainer" parent="."]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1920.0
+margin_bottom = 1004.0
 mouse_filter = 2
 
 [node name="Title" type="Label" parent="CharacterCreationContainer"]
 margin_right = 1920.0
-margin_bottom = 39.0
-rect_min_size = Vector2( 250, 32 )
+margin_bottom = 40.0
+rect_min_size = Vector2( 250, 40 )
 custom_fonts/font = SubResource( 3 )
 text = "Create Character"
 align = 1
 valign = 1
 
 [node name="ClassesContainer" type="GridContainer" parent="CharacterCreationContainer"]
-margin_top = 43.0
+margin_top = 44.0
 margin_right = 1920.0
-margin_bottom = 963.0
-rect_min_size = Vector2( 1920, 920 )
+margin_bottom = 858.0
+rect_min_size = Vector2( 1920, 814 )
 mouse_filter = 2
 columns = 4
 
@@ -533,10 +532,10 @@ position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
 [node name="Button" type="Button" parent="CharacterCreationContainer"]
-margin_left = 934.0
-margin_top = 967.0
-margin_right = 985.0
-margin_bottom = 993.0
+margin_left = 928.0
+margin_top = 862.0
+margin_right = 991.0
+margin_bottom = 898.0
 mouse_filter = 1
 size_flags_horizontal = 4
 disabled = true

@@ -52,6 +52,8 @@ enum gameState {
 	INVENTORY
 	PICK_UP_ITEMS
 	DROP_ITEMS
+	PICK_LOOTABLE
+	LOOT
 	READ
 	RUNES
 	QUAFF
@@ -120,6 +122,7 @@ func _ready():
 	$UI/UITheme/ItemManagement.create()
 	$UI/UITheme/Equipment.create()
 	$UI/UITheme/ListMenu.create()
+	$UI/UITheme/Container.create()
 	$UI/UITheme/DialogMenu.create()
 	for _node in $UI/UITheme.get_children():
 		_node.hide()
@@ -197,8 +200,8 @@ func create(_className):
 	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("wand of wishing", null, 1, true, { "alignment": "blessed" })
-	$Items/Items.createItem("wand of wishing", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("frostfury", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("shovel", null, 1, true, { "alignment": "cursed" })
+	$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
 #	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
@@ -434,6 +437,8 @@ func _input(_event):
 				openMenu("pick up", _playerTile)
 			elif (Input.is_action_just_pressed("DROP") and currentGameState == gameState.GAME):
 				openMenu("drop")
+			elif (Input.is_action_just_pressed("LOOT") and currentGameState == gameState.GAME):
+				openMenu("loot")
 			elif (Input.is_action_just_pressed("EQUIPMENT") and currentGameState == gameState.GAME):
 				openMenu("equipment")
 			elif (Input.is_action_just_pressed("RUNES") and currentGameState == gameState.GAME):
@@ -801,6 +806,11 @@ func openMenu(_menu, _playerTile = null):
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.inventory
 				$UI/UITheme/ItemManagement.showItemManagementList()
 				currentGameState = gameState.DROP_ITEMS
+		"loot":
+			if currentGameState == gameState.GAME:
+				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"], "Storage")
+				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				currentGameState = gameState.PICK_LOOTABLE
 		"equipment":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["weapon", "accessory", "armor"]))
@@ -953,7 +963,8 @@ func closeMenu(_additionalChoices = false, _pickDirection = false):
 			currentGameState == gameState.READ or
 			currentGameState == gameState.QUAFF or
 			currentGameState == gameState.CONSUME or
-			currentGameState == gameState.USE
+			currentGameState == gameState.USE or
+			currentGameState == gameState.PICK_LOOTABLE
 		):
 			$UI/UITheme/ItemManagement.hideItemManagementList()
 		if currentGameState == gameState.EQUIPMENT:
@@ -962,6 +973,8 @@ func closeMenu(_additionalChoices = false, _pickDirection = false):
 			$UI/UITheme/Runes.hideRunes()
 		if currentGameState == gameState.INVENTORY:
 			$Critters/"0"/Inventory.hideInventory()
+		if currentGameState == gameState.LOOT:
+			$UI/UITheme/Container.hideContainerList()
 		$UI/UITheme/ListMenu.hideListMenuList()
 		resetToDefaulGameState()
 

@@ -29,6 +29,12 @@ func hideItemManagementList():
 
 func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 	if chooseOnClick:
+		if $"/root/World".currentGameState == $"/root/World".gameState.PICK_LOOTABLE:
+			$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
+			$"/root/World".currentGameState = $"/root/World".gameState.LOOT
+			var _containerItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
+			$"/root/World/UI/UITheme/Container".showContainerList(_id, _containerItem.itemName, _containerItem.container, $"/root/World/Critters/0/Inventory".inventory)
+			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.READ:
 			$"/root/World/Critters/0".readItem(_id)
 			if _processGameTurn:

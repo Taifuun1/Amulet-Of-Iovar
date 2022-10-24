@@ -633,7 +633,10 @@ func dealWithWandOfWishing(_name, _alignment):
 	if _alignment.matchn("blessed"):
 		$"/root/World/Items/Items".createItem(_name, null, 1, true)
 		Globals.gameConsole.addLog("An item appears in your inventory.")
+	elif _alignment.matchn("cursed"):
+		$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), $"/root/World".level.getCritterTile(0))
+		Globals.gameConsole.addLog("An item appears at your feet.")
 	else:
 		$"/root/World/Items/Items".createItem(_name, $"/root/World".level.getCritterTile(0))
-		Globals.gameConsole.addLog("An item appears at your feet.")
+		Globals.gameConsole.addLog("An item appears at your feet... It doesn't seem to be what you wished for.")
 	$"/root/World".closeMenu()
