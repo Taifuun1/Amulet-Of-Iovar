@@ -240,7 +240,14 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 			var _attackLog = ""
 			
 			var _damageNumber = damageNumber.instance()
-			_damageNumber.create(_critterTile, _damage.dmg + _damage.magicDmg, "#00F")
+			var _damageText
+			if _damage.dmg < 1 and _damage.dmg >= -2:
+				_damageText = 1 + _damage.magicDmg
+			elif _damage.dmg < -2:
+				_damageText = 0
+			else:
+				_damageText = _damage.dmg + _damage.magicDmg
+			_damageNumber.create(_critterTile, _damageText, "#00F")
 			$"/root/World/Animations".add_child(_damageNumber)
 			
 			# Magic spell

@@ -110,7 +110,7 @@ var randomItemList = {
 			"create potion",
 			"teleport",
 			"genocide",
-			"confuse"
+			"confusion"
 		],
 		"appearance": [
 			"Dwarven scriptures",

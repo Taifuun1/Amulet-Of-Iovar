@@ -55,6 +55,20 @@ var scrolls = {
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
+		},
+		{
+			"itemName": "Scroll of confusion",
+			"unidentifiedItemName": null,
+			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"unIdentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"type": "Scroll",
+			"category": null,
+			"weight": 5,
+			"value": null,
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Common",
+			"identified": false
 		}
 	],
 	"uncommon": [
@@ -144,20 +158,6 @@ var scrolls = {
 		},
 		{
 			"itemName": "Scroll of teleport",
-			"unidentifiedItemName": null,
-			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
-			"unIdentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
-			"type": "Scroll",
-			"category": null,
-			"weight": 5,
-			"value": null,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
-		},
-		{
-			"itemName": "Scroll of confuse",
 			"unidentifiedItemName": null,
 			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
 			"unIdentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),

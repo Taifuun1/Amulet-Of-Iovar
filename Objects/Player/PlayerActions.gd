@@ -209,6 +209,19 @@ func readItem(_id):
 					Globals.gameConsole.addLog("Whoosh! You reappear somewhere!")
 				else:
 					Globals.gameConsole.addLog("It doesn't seem you have space to teleport...")
+			"scroll of confusion":
+				if statusEffects.confusion != -1:
+					if _readItem.alignment.matchn("blessed"):
+						statusEffects.confusion = 4
+						Globals.gameConsole.addLog("You feel slightly disoriented.")
+					elif _readItem.alignment.matchn("blessed"):
+						statusEffects.confusion = 10
+						Globals.gameConsole.addLog("You feel confused.")
+					elif _readItem.alignment.matchn("blessed"):
+						statusEffects.confusion = 22
+						Globals.gameConsole.addLog("The world spins!")
+				else:
+					Globals.gameConsole.addLog("You already feel confused enough!")
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		checkAllItemsIdentification()
@@ -299,6 +312,19 @@ func quaffItem(_id):
 				if _quaffedItem.alignment.matchn("cursed"):
 					calories += -1000
 					Globals.gameConsole.addLog("You feel like you lost half your weight!")
+			"potion of confusion":
+				if statusEffects.confusion != -1:
+					if _quaffedItem.alignment.matchn("blessed"):
+						statusEffects.confusion = 4
+						Globals.gameConsole.addLog("You feel slightly disoriented.")
+					elif _quaffedItem.alignment.matchn("uncursed"):
+						statusEffects.confusion = 10
+						Globals.gameConsole.addLog("You feel confused.")
+					elif _quaffedItem.alignment.matchn("cursed"):
+						statusEffects.confusion = 22
+						Globals.gameConsole.addLog("The world spins!")
+				else:
+					Globals.gameConsole.addLog("You already feel confused enough!")
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
 		checkAllItemsIdentification()

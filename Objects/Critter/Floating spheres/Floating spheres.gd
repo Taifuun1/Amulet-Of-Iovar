@@ -6,7 +6,7 @@ var floatingSpheres = {
 			"race": "Floating sphere",
 			"class": "Natural hazard",
 			"weight": 150,
-			"aI": "Aggressive",
+			"aI": "Neutral",
 			"texture": load("res://Assets/Critters/FloatingSphereFloatingEye.png"),
 			"alignment": "Neutral",
 			"level": 3,

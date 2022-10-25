@@ -90,6 +90,12 @@ var statusEffects = {
 		"description": "You can see magically. (You can see enemies through walls.)",
 		"color": "#ffbb1c",
 		"texture": load("res://Assets/Status Effects/StatusEffectSeeing.png")
+	},
+	"stun": {
+		"label": "stn",
+		"description": "You are stunned. (Skip turns until not stunned.)",
+		"color": "#ff0000",
+		"texture": load("res://Assets/Status Effects/StatusEffectStun.png")
 	}
 }
 

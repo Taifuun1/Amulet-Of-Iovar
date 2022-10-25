@@ -137,6 +137,8 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter != null:
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
 		if _critter.aI.aI == "Aggressive":
+			if checkIfCritterHasEffect(_critter):
+				return
 			if hits[currentHit] == 1:
 				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo)
 				if _didCritterDespawn != null:
@@ -172,7 +174,14 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			var _damage = calculateDmg(_attack)
 			
 			var _damageNumber = damageNumber.instance()
-			_damageNumber.create(_critterTile, _damage.dmg + _damage.magicDmg, "#00F")
+			var _damageText
+			if _damage.dmg < 1 and _damage.dmg >= -2:
+				_damageText = 1 + _damage.magicDmg
+			elif _damage.dmg < -2:
+				_damageText = 0
+			else:
+				_damageText = _damage.dmg + _damage.magicDmg
+			_damageNumber.create(_critterTile, _damageText, "#00F")
 			$"/root/World/Animations".add_child(_damageNumber)
 			
 			# Magic spell
@@ -328,6 +337,9 @@ func processPlayerSpecificEffects():
 		if (statusEffects[_statusEffect] > 0 or statusEffects[_statusEffect] == -1):
 			if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".addStatusEffect(_statusEffect)
+				var _damageNumber = damageNumber.instance()
+				_damageNumber.create($"/root/World".level.getCritterTile(0), _statusEffect.capitalize(), "#00F")
+				$"/root/World/Animations".add_child(_damageNumber)
 		else:
 			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_statusEffect)
@@ -554,4 +566,11 @@ func checkIfLightSourceIsTurnedOn():
 			_item.identifiedItemName.to_lower() == "magic lamp"
 		):
 			return true
+	return false
+
+func checkIfCritterHasEffect(_critter):
+	if _critter.critterName.matchn("floating eye"):
+		statusEffects.stun = 10
+		Globals.gameConsole.addLog("The {critterName}s gaze stuns you!".format({ "critterName": _critter.critterName }))
+		return true
 	return false

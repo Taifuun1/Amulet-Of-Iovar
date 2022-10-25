@@ -310,6 +310,9 @@ var globalItemInfo = {
 	"Scroll of create food": {
 		"identified": false
 	},
+	"Scroll of confusion": {
+		"identified": false
+	},
 	"Scroll of remove curse": {
 		"identified": false
 	},
@@ -329,9 +332,6 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Scroll of teleport": {
-		"identified": false
-	},
-	"Scroll of confuse": {
 		"identified": false
 	},
 	"Scroll of genocide": {
