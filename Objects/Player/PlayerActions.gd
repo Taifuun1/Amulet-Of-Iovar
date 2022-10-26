@@ -376,6 +376,7 @@ func zapItem(_direction):
 							"duration": 10
 						}
 						Globals.gameConsole.addLog("The light illuminates your surroundings dimly.")
+					$"/root/World".drawLevel()
 				"wand of teleport":
 					var _grid = $"/root/World".level.grid
 #					if _zappedItem.alignment.matchn("blessed"):

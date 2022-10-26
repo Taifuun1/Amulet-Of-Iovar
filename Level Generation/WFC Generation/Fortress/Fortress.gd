@@ -16,7 +16,8 @@ func createDungeon():
 		createFortress()
 		trimGenerationEdges()
 		getGenerationGrid()
-		fillEmptyTiles("CORRIDOR_STONE")
+		fillEmptyGenerationTiles("CORRIDOR_STONE")
+		fillGridWithGeneratedGrid()
 		changeReplaceables(["ROAD_DUNGEON"])
 		getAndCleanUpRooms([
 			{
@@ -40,7 +41,7 @@ func createDungeon():
 
 func createFortress():
 	for _i in range(40):
-		if generateMap(randi() % 4) and get_used_cells().size() > 1350:
+		if generateMap(randi() % 4) and getUsedCells() > 1750:
 			return
 		resetGeneration()
 

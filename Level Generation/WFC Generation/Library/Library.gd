@@ -19,8 +19,9 @@ func createDungeon(_isLast):
 		createLibrary()
 		trimGenerationEdges()
 		getGenerationGrid()
+		fillEmptyGenerationTiles("CORRIDOR_SAND")
+		fillGridWithGeneratedGrid()
 		changeReplaceables(["BOOKCASE1", "BOOKCASE2", "BOOKCASE3"])
-		fillEmptyTiles("CORRIDOR_SAND")
 		if _isLast:
 			_bossRoomCenter = generateBossRoom()
 			librarySpawns.librarySpawns[0].tiles = _bossRoomCenter
@@ -42,7 +43,7 @@ func createDungeon(_isLast):
 
 func createLibrary():
 	for _i in range(40):
-		if generateMap(randi() % 11) and get_used_cells().size() > 1350:
+		if generateMap(randi() % 11) and getUsedCells() > 1750:
 			return
 		resetGeneration()
 

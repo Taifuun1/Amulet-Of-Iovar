@@ -19,7 +19,8 @@ func createDungeon(_isLast):
 		createLabyrinth()
 		trimGenerationEdges()
 		getGenerationGrid()
-		fillEmptyTiles("CORRIDOR_DUNGEON")
+		fillEmptyGenerationTiles("CORRIDOR_DUNGEON")
+		fillGridWithGeneratedGrid()
 		if _isLast:
 			_bossRoomCenter = generateBossRoom()
 			labyrinthSpawns.labyrinthSpawns[0].tiles = _bossRoomCenter
@@ -41,7 +42,7 @@ func createDungeon(_isLast):
 
 func createLabyrinth():
 	for _i in range(40):
-		if generateMap() and get_used_cells().size() > 1350:
+		if generateMap() and getUsedCells() > 1750:
 			return
 		resetGeneration()
 

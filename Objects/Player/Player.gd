@@ -322,7 +322,9 @@ func processPlayerSpecificEffects():
 	
 	if checkIfStatusEffectIsInEffect("blindness"):
 		playerVisibility.distance = 0
-	elif !checkIfLightSourceIsTurnedOn():
+	elif !checkIfLightSourceIsTurnedOn() and playerVisibility.duration == 0:
+		if playerVisibility.distance > 0:
+			Globals.gameConsole.addLog("Your vision changes.")
 		playerVisibility.distance = -1
 	
 	if checkIfStatusEffectIsInEffect("toxix"):
@@ -548,9 +550,18 @@ func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
 	
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.ALTAR:
 		Globals.gameConsole.addLog("You see an altar here.")
-		
+	
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.HIDDEN_ITEM:
 		Globals.gameConsole.addLog("There's something hidden in the ground here.")
+	
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT:
+		Globals.gameConsole.addLog("There's a plant here.")
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT_TOMATO:
+		Globals.gameConsole.addLog("There's a tomato plant here.")
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT_BEAN:
+		Globals.gameConsole.addLog("There's a bean plant here.")
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT_ORANGE:
+		Globals.gameConsole.addLog("There's an orange plant here.")
 
 func checkAllItemsIdentification():
 	for _item in $"/root/World/Items".get_children():

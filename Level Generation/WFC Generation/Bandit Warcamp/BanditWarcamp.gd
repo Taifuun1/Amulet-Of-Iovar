@@ -16,7 +16,8 @@ func createDungeon():
 		createBanditWarcamp()
 		trimGenerationEdges()
 		getGenerationGrid()
-		fillEmptyTiles("GRASS")
+		fillEmptyGenerationTiles("GRASS")
+		fillGridWithGeneratedGrid()
 		getAndCleanUpRooms([
 			{
 				"floor": "FLOOR_WOOD_BRICK",
@@ -45,6 +46,6 @@ func createDungeon():
 
 func createBanditWarcamp():
 	for _i in range(40):
-		if generateMap(randi() % 5 + 3) and get_used_cells().size() > 1350:
+		if generateMap(randi() % 5 + 3) and getUsedCells() > 1750:
 			return
 		resetGeneration()

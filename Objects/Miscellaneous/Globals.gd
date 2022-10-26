@@ -95,6 +95,11 @@ enum interactables {
 	LOCKED
 	HIDDEN_ITEM
 	ALTAR
+	PLANT
+	PLANT_CARROT
+	PLANT_TOMATO
+	PLANT_BEAN
+	PLANT_ORANGE
 }
 
 var currentDungeonLevel = 1

@@ -16,7 +16,8 @@ func createDungeon():
 		createDragonsPeak()
 		trimGenerationEdges()
 		getGenerationGrid()
-		fillEmptyTiles("WALL_DRAGONS_PEAK")
+		fillEmptyGenerationTiles("WALL_DRAGONS_PEAK")
+		fillGridWithGeneratedGrid()
 		removeSmallWallFormations()
 		getSpawnableTiles(
 			["FLOOR_DRAGONS_PEAK"],
@@ -32,7 +33,7 @@ func createDungeon():
 
 func createDragonsPeak():
 	for _i in range(40):
-		if generateMap(randi() % 5) and get_used_cells().size() > 1350:
+		if generateMap(randi() % 5) and getUsedCells() > 1750:
 			return
 		resetGeneration()
 

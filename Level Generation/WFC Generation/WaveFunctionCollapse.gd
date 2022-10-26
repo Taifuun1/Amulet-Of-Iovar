@@ -5,6 +5,7 @@ var gridSize = Vector2(68,32)
 var entropyVariation = 0
 
 var allInputs
+var generatedGrid = []
 var edgeTiles = []
 var nonLegibleTiles = []
 
@@ -20,6 +21,7 @@ func sortToLowestEntropy(a, b):
 	return a.matches.size() < b.matches.size()
 
 func resetGeneration():
+	generatedGrid = []
 	edgeTiles.clear()
 	allInputs.clear()
 	nonLegibleTiles.clear()
@@ -30,6 +32,8 @@ func resetGeneration():
 func generateMap(_entropyVariation = null):
 	if _entropyVariation != null:
 		entropyVariation = _entropyVariation
+	
+	createGenerationGrid()
 	
 	allInputs = getAllInputs()
 	
@@ -53,7 +57,8 @@ func isTileLegible(_tile):
 		var _legibleInputs = doesTileHaveLegibleInputs(_tile, _match)
 		if typeof(_legibleInputs) != TYPE_BOOL:
 			for _legibleTile in _legibleInputs.grid:
-				set_cellv(Vector2(_legibleTile.x, _legibleTile.y), _legibleInputs.grid[_legibleTile])
+				generatedGrid[_legibleTile.x][_legibleTile.y].tile = _legibleInputs.grid[_legibleTile]
+#				set_cellv(Vector2(_legibleTile.x, _legibleTile.y), _legibleInputs.grid[_legibleTile])
 			edgeTiles = _legibleInputs.edgeTiles.duplicate(true)
 			return true
 	
@@ -209,7 +214,8 @@ func getPartialPatternForTile(_tile, _grid = null):
 			if _grid != null and _grid.has(Vector2(x,y)):
 				_partialPattern[x][y] = _grid[Vector2(x,y)]
 			else:
-				_partialPattern[x][y] = get_cellv(Vector2(_tile.x + (x - 1), _tile.y + (y - 1)))
+				_partialPattern[x][y] = generatedGrid[_tile.x + (x - 1)][_tile.y + (y - 1)].tile
+#				get_cellv(Vector2(_tile.x + (x - 1), _tile.y + (y - 1)))
 	return _partialPattern
 
 func findAllPartialPatternMatches(_partialPattern):
@@ -245,11 +251,13 @@ func checkMatchesDoesntHavePattern(_newInputPattern, _array):
 func drawPattern(_tile, _pattern):
 	for x in range(3):
 		for y in range(3):
-			set_cellv(Vector2(_tile.x + (x - 1), _tile.y + (y - 1)), _pattern[x][y])
+			generatedGrid[_tile.x + (x - 1)][_tile.y + (y - 1)].tile = _pattern[x][y]
+#			set_cellv(Vector2(_tile.x + (x - 1), _tile.y + (y - 1)), _pattern[x][y])
 
 func drawPatternWithGrid(_grid):
 	for tile in _grid.keys():
-		set_cellv(Vector2(tile.x, tile.y), _grid[tile])
+		pass
+#		set_cellv(Vector2(tile.x, tile.y), _grid[tile])
 
 func changeReplaceables(_replaceables):
 	for x in Globals.gridSize.x:
@@ -257,11 +265,44 @@ func changeReplaceables(_replaceables):
 			if grid[x][y].tile == Globals.tiles.REPLACEABLE1:
 				grid[x][y].tile = Globals.tiles[_replaceables[randi() % _replaceables.size()]]
 
+func placeTilesInArea(_placement):
+	if _placement.has("side"):
+		if _placement.side.matchn("west"):
+			for x in _placement.tilesFromSide:
+				for y in Globals.gridSize.y:
+					grid[x][y].tile = generatedGrid[x][y].tile
+					grid[x][y].tileMetaData = generatedGrid[x][y].tileMetaData
+		elif _placement.side.matchn("east"):
+			for x in range(int(Globals.gridSize.x) - 1, int(Globals.gridSize.x) - _placement.tilesFromSide, -1):
+				for y in Globals.gridSize.y - 1:
+					grid[x][y].tile = generatedGrid[x][y].tile
+					grid[x][y].tileMetaData = generatedGrid[x][y].tileMetaData
+	if _placement.has("splotches"):
+		for _splotch in _placement.splotches:
+			for x in Globals.gridSize.x:
+				for y in Globals.gridSize.y:
+					if calculatePath(Vector2(x,y), _splotch.spot).size() < _splotch.distance:
+						grid[x][y].tile = generatedGrid[x][y].tile
+						grid[x][y].tileMetaData = generatedGrid[x][y].tileMetaData
+
 
 
 ##########################################
 ### Input pattern processing functions ###
 ##########################################
+
+func addInputs(_name, _path):
+	var dir = Directory.new()
+	var inputs = []
+	if dir.open(_path) == OK:
+		dir.list_dir_begin()
+		var fileName = dir.get_next()
+		while fileName != "":
+			if not dir.current_is_dir() and fileName.get_extension().matchn("tscn"):
+				inputs.append(fileName)
+			fileName = dir.get_next()
+	for fileName in inputs:
+		$Inputs.add_child(load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
 
 func getAllInputs():
 	var _allInputs = []
@@ -284,6 +325,7 @@ func createNodeInputGrid(_inputNode):
 		_input.append([])
 		for y in range(_inputNode.gridSize.y):
 			_input[x].append(_inputNode.get_cellv(Vector2(x,y)))
+#			_input[x].append(_inputNode.get_cellv(Vector2(x,y)))
 	return _input
 
 func createInputGrid(_input):
@@ -395,15 +437,26 @@ func placeCornerPatterns():
 						_edgeTiles.append(_newEdgeTile)
 					elif _tileCount < 3 or _tileCount == 9:
 						_edgeTiles.erase(_corner)
-	
 	for _edgeTile in _edgeTiles:
 		var _matches = findAllPartialPatternMatches(getPartialPatternForTile(_edgeTile.position))
 		if typeof(_matches) == TYPE_BOOL:
 			continue
 		_edgeTile.setValues(_edgeTile.position, _matches)
 		edgeTiles.append(_edgeTile)
-	
 	edgeTiles.shuffle()
+
+func createGenerationGrid(_isGenerationGridSize = true):
+	generatedGrid = []
+	var _gridSize = gridSize
+	if !_isGenerationGridSize:
+		_gridSize = Globals.gridSize
+	for x in range(_gridSize.x):
+		generatedGrid.append([])
+		for _y in range(_gridSize.y):
+			generatedGrid[x].append({
+				"tile": -1,
+				"tileMetaData": null
+			})
 
 func checkIfArrayOfClassesHasValue(_array, _property, _value):
 	for _index in _array.size():
@@ -412,30 +465,65 @@ func checkIfArrayOfClassesHasValue(_array, _property, _value):
 	return -1
 
 func checkIfPositionHasTile(_position, _testGrid):
-	if get_cellv(_position) != -1 or (_testGrid.has(_position) and _testGrid[_position] != -1):
+	if generatedGrid[_position.x][_position.y].tile != -1 or (_testGrid.has(_position) and _testGrid[_position] != -1):
 		return true
 	return false
 
-func addInputs(_name, _path):
-	var dir = Directory.new()
-	var inputs = []
-	if dir.open(_path) == OK:
-		dir.list_dir_begin()
-		var fileName = dir.get_next()
-		while fileName != "":
-			if not dir.current_is_dir() and fileName.get_extension().matchn("tscn"):
-				inputs.append(fileName)
-			fileName = dir.get_next()
-	for fileName in inputs:
-		$Inputs.add_child(load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
+func getGenerationGrid():
+	for x in range(generatedGrid.size()):
+		for y in range(generatedGrid[x].size()):
+#			grid[x][y].tile = get_cellv(Vector2(x,y))
+#			grid[x][y].tileMetaData = {
+#				"xFlip": is_cell_x_flipped(x, y),
+#				"yFlip": is_cell_y_flipped(x, y)
+#			}
+			generatedGrid[x][y].tileMetaData = {
+				"xFlip": is_cell_x_flipped(x, y),
+				"yFlip": is_cell_y_flipped(x, y)
+			}
 
 func trimGenerationEdges():
-	var grid = []
+	var _trimmedGrid = []
+	var _generatedGridCopy = generatedGrid.duplicate(true)
 	for x in range(gridSize.x - 8):
-		grid.append([])
+		_trimmedGrid.append([])
 		for y in range(gridSize.y - 8):
-			grid[x].append(get_cellv(Vector2(x + 4,y + 4)))
-	clear()
-	for x in grid.size():
-		for y in grid[x].size():
-			set_cellv(Vector2(x,y), grid[x][y])
+			_trimmedGrid[x].append(_generatedGridCopy[x + 4][y + 4].tile)
+	createGenerationGrid(false)
+	for x in _trimmedGrid.size():
+		for y in _trimmedGrid[x].size():
+			generatedGrid[x][y].tile = _trimmedGrid[x][y]
+#			set_cellv(Vector2(x,y), grid[x][y])
+
+func fillEmptyGenerationTiles(_tile, _fillEdges = null):
+	for x in range(generatedGrid.size()):
+		for y in range(generatedGrid[x].size()):
+			if generatedGrid[x][y].tile == -1:
+				generatedGrid[x][y].tile = Globals.tiles[_tile]
+	if _fillEdges != null:
+		for x in range(generatedGrid.size()):
+			if generatedGrid[x][0].tile == Globals.tiles.DOOR_CLOSED:
+				generatedGrid[x][0].tile = Globals.tiles[_fillEdges]
+		for x in range(generatedGrid.size()):
+			if generatedGrid[x][generatedGrid[x].size() - 1].tile == Globals.tiles.DOOR_CLOSED:
+				generatedGrid[x][generatedGrid[x].size() - 1].tile = Globals.tiles[_fillEdges]
+		for y in range(1, generatedGrid[0].size() - 1):
+			if generatedGrid[0][y].tile == Globals.tiles.DOOR_CLOSED:
+				generatedGrid[0][y].tile = Globals.tiles[_fillEdges]
+		for y in range(1, generatedGrid[0].size() - 1):
+			if generatedGrid[generatedGrid.size() - 1][y].tile == Globals.tiles.DOOR_CLOSED:
+				generatedGrid[generatedGrid.size() - 1][y].tile = Globals.tiles[_fillEdges]
+
+func getUsedCells():
+	var _usedCells = 0
+	for x in generatedGrid.size():
+		for y in generatedGrid[x].size():
+			if generatedGrid[x][y].tile != -1:
+				_usedCells += 1
+	return _usedCells
+
+func fillGridWithGeneratedGrid():
+	for x in generatedGrid.size():
+		for y in generatedGrid[x].size():
+			grid[x][y].tile = generatedGrid[x][y].tile
+			grid[x][y].tileMetaData = generatedGrid[x][y].tileMetaData

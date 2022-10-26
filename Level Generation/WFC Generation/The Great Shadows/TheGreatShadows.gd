@@ -16,8 +16,9 @@ func createDungeon():
 		createTheGreatShadows()
 		trimGenerationEdges()
 		getGenerationGrid()
+		fillEmptyGenerationTiles("GRASS_DARK")
+		fillGridWithGeneratedGrid()
 		changeReplaceables(["GRASS_DEAD_TREE"])
-		fillEmptyTiles("GRASS_DARK")
 		makeForestOpenings()
 		getSpawnableTiles(
 			["GRASS_DARK"],
@@ -33,7 +34,7 @@ func createDungeon():
 
 func createTheGreatShadows():
 	for _i in range(40):
-		if generateMap() and get_used_cells().size() > 1350:
+		if generateMap() and getUsedCells() > 1750:
 			return
 		resetGeneration()
 

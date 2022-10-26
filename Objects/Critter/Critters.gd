@@ -207,9 +207,9 @@ func checkNewCritterSpawn(_level, _playerTile):
 		spawnCritters(_randomCritter, _randomSpawnableTile)
 
 func checkSpawnableCrittersLevel():
-	for _species in critters.values():
-		for _critter in _species.critterTypes:
-			if _critter.level <= $"/root/World/Critters/0".level and !spawnableCritters.has(critter):
+	for _species in critters.keys():
+		for _critter in critters[_species].critterTypes:
+			if _critter.level <= $"/root/World/Critters/0".level and !spawnableCritters.has(critter) and !_species.matchn("bosses"):
 				spawnableCritters.append(_critter.critterName)
 
 func getCritterByName(_critterName):

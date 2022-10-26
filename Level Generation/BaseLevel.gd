@@ -16,6 +16,7 @@ var floors = []
 var openTiles = []
 var spawnableItemTiles = []
 var spawnableCritterTiles = []
+var floorTiles = []
 var stairs = {}
 
 var critters = []
@@ -52,15 +53,6 @@ func createGrid(_tile = Globals.tiles.EMPTY):
 				"interactable": null
 			})
 
-func getGenerationGrid():
-	for x in range(grid.size()):
-		for y in range(grid[x].size()):
-			grid[x][y].tile = get_cellv(Vector2(x,y))
-			grid[x][y].tileMetaData = {
-				"xFlip": is_cell_x_flipped(x, y),
-				"yFlip": is_cell_y_flipped(x, y)
-			}
-
 func placeCritterOnTypeOfTile(_tile, _critter):
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):
@@ -82,7 +74,7 @@ func getTilePosition(_tile):
 				return Vector2(x, y)
 	return false
 
-func getSpawnableTiles(_openTiles, _spawnableItemTiles, _spawnableCritterTiles, useAreas = false):
+func getSpawnableTiles(_openTiles, _spawnableItemTiles, _spawnableCritterTiles, useAreas = false, _floorTiles = null):
 	for x in Globals.gridSize.x:
 		for y in Globals.gridSize.y:
 			for _tile in _openTiles:
@@ -116,6 +108,18 @@ func getSpawnableTiles(_openTiles, _spawnableItemTiles, _spawnableCritterTiles, 
 				elif grid[x][y].tile == Globals.tiles[_tile]:
 					spawnableCritterTiles.append(Vector2(x, y))
 					break
+	if _floorTiles != null:
+		for x in Globals.gridSize.x:
+			for y in Globals.gridSize.y:
+				for _tile in _floorTiles:
+					if useAreas:
+						for _area in areas:
+							if _area.has(Vector2(x, y)) and _area.size() > 75:
+								floorTiles.append(Vector2(x, y))
+								break
+					elif grid[x][y].tile == Globals.tiles[_tile]:
+						floorTiles.append(Vector2(x, y))
+						break
 
 func placeStairs(_stairType = "DUNGEON", _isDouble = false):
 	stairs["downStair"] = placeStair("downStair", "DOWN_STAIR_", _stairType)
@@ -128,9 +132,14 @@ func placeStairs(_stairType = "DUNGEON", _isDouble = false):
 func placeStair(_stairName, _stairTile, _stairType):
 	for _i in range(20):
 		var _stair = spawnableItemTiles[randi() % spawnableItemTiles.size()]
+		if !floorTiles.empty():
+			_stair = floorTiles[randi() % floorTiles.size()]
 		if !isTileAStair(_stair):
 			grid[_stair.x][_stair.y].tile = Globals.tiles[_stairTile + "{type}".format({ "type": _stairType })]
-			spawnableItemTiles.erase(_stair)
+			if floorTiles.has(_stair):
+				floorTiles.erase(_stair)
+			if spawnableItemTiles.has(_stair):
+				spawnableItemTiles.erase(_stair)
 			if spawnableCritterTiles.has(_stair):
 				spawnableCritterTiles.erase(_stair)
 			return _stair
@@ -578,3 +587,12 @@ func isTileAlreadyInAnArea(_tile):
 			if _floor == _tile:
 				return true
 	return false
+
+func getGenerationGrid():
+	for x in range(grid.size()):
+		for y in range(grid[x].size()):
+			grid[x][y].tile = get_cellv(Vector2(x,y))
+			grid[x][y].tileMetaData = {
+				"xFlip": is_cell_x_flipped(x, y),
+				"yFlip": is_cell_y_flipped(x, y)
+			}

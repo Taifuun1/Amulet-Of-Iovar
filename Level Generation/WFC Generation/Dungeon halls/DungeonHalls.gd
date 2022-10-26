@@ -16,7 +16,8 @@ func createDungeon():
 		createDungeonHalls()
 		trimGenerationEdges()
 		getGenerationGrid()
-		fillEmptyTiles("WALL_DUNGEON", "WALL_DUNGEON")
+		fillEmptyGenerationTiles("WALL_DUNGEON", "WALL_DUNGEON")
+		fillGridWithGeneratedGrid()
 		getAndCleanUpDungeonHallsRooms()
 		getSpawnableTiles(
 			["FLOOR_DUNGEON", "CORRIDOR_DUNGEON"],
@@ -33,7 +34,7 @@ func createDungeon():
 
 func createDungeonHalls():
 	for _i in range(40):
-		if generateMap(randi() % 9 + 1) and get_used_cells().size() > 1350:
+		if generateMap(randi() % 9 + 1) and getUsedCells() > 1750:
 			return
 		resetGeneration()
 

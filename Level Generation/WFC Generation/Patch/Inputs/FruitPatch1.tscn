@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Level Generation/WFC Generation/InputTemplate.gd" type="Script" id=1]
+[ext_resource path="res://Objects/World/World.tres" type="TileSet" id=2]
+
+[node name="Input" type="TileMap"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 0, 24, 0, 1, 24, 0, 2, 24, 0, 3, 24, 0, 4, 24, 0, 5, 24, 0, 65536, 24, 0, 65537, 24, 0, 65538, 24, 0, 65539, 24, 0, 65540, 24, 0, 65541, 24, 0, 131072, 24, 0, 131073, 24, 0, 131074, 24, 0, 131075, 24, 0, 131076, 24, 0, 131077, 24, 0, 196608, 24, 0, 196609, 24, 0, 196610, 24, 0, 196611, 29, 0, 196612, 29, 0, 196613, 29, 0, 262144, 24, 0, 262145, 24, 0, 262146, 24, 0, 262147, 29, 0, 262148, 29, 0, 262149, 29, 0, 327680, 24, 0, 327681, 24, 0, 327682, 24, 0, 327683, 29, 0, 327684, 29, 0, 327685, 29, 0 )
+script = ExtResource( 1 )

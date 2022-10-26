@@ -18,6 +18,7 @@ onready var vacationResort = preload("res://Level Generation/Generic Generation/
 ######################
 onready var minesOfTidoh = preload("res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn")
 onready var depthsOfTidoh = preload("res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn")
+onready var patch = preload("res://Level Generation/WFC Generation/Patch/Patch.tscn")
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
 onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
 onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
@@ -146,7 +147,7 @@ func _on_Game_Start(_className):
 func create(_className):
 	$Items/Items.randomizeRandomItems()
 	
-	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
+	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel("carrot")
 	
 	for _level in levels.dungeon1.size():
 		if levels.dungeon1[_level] == levels.dungeon1.back():
@@ -200,7 +201,7 @@ func create(_className):
 	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("wand of wishing", null, 1, true, { "alignment": "blessed" })
-	$Items/Items.createItem("shovel", null, 1, true, { "alignment": "cursed" })
+	$Items/Items.createItem("wand of light", null, 1, true, { "alignment": "cursed" })
 	$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
 #	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
@@ -230,7 +231,7 @@ func create(_className):
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = dungeonHallways.instance()
+	var firstLevel = patch.instance()
 	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)

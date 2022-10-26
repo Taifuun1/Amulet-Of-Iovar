@@ -212,8 +212,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		# Player hit check
 		if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 			if abilityHits.size() != 0 and  abilityHits[currentCritterAbilityHit] == 1 and _pickedAbility != null and _pickedAbility.abilityType.matchn("meleeSpell"):
+				Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
-				Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.abilityName }))
 				return true
 			elif hits[currentHit] == 1:
 				$"/root/World/Critters/0".takeDamage(attacks, _moveCritterTo, critterName)

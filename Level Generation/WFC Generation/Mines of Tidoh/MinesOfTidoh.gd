@@ -16,7 +16,8 @@ func createDungeon():
 		createMinesOfTidoh()
 		trimGenerationEdges()
 		getGenerationGrid()
-		fillEmptyTiles("WALL_CAVE")
+		fillEmptyGenerationTiles("WALL_CAVE")
+		fillGridWithGeneratedGrid()
 		connectLargeDisconnectedAreas()
 		getSpawnableTiles(
 			["FLOOR_CAVE"],
@@ -33,8 +34,9 @@ func createDungeon():
 
 func createMinesOfTidoh():
 	for _i in range(40):
-		if generateMap(randi() % 5) and get_used_cells().size() > 1350:
-			return
+		if generateMap(randi() % 5):
+			if getUsedCells() > 1750:
+				return
 		resetGeneration()
 
 func connectLargeDisconnectedAreas():
