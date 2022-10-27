@@ -47,7 +47,7 @@ func createFortress():
 
 func checkAllRoomsAreAccessible():
 	# Check if rooms are accessible
-	updateTilemapToGrid()
+#	updateTilemapToGrid()
 	pathFind([Globals.tiles.WALL_STONE_BRICK])
 	pathFindWeightedPath([], [{ "tile": "WALL_STONE_BRICK", "weighting": 15 }])
 	var _rooms = []
@@ -62,7 +62,7 @@ func checkAllRoomsAreAccessible():
 				if grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_STONE_BRICK:
 					grid[_tile.x][_tile.y].tile = Globals.tiles.DOOR_CLOSED
 					_room.walls.erase(_tile)
-			updateTilemapToGrid()
+#			updateTilemapToGrid()
 			pathFind([Globals.tiles.WALL_STONE_BRICK])
 			pathFindWeightedPath([], [{ "tile": "WALL_STONE_BRICK", "weighting": 15 }])
 

@@ -593,6 +593,46 @@ func useItem(_id):
 		checkAllItemsIdentification()
 		$"/root/World".closeMenu()
 
+func dipItem(_id):
+	var _dippedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
+	var _selectedItem
+	if selectedItem != null:
+		_selectedItem = get_node("/root/World/Items/{id}".format({ "id": selectedItem }))
+	var _additionalChoices = false
+	if !_dippedItem.type.matchn("potion"):
+		$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
+		$"/root/World/UI/UITheme/ItemManagement".items = $"/root/World/Critters/0/Inventory".getItemsOfType(["potion"])
+		$"/root/World/UI/UITheme/ItemManagement".showItemManagementList(true)
+		$"/root/World".currentGameState = $"/root/World".gameState.DIP
+	elif _dippedItem.type.matchn("potion"):
+		match _dippedItem.identifiedItemName.to_lower():
+			"water potion":
+				if _dippedItem.alignment.matchn("blessed"):
+					_selectedItem.alignment = "blessed"
+					Globals.gameConsole.addLog("The {itemName} glows with a white light!".format({ "itemName": _selectedItem.itemName }))
+				elif _dippedItem.alignment.matchn("uncursed"):
+					Globals.gameConsole.addLog("The {itemName} gets wet.".format({ "itemName": _selectedItem.itemName }))
+				elif _dippedItem.alignment.matchn("cursed"):
+					_selectedItem.alignment = "cursed"
+					Globals.gameConsole.addLog("The {itemName} glows with a black light!".format({ "itemName": _selectedItem.itemName }))
+				Globals.gameConsole.addLog("The {itemName} is consumed.".format({ "itemName": _dippedItem.itemName }))
+			"soda bottle":
+				Globals.gameConsole.addLog("The {itemName} is soaked with sugar.".format({ "itemName": _selectedItem.itemName }))
+			"potion of confusion":
+				Globals.gameConsole.addLog("The {itemName} looks visibly confused!".format({ "itemName": _selectedItem.itemName }))
+			"potion of toxix":
+				Globals.gameConsole.addLog("The {itemName} looks slightly corroded.".format({ "itemName": _selectedItem.itemName }))
+			"potion of invisibility":
+				Globals.gameConsole.addLog("The {itemName} looks transparent.".format({ "itemName": _selectedItem.itemName }))
+			_:
+				Globals.gameConsole.addLog("You soak the {itemName} into the potion. Nothing happens.".format({ "itemName": _selectedItem.itemName }))
+		selectedItem = null
+		checkAllItemsIdentification()
+		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
+		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+		$"/root/World".closeMenu(_additionalChoices)
+		$"/root/World".processGameTurn()
+
 
 
 ########################

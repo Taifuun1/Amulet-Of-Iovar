@@ -50,7 +50,6 @@ func addLootToSmallDisconnectedAreas():
 	# Add loot to small areas
 	var _smallAreas = []
 	var _depthsOfTidohSpawns = []
-	updateTilemapToGrid()
 	pathFind([Globals.tiles.WALL_DUNGEON])
 	for _area in areas:
 		if _area.size() <= 75:

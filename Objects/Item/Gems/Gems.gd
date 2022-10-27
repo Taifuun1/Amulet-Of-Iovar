@@ -225,6 +225,34 @@ var gems = {
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
+		},
+		{
+			"itemName": "Loadstone",
+			"unidentifiedItemName": "Grey rock",
+			"texture": load("res://Assets/Gems/GemLoadStone.png"),
+			"unIdentifiedTexture": load("res://Assets/Gems/GemLabradorite.png"),
+			"type": "Gem",
+			"category": null,
+			"weight": 500,
+			"value": null,
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Common",
+			"identified": false
+		},
+		{
+			"itemName": "Labradorite",
+			"unidentifiedItemName": "Grey rock",
+			"texture": load("res://Assets/Gems/GemLabradorite.png"),
+			"unIdentifiedTexture": load("res://Assets/Gems/GemLabradorite.png"),
+			"type": "Gem",
+			"category": null,
+			"weight": 5,
+			"value": null,
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Common",
+			"identified": false
 		}
 	],
 	"rare": [
@@ -330,6 +358,20 @@ var gems = {
 			"itemName": "Sapphire",
 			"unidentifiedItemName": "Blue rock",
 			"texture": load("res://Assets/Gems/GemSapphire.png"),
+			"unIdentifiedTexture": load("res://Assets/Gems/GemGlassBlue.png"),
+			"type": "Gem",
+			"category": null,
+			"weight": 5,
+			"value": null,
+			"enchantment": true,
+			"stackable": false,
+			"rarity": "Common",
+			"identified": false
+		},
+		{
+			"itemName": "Blue Topaz",
+			"unidentifiedItemName": "Blue rock",
+			"texture": load("res://Assets/Gems/GemBlueTopaz.png"),
 			"unIdentifiedTexture": load("res://Assets/Gems/GemGlassBlue.png"),
 			"type": "Gem",
 			"category": null,

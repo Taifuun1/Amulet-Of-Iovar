@@ -13,6 +13,20 @@ var miscellaneous = {
 		"rarity": "Common",
 		"identified": false
 	},
+	"Amulet of Iovar": {
+		"itemName": "Amulet of Iovar",
+		"unidentifiedItemName": "Amulet of Iovar",
+		"texture": load("res://Assets/Amulets/AmuletofIovar.png"),
+		"unIdentifiedTexture": load("res://Assets/Amulets/AmuletofIovar.png"),
+		"type": "Amulet",
+		"category": null,
+		"weight": 25,
+		"value": null,
+		"enchantment": true,
+		"stackable": false,
+		"rarity": "Common",
+		"identified": false
+	},
 	"corpse": {
 		"itemName": "Corpse",
 		"unidentifiedItemName": "Corpse",

@@ -83,7 +83,7 @@ func getAndCleanUpDungeonHallsRooms():
 
 func checkAllRoomsAreAccessible():
 	# Check if rooms are accessible
-	updateTilemapToGrid()
+#	updateTilemapToGrid()
 	pathFind([Globals.tiles.WALL_DUNGEON])
 	pathFindWeightedPath([], [{ "tile": "WALL_DUNGEON", "weighting": 15 }])
 	var _rooms = []
@@ -99,6 +99,6 @@ func checkAllRoomsAreAccessible():
 			for _tile in _path:
 				if grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_DUNGEON:
 					grid[_tile.x][_tile.y].tile = Globals.tiles.DOOR_CLOSED
-			updateTilemapToGrid()
+#			updateTilemapToGrid()
 			pathFind([Globals.tiles.WALL_DUNGEON])
 			pathFindWeightedPath([], [{ "tile": "WALL_DUNGEON", "weighting": 15 }])

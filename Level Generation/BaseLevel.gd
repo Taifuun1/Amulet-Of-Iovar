@@ -282,7 +282,7 @@ func whichTilesAreOpenAndFreeOfCritters(_tile, _distance):
 	return _legibleTiles
 
 func isTileOpenAndFreeOfCritters(_tile):
-	if Globals.isTileFree(_tile, grid) and isTileFreeOfCritters(_tile):
+	if Globals.isTileFree(_tile, grid) and isTileFreeOfCritters(_tile) and grid[_tile.x][_tile.y].tile != Globals.tiles.DOOR_CLOSED:
 		return true
 	return false
 
@@ -408,7 +408,8 @@ func connectAllWeightedCells(points):
 func updateTilemapToGrid():
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):
-			set_cellv(Vector2(x, y), Globals.tiles[grid[x][y].tile])
+			pass
+#			set_cellv(Vector2(x, y), Globals.tiles[grid[x][y].tile])
 
 func doFinalPathfinding(_blockedTiles = Globals.blockedTiles):
 	pathFind(_blockedTiles)
@@ -512,8 +513,11 @@ func placePresetItems(_items, _level):
 								)
 				else:
 					if randi() % 101 <= _item.chance and Globals.isTileFree(_item.tiles, grid) and grid[_item.tiles.x][_item.tiles.y].tile != Globals.tiles.DOOR_CLOSED:
+						var _itemName = _item.items.names
+						if typeof(_item.items.names) == TYPE_ARRAY:
+							_itemName = _item.items.names[randi() % _item.items.names.size()]
 						$"/root/World/Items/Items".createItem(
-							_item.items.names,
+							_itemName,
 							_item.tiles,
 							1,
 							false,

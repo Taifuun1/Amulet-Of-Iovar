@@ -178,20 +178,13 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 					})
 					break
 	
-	print(generatedRooms)
-	print("")
-	
 	# Clean up missing walls
 	for _room in generatedRooms:
 		for _floorTile in _room.floors:
 			for _tileType in _tileTypes:
 				if generatedGrid[_floorTile.x][_floorTile.y].tile == Globals.tiles[_tileType.floor]:
 					for _adjacentTile in checkAdjacentTilesForTileInGenerated(_floorTile, [_tileType.floor, _tileType.wall], false):
-#						if !isTileAlreadyInARoom(_adjacentTile):
 						generatedGrid[_adjacentTile.x][_adjacentTile.y].tile = Globals.tiles[_tileType.wall]
-	
-	print(generatedRooms)
-	print("")
 	
 	# Get walls
 	for _room in generatedRooms:
@@ -199,26 +192,17 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 		for _floorTile in _room.floors:
 			for _tileType in _tileTypes:
 				for _adjacentTile in checkAdjacentTilesForTileInGenerated(_floorTile, [_tileType.wall]):
-#					if !isTileAlreadyInARoom(_adjacentTile):
 					_walls.append(_adjacentTile)
 		_room.walls = _walls
 	
-	print(generatedRooms.size())
-	print("")
-	
 	# Remove small rooms
 	for _roomIndex in generatedRooms.duplicate(true).size():
-		print(generatedRooms[_roomIndex].floors.size())
 		if generatedRooms[_roomIndex].floors.size() < 4:
-			print("deleting", generatedRooms[_roomIndex].floors)
 			for _floor in generatedRooms[_roomIndex].floors:
 				generatedGrid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
 			for _wall in generatedRooms[_roomIndex].walls:
 				generatedGrid[_wall.x][_wall.y].tile = Globals.tiles.GRASS
 		generatedRooms.remove(_roomIndex)
-	
-	print(generatedRooms.size())
-	print("")
 
 func getGeneratedRoom(_tile, _tileType):
 	var _roomTiles = [_tile]

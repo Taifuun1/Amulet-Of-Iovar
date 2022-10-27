@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RingBlueTopaz.png-95000a02e023c2baf8c169c202aa989f.stex"
+path="res://.import/GemBlueTopaz.png-2f0b49d6f9e01b2f3de6dff71dc38673.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Gems/RingBlueTopaz.png"
-dest_files=[ "res://.import/RingBlueTopaz.png-95000a02e023c2baf8c169c202aa989f.stex" ]
+source_file="res://Assets/Gems/GemBlueTopaz.png"
+dest_files=[ "res://.import/GemBlueTopaz.png-2f0b49d6f9e01b2f3de6dff71dc38673.stex" ]
 
 [params]
 

@@ -76,7 +76,7 @@ func awakeCritter(_level = $"/root/World".level):
 			get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).awakeCritter()
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
-	if statusEffects["stun"] > 0:
+	if statusEffects.stun > 0:
 		Globals.gameConsole.addLog("The {critter} cant move!".format({ "critter": critterName.capitalize() }))
 		return false
 	
@@ -114,6 +114,22 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 						Vector2(-1, 1),
 						Vector2(-1, 0)
 					]
+					if statusEffects.blindness > 0:
+						var _randomDirection = _directions[randi() % _directions.size()]
+						var _distance = 0
+						for _i in _pickedAbility.data.distance:
+							_distance += 1
+							var _tile = _critterTile + (_randomDirection * _distance)
+							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid):
+								break
+							match _pickedAbility.abilityName:
+								"rockThrow", "crackerThrow", "dragonBreath", "frostBreath", "gleeieerBreath", "fleirBreath", "thunderBreath", "frostBite", "fleirnado", "elderDragonBreath", "voidBlast":
+									if _level.grid[_tile.x][_tile.y].critter != null:
+										var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
+										_critterNode.takeDamage(_pickedAbility.data.attacks, _tile, critterName)
+										Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+										return true
+						Globals.addLog("DEV: Add animation here for random direction while critter is blind and when not hit.")
 					for _direction in _directions:
 						var _critters = []
 						var _distance = 0
@@ -126,8 +142,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_critters.append([_level.grid[_tile.x][_tile.y].critter, _tile])
 								var _critterData = _critters.front()
 								var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterData[0] }))
+								Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 								_critterNode.takeDamage(_pickedAbility.data.attacks, _critterData[1], critterName)
-								Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.abilityName }))
 								return true
 							match _pickedAbility.abilityName:
 								"rockThrow", "crackerThrow", "dragonBreath", "frostBreath", "gleeieerBreath", "fleirBreath", "thunderBreath", "frostBite", "fleirnado", "elderDragonBreath", "voidBlast":
@@ -194,7 +210,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 							else:
 								_tiles = _legibleTiles
 							for _tile in _tiles:
-								_level.spawnRandomCritter(_tile)
+								$"/root/World/Critters/Critters".spawnRandomCritter(_tile)
 							Globals.gameConsole.addLog("{critter} summons critters!".format({ "critter": critterName.capitalize() }))
 							return false
 	
@@ -202,6 +218,15 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	if _path.size() > 1:
 		# Tile to move to
 		var _moveCritterTo = _path[1]
+		
+		if statusEffects.blindness > 0:
+			if randi() % 2 == 0:
+				var _randomOpenTiles = level.checkAdjacentTilesForOpenSpace(_critterTile)
+				_randomOpenTiles.shuffle()
+				_moveCritterTo = _randomOpenTiles[0]
+			else:
+				aI.getNeutralCritterMove()
+			Globals.gameConsole.addLog("{critterName} blindly stumbles!".format({ "critterName": critterName.capitalize() }))
 		
 		# Confused check
 		if statusEffects["confusion"] > 0 and randi() % 3 == 0:

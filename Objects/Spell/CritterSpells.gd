@@ -4,6 +4,11 @@ var gridMovement = {
 	"distance": 0
 }
 
+var charge = {
+	"name": "Charge",
+	"distance": 5
+}
+
 var sharpenSword = {
 	"name": "Sharpen sword",
 	"distance": 3
@@ -11,6 +16,21 @@ var sharpenSword = {
 
 var createShield = {
 	"name": "Create shield",
+	"distance": 4
+}
+
+var displaceSelf = {
+	"name": "Displace self",
+	"distance": 2
+}
+
+var summonCritter = {
+	"name": "Summon critter",
+	"distance": 3
+}
+
+var summonCritters = {
+	"name": "Summon critters",
 	"distance": 4
 }
 
@@ -44,6 +64,22 @@ var crackerThrow = {
 		}
 	],
 	"distance": 6
+}
+
+var fleirpoint = {
+	"name": "Fleirpoint",
+	"attacks": [
+		{
+			"dmg": null,
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [2, 18],
+				"element": "fleir"
+			}
+		}
+	],
+	"distance": 8
 }
 
 var fleirnado = {
@@ -169,7 +205,7 @@ var elderDragonBreath = {
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": [22,48],
-				"element": null
+				"element": "incineration"
 			}
 		}
 	],
@@ -185,7 +221,7 @@ var dragonBreath = {
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": [12,23],
-				"element": null
+				"element": "incineration"
 			}
 		}
 	],
@@ -265,7 +301,7 @@ var voidBlast = {
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": [64,148],
-				"element": null
+				"element": "Void"
 			}
 		}
 	],

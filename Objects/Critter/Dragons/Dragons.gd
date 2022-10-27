@@ -192,7 +192,7 @@ var dragons = {
 			},
 			"abilities": [
 				{
-					"abilityName": "dragonBeath",
+					"abilityName": "dragonBreath",
 					"abilityType": "rangedSpell",
 					"chance": 8
 				}

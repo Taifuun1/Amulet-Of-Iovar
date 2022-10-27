@@ -29,7 +29,7 @@ onready var fortress = preload("res://Level Generation/WFC Generation/Fortress/F
 onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
 
 #####################
-### Premade level ###
+### Premade levels ###
 #####################
 onready var banditCompound1 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound1.tscn")
 onready var banditCompound2 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound2.tscn")
@@ -43,6 +43,8 @@ onready var tidohMinesEnd1 = preload("res://Level Generation/Premade Levels/Tido
 onready var tidohMinesEnd2 = preload("res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd2.tscn")
 onready var tidohMiningOutpost1 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost1.tscn")
 onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
+onready var iovarsLair1 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair1.tscn")
+onready var iovarsLair2 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair2.tscn")
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -66,6 +68,8 @@ enum gameState {
 	CAST
 	USE
 	KICK
+	DIP_ITEM
+	DIP
 }
 
 var level = null
@@ -147,7 +151,7 @@ func _on_Game_Start(_className):
 func create(_className):
 	$Items/Items.randomizeRandomItems()
 	
-	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel("carrot")
+	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
 	
 	for _level in levels.dungeon1.size():
 		if levels.dungeon1[_level] == levels.dungeon1.back():
@@ -203,6 +207,9 @@ func create(_className):
 	$Items/Items.createItem("wand of wishing", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("wand of light", null, 1, true, { "alignment": "cursed" })
 	$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
+	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
+	$Items/Items.createItem("potion of invisibility", null, 1, true, { "alignment": "cursed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
 #	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
@@ -231,7 +238,7 @@ func create(_className):
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = patch.instance()
+	var firstLevel = iovarsLair2.instance()
 	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
@@ -452,6 +459,8 @@ func _input(_event):
 				openMenu("consume")
 			elif (Input.is_action_just_pressed("ZAP") and currentGameState == gameState.GAME):
 				openMenu("zap")
+			elif (Input.is_action_just_pressed("DIP") and currentGameState == gameState.GAME):
+				openMenu("dip")
 			elif (Input.is_action_just_pressed("CAST") and currentGameState == gameState.GAME):
 				castWith(_playerTile)
 			elif Input.is_action_just_pressed("INTERACT") and currentGameState == gameState.GAME:
@@ -840,6 +849,11 @@ func openMenu(_menu, _playerTile = null):
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["wand"])
 				$UI/UITheme/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.ZAP
+		"dip":
+			if currentGameState == gameState.GAME:
+				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["amulet", "armor", "comestible", "gem", "ring", "rune", "scroll", "tool", "wand", "weapon"])
+				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				currentGameState = gameState.DIP_ITEM
 		"use":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"])
@@ -909,7 +923,7 @@ func interactWith(_tileToInteractWith):
 				Globals.gameConsole.addLog("You pick a carrot from the plant.")
 				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 			elif randi() % 5 == 0:
-				$Items/Items.createItem("bean", _tileToInteractWith)
+				$Items/Items.createItem("beans", _tileToInteractWith)
 				Globals.gameConsole.addLog("You pick beans from the plant.")
 				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 			elif randi() % 16 == 0:
@@ -932,7 +946,7 @@ func interactWith(_tileToInteractWith):
 			processGameTurn()
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_BEAN:
 			$Items/Items.createItem("beans", _tileToInteractWith)
-			Globals.gameConsole.addLog("You pick a bean from the plant.")
+			Globals.gameConsole.addLog("You pick beans from the plant.")
 			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 			processGameTurn()
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_ORANGE:
@@ -1014,6 +1028,8 @@ func closeMenu(_additionalChoices = false, _pickDirection = false):
 			currentGameState == gameState.READ or
 			currentGameState == gameState.QUAFF or
 			currentGameState == gameState.CONSUME or
+			currentGameState == gameState.DIP_ITEM or
+			currentGameState == gameState.DIP or
 			currentGameState == gameState.USE or
 			currentGameState == gameState.PICK_LOOTABLE
 		):

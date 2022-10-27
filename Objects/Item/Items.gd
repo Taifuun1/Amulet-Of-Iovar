@@ -59,6 +59,8 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 	if typeof(_item) == TYPE_STRING:
 		if _item.matchn("goldPieces"):
 			newItem.createItem(miscellaneousItems.goldPieces, _extraData, _amount)
+		elif _item.matchn("amulet of iovar"):
+			newItem.createItem(miscellaneousItems["Amulet of Iovar"], _extraData, 1)
 		else:
 			newItem.createItem(getItemByName(_item), _extraData)
 	else:

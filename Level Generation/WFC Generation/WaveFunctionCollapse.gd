@@ -25,9 +25,9 @@ func resetGeneration():
 	edgeTiles.clear()
 	allInputs.clear()
 	nonLegibleTiles.clear()
-	for x in range(gridSize.x):
-		for y in range(gridSize.y):
-			set_cellv(Vector2(x, y), -1)
+#	for x in range(gridSize.x):
+#		for y in range(gridSize.y):
+#			set_cellv(Vector2(x, y), -1)
 
 func generateMap(_entropyVariation = null):
 	if _entropyVariation != null:

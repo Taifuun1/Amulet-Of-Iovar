@@ -48,7 +48,7 @@ func connectLargeDisconnectedAreas():
 	
 	# Connect large areas
 	var _unconnectedAreas = []
-	updateTilemapToGrid()
+#	updateTilemapToGrid()
 	pathFindWeightedPath([], [{ "tile": "WALL_CAVE", "weighting": 15 }])
 	for _area in areas:
 		if _area.size() > 75:
@@ -60,5 +60,5 @@ func connectLargeDisconnectedAreas():
 				for _tile in _path:
 					if grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE:
 						grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
-				updateTilemapToGrid()
+#				updateTilemapToGrid()
 				pathFindWeightedPath([], [{ "tile": "WALL_CAVE", "weighting": 15 }])
