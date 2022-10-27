@@ -42,6 +42,7 @@ func createDungeon(_patchType):
 			generateForest("splotches", _patchType)
 		resetGeneration()
 		
+		
 		# Soil areas
 		getSoilAreas()
 		
@@ -67,9 +68,7 @@ func createDungeon(_patchType):
 		getSpawnableTiles(
 			["GRASS", "SOIL", "FLOOR_WOOD_BRICK"],
 			["GRASS", "FLOOR_WOOD_BRICK"],
-			["GRASS", "SOIL", "FLOOR_WOOD_BRICK"],
-			false,
-			["FLOOR_WOOD_BRICK"]
+			["GRASS", "SOIL", "FLOOR_WOOD_BRICK"]
 		)
 		placeStairs()
 		if areAllStairsConnected():
@@ -204,18 +203,21 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 					_walls.append(_adjacentTile)
 		_room.walls = _walls
 	
-	print(generatedRooms)
+	print(generatedRooms.size())
 	print("")
 	
-	for _room in generatedRooms.duplicate(true):
-		if _room.floors.size() < 4:
-			for _floor in _room.floors:
+	# Remove small rooms
+	for _roomIndex in generatedRooms.duplicate(true).size():
+		print(generatedRooms[_roomIndex].floors.size())
+		if generatedRooms[_roomIndex].floors.size() < 4:
+			print("deleting", generatedRooms[_roomIndex].floors)
+			for _floor in generatedRooms[_roomIndex].floors:
 				generatedGrid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
-			for _wall in _room.walls:
+			for _wall in generatedRooms[_roomIndex].walls:
 				generatedGrid[_wall.x][_wall.y].tile = Globals.tiles.GRASS
-		generatedRooms.erase(_room)
+		generatedRooms.remove(_roomIndex)
 	
-	print(generatedRooms)
+	print(generatedRooms.size())
 	print("")
 
 func getGeneratedRoom(_tile, _tileType):
@@ -270,7 +272,7 @@ func generateSoilAreaInteractablesAndItems(_patchType):
 	for _area in areas:
 		var _areaRandomness = randi() % 101
 		for _tile in _area:
-			if randi() % 51 < _areaRandomness:
+			if randi() % 61 < _areaRandomness:
 				if _patchType.matchn("carrot"):
 					if randi() % 12 == 0:
 						grid[_tile.x][_tile.y].interactable = Globals.interactables.PLANT_TOMATO

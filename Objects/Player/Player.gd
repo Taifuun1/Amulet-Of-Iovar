@@ -556,6 +556,8 @@ func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
 	
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT:
 		Globals.gameConsole.addLog("There's a plant here.")
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT_CARROT:
+		Globals.gameConsole.addLog("There's a carrot plant here.")
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT_TOMATO:
 		Globals.gameConsole.addLog("There's a tomato plant here.")
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT_BEAN:

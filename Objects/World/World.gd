@@ -890,6 +890,56 @@ func interactWith(_tileToInteractWith):
 				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(4):
 					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 					Globals.gameConsole.addLog("You unlock the door with your credit card.")
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
+			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
+				Globals.gameConsole.addLog("You dig up the item from the sand.")
+				if randi() % 3 == 0:
+					$Items/Items.createItem("message in a bottle", _tileToInteractWith)
+					Globals.gameConsole.addLog("You discover a message in a bottle!")
+				else:
+					$Items/Items.createItem($Items/Items.getRandomItem(), _tileToInteractWith)
+					Globals.gameConsole.addLog("You discover an item!")
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				processGameTurn()
+			else:
+				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT:
+			if randi() % 5 == 0:
+				$Items/Items.createItem("carrot", _tileToInteractWith)
+				Globals.gameConsole.addLog("You pick a carrot from the plant.")
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			elif randi() % 5 == 0:
+				$Items/Items.createItem("bean", _tileToInteractWith)
+				Globals.gameConsole.addLog("You pick beans from the plant.")
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			elif randi() % 16 == 0:
+				$Items/Items.createItem("tomato", _tileToInteractWith)
+				Globals.gameConsole.addLog("You pick a tomato from the plant.")
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			else:
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				Globals.gameConsole.addLog("The plant is empty.")
+			processGameTurn()
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_CARROT:
+			$Items/Items.createItem("carrot", _tileToInteractWith)
+			Globals.gameConsole.addLog("You pick a carrot from the plant.")
+			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			processGameTurn()
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_TOMATO:
+			$Items/Items.createItem("tomato", _tileToInteractWith)
+			Globals.gameConsole.addLog("You pick a tomato from the plant.")
+			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			processGameTurn()
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_BEAN:
+			$Items/Items.createItem("beans", _tileToInteractWith)
+			Globals.gameConsole.addLog("You pick a bean from the plant.")
+			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			processGameTurn()
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_ORANGE:
+			$Items/Items.createItem("orange", _tileToInteractWith)
+			Globals.gameConsole.addLog("You pick an orange from the plant.")
+			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			processGameTurn()
 	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_CLOSED:
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == null:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):
