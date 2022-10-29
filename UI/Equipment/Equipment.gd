@@ -259,6 +259,15 @@ func checkWhatAmuletIsWorn(_amulet):
 				_playerNode.itemsTurnedOn.append(_amulet)
 				_playerNode.statusEffects.toxix = -1
 				Globals.gameConsole.addLog("You feel terrible!")
+		"amulet of sleep":
+			if _playerNode.itemsTurnedOn.has(_amulet):
+				_playerNode.itemsTurnedOn.erase(_amulet)
+				_playerNode.statusEffects.sleep = 0
+				Globals.gameConsole.addLog("You dont feel sleepy anymore.")
+			else:
+				_playerNode.itemsTurnedOn.append(_amulet)
+				_playerNode.statusEffects.sleep = 10
+				Globals.gameConsole.addLog("Your eyelids feel heavy.")
 	_playerNode.checkAllItemsIdentification()
 
 func checkWhatRingIsWorn(_ring):
@@ -306,15 +315,6 @@ func checkWhatRingIsWorn(_ring):
 				_playerNode.statusEffects["fumbling"] = -1
 				_playerNode.itemsTurnedOn.append(_ring)
 				Globals.gameConsole.addLog("Your legs feel like jelly.")
-#		"ring of seeing":
-#			if _playerNode.itemsTurnedOn.has(_ring):
-#				_playerNode.statusEffects["seeing"] = 0
-#				_playerNode.itemsTurnedOn.erase(_ring)
-#				Globals.gameConsole.addLog("It feels like you cant see at all.")
-#			else:
-#				_playerNode.statusEffects["seeing"] = -1
-#				_playerNode.itemsTurnedOn.append(_ring)
-#				Globals.gameConsole.addLog("You can see everything!")
 	_playerNode.checkAllItemsIdentification()
 
 func checkIfMatchingEquipmentAndSlot(_type, _category):

@@ -171,7 +171,7 @@ func spawnCritter(_critter, _position = null, _isDeactivated = null, _level = $"
 	):
 		var newCritter = critter.instance()
 		newCritter.createCritter(_newCritter, _level.levelId, _extraData)
-		newCritter.createAi(_aI, _isDeactivated)
+		newCritter.createAi(_aI, _newCritter.aggroDistance, _isDeactivated)
 		$"/root/World/Critters".add_child(newCritter, true)
 		_level.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
 		_level.critters.append(newCritter.id)
@@ -194,7 +194,7 @@ func spawnRandomCritter(_position, _spawnLiches = true):
 			):
 				var newCritter = critter.instance()
 				newCritter.createCritter(_critter, _level.levelId)
-				newCritter.createAi(_critter.aI)
+				newCritter.createAi(_critter.aI, _critter.aggroDistance)
 				_level.grid[_position.x][_position.y].critter = newCritter.id
 				$"/root/World/Critters".add_child(newCritter, true)
 				_level.critters.append(newCritter.id)

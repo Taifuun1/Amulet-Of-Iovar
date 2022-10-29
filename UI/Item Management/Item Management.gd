@@ -50,6 +50,12 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.ZAP:
 			$"/root/World/Critters/0".selectedItem = _id
+			var _zappedItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
+			if _zappedItem.identifiedItemName.matchn("wand of light") or _zappedItem.identifiedItemName.matchn("wand of summon critter"):
+				$"/root/World/Critters/0".zapItem(Vector2())
+				$"/root/World".closeMenu()
+				$"/root/World".processGameTurn()
+				return
 			$"/root/World".closeMenu(false, true)
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.DIP_ITEM:
@@ -58,6 +64,7 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.DIP:
 			$"/root/World/Critters/0".dipItem(_id)
+			$"/root/World".processGameTurn()
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.USE:
 			$"/root/World/Critters/0".useItem(_id)

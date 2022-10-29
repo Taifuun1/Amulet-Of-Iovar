@@ -211,10 +211,10 @@ func create(_className):
 	$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
-	$Items/Items.createItem("pickaxe", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("amulet of backscattering", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("wand of digging", null, 1, true, { "alignment": "blessed" })
-	$Items/Items.createItem("wand of digging", null, 1, true, { "alignment": "cursed" })
+	$Items/Items.createItem("wand of teleport", null, 1, true, { "alignment": "cursed" })
 	$Items/Items.createItem("scroll of summon critter", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
 #	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
@@ -335,7 +335,9 @@ func createDungeon():
 
 func _process(_delta):
 	if inGame:
-		if $Critters/"0".statusEffects["stun"] > 0:
+		if $Critters/"0".statusEffects["stun"] > 0 or $Critters/"0".statusEffects["sleep"] > 0:
+			if $Critters/"0".statusEffects["stun"] > 0: Globals.gameConsole.addLog("You are stunned!")
+			if $Critters/"0".statusEffects["sleep"] > 0: Globals.gameConsole.addLog("You are asleep.")
 			processGameTurn()
 	if generationDone:
 		yield(get_tree().create_timer(0.1), "timeout")
@@ -426,6 +428,7 @@ func _input(_event):
 						elif currentGameState == gameState.ZAP_DIRECTION:
 							$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
 							resetToDefaulGameState()
+							processGameTurn()
 			elif (
 				Input.is_action_just_pressed("WAIT") and
 				currentGameState == gameState.GAME
@@ -459,10 +462,10 @@ func _input(_event):
 				closeMenu()
 			elif (Input.is_action_just_pressed("INVENTORY") and currentGameState == gameState.GAME):
 				openMenu("inventory")
-			elif (Input.is_action_just_pressed("PICK_UP") and currentGameState == gameState.GAME):
-				openMenu("pick up", _playerTile)
 			elif (Input.is_action_just_pressed("DROP") and currentGameState == gameState.GAME):
 				openMenu("drop")
+			elif (Input.is_action_just_pressed("PICK_UP") and currentGameState == gameState.GAME):
+				openMenu("pick up", _playerTile)
 			elif (Input.is_action_just_pressed("LOOT") and currentGameState == gameState.GAME):
 				openMenu("loot")
 			elif (Input.is_action_just_pressed("EQUIPMENT") and currentGameState == gameState.GAME):
@@ -558,8 +561,13 @@ func processEnemyActions():
 			var _critterTile = level.getCritterTile(_enemy)
 			var _critter = get_node("Critters/{id}".format({ "id": _enemy }))
 			_critter.isCritterAwakened(_critterTile, _playerTile, level)
-			if _critter.processCritterAction(_critterTile, _playerTile, _enemy, level):
+			if _critter.statusEffects.sleep > 0:
+				Globals.gameConsole.addLog("The {critterName} is fast asleep.".format({ "critterName": _critter.critterName }))
+			elif _critter.processCritterAction(_critterTile, _playerTile, _enemy, level):
 				_isPlayerHit = true
+				if $Critters/"0".statusEffects.sleep > 0:
+					$Critters/"0".statusEffects.sleep = 0
+					Globals.gameConsole.addLog("You wake up!")
 			_critter.processCritterEffects()
 	return _isPlayerHit
 
@@ -847,7 +855,7 @@ func openMenu(_menu, _playerTile = null):
 				currentGameState = gameState.PICK_LOOTABLE
 		"equipment":
 			if currentGameState == gameState.GAME:
-				$UI/UITheme/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["weapon", "accessory", "armor"]))
+				$UI/UITheme/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["accessory", "armor", "weapon",]))
 				currentGameState = gameState.EQUIPMENT     
 		"read":
 			if currentGameState == gameState.GAME:

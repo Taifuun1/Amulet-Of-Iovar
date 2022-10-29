@@ -56,9 +56,9 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	expDropAmount = _critter.expDropAmount
 	drops = _critter.drops
 
-func createAi(_aI = "aggressive", _activationDistance = null):
+func createAi(_aI = "aggressive", _aggroDistance = -1, _activationDistance = null):
 	var _critterAi = load("res://Objects/AI/AI.tscn").instance()
-	_critterAi.create(_aI, _activationDistance)
+	_critterAi.create(_aI, _aggroDistance, _activationDistance)
 	add_child(_critterAi)
 	aI = $aI
 
@@ -117,41 +117,50 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 						Vector2(-1, 1),
 						Vector2(-1, 0)
 					]
-					if statusEffects.blindness > 0:
-						var _randomDirection = _directions[randi() % _directions.size()]
-						var _distance = 0
-						for _i in _pickedAbility.data.distance:
-							_distance += 1
-							var _tile = _critterTile + (_randomDirection * _distance)
-							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid):
-								break
-							match _pickedAbility.abilityName:
-								"rockThrow", "crackerThrow", "dragonBreath", "frostBreath", "gleeieerBreath", "fleirBreath", "thunderBreath", "frostBite", "fleirnado", "elderDragonBreath", "voidBlast":
-									if _level.grid[_tile.x][_tile.y].critter != null:
-										var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
-										_critterNode.takeDamage(_pickedAbility.data.attacks, _tile, critterName)
-										Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
-										return true
-						Globals.addLog("DEV: Add animation here for random direction while critter is blind and when not hit.")
+					if statusEffects.blindness > 0 or statusEffects.blindness == -1:
+						_directions = _directions[randi() % _directions.size()]
+					var _critters = []
 					for _direction in _directions:
-						var _critters = []
 						var _distance = 0
 						for _i in _pickedAbility.data.distance:
 							_distance += 1
 							var _tile = _critterTile + (_direction * _distance)
-							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid):
 								break
-							if _tile == _playerTile:
-								_critters.append([_level.grid[_tile.x][_tile.y].critter, _tile])
-								var _critterData = _critters.front()
-								var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterData[0] }))
-								Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
-								_critterNode.takeDamage(_pickedAbility.data.attacks, _critterData[1], critterName)
-								return true
 							match _pickedAbility.abilityName:
-								"rockThrow", "crackerThrow", "dragonBreath", "frostBreath", "gleeieerBreath", "fleirBreath", "thunderBreath", "frostBite", "fleirnado", "elderDragonBreath", "voidBlast":
+								"rockThrow", "crackerThrow", "fleirpoint", "fleirnado", "frostpoint", "frostBite", "thunderPoint", "thundersplit", "voidBlast":
+									if _level.grid[_tile.x][_tile.y].critter == 0:
+										var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
+										if (
+											_critterNode.statusEffects.backscattering > 0 and
+											_pickedAbility.abilityName.matchn("rockThrow")
+										):
+											Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
+											return false
+										Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+										_critterNode.takeDamage(_pickedAbility.data.attacks, _tile, critterName)
+										return true
+								"dragonBreath", "fleirBreath", "frostBreath", "thunderBreath", "gleeieerBreath", "toxixBreath", "elderDragonBreath":
 									if _level.grid[_tile.x][_tile.y].critter != null:
-										_critters.append([_level.grid[_tile.x][_tile.y].critter, _tile])
+										_critters.append(_level.grid[_tile.x][_tile.y].critter)
+						if _critters.has(0) or statusEffects.blindness > 0 or statusEffects.blindness == -1:
+							break
+						else:
+							_critters.clear()
+					if _critters.size() == 0:
+						continue
+					if statusEffects.blindness > 0:
+						Globals.gameConsole.addLog("{critterName} casts {spell} in a random direction!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+					else:
+						Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+					for _critter in _critters:
+						var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critter }))
+						if _critterNode.statusEffects.backscattering > 0 and _pickedAbility.abilityName.matchn("dragonBreath"):
+							Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
+							continue
+						_critterNode.takeDamage(_pickedAbility.data.attacks, _level.getCritterTile(_critter), critterName)
+					if _critters.has(0):
+						return true
 				"selfCastSpell":
 					match _pickedAbility.abilityName:
 						"createShield":
@@ -291,13 +300,16 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 			
 			var _damageNumber = damageNumber.instance()
 			var _damageText
+			var _damageColor = "#000"
 			if _damage.dmg < 1 and _damage.dmg >= -2:
 				_damageText = 1 + _damage.magicDmg
 			elif _damage.dmg < -2:
 				_damageText = 0
 			else:
 				_damageText = _damage.dmg + _damage.magicDmg
-			_damageNumber.create(_critterTile, _damageText, "#00F")
+			if _damage.magicDmg != 0 and _attack.magicDmg.element != null:
+				_damageColor = spellData.spellData[_attack.magicDmg.element].color
+			_damageNumber.create(_critterTile, _damageText, _damageColor)
 			$"/root/World/Animations".add_child(_damageNumber)
 			
 			# Magic spell
@@ -333,6 +345,9 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 		if aI.aI.matchn("Deactivated"):
 			awakeCritter()
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
+		if statusEffects.sleep > 0:
+			statusEffects.sleep = 0
+			Globals.gameConsole.addLog("The {critterName} wakes up!".format({ "critterName": critterName }))
 	else:
 		Globals.gameConsole.addLog("Looks like you cant attack...")
 	return _didCritterDie

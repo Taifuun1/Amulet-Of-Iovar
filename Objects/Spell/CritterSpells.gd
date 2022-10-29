@@ -1,6 +1,13 @@
 
+### Abilities
+
 var gridMovement = {
 	"name": "Grid movement",
+	"distance": 0
+}
+
+var mining = {
+	"name": "Mining",
 	"distance": 0
 }
 
@@ -9,10 +16,9 @@ var charge = {
 	"distance": 5
 }
 
-var mining = {
-	"name": "Mining",
-	"distance": 0
-}
+
+
+### Self cast abilities
 
 var sharpenSword = {
 	"name": "Sharpen sword",
@@ -29,15 +35,9 @@ var displaceSelf = {
 	"distance": 2
 }
 
-var summonCritter = {
-	"name": "Summon critter",
-	"distance": 3
-}
 
-var summonCritters = {
-	"name": "Summon critters",
-	"distance": 4
-}
+
+### Throwing abilities
 
 var rockThrow = {
 	"name": "Rock throw",
@@ -71,6 +71,10 @@ var crackerThrow = {
 	"distance": 6
 }
 
+
+
+### Fleir abilities
+
 var fleirpoint = {
 	"name": "Fleirpoint",
 	"attacks": [
@@ -95,7 +99,7 @@ var fleirnado = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [8, 14],
+				"dmg": [8, 15],
 				"element": "fleir"
 			}
 		}
@@ -121,6 +125,42 @@ var fleirMiasma = {
 	"duration": 3
 }
 
+var fleirBreath = {
+	"name": "Fleir breath",
+	"attacks": [
+		{
+			"dmg": null,
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [15,28],
+				"element": "fleir"
+			}
+		}
+	],
+	"distance": 12
+}
+
+
+
+### Frost abilities
+
+var frostpoint = {
+	"name": "Frostpoint",
+	"attacks": [
+		{
+			"dmg": null,
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [6, 8],
+				"element": "frost"
+			}
+		}
+	],
+	"distance": 7
+}
+
 var frostBite = {
 	"name": "Frost-bite",
 	"attacks": [
@@ -129,7 +169,7 @@ var frostBite = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [4, 10],
+				"dmg": [4, 12],
 				"element": "frost"
 			}
 		}
@@ -153,7 +193,27 @@ var frostTouch = {
 	"distance": 1
 }
 
-var thunderPoint = {
+var frostBreath = {
+	"name": "Frost breath",
+	"attacks": [
+		{
+			"dmg": null,
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [11,13],
+				"element": "frost"
+			}
+		}
+	],
+	"distance": 10
+}
+
+
+
+### Thunder abilities
+
+var thunderpoint = {
 	"name": "Thunderpoint",
 	"attacks": [
 		{
@@ -161,7 +221,7 @@ var thunderPoint = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [11, 13],
+				"dmg": [10, 13],
 				"element": "thunder"
 			}
 		}
@@ -185,6 +245,26 @@ var thundersplit = {
 	"distance": 8
 }
 
+var thunderBreath = {
+	"name": "Thunder breath",
+	"attacks": [
+		{
+			"dmg": null,
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [14,15],
+				"element": "thunder"
+			}
+		}
+	],
+	"distance": 13
+}
+
+
+
+### Toxix abilities
+
 var poisonBite = {
 	"name": "Poison bite",
 	"attacks": [
@@ -201,20 +281,54 @@ var poisonBite = {
 	"distance": 7
 }
 
-var elderDragonBreath = {
-	"name": "Elder dragon breath",
+var toxixBreath = {
+	"name": "Toxix breath",
 	"attacks": [
 		{
 			"dmg": null,
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [22,48],
-				"element": "incineration"
+				"dmg": [2,6],
+				"element": "toxix"
 			}
 		}
 	],
-	"distance": 16,
+	"distance": 6
+}
+
+
+
+### Gleeie'er abilities
+
+var gleeieerBreath = {
+	"name": "Gleeie'er breath",
+	"attacks": [
+		{
+			"dmg": null,
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [12,14],
+				"element": "gleeie'er"
+			}
+		}
+	],
+	"distance": 14
+}
+
+
+
+### Other abilities
+
+var summonCritter = {
+	"name": "Summon critter",
+	"distance": 3
+}
+
+var summonCritters = {
+	"name": "Summon critters",
+	"distance": 4
 }
 
 var dragonBreath = {
@@ -233,68 +347,20 @@ var dragonBreath = {
 	"distance": 12,
 }
 
-var fleirBreath = {
-	"name": "Fleir breath",
+var elderDragonBreath = {
+	"name": "Elder dragon breath",
 	"attacks": [
 		{
 			"dmg": null,
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [15,28],
-				"element": "fleir"
+				"dmg": [22,48],
+				"element": "incineration"
 			}
 		}
 	],
-	"distance": 12
-}
-
-var frostBreath = {
-	"name": "Frost breath",
-	"attacks": [
-		{
-			"dmg": null,
-			"bonusDmg": {},
-			"armorPen": 0,
-			"magicDmg": {
-				"dmg": [11,13],
-				"element": "frost"
-			}
-		}
-	],
-	"distance": 10
-}
-
-var thunderBreath = {
-	"name": "Thunder breath",
-	"attacks": [
-		{
-			"dmg": null,
-			"bonusDmg": {},
-			"armorPen": 0,
-			"magicDmg": {
-				"dmg": [14,15],
-				"element": "thunder"
-			}
-		}
-	],
-	"distance": 13
-}
-
-var gleeieerBreath = {
-	"name": "Gleeie'er breath",
-	"attacks": [
-		{
-			"dmg": null,
-			"bonusDmg": {},
-			"armorPen": 0,
-			"magicDmg": {
-				"dmg": [12,14],
-				"element": "gleeie'er"
-			}
-		}
-	],
-	"distance": 14
+	"distance": 16,
 }
 
 var voidBlast = {

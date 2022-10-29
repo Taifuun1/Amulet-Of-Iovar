@@ -50,7 +50,8 @@ var statusEffects = {
 	"blindness": 0,
 	"invisibility": 0,
 	"seeing": 0,
-	"toxix": 0
+	"toxix": 0,
+	"backscattering": 0
 }
 
 var statusStates = {

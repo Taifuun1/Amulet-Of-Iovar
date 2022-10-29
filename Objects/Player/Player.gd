@@ -4,6 +4,8 @@ class_name Player
 var inventory = load("res://UI/Inventory/Inventory.tscn").instance()
 
 var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
+var spellData = load("res://Objects/Spell/SpellData.gd").new()
+var statusEffectsData = load("res://Objects/Miscellaneous/StatusEffectsData.gd").new()
 
 var playerClass
 
@@ -122,6 +124,8 @@ func create(_className):
 	
 	goldPieces = _playerClass.goldPieces
 	
+	statusEffects.sleep = 5
+	
 	for _item in _playerClass.items.keys():
 		$"/root/World/Items/Items".createItem(_item, null, _playerClass.items[_item], true)
 	
@@ -191,13 +195,16 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			
 			var _damageNumber = damageNumber.instance()
 			var _damageText
+			var _damageColor = "#000"
 			if _damage.dmg < 1 and _damage.dmg >= -2:
 				_damageText = 1 + _damage.magicDmg
 			elif _damage.dmg < -2:
 				_damageText = 0
 			else:
 				_damageText = _damage.dmg + _damage.magicDmg
-			_damageNumber.create(_critterTile, _damageText, "#00F")
+			if _damage.magicDmg != 0 and _attack.magicDmg.element != null:
+				_damageColor = spellData.spellData[_attack.magicDmg.element].color
+			_damageNumber.create(_critterTile, _damageText, _damageColor)
 			$"/root/World/Animations".add_child(_damageNumber)
 			
 			# Magic spell
@@ -356,7 +363,7 @@ func processPlayerSpecificEffects():
 			if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".addStatusEffect(_statusEffect)
 				var _damageNumber = damageNumber.instance()
-				_damageNumber.create($"/root/World".level.getCritterTile(0), _statusEffect.capitalize(), "#00F")
+				_damageNumber.create($"/root/World".level.getCritterTile(0), _statusEffect.capitalize(), statusEffectsData.statusEffectsData[_statusEffect].color)
 				$"/root/World/Animations".add_child(_damageNumber)
 		else:
 			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
@@ -374,6 +381,11 @@ func processPlayerSpecificEffects():
 				Globals.gameConsole.addLog("You are strangled by the amulet!")
 			"amulet of toxix":
 				statusEffects["toxix"] = -1
+			"amulet of sleep":
+				if statusEffects["sleep"] == 0 and randi() % 21 == 0:
+					statusEffects["sleep"] = randi() % 8 + 4
+			"amulet of backscattering":
+				statusEffects["backscattering"] = -1
 			"ring of fast digestion":
 				statusEffects["fast digestion"] = -1
 			"ring of slow digestion":

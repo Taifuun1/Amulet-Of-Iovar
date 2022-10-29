@@ -292,6 +292,31 @@ func quaffItem(_id):
 					hp = maxhp
 				else:
 					hp += _amountToHeal
+			"potion of toxix":
+				if _quaffedItem.alignment.matchn("blessed"):
+					statusEffects.toxix = 2
+					Globals.gameConsole.addLog("The {potion} tastes slightly acidic. Bleagh!".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.alignment.matchn("uncursed"):
+					statusEffects.toxix = 8
+					hp -= 4
+					Globals.gameConsole.addLog("The {potion} tastes bitter. Urgh!".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.alignment.matchn("cursed"):
+					statusEffects.toxix = 16
+					hp -= 4
+					Globals.gameConsole.addLog("The {potion} burns your mouth. Uhhhh...".format({ "potion": _quaffedItem.itemName }))
+					maxhp -= 1
+					hp -= 1
+					Globals.gameConsole.addLog("You feel a little less healthy.")
+			"potion of sleep":
+				if _quaffedItem.alignment.matchn("blessed"):
+					statusEffects.sleep = 3
+					Globals.gameConsole.addLog("The {potion} gives you sweet dreams.".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.alignment.matchn("uncursed"):
+					statusEffects.sleep = 7
+					Globals.gameConsole.addLog("The {potion} puts you asleep.".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.alignment.matchn("cursed"):
+					statusEffects.sleep = 13
+					Globals.gameConsole.addLog("The {potion} knocks you out.".format({ "potion": _quaffedItem.itemName }))
 			"potion of gain level":
 				if _quaffedItem.alignment.matchn("blessed"):
 					addExp(experienceNeededForLevelGainAmount)
@@ -361,13 +386,13 @@ func zapItem(_direction):
 					if _zappedItem.alignment.matchn("blessed"):
 						playerVisibility = {
 							"distance": 10,
-							"duration": 20
+							"duration": 80
 						}
 						Globals.gameConsole.addLog("The light illuminates your surroundings brightly!")
 					elif _zappedItem.alignment.matchn("uncursed"):
 						playerVisibility = {
 							"distance": 7,
-							"duration": 15
+							"duration": 35
 						}
 						Globals.gameConsole.addLog("The light illuminates your surroundings.")
 					elif _zappedItem.alignment.matchn("cursed"):
@@ -379,20 +404,16 @@ func zapItem(_direction):
 					$"/root/World".drawLevel()
 				"wand of teleport":
 					var _grid = $"/root/World".level.grid
-#					if _zappedItem.alignment.matchn("blessed"):
 					for i in range(1, 7):
 						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
 							break
 						if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter != null:
+							if _zappedItem.alignment.matchn("cursed"):
+								Globals.gameConsole.addLog("The {critterName} vibrates... But nothing happens.".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter })).critterName }))
+								break
 							dealWithTeleport(_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter, _zappedItem.alignment, _zappedItem.type)
 							Globals.gameConsole.addLog("The {critterName} disappears!".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter })).critterName }))
 							break
-#					elif _zappedItem.alignment.matchn("uncursed"):
-#						dealWithTeleport(_zappedItem.id, _zappedItem.alignment, _zappedItem.type)
-#						Globals.gameConsole.addLog("The light illuminates your surroundings.")
-#					elif _zappedItem.alignment.matchn("cursed"):
-#						dealWithTeleport(_zappedItem.id, _zappedItem.alignment, _zappedItem.type)
-#						Globals.gameConsole.addLog("The light illuminates your surroundings dimly.")
 				"wand of summon critter":
 					if _zappedItem.alignment.matchn("blessed"):
 						var _critter = neutralCritters[randi() % neutralCritters.size()]

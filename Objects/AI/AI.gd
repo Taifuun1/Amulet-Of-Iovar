@@ -1,17 +1,19 @@
 extends Node
 
 var aI = "Aggressive"
+var aggroDistance = -1
 var activationDistance
 
-func create(_aI, _activationDistance = null):
+func create(_aI, _aggroDistance, _activationDistance = null):
 	name = "aI"
 	aI = _aI
+	aggroDistance = _aggroDistance
 	activationDistance = _activationDistance
 
 func getCritterMove(_critterTile, _playerTile, _level):
 	if aI.matchn("Aggressive"):
 		var _path = _level.calculatePathFindingPath(_critterTile, _playerTile)
-		if _path.size() == 0:
+		if (_path.size() == 0 or _path.size() >= aggroDistance) and aggroDistance != -1:
 			return getNeutralCritterMove(_critterTile, _level)
 		return _path
 	elif aI.matchn("Deactivated"):

@@ -7,6 +7,7 @@ var liches = {
 			"class": "Ancient",
 			"weight": 100,
 			"aI": "Aggressive",
+			"aggroDistance": 9,
 			"texture": load("res://Assets/Critters/LichHalf-Lich.png"),
 			"alignment": "Neutral",
 			"level": 12,
@@ -38,7 +39,17 @@ var liches = {
 				{
 					"abilityName": "fleirpoint",
 					"abilityType": "rangedSpell",
-					"chance": 6
+					"chance": 2
+				},
+				{
+					"abilityName": "frostpoint",
+					"abilityType": "rangedSpell",
+					"chance": 2
+				},
+				{
+					"abilityName": "thunderpoint",
+					"abilityType": "rangedSpell",
+					"chance": 2
 				},
 				{
 					"abilityName": "createShield",
@@ -76,6 +87,7 @@ var liches = {
 			"class": "Ancient",
 			"weight": 100,
 			"aI": "Aggressive",
+			"aggroDistance": 13,
 			"texture": load("res://Assets/Critters/LichLich.png"),
 			"alignment": "Neutral",
 			"level": 15,
@@ -106,9 +118,14 @@ var liches = {
 			"abilityHits": [1,0,1,0,1,1,0,0],
 			"abilities": [
 				{
+					"abilityName": "frostpoint",
+					"abilityType": "rangedSpell",
+					"chance": 6
+				},
+				{
 					"abilityName": "summonCritter",
 					"abilityType": "spell",
-					"chance": 8
+					"chance": 2
 				}
 			],
 			"resistances": ["fleir", "frost", "gleeie'er", "toxix", "blindness", "confusion", "fumbling", "sleep"],
@@ -140,6 +157,7 @@ var liches = {
 			"class": "Ancient",
 			"weight": 100,
 			"aI": "Aggressive",
+			"aggroDistance": 13,
 			"texture": load("res://Assets/Critters/LichGrandLich.png"),
 			"alignment": "Neutral",
 			"level": 20,
@@ -169,9 +187,14 @@ var liches = {
 			},
 			"abilities": [
 				{
+					"abilityName": "fleirpoint",
+					"abilityType": "rangedSpell",
+					"chance": 4
+				},
+				{
 					"abilityName": "summonCritters",
 					"abilityType": "spell",
-					"chance": 8
+					"chance": 4
 				}
 			],
 			"abilityHits": [1,1,1,0,1,1,0,1],
@@ -204,6 +227,7 @@ var liches = {
 			"class": "Ancient",
 			"weight": 100,
 			"aI": "Aggressive",
+			"aggroDistance": 13,
 			"texture": load("res://Assets/Critters/LichArch-Lich.png"),
 			"alignment": "Neutral",
 			"level": 25,
@@ -223,9 +247,14 @@ var liches = {
 			},
 			"abilities": [
 				{
+					"abilityName": "thundersplit",
+					"abilityType": "rangedSpell",
+					"chance": 2
+				},
+				{
 					"abilityName": "summonCritters",
 					"abilityType": "spell",
-					"chance": 8
+					"chance": 6
 				}
 			],
 			"abilityHits": [1,1,1,1,1,1,1,0],

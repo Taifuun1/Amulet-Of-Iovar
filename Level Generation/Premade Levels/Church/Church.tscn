@@ -4,6 +4,7 @@
 [ext_resource path="res://Level Generation/Premade Levels/Church/Church.gd" type="Script" id=2]
 
 [node name="Church" type="TileMap"]
+visible = false
 rotation = 0.000976183
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
