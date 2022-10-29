@@ -282,7 +282,15 @@ func whichTilesAreOpenAndFreeOfCritters(_tile, _distance):
 	return _legibleTiles
 
 func isTileOpenAndFreeOfCritters(_tile):
-	if Globals.isTileFree(_tile, grid) and isTileFreeOfCritters(_tile) and grid[_tile.x][_tile.y].tile != Globals.tiles.DOOR_CLOSED:
+	if (
+		_tile.y >= 0 and
+		_tile.y < grid[0].size() and
+		_tile.x >= 0 and
+		_tile.x < grid.size() and 
+		Globals.isTileFree(_tile, grid) and
+		isTileFreeOfCritters(_tile) and
+		grid[_tile.x][_tile.y].tile != Globals.tiles.DOOR_CLOSED
+	):
 		return true
 	return false
 
@@ -354,6 +362,30 @@ func isTileIllegibleInPathfind(_point, _illegibleTiles):
 			return true
 	return false
 
+func addPointToPathPathding(point):
+	var _pointId = id(point)
+	if astarNode.has_point(_pointId):
+		astarNode.set_point_disabled(_pointId, false)
+	else:
+		astarNode.add_point(_pointId, point, 1.0)
+		var pointsRelative = PoolVector2Array([
+			Vector2(point.x, point.y - 1),
+			Vector2(point.x + 1, point.y - 1),
+			Vector2(point.x + 1, point.y),
+			Vector2(point.x + 1, point.y + 1),
+			Vector2(point.x, point.y + 1),
+			Vector2(point.x - 1, point.y + 1),
+			Vector2(point.x - 1, point.y),
+			Vector2(point.x - 1, point.y - 1)
+		])
+		for pointRelative in pointsRelative:
+			var pointRelativeIndex = id(pointRelative)
+			if isOutSideTileMap(pointRelative):
+				continue
+			if not astarNode.has_point(pointRelativeIndex):
+				continue
+			astarNode.connect_points(_pointId, pointRelativeIndex, true)
+
 # Weighted pathfinding
 func calculateWeightedPath(pathStartPosition, pathEndPosition):
 	return weightedAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
@@ -399,6 +431,30 @@ func connectAllWeightedCells(points):
 				continue
 			weightedAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
 
+func addPointToWeightedPathding(point):
+	var _pointId = id(point)
+	if weightedAstarNode.has_point(_pointId):
+		weightedAstarNode.set_point_disabled(_pointId, false)
+	else:
+		weightedAstarNode.add_point(_pointId, point, 1.0)
+		var pointsRelative = PoolVector2Array([
+			Vector2(point.x, point.y - 1),
+			Vector2(point.x + 1, point.y - 1),
+			Vector2(point.x + 1, point.y),
+			Vector2(point.x + 1, point.y + 1),
+			Vector2(point.x, point.y + 1),
+			Vector2(point.x - 1, point.y + 1),
+			Vector2(point.x - 1, point.y),
+			Vector2(point.x - 1, point.y - 1)
+		])
+		for pointRelative in pointsRelative:
+			var pointRelativeIndex = id(pointRelative)
+			if isOutSideTileMap(pointRelative):
+				continue
+			if not weightedAstarNode.has_point(pointRelativeIndex):
+				continue
+			weightedAstarNode.connect_points(_pointId, pointRelativeIndex, true)
+
 
 
 ################################
@@ -406,8 +462,8 @@ func connectAllWeightedCells(points):
 ################################
 
 func updateTilemapToGrid():
-	for x in range(grid.size()):
-		for y in range(grid[x].size()):
+	for _x in range(grid.size()):
+		for _y in range(grid[_x].size()):
 			pass
 #			set_cellv(Vector2(x, y), Globals.tiles[grid[x][y].tile])
 
@@ -552,7 +608,7 @@ func placePresetCritters(_critters, _level):
 #							grid
 #						)
 			if _critter.critters.names != null:
-				if typeof(_critter.tiles) == TYPE_VECTOR2_ARRAY:
+				if typeof(_critter.tiles) == TYPE_ARRAY:
 					for x in range(_critter.tiles[0].x, _critter.tiles[1].x + 1):
 						for y in range(_critter.tiles[0].y, _critter.tiles[1].y + 1):
 							if randi() % 101 <= _critter.chance and Globals.isTileFree(Vector2(x, y), grid) and grid[x][y].tile != Globals.tiles.DOOR_CLOSED:

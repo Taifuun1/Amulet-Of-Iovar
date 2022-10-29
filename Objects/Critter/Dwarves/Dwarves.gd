@@ -6,7 +6,7 @@ var dwarves = {
 			"race": "Dwarf",
 			"class": "Humanoid",
 			"weight": 200,
-			"aI": "Neutral",
+			"aI": "Miner",
 			"texture": load("res://Assets/Critters/DwarfMiner.png"),
 			"alignment": "Neutral",
 			"level": 6,

@@ -148,7 +148,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			if currentHit == 15:
 				currentHit = 0
 			currentHit += 1
-		elif _critter.aI.aI == "Neutral":
+		elif _critter.aI.aI.matchn("neutral") or _critter.aI.aI.matchn("miner"):
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level, _critter.id)
 			Globals.gameConsole.addLog("You swap places with the {critter}.".format({ "critter": _critter.critterName }))
 			checkIfThereIsSomethingOnTheGroundHere(_tileToMoveTo, _level)
@@ -160,6 +160,22 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		else:
 			_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.DOOR_OPEN
 			_level.addPointToEnemyPathding(_tileToMoveTo)
+	elif (
+		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.EMPTY or
+		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE or
+		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP
+	):
+		if inventory.checkIfItemInInventoryByName("pickaxe"):
+			if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.EMPTY:
+				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE
+			elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE:
+				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE
+			elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP:
+				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
+			_level.addPointToEnemyPathding(_tileToMoveTo)
+			_level.addPointToPathPathding(_tileToMoveTo)
+			_level.addPointToWeightedPathding(_tileToMoveTo)
+			Globals.gameConsole.addLog("You mine the cave wall.")
 	else:
 		if checkIfStatusEffectIsInEffect("fumbling") and randi() % 4 == 0:
 			Globals.gameConsole.addLog("You fumble on your feet.")
@@ -564,6 +580,9 @@ func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
 		Globals.gameConsole.addLog("There's a bean plant here.")
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT_ORANGE:
 		Globals.gameConsole.addLog("There's an orange plant here.")
+	
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.ANT_HILL:
+		Globals.gameConsole.addLog("There's an ant hill here.")
 
 func checkAllItemsIdentification():
 	for _item in $"/root/World/Items".get_children():

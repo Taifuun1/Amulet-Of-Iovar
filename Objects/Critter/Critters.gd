@@ -180,23 +180,27 @@ func spawnCritter(_critter, _position = null, _isDeactivated = null, _level = $"
 		return _newCritter.critterName
 	return false
 
-func spawnRandomCritter(_position, _level = $"/root/World".level):
+func spawnRandomCritter(_position, _spawnLiches = true):
+	var _level = $"/root/World".level
 	if _level.grid[_position.x][_position.y].critter == null:
 		var _species = critters.keys()[randi() % critters.keys().size()]
-		var _critter = critters[_species].critterTypes[randi() % critters[_species].critterTypes.size()].duplicate(true)
-		if (
-			GlobalCritterInfo.globalCritterInfo[_critter.critterName].population != 0 and
-			GlobalCritterInfo.globalCritterInfo[_critter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_critter.critterName].population
-		):
-			var newCritter = critter.instance()
-			newCritter.createCritter(_critter, _level.levelId)
-			newCritter.createAi(_critter.aI)
-			_level.grid[_position.x][_position.y].critter = newCritter.id
-			$"/root/World/Critters".add_child(newCritter, true)
-			_level.critters.append(newCritter.id)
-			_level.removePointFromEnemyPathfinding(_position)
-			GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
-			return _critter.critterName
+		if !_species.matchn("bosses"):
+			if !_spawnLiches and _species.matchn("liches"):
+				return null
+			var _critter = critters[_species].critterTypes[randi() % critters[_species].critterTypes.size()].duplicate(true)
+			if (
+				GlobalCritterInfo.globalCritterInfo[_critter.critterName].population != 0 and
+				GlobalCritterInfo.globalCritterInfo[_critter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_critter.critterName].population
+			):
+				var newCritter = critter.instance()
+				newCritter.createCritter(_critter, _level.levelId)
+				newCritter.createAi(_critter.aI)
+				_level.grid[_position.x][_position.y].critter = newCritter.id
+				$"/root/World/Critters".add_child(newCritter, true)
+				_level.critters.append(newCritter.id)
+				_level.removePointFromEnemyPathfinding(_position)
+				GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
+				return _critter.critterName
 	return null
 
 func checkNewCritterSpawn(_level, _playerTile):

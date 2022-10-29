@@ -9,6 +9,11 @@ var charge = {
 	"distance": 5
 }
 
+var mining = {
+	"name": "Mining",
+	"distance": 0
+}
+
 var sharpenSword = {
 	"name": "Sharpen sword",
 	"distance": 3

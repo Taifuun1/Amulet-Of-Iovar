@@ -81,7 +81,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		return false
 	
 	var _path = []
+	var _distanceFromPlayer = []
 	
+	# Get critter distance from player
+	_distanceFromPlayer = _level.calculatePath(_critterTile, _playerTile)
 	# Get critter move
 	if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
 		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
@@ -101,7 +104,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		if _abilities.size() != 0:
 			_pickedAbility = _abilities[randi() % _abilities.size()]
 			_pickedAbility.data = critterSpellData[_pickedAbility.abilityName]
-		if _pickedAbility != null and _path.size() <= _pickedAbility.data.distance and _path.size() != 0:
+		if _pickedAbility != null and _distanceFromPlayer.size() <= _pickedAbility.data.distance and _distanceFromPlayer.size() != 0:
 			match _pickedAbility.abilityType:
 				"rangedSpell":
 					var _directions = [
@@ -136,7 +139,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 						for _i in _pickedAbility.data.distance:
 							_distance += 1
 							var _tile = _critterTile + (_direction * _distance)
-							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid):
+							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 								break
 							if _tile == _playerTile:
 								_critters.append([_level.grid[_tile.x][_tile.y].critter, _tile])
@@ -210,9 +213,31 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 							else:
 								_tiles = _legibleTiles
 							for _tile in _tiles:
-								$"/root/World/Critters/Critters".spawnRandomCritter(_tile)
+								$"/root/World/Critters/Critters".spawnRandomCritter(_tile, false)
 							Globals.gameConsole.addLog("{critter} summons critters!".format({ "critter": critterName.capitalize() }))
 							return false
+	
+	for _ability in abilities:
+		if _path.size() > 1:
+			match _ability.abilityType:
+				"skill":
+					match _ability.abilityName:
+						"mining":
+							var _tileToMoveTo = _path[1]
+							if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.EMPTY or _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE:
+								_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE
+								_level.addPointToEnemyPathding(_tileToMoveTo)
+								_level.addPointToPathPathding(_tileToMoveTo)
+								_level.addPointToWeightedPathding(_tileToMoveTo)
+								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
+									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
+							if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP:
+								_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
+								_level.addPointToEnemyPathding(_tileToMoveTo)
+								_level.addPointToPathPathding(_tileToMoveTo)
+								_level.addPointToWeightedPathding(_tileToMoveTo)
+								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
+									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
 	
 	# Critter move
 	if _path.size() > 1:

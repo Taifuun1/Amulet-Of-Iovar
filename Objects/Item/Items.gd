@@ -50,7 +50,7 @@ func create():
 
 func createItem(_item, _position = null, _amount = 1, _toInventory = false, _extraData = {  }, _level = $"/root/World".level):
 	var _itemPosition
-	if _position == null:
+	if _position == null and !_toInventory:
 		_itemPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
 	else:
 		_itemPosition = _position

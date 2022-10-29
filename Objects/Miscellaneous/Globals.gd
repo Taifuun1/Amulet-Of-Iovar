@@ -100,6 +100,7 @@ enum interactables {
 	PLANT_TOMATO
 	PLANT_BEAN
 	PLANT_ORANGE
+	ANT_HILL
 }
 
 var currentDungeonLevel = 1

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cherry.png-68392e7a8e59f026779cd47648295814.stex"
+path="res://.import/AntHill.png-bd6d672bc7cb4fcbb20d3bb85331eef4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Interactables/Cherry.png"
-dest_files=[ "res://.import/Cherry.png-68392e7a8e59f026779cd47648295814.stex" ]
+source_file="res://Assets/Interactables/AntHill.png"
+dest_files=[ "res://.import/AntHill.png-bd6d672bc7cb4fcbb20d3bb85331eef4.stex" ]
 
 [params]
 

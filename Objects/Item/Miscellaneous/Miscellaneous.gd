@@ -16,8 +16,8 @@ var miscellaneous = {
 	"Amulet of Iovar": {
 		"itemName": "Amulet of Iovar",
 		"unidentifiedItemName": "Amulet of Iovar",
-		"texture": load("res://Assets/Amulets/AmuletofIovar.png"),
-		"unIdentifiedTexture": load("res://Assets/Amulets/AmuletofIovar.png"),
+		"texture": load("res://Assets/Amulets/AmuletOfIovar.png"),
+		"unIdentifiedTexture": load("res://Assets/Amulets/AmuletOfIovar.png"),
 		"type": "Amulet",
 		"category": null,
 		"weight": 25,

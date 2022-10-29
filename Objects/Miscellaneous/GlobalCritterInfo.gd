@@ -9,7 +9,7 @@ func removeCritterFromPlay(_critterName):
 
 var globalCritterInfo = {
 	"Iovar": {
-		"population": 1,
+		"population": 999999999,
 		"crittersInPlay": 0
 	},
 	"Elder Dragon": {
@@ -260,20 +260,20 @@ var globalCritterInfo = {
 		"population": 46,
 		"crittersInPlay": 0
 	},
-	"Arch-lich": {
-		"population": 14,
-		"crittersInPlay": 0
-	},
-	"Grand lich": {
-		"population": 21,
-		"crittersInPlay": 0
-	},
 	"Half-lich": {
 		"population": 42,
 		"crittersInPlay": 0
 	},
 	"Lich": {
 		"population": 35,
+		"crittersInPlay": 0
+	},
+	"Grand lich": {
+		"population": 21,
+		"crittersInPlay": 0
+	},
+	"Arch-lich": {
+		"population": 14,
 		"crittersInPlay": 0
 	},
 	"Humongous mimic": {

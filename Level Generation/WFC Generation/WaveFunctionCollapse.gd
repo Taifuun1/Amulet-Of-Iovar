@@ -265,7 +265,7 @@ func changeReplaceables(_replaceables):
 			if grid[x][y].tile == Globals.tiles.REPLACEABLE1:
 				grid[x][y].tile = Globals.tiles[_replaceables[randi() % _replaceables.size()]]
 
-func placeTilesInArea(_placement):
+func placeTilesInArea(_placement, _tile = null):
 	if _placement.has("side"):
 		if _placement.side.matchn("west"):
 			for x in _placement.tilesFromSide:
@@ -282,6 +282,8 @@ func placeTilesInArea(_placement):
 			for x in Globals.gridSize.x:
 				for y in Globals.gridSize.y:
 					if calculatePath(Vector2(x,y), _splotch.spot).size() < _splotch.distance:
+						if _tile != null and grid[x][y].tile == Globals.tiles[_tile]:
+							continue
 						grid[x][y].tile = generatedGrid[x][y].tile
 						grid[x][y].tileMetaData = generatedGrid[x][y].tileMetaData
 

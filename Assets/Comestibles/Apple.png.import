@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cherries.png-32fdc39ec74f0cebdd05b0f2a3d89103.stex"
+path="res://.import/Apple.png-18ab9f436395dee204954e345b9b9418.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Interactables/Cherries.png"
-dest_files=[ "res://.import/Cherries.png-32fdc39ec74f0cebdd05b0f2a3d89103.stex" ]
+source_file="res://Assets/Comestibles/Apple.png"
+dest_files=[ "res://.import/Apple.png-18ab9f436395dee204954e345b9b9418.stex" ]
 
 [params]
 

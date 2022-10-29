@@ -19,6 +19,7 @@ onready var vacationResort = preload("res://Level Generation/Generic Generation/
 onready var minesOfTidoh = preload("res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn")
 onready var depthsOfTidoh = preload("res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn")
 onready var patch = preload("res://Level Generation/WFC Generation/Patch/Patch.tscn")
+onready var antHill = preload("res://Level Generation/WFC Generation/Ant Hill/AntHill.tscn")
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
 onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
 onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
@@ -45,6 +46,7 @@ onready var tidohMiningOutpost1 = preload("res://Level Generation/Premade Levels
 onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
 onready var iovarsLair1 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair1.tscn")
 onready var iovarsLair2 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair2.tscn")
+onready var church = preload("res://Level Generation/Premade Levels/Church/Church.tscn")
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -191,7 +193,7 @@ func create(_className):
 	
 	$Critters.add_child(player, true)
 	player.create(_className)
-	level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
+	level.placeCritterOnTypeOfTile(Globals.tiles.DOWN_STAIR_DUNGEON, 0)
 	player.calculateEquipmentStats()
 	
 	for _level in $Levels.get_children():
@@ -209,7 +211,11 @@ func create(_className):
 	$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
-	$Items/Items.createItem("potion of invisibility", null, 1, true, { "alignment": "cursed" })
+	$Items/Items.createItem("pickaxe", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("wand of digging", null, 1, true, { "alignment": "blessed" })
+	$Items/Items.createItem("wand of digging", null, 1, true, { "alignment": "cursed" })
+	$Items/Items.createItem("scroll of summon critter", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
 #	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
@@ -238,8 +244,8 @@ func create(_className):
 
 func createDungeon():
 	### Dungeon 1
-	var firstLevel = iovarsLair2.instance()
-	firstLevel.create("dungeon1", "Dungeon hallways 1", 10000)
+	var firstLevel = church.instance()
+	firstLevel.create("minesOfTidoh", "Dungeon hallways 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(1):
@@ -386,28 +392,40 @@ func _input(_event):
 						_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y)
 					elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
 						_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
-					if currentGameState == gameState.GAME:
-						var _openTiles = level.checkAdjacentTilesForOpenSpace(_playerTile)
-						if $Critters/"0".statusEffects["confusion"] > 0 and randi() % 3 == 0:
-							var _randomOpenTiles = _openTiles.duplicate(true)
-							_randomOpenTiles.shuffle()
-							_tileToMoveTo = _randomOpenTiles[0]
-						for _openTile in _openTiles:
-							if _openTile == _tileToMoveTo:
-								if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null:
-									keepMovingLoop(_playerTile, _tileToMoveTo)
-								else:
-									processGameTurn(_playerTile, _tileToMoveTo)
-								break
-					elif currentGameState == gameState.INTERACT:
-						interactWith(_tileToMoveTo)
-					elif currentGameState == gameState.KICK:
-						kickAt(_tileToMoveTo)
-					elif currentGameState == gameState.CAST:
-						castAt(_playerTile, _tileToMoveTo)
-					elif currentGameState == gameState.ZAP_DIRECTION:
-						$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
-						resetToDefaulGameState()
+					
+					if(
+						Globals.isTileFree(_tileToMoveTo, level.grid) or
+						(
+							$Critters/"0".inventory.checkIfItemInInventoryByName("pickaxe") and
+							(
+								level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.EMPTY or
+								level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE or
+								level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP
+							)
+						)
+					):
+						if currentGameState == gameState.GAME:
+							var _openTiles = level.checkAdjacentTilesForOpenSpace(_playerTile)
+							if $Critters/"0".statusEffects["confusion"] > 0 and randi() % 3 == 0:
+								var _randomOpenTiles = _openTiles.duplicate(true)
+								_randomOpenTiles.shuffle()
+								_tileToMoveTo = _randomOpenTiles[0]
+	#						for _openTile in _openTiles:
+	#							if _openTile == _tileToMoveTo:
+							if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null:
+								keepMovingLoop(_playerTile, _tileToMoveTo)
+							else:
+								processGameTurn(_playerTile, _tileToMoveTo)
+	#						break
+						elif currentGameState == gameState.INTERACT:
+							interactWith(_tileToMoveTo)
+						elif currentGameState == gameState.KICK:
+							kickAt(_tileToMoveTo)
+						elif currentGameState == gameState.CAST:
+							castAt(_playerTile, _tileToMoveTo)
+						elif currentGameState == gameState.ZAP_DIRECTION:
+							$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
+							resetToDefaulGameState()
 			elif (
 				Input.is_action_just_pressed("WAIT") and
 				currentGameState == gameState.GAME
@@ -526,8 +544,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 			_tileToMoveTo.y < level.grid[0].size() and
 			_tileToMoveTo.x >= 0 and
 			_tileToMoveTo.x < level.grid.size()
-		) and
-		Globals.isTileFree(_tileToMoveTo, level.grid)
+		)
 	):
 		$"Critters/0".processPlayerAction(_playerTile, _tileToMoveTo, $Items/Items, level)
 	elif Input.is_action_pressed("ACCEPT"):
@@ -734,6 +751,13 @@ func moveLevel(_direction):
 	updateTiles()
 	Globals.currentDungeonLevelName = level.dungeonLevelName
 	level.grid[level.stairs[_placePlayerOnStair].x][level.stairs[_placePlayerOnStair].y].critter = 0
+	
+	if $Critters/"0".inventory.checkIfItemInInventoryByName("Amulet of Iovar") and randi() % 14 == 0:
+		var _openTiles = level.checkAdjacentTilesForOpenSpace(level.stairs[_placePlayerOnStair], false, true)
+		$Critters/Critters.spawnCritter("Iovar", _openTiles[randi() % _openTiles.size()])
+		Globals.gameConsole.addLog("Iovar appears next to you!")
+		Globals.gameConsole.addLog("Iovar: \"You cant escape, cur!\"")
+	
 	drawLevel()
 	$"/root/World".show()
 

@@ -500,16 +500,39 @@ func zapItem(_direction):
 								Globals.gameConsole.addLog("A few items on the ground vibrate.")
 				"wand of wishing":
 					var _itemTypes = []
-#					if _readItem.alignment.matchn("blessed"):
 					for _type in $"/root/World/Items/Items".items:
 						_itemTypes.append(_type)
-#					elif _readItem.alignment.matchn("uncursed") or _readItem.alignment.matchn("cursed"):
-#						for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
-#							if GlobalCritterInfo.globalCritterInfo[_critterName].population != 0:
-#								_aliveCritters.append(_critterName)
 					$"/root/World/UI/UITheme/ListMenu".showListMenuList("Wish for what item type?", _itemTypes, _zappedItem, true)
 					$"/root/World/UI/UITheme/ListMenu".show()
 					_additionalChoices = true
+				"wand of digging":
+					var _level = $"/root/World".level
+					var _distance = 4
+					if _zappedItem.alignment.matchn("blessed"):
+						_distance = 7
+					if _zappedItem.alignment.matchn("cursed"):
+						_distance = 2
+					var _isTileMined = false
+					for i in range(1, _distance):
+						var _tile = _playerPosition + _direction * i
+						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.EMPTY or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE:
+							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
+							_level.addPointToEnemyPathding(_tile)
+							_level.addPointToPathPathding(_tile)
+							_level.addPointToWeightedPathding(_tile)
+							_isTileMined = true
+						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE_DEEP:
+							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
+							_level.addPointToEnemyPathding(_tile)
+							_level.addPointToPathPathding(_tile)
+							_level.addPointToWeightedPathding(_tile)
+							_isTileMined = true
+						if !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+							break
+					if _isTileMined:
+						$"/root/World".updateTiles()
+						$"/root/World".drawLevel()
+						Globals.gameConsole.addLog("The {itemName} bores through the wall!".format({ "itemName": _zappedItem.itemName }))
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
 			_zappedItem.value.charges -= 1

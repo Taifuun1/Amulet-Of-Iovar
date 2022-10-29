@@ -22,7 +22,7 @@ func createDungeon():
 			"GRASS_YELLOW",
 			"ROAD_GRASS",
 			"FLOOR_WOOD_BRICK",
-			"FLOOR_WOOD_SMALL",
+			"FLOOR_BRICK_SMALL",
 			"FLOOR_STONE_BRICK",
 			"FLOOR_CAVE",
 			"FLOOR_CAVE_DEEP",
@@ -34,7 +34,10 @@ func createDungeon():
 			"GRASS_YELLOW",
 			"FLOOR_BRICK_SMALL"
 		],
-		[]
+		[
+			"GRASS",
+			"GRASS_YELLOW"
+		]
 	)
 	
 	var _groups = get_groups()
