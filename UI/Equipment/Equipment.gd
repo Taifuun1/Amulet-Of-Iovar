@@ -89,6 +89,8 @@ func _process(_delta):
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
 				if _item.category.matchn("ring"):
 					checkWhatRingIsWorn(_item)
+				if _item.category.matchn("amulet"):
+					checkWhatAmuletIsWorn(_item)
 			$"/root/World/Critters/0".calculateEquipmentStats()
 			if _changed:
 				$"/root/World".processGameTurn()
@@ -134,6 +136,8 @@ func setEquipment(_id):
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		if _item.category.matchn("ring"):
 			checkWhatRingIsWorn(_item)
+		if _item.category.matchn("amulet"):
+			checkWhatAmuletIsWorn(_item)
 		$"/root/World/Critters/0".calculateEquipmentStats()
 		$"/root/World".processGameTurn()
 	elif _matchingType.matchn("armor"):
@@ -243,6 +247,15 @@ func checkWhatAmuletIsWorn(_amulet):
 				$"/root/World/Critters/0".maxhp += 20
 				_playerNode.itemsTurnedOn.append(_amulet)
 				Globals.gameConsole.addLog("Your life energy feels stronger.")
+		"amulet of backscattering":
+			if _playerNode.itemsTurnedOn.has(_amulet):
+				_playerNode.itemsTurnedOn.erase(_amulet)
+				_playerNode.statusEffects.backscattering = 0
+				Globals.gameConsole.addLog("Your feel an energy field dissipate around you.")
+			else:
+				_playerNode.itemsTurnedOn.append(_amulet)
+				_playerNode.statusEffects.backscattering = -1
+				Globals.gameConsole.addLog("Your feel an energy field around you.")
 		"amulet of strangulation":
 			if _playerNode.itemsTurnedOn.has(_amulet):
 				_playerNode.itemsTurnedOn.erase(_amulet)

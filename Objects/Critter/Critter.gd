@@ -125,14 +125,14 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 						for _i in _pickedAbility.data.distance:
 							_distance += 1
 							var _tile = _critterTile + (_direction * _distance)
-							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid):
+							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 								break
 							match _pickedAbility.abilityName:
 								"rockThrow", "crackerThrow", "fleirpoint", "fleirnado", "frostpoint", "frostBite", "thunderPoint", "thundersplit", "voidBlast":
 									if _level.grid[_tile.x][_tile.y].critter == 0:
 										var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
 										if (
-											_critterNode.statusEffects.backscattering > 0 and
+											_critterNode.checkIfStatusEffectIsInEffect("backscattering") and
 											_pickedAbility.abilityName.matchn("rockThrow")
 										):
 											Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
@@ -155,7 +155,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 						Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 					for _critter in _critters:
 						var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critter }))
-						if _critterNode.statusEffects.backscattering > 0 and _pickedAbility.abilityName.matchn("dragonBreath"):
+						if _critterNode.checkIfStatusEffectIsInEffect("backscattering") and _pickedAbility.abilityName.matchn("dragonBreath"):
 							Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
 							continue
 						_critterNode.takeDamage(_pickedAbility.data.attacks, _level.getCritterTile(_critter), critterName)

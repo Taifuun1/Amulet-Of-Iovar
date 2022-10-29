@@ -23,6 +23,18 @@ var randomItemList = {
 			"White"
 		]
 	},
+#	"armor": {
+#		"type": [
+#			"seeing",
+#			"magic power",
+#			"life power",
+#		],
+#		"appearance": [
+#			"Black",
+#			"Blue",
+#			"Green",
+#		]
+#	},
 	"potion": {
 		"type": [
 			"confusion",

@@ -11,11 +11,11 @@ font_data = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Text" type="RichTextLabel" parent="."]
-margin_left = -100.0
+margin_left = -200.0
 margin_top = -20.0
-margin_right = 100.0
+margin_right = 200.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 200, 40 )
+rect_min_size = Vector2( 400, 40 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 1 )

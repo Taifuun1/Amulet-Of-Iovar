@@ -105,8 +105,8 @@ var amulets = {
 		{
 			"itemName": "Thunderous roar",
 			"unidentifiedItemName": "Thunderous roar",
-			"texture": null,
-			"unIdentifiedTexture": null,
+			"texture": load("res://Assets/Amulets/AmuletThunderourRoar.png"),
+			"unIdentifiedTexture": load("res://Assets/Amulets/AmuletThunderourRoar.png"),
 			"type": "Accessory",
 			"category": "Amulet",
 			"weight": 35,
@@ -119,8 +119,8 @@ var amulets = {
 		{
 			"itemName": "Cold breeze",
 			"unidentifiedItemName": "Cold breeze",
-			"texture": null,
-			"unIdentifiedTexture": null,
+			"texture": load("res://Assets/Amulets/AmuletColdBreeze.png"),
+			"unIdentifiedTexture": load("res://Assets/Amulets/AmuletColdBreeze.png"),
 			"type": "Accessory",
 			"category": "Amulet",
 			"weight": 35,

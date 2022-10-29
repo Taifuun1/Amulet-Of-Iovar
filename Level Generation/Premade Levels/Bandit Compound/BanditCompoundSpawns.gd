@@ -287,7 +287,7 @@ var banditCompoundSpawn2 = [
 			"types": null,
 			"names": [
 				"Frozen mail",
-				"Thunder mail",
+				"Great Ulromirs platemail",
 				"Green dragon scale mail"
 			]
 		},
