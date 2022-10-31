@@ -3,7 +3,10 @@ extends Node
 onready var item = preload("res://Objects/Item/Item.tscn")
 
 var amulets = preload("res://Objects/Item/Amulets/Amulets.gd").new()
-var armors = preload("res://Objects/Item/Armor/Armor.gd").new()
+var armor = preload("res://Objects/Item/Armor/Armor.gd").new()
+var belt = preload("res://Objects/Item/Belts/Belts.gd").new()
+var cloak = preload("res://Objects/Item/Cloaks/Cloaks.gd").new()
+var gauntlets = preload("res://Objects/Item/Gauntlets/Gauntlets.gd").new()
 var comestibles = preload("res://Objects/Item/Comestibles/Comestibles.gd").new()
 var gems = preload("res://Objects/Item/Gems/Gems.gd").new()
 var potions = preload("res://Objects/Item/Potions/Potions.gd").new()
@@ -27,7 +30,10 @@ var randomizedItemsByRarity = []
 func create():
 	name = "Items"
 	items["amulet"] = amulets.amulets
-	items["armor"] = armors.armors
+	items["armor"] = armor.armor
+	items["belt"] = belt.belt
+	items["cloak"] = cloak.cloak
+	items["gauntlets"] = gauntlets.gauntlets
 	items["comestible"] = comestibles.comestibles
 	items["gem"] = gems.gems
 	items["potion"] = potions.potions
@@ -198,6 +204,9 @@ func randomizeRandomItems():
 	var _randomItemList = randomItemList.randomItemList.duplicate(true)
 	var _shuffledItems = {
 		"amulet": {},
+		"belt": {},
+		"cloak": {},
+		"gauntlets": {},
 		"potion": {},
 		"ring": {},
 		"scroll": {},
@@ -214,6 +223,12 @@ func randomizeRandomItems():
 			if _itemType == "scroll":
 				_unidentifiedItemName = _itemType.capitalize() + " labeled " + _appearance
 				_textureLoadPath = "res://Assets/Miscellaneous/Scroll.png".format({
+					"appearance": _appearance.capitalize().replace(" ", ""),
+					"itemType": _itemType.capitalize()
+				})
+			elif _itemType == "gauntlets":
+				_unidentifiedItemName = _appearance + " " + _itemType.capitalize()
+				_textureLoadPath = "res://Assets/{itemType}/{itemType}{appearance}.png".format({
 					"appearance": _appearance.capitalize().replace(" ", ""),
 					"itemType": _itemType.capitalize()
 				})

@@ -207,7 +207,13 @@ func checkNewCritterSpawn(_level, _playerTile):
 	if _level.spawnableCritterTiles.size() != 0:
 		var _randomSpawnableTile = _level.spawnableCritterTiles[randi() % _level.spawnableCritterTiles.size()]
 		var _critterSpawnDistance = _level.calculatePath(_randomSpawnableTile, _playerTile).size()
+		print(_randomSpawnableTile)
+		print(_playerTile)
+		print("spw: ",_critterSpawnDistance)
 		if _randomSpawnableTile != null and _critterSpawnDistance > 16 and _level.critters.size() < 20:
+			print("spawned")
+			print(_critterSpawnDistance > 16)
+			print(_level.critters.size())
 			var _randomCritter = spawnableCritters[randi() % spawnableCritters.size()]
 			spawnCritters(_randomCritter, _randomSpawnableTile)
 

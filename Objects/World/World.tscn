@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Objects/World/World.gd" type="Script" id=1]
 [ext_resource path="res://Objects/World/World.tres" type="TileSet" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://UI/Runes/Runes.tscn" type="PackedScene" id=13]
 [ext_resource path="res://UI/Dialog Menu/Dialog Menu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/Container/Container.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Objects/Save/Save.tscn" type="PackedScene" id=16]
 
 [node name="World" type="TileMap"]
 tile_set = ExtResource( 2 )
@@ -45,6 +46,7 @@ mouse_filter = 2
 theme = ExtResource( 12 )
 
 [node name="StartScreen" parent="UI/UITheme" instance=ExtResource( 9 )]
+visible = false
 
 [node name="GameConsole" parent="UI/UITheme" instance=ExtResource( 4 )]
 visible = false
@@ -75,3 +77,5 @@ visible = false
 [node name="Debug Menu" parent="UI/UITheme" instance=ExtResource( 11 )]
 
 [node name="Levels" type="Node2D" parent="."]
+
+[node name="Save" parent="." instance=ExtResource( 16 )]

@@ -264,7 +264,7 @@ var banditCompoundSpawn2 = [
 		"items": {
 			"types": null,
 			"names": [
-				"Cloak of Invisibility"
+				"Cloak of magical ambiguity"
 			]
 		},
 		"chance": 50

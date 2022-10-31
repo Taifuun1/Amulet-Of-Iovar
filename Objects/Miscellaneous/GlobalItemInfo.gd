@@ -145,13 +145,13 @@ var globalItemInfo = {
 	"Cloak of displacement": {
 		"identified": false,
 	},
-	"Cloak of invisibility": {
-		"identified": false,
-	},
+#	"Cloak of invisibility": {
+#		"identified": false,
+#	},
 	"Alchemists robes": {
 		"identified": false,
 	},
-	"Cloak of magical ambiquity": {
+	"Cloak of magical ambiguity": {
 		"identified": false,
 	},
 	"Battered buckler": {
@@ -220,9 +220,9 @@ var globalItemInfo = {
 	"Potion of blindness": {
 		"identified": false
 	},
-	"Potion of invisibility": {
-		"identified": false
-	},
+#	"Potion of invisibility": {
+#		"identified": false
+#	},
 #	"Potion of levitation": {
 #		"identified": false
 #	},
@@ -260,9 +260,6 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Ring of protection": {
-		"identified": false
-	},
-	"Ring of seeing": {
 		"identified": false
 	},
 	"Ring of hunger": {

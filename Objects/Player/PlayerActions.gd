@@ -113,13 +113,13 @@ func readItem(_id):
 					newItem.createItem(_item)
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("A {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
 				elif _readItem.alignment.matchn("cursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					newItem.createItem($"/root/World/Items/Items".getItemByName("orange"))
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("An {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
 			"scroll of create potion":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.alignment.matchn("blessed"):
@@ -146,13 +146,13 @@ func readItem(_id):
 					newItem.createItem(_item)
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("A {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
 				elif _readItem.alignment.matchn("cursed"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					newItem.createItem($"/root/World/Items/Items".getItemByName("potion of toxix"))
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("An {itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
 			"scroll of summon critter":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.alignment.matchn("blessed"):
@@ -448,7 +448,7 @@ func zapItem(_direction):
 								"bonusDmg": {},
 								"armorPen": 0,
 								"magicDmg": {
-									"dmg": 0,
+									"dmg": [0,0],
 									"element": null
 								}
 							}
@@ -461,7 +461,7 @@ func zapItem(_direction):
 								"bonusDmg": {},
 								"armorPen": 0,
 								"magicDmg": {
-									"dmg": 0,
+									"dmg": [0,0],
 									"element": null
 								}
 							}
@@ -666,8 +666,8 @@ func dipItem(_id):
 				Globals.gameConsole.addLog("The {itemName} looks visibly confused!".format({ "itemName": _selectedItem.itemName }))
 			"potion of toxix":
 				Globals.gameConsole.addLog("The {itemName} looks slightly corroded.".format({ "itemName": _selectedItem.itemName }))
-			"potion of invisibility":
-				Globals.gameConsole.addLog("The {itemName} looks transparent.".format({ "itemName": _selectedItem.itemName }))
+#			"potion of invisibility":
+#				Globals.gameConsole.addLog("The {itemName} looks transparent.".format({ "itemName": _selectedItem.itemName }))
 			_:
 				Globals.gameConsole.addLog("You soak the {itemName} into the potion. Nothing happens.".format({ "itemName": _selectedItem.itemName }))
 		selectedItem = null

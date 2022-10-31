@@ -14,7 +14,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -37,7 +37,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -62,7 +62,7 @@ var weapons = {
 				},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -85,7 +85,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 1,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -108,7 +108,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -135,7 +135,7 @@ var weapons = {
 				},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -158,7 +158,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -183,7 +183,7 @@ var weapons = {
 				},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -208,7 +208,7 @@ var weapons = {
 				},
 				"armorPen": 1,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -283,7 +283,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 3,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -308,7 +308,7 @@ var weapons = {
 				},
 				"armorPen": 1,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -333,7 +333,7 @@ var weapons = {
 				},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -450,7 +450,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 6,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -498,7 +498,7 @@ var weapons = {
 				},
 				"armorPen": 5,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -567,7 +567,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -613,7 +613,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 3,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},
@@ -638,7 +638,7 @@ var weapons = {
 				},
 				"armorPen": 3,
 				"magicDmg": {
-					"dmg": 0,
+					"dmg": [0,0],
 					"element": null
 				}
 			},

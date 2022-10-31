@@ -100,20 +100,20 @@ var potions = {
 			"rarity": "Uncommon",
 			"identified": false
 		},
-		{
-			"itemName": "Potion of invisibility",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unIdentifiedTexture": null,
-			"type": "Potion",
-			"category": null,
-			"weight": 15,
-			"value": null,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
-		},
+#		{
+#			"itemName": "Potion of invisibility",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unIdentifiedTexture": null,
+#			"type": "Potion",
+#			"category": null,
+#			"weight": 15,
+#			"value": null,
+#			"enchantment": true,
+#			"stackable": false,
+#			"rarity": "Uncommon",
+#			"identified": false
+#		},
 #		{
 #			"itemName": "Potion of levitation",
 #			"unidentifiedItemName": null,

@@ -13,14 +13,16 @@ var runes = {
 }
 
 var spellDamage = {
-	"dmg": null,
+	"dmg": [0,0],
 	"bonusDmg": {},
 	"armorPen": 0,
 	"magicDmg": {
-		"dmg": 0,
+		"dmg": [0,0],
 		"element": null
 	}
 }
+
+var manaUsage = 0
 
 var hoveredEquipment = null
 
@@ -79,6 +81,11 @@ func _process(_delta):
 
 func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	yield(get_tree(), "idle_frame")
+	
+	if $"/root/World/Critters/0".mp - manaUsage < 0:
+		Globals.gameConsole.addLog("You dont have mp to cast that spell!")
+		return
+	
 	var _newSpell = spell.instance()
 	
 	var _runeData = {
@@ -178,6 +185,8 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	# warning-ignore:return_value_discarded
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
+	
+	$"/root/World/Critters/0".mp -= manaUsage
 
 
 
@@ -280,35 +289,42 @@ func isCastableRunes():
 func calculateMagicDamage():
 	if isCastableRunes() == "notCastable":
 		spellDamage = [{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": 0,
+				"dmg": [0,0],
 				"element": null
 			}
 		}]
 	elif runes.heario == null:
 		spellDamage = [{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": int(spellData.spellData[runes.eario.value.to_lower()].dmg * 0.5),
+				"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * 0.5), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[1] * 0.5)],
 				"element": runes.eario.value
 			}
 		}]
+		manaUsage = 0
+		for _rune in runes:
+			if !_rune.matchn("heario"):
+				manaUsage += runeData.runeData[_rune][runes[_rune].value.to_lower()].mp
 #	"effect": runeData.heario[runes.heario].effectMultiplier
 	else:
 		spellDamage = [{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": int(spellData.spellData[runes.eario.value.to_lower()].dmg * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier),
+				"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier)],
 				"element": runes.eario.value
 			}
 		}]
+		manaUsage = 0
+		for _rune in runes:
+			manaUsage += runeData.runeData[_rune][runes[_rune].value.to_lower()].mp
 
 
 

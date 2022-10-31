@@ -14,7 +14,7 @@ var color
 func create(_tiles, _runeData):
 	tiles = _tiles
 	spellTexture = _runeData.heario.texture
-	color = _runeData.eario
+	color = _runeData.eario.color
 
 func animateCycle():
 	var _cycleTiles = tiles.pop_front()

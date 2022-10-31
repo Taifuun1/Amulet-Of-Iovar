@@ -4,6 +4,7 @@
 [ext_resource path="res://Objects/FOV/FOV.gd" type="Script" id=2]
 
 [node name="FOV" type="TileMap"]
+visible = false
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0

@@ -301,14 +301,16 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 			var _damageNumber = damageNumber.instance()
 			var _damageText
 			var _damageColor = "#000"
-			if _damage.dmg < 1 and _damage.dmg >= -2:
+			if _damage.dmg == 0 and _damage.magicDmg != 0:
+				_damageText = _damage.magicDmg
+			elif _damage.dmg < 1 and _damage.dmg >= -2:
 				_damageText = 1 + _damage.magicDmg
 			elif _damage.dmg < -2:
 				_damageText = 0
 			else:
 				_damageText = _damage.dmg + _damage.magicDmg
 			if _damage.magicDmg != 0 and _attack.magicDmg.element != null:
-				_damageColor = spellData.spellData[_attack.magicDmg.element].color
+				_damageColor = spellData.spellData[_attack.magicDmg.element.to_lower()].color
 			_damageNumber.create(_critterTile, _damageText, _damageColor)
 			$"/root/World/Animations".add_child(_damageNumber)
 			

@@ -47,7 +47,7 @@ var rockThrow = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": 0,
+				"dmg": [0,0],
 				"element": null
 			}
 		}
@@ -63,7 +63,7 @@ var crackerThrow = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": 0,
+				"dmg": [0,0],
 				"element": null
 			}
 		}
@@ -79,7 +79,7 @@ var fleirpoint = {
 	"name": "Fleirpoint",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -95,7 +95,7 @@ var fleirnado = {
 	"name": "Fleirnado",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -111,7 +111,7 @@ var fleirMiasma = {
 	"name": "Fleir miasma",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -129,7 +129,7 @@ var fleirBreath = {
 	"name": "Fleir breath",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -149,7 +149,7 @@ var frostpoint = {
 	"name": "Frostpoint",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -165,7 +165,7 @@ var frostBite = {
 	"name": "Frost-bite",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -197,7 +197,7 @@ var frostBreath = {
 	"name": "Frost breath",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -217,7 +217,7 @@ var thunderpoint = {
 	"name": "Thunderpoint",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -233,7 +233,7 @@ var thundersplit = {
 	"name": "Thundersplit",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -249,7 +249,7 @@ var thunderBreath = {
 	"name": "Thunder breath",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -269,7 +269,7 @@ var poisonBite = {
 	"name": "Poison bite",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -285,7 +285,7 @@ var toxixBreath = {
 	"name": "Toxix breath",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -305,7 +305,7 @@ var gleeieerBreath = {
 	"name": "Gleeie'er breath",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -335,7 +335,7 @@ var dragonBreath = {
 	"name": "Dragon breath",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -351,7 +351,7 @@ var elderDragonBreath = {
 	"name": "Elder dragon breath",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -367,7 +367,7 @@ var voidBlast = {
 	"name": "Void blast",
 	"attacks": [
 		{
-			"dmg": null,
+			"dmg": [0,0],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {

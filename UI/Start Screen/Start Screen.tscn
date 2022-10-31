@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://UI/Start Screen/Start Screen.gd" type="Script" id=1]
+[ext_resource path="res://UI/Start Screen/Stats.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Critters/DragonWhiteDragon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Critters/DragonSilverDragon.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Critters/DragonVioletDragon.png" type="Texture" id=5]
@@ -239,17 +240,81 @@ root_node = NodePath("../DancingDragonsContainer")
 "anims/Dancing Dragons" = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
-[node name="StartContainer" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="StartContainer" type="MarginContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+rect_min_size = Vector2( 1880, 1040 )
 
-[node name="Button" type="Button" parent="StartContainer"]
-margin_left = 810.0
-margin_top = 490.0
-margin_right = 1110.0
-margin_bottom = 590.0
-rect_min_size = Vector2( 300, 100 )
-text = "Start"
+[node name="VBoxContainer2" type="VBoxContainer" parent="StartContainer"]
+margin_right = 1880.0
+margin_bottom = 1044.0
+
+[node name="CenterContainer" type="CenterContainer" parent="StartContainer/VBoxContainer2"]
+margin_right = 1880.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 1880, 400 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StartContainer/VBoxContainer2"]
+margin_top = 404.0
+margin_right = 1880.0
+margin_bottom = 1044.0
+rect_min_size = Vector2( 1880, 640 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 300.0
+margin_bottom = 640.0
+rect_min_size = Vector2( 300, 640 )
+alignment = 2
+
+[node name="Start game" type="Button" parent="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 332.0
+margin_right = 300.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 260, 100 )
+text = "Start game"
+
+[node name="Stats" type="Button" parent="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 436.0
+margin_right = 300.0
+margin_bottom = 536.0
+rect_min_size = Vector2( 260, 100 )
+text = "Stats"
+
+[node name="Exit game" type="Button" parent="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 540.0
+margin_right = 300.0
+margin_bottom = 640.0
+rect_min_size = Vector2( 260, 100 )
+text = "Exit game"
+
+[node name="StatsContainer" type="MarginContainer" parent="."]
+visible = false
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+rect_min_size = Vector2( 1880, 1040 )
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsContainer"]
+margin_right = 1880.0
+margin_bottom = 1040.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="StatsContainer/VBoxContainer"]
+margin_right = 1880.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 1880, 800 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsContainer/VBoxContainer/ScrollContainer"]
+
+[node name="Back" type="Button" parent="StatsContainer/VBoxContainer"]
+margin_top = 804.0
+margin_right = 1880.0
+margin_bottom = 904.0
+rect_min_size = Vector2( 260, 100 )
+text = "Back"
 
 [node name="CharacterCreationContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -616,7 +681,10 @@ margin_right = 1030.0
 margin_bottom = 32.0
 texture = ExtResource( 10 )
 
-[connection signal="pressed" from="StartContainer/Button" to="." method="_on_Start_Button_pressed"]
+[connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Start game" to="." method="_on_Start_Button_pressed"]
+[connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Stats" to="." method="_on_Stats_Button_pressed"]
+[connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Exit game" to="." method="_on_Exit_Button_pressed"]
+[connection signal="pressed" from="StatsContainer/VBoxContainer/Back" to="." method="_on_Back_Button_pressed"]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Archeologist/Area2D" to="." method="_on_Classes_Pick_input_event" binds= [ "Archeologist" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Banker/Area2D2" to="." method="_on_Classes_Pick_input_event" binds= [ "Banker" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/FreedomFighter/Area2D3" to="." method="_on_Classes_Pick_input_event" binds= [ "Freedom Fighter" ]]

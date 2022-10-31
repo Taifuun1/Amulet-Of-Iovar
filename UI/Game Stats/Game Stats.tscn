@@ -14,17 +14,20 @@ anchor_bottom = 1.0
 margin_left = 800.0
 margin_top = 768.0
 rect_min_size = Vector2( 1120, 312 )
+mouse_filter = 1
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 color = Color( 0.0235294, 0.0313726, 0.101961, 1 )
 
 [node name="GameStatsContainer" type="MarginContainer" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 
 [node name="GameStatsColumns" type="HBoxContainer" parent="Background/GameStatsContainer"]
 margin_right = 1120.0
@@ -345,6 +348,7 @@ margin_bottom = 44.0
 [node name="WeightLabel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer"]
 margin_right = 377.0
 margin_bottom = 20.0
+mouse_filter = 1
 text = "Weight"
 align = 1
 

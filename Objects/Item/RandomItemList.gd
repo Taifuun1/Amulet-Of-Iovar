@@ -7,9 +7,7 @@ var randomItemList = {
 			"backscattering",
 			"strangulation",
 			"sleep",
-			"Toxix",
-			"Thunderous roar",
-			"Cold breeze"
+			"Toxix"
 		],
 		"appearance": [
 			"Black",
@@ -23,18 +21,43 @@ var randomItemList = {
 			"White"
 		]
 	},
-#	"armor": {
-#		"type": [
-#			"seeing",
-#			"magic power",
-#			"life power",
-#		],
-#		"appearance": [
-#			"Black",
-#			"Blue",
-#			"Green",
-#		]
-#	},
+	"belt": {
+		"type": [
+			"Plato",
+			"Faith",
+			"Symmetry"
+		],
+		"appearance": [
+			"Black",
+			"White",
+			"Yellow"
+		]
+	},
+	"cloak": {
+		"type": [
+			"displacement",
+			"magical ambiguity"
+		],
+		"appearance": [
+			"Green",
+			"Grey",
+			"Orange",
+			"Red",
+			"Yellow"
+		]
+	},
+	"gauntlets": {
+		"type": [
+			"Devastation",
+			"Nimbleness",
+			"Balance"
+		],
+		"appearance": [
+			"Blue",
+			"Green",
+			"Red"
+		]
+	},
 	"potion": {
 		"type": [
 			"confusion",
@@ -42,7 +65,7 @@ var randomItemList = {
 			"heal",
 			"sleep",
 			"blindness",
-			"invisibility",
+#			"invisibility",
 #			"levitation",
 			"paralysis",
 			"hunger",

@@ -311,9 +311,8 @@ var banditWarcampSpawn2 = [
 		"items": {
 			"types": null,
 			"names": [
-				"Cloak of Invisibility",
 				"Cloak of Displacement",
-				"Cloak of Magical Ambiguity"
+				"Cloak of magical ambiguity"
 			]
 		},
 		"chance": 100

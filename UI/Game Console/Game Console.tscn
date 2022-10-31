@@ -8,12 +8,14 @@ margin_top = 768.0
 margin_right = 800.0
 margin_bottom = 1080.0
 rect_min_size = Vector2( 800, 312 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0.0235294, 0.0313726, 0.101961, 1 )
 
 [node name="GameConsoleContainer" type="MarginContainer" parent="Background"]
@@ -23,12 +25,15 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = -10.0
 margin_bottom = -10.0
+mouse_filter = 2
 
 [node name="GameConsoleScrollContainer" type="ScrollContainer" parent="Background/GameConsoleContainer"]
 margin_right = 780.0
 margin_bottom = 292.0
+mouse_filter = 2
 
 [node name="GameConsoleScroll" type="VBoxContainer" parent="Background/GameConsoleContainer/GameConsoleScrollContainer"]
 margin_right = 780.0
 margin_bottom = 292.0
 rect_min_size = Vector2( 780, 292 )
+mouse_filter = 2

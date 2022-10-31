@@ -4,6 +4,7 @@
 
 [node name="StatusEffectItem" type="Control"]
 rect_min_size = Vector2( 115, 50 )
+mouse_filter = 2
 script = ExtResource( 1 )
 
 [node name="Background" type="ColorRect" parent="."]
@@ -18,6 +19,7 @@ color = Color( 0, 0, 0, 1 )
 margin_right = 116.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 116, 50 )
+mouse_filter = 2
 
 [node name="StatusEffectText" type="RichTextLabel" parent="StatusEffectContainer"]
 margin_top = 17.0
@@ -35,4 +37,5 @@ margin_left = 83.0
 margin_right = 115.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 32, 50 )
+mouse_filter = 2
 stretch_mode = 6

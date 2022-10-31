@@ -105,8 +105,8 @@ var amulets = {
 		{
 			"itemName": "Thunderous roar",
 			"unidentifiedItemName": "Thunderous roar",
-			"texture": load("res://Assets/Amulets/AmuletThunderourRoar.png"),
-			"unIdentifiedTexture": load("res://Assets/Amulets/AmuletThunderourRoar.png"),
+			"texture": load("res://Assets/Amulets/AmuletThunderousRoar.png"),
+			"unIdentifiedTexture": load("res://Assets/Amulets/AmuletThunderousRoar.png"),
 			"type": "Accessory",
 			"category": "Amulet",
 			"weight": 35,

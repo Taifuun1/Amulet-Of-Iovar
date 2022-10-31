@@ -21,7 +21,7 @@ var orcs = {
 					"bonusDmg": {},
 					"armorPen": 0,
 					"magicDmg": {
-						"dmg": 0,
+						"dmg": [0,0],
 						"element": null
 					}
 				}
@@ -80,7 +80,7 @@ var orcs = {
 					"bonusDmg": {},
 					"armorPen": 0,
 					"magicDmg": {
-						"dmg": 0,
+						"dmg": [0,0],
 						"element": null
 					}
 				}
@@ -139,7 +139,7 @@ var orcs = {
 					"bonusDmg": {},
 					"armorPen": 0,
 					"magicDmg": {
-						"dmg": 0,
+						"dmg": [0,0],
 						"element": null
 					}
 				}
@@ -198,7 +198,7 @@ var orcs = {
 					"bonusDmg": {},
 					"armorPen": 0,
 					"magicDmg": {
-						"dmg": 0,
+						"dmg": [0,0],
 						"element": null
 					}
 				}
@@ -257,7 +257,7 @@ var orcs = {
 					"bonusDmg": {},
 					"armorPen": 0,
 					"magicDmg": {
-						"dmg": 0,
+						"dmg": [0,0],
 						"element": null
 					}
 				},
@@ -266,7 +266,7 @@ var orcs = {
 					"bonusDmg": {},
 					"armorPen": 0,
 					"magicDmg": {
-						"dmg": 0,
+						"dmg": [0,0],
 						"element": null
 					}
 				}

@@ -202,10 +202,16 @@ func create(_className):
 	for _level in $Levels.get_children():
 		$Critters/Critters.generateCrittersForLevel(_level)
 	
-#	$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
+	$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("wand of item polymorph", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
-	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("amulet of sleep", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("belt of plato", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("belt of faith", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("belt of symmetry", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("cloak of displacement", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("gauntlets of nimbleness", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("gauntlets of balance", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("wand of wishing", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("wand of light", null, 1, true, { "alignment": "cursed" })
 	$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
@@ -213,9 +219,18 @@ func create(_className):
 	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
 	$Items/Items.createItem("amulet of backscattering", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("wand of digging", null, 1, true, { "alignment": "blessed" })
+	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("wand of teleport", null, 1, true, { "alignment": "cursed" })
 	$Items/Items.createItem("scroll of summon critter", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("Eario of Thunder", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("Luirio of adjacent", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("Heario of true", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
 #	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
 #	$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
@@ -239,6 +254,7 @@ func create(_className):
 		if _node.name == "GameStats":
 			_node.show()
 	$UI/UITheme/StartScreen.hide()
+	$FOV.show()
 	
 	generationDone = true
 
@@ -855,8 +871,8 @@ func openMenu(_menu, _playerTile = null):
 				currentGameState = gameState.PICK_LOOTABLE
 		"equipment":
 			if currentGameState == gameState.GAME:
-				$UI/UITheme/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["accessory", "armor", "weapon",]))
-				currentGameState = gameState.EQUIPMENT     
+				$UI/UITheme/Equipment.showEquipment($Critters/"0"/Inventory.getItemsOfType(["accessory", "armor", "belt", "cloak", "gauntlets", "weapon"]))
+				currentGameState = gameState.EQUIPMENT
 		"read":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["scroll"])
@@ -883,7 +899,7 @@ func openMenu(_menu, _playerTile = null):
 				currentGameState = gameState.ZAP
 		"dip":
 			if currentGameState == gameState.GAME:
-				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["amulet", "armor", "comestible", "gem", "ring", "rune", "scroll", "tool", "wand", "weapon"])
+				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["amulet", "armor", "belt", "cloak", "gauntlets", "comestible", "gem", "ring", "rune", "scroll", "tool", "wand", "weapon"])
 				$UI/UITheme/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.DIP_ITEM
 		"use":
@@ -1113,4 +1129,5 @@ func _debug__go_to_level(_level):
 	$"/root/World".show()
 
 func _exit_tree():
-	thread.wait_to_finish()
+	if thread != null:
+		thread.wait_to_finish()

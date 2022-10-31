@@ -48,7 +48,7 @@ var statusEffects = {
 	"fumbling": 0,
 	"sleep": 0,
 	"blindness": 0,
-	"invisibility": 0,
+#	"invisibility": 0,
 	"seeing": 0,
 	"toxix": 0,
 	"backscattering": 0
@@ -73,12 +73,12 @@ func moveCritter(_moveFrom, _moveTo, _movingCritter, _level, _movedCritter = nul
 
 
 ####################################
-### Damage calculation functions ###
+### Damage calculation function ###
 ####################################
 
 func calculateDmg(_attack):
 	var damage = {
-		"dmg": 0,
+		"dmg": [0,0],
 		"magicDmg": 0
 	}
 	
