@@ -204,6 +204,8 @@ text = "-"
 align = 2
 clip_text = true
 
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/StrengthContainer" instance=ExtResource( 8 )]
+
 [node name="LegerityContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 168.0
 margin_right = 377.0
@@ -225,6 +227,8 @@ rect_min_size = Vector2( 123, 0 )
 text = "-"
 align = 2
 clip_text = true
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LegerityContainer" instance=ExtResource( 8 )]
 
 [node name="BalanceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 192.0
@@ -248,6 +252,8 @@ text = "-"
 align = 2
 clip_text = true
 
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BalanceContainer" instance=ExtResource( 8 )]
+
 [node name="BeliefContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 216.0
 margin_right = 377.0
@@ -269,6 +275,8 @@ rect_min_size = Vector2( 123, 0 )
 text = "-"
 align = 2
 clip_text = true
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BeliefContainer" instance=ExtResource( 8 )]
 
 [node name="VisageContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 240.0
@@ -292,6 +300,8 @@ text = "-"
 align = 2
 clip_text = true
 
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/VisageContainer" instance=ExtResource( 8 )]
+
 [node name="WisdomContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 264.0
 margin_right = 377.0
@@ -313,6 +323,8 @@ rect_min_size = Vector2( 123, 0 )
 text = "-"
 align = 2
 clip_text = true
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WisdomContainer" instance=ExtResource( 8 )]
 
 [node name="StatsContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_left = 381.0
@@ -550,6 +562,18 @@ columns = 3
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/LevelContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/ExperienceContainer", "experience" ]]
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/ExperienceContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/StrengthContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/StrengthContainer", "strength" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/StrengthContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/StrengthContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LegerityContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/LegerityContainer", "legerity" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LegerityContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/LegerityContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BalanceContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/BalanceContainer", "balance" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BalanceContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/BalanceContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BeliefContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/BeliefContainer", "belief" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BeliefContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/BeliefContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/VisageContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/VisageContainer", "visage" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/VisageContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/VisageContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WisdomContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/WisdomContainer", "wisdom" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WisdomContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/WisdomContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/HPContainer", "hp" ]]
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/HPContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MPContainer", "mp" ]]
