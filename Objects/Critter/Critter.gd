@@ -13,7 +13,7 @@ var currentCritterAbilityHit
 var activationDistance = null
 
 
-func createCritter(_critter, _levelId, _extraData = {}):
+func createCritter(_critter, _levelId, _tooltip, _extraData = {}):
 	id = Globals.critterId
 	name = str(id)
 	Globals.critterId += 1
@@ -55,6 +55,8 @@ func createCritter(_critter, _levelId, _extraData = {}):
 	
 	expDropAmount = _critter.expDropAmount
 	drops = _critter.drops
+	
+	$Tooltip/TooltipContainer.updateTooltip(critterName, _tooltip.description, _critter.texture)
 
 func createAi(_aI = "aggressive", _aggroDistance = -1, _activationDistance = null):
 	var _critterAi = load("res://Objects/AI/AI.tscn").instance()
@@ -393,3 +395,19 @@ func despawn(_critterTile = null, createCorpse = true):
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
 	queue_free()
+
+func checkCritterIdentification(_data):
+	if _data.knowledge:
+		$Tooltip/TooltipContainer.updateTooltip(critterName, _data.description, $CritterSprite.texture)
+
+
+
+########################
+### Signal functions ###
+########################
+
+func _on_Critter_mouse_entered():
+	$Tooltip/TooltipContainer.showTooltip()
+
+func _on_Critter_mouse_exited():
+	$Tooltip/TooltipContainer.hideTooltip()

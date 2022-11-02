@@ -637,7 +637,7 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
-	"Giantslayer": {
+	"Dragonslayer": {
 		"knowledge": false,
 		"description": ""
 	},

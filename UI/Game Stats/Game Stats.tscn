@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/UI/BlankBar.png" type="Texture" id=1]
 [ext_resource path="res://UI/Game Stats/Game Stats.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/UI/BarOutline.png" type="Texture" id=5]
 [ext_resource path="res://Assets/UI/MPBar.png" type="Texture" id=6]
 [ext_resource path="res://Assets/UI/BarOutline2.png" type="Texture" id=7]
+[ext_resource path="res://UI/Tooltip/Tooltip.tscn" type="PackedScene" id=8]
 
 [node name="GameStats" type="Control"]
 anchor_right = 1.0
@@ -38,139 +39,15 @@ margin_right = 377.0
 margin_bottom = 312.0
 rect_min_size = Vector2( 363, 0 )
 
-[node name="HPContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_right = 377.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="HPLabel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HPContainer"]
-margin_right = 24.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 24, 32 )
-hint_tooltip = "Health points"
-mouse_filter = 1
-text = "HP"
-valign = 1
-
-[node name="HP" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HPContainer"]
-margin_left = 28.0
-margin_right = 73.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 45, 32 )
-hint_tooltip = "Health points"
-mouse_filter = 1
-text = "HP"
-align = 1
-valign = 1
-
-[node name="HPAmount" type="TextureProgress" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HPContainer"]
-margin_left = 77.0
-margin_right = 377.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 300, 32 )
-value = 50.0
-texture_under = ExtResource( 5 )
-texture_over = ExtResource( 5 )
-texture_progress = ExtResource( 4 )
-
-[node name="MPContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 36.0
-margin_right = 377.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="MPLabel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/MPContainer"]
-margin_right = 24.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 24, 32 )
-hint_tooltip = "Magic points"
-mouse_filter = 1
-text = "MP"
-valign = 1
-
-[node name="MP" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/MPContainer"]
-margin_left = 28.0
-margin_right = 73.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 45, 32 )
-hint_tooltip = "Magic points"
-mouse_filter = 1
-text = "MP"
-align = 1
-valign = 1
-
-[node name="MPAmount" type="TextureProgress" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/MPContainer"]
-margin_left = 77.0
-margin_right = 377.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 300, 32 )
-value = 50.0
-texture_under = ExtResource( 5 )
-texture_over = ExtResource( 5 )
-texture_progress = ExtResource( 6 )
-
-[node name="LevelContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 72.0
-margin_right = 377.0
-margin_bottom = 92.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="LevelText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer"]
-margin_right = 186.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Level"
-mouse_filter = 1
-text = "Level"
-clip_text = true
-
-[node name="Level" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer"]
-margin_left = 190.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
-text = "0"
-align = 2
-clip_text = true
-
-[node name="ExperienceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 96.0
-margin_right = 377.0
-margin_bottom = 116.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="ExperienceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer"]
-margin_right = 186.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Experience"
-mouse_filter = 1
-text = "Experience"
-clip_text = true
-
-[node name="Experience" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer"]
-margin_left = 190.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
-text = "0"
-align = 2
-clip_text = true
-
 [node name="NameContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 120.0
 margin_right = 377.0
-margin_bottom = 140.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="NameText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer"]
 margin_right = 186.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Name"
-mouse_filter = 1
 text = "Name"
 clip_text = true
 
@@ -179,23 +56,22 @@ margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
 text = "-"
 align = 2
 clip_text = true
 
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer" instance=ExtResource( 8 )]
+
 [node name="RaceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 144.0
+margin_top = 24.0
 margin_right = 377.0
-margin_bottom = 164.0
+margin_bottom = 44.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="RaceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer"]
 margin_right = 186.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Race"
-mouse_filter = 1
 text = "Race"
 clip_text = true
 
@@ -204,23 +80,22 @@ margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
 text = "-"
 align = 2
 clip_text = true
 
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer" instance=ExtResource( 8 )]
+
 [node name="JusticeContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 168.0
+margin_top = 48.0
 margin_right = 377.0
-margin_bottom = 188.0
+margin_bottom = 68.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="JusticeText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer"]
 margin_right = 186.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Alignment"
-mouse_filter = 1
 text = "Justice"
 clip_text = true
 
@@ -229,75 +104,22 @@ margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
 text = "-"
 align = 2
 clip_text = true
 
-[node name="AttacksContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-visible = false
-margin_top = 192.0
-margin_right = 377.0
-margin_bottom = 212.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AttacksContainer"]
-margin_right = 250.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Alignment"
-mouse_filter = 1
-text = "Alignment"
-clip_text = true
-
-[node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/AttacksContainer"]
-margin_left = 254.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
-
-[node name="HitsContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-visible = false
-margin_top = 216.0
-margin_right = 377.0
-margin_bottom = 236.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HitsContainer"]
-margin_right = 186.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Your hits pattern"
-mouse_filter = 1
-text = "Alignment"
-clip_text = true
-
-[node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/HitsContainer"]
-margin_left = 190.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer" instance=ExtResource( 8 )]
 
 [node name="DungeonLevelContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
-margin_top = 192.0
+margin_top = 72.0
 margin_right = 377.0
-margin_bottom = 212.0
+margin_bottom = 92.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="DungeonLevelText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer"]
 margin_right = 186.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Current dungeon level"
-mouse_filter = 1
 text = "Dungeon Level"
 clip_text = true
 
@@ -306,31 +128,188 @@ margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
 text = "-"
 align = 2
 clip_text = true
 
-[node name="GoldPiecesContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer" instance=ExtResource( 8 )]
+
+[node name="LevelContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 96.0
+margin_right = 377.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="LevelText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer"]
+margin_right = 186.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 186, 0 )
+text = "Level"
+clip_text = true
+
+[node name="Level" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 187, 0 )
+text = "0"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer" instance=ExtResource( 8 )]
+
+[node name="ExperienceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 120.0
+margin_right = 377.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="ExperienceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer"]
+margin_right = 186.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 186, 0 )
+text = "Experience"
+clip_text = true
+
+[node name="Experience" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 187, 0 )
+text = "0"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer" instance=ExtResource( 8 )]
+
+[node name="StrengthContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 144.0
+margin_right = 377.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="StrengthText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/StrengthContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Strength"
+clip_text = true
+
+[node name="Strength" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/StrengthContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="LegerityContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 168.0
+margin_right = 377.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="LegerityText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LegerityContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Legerity"
+clip_text = true
+
+[node name="Legerity" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LegerityContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="BalanceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 192.0
+margin_right = 377.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="BalanceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BalanceContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Balance"
+clip_text = true
+
+[node name="Balance" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BalanceContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="BeliefContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
 margin_top = 216.0
 margin_right = 377.0
 margin_bottom = 236.0
 rect_min_size = Vector2( 377, 0 )
 
-[node name="GoldPiecesText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/GoldPiecesContainer"]
+[node name="BeliefText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BeliefContainer"]
 margin_right = 250.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 250, 0 )
-mouse_filter = 1
-text = "Gold Pieces"
+text = "Belief"
 clip_text = true
 
-[node name="GoldPieces" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/GoldPiecesContainer"]
+[node name="Belief" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BeliefContainer"]
 margin_left = 254.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 123, 0 )
-mouse_filter = 1
+text = "-"
+align = 2
+clip_text = true
+
+[node name="VisageContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 240.0
+margin_right = 377.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="VisageText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/VisageContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Visage"
+clip_text = true
+
+[node name="Visage" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/VisageContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="WisdomContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer"]
+margin_top = 264.0
+margin_right = 377.0
+margin_bottom = 284.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="WisdomText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WisdomContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Wisdom"
+clip_text = true
+
+[node name="Wisdom" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WisdomContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
 text = "-"
 align = 2
 clip_text = true
@@ -341,14 +320,179 @@ margin_right = 758.0
 margin_bottom = 312.0
 rect_min_size = Vector2( 360, 0 )
 
-[node name="WeightContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+[node name="HPContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
 margin_right = 377.0
-margin_bottom = 44.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="HPLabel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer"]
+margin_right = 24.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 24, 32 )
+text = "HP"
+valign = 1
+
+[node name="HP" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer"]
+margin_left = 28.0
+margin_right = 73.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 45, 32 )
+text = "HP"
+align = 1
+valign = 1
+
+[node name="HPAmount" type="TextureProgress" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer"]
+margin_left = 77.0
+margin_right = 377.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 300, 32 )
+mouse_filter = 2
+value = 50.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer" instance=ExtResource( 8 )]
+
+[node name="MPContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 36.0
+margin_right = 377.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="MPLabel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer"]
+margin_right = 24.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 24, 32 )
+text = "MP"
+valign = 1
+
+[node name="MP" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer"]
+margin_left = 28.0
+margin_right = 73.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 45, 32 )
+text = "MP"
+align = 1
+valign = 1
+
+[node name="MPAmount" type="TextureProgress" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer"]
+margin_left = 77.0
+margin_right = 377.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 300, 32 )
+mouse_filter = 2
+value = 50.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer" instance=ExtResource( 8 )]
+
+[node name="ACContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 72.0
+margin_right = 377.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="ACText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer"]
+margin_right = 186.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 186, 0 )
+text = "AC"
+clip_text = true
+
+[node name="AC" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer" instance=ExtResource( 8 )]
+
+[node name="AttacksContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+visible = false
+margin_left = -381.0
+margin_top = 192.0
+margin_right = -4.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 186, 0 )
+text = "Alignment"
+clip_text = true
+
+[node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="HitsContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+visible = false
+margin_left = -381.0
+margin_top = 216.0
+margin_right = -4.0
+margin_bottom = 236.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HitsContainer"]
+margin_right = 186.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 186, 0 )
+text = "Alignment"
+clip_text = true
+
+[node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HitsContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="GoldPiecesContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 96.0
+margin_right = 377.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="GoldPiecesText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer"]
+margin_right = 250.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 250, 0 )
+text = "Gold Pieces"
+clip_text = true
+
+[node name="GoldPieces" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" instance=ExtResource( 8 )]
+
+[node name="WeightContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 120.0
+margin_right = 377.0
+margin_bottom = 164.0
 
 [node name="WeightLabel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer"]
 margin_right = 377.0
 margin_bottom = 20.0
-mouse_filter = 1
 text = "Weight"
 align = 1
 
@@ -357,13 +501,12 @@ margin_top = 24.0
 margin_right = 377.0
 margin_bottom = 44.0
 rect_min_size = Vector2( 377, 20 )
+mouse_filter = 2
 
 [node name="PreviousWeightBound" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer"]
 margin_right = 84.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 84, 0 )
-hint_tooltip = "Previous weight bound"
-mouse_filter = 1
 text = "0"
 
 [node name="Weigth" type="TextureProgress" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer"]
@@ -371,7 +514,7 @@ margin_left = 88.0
 margin_right = 288.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 200, 20 )
-hint_tooltip = "Current carried weight"
+mouse_filter = 2
 size_flags_vertical = 0
 value = 50.0
 rounded = true
@@ -383,179 +526,10 @@ margin_left = 292.0
 margin_right = 376.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 84, 20 )
-hint_tooltip = "Next weight bound"
-mouse_filter = 1
 text = "0"
 align = 2
 
-[node name="ACContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 48.0
-margin_right = 377.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="ACText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer"]
-margin_right = 186.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 186, 0 )
-hint_tooltip = "Armor class"
-mouse_filter = 1
-text = "AC"
-clip_text = true
-
-[node name="AC" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer"]
-margin_left = 190.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 187, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
-
-[node name="StrengthContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 72.0
-margin_right = 377.0
-margin_bottom = 92.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="StrengthText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer"]
-margin_right = 250.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
-mouse_filter = 1
-text = "Strength"
-clip_text = true
-
-[node name="Strength" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/StrengthContainer"]
-margin_left = 254.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
-
-[node name="LegerityContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 96.0
-margin_right = 377.0
-margin_bottom = 116.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="LegerityText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/LegerityContainer"]
-margin_right = 250.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
-mouse_filter = 1
-text = "Legerity"
-clip_text = true
-
-[node name="Legerity" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/LegerityContainer"]
-margin_left = 254.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
-
-[node name="BalanceContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 120.0
-margin_right = 377.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="BalanceText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BalanceContainer"]
-margin_right = 250.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
-mouse_filter = 1
-text = "Balance"
-clip_text = true
-
-[node name="Balance" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BalanceContainer"]
-margin_left = 254.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
-
-[node name="BeliefContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 144.0
-margin_right = 377.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="BeliefText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BeliefContainer"]
-margin_right = 250.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
-mouse_filter = 1
-text = "Belief"
-clip_text = true
-
-[node name="Belief" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/BeliefContainer"]
-margin_left = 254.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
-
-[node name="VisageContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 168.0
-margin_right = 377.0
-margin_bottom = 188.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="VisageText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/VisageContainer"]
-margin_right = 250.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
-mouse_filter = 1
-text = "Visage"
-clip_text = true
-
-[node name="Visage" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/VisageContainer"]
-margin_left = 254.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
-
-[node name="WisdomContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 192.0
-margin_right = 377.0
-margin_bottom = 212.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="WisdomText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer"]
-margin_right = 250.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 250, 0 )
-mouse_filter = 1
-text = "Wisdom"
-clip_text = true
-
-[node name="Wisdom" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WisdomContainer"]
-margin_left = 254.0
-margin_right = 377.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 123, 0 )
-mouse_filter = 1
-text = "-"
-align = 2
-clip_text = true
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer" instance=ExtResource( 8 )]
 
 [node name="StatusEffectsContainer" type="GridContainer" parent="Background/GameStatsContainer/GameStatsColumns"]
 margin_left = 762.0
@@ -564,4 +538,26 @@ margin_bottom = 312.0
 rect_min_size = Vector2( 358, 0 )
 columns = 3
 
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/NameContainer", "className" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/NameContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/RaceContainer", "race" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/RaceContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/JusticeContainer", "justice" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/JusticeContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/DungeonLevelContainer", "dungeonLevel" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/DungeonLevelContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/LevelContainer", "level" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/LevelContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/ExperienceContainer", "experience" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/ExperienceContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/HPContainer", "hp" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/HPContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MPContainer", "mp" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MPContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/ACContainer", "ac" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/ACContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/GoldPiecesContainer", "goldPieces" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/GoldPiecesContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/WeightContainer", "weight" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/WeightContainer" ]]
 [connection signal="value_changed" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth" to="." method="_on_Weigth_value_changed"]

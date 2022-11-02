@@ -3,6 +3,7 @@ extends Node
 onready var critter = preload("res://Objects/Critter/Critter.tscn")
 onready var critterSpawnBehaviour = preload("res://Objects/Critter/CritterSpawnBehaviour.gd").new()
 onready var critterLevelGenerationList = preload("res://Objects/Critter/CritterLevelGenerationList.gd").new()
+onready var crittersData = preload("res://Objects/Miscellaneous/StatsData.gd").new().critters
 
 var ants = preload("res://Objects/Critter/Ants/Ants.gd").new()
 var aquaticLife = preload("res://Objects/Critter/Aquatic life/Aquatic life.gd").new()
@@ -170,7 +171,7 @@ func spawnCritter(_critter, _position = null, _isDeactivated = null, _level = $"
 		GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].population
 	):
 		var newCritter = critter.instance()
-		newCritter.createCritter(_newCritter, _level.levelId, _extraData)
+		newCritter.createCritter(_newCritter, _level.levelId, crittersData[_newCritter.critterName], _extraData)
 		newCritter.createAi(_aI, _newCritter.aggroDistance, _isDeactivated)
 		$"/root/World/Critters".add_child(newCritter, true)
 		_level.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
@@ -193,7 +194,7 @@ func spawnRandomCritter(_position, _spawnLiches = true):
 				GlobalCritterInfo.globalCritterInfo[_critter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_critter.critterName].population
 			):
 				var newCritter = critter.instance()
-				newCritter.createCritter(_critter, _level.levelId)
+				newCritter.createCritter(_critter, _level.levelId, crittersData[_critter.critterName])
 				newCritter.createAi(_critter.aI, _critter.aggroDistance)
 				_level.grid[_position.x][_position.y].critter = newCritter.id
 				$"/root/World/Critters".add_child(newCritter, true)
@@ -228,3 +229,9 @@ func getCritterByName(_critterName):
 		for _critter in _species.critterTypes:
 			if _critter.critterName == _critterName:
 				return _critter
+
+func checkAllCrittersIdentification():
+	for _critter in $"/root/World/Critters".get_children():
+		if _critter.name == "Critters":
+			continue
+		_critter.checkCritterIdentification(crittersData[_critter.critterName])

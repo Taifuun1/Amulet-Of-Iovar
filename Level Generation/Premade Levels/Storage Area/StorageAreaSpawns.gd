@@ -137,7 +137,7 @@ var storageAreaSpawn2 = [
 				"Adorned sword",
 				"Dwarvish laysword",
 				"Titan Slayer",
-				"Giantslayer"
+				"Dragonslayer"
 			]
 		},
 		"chance": 100

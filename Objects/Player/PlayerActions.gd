@@ -224,7 +224,7 @@ func readItem(_id):
 					Globals.gameConsole.addLog("You already feel confused enough!")
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
-		checkAllItemsIdentification()
+		checkAllIdentification(true)
 		if !_readItem.identifiedItemName.to_lower().matchn("blank scroll"):
 			$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 			get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
@@ -352,7 +352,7 @@ func quaffItem(_id):
 					Globals.gameConsole.addLog("You already feel confused enough!")
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
-		checkAllItemsIdentification()
+		checkAllIdentification(true)
 		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 	$"/root/World".closeMenu(_additionalChoices)
@@ -361,7 +361,7 @@ func consumeItem(_id):
 	var _eatenItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if _eatenItem.type.matchn("comestible"):
 		calories += _eatenItem.value
-		checkAllItemsIdentification()
+		checkAllIdentification(true)
 		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 		Globals.gameConsole.addLog("You eat the {comestible}.".format({ "comestible": _eatenItem.itemName }))
@@ -557,7 +557,7 @@ func zapItem(_direction):
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
 			_zappedItem.value.charges -= 1
-			checkAllItemsIdentification()
+			checkAllIdentification(true)
 		else:
 			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
 	$"/root/World".closeMenu(_additionalChoices)
@@ -634,7 +634,7 @@ func useItem(_id):
 				Globals.gameConsole.addLog("You pull a {itemName} out of the bottle.".format({ "itemName": _newItem.itemName }))
 			_:
 				Globals.gameConsole.addLog("Thats not a tool...")
-		checkAllItemsIdentification()
+		checkAllIdentification(true, true)
 		$"/root/World".closeMenu()
 
 func dipItem(_id):
@@ -671,7 +671,7 @@ func dipItem(_id):
 			_:
 				Globals.gameConsole.addLog("You soak the {itemName} into the potion. Nothing happens.".format({ "itemName": _selectedItem.itemName }))
 		selectedItem = null
-		checkAllItemsIdentification()
+		checkAllIdentification(true)
 		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 		$"/root/World".closeMenu(_additionalChoices)

@@ -250,7 +250,7 @@ func checkWhatRuneIsEquipped(_rune):
 #				_playerNode.statusEffects["seeing"] = -1
 #				_playerNode.itemsTurnedOn.append(_ring)
 #				Globals.gameConsole.addLog("You can see everything!")
-	_playerNode.checkAllItemsIdentification()
+	_playerNode.checkAllIdentification(true)
 
 func checkIfMatchingRuneAndSlot(_type, _category):
 	if _type.matchn("rune"):

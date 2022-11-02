@@ -494,7 +494,7 @@ var weapons = {
 				"dmg": [8,14],
 				"d": 1,
 				"bonusDmg": {
-					"giants": 5
+					"giants": 6
 				},
 				"armorPen": 5,
 				"magicDmg": {
@@ -623,10 +623,10 @@ var weapons = {
 			"identified": false
 		},
 		{
-			"itemName": "Giantslayer",
-			"unidentifiedItemName": "Giantslayer",
-			"texture": load("res://Assets/Weapons/TwohanderGiantslayer.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderGiantslayer.png"),
+			"itemName": "Dragonslayer",
+			"unidentifiedItemName": "Dragonslayer",
+			"texture": load("res://Assets/Weapons/TwohanderDragonslayer.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderDragonslayer.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
 			"weight": 50,
@@ -634,7 +634,7 @@ var weapons = {
 				"dmg": [18,26],
 				"d": 1,
 				"bonusDmg": {
-					"giants": 5
+					"dragons": 6
 				},
 				"armorPen": 3,
 				"magicDmg": {

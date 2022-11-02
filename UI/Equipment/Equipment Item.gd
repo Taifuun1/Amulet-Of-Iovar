@@ -1,12 +1,12 @@
 extends Control
 
-var id
+var item
 
 var selected = false
 var equipmentTexture
 
 func setValues(_item):
-	id = _item.id
+	item = _item
 	
 	$ItemContainer/Name.text = str(_item.itemName)
 	if _item.notIdentified.alignment:
@@ -20,12 +20,23 @@ func setValues(_item):
 	
 	equipmentTexture = _item.getTexture()
 
+func updateValues(_itemName):#, _alignment, _enchantment):
+	$ItemContainer/Name.text = str(_itemName)
+#	if _data.notIdentified.alignment:
+#		$ItemContainer/Alignment.text = str(_data.alignment)
+#	else:
+#		$ItemContainer/Alignment.text = "Unknown"
+#	if _data.notIdentified.enchantment:
+#		$ItemContainer/Enchantment.text = str(_data.enchantment)
+#	else:
+#		$ItemContainer/Enchantment.text = "Unknown"
+
 func _process(_delta):
 	if selected:
 		$"/root/World/UI/UITheme/Equipment/DragSprite".global_position = lerp($"/root/World/UI/UITheme/Equipment/DragSprite".global_position, get_global_mouse_position(), _delta * 25)
 	if selected and Input.is_action_just_released("LEFT_CLICK"):
 		if $"/root/World/UI/UITheme/Equipment".hoveredEquipment != null:
-			$"/root/World/UI/UITheme/Equipment".setEquipment(id)
+			$"/root/World/UI/UITheme/Equipment".setEquipment(item.id)
 		get_node("/root/World/UI/UITheme/Equipment/DragSprite").texture = null
 		selected = false
 		get_tree().get_root().set_input_as_handled()

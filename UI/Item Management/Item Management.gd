@@ -17,11 +17,11 @@ func showItemManagementList(_chooseOnClick = false):
 		var newItem = inventoryItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
 		newItem.setValues(_item)
-		$ItemManagementList.add_child(newItem)
+		$ItemManagementListScrollContainer/ItemManagementList.add_child(newItem)
 	show()
 
 func hideItemManagementList():
-	for _item in $ItemManagementList.get_children():
+	for _item in $ItemManagementListScrollContainer/ItemManagementList.get_children():
 		_item.queue_free()
 	items = []
 	selectedItems = []
@@ -71,7 +71,7 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 			$"/root/World".processGameTurn()
 			return
 	
-	var clickedItem = get_node("ItemManagementList/{id}".format({ "id": _id }))
+	var clickedItem = get_node("ItemManagementListScrollContainer/ItemManagementList/{id}".format({ "id": _id }))
 	var isRemoved = false
 	for _item in range(selectedItems.size()):
 		if selectedItems[_item] == clickedItem.id:

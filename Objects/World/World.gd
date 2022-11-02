@@ -115,8 +115,6 @@ func _ready():
 #	OS.window_size = Vector2(1280, 900)
 #	get_tree().set_screen_stretch(2,1,Vector2(960, 540),.5)
 	
-	set_process(true)
-	
 	randomize()
 	
 	items.create()
@@ -218,14 +216,7 @@ func create(_className):
 	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
 	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
 	$Items/Items.createItem("amulet of backscattering", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("giantslayer", null, 1, true, { "alignment": "uncursed" })
+	$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("wand of teleport", null, 1, true, { "alignment": "cursed" })
 	$Items/Items.createItem("scroll of summon critter", null, 1, true, { "alignment": "uncursed" })
 	$Items/Items.createItem("Eario of Thunder", null, 1, true, { "alignment": "uncursed" })
@@ -679,7 +670,8 @@ func drawCrittersAndItems():
 		for y in (Globals.gridSize.y):
 			if level.grid[x][y].critter != null:
 				if (
-					$FOV.currentFOVLevel[x][y] == -1 or level.grid[x][y].critter == 0 or
+					$FOV.currentFOVLevel[x][y] == -1 or
+					level.grid[x][y].critter == 0 or
 					(
 						$Critters/"0".checkIfStatusEffectIsInEffect("seeing") and
 						$Critters/"0".position.distance_to(map_to_world(Vector2(x,y))) < 32 * 12

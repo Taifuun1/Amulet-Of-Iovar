@@ -199,6 +199,87 @@ var globalItemInfo = {
 	"Cool Mikeys": {
 		"identified": false
 	},
+	"Black glass": {
+		"identified": false
+	},
+	"Blue glass": {
+		"identified": false
+	},
+	"Green glass": {
+		"identified": false
+	},
+	"Pink glass": {
+		"identified": false
+	},
+	"Red glass": {
+		"identified": false
+	},
+	"Turqoise glass": {
+		"identified": false
+	},
+	"White glass": {
+		"identified": false
+	},
+	"Yellow glass": {
+		"identified": false
+	},
+	"Black crystal": {
+		"identified": false
+	},
+	"Blue crystal": {
+		"identified": false
+	},
+	"Green crystal": {
+		"identified": false
+	},
+	"Pink crystal": {
+		"identified": false
+	},
+	"Red crystal": {
+		"identified": false
+	},
+	"Turqoise crystal": {
+		"identified": false
+	},
+	"White crystal": {
+		"identified": false
+	},
+	"Yellow crystal": {
+		"identified": false
+	},
+	"Loadstone": {
+		"identified": false
+	},
+	"Apatite": {
+		"identified": false
+	},
+	"Blue Topaz": {
+		"identified": false
+	},
+	"Citrine": {
+		"identified": false
+	},
+	"Labradorite": {
+		"identified": false
+	},
+	"Moonstone": {
+		"identified": false
+	},
+	"Morganite": {
+		"identified": false
+	},
+	"Onyx": {
+		"identified": false
+	},
+	"Peridot": {
+		"identified": false
+	},
+	"Ruby": {
+		"identified": false
+	},
+	"Sapphire": {
+		"identified": false
+	},
 	"Water potion": {
 		"identified": false
 	},
@@ -382,6 +463,9 @@ var globalItemInfo = {
 	"Magic lamp": {
 		"identified": false
 	},
+	"Tome of Knowledge": {
+		"identified": false
+	},
 	"Magic marker": {
 		"identified": false
 	},
@@ -460,7 +544,7 @@ var globalItemInfo = {
 	"Mithril two-hander": {
 		"identified": false
 	},
-	"Giantslayer": {
+	"Dragonslayer": {
 		"identified": false
 	},
 	"Brittleleaf": {

@@ -15,8 +15,11 @@ margin_right = 1540.0
 margin_bottom = 720.0
 color = Color( 0.0509804, 0.109804, 0.247059, 1 )
 
-[node name="ItemManagementList" type="VBoxContainer" parent="."]
+[node name="ItemManagementListScrollContainer" type="ScrollContainer" parent="."]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1520.0
-margin_bottom = 700.0
+margin_bottom = 660.0
+rect_min_size = Vector2( 1500, 680 )
+
+[node name="ItemManagementList" type="VBoxContainer" parent="ItemManagementListScrollContainer"]

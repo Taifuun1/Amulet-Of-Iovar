@@ -267,6 +267,8 @@ func dropItems(_playerTile, _items, _grid):
 			_itemsLog.append(dropItem(_playerTile, _item, _grid))
 	var _itemsLogString = PoolStringArray(_itemsLog).join(" ")
 	Globals.gameConsole.addLog(_itemsLogString)
+	$"/root/World".hideObjectsWhenDrawingNextFrame = true
+	$"/root/World".drawLevel()
 
 func dropItem(_playerTile, _item, _grid):
 	var _dropLog = []
@@ -596,11 +598,11 @@ func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.ANT_HILL:
 		Globals.gameConsole.addLog("There's an ant hill here.")
 
-func checkAllItemsIdentification():
-	for _item in $"/root/World/Items".get_children():
-		if _item.name == "Items":
-			continue
-		_item.checkItemIdentification()
+func checkAllIdentification(_items = false, _critters = null):
+	if _items:
+		$"/root/World/Items/Items".checkAllItemsIdentification()
+	if _critters:
+		$"/root/World/Critters/Critters".checkAllCrittersIdentification()
 
 func checkIfLightSourceIsTurnedOn():
 	for _item in itemsTurnedOn:

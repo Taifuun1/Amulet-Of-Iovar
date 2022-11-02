@@ -26,6 +26,6 @@ func setValues(_item):
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		if itemName.matchn("scroll of genocide"):
-			$"../.."._on_Item_Management_List_Clicked(id, false)
+			$"../../.."._on_Item_Management_List_Clicked(id, false)
 		else:
-			$"../.."._on_Item_Management_List_Clicked(id)
+			$"../../.."._on_Item_Management_List_Clicked(id)

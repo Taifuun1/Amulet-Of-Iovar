@@ -2,6 +2,21 @@ extends Control
 
 var equipmentItem = load("res://UI/Equipment/Equipment Item.tscn")
 
+var equipmentUITemplatePaths = {
+	"lefthand": "res://Assets/UI/EquipmentHand.png",
+	"righthand": "res://Assets/UI/EquipmentHand.png",
+	"amulet": "res://Assets/UI/EquipmentAmulet.png",
+	"ring1": "res://Assets/UI/EquipmentRing.png",
+	"ring2": "res://Assets/UI/EquipmentRing.png",
+	"helmet": "res://Assets/UI/EquipmentHelmet.png",
+	"cloak": "res://Assets/UI/EquipmentCloak.png",
+	"plate": "res://Assets/UI/EquipmentPlate.png",
+	"gauntlets": "res://Assets/UI/EquipmentGauntlets.png",
+	"belt": "res://Assets/UI/EquipmentBelt.png",
+	"greaves": "res://Assets/UI/EquipmentGreaves.png",
+	"boots": "res://Assets/UI/EquipmentBoots.png"
+}
+
 var hands = {
 	"lefthand": null,
 	"righthand": null
@@ -67,8 +82,8 @@ func _process(_delta):
 					if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
 						hands["lefthand"] = null
 						hands["righthand"] = null
-						$"EquipmentBackground/LeftHand/Sprite".texture = null
-						$"EquipmentBackground/RightHand/Sprite".texture = null
+						$"EquipmentBackground/LeftHand/Sprite".texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
+						$"EquipmentBackground/RightHand/Sprite".texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
 						_changed = true
 				else:
 					if hands[hoveredEquipment.to_lower()] == null:
@@ -76,22 +91,29 @@ func _process(_delta):
 					if hands[hoveredEquipment.to_lower()] != null:
 						_changed = true
 					hands[hoveredEquipment.to_lower()] = null
-					get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
+					get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
 			elif _matchingType.matchn("armor"):
 				if equipment[hoveredEquipment.to_lower()] != null:
 					_changed = true
 				equipment[hoveredEquipment.to_lower()] = null
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
+				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
+				if _item.category.matchn("belt"):
+					checkWhatBeltIsWorn(_item)
+				if _item.category.matchn("cloak"):
+					checkWhatCloakIsWorn(_item)
+				if _item.category.matchn("gauntlets"):
+					checkWhatGauntletsAreWorn(_item)
 			elif _matchingType.matchn("accessory"):
 				if accessories[hoveredEquipment.to_lower()] != null:
 					_changed = true
 				accessories[hoveredEquipment.to_lower()] = null
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
+				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
 				if _item.category.matchn("ring"):
 					checkWhatRingIsWorn(_item)
 				if _item.category.matchn("amulet"):
 					checkWhatAmuletIsWorn(_item)
 			$"/root/World/Critters/0".calculateEquipmentStats()
+			$"/root/World/Critters/0".checkAllIdentification(true)
 			if _changed:
 				$"/root/World".processGameTurn()
 
@@ -111,7 +133,7 @@ func setEquipment(_id):
 	var _item = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	var _matchingType = checkIfMatchingEquipmentAndSlot(_item.type, _item.category)
 	if _matchingType == null:
-		pass
+		return
 	elif _matchingType.matchn("weapon"):
 		dualWielding = false
 		if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
@@ -129,18 +151,28 @@ func setEquipment(_id):
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		if hands["lefthand"] != null and hands["righthand"] != null and !(hands["lefthand"] == hands["righthand"]):
 			dualWielding = true
-		$"/root/World/Critters/0".calculateEquipmentStats()
-		$"/root/World".processGameTurn()
 	elif _matchingType.matchn("accessory"):
+		if accessories[hoveredEquipment.to_lower()] != null:
+			var _oldItem = get_node("/root/World/Items/{id}".format({ "id": accessories[hoveredEquipment.to_lower()] }))
+			if _item.category.matchn("ring"):
+				checkWhatRingIsWorn(_oldItem)
+			if _item.category.matchn("amulet"):
+				checkWhatAmuletIsWorn(_oldItem)
 		accessories[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		if _item.category.matchn("ring"):
 			checkWhatRingIsWorn(_item)
 		if _item.category.matchn("amulet"):
 			checkWhatAmuletIsWorn(_item)
-		$"/root/World/Critters/0".calculateEquipmentStats()
-		$"/root/World".processGameTurn()
 	elif _matchingType.matchn("armor"):
+		if equipment[hoveredEquipment.to_lower()] != null:
+			var _oldItem = get_node("/root/World/Items/{id}".format({ "id": equipment[hoveredEquipment.to_lower()] }))
+			if _item.category.matchn("belt"):
+				checkWhatBeltIsWorn(_oldItem)
+			if _item.category.matchn("cloak"):
+				checkWhatCloakIsWorn(_oldItem)
+			if _item.category.matchn("gauntlets"):
+				checkWhatGauntletsAreWorn(_oldItem)
 		equipment[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		if _item.category.matchn("belt"):
@@ -149,12 +181,17 @@ func setEquipment(_id):
 			checkWhatCloakIsWorn(_item)
 		if _item.category.matchn("gauntlets"):
 			checkWhatGauntletsAreWorn(_item)
-		$"/root/World/Critters/0".calculateEquipmentStats()
-		$"/root/World".processGameTurn()
+	for _listItem in $ItemsBackground/ItemContainer/ItemList.get_children():
+		if _item.itemName.matchn(_listItem.item.itemName):
+			_listItem.updateValues(_item.itemName)
+	$"/root/World/Critters/0".calculateEquipmentStats()
+	$"/root/World/Critters/0".checkAllIdentification(true)
+	$"/root/World".processGameTurn()
 
 func takeOfEquipmentWhenDroppingItem(_id):
 	checkIfEquipmentNeedsToBeUnequipped(_id)
 	$"/root/World/Critters/0".calculateEquipmentStats()
+	$"/root/World/Critters/0".checkAllIdentification(true)
 
 func checkIfEquipmentNeedsToBeUnequipped(_id):
 	var _item = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -162,23 +199,23 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 		if hands[_hand] == _id:
 			hands[_hand] = null
 			if _hand == "righthand":
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = null
+				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = load(equipmentUITemplatePaths[_hand.to_lower()])
 			else:
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = null
+				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = load(equipmentUITemplatePaths[_hand.to_lower()])
 			return
 	for _accessory in accessories.keys():
 		if accessories[_accessory] == _id:
+			accessories[_accessory] = null
+			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = load(equipmentUITemplatePaths[_accessory.to_lower()])
 			if _item.category.matchn("ring"):
 				checkWhatRingIsWorn(_item)
 			if _item.category.matchn("amulet"):
 				checkWhatAmuletIsWorn(_item)
-			accessories[_accessory] = null
-			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = null
 			return
 	for _equipment in equipment.keys():
 		if equipment[_equipment] == _id:
 			equipment[_equipment] = null
-			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = null
+			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = load(equipmentUITemplatePaths[_equipment.to_lower()])
 			if _item.category.matchn("belt"):
 				checkWhatBeltIsWorn(_item)
 			if _item.category.matchn("cloak"):
@@ -298,7 +335,7 @@ func checkWhatAmuletIsWorn(_amulet):
 				_playerNode.itemsTurnedOn.append(_amulet)
 				_playerNode.statusEffects.sleep = 10
 				Globals.gameConsole.addLog("Your eyelids feel heavy.")
-	_playerNode.checkAllItemsIdentification()
+	_playerNode.checkAllIdentification(true)
 
 func checkWhatRingIsWorn(_ring):
 	if (
@@ -345,7 +382,7 @@ func checkWhatRingIsWorn(_ring):
 				_playerNode.statusEffects["fumbling"] = -1
 				_playerNode.itemsTurnedOn.append(_ring)
 				Globals.gameConsole.addLog("Your legs feel like jelly.")
-	_playerNode.checkAllItemsIdentification()
+	_playerNode.checkAllIdentification(true)
 
 func checkWhatBeltIsWorn(_belt):
 	if (
@@ -367,11 +404,11 @@ func checkWhatBeltIsWorn(_belt):
 				Globals.gameConsole.addLog("Your feel very wise.")
 		"belt of faith":
 			if _playerNode.itemsTurnedOn.has(_belt):
-				_playerNode.stats["faith"] -= 1
+				_playerNode.stats["belief"] -= 1
 				_playerNode.itemsTurnedOn.erase(_belt)
 				Globals.gameConsole.addLog("Your feel like you dont believe in anything.")
 			else:
-				_playerNode.stats["faith"] += 1
+				_playerNode.stats["belief"] += 1
 				_playerNode.itemsTurnedOn.append(_belt)
 				Globals.gameConsole.addLog("Your feel rapturous faith fill you.")
 		"belt of symmetry":
@@ -383,7 +420,7 @@ func checkWhatBeltIsWorn(_belt):
 				_playerNode.stats["visage"] += 1
 				_playerNode.itemsTurnedOn.append(_belt)
 				Globals.gameConsole.addLog("Your feel very photogenetic.")
-	_playerNode.checkAllItemsIdentification()
+	_playerNode.checkAllIdentification(true)
 
 func checkWhatCloakIsWorn(_cloak):
 	if (
@@ -412,7 +449,7 @@ func checkWhatCloakIsWorn(_cloak):
 #				_playerNode.statusEffects[""] = -1
 #				_playerNode.itemsTurnedOn.append(_cloak)
 				Globals.gameConsole.addLog("Your feel strangely ambivalent about magic. (UN_IMPL)")
-	_playerNode.checkAllItemsIdentification()
+	_playerNode.checkAllIdentification(true)
 
 func checkWhatGauntletsAreWorn(_gauntlets):
 	if (
@@ -450,7 +487,7 @@ func checkWhatGauntletsAreWorn(_gauntlets):
 				_playerNode.stats["balance"] += 1
 				_playerNode.itemsTurnedOn.append(_gauntlets)
 				Globals.gameConsole.addLog("Your feel like a dwarf.")
-	_playerNode.checkAllItemsIdentification()
+	_playerNode.checkAllIdentification(true)
 
 func checkIfMatchingEquipmentAndSlot(_type, _category):
 	if _type.matchn("weapon"):

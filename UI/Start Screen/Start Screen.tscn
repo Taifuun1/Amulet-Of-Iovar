@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://UI/Start Screen/Start Screen.gd" type="Script" id=1]
 [ext_resource path="res://UI/Start Screen/Stats.gd" type="Script" id=2]
@@ -225,6 +225,14 @@ tracks/7/keys = {
 size = 32
 font_data = ExtResource( 11 )
 
+[sub_resource type="StyleBoxFlat" id=5]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 238, 202 )
 
@@ -317,7 +325,6 @@ rect_min_size = Vector2( 260, 100 )
 text = "Back"
 
 [node name="CharacterCreationContainer" type="VBoxContainer" parent="."]
-visible = false
 margin_right = 1920.0
 margin_bottom = 1004.0
 mouse_filter = 2
@@ -334,18 +341,26 @@ valign = 1
 [node name="ClassesContainer" type="GridContainer" parent="CharacterCreationContainer"]
 margin_top = 44.0
 margin_right = 1920.0
-margin_bottom = 858.0
+margin_bottom = 862.0
 rect_min_size = Vector2( 1920, 814 )
 mouse_filter = 2
 columns = 4
 
-[node name="Archeologist" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_right = 476.0
-margin_bottom = 405.0
+[node name="Archeologist" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
+margin_right = 480.0
+margin_bottom = 409.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 5 )
+
+[node name="ArcheologistContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Archeologist"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 478.0
+margin_bottom = 407.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Archeologist"]
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
 margin_right = 476.0
 margin_bottom = 380.0
 rect_min_size = Vector2( 476, 380 )
@@ -354,7 +369,7 @@ size_flags_vertical = 3
 texture = ExtResource( 15 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Archeologist"]
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
 margin_top = 384.0
 margin_right = 476.0
 margin_bottom = 405.0
@@ -364,22 +379,22 @@ bbcode_text = "[center]Archeologist[/center]"
 text = "Archeologist"
 fit_content_height = true
 
-[node name="Area2D" type="Area2D" parent="CharacterCreationContainer/ClassesContainer/Archeologist"]
+[node name="Area2D" type="Area2D" parent="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterCreationContainer/ClassesContainer/Archeologist/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer/Area2D"]
 position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
 [node name="Banker" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 480.0
-margin_right = 956.0
-margin_bottom = 405.0
+margin_left = 484.0
+margin_right = 960.0
+margin_bottom = 409.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Banker"]
 margin_right = 476.0
-margin_bottom = 380.0
+margin_bottom = 384.0
 rect_min_size = Vector2( 476, 380 )
 mouse_filter = 2
 size_flags_vertical = 3
@@ -387,9 +402,9 @@ texture = ExtResource( 12 )
 stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Banker"]
-margin_top = 384.0
+margin_top = 388.0
 margin_right = 476.0
-margin_bottom = 405.0
+margin_bottom = 409.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Banker[/center]"
@@ -403,15 +418,15 @@ position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
 [node name="FreedomFighter" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 960.0
-margin_right = 1436.0
-margin_bottom = 405.0
+margin_left = 964.0
+margin_right = 1440.0
+margin_bottom = 409.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/FreedomFighter"]
 margin_right = 476.0
-margin_bottom = 380.0
+margin_bottom = 384.0
 rect_min_size = Vector2( 476, 380 )
 mouse_filter = 2
 size_flags_vertical = 3
@@ -419,9 +434,9 @@ texture = ExtResource( 13 )
 stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/FreedomFighter"]
-margin_top = 384.0
+margin_top = 388.0
 margin_right = 476.0
-margin_bottom = 405.0
+margin_bottom = 409.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Freedom Fighter[/center]"
@@ -435,15 +450,15 @@ position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
 [node name="Herbalogue" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 1440.0
-margin_right = 1916.0
-margin_bottom = 405.0
+margin_left = 1444.0
+margin_right = 1920.0
+margin_bottom = 409.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Herbalogue"]
 margin_right = 476.0
-margin_bottom = 380.0
+margin_bottom = 384.0
 rect_min_size = Vector2( 476, 380 )
 mouse_filter = 2
 size_flags_vertical = 3
@@ -451,9 +466,9 @@ texture = ExtResource( 16 )
 stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Herbalogue"]
-margin_top = 384.0
+margin_top = 388.0
 margin_right = 476.0
-margin_bottom = 405.0
+margin_bottom = 409.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Herbalogue[/center]"
@@ -467,14 +482,14 @@ position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
 [node name="Mercenary" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_top = 409.0
-margin_right = 476.0
-margin_bottom = 814.0
+margin_top = 413.0
+margin_right = 480.0
+margin_bottom = 818.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Mercenary"]
-margin_right = 476.0
+margin_right = 480.0
 margin_bottom = 380.0
 rect_min_size = Vector2( 476, 380 )
 mouse_filter = 2
@@ -484,7 +499,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Mercenary"]
 margin_top = 384.0
-margin_right = 476.0
+margin_right = 480.0
 margin_bottom = 405.0
 mouse_filter = 2
 bbcode_enabled = true
@@ -499,10 +514,10 @@ position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
 [node name="Exterminator" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 480.0
-margin_top = 409.0
-margin_right = 956.0
-margin_bottom = 814.0
+margin_left = 484.0
+margin_top = 413.0
+margin_right = 960.0
+margin_bottom = 818.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
@@ -532,10 +547,10 @@ position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
 [node name="Rogue" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 960.0
-margin_top = 409.0
-margin_right = 1436.0
-margin_bottom = 814.0
+margin_left = 964.0
+margin_top = 413.0
+margin_right = 1440.0
+margin_bottom = 818.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
@@ -565,10 +580,10 @@ position = Vector2( 238, 202 )
 shape = SubResource( 4 )
 
 [node name="Savant" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 1440.0
-margin_top = 409.0
-margin_right = 1916.0
-margin_bottom = 814.0
+margin_left = 1444.0
+margin_top = 413.0
+margin_right = 1920.0
+margin_bottom = 818.0
 rect_min_size = Vector2( 476, 404 )
 mouse_filter = 2
 
@@ -599,9 +614,9 @@ shape = SubResource( 4 )
 
 [node name="Button" type="Button" parent="CharacterCreationContainer"]
 margin_left = 928.0
-margin_top = 862.0
+margin_top = 866.0
 margin_right = 991.0
-margin_bottom = 898.0
+margin_bottom = 902.0
 mouse_filter = 1
 size_flags_horizontal = 4
 disabled = true
@@ -685,7 +700,9 @@ texture = ExtResource( 10 )
 [connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Stats" to="." method="_on_Stats_Button_pressed"]
 [connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Exit game" to="." method="_on_Exit_Button_pressed"]
 [connection signal="pressed" from="StatsContainer/VBoxContainer/Back" to="." method="_on_Back_Button_pressed"]
-[connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Archeologist/Area2D" to="." method="_on_Classes_Pick_input_event" binds= [ "Archeologist" ]]
+[connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer/Area2D" to="." method="_on_Classes_Pick_input_event" binds= [ "Archeologist" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer/Area2D" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Archeologist" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer/Area2D" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Archeologist" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Banker/Area2D2" to="." method="_on_Classes_Pick_input_event" binds= [ "Banker" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/FreedomFighter/Area2D3" to="." method="_on_Classes_Pick_input_event" binds= [ "Freedom Fighter" ]]
 [connection signal="input_event" from="CharacterCreationContainer/ClassesContainer/Herbalogue/Area2D4" to="." method="_on_Classes_Pick_input_event" binds= [ "Herbalogue" ]]

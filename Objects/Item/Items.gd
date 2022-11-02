@@ -254,3 +254,9 @@ func randomizeRandomItems():
 						if !_itemType.matchn("scroll"):
 							_item.texture = _shuffledItems[_itemType][_item.itemName].texture
 							_item.unIdentifiedTexture = _shuffledItems[_itemType][_item.itemName].texture
+
+func checkAllItemsIdentification():
+	for _item in $"/root/World/Items".get_children():
+		if _item.name == "Items":
+			continue
+		_item.checkItemIdentification()

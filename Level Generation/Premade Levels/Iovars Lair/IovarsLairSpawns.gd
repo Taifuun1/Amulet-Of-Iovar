@@ -170,7 +170,7 @@ var iovarsLairSpawn2 = [
 		"items": {
 			"types": null,
 			"names": [
-				"Giantslayer",
+				"Dragonslayer",
 				"Vorpal sword"
 			]
 		},

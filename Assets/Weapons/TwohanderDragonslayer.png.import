@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TwohanderGiantslayer.png-c050f284649cf3b450144e832e30d811.stex"
+path="res://.import/TwohanderDragonslayer.png-20fcd66ebcc79b623b853bfe793b75ed.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Weapons/TwohanderGiantslayer.png"
-dest_files=[ "res://.import/TwohanderGiantslayer.png-c050f284649cf3b450144e832e30d811.stex" ]
+source_file="res://Assets/Weapons/TwohanderDragonslayer.png"
+dest_files=[ "res://.import/TwohanderDragonslayer.png-20fcd66ebcc79b623b853bfe793b75ed.stex" ]
 
 [params]
 

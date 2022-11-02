@@ -31,192 +31,192 @@ color = Color( 0.0196078, 0.0392157, 0.188235, 1 )
 [node name="Helmet" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 50.0
-margin_right = 325.0
-margin_bottom = 125.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 314.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Helmet"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 6 )
 stretch_mode = 1
 
 [node name="Amulet" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 150.0
-margin_right = 325.0
-margin_bottom = 225.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 314.0
+margin_bottom = 214.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Amulet"]
 margin_right = 40.0
 margin_bottom = 40.0
-rect_min_size = Vector2( 75, 75 )
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 2 )
 stretch_mode = 1
 
 [node name="Cloak" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 375.0
 margin_top = 150.0
-margin_right = 450.0
-margin_bottom = 225.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 439.0
+margin_bottom = 214.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Cloak"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 5 )
 stretch_mode = 1
 
 [node name="Plate" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 250.0
-margin_right = 325.0
-margin_bottom = 325.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 314.0
+margin_bottom = 314.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Plate"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 4 )
 stretch_mode = 1
 
 [node name="Ring1" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 375.0
 margin_top = 250.0
-margin_right = 450.0
-margin_bottom = 325.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 439.0
+margin_bottom = 314.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Ring1"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 3 )
 stretch_mode = 1
 
 [node name="Ring2" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 125.0
 margin_top = 250.0
-margin_right = 200.0
-margin_bottom = 325.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 189.0
+margin_bottom = 314.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Ring2"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 3 )
 stretch_mode = 1
 
 [node name="Gauntlets" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 125.0
 margin_top = 150.0
-margin_right = 200.0
-margin_bottom = 225.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 189.0
+margin_bottom = 214.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Gauntlets"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 8 )
 stretch_mode = 1
 
 [node name="LeftHand" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 125.0
 margin_top = 350.0
-margin_right = 200.0
-margin_bottom = 425.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 189.0
+margin_bottom = 414.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/LeftHand"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 7 )
 stretch_mode = 1
 
 [node name="RightHand" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 375.0
 margin_top = 350.0
-margin_right = 450.0
-margin_bottom = 425.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 439.0
+margin_bottom = 414.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/RightHand"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 7 )
 stretch_mode = 1
 
 [node name="Belt" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 350.0
-margin_right = 325.0
-margin_bottom = 425.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 314.0
+margin_bottom = 414.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Belt"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 9 )
 stretch_mode = 1
 
 [node name="Greaves" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 450.0
-margin_right = 325.0
-margin_bottom = 525.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 314.0
+margin_bottom = 514.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Greaves"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 10 )
 stretch_mode = 1
 
 [node name="Boots" type="ColorRect" parent="EquipmentBackground"]
 margin_left = 250.0
 margin_top = 550.0
-margin_right = 325.0
-margin_bottom = 625.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 314.0
+margin_bottom = 614.0
+rect_min_size = Vector2( 64, 64 )
 mouse_filter = 2
 color = Color( 0, 0.203922, 1, 1 )
 
 [node name="Sprite" type="TextureRect" parent="EquipmentBackground/Boots"]
-margin_right = 75.0
-margin_bottom = 75.0
-rect_min_size = Vector2( 75, 75 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 11 )
 stretch_mode = 1
 
