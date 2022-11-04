@@ -7,7 +7,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordChippedSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [2,4],
 				"d": 1,
@@ -18,10 +18,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Dull two-hander",
@@ -30,7 +28,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderDullTwohander.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
-			"weight": 50,
+			"weight": 30,
 			"value": {
 				"dmg": [4,7],
 				"d": 1,
@@ -41,10 +39,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Cut dagger",
@@ -53,7 +49,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerCutDagger.png"),
 			"type": "Weapon",
 			"category": "Dagger",
-			"weight": 50,
+			"weight": 15,
 			"value": {
 				"dmg": [1,3],
 				"d": 2,
@@ -66,10 +62,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Worn mace",
@@ -78,7 +72,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceWornMace.png"),
 			"type": "Weapon",
 			"category": "Mace",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [3,5],
 				"d": 1,
@@ -89,10 +83,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Rigid flail",
@@ -101,7 +93,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailRigidFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
-			"weight": 50,
+			"weight": 25,
 			"value": {
 				"dmg": [1,3],
 				"d": 3,
@@ -112,10 +104,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		}
 	],
 	"uncommon": [
@@ -126,10 +116,10 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerOrcDagger.png"),
 			"type": "Weapon",
 			"category": "Dagger",
-			"weight": 50,
+			"weight": 15,
 			"value": {
-				"dmg": [3,5],
-				"d": 1,
+				"dmg": [2,4],
+				"d": 2,
 				"bonusDmg": {
 					"baseWeapon": 1
 				},
@@ -139,10 +129,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Sharp flail",
@@ -151,7 +139,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailSharpFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [2,4],
 				"d": 3,
@@ -162,10 +150,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Dwarvish laysword",
@@ -174,7 +160,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordDwarvishLaysword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [5,8],
 				"d": 1,
@@ -187,10 +173,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
 		},
 		{
 			"itemName": "Orcish sword",
@@ -199,7 +183,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordOrcSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [5,7],
 				"d": 1,
@@ -212,10 +196,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Elvish sword",
@@ -224,7 +206,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordElvishSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [5,7],
 				"d": 1,
@@ -237,10 +219,31 @@ var weapons = {
 					"element": "Gleeie'er"
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Orcish two-hander",
+			"unidentifiedItemName": "Black two-hander",
+			"texture": load("res://Assets/Weapons/TwohanderOrcTwohander.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderOrcTwohander.png"),
+			"type": "Weapon",
+			"category": "Two-hander",
+			"weight": 30,
+			"value": {
+				"dmg": [5,10],
+				"d": 1,
+				"bonusDmg": {
+					"baseWeapon": 2
+				},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			},
+			"enchantable": true,
+			"stackable": false
 		}
 	],
 	"rare": [
@@ -251,7 +254,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerGlowingDagger.png"),
 			"type": "Weapon",
 			"category": "Dagger",
-			"weight": 50,
+			"weight": 15,
 			"value": {
 				"dmg": [2,5],
 				"d": 2,
@@ -264,10 +267,52 @@ var weapons = {
 					"element": "Thunder"
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Dwarvish dagger",
+			"unidentifiedItemName": "Blueish dagger",
+			"texture": load("res://Assets/Weapons/DaggerDwarvishDagger.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerDwarvishDagger.png"),
+			"type": "Weapon",
+			"category": "Dagger",
+			"weight": 15,
+			"value": {
+				"dmg": [5,5],
+				"d": 1,
+				"bonusDmg": {
+					"baseWeapon": 1
+				},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			},
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Elvish flail",
+			"unidentifiedItemName": "Greenish flail",
+			"texture": load("res://Assets/Weapons/FlailElvishFlail.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/FlailElvishFlail.png"),
+			"type": "Weapon",
+			"category": "Flail",
+			"weight": 20,
+			"value": {
+				"dmg": [2,3],
+				"d": 3,
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [1,1],
+					"element": "Gleeie'er"
+				}
+			},
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Morning star",
@@ -276,7 +321,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceMorningStar.png"),
 			"type": "Weapon",
 			"category": "Mace",
-			"weight": 50,
+			"weight": 25,
 			"value": {
 				"dmg": [7,10],
 				"d": 1,
@@ -287,10 +332,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Adorned sword",
@@ -299,7 +342,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordAdornedSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [7,10],
 				"d": 1,
@@ -312,9 +355,30 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Justice'eer sword",
+			"unidentifiedItemName": "Justice'eer sword",
+			"texture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
+			"type": "Weapon",
+			"category": "Sword",
+			"weight": 20,
+			"value": {
+				"dmg": [8,14],
+				"d": 1,
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			},
+			"enchantable": true,
 			"stackable": false,
-			"rarity": "Rare",
+			"rarity": "Legendary",
 			"identified": false
 		},
 		{
@@ -324,7 +388,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderMithrilTwohander.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
-			"weight": 50,
+			"weight": 30,
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
@@ -337,10 +401,8 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"enchantable": true,
+			"stackable": false
 		}
 	],
 	"legendary": [
@@ -351,7 +413,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerKrakagOrraig.png"),
 			"type": "Weapon",
 			"category": "Dagger",
-			"weight": 50,
+			"weight": 15,
 			"value": {
 				"dmg": [5,7],
 				"d": 2,
@@ -362,7 +424,7 @@ var weapons = {
 					"element": "Toxix"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -374,7 +436,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/DaggerOfElbier.png"),
 			"type": "Weapon",
 			"category": "Dagger",
-			"weight": 50,
+			"weight": 15,
 			"value": {
 				"dmg": [5,7],
 				"d": 2,
@@ -385,7 +447,7 @@ var weapons = {
 					"element": "Thunder"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -397,7 +459,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailCrustelFlail.png"),
 			"type": "Weapon",
 			"category": "Flail",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [5,7],
 				"d": 4,
@@ -408,7 +470,7 @@ var weapons = {
 					"element": "Gleeie'er"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -420,7 +482,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/FlailLoperielsDestiny.png"),
 			"type": "Weapon",
 			"category": "Flail",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [3,6],
 				"d": 4,
@@ -431,7 +493,30 @@ var weapons = {
 					"element": "Toxix"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
+			"stackable": false,
+			"rarity": "Legendary",
+			"identified": false
+		},
+		{
+			"itemName": "Star Love",
+			"unidentifiedItemName": "Star Love",
+			"texture": load("res://Assets/Weapons/FlailStarLove.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/FlailStarLove.png"),
+			"type": "Weapon",
+			"category": "Flail",
+			"weight": 20,
+			"value": {
+				"dmg": [4,6],
+				"d": 4,
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [1,4],
+					"element": "Frost"
+				}
+			},
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -443,7 +528,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceDumpelPompel.png"),
 			"type": "Weapon",
 			"category": "Mace",
-			"weight": 50,
+			"weight": 25,
 			"value": {
 				"dmg": [9,12],
 				"d": 1,
@@ -454,7 +539,7 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -466,7 +551,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceFinalDawn.png"),
 			"type": "Weapon",
 			"category": "Mace",
-			"weight": 50,
+			"weight": 25,
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
@@ -477,7 +562,7 @@ var weapons = {
 					"element": "Fleir"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -489,7 +574,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/MaceTitanSlayer.png"),
 			"type": "Weapon",
 			"category": "Mace",
-			"weight": 50,
+			"weight": 25,
 			"value": {
 				"dmg": [8,14],
 				"d": 1,
@@ -502,7 +587,7 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -514,7 +599,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordFleirflare.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
@@ -525,7 +610,7 @@ var weapons = {
 					"element": "Fleir"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -537,7 +622,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordFrostfury.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [6,9],
 				"d": 1,
@@ -548,30 +633,30 @@ var weapons = {
 					"element": "Frost"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
 		},
 		{
-			"itemName": "Justice'eer sword",
-			"unidentifiedItemName": "Justice'eer sword",
-			"texture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
-			"unIdentifiedTexture": load("res://Assets/Weapons/SwordJustice'eerSword.png"),
+			"itemName": "Thunderstruck",
+			"unidentifiedItemName": "Thunderstruck",
+			"texture": load("res://Assets/Weapons/SwordThunderstruck.png"),
+			"unIdentifiedTexture": load("res://Assets/Weapons/SwordThunderstruck.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
-				"dmg": [8,14],
+				"dmg": [6,9],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
+					"dmg": [6,8],
+					"element": "Thunder"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -583,7 +668,7 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordStormbringer.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 20,
 			"value": {
 				"dmg": [5,8],
 				"d": 1,
@@ -594,7 +679,7 @@ var weapons = {
 					"element": "Gleeie'er"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -606,9 +691,9 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/SwordVorpalSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 50,
+			"weight": 40,
 			"value": {
-				"dmg": [13,18],
+				"dmg": [15,20],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 3,
@@ -617,7 +702,7 @@ var weapons = {
 					"element": null
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -629,20 +714,20 @@ var weapons = {
 			"unIdentifiedTexture": load("res://Assets/Weapons/TwohanderDragonslayer.png"),
 			"type": "Weapon",
 			"category": "Two-hander",
-			"weight": 50,
+			"weight": 75,
 			"value": {
-				"dmg": [18,26],
+				"dmg": [18,27],
 				"d": 1,
 				"bonusDmg": {
 					"dragons": 6
 				},
-				"armorPen": 3,
+				"armorPen": 5,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -665,7 +750,7 @@ var weapons = {
 					"element": "Gleeie'er"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
@@ -688,7 +773,7 @@ var weapons = {
 					"element": "Frost"
 				}
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary",
 			"identified": false
