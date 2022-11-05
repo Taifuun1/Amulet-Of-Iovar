@@ -68,6 +68,10 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.USE:
 			$"/root/World/Critters/0".useItem(_id)
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
+			if _item.identifiedItemName.matchn("marker") or _item.identifiedItemName.matchn("magic marker"):
+				$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
+				return
 			$"/root/World".processGameTurn()
 			return
 	

@@ -9,7 +9,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -23,7 +23,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -37,7 +37,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -51,7 +51,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -65,7 +65,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -79,7 +79,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -93,7 +93,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -107,7 +107,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -123,7 +123,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -137,7 +137,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -151,7 +151,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -165,7 +165,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -179,7 +179,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -193,7 +193,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -207,7 +207,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -221,7 +221,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -234,8 +234,10 @@ var gems = {
 			"type": "Gem",
 			"category": null,
 			"weight": 500,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"binds": "Inventory"
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -251,7 +253,7 @@ var gems = {
 			"category": null,
 			"weight": 3,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -265,7 +267,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -279,7 +281,7 @@ var gems = {
 			"category": null,
 			"weight": 2,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -293,7 +295,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -307,7 +309,7 @@ var gems = {
 			"category": null,
 			"weight": 8,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -321,7 +323,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -335,7 +337,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -349,7 +351,7 @@ var gems = {
 			"category": null,
 			"weight": 4,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -363,7 +365,7 @@ var gems = {
 			"category": null,
 			"weight": 8,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -377,7 +379,7 @@ var gems = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false

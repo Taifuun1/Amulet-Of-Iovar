@@ -71,7 +71,22 @@ var mp = {
 
 var ac = {
 	"title": "Armor class",
-	"description": "Your armor class blocks one point of damage for every point."
+	"description": "Your armor class blocks one point of damage for every other point."
+}
+
+var attacksText = {
+	"title": "Attacks",
+	"description": "Your attacks are determined by your stats and equipped weapons."
+}
+
+var attacks = {
+	"title": "Attack calculations",
+	"description": """Damage: {damage}
+Hits: {hits}
+Bonus Dmg: {bonusDmg}
+Armor Pen.: {ap}
+Magic damage: {magicDmg} {magicElement}
+"""
 }
 
 var goldPieces = {

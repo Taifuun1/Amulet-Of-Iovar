@@ -130,6 +130,8 @@ func create(_className):
 		$"/root/World/Items/Items".createItem(_item, null, _playerClass.items[_item], true)
 	
 	$PlayerSprite.texture = _playerClass.texture
+	
+	$Tooltip/TooltipContainer.updateTooltip(critterName, _playerClass.description, _playerClass.texture)
 
 
 
@@ -255,7 +257,7 @@ func pickUpItem(_playerTile, _itemId, _grid):
 				goldPieces += _item.amount
 				_item.queue_free()
 			else:
-				$Inventory.addToInventory(_item)
+				addToInventory([_itemId])
 				_item.hide()
 			return
 
@@ -272,18 +274,21 @@ func dropItems(_playerTile, _items, _grid):
 
 func dropItem(_playerTile, _item, _grid):
 	var _dropLog = []
-	_grid[_playerTile.x][_playerTile.y].items.append(_item.id)
-	$Inventory.removeFromInventory(_item)
-	get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
-	$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
-	$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
-	_dropLog.append("You drop {item}.".format({ "item": _item.itemName }))
-	if _grid[_playerTile.x][_playerTile.y].interactable == Globals.interactables.ALTAR:
-		_item.identifyItem(false, true, false)
-		if _item.alignment.matchn("blessed"):
-			_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
-		elif _item.alignment.matchn("cursed"):
-			_dropLog.append("The {item} flashes with a black light.".format({ "item": _item.itemName }))
+	if _item.binds != null and _item.binds.state.matchn("bound"):
+		_dropLog.append("The {item} is bound to you.".format({ "item": _item.itemName }))
+	else:
+		_grid[_playerTile.x][_playerTile.y].items.append(_item.id)
+		$Inventory.removeFromInventory(_item)
+		get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
+		$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
+		$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
+		_dropLog.append("You drop {item}.".format({ "item": _item.itemName }))
+		if _grid[_playerTile.x][_playerTile.y].interactable == Globals.interactables.ALTAR:
+			_item.identifyItem(false, true, false)
+			if _item.alignment.matchn("blessed"):
+				_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
+			elif _item.alignment.matchn("cursed"):
+				_dropLog.append("The {item} flashes with a black light.".format({ "item": _item.itemName }))
 	var _dropLogString = PoolStringArray(_dropLog).join(" ")
 	return _dropLogString
 
@@ -291,11 +296,17 @@ func addToInventory(_items):
 	for _itemId in _items:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": _itemId }))
 		$Inventory.addToInventory(_item)
+		if _item.binds != null and _item.binds.type.matchn("inventory"):
+			_item.binds = {
+				"type": _item.value.binds,
+				"state": "Bound"
+			}
 
 func removeFromInventory(_items):
 	for _itemId in _items:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": _itemId }))
 		$Inventory.removeFromInventory(_item)
+
 
 
 ####################################
@@ -355,9 +366,9 @@ func processPlayerSpecificEffects():
 	if checkIfStatusEffectIsInEffect("toxix"):
 		hp -= 1
 		if hp > 12:
-			Globals.gameConsole.addlog("You take damage from the poison.")
+			Globals.gameConsole.addLog("You take damage from the poison.")
 		else:
-			Globals.gameConsole.addlog("You take damage from the poison!")
+			Globals.gameConsole.addLog("You take damage from the poison!")
 	
 	# Deal with status effects in the UI
 	for _statusEffect in statusEffects.keys():
@@ -385,7 +396,7 @@ func processPlayerSpecificEffects():
 				statusEffects["toxix"] = -1
 			"amulet of sleep":
 				if statusEffects["sleep"] == 0 and randi() % 21 == 0:
-					statusEffects["sleep"] = randi() % 8 + 4
+					statusEffects["sleep"] = randi() % 6 + 2
 			"amulet of backscattering":
 				statusEffects["backscattering"] = -1
 			"ring of fast digestion":
@@ -533,6 +544,9 @@ func gainLevel():
 	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
 
 func updatePlayerStats():
+	var _totalBonusDamage = 0
+	for _bonusDamage in attacks[0].bonusDmg.values():
+		_totalBonusDamage += _bonusDamage
 	Globals.gameStats.updateStats({
 		maxhp = maxhp,
 		hp = hp,
@@ -545,7 +559,11 @@ func updatePlayerStats():
 		race = race,
 		justice = justice,
 		ac = ac,
-		attacks = attacks,
+		attacks = {
+			"attack": attacks[0],
+			"hits": attacks.size(),
+			"bonusDmg": _totalBonusDamage
+		},
 		currentHit = currentHit,
 		hits = hits,
 		dungeonLevel = Globals.currentDungeonLevelName,
@@ -619,4 +637,19 @@ func checkIfCritterHasEffect(_critter):
 		statusEffects.stun = 10
 		Globals.gameConsole.addLog("The {critterName}s gaze stuns you!".format({ "critterName": _critter.critterName }))
 		return true
+	if _critter.checkIfStatusEffectIsInEffect("displacement") and randi() % 4 == 0:
+		Globals.gameConsole.addLog("You miss the displaced image of {critterName}!".format({ "critterName": _critter.critterName }))
+		return true
 	return false
+
+
+
+########################
+### Signal functions ###
+########################
+
+func _on_Critter_mouse_entered():
+	$Tooltip/TooltipContainer.showTooltip()
+
+func _on_Critter_mouse_exited():
+	$Tooltip/TooltipContainer.hideTooltip()

@@ -3,11 +3,13 @@ extends HBoxContainer
 var itemName
 var changeMenuItems
 
-func setValues(_name, _changeMenuItems = false):
+func setValues(_name, _changeMenuItems = false, _otherText = null):
 	itemName = _name
 	name = str(_name)
 	
 	$Name.text = _name
+	if _otherText != null:
+		$OtherText.text = str(_otherText)
 	
 	changeMenuItems = _changeMenuItems
 

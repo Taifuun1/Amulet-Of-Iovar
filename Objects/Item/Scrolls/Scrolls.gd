@@ -8,8 +8,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 18
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -22,8 +24,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 0
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -36,8 +40,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 6
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -50,8 +56,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 4
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -64,8 +72,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 5
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -80,8 +90,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 18
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -94,8 +106,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 13
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -108,8 +122,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 11
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -122,8 +138,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 10
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -136,8 +154,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 8
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -150,8 +170,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 8
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -164,8 +186,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 6
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -180,7 +204,7 @@ var scrolls = {
 #			"type": "Scroll",
 #			"category": null,
 #			"value": null,
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Rare",
 #			"identified": false
@@ -193,7 +217,7 @@ var scrolls = {
 #			"type": "Scroll",
 #			"category": null,
 #			"value": null,
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Rare",
 #			"identified": false
@@ -208,8 +232,10 @@ var scrolls = {
 			"type": "Scroll",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"letters": 34
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
 			"identified": false

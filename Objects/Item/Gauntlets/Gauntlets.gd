@@ -12,7 +12,7 @@ var gauntlets = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Common"
 		}
@@ -30,7 +30,7 @@ var gauntlets = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		}
@@ -48,7 +48,7 @@ var gauntlets = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -64,7 +64,7 @@ var gauntlets = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -80,7 +80,7 @@ var gauntlets = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -96,7 +96,7 @@ var gauntlets = {
 				"ac": 7,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		}

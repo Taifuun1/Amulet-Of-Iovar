@@ -521,7 +521,7 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
-	"Bag of disenchantment": {
+	"Bag of weight": {
 		"knowledge": false,
 		"description": ""
 	},

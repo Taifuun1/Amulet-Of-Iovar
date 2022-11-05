@@ -9,7 +9,7 @@ var comestibles = {
 			"category": null,
 			"weight": 5,
 			"value": 300,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -23,7 +23,7 @@ var comestibles = {
 			"category": null,
 			"weight": 5,
 			"value": 300,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -37,7 +37,7 @@ var comestibles = {
 			"category": null,
 			"weight": 2,
 			"value": 100,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -51,7 +51,7 @@ var comestibles = {
 			"category": null,
 			"weight": 5,
 			"value": 550,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -65,7 +65,7 @@ var comestibles = {
 			"category": null,
 			"weight": 2,
 			"value": 250,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -79,7 +79,7 @@ var comestibles = {
 			"category": null,
 			"weight": 2,
 			"value": 100,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -93,7 +93,7 @@ var comestibles = {
 			"category": null,
 			"weight": 3,
 			"value": 200,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -107,7 +107,7 @@ var comestibles = {
 			"category": null,
 			"weight": 2,
 			"value": 150,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -121,7 +121,7 @@ var comestibles = {
 			"category": null,
 			"weight": 2,
 			"value": 300,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -137,7 +137,7 @@ var comestibles = {
 			"category": null,
 			"weight": 20,
 			"value": 1500,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -151,7 +151,7 @@ var comestibles = {
 			"category": null,
 			"weight": 10,
 			"value": 700,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -165,7 +165,7 @@ var comestibles = {
 			"category": null,
 			"weight": 10,
 			"value": 750,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -179,7 +179,7 @@ var comestibles = {
 			"category": null,
 			"weight": 40,
 			"value": 5000,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -193,7 +193,7 @@ var comestibles = {
 			"category": null,
 			"weight": 20,
 			"value": 4000,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false

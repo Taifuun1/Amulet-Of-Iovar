@@ -107,126 +107,129 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			_pickedAbility = _abilities[randi() % _abilities.size()]
 			_pickedAbility.data = critterSpellData[_pickedAbility.abilityName]
 		if _pickedAbility != null and _distanceFromPlayer.size() <= _pickedAbility.data.distance and _distanceFromPlayer.size() != 0:
-			match _pickedAbility.abilityType:
-				"rangedSpell":
-					var _directions = [
-						Vector2(-1, -1),
-						Vector2(0, -1),
-						Vector2(1, -1),
-						Vector2(1, 0),
-						Vector2(1, 1),
-						Vector2(0, 1),
-						Vector2(-1, 1),
-						Vector2(-1, 0)
-					]
-					if statusEffects.blindness > 0 or statusEffects.blindness == -1:
-						_directions = _directions[randi() % _directions.size()]
-					var _critters = []
-					for _direction in _directions:
-						var _distance = 0
-						for _i in _pickedAbility.data.distance:
-							_distance += 1
-							var _tile = _critterTile + (_direction * _distance)
-							if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+			if !_pickedAbility.abilityType.matchn("skill") and mp - _pickedAbility.data.mp < 0:
+				if randi() % 10 == 0:
+					Globals.gameConsole.addLog("{critter} tries to cast a spell but nothing happens!".format({ "critter": critterName }))
+					return false
+			else:
+				match _pickedAbility.abilityType:
+					"rangedSpell":
+						var _directions = [
+							Vector2(-1, -1),
+							Vector2(0, -1),
+							Vector2(1, -1),
+							Vector2(1, 0),
+							Vector2(1, 1),
+							Vector2(0, 1),
+							Vector2(-1, 1),
+							Vector2(-1, 0)
+						]
+						if statusEffects.blindness > 0 or statusEffects.blindness == -1:
+							_directions = _directions[randi() % _directions.size()]
+						var _critters = []
+						for _direction in _directions:
+							var _distance = 0
+							for _i in _pickedAbility.data.distance:
+								_distance += 1
+								var _tile = _critterTile + (_direction * _distance)
+								if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+									break
+								match _pickedAbility.abilityName:
+									"rockThrow", "crackerThrow", "fleirpoint", "fleirnado", "frostpoint", "frostBite", "thunderPoint", "thundersplit", "voidBlast":
+										if _level.grid[_tile.x][_tile.y].critter == 0:
+											var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
+											if (
+												_critterNode.checkIfStatusEffectIsInEffect("backscattering") and
+												_pickedAbility.abilityName.matchn("rockThrow")
+											):
+												Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
+												return false
+											Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+											_critterNode.takeDamage(_pickedAbility.data.attacks, _tile, critterName)
+											return true
+									"dragonBreath", "fleirBreath", "frostBreath", "thunderBreath", "gleeieerBreath", "toxixBreath", "elderDragonBreath":
+										if _level.grid[_tile.x][_tile.y].critter != null:
+											_critters.append(_level.grid[_tile.x][_tile.y].critter)
+							if _critters.has(0) or statusEffects.blindness > 0 or statusEffects.blindness == -1:
 								break
-							match _pickedAbility.abilityName:
-								"rockThrow", "crackerThrow", "fleirpoint", "fleirnado", "frostpoint", "frostBite", "thunderPoint", "thundersplit", "voidBlast":
-									if _level.grid[_tile.x][_tile.y].critter == 0:
-										var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
-										if (
-											_critterNode.checkIfStatusEffectIsInEffect("backscattering") and
-											_pickedAbility.abilityName.matchn("rockThrow")
-										):
-											Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
-											return false
-										Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
-										_critterNode.takeDamage(_pickedAbility.data.attacks, _tile, critterName)
-										return true
-								"dragonBreath", "fleirBreath", "frostBreath", "thunderBreath", "gleeieerBreath", "toxixBreath", "elderDragonBreath":
-									if _level.grid[_tile.x][_tile.y].critter != null:
-										_critters.append(_level.grid[_tile.x][_tile.y].critter)
-						if _critters.has(0) or statusEffects.blindness > 0 or statusEffects.blindness == -1:
-							break
-						else:
-							_critters.clear()
-					if _critters.size() == 0:
-						continue
-					if statusEffects.blindness > 0:
-						Globals.gameConsole.addLog("{critterName} casts {spell} in a random direction!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
-					else:
-						Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
-					for _critter in _critters:
-						var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critter }))
-						if _critterNode.checkIfStatusEffectIsInEffect("backscattering") and _pickedAbility.abilityName.matchn("dragonBreath"):
-							Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
+							else:
+								_critters.clear()
+						if _critters.size() == 0:
 							continue
-						_critterNode.takeDamage(_pickedAbility.data.attacks, _level.getCritterTile(_critter), critterName)
-					if _critters.has(0):
-						return true
-				"selfCastSpell":
-					match _pickedAbility.abilityName:
-						"createShield":
-							if shields > 17:
-								shields = 20
-								Globals.gameConsole.addLog("{critter}s aura reverberates!".format({ "critter": critterName.capitalize() }))
-							else:
-								shields += 3
-								Globals.gameConsole.addLog("{critter}s aura grows stronger!".format({ "critter": critterName.capitalize() }))
-							return false
-						"sharpenSword":
-							for _attack in attacks:
-								if !_attack.bonusDmg.has("bonusDmg"):
-									_attack.bonusDmg.bonusDmg = 1
-								elif _attack.bonusDmg.bonusDmg < 5:
-									_attack.bonusDmg.bonusDmg += 1
+						if statusEffects.blindness > 0:
+							Globals.gameConsole.addLog("{critterName} casts {spell} in a random direction!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+						else:
+							Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+						for _critter in _critters:
+							var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critter }))
+							if _critterNode.checkIfStatusEffectIsInEffect("backscattering") and _pickedAbility.abilityName.matchn("dragonBreath"):
+								Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
+								continue
+							_critterNode.takeDamage(_pickedAbility.data.attacks, _level.getCritterTile(_critter), critterName)
+						if _critters.has(0):
+							return true
+					"selfCastSpell":
+						match _pickedAbility.abilityName:
+							"createShield":
+								if shields > 17:
+									shields = 20
+									Globals.gameConsole.addLog("{critter}s aura reverberates!".format({ "critter": critterName.capitalize() }))
 								else:
-									Globals.gameConsole.addLog("{critter} sharpens its sword. SSHhhrrrr...".format({ "critter": critterName.capitalize() }))
-									continue
-							Globals.gameConsole.addLog("{critter} sharpens its sword. SKKRRrrr!".format({ "critter": critterName.capitalize() }))
-							return false
-						"mimicBox":
-							return false
-						"mimicChest":
-							return false
-						"displaceSelf":
-							return false
-				"spell":
-					match _pickedAbility.abilityName:
-						"fireMiasma":
-							var _tiles = []
-							var _legibleTiles = []
-							for x in range(_critterTile.x - _pickedAbility.data.distance, _critterTile.x + _pickedAbility.data.distance + 1):
-								for y in range(_critterTile.y - _pickedAbility.data.distance, _critterTile.y + _pickedAbility.data.distance + 1):
-									if !_level.isOutSideTileMap(Vector2(x,y)) and Globals.isTileFree(Vector2(x,y), _level.grid):
-										_legibleTiles.append(Vector2(x,y))
-							if _legibleTiles.size() > 5:
-								for _i in 5:
-									_tiles.append(_legibleTiles.pop_at(randi() % _legibleTiles.size()))
-							else:
-								_tiles = _legibleTiles
-							var _effect = load("res://UI/Effect/Effect.tscn")
-							for _tile in _tiles:
-								var _miasmaNode = _effect.instance()
-								_miasmaNode.create(load("res://Assets/Spells/Gas.png"), [_pickedAbility.data.attacks[0].magicDmg.element], _tile, 0, _pickedAbility.duration)
-								_miasmaNode.setTurnDuration(_pickedAbility.duration)
-								$"/root/World/Effects".add_child(_miasmaNode)
-								_level.grid[_tile.x][_tile.y].effects.append("fire miasma")
-							Globals.gameConsole.addLog("Fire appears around {critterName} casts!".format({ "critterName": critterName.capitalize() }))
-							return false
-						"summonCritter", "summonCritters":
-							var _tiles = []
-							var _legibleTiles = _level.whichTilesAreOpenAndFreeOfCritters(_critterTile, _pickedAbility.data.distance)
-							if _legibleTiles.size() > 5:
-								for _i in randi() % 3 + 2:
-									_tiles.append(_legibleTiles.pop_at(randi() % _legibleTiles.size()))
-									if _pickedAbility.abilityName.matchn("summonCritter"):
-										break
-							else:
-								_tiles = _legibleTiles
-							for _tile in _tiles:
-								$"/root/World/Critters/Critters".spawnRandomCritter(_tile, false)
-							Globals.gameConsole.addLog("{critter} summons critters!".format({ "critter": critterName.capitalize() }))
-							return false
+									shields += 3
+									Globals.gameConsole.addLog("{critter}s aura grows stronger!".format({ "critter": critterName.capitalize() }))
+								return false
+							"sharpenSword":
+								for _attack in attacks:
+									if !_attack.bonusDmg.has("bonusDmg"):
+										_attack.bonusDmg.bonusDmg = 1
+									elif _attack.bonusDmg.bonusDmg < 5:
+										_attack.bonusDmg.bonusDmg += 1
+									else:
+										Globals.gameConsole.addLog("{critter} sharpens its sword. SSHhhrrrr...".format({ "critter": critterName.capitalize() }))
+										continue
+								Globals.gameConsole.addLog("{critter} sharpens its sword. SKKRRrrr!".format({ "critter": critterName.capitalize() }))
+								return false
+							"displaceSelf":
+								return false
+					"spell":
+						match _pickedAbility.abilityName:
+							"fireMiasma":
+								var _tiles = []
+								var _legibleTiles = []
+								for x in range(_critterTile.x - _pickedAbility.data.distance, _critterTile.x + _pickedAbility.data.distance + 1):
+									for y in range(_critterTile.y - _pickedAbility.data.distance, _critterTile.y + _pickedAbility.data.distance + 1):
+										if !_level.isOutSideTileMap(Vector2(x,y)) and Globals.isTileFree(Vector2(x,y), _level.grid):
+											_legibleTiles.append(Vector2(x,y))
+								if _legibleTiles.size() > 5:
+									for _i in 5:
+										_tiles.append(_legibleTiles.pop_at(randi() % _legibleTiles.size()))
+								else:
+									_tiles = _legibleTiles
+								var _effect = load("res://UI/Effect/Effect.tscn")
+								for _tile in _tiles:
+									var _miasmaNode = _effect.instance()
+									_miasmaNode.create(load("res://Assets/Spells/Gas.png"), [_pickedAbility.data.attacks[0].magicDmg.element], _tile, 0, _pickedAbility.duration)
+									_miasmaNode.setTurnDuration(_pickedAbility.duration)
+									$"/root/World/Effects".add_child(_miasmaNode)
+									_level.grid[_tile.x][_tile.y].effects.append("fire miasma")
+								Globals.gameConsole.addLog("Fire appears around {critterName} casts!".format({ "critterName": critterName.capitalize() }))
+								return false
+							"summonCritter", "summonCritters":
+								var _tiles = []
+								var _legibleTiles = _level.whichTilesAreOpenAndFreeOfCritters(_critterTile, _pickedAbility.data.distance)
+								if _legibleTiles.size() > 5:
+									for _i in randi() % 3 + 2:
+										_tiles.append(_legibleTiles.pop_at(randi() % _legibleTiles.size()))
+										if _pickedAbility.abilityName.matchn("summonCritter"):
+											break
+								else:
+									_tiles = _legibleTiles
+								for _tile in _tiles:
+									$"/root/World/Critters/Critters".spawnRandomCritter(_tile, false)
+								Globals.gameConsole.addLog("{critter} summons critters!".format({ "critter": critterName.capitalize() }))
+								return false
+				if !_pickedAbility.abilityType.matchn("skill"):
+					mp -= _pickedAbility.data.mp
 	
 	for _ability in abilities:
 		if _path.size() > 1:
@@ -249,6 +252,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_level.addPointToWeightedPathding(_tileToMoveTo)
 								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
 									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
+						"mimicBox":
+							return false
+						"mimicChest":
+							return false
 	
 	# Critter move
 	if _path.size() > 1:
@@ -272,18 +279,28 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		
 		# Player hit check
 		if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
-			if abilityHits.size() != 0 and  abilityHits[currentCritterAbilityHit] == 1 and _pickedAbility != null and _pickedAbility.abilityType.matchn("meleeSpell"):
-				Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
-				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
-				return true
-			elif hits[currentHit] == 1:
-				$"/root/World/Critters/0".takeDamage(attacks, _moveCritterTo, critterName)
-				return true
-			else:
-				Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
 			if currentHit == 15:
 				currentHit = 0
 			currentHit += 1
+			if (
+				abilityHits.size() != 0 and
+				abilityHits[currentCritterAbilityHit] == 1 and
+				_pickedAbility != null and
+				_pickedAbility.abilityType.matchn("meleeSpell") and
+				mp - _pickedAbility.data.mp >= 0
+			):
+				Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
+				mp -= _pickedAbility.data.mp
+			elif hits[currentHit] == 1:
+				if $"/root/World/Critters/0".checkIfStatusEffectIsInEffect("displacement") and randi() % 4 == 0:
+					Globals.gameConsole.addLog("{critterName} hits your displaced image!".format({ "critterName": critterName }))
+					return false
+				$"/root/World/Critters/0".takeDamage(attacks, _moveCritterTo, critterName)
+			else:
+				Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
+				return false
+			return true
 		# Movement check
 		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
 			moveCritter(_critterTile, _moveCritterTo, _critter, _level)

@@ -426,35 +426,38 @@ clip_text = true
 [node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer" instance=ExtResource( 8 )]
 
 [node name="AttacksContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-visible = false
-margin_left = -381.0
-margin_top = 192.0
-margin_right = -4.0
-margin_bottom = 212.0
+margin_top = 96.0
+margin_right = 377.0
+margin_bottom = 116.0
 rect_min_size = Vector2( 377, 0 )
+mouse_filter = 2
+custom_constants/separation = 4
 
-[node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer"]
-margin_right = 250.0
+[node name="AttacksText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer"]
+margin_right = 186.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 186, 0 )
-text = "Alignment"
+mouse_filter = 1
+text = "Attacks"
 clip_text = true
 
-[node name="Alignment" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer"]
-margin_left = 254.0
+[node name="Attacks" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer"]
+margin_left = 190.0
 margin_right = 377.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
 text = "-"
 align = 2
 clip_text = true
 
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer" instance=ExtResource( 8 )]
+
 [node name="HitsContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
 visible = false
-margin_left = -381.0
-margin_top = 216.0
-margin_right = -4.0
-margin_bottom = 236.0
+margin_top = 120.0
+margin_right = 377.0
+margin_bottom = 140.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="AlignmentText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/HitsContainer"]
@@ -474,9 +477,9 @@ align = 2
 clip_text = true
 
 [node name="GoldPiecesContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 96.0
+margin_top = 120.0
 margin_right = 377.0
-margin_bottom = 116.0
+margin_bottom = 140.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="GoldPiecesText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer"]
@@ -498,9 +501,9 @@ clip_text = true
 [node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" instance=ExtResource( 8 )]
 
 [node name="WeightContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 120.0
+margin_top = 144.0
 margin_right = 377.0
-margin_bottom = 164.0
+margin_bottom = 188.0
 
 [node name="WeightLabel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer"]
 margin_right = 377.0
@@ -580,6 +583,10 @@ columns = 3
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MPContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/ACContainer", "ac" ]]
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/ACContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/AttacksText" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/AttacksContainer", "attacksText" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/AttacksText" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/AttacksContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/Attacks" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/AttacksContainer", "attacks" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/Attacks" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/AttacksContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/GoldPiecesContainer", "goldPieces" ]]
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/GoldPiecesContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/WeightContainer", "weight" ]]

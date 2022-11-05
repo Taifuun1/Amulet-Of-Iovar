@@ -16,3 +16,11 @@ margin_right = 485.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 485, 14 )
 size_flags_horizontal = 8
+
+[node name="OtherText" type="Label" parent="."]
+margin_left = 489.0
+margin_top = 5.0
+margin_right = 974.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 485, 14 )
+size_flags_horizontal = 8

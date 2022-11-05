@@ -76,7 +76,9 @@ func _process(_delta):
 			var _matchingType = checkIfMatchingEquipmentAndSlot(_item.type, _item.category)
 			var _changed = false
 			if _matchingType == null:
-				pass
+				return
+			elif _item.binds != null and _item.binds.type.matchn("equipment") and _item.binds.state.matchn("bound"):
+				Globals.gameConsole.addLog("The {item} is bound to you.".format({ "item": _item.itemName }))
 			elif _matchingType.matchn("weapon"):
 				if _item.category.matchn("two-hander"):
 					if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
@@ -112,6 +114,13 @@ func _process(_delta):
 					checkWhatRingIsWorn(_item)
 				if _item.category.matchn("amulet"):
 					checkWhatAmuletIsWorn(_item)
+			
+			if _item.category.matchn("amulet"):
+				var panelStylebox = get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).get_stylebox("panel").duplicate()
+				panelStylebox.set_border_width_all(0)
+				panelStylebox.set_border_color(Color(1, 0, 0, 0))
+				get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
+			
 			$"/root/World/Critters/0".calculateEquipmentStats()
 			$"/root/World/Critters/0".checkAllIdentification(true)
 			if _changed:
@@ -134,6 +143,18 @@ func setEquipment(_id):
 	var _matchingType = checkIfMatchingEquipmentAndSlot(_item.type, _item.category)
 	if _matchingType == null:
 		return
+	
+	var _oldItem
+	if _matchingType.matchn("weapon"):
+		_oldItem = get_node("/root/World/Items/{id}".format({ "id": hands[hoveredEquipment.to_lower()] }))
+	elif _matchingType.matchn("accessory"):
+		_oldItem = get_node("/root/World/Items/{id}".format({ "id": accessories[hoveredEquipment.to_lower()] }))
+	elif _matchingType.matchn("armor"):
+		_oldItem = get_node("/root/World/Items/{id}".format({ "id": equipment[hoveredEquipment.to_lower()] }))
+	
+	if _oldItem != null and _oldItem.binds != null and _oldItem.binds.type.matchn("equipment") and _oldItem.binds.state.matchn("bound"):
+		Globals.gameConsole.addLog("The {item} is bound to you.".format({ "item": _oldItem.itemName }))
+		return
 	elif _matchingType.matchn("weapon"):
 		dualWielding = false
 		if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
@@ -153,7 +174,6 @@ func setEquipment(_id):
 			dualWielding = true
 	elif _matchingType.matchn("accessory"):
 		if accessories[hoveredEquipment.to_lower()] != null:
-			var _oldItem = get_node("/root/World/Items/{id}".format({ "id": accessories[hoveredEquipment.to_lower()] }))
 			if _item.category.matchn("ring"):
 				checkWhatRingIsWorn(_oldItem)
 			if _item.category.matchn("amulet"):
@@ -166,7 +186,6 @@ func setEquipment(_id):
 			checkWhatAmuletIsWorn(_item)
 	elif _matchingType.matchn("armor"):
 		if equipment[hoveredEquipment.to_lower()] != null:
-			var _oldItem = get_node("/root/World/Items/{id}".format({ "id": equipment[hoveredEquipment.to_lower()] }))
 			if _item.category.matchn("belt"):
 				checkWhatBeltIsWorn(_oldItem)
 			if _item.category.matchn("cloak"):
@@ -184,6 +203,15 @@ func setEquipment(_id):
 	for _listItem in $ItemsBackground/ItemContainer/ItemList.get_children():
 		if _item.itemName.matchn(_listItem.item.itemName):
 			_listItem.updateValues(_item.itemName)
+	if _item.binds != null and _item.binds.type.matchn("equipment"):
+		_item.binds = {
+			"type": _item.value.binds,
+			"state": "Bound"
+		}
+		var panelStylebox = get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).get_stylebox("panel").duplicate()
+		panelStylebox.set_border_width_all(1)
+		panelStylebox.set_border_color(Color(1, 0, 0))
+		get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
 	$"/root/World/Critters/0".calculateEquipmentStats()
 	$"/root/World/Critters/0".checkAllIdentification(true)
 	$"/root/World".processGameTurn()
@@ -195,6 +223,9 @@ func takeOfEquipmentWhenDroppingItem(_id):
 
 func checkIfEquipmentNeedsToBeUnequipped(_id):
 	var _item = get_node("/root/World/Items/{id}".format({ "id": _id }))
+	if _item.binds != null and _item.binds.type.matchn("equipment") and _item.binds.state.matchn("bound"):
+		Globals.gameConsole.addLog("The {item} is bound to you.".format({ "item": _item.itemName }))
+		return
 	for _hand in hands.keys():
 		if hands[_hand] == _id:
 			hands[_hand] = null
@@ -254,7 +285,7 @@ func getArmorClass():
 		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })))
 	if accessories["ring2"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).category.matchn("ring"):
 		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })))
-	return _ac
+	return _ac / 2
 
 func checkIfRingIsRingOfProtection(_ring):
 	match _ring.identifiedItemName.to_lower():

@@ -52,9 +52,9 @@ func removeFromInventory(_item):
 #		pass
 
 func showInventory():
-	for item in inventory:
+	for _itemId in inventory:
 		var _newItem = inventoryItem.instance()
-		_newItem.setValues(get_node("/root/World/Items/{id}".format({ "id": item })))
+		_newItem.setValues(get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })))
 		$InventoryContainer/InventoryListMargin/InventoryListContainer/ListMenuContent.add_child(_newItem)
 	$InventoryContainer.show()
 
@@ -66,17 +66,19 @@ func hideInventory():
 func getItemsOfType(_types, _category = null):
 	var _items = []
 	for _type in _types:
-		for _item in inventory:
-			if get_node("/root/World/Items/{id}".format({ "id": _item })).type.matchn(_type):
-				_items.append(_item)
+		for _itemId in inventory:
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+			if _item.type.matchn(_type):
+				_items.append(_itemId)
 	if _category:
-		for _item in _items:
-			if get_node("/root/World/Items/{id}".format({ "id": _item })).category == null or get_node("/root/World/Items/{id}".format({ "id": _item })).category.matchn(_category):
-				_items.erase(_item)
+		for _itemId in _items.duplicate(true):
+			if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn(_category):
+				print("erase")
+				_items.erase(_itemId)
 	return _items
 
 func checkIfItemInInventoryByName(_itemName):
-	for _item in inventory:
-		if get_node("/root/World/Items/{id}".format({ "id": _item })).identifiedItemName.matchn(_itemName):
+	for _itemId in inventory:
+		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn(_itemName):
 			return true
 	return false

@@ -1,17 +1,10 @@
 extends HBoxContainer
 
-var id
-var itemName
-var unidentifiedItemName
-var type
-var itemAlignment
-var enchantment
-var stackable
+var item
 
 func setValues(_item):
-	id = _item.id
 	name = str(_item.id)
-	itemName = _item.itemName
+	item = _item
 	
 	$Name.text = _item.itemName
 	if _item.notIdentified.alignment:
@@ -25,7 +18,7 @@ func setValues(_item):
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		if itemName.matchn("scroll of genocide"):
-			$"../../.."._on_Item_Management_List_Clicked(id, false)
+		if item.itemName.matchn("scroll of genocide"):
+			$"../../.."._on_Item_Management_List_Clicked(item.id, false)
 		else:
-			$"../../.."._on_Item_Management_List_Clicked(id)
+			$"../../.."._on_Item_Management_List_Clicked(item.id)

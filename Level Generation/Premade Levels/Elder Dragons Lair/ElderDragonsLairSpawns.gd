@@ -202,7 +202,7 @@ var elderDragonsLairSpawn2 = [
 			"types": null,
 			"names": [
 				"Credit card",
-				"Bag of disenchantment",
+				"Bag of weight",
 				"Final Dawn"
 			],
 			"randomByRarity": true

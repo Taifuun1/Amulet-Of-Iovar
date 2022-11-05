@@ -24,6 +24,8 @@ var notIdentified = {
 
 var container = null
 
+var binds = null
+
 var stackable
 
 func createItem(_item, _extraData = {}, _amount = 1):
@@ -32,7 +34,9 @@ func createItem(_item, _extraData = {}, _amount = 1):
 	Globals.itemId += 1
 	
 	if (
-		(GlobalItemInfo.globalItemInfo.has(itemName) and GlobalItemInfo.globalItemInfo[itemName].identified) or
+		_item.itemName.matchn("box") or
+		_item.itemName.matchn("chest") or
+		(GlobalItemInfo.globalItemInfo.has(_item.itemName) and GlobalItemInfo.globalItemInfo[_item.itemName].identified) or
 		_item.type.to_lower() == "comestible"
 	):
 		itemName = _item.itemName
@@ -63,13 +67,14 @@ func createItem(_item, _extraData = {}, _amount = 1):
 		else:
 			alignment = "uncursed"
 	
-	if randi() % 8 == 1:
-		if randi() % 2 == 1:
-			enchantment = randi() % 2
+	if _item.enchantable:
+		if randi() % 8 == 1:
+			if randi() % 2 == 1:
+				enchantment = randi() % 4
+			else:
+				enchantment = -randi() % 4
 		else:
-			enchantment = -randi() % 2
-	else:
-		enchantment = 0
+			enchantment = 0
 	
 	if typeof(_item.value) == TYPE_DICTIONARY:
 		if _item.value.has("charges"):
@@ -92,6 +97,17 @@ func createItem(_item, _extraData = {}, _amount = 1):
 			value = {
 				"worn": false
 			}
+		elif _item.value.has("ink"):
+			value = {
+				"ink": randi() % _item.value.ink[1] + _item.value.ink[0]
+			}
+		elif _item.value.has("binds"):
+			binds = {
+				"type": _item.value.binds,
+				"state": "Unbound"
+			}
+			if _item.value.binds.matchn("inventory"):
+				binds.state = "Bound"
 	
 	stackable = _item.stackable
 	

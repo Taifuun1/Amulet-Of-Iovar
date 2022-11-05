@@ -51,7 +51,8 @@ var statusEffects = {
 #	"invisibility": 0,
 	"seeing": 0,
 	"toxix": 0,
-	"backscattering": 0
+	"backscattering": 0,
+	"displacement": 0
 }
 
 var statusStates = {
@@ -130,10 +131,18 @@ func processCritterEffects():
 		if statusEffects[_status] > 0:
 			statusEffects[_status] -= 1
 	
-	if hpRegenTimer >= 20 - ( stats.legerity / 2 ):
+	if hpRegenTimer >= 20 - ( (stats.legerity / 3) + (stats.strength / 3) ):
 		if hp < maxhp:
 			if checkIfStatusEffectIsInEffect("regen"):
 				hp += 3
+			if (stats.legerity / 3) + (stats.strength / 3) >= 20:
+				hp += 8
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 15:
+				hp += 5
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 10:
+				hp += 3
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 5:
+				hp += 2
 			else:
 				hp += 1
 		hpRegenTimer = 0
@@ -142,7 +151,16 @@ func processCritterEffects():
 	
 	if mpRegenTimer >= 20 - ( stats.belief / 2 ):
 		if mp < maxmp:
-			mp += 1
+			if stats.belief / 2 >= 20:
+				mp += 8
+			elif stats.belief / 2 >= 15:
+				mp += 5
+			elif stats.belief / 2 >= 10:
+				mp += 3
+			elif stats.belief / 2 >= 5:
+				mp += 2
+			else:
+				mp += 1
 		mpRegenTimer = 0
 	else:
 		mpRegenTimer += 1

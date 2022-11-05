@@ -5,22 +5,27 @@ onready var listItem = preload("res://UI/List Menu/List Menu Item.tscn")
 var items = []
 var usedItemName
 var usedItemAlignment
+var additionalData
 
 
 func create():
 	name = "ListMenu"
 	hide()
 
-func showListMenuList(_title, _items, _usedItem = null, _changeMenuItems = false):
+func showListMenuList(_title, _items, _usedItem = null, _changeMenuItems = false, _additionalData = null):
 	$ListMenuMargin/Title.text = _title
 	items = _items
 	if _usedItem != null:
 		usedItemName = _usedItem.identifiedItemName
 		usedItemAlignment = _usedItem.alignment
+	additionalData = _additionalData
 	for _item in items:
 		var newItem = listItem.instance()
 #		var _item = get_node("/root/World/Critters/{id}".format({ "id": item }))
-		newItem.setValues(_item, _changeMenuItems)
+		if additionalData != null and additionalData.has("letters") and _additionalData.letters[_item] != null:
+			newItem.setValues(_item, _changeMenuItems, _additionalData.letters[_item])
+		else:
+			newItem.setValues(_item, _changeMenuItems)
 		$ListMenuMargin/ListMenuScrollMargin/ListMenuContainer/ListMenuContent.add_child(newItem)
 	show()
 
@@ -49,6 +54,14 @@ func _on_List_Menu_Item_Clicked(_name, _changeMenuItems):
 		$"/root/World/Critters/0".dealWithScrollOfGenocide(_name, usedItemAlignment)
 	elif usedItemName.matchn("wand of wishing"):
 		$"/root/World/Critters/0".dealWithWandOfWishing(_name, usedItemAlignment)
+	elif usedItemName.matchn("magic marker"):
+		if !$"/root/World/Critters/0".dealWithMarker(_name, { "blankPaper": additionalData.blankPaper }):
+			$"/root/World".closeMenu()
+			return
+	elif usedItemName.matchn("marker"):
+		if !$"/root/World/Critters/0".dealWithMarker(_name, { "ink": additionalData.ink, "letters": additionalData.letters[_name], "blankPaper": additionalData.blankPaper }):
+			$"/root/World".closeMenu()
+			return
 	$"/root/World".processGameTurn()
 
 #func setValues(_title, _critters):

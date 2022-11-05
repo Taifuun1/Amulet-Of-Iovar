@@ -30,7 +30,7 @@ mouse_filter = 2
 [node name="GameConsoleScrollContainer" type="ScrollContainer" parent="Background/GameConsoleContainer"]
 margin_right = 780.0
 margin_bottom = 292.0
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="GameConsoleScroll" type="VBoxContainer" parent="Background/GameConsoleContainer/GameConsoleScrollContainer"]
 margin_right = 780.0

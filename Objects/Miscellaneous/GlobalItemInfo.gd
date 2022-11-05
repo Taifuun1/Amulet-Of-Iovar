@@ -454,7 +454,7 @@ var globalItemInfo = {
 	"Key": {
 		"identified": false
 	},
-	"Bag of disenchantment": {
+	"Bag of weight": {
 		"identified": false
 	},
 	"Bag of holding": {

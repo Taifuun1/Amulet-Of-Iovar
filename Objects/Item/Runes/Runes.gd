@@ -9,7 +9,7 @@ var runes = {
 			"category": "Eario",
 			"weight": 20,
 			"value": "Fleir",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -21,7 +21,7 @@ var runes = {
 			"category": "Eario",
 			"weight": 20,
 			"value": "Frost",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -33,7 +33,7 @@ var runes = {
 			"category": "Eario",
 			"weight": 20,
 			"value": "Thunder",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -45,7 +45,7 @@ var runes = {
 			"category": "Eario",
 			"weight": 20,
 			"value": "Gleeie'er",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -57,7 +57,7 @@ var runes = {
 			"category": "Eario",
 			"weight": 20,
 			"value": "Toxix",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -69,7 +69,7 @@ var runes = {
 			"category": "Luirio",
 			"weight": 20,
 			"value": "Line",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -81,7 +81,7 @@ var runes = {
 			"category": "Luirio",
 			"weight": 20,
 			"value": "Cone",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -93,7 +93,7 @@ var runes = {
 			"category": "Luirio",
 			"weight": 20,
 			"value": "Adjacent",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -105,7 +105,7 @@ var runes = {
 			"category": "Luirio",
 			"weight": 20,
 			"value": "Point",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -117,7 +117,7 @@ var runes = {
 			"category": "Luirio",
 			"weight": 20,
 			"value": "Fourway",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -129,7 +129,7 @@ var runes = {
 			"category": "Heario",
 			"weight": 20,
 			"value": "Gas",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -141,7 +141,7 @@ var runes = {
 			"category": "Heario",
 			"weight": 20,
 			"value": "True",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -153,7 +153,7 @@ var runes = {
 			"category": "Heario",
 			"weight": 20,
 			"value": "Bolt",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -165,7 +165,7 @@ var runes = {
 			"category": "Heario",
 			"weight": 20,
 			"value": "Fragment",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		},
 		{
@@ -177,7 +177,7 @@ var runes = {
 			"category": "Heario",
 			"weight": 20,
 			"value": "Flow",
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false
 		}
 	]

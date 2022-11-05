@@ -4,6 +4,8 @@ var tooltipTexts = load("res://UI/Game Stats/StatsTooltipTexts.gd").new()
 
 onready var statusEffectItem = preload("res://UI/Game Stats/Status Effect Item.tscn")
 
+var attacks
+
 #func _ready():
 #	addStatusEffect("blindness")
 #	addStatusEffect("fumbling")
@@ -50,39 +52,28 @@ func updateStats(stats = {
 }):
 	if stats.critterName != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer/Name.text = str(stats.critterName)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer/Name.set_tooltip(str(stats.critterName))
 	if stats.race != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer/Race.text = str(stats.race)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer/Race.set_tooltip(str(stats.race))
 	if stats.justice != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer/Justice.text = str(stats.justice)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer/Justice.set_tooltip(str(stats.justice))
 	if stats.dungeonLevel != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.text = str(stats.dungeonLevel)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.set_tooltip(str(stats.dungeonLevel))
 	if stats.level != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer/Level.text = str(stats.level)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer/Level.set_tooltip(str(stats.level))
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer/Experience.text = str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount)
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer/Experience.set_tooltip("First value is your current exp, second value is next level\n" + str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount))
 	if stats.strength != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/StrengthContainer/Strength.text = str(stats.strength)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/StrengthContainer/Strength.set_tooltip(str(stats.strength))
 	if stats.legerity != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LegerityContainer/Legerity.text = str(stats.legerity)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LegerityContainer/Legerity.set_tooltip(str(stats.legerity))
 	if stats.balance != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BalanceContainer/Balance.text = str(stats.balance)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BalanceContainer/Balance.set_tooltip(str(stats.balance))
 	if stats.belief != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BeliefContainer/Belief.text = str(stats.belief)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BeliefContainer/Belief.set_tooltip(str(stats.belief))
 	if stats.visage != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/VisageContainer/Visage.text = str(stats.visage)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/VisageContainer/Visage.set_tooltip(str(stats.visage))
 	if stats.wisdom != null:
 		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WisdomContainer/Wisdom.text = str(stats.wisdom)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WisdomContainer/Wisdom.set_tooltip(str(stats.wisdom))
 	
 	if stats.maxhp != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer/HPAmount.max_value = stats.maxhp
@@ -96,10 +87,18 @@ func updateStats(stats = {
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer/MPAmount.value = stats.mp
 	if stats.ac != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer/AC.text = str(stats.ac)
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer/AC.set_tooltip(str(stats.ac))
+	if stats.attacks != null:
+		var _attackString = "{damage}d{hits}+{bonusDmg}({ap})/{magicDmg}".format({
+			"damage": str(stats.attacks.attack.dmg[0]) + "-" + str(stats.attacks.attack.dmg[1]),
+			"hits": stats.attacks.hits,
+			"bonusDmg": stats.attacks.bonusDmg,
+			"ap": stats.attacks.attack.armorPen,
+			"magicDmg": str(stats.attacks.attack.magicDmg.dmg[0]) + "-" + str(stats.attacks.attack.magicDmg.dmg[1])
+		})
+		attacks = stats.attacks
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/Attacks.text = str(_attackString)
 	if stats.goldPieces != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer/GoldPieces.text = str(stats.goldPieces)
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer/GoldPiecesText.set_tooltip(str(stats.goldPieces))
 	if stats.weight != null and stats.weightBounds != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = stats.weight
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value = stats.weightBounds.min
@@ -139,7 +138,20 @@ func removeStatusEffect(_statusEffect):
 ########################
 
 func _onMouseEnteredStat(_nodePath, _stat):
-	get_node("Background/GameStatsContainer/GameStatsColumns/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).updateTooltip(tooltipTexts[_stat].title, tooltipTexts[_stat].description)
+	var _tooltipDescription = tooltipTexts[_stat].description
+	if _stat.matchn("attacks"):
+		var _magicElement = ""
+		if attacks.attack.magicDmg.element != null:
+			_magicElement = attacks.attack.magicDmg.element
+		_tooltipDescription = _tooltipDescription.format({
+			"damage": str(attacks.attack.dmg[0]) + "-" + str(attacks.attack.dmg[1]),
+			"hits": attacks.hits,
+			"bonusDmg": attacks.bonusDmg,
+			"ap": attacks.attack.armorPen,
+			"magicDmg": str(attacks.attack.magicDmg.dmg[0]) + "-" + str(attacks.attack.magicDmg.dmg[1]),
+			"magicElement": _magicElement
+		})
+	get_node("Background/GameStatsContainer/GameStatsColumns/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).updateTooltip(tooltipTexts[_stat].title, _tooltipDescription)
 	get_node("Background/GameStatsContainer/GameStatsColumns/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).showTooltip()
 
 func _onMouseExitedStat(_nodePath):

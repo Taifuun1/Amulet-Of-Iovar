@@ -232,6 +232,6 @@ func getCritterByName(_critterName):
 
 func checkAllCrittersIdentification():
 	for _critter in $"/root/World/Critters".get_children():
-		if _critter.name == "Critters":
+		if _critter.name == "Critters" or _critter.id == 0:
 			continue
 		_critter.checkCritterIdentification(crittersData[_critter.critterName])

@@ -268,7 +268,7 @@ func resetLevel():
 		for y in range(grid[x].size()):
 			grid[x][y].tile = -1
 
-func cleanOutPremadeTilemap():
+func cleanOutTilemap():
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):
 			set_cellv(Vector2(x,y), -1)

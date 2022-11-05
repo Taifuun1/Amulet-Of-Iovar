@@ -22,17 +22,20 @@ var charge = {
 
 var sharpenSword = {
 	"name": "Sharpen sword",
-	"distance": 3
+	"distance": 3,
+	"mp": 7
 }
 
 var createShield = {
 	"name": "Create shield",
-	"distance": 4
+	"distance": 4,
+	"mp": 3
 }
 
 var displaceSelf = {
 	"name": "Displace self",
-	"distance": 2
+	"distance": 2,
+	"mp": 13
 }
 
 
@@ -52,7 +55,8 @@ var rockThrow = {
 			}
 		}
 	],
-	"distance": 8
+	"distance": 8,
+	"mp": 9
 }
 
 var crackerThrow = {
@@ -68,7 +72,8 @@ var crackerThrow = {
 			}
 		}
 	],
-	"distance": 6
+	"distance": 6,
+	"mp": 8
 }
 
 
@@ -88,7 +93,8 @@ var fleirpoint = {
 			}
 		}
 	],
-	"distance": 8
+	"distance": 8,
+	"mp": 12
 }
 
 var fleirnado = {
@@ -104,7 +110,8 @@ var fleirnado = {
 			}
 		}
 	],
-	"distance": 5
+	"distance": 5,
+	"mp": 14
 }
 
 var fleirMiasma = {
@@ -122,7 +129,8 @@ var fleirMiasma = {
 	],
 	"distance": 5,
 	"tiles": 5,
-	"duration": 3
+	"duration": 3,
+	"mp": 4
 }
 
 var fleirBreath = {
@@ -138,7 +146,8 @@ var fleirBreath = {
 			}
 		}
 	],
-	"distance": 12
+	"distance": 12,
+	"mp": 18
 }
 
 
@@ -158,7 +167,8 @@ var frostpoint = {
 			}
 		}
 	],
-	"distance": 7
+	"distance": 7,
+	"mp": 7
 }
 
 var frostBite = {
@@ -174,7 +184,8 @@ var frostBite = {
 			}
 		}
 	],
-	"distance": 7
+	"distance": 7,
+	"mp": 9
 }
 
 var frostTouch = {
@@ -190,7 +201,8 @@ var frostTouch = {
 			}
 		}
 	],
-	"distance": 1
+	"distance": 1,
+	"mp": 6
 }
 
 var frostBreath = {
@@ -206,7 +218,8 @@ var frostBreath = {
 			}
 		}
 	],
-	"distance": 10
+	"distance": 10,
+	"mp": 18
 }
 
 
@@ -226,7 +239,8 @@ var thunderpoint = {
 			}
 		}
 	],
-	"distance": 10
+	"distance": 10,
+	"mp": 8
 }
 
 var thundersplit = {
@@ -242,7 +256,8 @@ var thundersplit = {
 			}
 		}
 	],
-	"distance": 8
+	"distance": 8,
+	"mp": 15
 }
 
 var thunderBreath = {
@@ -258,7 +273,8 @@ var thunderBreath = {
 			}
 		}
 	],
-	"distance": 13
+	"distance": 13,
+	"mp": 18
 }
 
 
@@ -278,7 +294,8 @@ var poisonBite = {
 			}
 		}
 	],
-	"distance": 7
+	"distance": 7,
+	"mp": 5
 }
 
 var toxixBreath = {
@@ -294,7 +311,8 @@ var toxixBreath = {
 			}
 		}
 	],
-	"distance": 6
+	"distance": 6,
+	"mp": 18
 }
 
 
@@ -314,7 +332,8 @@ var gleeieerBreath = {
 			}
 		}
 	],
-	"distance": 14
+	"distance": 14,
+	"mp": 18
 }
 
 
@@ -323,12 +342,14 @@ var gleeieerBreath = {
 
 var summonCritter = {
 	"name": "Summon critter",
-	"distance": 3
+	"distance": 3,
+	"mp": 11
 }
 
 var summonCritters = {
 	"name": "Summon critters",
-	"distance": 4
+	"distance": 4,
+	"mp": 25
 }
 
 var dragonBreath = {
@@ -345,6 +366,7 @@ var dragonBreath = {
 		}
 	],
 	"distance": 12,
+	"mp": 18
 }
 
 var elderDragonBreath = {
@@ -361,6 +383,7 @@ var elderDragonBreath = {
 		}
 	],
 	"distance": 16,
+	"mp": 22
 }
 
 var voidBlast = {
@@ -376,5 +399,6 @@ var voidBlast = {
 			}
 		}
 	],
-	"distance": 6
+	"distance": 6,
+	"mp": 34
 }

@@ -12,7 +12,7 @@ var armor = {
 				"ac": 3,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
@@ -28,7 +28,7 @@ var armor = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
@@ -44,7 +44,7 @@ var armor = {
 				"ac": 2,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
@@ -60,7 +60,7 @@ var armor = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
@@ -76,7 +76,7 @@ var armor = {
 				"ac": 2,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Common"
 		},
@@ -92,7 +92,7 @@ var armor = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Common"
 		}
@@ -110,7 +110,7 @@ var armor = {
 				"ac": 4,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
@@ -126,7 +126,7 @@ var armor = {
 				"ac": 4,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
@@ -142,7 +142,7 @@ var armor = {
 				"ac": 5,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
@@ -158,7 +158,7 @@ var armor = {
 				"ac": 2,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
@@ -174,7 +174,7 @@ var armor = {
 				"ac": 2,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
@@ -190,7 +190,7 @@ var armor = {
 				"ac": 2,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
@@ -206,7 +206,7 @@ var armor = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
@@ -222,7 +222,7 @@ var armor = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		}
@@ -240,7 +240,7 @@ var armor = {
 				"ac": 8,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Rare"
 		},
@@ -256,7 +256,7 @@ var armor = {
 				"ac": 4,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Rare"
 		},
@@ -272,7 +272,7 @@ var armor = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Rare"
 		}
@@ -288,7 +288,7 @@ var armor = {
 #				"ac": 4,
 #				"resistance": null
 #			},
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Rare"
 #		}
@@ -306,7 +306,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Frost"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -322,7 +322,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Gleeie'er"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -338,7 +338,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -354,7 +354,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Thunder"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -370,7 +370,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Toxix"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -386,7 +386,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -402,7 +402,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -418,7 +418,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -434,7 +434,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -450,7 +450,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -466,7 +466,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -482,7 +482,7 @@ var armor = {
 				"ac": 7,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -498,7 +498,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -514,7 +514,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -530,7 +530,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -546,7 +546,7 @@ var armor = {
 #				"ac": 7,
 #				"resistance": "Flier"
 #			},
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Artefact"
 #		},
@@ -562,7 +562,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -579,7 +579,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -595,7 +595,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -611,7 +611,7 @@ var armor = {
 				"ac": 7,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -627,7 +627,7 @@ var armor = {
 				"ac": 7,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -643,7 +643,7 @@ var armor = {
 				"ac": 7,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		}

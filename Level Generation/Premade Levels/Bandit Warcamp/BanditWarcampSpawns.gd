@@ -153,7 +153,7 @@ var banditWarcampSpawn1 = [
 			"types": null,
 			"names": [
 				"Wand of sleep",
-				"Bag of disenchantment",
+				"Bag of weight",
 				"Amulet of strangulation"
 			]
 		},

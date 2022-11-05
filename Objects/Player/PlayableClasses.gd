@@ -1,6 +1,7 @@
 
 var archeologist = {
 	critterName = "Archeologist",
+	description = "Archeologist scours temples and dungeons for valuables. Has a chance of getting multiple gems from mined minerals.",
 	race = "Human",
 	justice = "Grilling",
 	hp = 14,
@@ -58,6 +59,7 @@ var archeologist = {
 
 var banker = {
 	critterName = "Banker",
+	description = "Banker exploits the free markets for gold and valuables. Has high starting gold and gets discounts at shops.",
 	race = "Human",
 	justice = "Laissez-faire",
 	hp = 11,
@@ -118,6 +120,7 @@ var banker = {
 
 var freedomFighter = {
 	critterName = "Freedom fighter",
+	description = "Freedom fighter rouses revolutions to overthrow the establishment. .",
 	race = "Human",
 	justice = "Draconian",
 	hp = 18,
@@ -175,6 +178,7 @@ var freedomFighter = {
 
 var herbalogue = {
 	critterName = "Herbalogue",
+	description = "Herbalogue has extensive knowledge of herbs. Gets more calories from eating.",
 	race = "Human",
 	justice = "Grilling",
 	hp = 10,
@@ -232,6 +236,7 @@ var herbalogue = {
 
 var mercenary = {
 	critterName = "Mercenary",
+	description = "Mercenary works for anyone, anywhere, for a price. Has .",
 	race = "Human",
 	justice = "Grilling",
 	hp = 20,
@@ -294,6 +299,7 @@ var mercenary = {
 
 var exterminator = {
 	critterName = "Exterminator",
+	description = "Exterminator has gone mad with power. Gets +2 fleir damage.",
 	race = "Human",
 	justice = "Draconian",
 	hp = 8,
@@ -343,6 +349,7 @@ var exterminator = {
 
 var rogue = {
 	critterName = "Rogue",
+	description = "Rogue uses a cloak and dagger from the shadows. Gets +1 toxix and bonus damage from using daggers.",
 	race = "Human",
 	justice = "Laissez-faire",
 	hp = 12,
@@ -405,6 +412,7 @@ var rogue = {
 
 var savant = {
 	critterName = "Savant",
+	description = "Savant is a 1400 year old wizard. Gets +1 frost, thunder and gleeie'er damage.",
 	race = "Human",
 	justice = "Grilling",
 	hp = 8,

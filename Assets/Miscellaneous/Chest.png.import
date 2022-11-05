@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BagOfDisenchantment.png-c9c21d0b88f5dc57141e4f14c0bdc6c6.stex"
+path="res://.import/Chest.png-15ce77c8dfa83b4279e0339d14565a3e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tools/BagOfDisenchantment.png"
-dest_files=[ "res://.import/BagOfDisenchantment.png-c9c21d0b88f5dc57141e4f14c0bdc6c6.stex" ]
+source_file="res://Assets/Miscellaneous/Chest.png"
+dest_files=[ "res://.import/Chest.png-15ce77c8dfa83b4279e0339d14565a3e.stex" ]
 
 [params]
 

@@ -9,10 +9,9 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
 		},
 		{
 			"itemName": "Amulet of life power",
@@ -23,10 +22,9 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
 		},
 		{
 			"itemName": "Amulet of magic power",
@@ -37,10 +35,54 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
+		},
+		{
+			"itemName": "Amulet of Toxix",
+			"unidentifiedItemName": null,
+			"texture": null,
+			"unIdentifiedTexture": null,
+			"type": "Accessory",
+			"category": "Amulet",
+			"weight": 35,
+			"value": {
+				"binds": "Equipment"
+			},
+			"enchantable": false,
+			"stackable": false,
+			"rarity": "Common"
+		},
+		{
+			"itemName": "Amulet of strangulation",
+			"unidentifiedItemName": null,
+			"texture": null,
+			"unIdentifiedTexture": null,
+			"type": "Accessory",
+			"category": "Amulet",
+			"weight": 35,
+			"value": {
+				"binds": "Equipment"
+			},
+			"enchantable": false,
+			"stackable": false,
+			"rarity": "Common"
+		},
+		{
+			"itemName": "Amulet of sleep",
+			"unidentifiedItemName": null,
+			"texture": null,
+			"unIdentifiedTexture": null,
+			"type": "Accessory",
+			"category": "Amulet",
+			"weight": 35,
+			"value": {
+				"binds": "Equipment"
+			},
+			"enchantable": false,
+			"stackable": false,
+			"rarity": "Common"
 		}
 	],
 	"rare": [
@@ -53,52 +95,9 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
-		},
-		{
-			"itemName": "Amulet of strangulation",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unIdentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Amulet",
-			"weight": 35,
-			"value": null,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
-		},
-		{
-			"itemName": "Amulet of sleep",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unIdentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Amulet",
-			"weight": 35,
-			"value": null,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
-		},
-		{
-			"itemName": "Amulet of Toxix",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unIdentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Amulet",
-			"weight": 35,
-			"value": null,
-			"enchantment": true,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
 		}
 	],
 	"legendary": [
@@ -111,10 +110,9 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
 		},
 		{
 			"itemName": "Cold breeze",
@@ -125,10 +123,9 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
 		}
 	]
 }

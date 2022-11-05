@@ -9,7 +9,6 @@ func createNewLevel():
 	createDungeon()
 	
 	doFinalPathfinding()
-	cleanOutPremadeTilemap()
 	
 	return self
 

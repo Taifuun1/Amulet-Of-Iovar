@@ -38,7 +38,7 @@ var quadrapeds = {
 			"abilities": [
 				{
 					"abilityName": "charge",
-					"abilityType": "spell",
+					"abilityType": "skill",
 					"chance": 8
 				}
 			],
@@ -83,7 +83,7 @@ var quadrapeds = {
 			"abilities": [
 				{
 					"abilityName": "charge",
-					"abilityType": "spell",
+					"abilityType": "skill",
 					"chance": 8
 				}
 			],

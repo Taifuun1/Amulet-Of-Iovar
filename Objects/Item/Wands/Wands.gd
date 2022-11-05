@@ -11,10 +11,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
 		},
 		{
 			"itemName": "Wand of turn lock",
@@ -27,10 +26,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
 		},
 		{
 			"itemName": "Wand of digging",
@@ -43,10 +41,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"rarity": "Common"
 		}
 	],
 	"uncommon": [
@@ -61,10 +58,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Wand of Frost",
@@ -77,10 +73,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Wand of Fleir",
@@ -93,10 +88,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Wand of Thunder",
@@ -109,10 +103,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Wand of sleep",
@@ -125,10 +118,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Wand of backwards magic sphere",
@@ -141,10 +133,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		}
 	],
 	"rare": [
@@ -159,10 +150,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		},
 		{
 			"itemName": "Wand of item polymorph",
@@ -175,10 +165,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		},
 		{
 			"itemName": "Wand of summon critter",
@@ -191,10 +180,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		}
 	],
 	"legendary": [
@@ -209,10 +197,9 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"rarity": "Legendary"
 		}
 	]
 }

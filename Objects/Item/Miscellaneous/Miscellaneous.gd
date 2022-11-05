@@ -8,10 +8,8 @@ var miscellaneous = {
 		"category": null,
 		"weight": 0,
 		"value": null,
-		"enchantment": true,
-		"stackable": false,
-		"rarity": "Common",
-		"identified": false
+		"enchantable": false,
+		"stackable": false
 	},
 	"Amulet of Iovar": {
 		"itemName": "Amulet of Iovar",
@@ -22,10 +20,8 @@ var miscellaneous = {
 		"category": null,
 		"weight": 25,
 		"value": null,
-		"enchantment": true,
-		"stackable": false,
-		"rarity": "Common",
-		"identified": false
+		"enchantable": false,
+		"stackable": false
 	},
 	"corpse": {
 		"itemName": "Corpse",
@@ -35,8 +31,31 @@ var miscellaneous = {
 		"type": "Corpse",
 		"category": null,
 		"value": null,
-		"enchantment": true,
-		"stackable": false,
-		"identified": false
+		"enchantable": false,
+		"stackable": false
+	},
+	"box": {
+		"itemName": "Box",
+		"unidentifiedItemName": "Box",
+		"texture": load("res://Assets/Miscellaneous/Box.png"),
+		"unIdentifiedTexture": load("res://Assets/Miscellaneous/Box.png"),
+		"type": "Tool",
+		"category": "Container",
+		"weight": 75,
+		"value": null,
+		"enchantable": false,
+		"stackable": false
+	},
+	"chest": {
+		"itemName": "Chest",
+		"unidentifiedItemName": "Chest",
+		"texture": load("res://Assets/Miscellaneous/Chest.png"),
+		"unIdentifiedTexture": load("res://Assets/Miscellaneous/Chest.png"),
+		"type": "Tool",
+		"category": "Container",
+		"weight": 250,
+		"value": null,
+		"enchantable": false,
+		"stackable": false
 	}
 }

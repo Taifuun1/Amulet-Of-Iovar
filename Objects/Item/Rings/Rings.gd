@@ -9,10 +9,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Ring of Frost resistance",
@@ -23,10 +22,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Ring of Thunder resistance",
@@ -37,10 +35,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Ring of Gleeie'er resistance",
@@ -51,10 +48,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Ring of Toxix resistance",
@@ -65,10 +61,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Ring of protection",
@@ -79,10 +74,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": 3,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 #		{
 #			"itemName": "Ring of seeing",
@@ -93,7 +87,7 @@ var rings = {
 #			"category": "Ring",
 #			"weight": 10,
 #			"value": null,
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Uncommon",
 #			"identified": false
@@ -107,10 +101,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 #		{
 #			"itemName": "Ring of levitation",
@@ -121,7 +114,7 @@ var rings = {
 #			"category": "Ring",
 #			"weight": 10,
 #			"value": null,
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Uncommon",
 #			"identified": false
@@ -137,10 +130,9 @@ var rings = {
 			"value": {
 				"turnedOn": null
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Ring of regen",
@@ -151,10 +143,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		},
 		{
 			"itemName": "Ring of fumbling",
@@ -165,10 +156,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"rarity": "Uncommon"
 		}
 	],
 	"rare": [
@@ -181,10 +171,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		},
 		{
 			"itemName": "Ring of Legerity",
@@ -195,10 +184,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		},
 		{
 			"itemName": "Ring of Balance",
@@ -209,10 +197,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		},
 		{
 			"itemName": "Ring of Wisdom",
@@ -223,10 +210,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		},
 		{
 			"itemName": "Ring of Belief",
@@ -237,10 +223,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		},
 		{
 			"itemName": "Ring of Visage",
@@ -251,10 +236,9 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"rarity": "Rare"
 		}
 	]
 }

@@ -202,7 +202,6 @@ func readItem(_id):
 						):
 							_aliveCritters.append(_critterName)
 				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters, _readItem)
-				$"/root/World/UI/UITheme/ListMenu".show()
 				_additionalChoices = true
 			"scroll of teleport":
 				if dealWithTeleport(0, _readItem.alignment):
@@ -360,11 +359,16 @@ func quaffItem(_id):
 func consumeItem(_id):
 	var _eatenItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if _eatenItem.type.matchn("comestible"):
-		calories += _eatenItem.value
+		if calories > 5000:
+			calories += _eatenItem.value / 3
+		else:
+			calories += _eatenItem.value
 		checkAllIdentification(true)
 		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 		Globals.gameConsole.addLog("You eat the {comestible}.".format({ "comestible": _eatenItem.itemName }))
+		if calories > 5000:
+			Globals.gameConsole.addLog("You feel full.")
 	$"/root/World".closeMenu()
 
 func zapItem(_direction):
@@ -524,7 +528,6 @@ func zapItem(_direction):
 					for _type in $"/root/World/Items/Items".items:
 						_itemTypes.append(_type)
 					$"/root/World/UI/UITheme/ListMenu".showListMenuList("Wish for what item type?", _itemTypes, _zappedItem, true)
-					$"/root/World/UI/UITheme/ListMenu".show()
 					_additionalChoices = true
 				"wand of digging":
 					var _level = $"/root/World".level
@@ -632,10 +635,55 @@ func useItem(_id):
 				$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 				get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 				Globals.gameConsole.addLog("You pull a {itemName} out of the bottle.".format({ "itemName": _newItem.itemName }))
+			"marker":
+				var _scrolls = []
+				var _letters = {}
+				var _ink = 0
+				var _blankPaper = null
+				for _item in $"/root/World/Critters/0".inventory.inventory:
+					var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
+					if _itemNode.identifiedItemName.matchn("blank scroll"):
+						_blankPaper = _itemNode
+				if _blankPaper == null:
+					Globals.gameConsole.addLog("You dont have a blank scroll.")
+					continue
+				for _rarity in $"/root/World/Items/Items".items.scroll:
+					for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
+						if (
+							GlobalItemInfo.globalItemInfo.has(_scroll.itemName) and
+							GlobalItemInfo.globalItemInfo[_scroll.itemName].identified
+						):
+							_scrolls.append(_scroll.itemName)
+							_letters[_scroll.itemName] = _scroll.value.letters
+				for _item in $"/root/World/Critters/0".inventory.inventory:
+					var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
+					if _itemNode.identifiedItemName.matchn("ink bottle"):
+						_ink += _itemNode.value.ink
+				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Write what? ({ink} letters of ink)".format({ "ink": _ink }), _scrolls, _usedItem, false, { "ink": _ink, "letters": _letters, "blankPaper": _blankPaper })
+				_additionalChoices = true
+			"magic marker":
+				var _scrolls = []
+				var _blankPaper = null
+				for _item in $"/root/World/Critters/0".inventory.inventory:
+					var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
+					if _itemNode.identifiedItemName.matchn("blank scroll"):
+						_blankPaper = _itemNode
+				if _blankPaper == null:
+					Globals.gameConsole.addLog("You dont have a blank paper.")
+					continue
+				for _rarity in $"/root/World/Items/Items".items.scroll:
+					for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
+						if (
+							GlobalItemInfo.globalItemInfo.has(_scroll.itemName) and
+							GlobalItemInfo.globalItemInfo[_scroll.itemName].identified
+						):
+							_scrolls.append(_scroll.itemName)
+				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Write what?", _scrolls, _usedItem, false, { "blankPaper": _blankPaper })
+				_additionalChoices = true
 			_:
 				Globals.gameConsole.addLog("Thats not a tool...")
 		checkAllIdentification(true, true)
-		$"/root/World".closeMenu()
+		$"/root/World".closeMenu(_additionalChoices)
 
 func dipItem(_id):
 	var _dippedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -751,3 +799,34 @@ func dealWithWandOfWishing(_name, _alignment):
 		$"/root/World/Items/Items".createItem(_name, $"/root/World".level.getCritterTile(0))
 		Globals.gameConsole.addLog("An item appears at your feet... It doesn't seem to be what you wished for.")
 	$"/root/World".closeMenu()
+
+func dealWithMarker(_scroll, _ink):
+	if _ink.has("ink"):
+		if _ink.ink < _ink.letters:
+			Globals.gameConsole.addLog("You dont have enough ink to write that scroll.")
+			return false
+		elif _scroll.matchn("blank scroll"):
+			Globals.gameConsole.addLog("You write a blank scroll... on the blank scroll.")
+			$"/root/World/Items/Items".createItem(_scroll, null, 1, true)
+		else:
+			for _item in $"/root/World/Critters/0".inventory.inventory:
+				var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
+				if _itemNode.identifiedItemName.matchn("ink bottle"):
+					if _itemNode.value.ink != 0 and _ink.letters != 0:
+						if _ink.letters - _itemNode.value.ink <= 0:
+							_itemNode.value.ink -= _ink.letters
+							_ink.letters = 0
+						elif _itemNode.value.ink - _ink.letters <= 0:
+							_ink.letters -= _itemNode.value.ink
+							_itemNode.value.ink = 0
+						else:
+							_ink.letters -= _itemNode.value.ink
+							_itemNode.value.ink = 0
+			$"/root/World/Items/Items".createItem(_scroll, null, 1, true)
+			Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
+	else:
+		$"/root/World/Items/Items".createItem(_scroll, null, 1, true)
+		Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
+	$"/root/World/Items/Items".removeItem(_ink.blankPaper)
+	$"/root/World".closeMenu()
+	return true

@@ -12,7 +12,7 @@ var cloak = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Common"
 		}
@@ -30,7 +30,7 @@ var cloak = {
 				"ac": 2,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		},
@@ -46,7 +46,7 @@ var cloak = {
 				"ac": 1,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Uncommon"
 		}
@@ -64,7 +64,7 @@ var cloak = {
 #				"ac": 4,
 #				"resistance": null
 #			},
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Rare"
 #		}
@@ -82,7 +82,7 @@ var cloak = {
 				"ac": 7,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -98,7 +98,7 @@ var cloak = {
 #				"ac": 7,
 #				"resistance": null
 #			},
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Legendary"
 #		},
@@ -114,7 +114,7 @@ var cloak = {
 				"ac": 7,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		},
@@ -130,7 +130,7 @@ var cloak = {
 				"ac": 7,
 				"resistance": null
 			},
-			"enchantment": true,
+			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
 		}

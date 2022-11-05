@@ -64,20 +64,24 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 	var newItem = item.instance()
 	if typeof(_item) == TYPE_STRING:
 		if _item.matchn("goldPieces"):
-			newItem.createItem(miscellaneousItems.goldPieces, _extraData, _amount)
+			newItem.createItem(miscellaneousItems["goldPieces"], _extraData, _amount)
 		elif _item.matchn("amulet of iovar"):
 			newItem.createItem(miscellaneousItems["Amulet of Iovar"], _extraData, 1)
+		elif _item.matchn("box"):
+			newItem.createItem(miscellaneousItems["box"], _extraData, 1)
+		elif _item.matchn("chest"):
+			newItem.createItem(miscellaneousItems["chest"], _extraData, 1)
 		else:
 			newItem.createItem(getItemByName(_item), _extraData)
 	else:
 		newItem.createItem(_item, _extraData)
 	
+	$"/root/World/Items".add_child(newItem, true)
+	
 	if _toInventory:
-		$"/root/World/Critters/0/Inventory".addToInventory(newItem)
+		$"/root/World/Critters/0".addToInventory([newItem.id])
 	else:
 		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
-	
-	$"/root/World/Items".add_child(newItem, true)
 
 func generateItemsForLevel(_level):
 	var _itemGeneration = itemGeneration.itemGeneration[_level.dungeonType]
@@ -109,7 +113,7 @@ func getItemByName(_itemName):
 	for _types in items.values():
 		for _rarity in _types.values():
 			for _item in _rarity:
-				if _item.itemName.matchn(_itemName):
+				if _item.itemName.matchn(_itemName) and _item.itemName.length() == _itemName.length():
 					return _item
 
 func getRandomItem(_randomByRarity = true):

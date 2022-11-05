@@ -9,7 +9,7 @@ var tools = {
 			"category": "Container",
 			"weight": 25,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -23,7 +23,7 @@ var tools = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -39,7 +39,7 @@ var tools = {
 			"value": {
 				"worn": null
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -57,7 +57,7 @@ var tools = {
 				"charges": [150, 100],
 				"value": 3
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -71,7 +71,7 @@ var tools = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -85,7 +85,7 @@ var tools = {
 			"category": null,
 			"weight": 50,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -99,7 +99,7 @@ var tools = {
 #			"category": null,
 #			"weight": 5,
 #			"value": null,
-#			"enchantment": true,
+#			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Common"
 #		}
@@ -118,7 +118,7 @@ var tools = {
 				"charges": [500, 750],
 				"value": 5
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Common",
 			"identified": false
@@ -132,7 +132,7 @@ var tools = {
 			"category": null,
 			"weight": 50,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -146,7 +146,7 @@ var tools = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -159,8 +159,10 @@ var tools = {
 			"type": "Tool",
 			"category": null,
 			"weight": 5,
-			"value": null,
-			"enchantment": true,
+			"value": {
+				"ink": [0, 31]
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -174,7 +176,7 @@ var tools = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -188,7 +190,7 @@ var tools = {
 			"category": null,
 			"weight": 25,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Uncommon",
 			"identified": false
@@ -202,23 +204,25 @@ var tools = {
 			"unIdentifiedTexture": load("res://Assets/Tools/BagLeather.png"),
 			"type": "Tool",
 			"category": "Container",
-			"weight": 25,
+			"weight": 10,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
 			"identified": false
 		},
 		{
-			"itemName": "Bag of disenchantment",
+			"itemName": "Bag of weight",
 			"unidentifiedItemName": "Bag",
-			"texture": load("res://Assets/Tools/BagOfDisenchantment.png"),
+			"texture": load("res://Assets/Tools/BagOfWeight.png"),
 			"unIdentifiedTexture": load("res://Assets/Tools/BagLeather.png"),
 			"type": "Tool",
 			"category": "Container",
-			"weight": 25,
-			"value": null,
-			"enchantment": true,
+			"weight": 10,
+			"value": {
+				"binds": "Inventory"
+			},
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
 			"identified": false
@@ -236,7 +240,7 @@ var tools = {
 				"charges": -1,
 				"value": 7
 			},
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
 			"identified": false
@@ -250,7 +254,7 @@ var tools = {
 			"category": null,
 			"weight": 25,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
 			"identified": false
@@ -264,7 +268,7 @@ var tools = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
 			"identified": false
@@ -278,7 +282,7 @@ var tools = {
 			"category": null,
 			"weight": 5,
 			"value": null,
-			"enchantment": true,
+			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
 			"identified": false
