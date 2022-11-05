@@ -10,7 +10,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -24,7 +24,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -38,7 +38,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -52,7 +52,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		}
@@ -68,7 +68,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -82,7 +82,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -96,7 +96,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -137,7 +137,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -151,7 +151,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		}
@@ -167,7 +167,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Rare",
 			"identified": false
 		},
@@ -181,7 +181,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Rare",
 			"identified": false
 		},
@@ -195,7 +195,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Rare",
 			"identified": false
 		},
@@ -209,7 +209,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Rare",
 			"identified": false
 		},

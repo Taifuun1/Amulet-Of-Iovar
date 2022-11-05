@@ -9,7 +9,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.027451, 0.0745098, 0.184314, 1 )
-border_blend = true
 shadow_color = Color( 0, 0, 0, 0 )
 anti_aliasing = false
 

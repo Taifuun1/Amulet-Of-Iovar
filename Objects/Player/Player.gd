@@ -86,6 +86,15 @@ func create(_className):
 	race = _playerClass.race
 	justice = _playerClass.justice
 	
+	level = 1
+	hp = _playerClass.hp
+	mp = _playerClass.mp
+	basehp = _playerClass.hp
+	basemp = _playerClass.mp
+	maxhp = _playerClass.hp
+	maxmp = _playerClass.mp
+	shields = 0
+	
 	stats.strength = _playerClass.strength
 	stats.legerity = _playerClass.legerity
 	stats.balance = _playerClass.balance
@@ -104,27 +113,16 @@ func create(_className):
 	
 	skills = _playerClass.skills
 	
-	level = 1
-	hp = _playerClass.hp
-	mp = _playerClass.mp
-	basehp = _playerClass.hp
-	basemp = _playerClass.mp
-	maxhp = _playerClass.hp
-	maxmp = _playerClass.mp
-	shields = 0
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 	
-	abilities = []
-	resistances = []
+	resistances = _playerClass.resistances
 	
 	calories = 3000
 	previousCalories = calories
 	
 	goldPieces = _playerClass.goldPieces
-	
-	statusEffects.sleep = 5
 	
 	for _item in _playerClass.items.keys():
 		$"/root/World/Items/Items".createItem(_item, null, _playerClass.items[_item], true)

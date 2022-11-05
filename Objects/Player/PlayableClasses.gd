@@ -20,6 +20,7 @@ var archeologist = {
 	beliefIncrease = 0.5,
 	visageIncrease = 1,
 	wisdomIncrease = 1.5,
+	resistances = [  ],
 	items = {
 		"Rigid flail": 1,
 		"Leather armor": 1,
@@ -78,6 +79,7 @@ var banker = {
 	beliefIncrease = 1.2,
 	visageIncrease = 1.2,
 	wisdomIncrease = 1,
+	resistances = [  ],
 	items = {
 		"Orc dagger": 1,
 #		"Orc cloak": 1,
@@ -139,6 +141,7 @@ var freedomFighter = {
 	beliefIncrease = 1.5,
 	visageIncrease = 2.5,
 	wisdomIncrease = 0,
+	resistances = [  ],
 	items = {
 		"Chipped sword": 1,
 		"Chipped buckler": 1,
@@ -197,6 +200,7 @@ var herbalogue = {
 	beliefIncrease = 1,
 	visageIncrease = 1,
 	wisdomIncrease = 2,
+	resistances = [ "toxix" ],
 	items = {
 		"Chipped sword": 1,
 		"Leather mail": 1,
@@ -255,6 +259,7 @@ var mercenary = {
 	beliefIncrease = -0.2,
 	visageIncrease = 1,
 	wisdomIncrease = 1,
+	resistances = [  ],
 	items = {
 		"Mithril two-hander": 1,
 #		"Adorned helmet": 1,
@@ -318,6 +323,7 @@ var exterminator = {
 	beliefIncrease = 1.4,
 	visageIncrease = 1.4,
 	wisdomIncrease = 1.4,
+	resistances = [ "fleir" ],
 	items = {
 		"Chipped sword": 1,
 	},
@@ -368,6 +374,7 @@ var rogue = {
 	beliefIncrease = 0.8,
 	visageIncrease = 1.5,
 	wisdomIncrease = 1,
+	resistances = [ "gleeie'er" ],
 	items = {
 		"Cut dagger": 1,
 		"Leather cap": 1,
@@ -431,6 +438,7 @@ var savant = {
 	beliefIncrease = 1.5,
 	visageIncrease = 0.5,
 	wisdomIncrease = 3,
+	resistances = [  ],
 	items = {
 		"Worn mace": 1,
 #		"Roman robe": 1,

@@ -226,6 +226,12 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 	if _item.binds != null and _item.binds.type.matchn("equipment") and _item.binds.state.matchn("bound"):
 		Globals.gameConsole.addLog("The {item} is bound to you.".format({ "item": _item.itemName }))
 		return
+	if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null and hands["righthand"] == _id and hands["lefthand"] == _id:
+		dualWielding = false
+		hands["lefthand"] = null
+		hands["righthand"] = null
+		$"EquipmentBackground/LeftHand/Sprite".texture = load(equipmentUITemplatePaths["lefthand"])
+		$"EquipmentBackground/RightHand/Sprite".texture = load(equipmentUITemplatePaths["righthand"])
 	for _hand in hands.keys():
 		if hands[_hand] == _id:
 			hands[_hand] = null

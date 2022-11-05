@@ -23,6 +23,7 @@ var notIdentified = {
 }
 
 var container = null
+var containerWeight = null
 
 var binds = null
 
@@ -48,10 +49,10 @@ func createItem(_item, _extraData = {}, _amount = 1):
 	type = _item.type
 	category = _item.category
 	
+	weight = _item.weight
+	
 	if category != null and category.matchn("container"):
 		addContainer()
-	
-	weight = _item.weight
 	
 	value = _item.value
 	amount = _amount
@@ -231,3 +232,4 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 
 func addContainer():
 	container = []
+	containerWeight = weight

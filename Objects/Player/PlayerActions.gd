@@ -225,8 +225,10 @@ func readItem(_id):
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		checkAllIdentification(true)
 		if !_readItem.identifiedItemName.to_lower().matchn("blank scroll"):
-			$"/root/World/Critters/0/Inventory".inventory.erase(_id)
-			get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+			if _readItem.amount > 0:
+				_readItem.amount -= 1
+			else:
+				$"/root/World/Items/Items".removeItem(_id)
 	$"/root/World".closeMenu(_additionalChoices)
 
 func quaffItem(_id):
@@ -352,8 +354,10 @@ func quaffItem(_id):
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
 		checkAllIdentification(true)
-		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
-		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+		if _quaffedItem.amount > 0:
+			_quaffedItem.amount -= 1
+		else:
+			$"/root/World/Items/Items".removeItem(_id)
 	$"/root/World".closeMenu(_additionalChoices)
 
 func consumeItem(_id):
@@ -364,9 +368,11 @@ func consumeItem(_id):
 		else:
 			calories += _eatenItem.value
 		checkAllIdentification(true)
-		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
-		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
-		Globals.gameConsole.addLog("You eat the {comestible}.".format({ "comestible": _eatenItem.itemName }))
+		if _eatenItem.amount > 0:
+			_eatenItem.amount -= 1
+		else:
+			$"/root/World/Items/Items".removeItem(_id)
+		Globals.gameConsole.addLog("You eat {comestible}.".format({ "comestible": _eatenItem.itemName }))
 		if calories > 5000:
 			Globals.gameConsole.addLog("You feel full.")
 	$"/root/World".closeMenu()
@@ -630,10 +636,14 @@ func useItem(_id):
 				else:
 					Globals.gameConsole.addLog("You already have a lightsource on.")
 			"message in a bottle":
+				var _messageInABottle = get_node("/root/World/Items/{id}".format({ "id": _id }))
 				var _newItem = $"/root/World/Items/Items".getRandomItemByItemTypes(["scroll"], true)
 				$"/root/World/Items/Items".createItem(_newItem, null, 1, true)
-				$"/root/World/Critters/0/Inventory".inventory.erase(_id)
-				get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+				if _messageInABottle.amount > 1:
+					_messageInABottle.amount -= 1
+				else:
+					$"/root/World/Critters/0/Inventory".inventory.erase(_id)
+					get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 				Globals.gameConsole.addLog("You pull a {itemName} out of the bottle.".format({ "itemName": _newItem.itemName }))
 			"marker":
 				var _scrolls = []
@@ -827,6 +837,9 @@ func dealWithMarker(_scroll, _ink):
 	else:
 		$"/root/World/Items/Items".createItem(_scroll, null, 1, true)
 		Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
-	$"/root/World/Items/Items".removeItem(_ink.blankPaper)
+	if get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount > 0:
+		get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount -= 1
+	else:
+		$"/root/World/Items/Items".removeItem(_ink.blankPaper)
 	$"/root/World".closeMenu()
 	return true

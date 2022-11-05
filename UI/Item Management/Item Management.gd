@@ -77,8 +77,8 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 	
 	var clickedItem = get_node("ItemManagementListScrollContainer/ItemManagementList/{id}".format({ "id": _id }))
 	var isRemoved = false
-	for _item in range(selectedItems.size()):
-		if selectedItems[_item] == clickedItem.id:
+	for _item in range(selectedItems.duplicate().size()):
+		if selectedItems[_item] == clickedItem.item.id:
 			selectedItems.remove(_item)
 			isRemoved = true
 			clickedItem.get_node("Checked").pressed = false

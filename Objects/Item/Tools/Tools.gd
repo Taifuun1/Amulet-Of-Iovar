@@ -24,7 +24,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -40,7 +40,7 @@ var tools = {
 				"worn": null
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -72,7 +72,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -147,7 +147,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -177,7 +177,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -191,7 +191,7 @@ var tools = {
 			"weight": 25,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		}
@@ -218,7 +218,7 @@ var tools = {
 			"unIdentifiedTexture": load("res://Assets/Tools/BagLeather.png"),
 			"type": "Tool",
 			"category": "Container",
-			"weight": 10,
+			"weight": 150,
 			"value": {
 				"binds": "Inventory"
 			},
@@ -255,7 +255,7 @@ var tools = {
 			"weight": 25,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Rare",
 			"identified": false
 		},
@@ -269,7 +269,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Rare",
 			"identified": false
 		},
@@ -283,7 +283,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Rare",
 			"identified": false
 		}

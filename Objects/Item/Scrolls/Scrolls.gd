@@ -12,7 +12,7 @@ var scrolls = {
 				"letters": 18
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -28,7 +28,7 @@ var scrolls = {
 				"letters": 0
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -44,7 +44,7 @@ var scrolls = {
 				"letters": 6
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -60,7 +60,7 @@ var scrolls = {
 				"letters": 4
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		},
@@ -76,7 +76,7 @@ var scrolls = {
 				"letters": 5
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Common",
 			"identified": false
 		}
@@ -94,7 +94,7 @@ var scrolls = {
 				"letters": 18
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -110,7 +110,7 @@ var scrolls = {
 				"letters": 13
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -126,7 +126,7 @@ var scrolls = {
 				"letters": 11
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -142,7 +142,7 @@ var scrolls = {
 				"letters": 10
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -158,7 +158,7 @@ var scrolls = {
 				"letters": 8
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -174,7 +174,7 @@ var scrolls = {
 				"letters": 8
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		},
@@ -190,7 +190,7 @@ var scrolls = {
 				"letters": 6
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Uncommon",
 			"identified": false
 		}
@@ -236,7 +236,7 @@ var scrolls = {
 				"letters": 34
 			},
 			"enchantable": false,
-			"stackable": false,
+			"stackable": true,
 			"rarity": "Rare",
 			"identified": false
 		}

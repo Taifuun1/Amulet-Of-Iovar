@@ -5,6 +5,7 @@ onready var inventoryItem = preload("res://UI/Inventory/Inventory Item.tscn")
 var inventory = []
 var currentWeight = 0
 
+
 func create():
 	name = "Inventory"
 	$InventoryContainer.hide()
@@ -12,8 +13,9 @@ func create():
 	layer = 10
 
 func addToInventory(_item):
-	inventory.append(_item.id)
-	currentWeight += _item.weight
+	if !checkIfStackableItemInInventory(_item):
+		inventory.append(_item.id)
+	updateWeight()
 
 #	for item in inventory:
 #		if item.itemName == _item.itemName:
@@ -36,7 +38,7 @@ func addToInventory(_item):
 
 func removeFromInventory(_item):
 	inventory.erase(_item.id)
-	currentWeight -= _item.weight
+	updateWeight()
 
 #	for item in inventory:
 #		if item.itemName == _item.itemName:
@@ -73,12 +75,31 @@ func getItemsOfType(_types, _category = null):
 	if _category:
 		for _itemId in _items.duplicate(true):
 			if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn(_category):
-				print("erase")
 				_items.erase(_itemId)
 	return _items
 
 func checkIfItemInInventoryByName(_itemName):
 	for _itemId in inventory:
 		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn(_itemName):
+			return true
+	return false
+
+func updateWeight():
+	currentWeight = 0
+	for _itemId in inventory:
+		var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+		if _item.containerWeight != null:
+			currentWeight += _item.containerWeight
+		else:
+			currentWeight += _item.weight
+	$"..".calculateWeightStats()
+	$"..".updatePlayerStats()
+
+func checkIfStackableItemInInventory(_item):
+	for _itemId in inventory:
+		var _inventoryItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+		if _inventoryItem.identifiedItemName.matchn(_item.identifiedItemName) and _inventoryItem.stackable and _inventoryItem.alignment.matchn(_item.alignment):
+			_inventoryItem.amount += _item.amount
+			updateWeight()
 			return true
 	return false

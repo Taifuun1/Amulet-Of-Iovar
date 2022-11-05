@@ -9,7 +9,7 @@ var miscellaneous = {
 		"weight": 0,
 		"value": null,
 		"enchantable": false,
-		"stackable": false
+		"stackable": true
 	},
 	"Amulet of Iovar": {
 		"itemName": "Amulet of Iovar",
