@@ -453,6 +453,34 @@ clip_text = true
 
 [node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer" instance=ExtResource( 8 )]
 
+[node name="MagicAttacksContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
+margin_top = 120.0
+margin_right = 377.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 377, 0 )
+mouse_filter = 2
+custom_constants/separation = 4
+
+[node name="MagicAttacksText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer"]
+margin_right = 186.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 186, 0 )
+mouse_filter = 1
+text = "Magic Attacks"
+clip_text = true
+
+[node name="MagicAttacks" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer" instance=ExtResource( 8 )]
+
 [node name="HitsContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
 visible = false
 margin_top = 120.0
@@ -477,9 +505,9 @@ align = 2
 clip_text = true
 
 [node name="GoldPiecesContainer" type="HBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 120.0
+margin_top = 144.0
 margin_right = 377.0
-margin_bottom = 140.0
+margin_bottom = 164.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="GoldPiecesText" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer"]
@@ -501,9 +529,9 @@ clip_text = true
 [node name="Tooltip" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" instance=ExtResource( 8 )]
 
 [node name="WeightContainer" type="VBoxContainer" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer"]
-margin_top = 144.0
+margin_top = 168.0
 margin_right = 377.0
-margin_bottom = 188.0
+margin_bottom = 212.0
 
 [node name="WeightLabel" type="Label" parent="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer"]
 margin_right = 377.0
@@ -587,6 +615,10 @@ columns = 3
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/AttacksText" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/AttacksContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/Attacks" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/AttacksContainer", "attacks" ]]
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/Attacks" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/AttacksContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer/MagicAttacksText" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MagicAttacksContainer", "magicAttacksText" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer/MagicAttacksText" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MagicAttacksContainer" ]]
+[connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer/MagicAttacks" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MagicAttacksContainer", "magicAttacks" ]]
+[connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer/MagicAttacks" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MagicAttacksContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/GoldPiecesContainer", "goldPieces" ]]
 [connection signal="mouse_exited" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/GoldPiecesContainer" ]]
 [connection signal="mouse_entered" from="Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/WeightContainer", "weight" ]]

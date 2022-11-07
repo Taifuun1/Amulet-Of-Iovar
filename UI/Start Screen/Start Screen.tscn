@@ -325,6 +325,7 @@ rect_min_size = Vector2( 260, 100 )
 text = "Back"
 
 [node name="CharacterCreationContainer" type="VBoxContainer" parent="."]
+visible = false
 margin_right = 1920.0
 margin_bottom = 1004.0
 mouse_filter = 2

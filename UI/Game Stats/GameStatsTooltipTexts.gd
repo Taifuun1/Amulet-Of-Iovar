@@ -89,6 +89,21 @@ Magic damage: {magicDmg} {magicElement}
 """
 }
 
+var magicAttacksText = {
+	"title": "Magic Attacks",
+	"description": "Your magic attacks are determined by your stats and equipped runes."
+}
+
+var magicAttacks = {
+	"title": "Magic attack calculations",
+	"description": """Damage: {damage}
+Hits: {hits}
+Bonus Dmg: {bonusDmg}
+Armor Pen.: {ap}
+Magic damage: {magicDmg} {magicElement}
+"""
+}
+
 var goldPieces = {
 	"title": "Gold pieces",
 	"description": "Gold pieces are used for buying items in shops."

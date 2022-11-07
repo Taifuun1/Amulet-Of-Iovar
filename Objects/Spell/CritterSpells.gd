@@ -40,6 +40,61 @@ var displaceSelf = {
 
 
 
+### On attack abilities
+
+var selfdestruct = {
+	"name": "Selfdestruct",
+	"attacks": [
+		{
+			"dmg": [8,12],
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [0,0],
+				"element": null
+			}
+		}
+	],
+	"distance": 0,
+	"mp": 4
+}
+
+var frostSelfdestruct = {
+	"name": "Frost selfdestruct",
+	"attacks": [
+		{
+			"dmg": [2,6],
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [8,12],
+				"element": null
+			}
+		}
+	],
+	"distance": 0,
+	"mp": 5
+}
+
+var thunderSelfdestruct = {
+	"name": "Thunder selfdestruct",
+	"attacks": [
+		{
+			"dmg": [3,3],
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [13,17],
+				"element": null
+			}
+		}
+	],
+	"distance": 0,
+	"mp": 7
+}
+
+
+
 ### Throwing abilities
 
 var rockThrow = {

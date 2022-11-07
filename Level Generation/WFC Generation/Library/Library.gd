@@ -107,7 +107,7 @@ func generateBossRoom():
 	return _randomTile
 
 func placeSpiderWebs():
-	for _i in range(randi() % 501 + 75):
+	for _i in range(randi() % 301 + 0):
 		var _tile = Vector2(randi() % int(Globals.gridSize.x), randi() % int(Globals.gridSize.y))
 		if Globals.isTileFree(_tile, grid) and grid[_tile.x][_tile.y].tile != Globals.tiles.DOOR_CLOSED:
 			grid[_tile.x][_tile.y].interactable = Globals.interactables.SPIDER_WEB

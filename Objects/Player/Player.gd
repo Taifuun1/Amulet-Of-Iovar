@@ -573,6 +573,11 @@ func updatePlayerStats():
 		},
 		currentHit = currentHit,
 		hits = hits,
+		magicAttacks = {
+			"attack": $"/root/World/UI/UITheme/Runes".spellDamage[0],
+			"hits": $"/root/World/UI/UITheme/Runes".spellDamage.size(),
+			"bonusDmg": _totalBonusDamage
+		},
 		dungeonLevel = Globals.currentDungeonLevelName,
 		weight = $Inventory.currentWeight,
 		weightBounds = carryWeightBounds,

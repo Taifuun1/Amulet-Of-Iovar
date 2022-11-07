@@ -12,7 +12,7 @@ var runes = {
 	"heario": null
 }
 
-var spellDamage = {
+var spellDamage = [{
 	"dmg": [0,0],
 	"bonusDmg": {},
 	"armorPen": 0,
@@ -20,7 +20,7 @@ var spellDamage = {
 		"dmg": [0,0],
 		"element": null
 	}
-}
+}]
 
 var manaUsage = 0
 
@@ -324,7 +324,7 @@ func calculateMagicDamage():
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower() + _magicDamageIncrease.dmg].dmgMultiplier), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg)],
+					"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg)],
 					"element": runes.eario.value
 				}
 			})
@@ -332,6 +332,7 @@ func calculateMagicDamage():
 		for _rune in runes:
 			manaUsage += runeData.runeData[_rune][runes[_rune].value.to_lower()].mp
 	spellDamage = _magicAttacks
+	$"/root/World/Critters/0".updatePlayerStats()
 
 func calculateMagicDamageIncrease(_type):
 	var _stats = $"/root/World/Critters/0".stats

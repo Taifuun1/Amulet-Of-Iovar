@@ -5,6 +5,7 @@ var tooltipTexts = load("res://UI/Game Stats/GameStatsTooltipTexts.gd").new()
 onready var statusEffectItem = preload("res://UI/Game Stats/Status Effect Item.tscn")
 
 var attacks
+var magicAttacks
 var weight
 
 #func _ready():
@@ -40,6 +41,7 @@ func updateStats(stats = {
 	attacks = null,
 	currentHit = null,
 	hits = null,
+	magicAttacks = null,
 	dungeonLevel = null,
 	weight = null,
 	weightBounds = null,
@@ -98,6 +100,16 @@ func updateStats(stats = {
 		})
 		attacks = stats.attacks
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/Attacks.text = str(_attackString)
+	if stats.magicAttacks != null:
+		var _attackString = "{damage}d{hits}+{bonusDmg}({ap})/{magicDmg}".format({
+			"damage": str(stats.magicAttacks.attack.dmg[0]) + "-" + str(stats.magicAttacks.attack.dmg[1]),
+			"hits": stats.magicAttacks.hits,
+			"bonusDmg": stats.magicAttacks.bonusDmg,
+			"ap": stats.magicAttacks.attack.armorPen,
+			"magicDmg": str(stats.magicAttacks.attack.magicDmg.dmg[0]) + "-" + str(stats.magicAttacks.attack.magicDmg.dmg[1])
+		})
+		magicAttacks = stats.magicAttacks
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer/MagicAttacks.text = str(_attackString)
 	if stats.goldPieces != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer/GoldPieces.text = str(stats.goldPieces)
 	if stats.weight != null and stats.weightBounds != null:
@@ -151,6 +163,18 @@ func _onMouseEnteredStat(_nodePath, _stat):
 			"bonusDmg": attacks.bonusDmg,
 			"ap": attacks.attack.armorPen,
 			"magicDmg": str(attacks.attack.magicDmg.dmg[0]) + "-" + str(attacks.attack.magicDmg.dmg[1]),
+			"magicElement": _magicElement
+		})
+	elif _stat.matchn("magicAttacks"):
+		var _magicElement = ""
+		if magicAttacks.attack.magicDmg.element != null:
+			_magicElement = magicAttacks.attack.magicDmg.element
+		_tooltipDescription = _tooltipDescription.format({
+			"damage": str(magicAttacks.attack.dmg[0]) + "-" + str(magicAttacks.attack.dmg[1]),
+			"hits": magicAttacks.hits,
+			"bonusDmg": magicAttacks.bonusDmg,
+			"ap": magicAttacks.attack.armorPen,
+			"magicDmg": str(magicAttacks.attack.magicDmg.dmg[0]) + "-" + str(magicAttacks.attack.magicDmg.dmg[1]),
 			"magicElement": _magicElement
 		})
 	elif _stat.matchn("weight"):

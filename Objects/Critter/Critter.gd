@@ -299,13 +299,23 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				abilityHits.size() != 0 and
 				abilityHits[currentCritterAbilityHit] == 1 and
 				_pickedAbility != null and
+				_pickedAbility.abilityType.matchn("onAttack") and
+				mp - _pickedAbility.data.mp >= 0
+			):
+				Globals.gameConsole.addLog("{critterName} {spell}ucts!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
+				mp -= _pickedAbility.data.mp
+				despawn(_moveCritterTo, false)
+			elif (
+				abilityHits.size() != 0 and
+				abilityHits[currentCritterAbilityHit] == 1 and
+				_pickedAbility != null and
 				_pickedAbility.abilityType.matchn("meleeSpell") and
 				mp - _pickedAbility.data.mp >= 0
 			):
 				Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
-				if !_pickedAbility.abilityType.matchn("skill"):
-					mp -= _pickedAbility.data.mp
+				mp -= _pickedAbility.data.mp
 			elif hits[currentHit] == 1:
 				if $"/root/World/Critters/0".checkIfStatusEffectIsInEffect("displacement") and randi() % 4 == 0:
 					Globals.gameConsole.addLog("{critterName} hits your displaced image!".format({ "critterName": critterName }))
