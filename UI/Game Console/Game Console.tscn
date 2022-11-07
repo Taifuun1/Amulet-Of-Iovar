@@ -32,12 +32,12 @@ anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 4.0
 margin_right = -2.0
-margin_bottom = -4.0
+margin_bottom = -5.0
 mouse_filter = 2
 
 [node name="GameConsoleScrollContainer" type="ScrollContainer" parent="Background/GameConsoleContainer"]
 margin_right = 790.0
-margin_bottom = 304.0
+margin_bottom = 303.0
 mouse_filter = 1
 follow_focus = true
 scroll_horizontal_enabled = false

@@ -7,6 +7,10 @@ func removeCritterFromPlay(_critterName):
 	globalCritterInfo[_critterName].population -= 1
 	globalCritterInfo[_critterName].crittersInPlay -= 1
 
+func addCritterBackToPopulation(_critterName):
+	globalCritterInfo[_critterName].population += 1
+	globalCritterInfo[_critterName].crittersInPlay -= 1
+
 var globalCritterInfo = {
 	"Iovar": {
 		"population": 999999999,

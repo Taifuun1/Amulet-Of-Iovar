@@ -414,7 +414,7 @@ func zapItem(_direction):
 					$"/root/World".drawLevel()
 				"wand of teleport":
 					var _grid = $"/root/World".level.grid
-					for i in range(1, 7):
+					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
 						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
 							break
 						if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter != null:
@@ -452,34 +452,14 @@ func zapItem(_direction):
 					if _zappedItem.alignment.matchn("blessed"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("uncursed"):
-						takeDamage([
-							{
-								"dmg": [8,12],
-								"bonusDmg": {},
-								"armorPen": 0,
-								"magicDmg": {
-									"dmg": [0,0],
-									"element": null
-								}
-							}
-						], "Wand of backwards magic sphere", _playerPosition)
+						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, "Wand of backwards magic sphere")
 						Globals.gameConsole.addLog("{itemName} hits you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("cursed"):
-						takeDamage([
-							{
-								"dmg": [18,22],
-								"bonusDmg": {},
-								"armorPen": 0,
-								"magicDmg": {
-									"dmg": [0,0],
-									"element": null
-								}
-							}
-						], "Wand of backwards magic sphere", _playerPosition)
+						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, "Wand of backwards magic sphere")
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
 				"wand of item polymorph":
 					var _grid = $"/root/World".level.grid
-					for i in range(1, 6):
+					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
 						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
 							break
 						var _itemCount = 0
@@ -537,13 +517,8 @@ func zapItem(_direction):
 					_additionalChoices = true
 				"wand of digging":
 					var _level = $"/root/World".level
-					var _distance = 4
-					if _zappedItem.alignment.matchn("blessed"):
-						_distance = 7
-					if _zappedItem.alignment.matchn("cursed"):
-						_distance = 2
 					var _isTileMined = false
-					for i in range(1, _distance):
+					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
 						var _tile = _playerPosition + _direction * i
 						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.EMPTY or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE:
 							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
@@ -563,6 +538,15 @@ func zapItem(_direction):
 						$"/root/World".updateTiles()
 						$"/root/World".drawLevel()
 						Globals.gameConsole.addLog("The {itemName} bores through the wall!".format({ "itemName": _zappedItem.itemName }))
+				"wand of magic sphere", "wand of fleir", "wand of frost", "wand of thunder":
+					var _grid = $"/root/World".level.grid
+					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
+						var _tile = _playerPosition + _direction * i
+						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+							break
+						if _grid[_tile.x][_tile.y].critter != null:
+							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
+							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _tile)
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
 			_zappedItem.value.charges -= 1

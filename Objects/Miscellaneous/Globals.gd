@@ -101,6 +101,7 @@ enum interactables {
 	PLANT_BEAN
 	PLANT_ORANGE
 	ANT_HILL
+	SPIDER_WEB
 }
 
 var currentDungeonLevel = 1
@@ -111,8 +112,14 @@ var levelId = 1
 var itemId = 0
 var critterId = 1
 
-func isTileFree(_tileToMoveTo, grid):
+func isTileFree(_tile, grid):
 	for blockingTile in blockedTiles:
-		if grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == blockingTile:
+		if (
+			_tile.x < 0 or
+			_tile.y < 0 or
+			_tile.x >= int(gridSize.x) or
+			_tile.y >= int(gridSize.y) or
+			grid[_tile.x][_tile.y].tile == blockingTile
+		):
 			return false
 	return true

@@ -21,13 +21,10 @@ func sortToLowestEntropy(a, b):
 	return a.matches.size() < b.matches.size()
 
 func resetGeneration():
+	allInputs.clear()
 	generatedGrid = []
 	edgeTiles.clear()
-	allInputs.clear()
 	nonLegibleTiles.clear()
-#	for x in range(gridSize.x):
-#		for y in range(gridSize.y):
-#			set_cellv(Vector2(x, y), -1)
 
 func generateMap(_entropyVariation = null):
 	if _entropyVariation != null:
@@ -58,7 +55,6 @@ func isTileLegible(_tile):
 		if typeof(_legibleInputs) != TYPE_BOOL:
 			for _legibleTile in _legibleInputs.grid:
 				generatedGrid[_legibleTile.x][_legibleTile.y].tile = _legibleInputs.grid[_legibleTile]
-#				set_cellv(Vector2(_legibleTile.x, _legibleTile.y), _legibleInputs.grid[_legibleTile])
 			edgeTiles = _legibleInputs.edgeTiles.duplicate(true)
 			return true
 	
@@ -252,12 +248,6 @@ func drawPattern(_tile, _pattern):
 	for x in range(3):
 		for y in range(3):
 			generatedGrid[_tile.x + (x - 1)][_tile.y + (y - 1)].tile = _pattern[x][y]
-#			set_cellv(Vector2(_tile.x + (x - 1), _tile.y + (y - 1)), _pattern[x][y])
-
-func drawPatternWithGrid(_grid):
-	for tile in _grid.keys():
-		pass
-#		set_cellv(Vector2(tile.x, tile.y), _grid[tile])
 
 func changeReplaceables(_replaceables):
 	for x in Globals.gridSize.x:
@@ -495,7 +485,6 @@ func trimGenerationEdges():
 	for x in _trimmedGrid.size():
 		for y in _trimmedGrid[x].size():
 			generatedGrid[x][y].tile = _trimmedGrid[x][y]
-#			set_cellv(Vector2(x,y), grid[x][y])
 
 func fillEmptyGenerationTiles(_tile, _fillEdges = null):
 	for x in range(generatedGrid.size()):

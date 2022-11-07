@@ -91,6 +91,9 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
 		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
 	
+	if typeof(_path) == TYPE_BOOL:
+		return false
+	
 	if currentCritterAbilityHit != null:
 		if currentCritterAbilityHit == abilityHits.size() - 1:
 			currentCritterAbilityHit = -1
@@ -146,6 +149,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 												return false
 											Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 											_critterNode.takeDamage(_pickedAbility.data.attacks, _tile, critterName)
+											if !_pickedAbility.abilityType.matchn("skill"):
+												mp -= _pickedAbility.data.mp
 											return true
 									"dragonBreath", "fleirBreath", "frostBreath", "thunderBreath", "gleeieerBreath", "toxixBreath", "elderDragonBreath":
 										if _level.grid[_tile.x][_tile.y].critter != null:
@@ -166,6 +171,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								Globals.gameConsole.addLog("Magic field around {critterName} deflects the {spell}!".format({ "critterName": _critterNode.critterName.capitalize(), "spell": _pickedAbility.data.name }))
 								continue
 							_critterNode.takeDamage(_pickedAbility.data.attacks, _level.getCritterTile(_critter), critterName)
+						if !_pickedAbility.abilityType.matchn("skill"):
+							mp -= _pickedAbility.data.mp
 						if _critters.has(0):
 							return true
 					"selfCastSpell":
@@ -177,6 +184,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								else:
 									shields += 3
 									Globals.gameConsole.addLog("{critter}s aura grows stronger!".format({ "critter": critterName.capitalize() }))
+								if !_pickedAbility.abilityType.matchn("skill"):
+									mp -= _pickedAbility.data.mp
 								return false
 							"sharpenSword":
 								for _attack in attacks:
@@ -187,6 +196,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 									else:
 										Globals.gameConsole.addLog("{critter} sharpens its sword. SSHhhrrrr...".format({ "critter": critterName.capitalize() }))
 										continue
+								if !_pickedAbility.abilityType.matchn("skill"):
+									mp -= _pickedAbility.data.mp
 								Globals.gameConsole.addLog("{critter} sharpens its sword. SKKRRrrr!".format({ "critter": critterName.capitalize() }))
 								return false
 							"displaceSelf":
@@ -212,6 +223,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 									_miasmaNode.setTurnDuration(_pickedAbility.duration)
 									$"/root/World/Effects".add_child(_miasmaNode)
 									_level.grid[_tile.x][_tile.y].effects.append("fire miasma")
+								if !_pickedAbility.abilityType.matchn("skill"):
+									mp -= _pickedAbility.data.mp
 								Globals.gameConsole.addLog("Fire appears around {critterName} casts!".format({ "critterName": critterName.capitalize() }))
 								return false
 							"summonCritter", "summonCritters":
@@ -226,10 +239,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 									_tiles = _legibleTiles
 								for _tile in _tiles:
 									$"/root/World/Critters/Critters".spawnRandomCritter(_tile, false)
+								if !_pickedAbility.abilityType.matchn("skill"):
+									mp -= _pickedAbility.data.mp
 								Globals.gameConsole.addLog("{critter} summons critters!".format({ "critter": critterName.capitalize() }))
 								return false
-				if !_pickedAbility.abilityType.matchn("skill"):
-					mp -= _pickedAbility.data.mp
 	
 	for _ability in abilities:
 		if _path.size() > 1:
@@ -291,7 +304,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			):
 				Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
-				mp -= _pickedAbility.data.mp
+				if !_pickedAbility.abilityType.matchn("skill"):
+					mp -= _pickedAbility.data.mp
 			elif hits[currentHit] == 1:
 				if $"/root/World/Critters/0".checkIfStatusEffectIsInEffect("displacement") and randi() % 4 == 0:
 					Globals.gameConsole.addLog("{critterName} hits your displaced image!".format({ "critterName": critterName }))
@@ -384,10 +398,7 @@ func despawn(_critterTile = null, createCorpse = true):
 		_gridPosition = _critterTile
 	
 	if createCorpse:
-		var _corpse = load("res://Objects/Item/Item.tscn").instance()
-		_corpse.createCorpse(critterName, weight, $"/root/World/Items/Items")
-		$"/root/World/Items".add_child(_corpse)
-		_level.grid[_gridPosition.x][_gridPosition.y].items.append(_corpse.id)
+		$"/root/World/Items/Items".createItem("corpse", _gridPosition, 1, false, { "weight": weight, "critterName": critterName })
 	
 	for _drop in drops:
 		var _dropTries = 1
@@ -411,6 +422,13 @@ func despawn(_critterTile = null, createCorpse = true):
 	_level.addPointToEnemyPathding(_gridPosition)
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
+	queue_free()
+
+func cleanUpCritter(_critterTile, _level):
+	_level.grid[_critterTile.x][_critterTile.y].critter = null
+	_level.addPointToEnemyPathding(_critterTile)
+	_level.critters.erase(id)
+	GlobalCritterInfo.addCritterBackToPopulation(critterName)
 	queue_free()
 
 func checkCritterIdentification(_data):

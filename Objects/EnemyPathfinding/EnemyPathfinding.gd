@@ -83,7 +83,8 @@ func addPointToEnemyPathding(point):
 			pathFindingAstarNode.connect_points(_pointId, pointRelativeIndex, true)
 
 func removePointFromEnemyPathfinding(point):
-	pathFindingAstarNode.set_point_disabled(id(point), true)
+	if pathFindingAstarNode.has_point(id(point)):
+		pathFindingAstarNode.set_point_disabled(id(point), true)
 
 
 

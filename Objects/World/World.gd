@@ -246,7 +246,7 @@ func createDungeon():
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
 	for _level in range(1):
-		var newDungeon = dungeon.instance()
+		var newDungeon = library.instance()
 		newDungeon.create("dungeon1", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)

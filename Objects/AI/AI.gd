@@ -17,7 +17,7 @@ func getCritterMove(_critterTile, _playerTile, _level):
 			return getNeutralCritterMove(_critterTile, _level)
 		return _path
 	elif aI.matchn("Deactivated"):
-		return []
+		return false
 	elif aI.matchn("Miner"):
 		return getMinerCritterMove(_critterTile, _level)
 	elif aI.matchn("Neutral"):
@@ -48,7 +48,7 @@ func getNeutralCritterMove(_critterTile, _level):
 		return []
 	else:
 		_chosenPoint = _points[randi() % _points.size()]
-	if _level.grid[_chosenPoint.x][_chosenPoint.y].critter == null:
+	if _chosenPoint.x >= 0 and _chosenPoint.y >= 0 and _chosenPoint.x < Globals.gridSize.x and _chosenPoint.y < Globals.gridSize.y and _level.grid[_chosenPoint.x][_chosenPoint.y].critter == null:
 		return _level.calculatePathFindingPath(_critterTile, _chosenPoint)
 	else:
 		return []

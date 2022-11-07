@@ -287,6 +287,7 @@ func isCastableRunes():
 	return "notCastable"
 
 func calculateMagicDamage():
+	var _magicAttacks = []
 	if isCastableRunes() == "notCastable":
 		spellDamage = [{
 			"dmg": [0,0],
@@ -297,34 +298,86 @@ func calculateMagicDamage():
 				"element": null
 			}
 		}]
+		return
 	elif runes.heario == null:
-		spellDamage = [{
-			"dmg": [0,0],
-			"bonusDmg": {},
-			"armorPen": 0,
-			"magicDmg": {
-				"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * 0.5), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[1] * 0.5)],
-				"element": runes.eario.value
-			}
-		}]
+		var _magicDamageIncrease = calculateMagicDamageIncrease(runes.eario.value)
+		for _d in range(1 + _magicDamageIncrease.d):
+			_magicAttacks.append({
+				"dmg": [0,0],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * 0.5 + _magicDamageIncrease.dmg), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[1] * 0.5 + _magicDamageIncrease.dmg)],
+					"element": runes.eario.value
+				}
+			})
 		manaUsage = 0
 		for _rune in runes:
 			if !_rune.matchn("heario"):
 				manaUsage += runeData.runeData[_rune][runes[_rune].value.to_lower()].mp
 #	"effect": runeData.heario[runes.heario].effectMultiplier
 	else:
-		spellDamage = [{
-			"dmg": [0,0],
-			"bonusDmg": {},
-			"armorPen": 0,
-			"magicDmg": {
-				"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier)],
-				"element": runes.eario.value
-			}
-		}]
+		var _magicDamageIncrease = calculateMagicDamageIncrease(runes.eario.value)
+		for _d in range(1 + _magicDamageIncrease.d):
+			_magicAttacks.append({
+				"dmg": [0,0],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower() + _magicDamageIncrease.dmg].dmgMultiplier), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg)],
+					"element": runes.eario.value
+				}
+			})
 		manaUsage = 0
 		for _rune in runes:
 			manaUsage += runeData.runeData[_rune][runes[_rune].value.to_lower()].mp
+	spellDamage = _magicAttacks
+
+func calculateMagicDamageIncrease(_type):
+	var _stats = $"/root/World/Critters/0".stats
+	if _type.matchn("fleir"):
+		return {
+			"dmg": _stats.belief / 2,
+			"d": 0
+		}
+	if _type.matchn("frost"):
+		var _d = 0
+		if _stats.visage > 18:
+			_d = 1
+		return {
+			"dmg": _stats.visage / 3,
+			"d": _d
+		}
+	if _type.matchn("thunder"):
+		var _d = 0
+		if _stats.visage > 27:
+			_d = 1
+		return {
+			"dmg": _stats.visage / 3,
+			"d": _d
+		}
+	if _type.matchn("gleeie'er"):
+		var _d = 0
+		if _stats.wisdom > 17:
+			_d = 2
+		elif _stats.wisdom > 8:
+			_d = 1
+		return {
+			"dmg": _stats.wisdom / 3,
+			"d": _d
+		}
+	if _type.matchn("toxix"):
+		var _d = 0
+		if _stats.wisdom > 21:
+			_d = 3
+		elif _stats.wisdom > 17:
+			_d = 2
+		elif _stats.wisdom > 15:
+			_d = 1
+		return {
+			"dmg": _stats.wisdom / 4,
+			"d": _d
+		}
 
 
 

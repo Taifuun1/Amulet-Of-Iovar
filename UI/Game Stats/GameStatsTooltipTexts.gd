@@ -96,5 +96,7 @@ var goldPieces = {
 
 var weight = {
 	"title": "Weight",
-	"description": "Your overall carried weight. Crossing a weight treshold gives a more punishing status effect."
+	"description": """Your overall carried weight. Crossing a weight treshold gives a more punishing status effect.
+Carried weight: {weight}
+"""
 }

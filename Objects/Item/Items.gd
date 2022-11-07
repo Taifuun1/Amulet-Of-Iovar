@@ -67,6 +67,8 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 			newItem.createItem(miscellaneousItems["goldPieces"], _extraData, _amount)
 		elif _item.matchn("amulet of iovar"):
 			newItem.createItem(miscellaneousItems["Amulet of Iovar"], _extraData, 1)
+		elif _item.matchn("corpse"):
+			newItem.createItem(miscellaneousItems["corpse"], _extraData, 1)
 		elif _item.matchn("box"):
 			newItem.createItem(miscellaneousItems["box"], _extraData, 1)
 		elif _item.matchn("chest"):

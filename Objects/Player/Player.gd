@@ -183,6 +183,15 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 	else:
 		if checkIfStatusEffectIsInEffect("fumbling") and randi() % 4 == 0:
 			Globals.gameConsole.addLog("You fumble on your feet.")
+		elif _level.grid[_playerTile.x][_playerTile.y].interactable == Globals.interactables.SPIDER_WEB:
+			if randi() % 3 == 0:
+				_level.grid[_playerTile.x][_playerTile.y].interactable = null
+				Globals.gameConsole.addLog("You free yourself from the spider web.")
+				if randi() % 8 == 0:
+					# TODO: spider spawn
+					Globals.gameConsole.addLog("Spider jumps out from the spider web!")
+			else:
+				Globals.gameConsole.addLog("You are still stuck in the spider web.")
 		else:
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 			checkIfThereIsSomethingOnTheGroundHere(_tileToMoveTo, _level)
@@ -613,6 +622,9 @@ func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
 	
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.ANT_HILL:
 		Globals.gameConsole.addLog("There's an ant hill here.")
+	
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.SPIDER_WEB:
+		Globals.gameConsole.addLog("You're stuck in the spider web!")
 
 func checkAllIdentification(_items = false, _critters = null):
 	if _items:

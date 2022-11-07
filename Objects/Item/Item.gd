@@ -34,7 +34,9 @@ func createItem(_item, _extraData = {}, _amount = 1):
 	name = str(id)
 	Globals.itemId += 1
 	
-	if (
+	if _item.itemName.matchn("corpse"):
+		itemName = "{critterName} {itemName}".format({ "critterName": _extraData.critterName, "itemName": "corpse"})
+	elif (
 		_item.itemName.matchn("box") or
 		_item.itemName.matchn("chest") or
 		(GlobalItemInfo.globalItemInfo.has(_item.itemName) and GlobalItemInfo.globalItemInfo[_item.itemName].identified) or
@@ -49,7 +51,10 @@ func createItem(_item, _extraData = {}, _amount = 1):
 	type = _item.type
 	category = _item.category
 	
-	weight = _item.weight
+	if _extraData.has("weight"):
+		weight = _extraData.weight
+	else:
+		weight = _item.weight
 	
 	if category != null and category.matchn("container"):
 		addContainer()
@@ -194,23 +199,6 @@ func calculateWeaponAttackIncrease(_stats):
 ###############################
 ### Miscellaneous functions ###
 ###############################
-
-func createCorpse(_critterName, _weight, _items):
-	var _item = _items.miscellaneousItems.corpse
-	
-	id = Globals.itemId
-	name = str(id)
-	Globals.itemId += 1
-	
-	itemName = "{critterName} {itemName}".format({ "critterName": _critterName, "itemName": "corpse"})
-	
-	type = _item.type
-	
-	weight = _weight
-	
-	stackable = _item.stackable
-	
-	$ItemSprite.texture = _item.texture
 
 func getTexture():
 	return $ItemSprite.texture

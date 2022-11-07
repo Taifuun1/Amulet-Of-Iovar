@@ -1,10 +1,11 @@
 extends Control
 
-var tooltipTexts = load("res://UI/Game Stats/StatsTooltipTexts.gd").new()
+var tooltipTexts = load("res://UI/Game Stats/GameStatsTooltipTexts.gd").new()
 
 onready var statusEffectItem = preload("res://UI/Game Stats/Status Effect Item.tscn")
 
 var attacks
+var weight
 
 #func _ready():
 #	addStatusEffect("blindness")
@@ -100,6 +101,7 @@ func updateStats(stats = {
 	if stats.goldPieces != null:
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer/GoldPieces.text = str(stats.goldPieces)
 	if stats.weight != null and stats.weightBounds != null:
+		weight = stats.weight
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = stats.weight
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value = stats.weightBounds.min
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.max_value = stats.weightBounds.max
@@ -151,6 +153,8 @@ func _onMouseEnteredStat(_nodePath, _stat):
 			"magicDmg": str(attacks.attack.magicDmg.dmg[0]) + "-" + str(attacks.attack.magicDmg.dmg[1]),
 			"magicElement": _magicElement
 		})
+	elif _stat.matchn("weight"):
+		_tooltipDescription = _tooltipDescription.format({ "weight": weight })
 	get_node("Background/GameStatsContainer/GameStatsColumns/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).updateTooltip(tooltipTexts[_stat].title, _tooltipDescription)
 	get_node("Background/GameStatsContainer/GameStatsColumns/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).showTooltip()
 

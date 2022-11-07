@@ -258,15 +258,28 @@ func placeRandomInteractables(_interactables):
 							grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable = Globals.interactables.ALTAR
 
 func resetLevel():
+	for x in range(grid.size()):
+		for y in range(grid[x].size()):
+			if grid[x][y].critter != null:
+				get_node("/root/World/Critters/{critterId}".format({ "critterId": grid[x][y].critter })).cleanUpCritter(Vector2(x, y), self)
+			grid[x][y].tile = -1
+			grid[x][y].tileMetaData = {
+				"xFlip": false,
+				"yFlip": false
+			}
+			grid[x][y].critter = null
+			grid[x][y].items = []
+			grid[x][y].effects = []
+			grid[x][y].interactable = -1
 	rooms.clear()
+	areas.clear()
 	floors.clear()
 	openTiles.clear()
 	spawnableItemTiles.clear()
 	spawnableCritterTiles.clear()
+	floorTiles.clear()
 	stairs.clear()
-	for x in range(grid.size()):
-		for y in range(grid[x].size()):
-			grid[x][y].tile = -1
+	critters.clear()
 
 func cleanOutTilemap():
 	for x in range(grid.size()):
@@ -286,7 +299,7 @@ func isTileOpenAndFreeOfCritters(_tile):
 		_tile.y >= 0 and
 		_tile.y < grid[0].size() and
 		_tile.x >= 0 and
-		_tile.x < grid.size() and 
+		_tile.x < grid.size() and
 		Globals.isTileFree(_tile, grid) and
 		isTileFreeOfCritters(_tile) and
 		grid[_tile.x][_tile.y].tile != Globals.tiles.DOOR_CLOSED
