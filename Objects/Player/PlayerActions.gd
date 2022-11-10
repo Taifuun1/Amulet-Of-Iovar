@@ -1,6 +1,6 @@
 extends Player
 
-
+var sacrificeGifts = load("res://Objects/Player/PlayerSacrificeGifts.gd")
 
 ######################
 ### Player actions ###
@@ -558,6 +558,29 @@ func zapItem(_direction):
 func useItem(_id):
 	var _usedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	var _additionalChoices = false
+	if _usedItem.type.matchn("corpse"):
+		var _playerPosition = $"/root/World".level.getCritterTile(0)
+		if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].interactable == Globals.interactables.ALTAR:
+			$"/root/World/Items/Items".removeItem(_usedItem)
+			Globals.gameConsole.addLog("You offer the {itemName} to the gods.".format({ "itemName": _usedItem.itemName }))
+			if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items != null:
+				var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
+				if randi() % 2 == 0:
+					_alignedItem.alignment = "Blessed"
+					Globals.gameConsole.addLog("{itemname} glows white.".format({ "itemName": _alignedItem.itemName }))
+				else:
+					_alignedItem.alignment = "Cursed"
+					Globals.gameConsole.addLog("{itemname} glows black.".format({ "itemName": _alignedItem.itemName }))
+			if randi() % 8 == 0:
+				var _gift
+				if randi() % 2 == 0:
+					_gift = sacrificeGifts[justice].armor[randi() % sacrificeGifts[justice].armor.size()]
+				else:
+					_gift = sacrificeGifts[justice].weapons[randi() % sacrificeGifts[justice].weapons.size()]
+				$"/root/World/Items/Items".createItem(_gift, _playerPosition, 1, false, { "alignment": "Uncursed" })
+				Globals.gameConsole.addLog("An item appears on the ground!")
+			else:
+				Globals.gameConsole.addLog("The gods seem unresponsive for now.")
 	if _usedItem.type.matchn("tool"):
 		if (
 			GlobalItemInfo.globalItemInfo.has(_usedItem.identifiedItemName) and
@@ -697,7 +720,12 @@ func dipItem(_id):
 					_selectedItem.alignment = "blessed"
 					Globals.gameConsole.addLog("The {itemName} glows with a white light!".format({ "itemName": _selectedItem.itemName }))
 				elif _dippedItem.alignment.matchn("uncursed"):
-					Globals.gameConsole.addLog("The {itemName} gets wet.".format({ "itemName": _selectedItem.itemName }))
+					if _selectedItem.type.matchn("scroll"):
+						$"/root/World/Items/Items".createItem("blank scroll", null, _selectedItem.amount, true)
+						$"/root/World/Items/Items".removeItem(selectedItem)
+						Globals.gameConsole.addLog("Ink fades from the {itemName}.".format({ "itemName": _selectedItem.itemName }))
+					else:
+						Globals.gameConsole.addLog("The {itemName} gets wet.".format({ "itemName": _selectedItem.itemName }))
 				elif _dippedItem.alignment.matchn("cursed"):
 					_selectedItem.alignment = "cursed"
 					Globals.gameConsole.addLog("The {itemName} glows with a black light!".format({ "itemName": _selectedItem.itemName }))
@@ -714,8 +742,7 @@ func dipItem(_id):
 				Globals.gameConsole.addLog("You soak the {itemName} into the potion. Nothing happens.".format({ "itemName": _selectedItem.itemName }))
 		selectedItem = null
 		checkAllIdentification(true)
-		$"/root/World/Critters/0/Inventory".inventory.erase(_id)
-		get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
+		$"/root/World/Items/Items".removeItem(_id)
 		$"/root/World".closeMenu(_additionalChoices)
 		$"/root/World".processGameTurn()
 

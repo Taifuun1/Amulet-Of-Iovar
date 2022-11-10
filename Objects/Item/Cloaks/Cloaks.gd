@@ -51,25 +51,7 @@ var cloak = {
 			"rarity": "Uncommon"
 		}
 	],
-#	"rare": [
-#		{
-#			"itemName": "Adorned cloak",
-#			"unidentifiedItemName": "Adorned cloak",
-#			"texture": load("res://Assets/Armor/CloakAdornedCloak.png"),
-#			"unIdentifiedTexture": load("res://Assets/Armor/CloakAdornedCloak.png"),
-#			"type": "Armor",
-#			"category": "Cloak",
-#			"weight": 75,
-#			"value": {
-#				"ac": 4,
-#				"resistance": null
-#			},
-#			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Rare"
-#		}
-#	],
-	"legendary": [
+	"rare": [
 		{
 			"itemName": "Cloak of displacement",
 			"unidentifiedItemName": null,
@@ -86,6 +68,38 @@ var cloak = {
 			"stackable": false,
 			"rarity": "Legendary"
 		},
+		{
+			"itemName": "Cloak of magical ambiguity",
+			"unidentifiedItemName": null,
+			"texture": null,
+			"unIdentifiedTexture": null,
+			"type": "Armor",
+			"category": "Cloak",
+			"weight": 75,
+			"value": {
+				"ac": 7,
+				"resistance": null
+			},
+			"enchantable": true,
+			"stackable": false,
+			"rarity": "Legendary"
+		}
+#		{
+#			"itemName": "Adorned cloak",
+#			"unidentifiedItemName": "Adorned cloak",
+#			"texture": load("res://Assets/Armor/CloakAdornedCloak.png"),
+#			"unIdentifiedTexture": load("res://Assets/Armor/CloakAdornedCloak.png"),
+#			"type": "Armor",
+#			"category": "Cloak",
+#			"weight": 75,
+#			"value": {
+#				"ac": 4,
+#				"resistance": null
+#			},
+#			"enchantable": true,
+#			"stackable": false,
+#			"rarity": "Rare"
+#		},
 #		{
 #			"itemName": "Cloak of invisibility",
 #			"unidentifiedItemName": null,
@@ -101,28 +115,14 @@ var cloak = {
 #			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Legendary"
-#		},
+#		}
+	],
+	"legendary": [
 		{
 			"itemName": "Alchemists robes",
 			"unidentifiedItemName": null,
 			"texture": load("res://Assets/Cloaks/CloakAlchemistsRobes.png"),
 			"unIdentifiedTexture": load("res://Assets/Cloaks/CloakAlchemistsRobes.png"),
-			"type": "Armor",
-			"category": "Cloak",
-			"weight": 75,
-			"value": {
-				"ac": 7,
-				"resistance": null
-			},
-			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
-		},
-		{
-			"itemName": "Cloak of magical ambiguity",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unIdentifiedTexture": null,
 			"type": "Armor",
 			"category": "Cloak",
 			"weight": 75,

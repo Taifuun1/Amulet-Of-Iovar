@@ -13,7 +13,7 @@ func create():
 	layer = 10
 
 func addToInventory(_item):
-	if !checkIfStackableItemInInventory(_item):
+	if !checkIfStackableItemInInventory(_item, "add"):
 		inventory.append(_item.id)
 	updateWeight()
 
@@ -37,7 +37,8 @@ func addToInventory(_item):
 #		Globals.inventory = inventory
 
 func removeFromInventory(_item):
-	inventory.erase(_item.id)
+	if !checkIfStackableItemInInventory(_item, "substract"):
+		inventory.erase(_item.id)
 	updateWeight()
 
 #	for item in inventory:
@@ -65,13 +66,17 @@ func hideInventory():
 		item.queue_free()
 	$InventoryContainer.hide()
 
-func getItemsOfType(_types, _category = null):
+func getItemsOfType(_types, _category = null, _miscellaneousTypes = null):
 	var _items = []
 	for _type in _types:
 		for _itemId in inventory:
 			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 			if _item.type.matchn(_type):
 				_items.append(_itemId)
+			elif _miscellaneousTypes != null:
+				for _miscellaneousType in _miscellaneousTypes:
+					if _item.type.matchn(_miscellaneousType):
+						_items.append(_itemId)
 	if _category:
 		for _itemId in _items.duplicate(true):
 			if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn(_category):
@@ -95,11 +100,14 @@ func updateWeight():
 	$"..".calculateWeightStats()
 	$"..".updatePlayerStats()
 
-func checkIfStackableItemInInventory(_item):
+func checkIfStackableItemInInventory(_item, _operation):
 	for _itemId in inventory:
 		var _inventoryItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 		if _inventoryItem.identifiedItemName.matchn(_item.identifiedItemName) and _inventoryItem.stackable and _inventoryItem.alignment.matchn(_item.alignment):
-			_inventoryItem.amount += _item.amount
+			if _operation.match("add"):
+				_inventoryItem.amount += _item.amount
+			elif _operation.match("substract"):
+				_inventoryItem.amount -= _item.amount
 			updateWeight()
 			return true
 	return false

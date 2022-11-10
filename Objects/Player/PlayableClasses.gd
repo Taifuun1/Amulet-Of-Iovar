@@ -25,11 +25,11 @@ var archeologist = {
 		"Rigid flail": 1,
 		"Leather armor": 1,
 		"Leather belt": 1,
-		"Cotton pants": 1,
+		"Leather pants": 1,
 		"Low boots": 1,
 		"Pickaxe": 1,
 		"Wand of digging": 1,
-		"Lamp": 1,
+		"Oil lamp": 1,
 		"Candle": [1, 3]
 	},
 	goldPieces = 275,
@@ -98,7 +98,7 @@ var banker = {
 	skills = {
 		"sword": {
 			"skill": 0,
-			"skillCap": 2
+			"skillCap": 3
 		},
 		"twohandedSword": {
 			"skill": 0,
@@ -106,7 +106,7 @@ var banker = {
 		},
 		"dagger": {
 			"skill": 1,
-			"skillCap": 3
+			"skillCap": 2
 		},
 		"mace": {
 			"skill": 0,
@@ -122,7 +122,7 @@ var banker = {
 
 var freedomFighter = {
 	critterName = "Freedom fighter",
-	description = "Freedom fighter rouses revolutions to overthrow the establishment. .",
+	description = ".",
 	race = "Human",
 	justice = "Draconian",
 	hp = 18,
@@ -130,8 +130,8 @@ var freedomFighter = {
 	strength = 8,
 	legerity = 5,
 	balance = 5,
-	belief = 12,
-	visage = 13,
+	belief = 6,
+	visage = 15,
 	wisdom = 3,
 	hpIncrease = 4,
 	mpIncrease = 4,
@@ -331,7 +331,7 @@ var exterminator = {
 	skills = {
 		"sword": {
 			"skill": 0,
-			"skillCap": 3
+			"skillCap": 2
 		},
 		"twohandedSword": {
 			"skill": 0,
@@ -339,18 +339,18 @@ var exterminator = {
 		},
 		"dagger": {
 			"skill": 0,
-			"skillCap": 3
+			"skillCap": 0
 		},
 		"mace": {
 			"skill": 0,
-			"skillCap": 3
+			"skillCap": 1
 		},
 		"flail": {
 			"skill": 0,
-			"skillCap": 3
+			"skillCap": 1
 		}
 	},
-	"texture": load("res://Assets/Classes/Perry.png")
+	"texture": load("res://Assets/Classes/Exterminator.png")
 }
 
 var rogue = {

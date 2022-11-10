@@ -898,7 +898,7 @@ func openMenu(_menu, _playerTile = null):
 				currentGameState = gameState.DIP_ITEM
 		"use":
 			if currentGameState == gameState.GAME:
-				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"])
+				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"], null, ["corpse"])
 				$UI/UITheme/ItemManagement.showItemManagementList(true)
 				currentGameState = gameState.USE
 

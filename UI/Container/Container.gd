@@ -48,7 +48,7 @@ func _on_Container_List_Clicked(_id):
 		if containerItemNode.binds.state.matchn("bound"):
 			Globals.gameConsole.addLog("{storageItem} doesn't let you remove the {itemName} while its bound!".format({ "storageItem": containerItemNode.itemName, "itemName": _item.itemName}))
 			return
-		if $"/root/World/Critters/0".inventory.checkIfStackableItemInInventory(_item):
+		if $"/root/World/Critters/0".inventory.checkIfStackableItemInInventory(_item, "add"):
 			containerItems.erase(_id)
 			return
 		containerItems.erase(_id)
@@ -62,7 +62,7 @@ func _on_Container_List_Clicked(_id):
 		else:
 			containerItemNode.containerWeight -= _item.weight
 	elif inventoryItems.has(_id):
-		if $"/root/World/Critters/0".inventory.checkIfStackableItemInInventory(_item):
+		if $"/root/World/Critters/0".inventory.checkIfStackableItemInInventory(_item, "substract"):
 			inventoryItems.erase(_id)
 			return
 		inventoryItems.erase(_id)
