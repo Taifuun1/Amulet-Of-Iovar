@@ -15,7 +15,7 @@ func create():
 func addToInventory(_item):
 	if !checkIfStackableItemInInventory(_item, "add"):
 		inventory.append(_item.id)
-	updateWeight()
+		updateWeight()
 
 #	for item in inventory:
 #		if item.itemName == _item.itemName:
@@ -39,7 +39,7 @@ func addToInventory(_item):
 func removeFromInventory(_item):
 	if !checkIfStackableItemInInventory(_item, "substract"):
 		inventory.erase(_item.id)
-	updateWeight()
+		updateWeight()
 
 #	for item in inventory:
 #		if item.itemName == _item.itemName:

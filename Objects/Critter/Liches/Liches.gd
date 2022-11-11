@@ -47,7 +47,7 @@ var liches = {
 					"chance": 2
 				},
 				{
-					"abilityName": "thunderpoint",
+					"abilityName": "thunderPoint",
 					"abilityType": "rangedSpell",
 					"chance": 2
 				},

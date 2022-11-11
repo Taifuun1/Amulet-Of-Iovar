@@ -49,23 +49,28 @@ var itemsTurnedOn = []
 
 var skills = {
 	"sword": {
-		"skill": 0,
+		"experience": 0,
+		"level": 0,
 		"skillCap": 0
 	},
-	"twohandedSword": {
-		"skill": 0,
+	"two-hander": {
+		"experience": 0,
+		"level": 0,
 		"skillCap": 0
 	},
 	"dagger": {
-		"skill": 0,
+		"experience": 0,
+		"level": 0,
 		"skillCap": 0
 	},
 	"mace": {
-		"skill": 0,
+		"experience": 0,
+		"level": 0,
 		"skillCap": 0
 	},
 	"flail": {
-		"skill": 0,
+		"experience": 0,
+		"level": 0,
 		"skillCap": 0
 	}
 }
@@ -140,18 +145,33 @@ func create(_className):
 func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter != null:
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
-		if _critter.aI.aI == "Aggressive":
+		if _critter.aI.aI.matchn("Aggressive") or _critter.aI.aI.matchn("Skulking"):
 			if checkIfCritterHasEffect(_critter):
 				return
+			
 			if hits[currentHit] == 1:
 				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo)
 				if _didCritterDespawn != null:
 					addExp(_didCritterDespawn)
 			else:
 				Globals.gameConsole.addLog("You miss!")
+			
 			if currentHit == 15:
 				currentHit = 0
 			currentHit += 1
+			
+			if (
+				$"/root/World/UI/UITheme/Equipment".hands.lefthand == $"/root/World/UI/UITheme/Equipment".hands.righthand and
+				$"/root/World/UI/UITheme/Equipment".hands.lefthand != null and
+				$"/root/World/UI/UITheme/Equipment".hands.righthand != null
+			):
+				skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
+			else:
+				if $"/root/World/UI/UITheme/Equipment".hands.lefthand != null:
+					skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
+				if $"/root/World/UI/UITheme/Equipment".hands.righthand != null:
+					skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.righthand })).category.to_lower()].experience += 1
+			checkSkillExperience()
 		elif _critter.aI.aI.matchn("neutral") or _critter.aI.aI.matchn("miner"):
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level, _critter.id)
 			Globals.gameConsole.addLog("You swap places with the {critter}.".format({ "critter": _critter.critterName }))
@@ -180,6 +200,14 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			_level.addPointToPathPathding(_tileToMoveTo)
 			_level.addPointToWeightedPathding(_tileToMoveTo)
 			Globals.gameConsole.addLog("You mine the cave wall.")
+			if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:
+				if critterClass.matchn("archeologist") and randi() % 2:
+					$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, randi() % 4 + 1, false, { "alignment": "Uncursed" })
+					Globals.gameConsole.addLog("You find several gems in the wall!")
+				else:
+					$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "alignment": "Uncursed" })
+					Globals.gameConsole.addLog("You find a gem in the wall.")
+				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable = null
 	else:
 		if checkIfStatusEffectIsInEffect("fumbling") and randi() % 4 == 0:
 			Globals.gameConsole.addLog("You fumble on your feet.")
@@ -214,7 +242,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			if _damage.magicDmg != 0 and _attack.magicDmg.element != null:
 				_damageColor = spellData.spellData[_attack.magicDmg.element].color
 			_damageNumber.create(_critterTile, _damageText, _damageColor)
-			$"/root/World/Animations".add_child(_damageNumber)
+			$"/root/World/Texts".add_child(_damageNumber)
 			
 			# Magic spell
 			if _damage.dmg == 0 and _damage.magicDmg != 0:
@@ -236,6 +264,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 				if _damage.magicDmg != 0:
 					hp -= _damage.magicDmg
 					_attacksLog.append(" ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
+				
 			
 			if hp <= 0:
 				_attacksLog.append("You die...")
@@ -348,7 +377,9 @@ func processPlayerSpecificEffects():
 	elif previousCalories >= 200 and calories < 200 and calories > 0:
 		Globals.gameConsole.addLog("You are starving!")
 	elif calories <= 0:
-		Globals.gameConsole.addLog("You die...")
+		hp -= 2
+		if previousCalories > 0:
+			Globals.gameConsole.addLog("You are famished!")
 	
 	############
 	## Weight ##
@@ -384,7 +415,7 @@ func processPlayerSpecificEffects():
 				$"/root/World/UI/UITheme/GameStats".addStatusEffect(_statusEffect)
 				var _damageNumber = damageNumber.instance()
 				_damageNumber.create($"/root/World".level.getCritterTile(0), _statusEffect.capitalize(), statusEffectsData.statusEffectsData[_statusEffect].color)
-				$"/root/World/Animations".add_child(_damageNumber)
+				$"/root/World/Texts".add_child(_damageNumber)
 		else:
 			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_statusEffect)
@@ -549,6 +580,9 @@ func gainLevel():
 	experienceNeededForLevelGainAmount = experienceNeededForLevelGainAmount + (experienceNeededForLevelGainAmount / 2)
 	
 	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
+	
+	calculateWeightStats()
+	updatePlayerStats()
 
 func updatePlayerStats():
 	var _totalBonusDamage = 0
@@ -656,6 +690,18 @@ func checkIfCritterHasEffect(_critter):
 		Globals.gameConsole.addLog("You miss the displaced image of {critterName}!".format({ "critterName": _critter.critterName }))
 		return true
 	return false
+
+func checkSkillExperience():
+	for _skill in skills:
+		if skills[_skill].skillCap > skills[_skill].level and skills[_skill].experience >= 200 and skills[_skill].level == 0:
+			skills[_skill].level = 1
+			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
+		elif skills[_skill].skillCap > skills[_skill].level and  skills[_skill].experience >= 500 and skills[_skill].level == 1:
+			skills[_skill].level = 2
+			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
+		elif skills[_skill].skillCap > skills[_skill].level and  skills[_skill].experience >= 1000 and skills[_skill].level == 2:
+			skills[_skill].level = 3
+			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
 
 
 

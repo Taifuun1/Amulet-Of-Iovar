@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Perry.png-55aa6b22adba613482be34225558e0e4.stex"
+path="res://.import/Exterminator.png-410a8c03fc5646068b589c5cbbe8e134.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Classes/Perry.png"
-dest_files=[ "res://.import/Perry.png-55aa6b22adba613482be34225558e0e4.stex" ]
+source_file="res://Assets/Classes/Exterminator.png"
+dest_files=[ "res://.import/Exterminator.png-410a8c03fc5646068b589c5cbbe8e134.stex" ]
 
 [params]
 

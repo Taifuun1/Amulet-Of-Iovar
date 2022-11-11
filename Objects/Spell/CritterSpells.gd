@@ -281,7 +281,7 @@ var frostBreath = {
 
 ### Thunder abilities
 
-var thunderpoint = {
+var thunderPoint = {
 	"name": "Thunderpoint",
 	"attacks": [
 		{

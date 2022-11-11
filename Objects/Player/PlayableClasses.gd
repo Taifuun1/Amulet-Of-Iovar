@@ -35,23 +35,28 @@ var archeologist = {
 	goldPieces = 275,
 	skills = {
 		"sword": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 0
 		},
-		"twohandedSword": {
-			"skill": 0,
+		"two-hander": {
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
 		"dagger": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		},
 		"mace": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		},
 		"flail": {
-			"skill": 1,
+			"experience": 0,
+			"level": 1,
 			"skillCap": 3
 		}
 	},
@@ -97,23 +102,28 @@ var banker = {
 	goldPieces = 2475,
 	skills = {
 		"sword": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 3
 		},
-		"twohandedSword": {
-			"skill": 0,
+		"two-hander": {
+			"experience": 0,
+			"level": 0,
 			"skillCap": 0
 		},
 		"dagger": {
-			"skill": 1,
+			"experience": 0,
+			"level": 1,
 			"skillCap": 2
 		},
 		"mace": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 0
 		},
 		"flail": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		}
 	},
@@ -122,7 +132,7 @@ var banker = {
 
 var freedomFighter = {
 	critterName = "Freedom fighter",
-	description = ".",
+	description = "Get +2 to all Gleeie'er damage.",
 	race = "Human",
 	justice = "Draconian",
 	hp = 18,
@@ -156,23 +166,28 @@ var freedomFighter = {
 	goldPieces = 8,
 	skills = {
 		"sword": {
-			"skill": 1,
+			"experience": 0,
+			"level": 1,
 			"skillCap": 1
 		},
-		"twohandedSword": {
-			"skill": 0,
+		"two-hander": {
+			"experience": 0,
+			"level": 0,
 			"skillCap": 3
 		},
 		"dagger": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		},
 		"mace": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		},
 		"flail": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		}
 	},
@@ -181,7 +196,7 @@ var freedomFighter = {
 
 var herbalogue = {
 	critterName = "Herbalogue",
-	description = "Herbalogue has extensive knowledge of herbs. Gets more calories from eating.",
+	description = "Herbalogue has extensive knowledge of herbs. Gets a third more calories from eating.",
 	race = "Human",
 	justice = "Grilling",
 	hp = 10,
@@ -215,23 +230,28 @@ var herbalogue = {
 	goldPieces = 20,
 	skills = {
 		"sword": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
-		"twohandedSword": {
-			"skill": 0,
+		"two-hander": {
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
 		"dagger": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
 		"mace": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
 		"flail": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		}
 	},
@@ -240,7 +260,7 @@ var herbalogue = {
 
 var mercenary = {
 	critterName = "Mercenary",
-	description = "Mercenary works for anyone, anywhere, for a price. Has .",
+	description = "Gets +1 to all physical damage.",
 	race = "Human",
 	justice = "Grilling",
 	hp = 20,
@@ -279,23 +299,28 @@ var mercenary = {
 	goldPieces = 350,
 	skills = {
 		"sword": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 3
 		},
-		"twohandedSword": {
-			"skill": 1,
+		"two-hander": {
+			"experience": 0,
+			"level": 1,
 			"skillCap": 3
 		},
 		"dagger": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
 		"mace": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
 		"flail": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		}
 	},
@@ -304,7 +329,7 @@ var mercenary = {
 
 var exterminator = {
 	critterName = "Exterminator",
-	description = "Exterminator has gone mad with power. Gets +2 fleir damage.",
+	description = "Exterminator has gone mad with power. Gets +2 to all fleir damage.",
 	race = "Human",
 	justice = "Draconian",
 	hp = 8,
@@ -330,23 +355,28 @@ var exterminator = {
 	goldPieces = 45,
 	skills = {
 		"sword": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
-		"twohandedSword": {
-			"skill": 0,
+		"two-hander": {
+			"experience": 0,
+			"level": 0,
 			"skillCap": 3
 		},
 		"dagger": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 0
 		},
 		"mace": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		},
 		"flail": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		}
 	},
@@ -355,7 +385,7 @@ var exterminator = {
 
 var rogue = {
 	critterName = "Rogue",
-	description = "Rogue uses a cloak and dagger from the shadows. Gets +1 toxix and bonus damage from using daggers.",
+	description = "Rogue uses a cloak and dagger from the shadows. Gets +1 to all toxix damage and +1 bonus damage from using daggers.",
 	race = "Human",
 	justice = "Laissez-faire",
 	hp = 12,
@@ -394,23 +424,28 @@ var rogue = {
 	goldPieces = 701,
 	skills = {
 		"sword": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 2
 		},
-		"twohandedSword": {
-			"skill": 0,
+		"two-hander": {
+			"experience": 0,
+			"level": 0,
 			"skillCap": 0
 		},
 		"dagger": {
-			"skill": 2,
+			"experience": 0,
+			"level": 2,
 			"skillCap": 3
 		},
 		"mace": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		},
 		"flail": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 1
 		}
 	},
@@ -419,7 +454,7 @@ var rogue = {
 
 var savant = {
 	critterName = "Savant",
-	description = "Savant is a 1400 year old wizard. Gets +1 frost, thunder and gleeie'er damage.",
+	description = "Savant is a 1400 year old wizard. Gets +3 frost and thunder spell damage.",
 	race = "Human",
 	justice = "Grilling",
 	hp = 8,
@@ -454,23 +489,28 @@ var savant = {
 	goldPieces = 110,
 	skills = {
 		"sword": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 0
 		},
-		"twohandedSword": {
-			"skill": 0,
+		"two-hander": {
+			"experience": 0,
+			"level": 0,
 			"skillCap": 0
 		},
 		"dagger": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 0
 		},
 		"mace": {
-			"skill": 1,
+			"experience": 0,
+			"level": 1,
 			"skillCap": 3
 		},
 		"flail": {
-			"skill": 0,
+			"experience": 0,
+			"level": 0,
 			"skillCap": 3
 		}
 	},

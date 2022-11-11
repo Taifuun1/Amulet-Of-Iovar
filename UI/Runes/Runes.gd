@@ -336,47 +336,79 @@ func calculateMagicDamage():
 
 func calculateMagicDamageIncrease(_type):
 	var _stats = $"/root/World/Critters/0".stats
+	var _critterClass = $"/root/World/Critters/0".critterClass
 	if _type.matchn("fleir"):
+		var _additionalDamage = 0
+		
+		if _critterClass.matchn("exterminator"):
+			_additionalDamage += 2
+		
 		return {
-			"dmg": _stats.belief / 2,
+			"dmg": _stats.belief / 2 + _additionalDamage,
 			"d": 0
 		}
 	if _type.matchn("frost"):
+		var _additionalDamage = 0
 		var _d = 0
+		
+		if _critterClass.matchn("savant"):
+			_additionalDamage += 3
+		
 		if _stats.visage > 18:
 			_d = 1
+		
 		return {
-			"dmg": _stats.visage / 3,
+			"dmg": _stats.visage / 3 + _additionalDamage,
 			"d": _d
 		}
 	if _type.matchn("thunder"):
+		var _additionalDamage = 0
 		var _d = 0
+		
+		if _critterClass.matchn("savant"):
+			_additionalDamage += 3
+		
 		if _stats.visage > 27:
 			_d = 1
+		
 		return {
-			"dmg": _stats.visage / 3,
+			"dmg": _stats.visage / 3 + _additionalDamage,
 			"d": _d
 		}
 	if _type.matchn("gleeie'er"):
+		var _additionalDamage = 0
 		var _d = 0
+		
 		if _stats.wisdom > 17:
 			_d = 2
 		elif _stats.wisdom > 8:
 			_d = 1
+		
+		if _critterClass.matchn("freedom fighter"):
+			_additionalDamage += 2
+		
 		return {
-			"dmg": _stats.wisdom / 3,
+			"dmg": _stats.wisdom / 3 + _additionalDamage,
 			"d": _d
 		}
 	if _type.matchn("toxix"):
+		var _additionalDamage = 0
 		var _d = 0
-		if _stats.wisdom > 21:
-			_d = 3
+		
+		if _critterClass.matchn("rogue"):
+			_additionalDamage += 1
+		
+		if _stats.wisdom > 27:
+			_d += 4
+		elif _stats.wisdom > 21:
+			_d += 3
 		elif _stats.wisdom > 17:
-			_d = 2
+			_d += 2
 		elif _stats.wisdom > 15:
-			_d = 1
+			_d += 1
+		
 		return {
-			"dmg": _stats.wisdom / 4,
+			"dmg": _stats.wisdom / 4 + _additionalDamage,
 			"d": _d
 		}
 

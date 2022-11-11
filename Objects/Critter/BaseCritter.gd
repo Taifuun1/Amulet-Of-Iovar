@@ -20,10 +20,6 @@ var maxmp
 var shields
 var ac
 var attacks
-var bonusDamage = {
-	"dmg": 0,
-	"magicDmg": 0
-}
 var currentHit
 var hits
 
@@ -94,7 +90,6 @@ func calculateDmg(_attack):
 		if _attack.bonusDmg != null:
 			for _bonusDamage in _attack.bonusDmg.values():
 				_totalBonusDamage += _bonusDamage
-		_totalBonusDamage += bonusDamage.dmg
 		
 		var _baseDmg
 		if _dmgVariation == 0:
@@ -111,7 +106,6 @@ func calculateDmg(_attack):
 			_magicDmg = _magicFloorDmg
 		else:
 			_magicDmg = randi() % int(_magicDmgVariation) + _magicFloorDmg
-		_magicDmg += bonusDamage.magicDmg
 		if _attack.magicDmg.element != null and resistances.has(_attack.magicDmg.element.to_lower()):
 			_magicDmg /= 2
 		damage.magicDmg = _magicDmg

@@ -1097,6 +1097,11 @@ func _on_Player_Animation_done():
 	processGameTurn()
 	resetToDefaulGameState()
 
+func _on_Critter_Animation_done():
+	pass
+#	if $Animations.get_child_count() == 1:
+#		resetToDefaulGameState()
+
 func _debug__go_to_level(_level):
 	$"/root/World".hide()
 	hideObjectsWhenDrawingNextFrame = true

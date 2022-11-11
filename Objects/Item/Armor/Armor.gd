@@ -13,8 +13,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		},
 		{
 			"itemName": "Leather cap",
@@ -29,8 +28,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		},
 		{
 			"itemName": "Bucket helmet",
@@ -45,8 +43,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		},
 		{
 			"itemName": "Battered buckler",
@@ -61,8 +58,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		},
 		{
 			"itemName": "Leather pants",
@@ -77,8 +73,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		},
 		{
 			"itemName": "Low boots",
@@ -93,8 +88,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		}
 	],
 	"uncommon": [
@@ -111,8 +105,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Scale ring mail",
@@ -127,8 +120,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Dwarvish coat",
@@ -143,8 +135,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Large orc shield",
@@ -159,8 +150,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Scale ring mail chausses",
@@ -175,8 +165,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Studded boots",
@@ -191,12 +180,11 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Boots of magic",
-			"unidentifiedItemName": "Boots of magic",
+			"unidentifiedItemName": "Low boots",
 			"texture": load("res://Assets/Armor/BootsOfMagic.png"),
 			"unIdentifiedTexture": load("res://Assets/Armor/BootsLowBoots.png"),
 			"type": "Armor",
@@ -207,12 +195,11 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Boots of fumbling",
-			"unidentifiedItemName": "Boots of fumbling",
+			"unidentifiedItemName": "Low boots",
 			"texture": load("res://Assets/Armor/BootsOfFumbling.png"),
 			"unIdentifiedTexture": load("res://Assets/Armor/BootsLowBoots.png"),
 			"type": "Armor",
@@ -223,8 +210,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		}
 	],
 	"rare": [
@@ -241,8 +227,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Rare"
+			"stackable": false
 		},
 		{
 			"itemName": "Adorned helmet",
@@ -257,8 +242,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Rare"
+			"stackable": false
 		},
 		{
 			"itemName": "Helm of ego",
@@ -273,8 +257,7 @@ var armor = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Rare"
+			"stackable": false
 		}
 #		{
 #			"itemName": "Adorned cloak",
@@ -303,12 +286,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 12,
 				"resistance": "Frost"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Green dragon scale mail",
@@ -319,12 +301,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 12,
 				"resistance": "Gleeie'er"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Red dragon scale mail",
@@ -335,12 +316,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 12,
 				"resistance": "Flier"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Yellow dragon scale mail",
@@ -351,12 +331,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 12,
 				"resistance": "Thunder"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Violet dragon scale mail",
@@ -367,12 +346,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 12,
 				"resistance": "Toxix"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Great Ulromirs platemail",
@@ -383,28 +361,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 15,
+				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
-		},
-		{
-			"itemName": "Frozen mail",
-			"unidentifiedItemName": "Frozen mail",
-			"texture": load("res://Assets/Armor/PlateFrozenMail.png"),
-			"unIdentifiedTexture": load("res://Assets/Armor/PlateFrozenMail.png"),
-			"type": "Armor",
-			"category": "Plate",
-			"weight": 75,
-			"value": {
-				"ac": 7,
-				"resistance": "Flier"
-			},
-			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Flaming mail",
@@ -415,12 +376,26 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 10,
 				"resistance": "Flier"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
+		},
+		{
+			"itemName": "Frozen mail",
+			"unidentifiedItemName": "Frozen mail",
+			"texture": load("res://Assets/Armor/PlateFrozenMail.png"),
+			"unIdentifiedTexture": load("res://Assets/Armor/PlateFrozenMail.png"),
+			"type": "Armor",
+			"category": "Plate",
+			"weight": 75,
+			"value": {
+				"ac": 10,
+				"resistance": "Frost"
+			},
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Thunder mail",
@@ -431,12 +406,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 10,
+				"resistance": "Thunder"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Gleeie'er mail",
@@ -447,12 +421,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 10,
+				"resistance": "Gleeie'er"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Bubbly mail",
@@ -463,12 +436,11 @@ var armor = {
 			"category": "Plate",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 10,
+				"resistance": "Toxix"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Uiroel helmet",
@@ -479,12 +451,11 @@ var armor = {
 			"category": "Helmet",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 4,
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Mossy helmet",
@@ -495,12 +466,11 @@ var armor = {
 			"category": "Helmet",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 4,
+				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Winged helmet",
@@ -511,12 +481,11 @@ var armor = {
 			"category": "Helmet",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 5,
+				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Justice'eer shield",
@@ -531,8 +500,7 @@ var armor = {
 				"resistance": "Flier"
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 #		{
 #			"itemName": "Shield of Backscattering",
@@ -559,12 +527,11 @@ var armor = {
 			"category": "Shield",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 6,
+				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 #			"itemName": "Shield of justice",shining shield
@@ -576,12 +543,11 @@ var armor = {
 			"category": "Shield",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 4,
+				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Thunder greaves",
@@ -592,12 +558,11 @@ var armor = {
 			"category": "Greaves",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 4,
+				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Burning mail chausses",
@@ -608,12 +573,11 @@ var armor = {
 			"category": "Greaves",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 4,
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Chilly boots",
@@ -624,12 +588,11 @@ var armor = {
 			"category": "Boots",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 3,
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Cool Mikeys",
@@ -640,12 +603,11 @@ var armor = {
 			"category": "Boots",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 1,
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		}
 	]
 }

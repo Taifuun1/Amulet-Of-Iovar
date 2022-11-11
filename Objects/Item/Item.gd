@@ -142,56 +142,141 @@ func createItem(_item, _extraData = {}, _amount = 1):
 ###########################################
 
 func getAttacks(_stats):
-	var attacks = []
-	var damageIncrease = calculateWeaponAttackIncrease(_stats)
-	for _d in range(value.d + damageIncrease.d):
-		attacks.append(
+	var _attacks = []
+	var _damageIncrease = calculateWeaponAttackIncrease(_stats)
+	var _critterClass = $"/root/World/Critters/0".critterClass
+	for _d in range(value.d + _damageIncrease.d):
+		var _newDamage = value.dmg.duplicate(true)
+		var _newBonusDamage = value.bonusDmg.duplicate(true)
+		var _newMagicDamage = value.magicDmg.duplicate(true)
+		if _critterClass.matchn("exterminator") and _newMagicDamage.element.matchn("fleir"):
+			_newMagicDamage.dmg[0] += 2
+			_newMagicDamage.dmg[1] += 2
+		elif _critterClass.matchn("freedom fighter") and _newMagicDamage.element.matchn("gleeie'er"):
+			_newMagicDamage.dmg[0] += 2
+			_newMagicDamage.dmg[1] += 2
+		elif _critterClass.matchn("rogue") and _newMagicDamage.element.matchn("toxix"):
+			_newMagicDamage.dmg[0] += 1
+			_newMagicDamage.dmg[1] += 1
+		if _critterClass.matchn("rogue") and category.matchn("dagger"):
+			_newBonusDamage.classBonusDamage = 1
+		_attacks.append(
 			{
-				"dmg": [value.dmg[0] + damageIncrease.dmg, value.dmg[1] + damageIncrease.dmg],
-				"bonusDmg": value.bonusDmg,
+				"dmg": [_newDamage[0] + _damageIncrease.dmg, _newDamage[1] + _damageIncrease.dmg],
+				"bonusDmg": _newBonusDamage,
 				"armorPen": value.armorPen,
-				"magicDmg": value.magicDmg
+				"magicDmg": _newMagicDamage
 			}
 		)
-	return attacks
+	return _attacks
 
 func calculateWeaponAttackIncrease(_stats):
+	var _playerSkills = $"/root/World/Critters/0".skills
+	var _critterClass = $"/root/World/Critters/0".critterClass
 	if category.matchn("sword"):
+		var _additionalDamage = 0
+		var _d = 0
+		
+		if _critterClass.matchn("mercenary"):
+			_additionalDamage += 1
+		
+		if _playerSkills.sword.level >= 3:
+			_additionalDamage += 7
+		elif _playerSkills.sword.level >= 2:
+			_additionalDamage += 4
+		elif _playerSkills.sword.level >= 1:
+			_additionalDamage += 2
+		
+		if _playerSkills.sword > 3:
+			_d += 1
+		
 		return {
-			"dmg": _stats.balance / 3,
-			"d": 0
+			"dmg": _stats.balance / 3 + _additionalDamage,
+			"d": _d
 		}
 	if category.matchn("two-hander"):
+		var _additionalDamage = 0
+		
+		if _critterClass.matchn("mercenary"):
+			_additionalDamage += 1
+		
+		if _playerSkills["two-hander"].level >= 3:
+			_additionalDamage += 12
+		elif _playerSkills["two-hander"].level >= 2:
+			_additionalDamage += 6
+		elif _playerSkills["two-hander"].level >= 1:
+			_additionalDamage += 3
+		
 		return {
-			"dmg": _stats.strength / 3,
+			"dmg": _stats.strength / 3 + _additionalDamage,
 			"d": 0
 		}
 	if category.matchn("dagger"):
+		var _additionalDamage = 0
 		var _d = 0
+		
+		if _critterClass.matchn("mercenary"):
+			_additionalDamage += 1
+		
+		if _playerSkills.dagger.level >= 3:
+			_additionalDamage += 4
+		elif _playerSkills.dagger.level >= 2:
+			_additionalDamage += 2
+			_d += 1
+		elif _playerSkills.dagger.level >= 1:
+			_additionalDamage += 1
+		
 		if _stats.legerity > 25:
-			_d = 2
+			_d += 2
 		elif _stats.legerity > 11:
-			_d = 1
+			_d += 1
+		
 		return {
-			"dmg": _stats.legerity / 5,
+			"dmg": _stats.legerity / 5 + _additionalDamage,
 			"d": _d
 		}
 	if category.matchn("mace"):
+		var _additionalDamage = 0
+		
+		if _critterClass.matchn("mercenary"):
+			_additionalDamage += 1
+		
+		if _playerSkills.mace.level >= 3:
+			_additionalDamage += 11
+		elif _playerSkills.mace.level >= 2:
+			_additionalDamage += 7
+		elif _playerSkills.mace.level >= 1:
+			_additionalDamage += 3
+		
 		return {
-			"dmg": (_stats.strength / 4) + (_stats.balance / 4),
+			"dmg": (_stats.strength / 4) + (_stats.balance / 4) + _additionalDamage,
 			"d": 0
 		}
 	if category.matchn("flail"):
+		var _additionalDamage = 0
 		var _d = 0
+		
+		if _critterClass.matchn("mercenary"):
+			_additionalDamage += 1
+		
+		if _playerSkills.flail.level >= 3:
+			_d += 3
+		elif _playerSkills.flail.level >= 2:
+			_additionalDamage += 1
+			_d += 2
+		elif _playerSkills.flail.level >= 1:
+			_d += 1
+		
 		if _stats.legerity > 22:
-			_d = 3
+			_d += 3
 		elif _stats.legerity > 15:
-			_d = 2
+			_d += 2
 		elif _stats.legerity > 8:
-			_d = 1
+			_d += 1
+		
 		return {
-			"dmg": _stats.legerity / 5,
-			"d": 0
+			"dmg": _stats.legerity / 5 + _additionalDamage,
+			"d": _d
 		}
 
 

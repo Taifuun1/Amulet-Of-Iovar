@@ -21,6 +21,7 @@ func createDungeon():
 		fillEmptyGenerationTiles("WALL_CAVE_DEEP")
 		fillGridWithGeneratedGrid()
 		addLootToSmallDisconnectedAreas()
+		placeRandomInteractables(["gems"])
 		getSpawnableTiles(
 			["FLOOR_CAVE_DEEP"],
 			["FLOOR_CAVE_DEEP"],

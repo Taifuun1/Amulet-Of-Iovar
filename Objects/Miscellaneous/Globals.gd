@@ -102,6 +102,7 @@ enum interactables {
 	PLANT_ORANGE
 	ANT_HILL
 	SPIDER_WEB
+	GEMS
 }
 
 var currentDungeonLevel = 1
@@ -123,3 +124,11 @@ func isTileFree(_tile, grid):
 		):
 			return false
 	return true
+
+func isItemIdentified(_item):
+	if (
+		GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and
+		GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified == false
+	):
+		GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified = true
+		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _item.identifiedItemName, "unidentifiedItemName": _item.unidentifiedItemName }))

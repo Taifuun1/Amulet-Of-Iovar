@@ -256,6 +256,17 @@ func placeRandomInteractables(_interactables):
 						var _randomSpawnableTile = spawnableItemTiles[randi() % spawnableItemTiles.size()]
 						if grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable == null:
 							grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable = Globals.interactables.ALTAR
+			"gems":
+				for _i in range(randi() % 81 + 20):
+					var _randomSpawnableTile = Vector2(randi() % int(Globals.gridSize.x), randi() % int(Globals.gridSize.y))
+					if (
+						grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable == null and
+						(
+							grid[_randomSpawnableTile.x][_randomSpawnableTile.y].tile == Globals.tiles.WALL_CAVE or
+							grid[_randomSpawnableTile.x][_randomSpawnableTile.y].tile == Globals.tiles.WALL_CAVE_DEEP
+						)
+					):
+						grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable = Globals.interactables.GEMS
 
 func resetLevel():
 	for x in range(grid.size()):

@@ -1,6 +1,8 @@
 extends BaseCritter
 
-var spellData = load("res://Objects/Spell/SpellData.gd").new()
+var spell = load("res://Objects/Spell/CritterSpell.tscn")
+
+var spellData = load("res://Objects/Spell/SpellData.gd").new().spellData
 var critterSpellData = load("res://Objects/Spell/CritterSpells.gd").new()
 
 var levelId
@@ -117,6 +119,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			else:
 				match _pickedAbility.abilityType:
 					"rangedSpell":
+						var _tiles = []
 						var _directions = [
 							Vector2(-1, -1),
 							Vector2(0, -1),
@@ -131,15 +134,33 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 							_directions = _directions[randi() % _directions.size()]
 						var _critters = []
 						for _direction in _directions:
+							_tiles = []
 							var _distance = 0
 							for _i in _pickedAbility.data.distance:
 								_distance += 1
 								var _tile = _critterTile + (_direction * _distance)
 								if _level.isOutSideTileMap(_tile) or !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 									break
+								_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 								match _pickedAbility.abilityName:
 									"rockThrow", "crackerThrow", "fleirpoint", "fleirnado", "frostpoint", "frostBite", "thunderPoint", "thundersplit", "voidBlast":
 										if _level.grid[_tile.x][_tile.y].critter == 0:
+											yield(get_tree(), "idle_frame")
+											var _newSpell = spell.instance()
+											var _color = "#000"
+											if _pickedAbility.data.attacks[0].magicDmg.element != null:
+												_color = spellData[_pickedAbility.data.attacks[0].magicDmg.element].color
+											_newSpell.create(_tiles, {
+												"texture": load("res://Assets/Spells/Bolt.png"),
+												"color": _color,
+												"spellDamage": _pickedAbility.data.attacks
+												}
+											)
+											$"/root/World/Animations".add_child(_newSpell)
+											# warning-ignore:return_value_discarded
+											$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("critterAnimationDone", $"/root/World", "_on_Critter_Animation_done")
+											$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
+#											$"/root/World".currentGameState = $"/root/World".gameState.OUT_OF_PLAYERS_HANDS
 											var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
 											if (
 												_critterNode.checkIfStatusEffectIsInEffect("backscattering") and
@@ -159,12 +180,31 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								break
 							else:
 								_critters.clear()
+						
 						if _critters.size() == 0:
-							continue
+							return false
 						if statusEffects.blindness > 0:
 							Globals.gameConsole.addLog("{critterName} casts {spell} in a random direction!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 						else:
 							Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+						
+						yield(get_tree(), "idle_frame")
+						var _newSpell = spell.instance()
+						var _color = "#000"
+						if _pickedAbility.data.attacks[0].magicDmg.element != null:
+							_color = spellData[_pickedAbility.data.attacks[0].magicDmg.element].color
+						_newSpell.create(_tiles, {
+							"texture": load("res://Assets/Spells/Bolt.png"),
+							"color": _color,
+							"spellDamage": _pickedAbility.data.attacks
+							}
+						)
+						$"/root/World/Animations".add_child(_newSpell)
+						# warning-ignore:return_value_discarded
+						$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("critterAnimationDone", $"/root/World", "_on_Critter_Animation_done")
+						$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
+#						$"/root/World".currentGameState = $"/root/World".gameState.OUT_OF_PLAYERS_HANDS
+						
 						for _critter in _critters:
 							var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critter }))
 							if _critterNode.checkIfStatusEffectIsInEffect("backscattering") and _pickedAbility.abilityName.matchn("dragonBreath"):
@@ -353,9 +393,9 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 			else:
 				_damageText = _damage.dmg + _damage.magicDmg
 			if _damage.magicDmg != 0 and _attack.magicDmg.element != null:
-				_damageColor = spellData.spellData[_attack.magicDmg.element.to_lower()].color
+				_damageColor = spellData[_attack.magicDmg.element.to_lower()].color
 			_damageNumber.create(_critterTile, _damageText, _damageColor)
-			$"/root/World/Animations".add_child(_damageNumber)
+			$"/root/World/Texts".add_child(_damageNumber)
 			
 			# Magic spell
 			if _damage.dmg == 0 and _damage.magicDmg != 0:

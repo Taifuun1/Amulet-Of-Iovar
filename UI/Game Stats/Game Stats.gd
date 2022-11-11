@@ -114,14 +114,12 @@ func updateStats(stats = {
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer/GoldPieces.text = str(stats.goldPieces)
 	if stats.weight != null and stats.weightBounds != null:
 		weight = stats.weight
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = stats.weight
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value = stats.weightBounds.min
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.max_value = stats.weightBounds.max
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.set_tooltip("Current carried weight: " + str(stats.weight))
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = 0
+		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = stats.weight
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/PreviousWeightBound.text = str(stats.weightBounds.min)
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/PreviousWeightBound.set_tooltip("Previous weight bound: " + str(stats.weightBounds.min))
 		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/NextWeightBound.text = str(stats.weightBounds.max)
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/NextWeightBound.set_tooltip("Next weight bound: " + str(stats.weightBounds.max))
 
 func _on_Weigth_value_changed(value):
 	var _min = $Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value

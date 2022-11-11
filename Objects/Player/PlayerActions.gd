@@ -11,15 +11,10 @@ func readItem(_id):
 	var _additionalChoices = false
 	if _readItem.type.matchn("scroll"):
 		Globals.gameConsole.addLog("You read a {itemName}.".format({ "itemName": _readItem.itemName }))
-		if (
-			GlobalItemInfo.globalItemInfo.has(_readItem.identifiedItemName) and
-			GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified == false
-		):
-			GlobalItemInfo.globalItemInfo[_readItem.identifiedItemName].identified = true
-			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _readItem.identifiedItemName, "unidentifiedItemName": _readItem.unidentifiedItemName }))
 		match _readItem.identifiedItemName.to_lower():
 			"blank scroll":
 				Globals.gameConsole.addLog("Its a blank scroll. Wow.")
+				Globals.isItemIdentified(_readItem)
 			"official mail":
 				Globals.gameConsole.addLog("Its a grocery list of milk, eggs and carrots. Riveting.")
 				Globals.gameConsole.addLog("The mail disappears!")
@@ -223,6 +218,7 @@ func readItem(_id):
 					Globals.gameConsole.addLog("You already feel confused enough!")
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
+		Globals.isItemIdentified(_readItem)
 		checkAllIdentification(true)
 		if !_readItem.identifiedItemName.to_lower().matchn("blank scroll"):
 			if _readItem.amount > 0:
@@ -236,12 +232,6 @@ func quaffItem(_id):
 	var _additionalChoices = false
 	if _quaffedItem.type.matchn("potion"):
 		Globals.gameConsole.addLog("You quaff a {itemName}.".format({ "itemName": _quaffedItem.itemName }))
-		if (
-			GlobalItemInfo.globalItemInfo.has(_quaffedItem.identifiedItemName) and
-			GlobalItemInfo.globalItemInfo[_quaffedItem.identifiedItemName].identified == false
-		):
-			GlobalItemInfo.globalItemInfo[_quaffedItem.identifiedItemName].identified = true
-			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _quaffedItem.identifiedItemName, "unidentifiedItemName": _quaffedItem.unidentifiedItemName }))
 		match _quaffedItem.identifiedItemName.to_lower():
 			"water potion":
 				if _quaffedItem.alignment.matchn("blessed"):
@@ -353,6 +343,7 @@ func quaffItem(_id):
 					Globals.gameConsole.addLog("You already feel confused enough!")
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
+		Globals.isItemIdentified(_quaffedItem)
 		checkAllIdentification(true)
 		if _quaffedItem.amount > 0:
 			_quaffedItem.amount -= 1
@@ -366,7 +357,10 @@ func consumeItem(_id):
 		if calories > 5000:
 			calories += _eatenItem.value / 3
 		else:
-			calories += _eatenItem.value
+			if critterClass.matchn("herbalogue"):
+				calories += _eatenItem.value + _eatenItem.value / 3
+			else:
+				calories += _eatenItem.value
 		checkAllIdentification(true)
 		if _eatenItem.amount > 0:
 			_eatenItem.amount -= 1
@@ -384,12 +378,6 @@ func zapItem(_direction):
 	var _additionalChoices = false
 	if _zappedItem.type.matchn("wand"):
 		Globals.gameConsole.addLog("You zap the {itemName}.".format({ "itemName": _zappedItem.itemName }))
-		if (
-			GlobalItemInfo.globalItemInfo.has(_zappedItem.identifiedItemName) and
-			GlobalItemInfo.globalItemInfo[_zappedItem.identifiedItemName].identified == false
-		):
-			GlobalItemInfo.globalItemInfo[_zappedItem.identifiedItemName].identified = true
-			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _zappedItem.identifiedItemName, "unidentifiedItemName": _zappedItem.unidentifiedItemName }))
 		if _zappedItem.value.charges > 0:
 			match _zappedItem.identifiedItemName.to_lower():
 				"wand of light":
@@ -412,6 +400,7 @@ func zapItem(_direction):
 						}
 						Globals.gameConsole.addLog("The light illuminates your surroundings dimly.")
 					$"/root/World".drawLevel()
+					Globals.isItemIdentified(_zappedItem)
 				"wand of teleport":
 					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
@@ -423,6 +412,7 @@ func zapItem(_direction):
 								break
 							dealWithTeleport(_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter, _zappedItem.alignment, _zappedItem.type)
 							Globals.gameConsole.addLog("The {critterName} disappears!".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter })).critterName }))
+							Globals.isItemIdentified(_zappedItem)
 							break
 				"wand of summon critter":
 					if _zappedItem.alignment.matchn("blessed"):
@@ -448,6 +438,7 @@ func zapItem(_direction):
 							Globals.gameConsole.addLog("A bucketload of critters appear around you!")
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
+					Globals.isItemIdentified(_zappedItem)
 				"wand of backwards magic sphere":
 					if _zappedItem.alignment.matchn("blessed"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
@@ -457,6 +448,7 @@ func zapItem(_direction):
 					elif _zappedItem.alignment.matchn("cursed"):
 						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, "Wand of backwards magic sphere")
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
+					Globals.isItemIdentified(_zappedItem)
 				"wand of item polymorph":
 					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
@@ -477,8 +469,10 @@ func zapItem(_direction):
 								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 								if _itemCount == 1:
 									Globals.gameConsole.addLog("Item on the ground vibrates.")
+									Globals.isItemIdentified(_zappedItem)
 									continue
 								Globals.gameConsole.addLog("Items on the ground vibrate.")
+								Globals.isItemIdentified(_zappedItem)
 						elif _zappedItem.alignment.matchn("uncursed"):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
 								var _newItems = []
@@ -494,6 +488,7 @@ func zapItem(_direction):
 								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 								if _itemCount > 0:
 									Globals.gameConsole.addLog("Some items on the ground vibrate.")
+									Globals.isItemIdentified(_zappedItem)
 						elif _zappedItem.alignment.matchn("cursed"):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
 								var _newItems = []
@@ -509,7 +504,9 @@ func zapItem(_direction):
 								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 							if _itemCount > 0:
 								Globals.gameConsole.addLog("A few items on the ground vibrate.")
+								Globals.isItemIdentified(_zappedItem)
 				"wand of wishing":
+					Globals.isItemIdentified(_zappedItem)
 					var _itemTypes = []
 					for _type in $"/root/World/Items/Items".items:
 						_itemTypes.append(_type)
@@ -538,6 +535,7 @@ func zapItem(_direction):
 						$"/root/World".updateTiles()
 						$"/root/World".drawLevel()
 						Globals.gameConsole.addLog("The {itemName} bores through the wall!".format({ "itemName": _zappedItem.itemName }))
+						Globals.isItemIdentified(_zappedItem)
 				"wand of magic sphere", "wand of fleir", "wand of frost", "wand of thunder":
 					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
@@ -547,6 +545,7 @@ func zapItem(_direction):
 						if _grid[_tile.x][_tile.y].critter != null:
 							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
 							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _tile)
+							Globals.isItemIdentified(_zappedItem)
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
 			_zappedItem.value.charges -= 1
@@ -582,12 +581,6 @@ func useItem(_id):
 			else:
 				Globals.gameConsole.addLog("The gods seem unresponsive for now.")
 	if _usedItem.type.matchn("tool"):
-		if (
-			GlobalItemInfo.globalItemInfo.has(_usedItem.identifiedItemName) and
-			GlobalItemInfo.globalItemInfo[_usedItem.identifiedItemName].identified == false
-		):
-			GlobalItemInfo.globalItemInfo[_usedItem.identifiedItemName].identified = true
-			Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _usedItem.identifiedItemName, "unidentifiedItemName": _usedItem.unidentifiedItemName }))
 		match _usedItem.identifiedItemName.to_lower():
 			"blindfold":
 				if _usedItem.value.worn:
@@ -699,6 +692,7 @@ func useItem(_id):
 				_additionalChoices = true
 			_:
 				Globals.gameConsole.addLog("Thats not a tool...")
+		Globals.isItemIdentified(_usedItem)
 		checkAllIdentification(true, true)
 		$"/root/World".closeMenu(_additionalChoices)
 
@@ -815,10 +809,10 @@ func dealWithWandOfWishing(_name, _alignment):
 		Globals.gameConsole.addLog("An item appears in your inventory.")
 	elif _alignment.matchn("cursed"):
 		$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), $"/root/World".level.getCritterTile(0))
-		Globals.gameConsole.addLog("An item appears at your feet.")
+		Globals.gameConsole.addLog("An item appears at your feet... It doesn't seem to be what you wished for.")
 	else:
 		$"/root/World/Items/Items".createItem(_name, $"/root/World".level.getCritterTile(0))
-		Globals.gameConsole.addLog("An item appears at your feet... It doesn't seem to be what you wished for.")
+		Globals.gameConsole.addLog("An item appears at your feet.")
 	$"/root/World".closeMenu()
 
 func dealWithMarker(_scroll, _ink):
