@@ -1,14 +1,14 @@
 extends Node
 
 var saveTypes = {
-	"levelSave": load("res://Objects/SaveLevelSave.gd"),
-	"fOVSave": load("res://Objects/FOVSave.gd"),
-	"itemSave": load("res://Objects/ItemSave.gd"),
-	"critterSave": load("res://Objects/CritterSave.gd"),
-	"gameConsoleSave": load("res://Objects/GameConsoleSave.gd"),
-	"gameStatsSave": load("res://Objects/GameStatsSave.gd"),
-	"globalsSave": load("res://Objects/GlobalsSave.gd"),
-	"equipmentSave": load("res://Objects/EquippedSave.gd")
+	"levelSave": load("res://Objects/Save/SaveLevelSave.gd"),
+	"fOVSave": load("res://Objects/Save/FOVSave.gd"),
+	"itemSave": load("res://Objects/Save/ItemSave.gd"),
+	"critterSave": load("res://Objects/Save/CritterSave.gd"),
+	"gameConsoleSave": load("res://Objects/Save/GameConsoleSave.gd"),
+	"gameStatsSave": load("res://Objects/Save/GameStatsSave.gd"),
+	"globalsSave": load("res://Objects/Save/GlobalsSave.gd"),
+	"equipmentSave": load("res://Objects/Save/EquippedSave.gd")
 }
 
 func saveData(_fileName, _filePath, _data = null):

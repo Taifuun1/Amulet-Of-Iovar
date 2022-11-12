@@ -106,7 +106,7 @@ enum interactables {
 }
 
 var currentDungeonLevel = 1
-var currentDungeonLevelName = "Dungeon hallways 1"
+var currentDungeonLevelName = ""
 var generatedLevels = 0
 
 var levelId = 1

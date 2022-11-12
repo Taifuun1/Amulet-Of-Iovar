@@ -37,7 +37,8 @@ func getFOVSaveData():
 	var _fovLevels = {}
 	for _fovLevel in fovLevels.size():
 		_fovLevels[_fovLevel] = {  }
-		for _fovLevelX in fovLevels[_fovLevel]:
-			for _fovLevelY in _fovLevel[_fovLevel][_fovLevelX]:
-				_fovLevels[_fovLevel][_fovLevelX][_fovLevelY] = fovLevels[_fovLevel][_fovLevelX][_fovLevelY]
+		for x in fovLevels[_fovLevel].size():
+			_fovLevels[_fovLevel][x] = {  }
+			for y in fovLevels[_fovLevel][x].size():
+				_fovLevels[_fovLevel][x][y] = fovLevels[_fovLevel][x][y]
 	return _fovLevels

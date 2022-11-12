@@ -39,7 +39,7 @@ func createGrid(_tile = Globals.tiles.EMPTY):
 	$"/root/World/UI/UITheme/StartScreen".setLoadingText("Generating level... \n{generatedLevels}".format({ "generatedLevels": Globals.generatedLevels }))
 	for x in range(Globals.gridSize.x):
 		grid.append([])
-		for y in range(Globals.gridSize.y):
+		for _y in range(Globals.gridSize.y):
 			grid[x].append({
 				"tile": _tile,
 				"tileMetaData": {
@@ -680,8 +680,9 @@ func getGenerationGrid():
 			}
 
 func getLevelSaveData():
-	var _grid = {}
+	var _grid = {  }
 	for x in grid.size():
+		_grid[x] = {  }
 		for y in grid[x].size():
 			_grid[x][y] = grid[x][y]
 	return {

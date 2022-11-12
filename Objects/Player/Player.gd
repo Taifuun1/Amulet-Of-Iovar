@@ -703,6 +703,36 @@ func checkSkillExperience():
 			skills[_skill].level = 3
 			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
 
+func getCritterSaveData():
+	var _critterData = {
+		inventory = $Inventory.inventory,
+		playerClass = playerClass,
+		playerVisibility = playerVisibility,
+		experiencePoints = experiencePoints,
+		experienceNeededForPreviousLevelGainAmount = experienceNeededForPreviousLevelGainAmount,
+		experienceNeededForLevelGainAmount = experienceNeededForLevelGainAmount,
+		hpIncrease = hpIncrease,
+		mpIncrease = mpIncrease,
+		strengthIncrease = strengthIncrease,
+		legerityIncrease = legerityIncrease,
+		balanceIncrease = balanceIncrease,
+		beliefIncrease = beliefIncrease,
+		visageIncrease = visageIncrease,
+		wisdomIncrease = wisdomIncrease,
+		calories = calories,
+		previousCalories = previousCalories,
+		goldPieces = goldPieces,
+		maxCarryWeight = maxCarryWeight,
+		carryWeightBounds = carryWeightBounds,
+		turnsUntilAction = turnsUntilAction,
+		selectedItem = selectedItem,
+		itemsTurnedOn = itemsTurnedOn,
+		skills = skills,
+		neutralCritters = neutralCritters
+	}
+	_critterData.merge(getBaseCritterSaveData())
+	return _critterData
+
 
 
 ########################

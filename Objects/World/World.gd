@@ -161,14 +161,14 @@ func create(_className):
 		else:
 			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel()
 	
-	for _level in levels.minesOfTidoh:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-	
-	for _level in levels.depthsOfTidoh:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-	
-	for _level in levels.dungeon2:
-		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+#	for _level in levels.minesOfTidoh:
+#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+#
+#	for _level in levels.depthsOfTidoh:
+#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+#
+#	for _level in levels.dungeon2:
+#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
 	
 #	for _level in levels.beach:
 #		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
@@ -253,29 +253,29 @@ func createDungeon():
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
-	### Mines of Tidoh
-	for _level in range(1):
-		var newCave = minesOfTidoh.instance()
-		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 2)
-		levels.minesOfTidoh.append(newCave)
-		$Levels.add_child(newCave)
-	var newMiningOutpost = tidohMiningOutpost2.instance()
-	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
-	levels.minesOfTidoh.append(newMiningOutpost)
-	$Levels.add_child(newMiningOutpost)
-	for _level in range(1):
-		var newCave = depthsOfTidoh.instance()
-		newCave.create("depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": levels.depthsOfTidoh.size() + 1 }), 1)
-		levels.minesOfTidoh.append(newCave)
-		$Levels.add_child(newCave)
-	
-	### Dungeon 2
-	for _level in range(1):
-		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon2", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
-		levels.dungeon2.append(newDungeon)
-		$Levels.add_child(newDungeon)
-
+#	### Mines of Tidoh
+#	for _level in range(1):
+#		var newCave = minesOfTidoh.instance()
+#		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 2)
+#		levels.minesOfTidoh.append(newCave)
+#		$Levels.add_child(newCave)
+#	var newMiningOutpost = tidohMiningOutpost2.instance()
+#	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
+#	levels.minesOfTidoh.append(newMiningOutpost)
+#	$Levels.add_child(newMiningOutpost)
+#	for _level in range(1):
+#		var newCave = depthsOfTidoh.instance()
+#		newCave.create("depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": levels.depthsOfTidoh.size() + 1 }), 1)
+#		levels.minesOfTidoh.append(newCave)
+#		$Levels.add_child(newCave)
+#
+#	### Dungeon 2
+#	for _level in range(1):
+#		var newDungeon = dungeon.instance()
+#		newDungeon.create("dungeon2", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
+#		levels.dungeon2.append(newDungeon)
+#		$Levels.add_child(newDungeon)
+#		
 #	### Beach
 #	var newBeach = beach.instance()
 #	newBeach.create("beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
@@ -1102,23 +1102,28 @@ func saveGame():
 		if _item.name == "Items":
 			continue
 		var _itemData = _item.getItemSaveData()
-		$Save.saveGameFile("itemSave", _itemData.id, "{saveGameFile}/items".format({ "saveGameFile": saveGameFile }), _itemData)
+#		$Save.saveGameFile("itemSave", _itemData.id, "{saveGameFile}/items".format({ "saveGameFile": saveGameFile }), _itemData)
 	for _critter in $Critters.get_children():
 		if _critter.name.matchn("Critters"):
 			continue
 		var _critterData = _critter.getCritterSaveData()
-		$Save.saveGameFile("critterSave", _critterData.id, "{saveGameFile}/critters".format({ "saveGameFile": saveGameFile }), _critterData)
-	for _level in levels:
-		var _data = _level.getLevelSaveData()
-		$Save.saveGameFile("levelSave", _data.levelId, "{saveGameFile}/levels".format({ "saveGameFile": saveGameFile }), _data)
+#		$Save.saveGameFile("critterSave", _critterData.id, "{saveGameFile}/critters".format({ "saveGameFile": saveGameFile }), _critterData)
+	for _levelSection in levels.values():
+		if typeof(_levelSection) != TYPE_ARRAY:
+			var _levelData = _levelSection.getLevelSaveData()
+		else:
+			for _level in _levelSection:
+				var _levelData = _level.getLevelSaveData()
+#		$Save.saveGameFile("levelSave", _data.levelId, "{saveGameFile}/levels".format({ "saveGameFile": saveGameFile }), _data)
 	var _fOVData = $FOV.getFOVSaveData()
-	$Save.saveGameFile("fOVSave", "fov", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _fOVData)
-	var _gameConsoleData = $UI/UITheme/GameConsole.getGameConsoleSaveData()
-	$Save.saveGameFile("gameConsoleSave", "gameConsole", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _gameConsoleData)
+#	$Save.saveGameFile("fOVSave", "fov", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _fOVData)
+#	var _gameConsoleData = $UI/UITheme/GameConsole.getGameConsoleSaveData()
+#	$Save.saveGameFile("gameConsoleSave", "gameConsole", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _gameConsoleData)
 	var _globalsData = Globals.getGlobalsSaveData()
-	$Save.saveGameFile("globalsSave", "globals", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _globalsData)
-	var _equipmentData = $UI/UITheme/Equipment.getEquipmentSaveData().merge($UI/UITheme/Runes.getERunesSaveData())
-	$Save.saveGameFile("equipmentSave", "equipment", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _equipmentData)
+#	$Save.saveGameFile("globalsSave", "globals", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _globalsData)
+	var _equipmentData = $UI/UITheme/Equipment.getEquipmentSaveData()
+	_equipmentData.merge($UI/UITheme/Runes.getRunesSaveData())
+#	$Save.saveGameFile("equipmentSave", "equipment", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _equipmentData)
 #	ResourceSaver.save("user://gameData{saveGameNumber}.save".format({ "saveGameNumber": 1 }), get_node("."))
 
 
