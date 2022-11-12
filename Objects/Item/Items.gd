@@ -263,6 +263,6 @@ func randomizeRandomItems():
 
 func checkAllItemsIdentification():
 	for _item in $"/root/World/Items".get_children():
-		if _item.name == "Items":
+		if _item.name.matchn("Items"):
 			continue
 		_item.checkItemIdentification()

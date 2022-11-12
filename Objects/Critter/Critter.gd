@@ -485,6 +485,18 @@ func checkCritterIdentification(_data):
 	if _data.knowledge:
 		$Tooltip/TooltipContainer.updateTooltip(critterName, _data.description, $CritterSprite.texture)
 
+func getCritterSaveData():
+	return {
+		levelId = levelId,
+		aI = aI,
+		weight = weight,
+		expDropAmount = expDropAmount,
+		drops = drops,
+		abilityHits = abilityHits,
+		currentCritterAbilityHit = currentCritterAbilityHit,
+		activationDistance = activationDistance
+	}.merge(getBaseCritterSaveData())
+
 
 
 ########################

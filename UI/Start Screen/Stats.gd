@@ -11,13 +11,13 @@ func fillStatsList():
 #	dir.remove("user://critters.json")
 	
 	var _lifetimeList = statsList.instance()
-	_lifetimeList.create("Lifetime stats", $"/root/World/Save".loadData("lifetimeStats", statsData.lifetimeStats))
+	_lifetimeList.create("Lifetime stats", $"/root/World/Save".loadDataLifeTimeStats("lifetimeStats", statsData.lifetimeStats))
 	$VBoxContainer/ScrollContainer/VBoxContainer.add_child(_lifetimeList)
 	
 	var _itemList = statsList.instance()
-	_itemList.create("Item knowledge", $"/root/World/Save".loadData("items", statsData.items))
+	_itemList.create("Item knowledge", $"/root/World/Save".loadDataLifeTimeStats("items", statsData.items))
 	$VBoxContainer/ScrollContainer/VBoxContainer.add_child(_itemList)
 	
 	var _critterList = statsList.instance()
-	_critterList.create("Critter knowledge", $"/root/World/Save".loadData("critters", statsData.critters))
+	_critterList.create("Critter knowledge", $"/root/World/Save".loadDataLifeTimeStats("critters", statsData.critters))
 	$VBoxContainer/ScrollContainer/VBoxContainer.add_child(_critterList)

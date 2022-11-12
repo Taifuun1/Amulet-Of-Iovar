@@ -32,3 +32,12 @@ func seeCell(x, y):
 func greyCell(x, y):
 	currentFOVLevel[x][y] = FOG
 	set_cell(x, y, FOG)
+
+func getFOVSaveData():
+	var _fovLevels = {}
+	for _fovLevel in fovLevels.size():
+		_fovLevels[_fovLevel] = {  }
+		for _fovLevelX in fovLevels[_fovLevel]:
+			for _fovLevelY in _fovLevel[_fovLevel][_fovLevelX]:
+				_fovLevels[_fovLevel][_fovLevelX][_fovLevelY] = fovLevels[_fovLevel][_fovLevelX][_fovLevelY]
+	return _fovLevels

@@ -1,5 +1,10 @@
 extends Node
 
+func getGlobalCritterSaveData():
+	return {
+		globalCritterInfo = globalCritterInfo
+	}
+
 func addCritterToPlay(_critterName):
 	globalCritterInfo[_critterName].crittersInPlay += 1
 

@@ -1,5 +1,10 @@
 extends Node
 
+func getGlobalCritterSaveData():
+	return {
+		globalItemInfo = globalItemInfo
+	}
+
 var globalItemInfo = {
 	"Amulet of seeing": {
 		"identified": false

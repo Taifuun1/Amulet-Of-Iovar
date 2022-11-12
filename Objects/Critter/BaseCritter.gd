@@ -168,3 +168,31 @@ func checkIfStatusEffectIsInEffect(_statusEffect):
 	if statusEffects[_statusEffect] > 0 or statusEffects[_statusEffect] == -1:
 		return true
 	return false
+
+func getBaseCritterSaveData():
+	return {
+		id = id,
+		critterName = critterName,
+		critterClass = critterClass,
+		race = race,
+		justice = justice,
+		level = level,
+		hp = hp,
+		mp = mp,
+		basehp = basehp,
+		basemp = basemp,
+		maxhp = maxhp,
+		maxmp = maxmp,
+		shields = shields,
+		ac = ac,
+		attacks = attacks,
+		currentHit = currentHit,
+		hits = hits,
+		stats = stats,
+		abilities = abilities,
+		resistances = resistances,
+		statusEffects = statusEffects,
+		statusStates = statusStates,
+		hpRegenTimer = hpRegenTimer,
+		mpRegenTimer = mpRegenTimer
+	}

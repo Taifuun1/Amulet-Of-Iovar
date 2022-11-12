@@ -306,3 +306,24 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 func addContainer():
 	container = []
 	containerWeight = weight
+
+func getItemSaveData():
+	return {
+		id = id,
+		itemName = itemName,
+		type = type,
+		category = category,
+		weight = weight,
+		value = value,
+		amount = amount,
+		alignment = alignment,
+		enchantment = enchantment,
+		identifiedItemName = identifiedItemName,
+		unidentifiedItemName = unidentifiedItemName,
+		texture = texture,
+		notIdentified = notIdentified,
+		container = container,
+		containerWeight = containerWeight,
+		binds = binds,
+		stackable = stackable
+	}

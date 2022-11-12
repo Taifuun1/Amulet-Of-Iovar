@@ -38,7 +38,6 @@ var equipment = {
 	"boots": null
 }
 
-var dualWielding = false
 var hoveredEquipment = null
 
 func create():
@@ -88,8 +87,6 @@ func _process(_delta):
 						$"EquipmentBackground/RightHand/Sprite".texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
 						_changed = true
 				else:
-					if hands[hoveredEquipment.to_lower()] == null:
-						dualWielding = false
 					if hands[hoveredEquipment.to_lower()] != null:
 						_changed = true
 					hands[hoveredEquipment.to_lower()] = null
@@ -156,7 +153,6 @@ func setEquipment(_id):
 		Globals.gameConsole.addLog("The {item} is bound to you.".format({ "item": _oldItem.itemName }))
 		return
 	elif _matchingType.matchn("weapon"):
-		dualWielding = false
 		if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
 			hands["lefthand"] = null
 			hands["righthand"] = null
@@ -170,8 +166,6 @@ func setEquipment(_id):
 		elif hands["lefthand"] != _item.id and hands["righthand"] != _item.id:
 			hands[hoveredEquipment.to_lower()] = _item.id
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
-		if hands["lefthand"] != null and hands["righthand"] != null and !(hands["lefthand"] == hands["righthand"]):
-			dualWielding = true
 	elif _matchingType.matchn("accessory"):
 		if accessories[hoveredEquipment.to_lower()] != null:
 			if _item.category.matchn("ring"):
@@ -227,7 +221,6 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 		Globals.gameConsole.addLog("The {item} is bound to you.".format({ "item": _item.itemName }))
 		return
 	if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null and hands["righthand"] == _id and hands["lefthand"] == _id:
-		dualWielding = false
 		hands["lefthand"] = null
 		hands["righthand"] = null
 		$"EquipmentBackground/LeftHand/Sprite".texture = load(equipmentUITemplatePaths["lefthand"])
@@ -601,6 +594,18 @@ func checkIfMatchingEquipmentAndSlot(_type, _category):
 		):
 			return "Armor"
 	return null
+
+func getEquipmentSaveData():
+	return {
+		hands = hands,
+		equipment = equipment,
+		accessories = accessories
+	}
+
+
+########################
+### Signal functions ###
+########################
 
 func _on_mouse_entered_equipment_slot(_equipmentSlot):
 	hoveredEquipment = _equipmentSlot

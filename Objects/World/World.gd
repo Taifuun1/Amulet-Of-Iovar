@@ -48,6 +48,8 @@ onready var iovarsLair1 = preload("res://Level Generation/Premade Levels/Iovars 
 onready var iovarsLair2 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair2.tscn")
 onready var church = preload("res://Level Generation/Premade Levels/Church/Church.tscn")
 
+var saveGameFile = 1
+
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
 
@@ -495,6 +497,8 @@ func _input(_event):
 			elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME:
 				currentGameState = gameState.KICK
 				Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
+			elif Input.is_action_just_pressed("SAVE") and currentGameState == gameState.GAME:
+				saveGame()
 			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
 				keepMoving = true
 		updateUI()
@@ -1092,6 +1096,36 @@ func resetToDefaulGameState():
 	currentGameState = gameState.GAME
 	inGame = true
 	keepMoving = false
+
+func saveGame():
+	for _item in $Items.get_children():
+		if _item.name == "Items":
+			continue
+		var _itemData = _item.getItemSaveData()
+		$Save.saveGameFile("itemSave", _itemData.id, "{saveGameFile}/items".format({ "saveGameFile": saveGameFile }), _itemData)
+	for _critter in $Critters.get_children():
+		if _critter.name.matchn("Critters"):
+			continue
+		var _critterData = _critter.getCritterSaveData()
+		$Save.saveGameFile("critterSave", _critterData.id, "{saveGameFile}/critters".format({ "saveGameFile": saveGameFile }), _critterData)
+	for _level in levels:
+		var _data = _level.getLevelSaveData()
+		$Save.saveGameFile("levelSave", _data.levelId, "{saveGameFile}/levels".format({ "saveGameFile": saveGameFile }), _data)
+	var _fOVData = $FOV.getFOVSaveData()
+	$Save.saveGameFile("fOVSave", "fov", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _fOVData)
+	var _gameConsoleData = $UI/UITheme/GameConsole.getGameConsoleSaveData()
+	$Save.saveGameFile("gameConsoleSave", "gameConsole", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _gameConsoleData)
+	var _globalsData = Globals.getGlobalsSaveData()
+	$Save.saveGameFile("globalsSave", "globals", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _globalsData)
+	var _equipmentData = $UI/UITheme/Equipment.getEquipmentSaveData().merge($UI/UITheme/Runes.getERunesSaveData())
+	$Save.saveGameFile("equipmentSave", "equipment", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _equipmentData)
+#	ResourceSaver.save("user://gameData{saveGameNumber}.save".format({ "saveGameNumber": 1 }), get_node("."))
+
+
+
+######################################
+### Signal and debuggind functions ###
+######################################
 
 func _on_Player_Animation_done():
 	processGameTurn()

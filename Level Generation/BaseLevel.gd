@@ -12,7 +12,6 @@ var visibility
 var grid = []
 var rooms = []
 var areas = []
-var floors = []
 var openTiles = []
 var spawnableItemTiles = []
 var spawnableCritterTiles = []
@@ -38,10 +37,10 @@ func create(_dungeonType, _dungeonLevelName, _visibility):
 func createGrid(_tile = Globals.tiles.EMPTY):
 	Globals.generatedLevels += 1
 	$"/root/World/UI/UITheme/StartScreen".setLoadingText("Generating level... \n{generatedLevels}".format({ "generatedLevels": Globals.generatedLevels }))
-	for _x in range(Globals.gridSize.x):
+	for x in range(Globals.gridSize.x):
 		grid.append([])
-		for _y in range(Globals.gridSize.y):
-			grid[_x].append({
+		for y in range(Globals.gridSize.y):
+			grid[x].append({
 				"tile": _tile,
 				"tileMetaData": {
 					"xFlip": false,
@@ -284,7 +283,6 @@ func resetLevel():
 			grid[x][y].interactable = -1
 	rooms.clear()
 	areas.clear()
-	floors.clear()
 	openTiles.clear()
 	spawnableItemTiles.clear()
 	spawnableCritterTiles.clear()
@@ -680,3 +678,23 @@ func getGenerationGrid():
 				"xFlip": is_cell_x_flipped(x, y),
 				"yFlip": is_cell_y_flipped(x, y)
 			}
+
+func getLevelSaveData():
+	var _grid = {}
+	for x in grid.size():
+		for y in grid[x].size():
+			_grid[x][y] = grid[x][y]
+	return {
+		levelId = levelId,
+		dungeonType = dungeonType,
+		dungeonLevelName = dungeonLevelName,
+		visibility = visibility,
+
+		grid = _grid,
+		openTiles = openTiles,
+		spawnableItemTiles = spawnableItemTiles,
+		spawnableCritterTiles = spawnableCritterTiles,
+		floorTiles = floorTiles,
+		stairs = stairs,
+		critters = critters
+	}

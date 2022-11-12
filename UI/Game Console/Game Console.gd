@@ -32,3 +32,9 @@ func updateGameConsole():
 	# Wait a frame for Godot to realize the new label
 	yield(get_tree().create_timer(.01), "timeout")
 	$Background/GameConsoleContainer/GameConsoleScrollContainer.scroll_vertical = $Background/GameConsoleContainer/GameConsoleScrollContainer.get_v_scrollbar().max_value
+
+func getGameConsoleSaveData():
+	var _consoleLogs = {}
+	for _consoleLog in consoleLog.size():
+		_consoleLogs[_consoleLog] = consoleLog[_consoleLog]
+	return _consoleLogs
