@@ -294,7 +294,7 @@ func addInputs(_name, _path):
 				inputs.append(fileName)
 			fileName = dir.get_next()
 	for fileName in inputs:
-		$Inputs.add_child(load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
+		$Inputs.call_deferred("add_child", load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
 
 func getAllInputs():
 	var _allInputs = []
@@ -307,7 +307,7 @@ func getAllInputs():
 				_allInputs.append(_newInputPatterns)
 			_input = turnInput(_input)
 	for _inputNode in $Inputs.get_children():
-		_inputNode.queue_free()
+		_inputNode.call_deferred("queue", "free")
 	
 	return _allInputs
 

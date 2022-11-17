@@ -1,57 +1,7 @@
 extends TileMap
+class_name WorldManagement
 
 onready var player = preload("res://Objects/Player/Player.tscn").instance()
-
-onready var critters = preload("res://Objects/Critter/Critters.tscn").instance()
-onready var items = preload("res://Objects/Item/Items.tscn").instance()
-
-##################################
-### Generic dungeon generation ###
-##################################
-onready var dungeon = preload("res://Level Generation/Generic Generation/Dungeon Levels/Dungeon.tscn")
-onready var tidohMiningOutpost = preload("res://Level Generation/Generic Generation/Mines Of Tidoh/TidohMiningOutpost.tscn")
-onready var beach = preload("res://Level Generation/Generic Generation/Beach/Beach.tscn")
-onready var vacationResort = preload("res://Level Generation/Generic Generation/Beach/VacationResort.tscn")
-
-######################
-### WFC Generation ###
-######################
-onready var minesOfTidoh = preload("res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn")
-onready var depthsOfTidoh = preload("res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn")
-onready var patch = preload("res://Level Generation/WFC Generation/Patch/Patch.tscn")
-onready var antHill = preload("res://Level Generation/WFC Generation/Ant Hill/AntHill.tscn")
-onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
-onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
-onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
-onready var dungeonHallways = preload("res://Level Generation/WFC Generation/Dungeon Halls/DungeonHalls.tscn")
-onready var dragonsPeak = preload("res://Level Generation/WFC Generation/Dragons Peak/DragonsPeak.tscn")
-onready var fortressEntrance = preload("res://Level Generation/WFC Generation/Fortress Entrance/FortressEntrance.tscn")
-onready var fortress = preload("res://Level Generation/WFC Generation/Fortress/Fortress.tscn")
-onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
-
-#####################
-### Premade levels ###
-#####################
-onready var banditCompound1 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound1.tscn")
-onready var banditCompound2 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound2.tscn")
-onready var banditWarcamp1 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp1.tscn")
-onready var banditWarcamp2 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp2.tscn")
-onready var elderDragonsLair1 = preload("res://Level Generation/Premade Levels/Elder Dragons Lair/ElderDragonsLair1.tscn")
-onready var elderDragonsLair2 = preload("res://Level Generation/Premade Levels/Elder Dragons Lair/ElderDragonsLair2.tscn")
-onready var storageArea1 = preload("res://Level Generation/Premade Levels/Storage Area/StorageArea1.tscn")
-onready var storageArea2 = preload("res://Level Generation/Premade Levels/Storage Area/StorageArea2.tscn")
-onready var tidohMinesEnd1 = preload("res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd1.tscn")
-onready var tidohMinesEnd2 = preload("res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd2.tscn")
-onready var tidohMiningOutpost1 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost1.tscn")
-onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
-onready var iovarsLair1 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair1.tscn")
-onready var iovarsLair2 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair2.tscn")
-onready var church = preload("res://Level Generation/Premade Levels/Church/Church.tscn")
-
-var saveGameFile = 1
-
-var hideObjectsWhenDrawingNextFrame = true
-var checkNewCritterSpawn = 0
 
 enum gameState {
 	OUT_OF_PLAYERS_HANDS
@@ -100,12 +50,20 @@ var levels = {
 	"fortress": [],
 	"iovarsLair": []
 }
+var churchLevel = null
 
 var tile_size = get_cell_size()
 var half_tile_size = tile_size / 2
 
+var threads = {
+	"threadDungeons": null,
+	"threadDungeonsSidepaths": null,
+	"threadHalls": null,
+	"threadHallsSidepaths": null,
+}
 
-var thread
+var hideObjectsWhenDrawingNextFrame = true
+var checkNewCritterSpawn = 0
 var inStartScreen = true
 var generationDone = false
 var inGame = false
@@ -113,87 +71,42 @@ var currentGameState = gameState.GAME
 var keepMoving = false
 var totalLevelCount = 0
 
-func _ready():
-#	OS.window_size = Vector2(1280, 900)
-#	get_tree().set_screen_stretch(2,1,Vector2(960, 540),.5)
-	
-	randomize()
-	
-	items.create()
-	$Items.add_child(items)
-	
-	critters.create()
-	$Critters.add_child(critters)
-	
-	$UI/UITheme/GameConsole.create()
-	$UI/UITheme/ItemManagement.create()
-	$UI/UITheme/Equipment.create()
-	$UI/UITheme/ListMenu.create()
-	$UI/UITheme/Container.create()
-	$UI/UITheme/DialogMenu.create()
-	for _node in $UI/UITheme.get_children():
-		_node.hide()
-	$UI/UITheme/StartScreen.show()
-	
-	createDungeon()
-	
-	var levelCount = 0
-	for section in levels:
-		if typeof(levels[section]) != TYPE_ARRAY:
-			levelCount += 1
-		else:
-			levelCount += levels[section].size()
-	
-	$FOV.createFOVLevels(levelCount)
+func _process(_delta):
+	if inGame:
+		if $Critters/"0".statusEffects["stun"] > 0 or $Critters/"0".statusEffects["sleep"] > 0:
+			if $Critters/"0".statusEffects["stun"] > 0: Globals.gameConsole.addLog("You are stunned!")
+			if $Critters/"0".statusEffects["sleep"] > 0: Globals.gameConsole.addLog("You are asleep.")
+			processGameTurn()
+	if generationDone:
+		yield(get_tree().create_timer(0.1), "timeout")
+		
+		setUpGameObjects()
+		
+		for _level in $Levels.get_children():
+			_level.cleanOutTilemap()
+		
+		updateTiles()
+		drawLevel()
+		
+		$Critters/"0".calculateWeightStats()
+		$Critters/"0".updatePlayerStats()
+		
+		inStartScreen = false
+		inGame = true
+		
+		show()
+		
+		generationDone = false
 
-func _on_Game_Start(_className):
-	thread = Thread.new()
-	thread.start(self, "create", _className, Thread.PRIORITY_HIGH)
-
-func create(_className):
+func setUpGameObjects():
 	$Items/Items.randomizeRandomItems()
 	
 	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
-	
-	for _level in levels.dungeon1.size():
-		if levels.dungeon1[_level] == levels.dungeon1.back():
-			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel(true)
-		else:
-			get_node("Levels/{level}".format({ "level": levels.dungeon1[_level] })).createNewLevel()
-	
-#	for _level in levels.minesOfTidoh:
-#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-#
-#	for _level in levels.depthsOfTidoh:
-#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-#
-#	for _level in levels.dungeon2:
-#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-	
-#	for _level in levels.beach:
-#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-#
-#	for _level in levels.dungeon3.size():
-#		if levels.dungeon3[_level] == levels.dungeon3.back():
-#			get_node("Levels/{level}".format({ "level": levels.dungeon3[_level] })).createNewLevel(true)
-#		else:
-#			get_node("Levels/{level}".format({ "level": levels.dungeon3[_level] })).createNewLevel()
-#
-#	for _level in levels.library:
-#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-#
-#	for _level in levels.dungeon4:
-#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-#
-#	for _level in levels.labyrinth:
-#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
-#
-#	for _level in levels.theGreatShadows:
-#		get_node("Levels/{level}".format({ "level": _level })).createNewLevel()
+	churchLevel = get_node("Levels/{level}".format({ "level": churchLevel })).createNewLevel()
 	
 	$Critters.add_child(player, true)
-	player.create(_className)
-	level.placeCritterOnTypeOfTile(Globals.tiles.DOWN_STAIR_DUNGEON, 0)
+	player.create()
+	level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
 	player.calculateEquipmentStats()
 	
 	for _level in $Levels.get_children():
@@ -238,124 +151,6 @@ func create(_className):
 			_node.show()
 	$UI/UITheme/StartScreen.hide()
 	$FOV.show()
-	
-	generationDone = true
-
-func createDungeon():
-	### Dungeon 1
-	var firstLevel = church.instance()
-	firstLevel.create("minesOfTidoh", "Dungeon hallways 1", 10000)
-	levels.firstLevel = firstLevel
-	$Levels.add_child(firstLevel)
-	for _level in range(1):
-		var newDungeon = library.instance()
-		newDungeon.create("dungeon1", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + 1 }), 10000)
-		levels.dungeon1.append(newDungeon)
-		$Levels.add_child(newDungeon)
-	
-#	### Mines of Tidoh
-#	for _level in range(1):
-#		var newCave = minesOfTidoh.instance()
-#		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": levels.minesOfTidoh.size() + 1 }), 2)
-#		levels.minesOfTidoh.append(newCave)
-#		$Levels.add_child(newCave)
-#	var newMiningOutpost = tidohMiningOutpost2.instance()
-#	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
-#	levels.minesOfTidoh.append(newMiningOutpost)
-#	$Levels.add_child(newMiningOutpost)
-#	for _level in range(1):
-#		var newCave = depthsOfTidoh.instance()
-#		newCave.create("depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": levels.depthsOfTidoh.size() + 1 }), 1)
-#		levels.minesOfTidoh.append(newCave)
-#		$Levels.add_child(newCave)
-#
-#	### Dungeon 2
-#	for _level in range(1):
-#		var newDungeon = dungeon.instance()
-#		newDungeon.create("dungeon2", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
-#		levels.dungeon2.append(newDungeon)
-#		$Levels.add_child(newDungeon)
-#		
-#	### Beach
-#	var newBeach = beach.instance()
-#	newBeach.create("beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
-#	levels.beach.append(newBeach)
-#	$Levels.add_child(newBeach)
-#	var newVacationResort = vacationResort.instance()
-#	newVacationResort.create("beach", "Vacation resort", 10000)
-#	levels.beach.append(newVacationResort)
-#	$Levels.add_child(newVacationResort)
-#	for _level in range(1):
-#		var newBeach2 = beach.instance()
-#		newBeach2.create("beach", "Beach {level}".format({ "level": levels.beach.size() }), 10000)
-#		levels.beach.append(newBeach2)
-#		$Levels.add_child(newBeach2)
-#
-#	### Dungeon 3
-#	for _level in range(1):
-#		var newDungeon = dungeon.instance()
-#		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + 1 }), 10000)
-#		levels.dungeon3.append(newDungeon)
-#		$Levels.add_child(newDungeon)
-#
-#	### Library
-#	for _level in range(1):
-#		var newlibrary = library.instance()
-#		newlibrary.create("library", "Library {level}".format({ "level": levels.library.size() }), 10000)
-#		levels.library.append(newlibrary)
-#		$Levels.add_child(newlibrary)
-#
-#	### Dungeon 4
-#	for _level in range(3):
-#		var newDungeon = dungeon.instance()
-#		newDungeon.create("dungeon", "Dungeon hallways {level}".format({ "level": 1 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() + 1 }), 10000)
-#		levels.dungeon4.append(newDungeon)
-#		$Levels.add_child(newDungeon)
-#
-#	### Labyrinth
-#	for _level in range(1):
-#		var newlabyrinth = labyrinth.instance()
-#		newlabyrinth.create("labyrinth", "Labyrinth {level}".format({ "level": levels.labyrinth.size() }), 10000)
-#		levels.labyrinth.append(newlabyrinth)
-#		$Levels.add_child(newlabyrinth)
-#
-#	### The Great Shadows
-#	for _level in range(3):
-#		var newGreatShadows = theGreatShadows.instance()
-#		newGreatShadows.create("theGreatShadows", "The Great Shadows {level}".format({ "level": levels.labyrinth.size() }), 10000)
-#		levels.theGreatShadows.append(newGreatShadows)
-#		$Levels.add_child(newGreatShadows)
-#
-#	for _levelSection in levels:
-#		if typeof(_levelSection) == TYPE_STRING:
-#			totalLevelCount += 1
-#		else:
-#			totalLevelCount += _levelSection.size()
-
-func _process(_delta):
-	if inGame:
-		if $Critters/"0".statusEffects["stun"] > 0 or $Critters/"0".statusEffects["sleep"] > 0:
-			if $Critters/"0".statusEffects["stun"] > 0: Globals.gameConsole.addLog("You are stunned!")
-			if $Critters/"0".statusEffects["sleep"] > 0: Globals.gameConsole.addLog("You are asleep.")
-			processGameTurn()
-	if generationDone:
-		yield(get_tree().create_timer(0.1), "timeout")
-		
-		for _level in $Levels.get_children():
-			_level.cleanOutTilemap()
-		
-		updateTiles()
-		drawLevel()
-		
-		$Critters/"0".calculateWeightStats()
-		$Critters/"0".updatePlayerStats()
-		
-		inStartScreen = false
-		inGame = true
-		
-		show()
-		
-		generationDone = false
 
 func _input(_event):
 	if !inStartScreen:
@@ -1102,28 +897,46 @@ func saveGame():
 		if _item.name == "Items":
 			continue
 		var _itemData = _item.getItemSaveData()
-#		$Save.saveGameFile("itemSave", _itemData.id, "{saveGameFile}/items".format({ "saveGameFile": saveGameFile }), _itemData)
+		$Save.saveGameFile("itemSave", _itemData.id, "{selectedSave}/items".format({ "selectedSave": StartingData.selectedSave }), _itemData)
+	
 	for _critter in $Critters.get_children():
 		if _critter.name.matchn("Critters"):
 			continue
 		var _critterData = _critter.getCritterSaveData()
-#		$Save.saveGameFile("critterSave", _critterData.id, "{saveGameFile}/critters".format({ "saveGameFile": saveGameFile }), _critterData)
+		$Save.saveGameFile("critterSave", _critterData.id, "{selectedSave}/critters".format({ "selectedSave": StartingData.selectedSave }), _critterData)
+	
 	for _levelSection in levels.values():
 		if typeof(_levelSection) != TYPE_ARRAY:
 			var _levelData = _levelSection.getLevelSaveData()
 		else:
 			for _level in _levelSection:
 				var _levelData = _level.getLevelSaveData()
-#		$Save.saveGameFile("levelSave", _data.levelId, "{saveGameFile}/levels".format({ "saveGameFile": saveGameFile }), _data)
+				$Save.saveGameFile("levelSave", _levelData.levelId, "{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _levelData)
+	
 	var _fOVData = $FOV.getFOVSaveData()
-#	$Save.saveGameFile("fOVSave", "fov", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _fOVData)
+	$Save.saveGameFile("fOVSave", "fov", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _fOVData)
+	
 #	var _gameConsoleData = $UI/UITheme/GameConsole.getGameConsoleSaveData()
-#	$Save.saveGameFile("gameConsoleSave", "gameConsole", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _gameConsoleData)
+#	$Save.saveGameFile("gameConsoleSave", "gameConsole", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _gameConsoleData)
+	
 	var _globalsData = Globals.getGlobalsSaveData()
-#	$Save.saveGameFile("globalsSave", "globals", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _globalsData)
+	$Save.saveGameFile("globalsSave", "globals", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalsData)
+	
 	var _equipmentData = $UI/UITheme/Equipment.getEquipmentSaveData()
 	_equipmentData.merge($UI/UITheme/Runes.getRunesSaveData())
-#	$Save.saveGameFile("equipmentSave", "equipment", "{saveGameFile}".format({ "saveGameFile": saveGameFile }), _equipmentData)
+	$Save.saveGameFile("equipmentSave", "equipment", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _equipmentData)
+	
+	var _saveData = {
+		"saveSlot": StartingData.selectedSave,
+		"hasSave": true,
+		"className": $Critters/"0".playerClass,
+		"dungeonLevelName": Globals.currentDungeonLevelName,
+		"level": Globals.currentDungeonLevel,
+		"points": 0
+	}
+	$Save.saveGameFile("saveDataSave", "saveData", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
+	
+	### Resource saver
 #	ResourceSaver.save("user://gameData{saveGameNumber}.save".format({ "saveGameNumber": 1 }), get_node("."))
 
 
@@ -1167,5 +980,22 @@ func _debug__go_to_level(_level):
 	$"/root/World".show()
 
 func _exit_tree():
-	if thread != null:
-		thread.wait_to_finish()
+	if threads.threadDungeons != null:
+		threads.threadDungeons.wait_to_finish()
+	if threads.threadDungeonsSidepaths != null:
+		threads.threadDungeonsSidepaths.wait_to_finish()
+	if threads.threadHalls != null:
+		threads.threadHalls.wait_to_finish()
+	if threads.threadHallsSidepaths != null:
+		threads.threadHallsSidepaths.wait_to_finish()
+	
+	var nulled = true
+	for _thread in threads.values():
+		if _thread == null:
+			continue
+		nulled = false
+		if _thread.is_alive():
+			generationDone = false
+			return
+	if !nulled:
+		generationDone = true

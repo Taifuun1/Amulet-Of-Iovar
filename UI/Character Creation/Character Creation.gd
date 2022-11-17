@@ -1,26 +1,40 @@
-extends MarginContainer
+extends Control
 
-var skillPoints = 21
+func _on_Classes_Pick_input(_event, _className):
+	if Input.is_action_pressed("LEFT_CLICK"):
+		if StartingData.selectedClass != null and !StartingData.selectedClass.match(_className):
+			var panelStylebox = get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": StartingData.selectedClass })).get_stylebox("panel").duplicate()
+			panelStylebox.set_border_color(Color(0, 0, 0))
+			get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": StartingData.selectedClass })).add_stylebox_override("panel", panelStylebox)
+		StartingData.selectedClass = _className
+		var panelStylebox = get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).get_stylebox("panel").duplicate()
+		panelStylebox.set_border_color(Color(1, 0, 1))
+		get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).add_stylebox_override("panel", panelStylebox)
+		$CharacterCreationContainer/StartButton.disabled = false
 
-func _ready():
-	$VBoxContainer/HBoxContainer2/VBoxContainer/StrengthContainer/Strength.text = String(Globals.skillPoints.Strength)
-	$VBoxContainer/HBoxContainer2/VBoxContainer/LegerityContainer/Legerity.text = String(Globals.skillPoints.Legerity)
-	$VBoxContainer/HBoxContainer2/VBoxContainer/BalanceContainer/Balance.text = String(Globals.skillPoints.Balance)
-	$VBoxContainer/HBoxContainer2/VBoxContainer/BeliefContainer/Belief.text = String(Globals.skillPoints.Belief)
-	$VBoxContainer/HBoxContainer2/VBoxContainer/TrincinContainer/Trincin.text = String(Globals.skillPoints.Trincin)
-	$VBoxContainer/HBoxContainer2/VBoxContainer/WisdomContainer/Wisdom.text = String(Globals.skillPoints.Wisdom)
+func _on_Classes_Pick_mouse_entered(_className):
+	if StartingData.selectedClass != null and _className.matchn(StartingData.selectedClass):
+		var panelStylebox = get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).get_stylebox("panel").duplicate()
+		panelStylebox.set_border_color(Color(1, 0, 1))
+		get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).add_stylebox_override("panel", panelStylebox)
+	else:
+		var panelStylebox = get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).get_stylebox("panel").duplicate()
+		panelStylebox.set_border_color(Color(1, 1, 0))
+		get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).add_stylebox_override("panel", panelStylebox)
 
-func _on_Race_Changed(_race):
-	Globals.race = _race
+func _on_Classes_Pick_mouse_exited(_className):
+	if StartingData.selectedClass != null and _className.matchn(StartingData.selectedClass):
+		var panelStylebox = get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).get_stylebox("panel").duplicate()
+		panelStylebox.set_border_color(Color(1, 0, 1))
+		get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).add_stylebox_override("panel", panelStylebox)
+	else:
+		var panelStylebox = get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).get_stylebox("panel").duplicate()
+		panelStylebox.set_border_color(Color(0, 0, 0))
+		get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).add_stylebox_override("panel", panelStylebox)
 
-func _on_Role_Changed(_role):
-	Globals.role = _role
+func _on_Start_Button_pressed():
+	get_tree().change_scene("res://Objects/World/World.tscn")
 
-func _on_Stats_Changed(_stat):
-	if(skillPoints > 0 and Globals.skillPoints[_stat] < 10):
-		Globals.skillPoints[_stat] += 1
-		skillPoints -= 1
-		get_node("VBoxContainer/HBoxContainer2/VBoxContainer/{stat}Container/{stat}".format({ "stat": _stat })).text = String(Globals.skillPoints[_stat])
-
-func _on_Begin_pressed():
-	get_tree().change_scene("res://path/to/scene.tscn")
+func _on_Back_Button_pressed():
+	StartingData.selectedClass = null
+	get_tree().change_scene("res://UI/Save Game Pick Screen/Save Game Pick Screen.tscn")

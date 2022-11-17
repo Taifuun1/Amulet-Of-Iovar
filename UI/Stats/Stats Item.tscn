@@ -31,6 +31,7 @@ text = "-"
 align = 2
 
 [node name="Description" type="Label" parent="."]
+visible = false
 margin_top = 36.0
 margin_right = 1800.0
 margin_bottom = 68.0

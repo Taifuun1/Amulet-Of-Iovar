@@ -77,14 +77,14 @@ var skills = {
 
 var neutralCritters = ["Sugar ant", "Shopkeeper"]
 
-func create(_className):
+func create():
 	id = 0
 	name = str(0)
 	
 	add_child(inventory)
 	$Inventory.create()
 	
-	var _playerClass = playerClasses[(_className[0].to_lower() + _className.substr(1,-1)).replace(" ", "")]
+	var _playerClass = playerClasses[(StartingData.selectedClass[0].to_lower() + StartingData.selectedClass.substr(1,-1)).replace(" ", "")]
 	
 	critterName = _playerClass.critterName
 	critterClass = "Humanoid"

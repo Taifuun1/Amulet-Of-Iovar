@@ -48,6 +48,11 @@ _global_script_classes=[ {
 "class": "WaveFunctionCollapseTemplate",
 "language": "GDScript",
 "path": "res://Level Generation/WFC Generation/InputTemplate.gd"
+}, {
+"base": "TileMap",
+"class": "WorldManagement",
+"language": "GDScript",
+"path": "res://Objects/World/World.gd"
 } ]
 _global_script_class_icons={
 "BaseCritter": "",
@@ -57,14 +62,15 @@ _global_script_class_icons={
 "GenericLevel": "",
 "Player": "",
 "WaveFunctionCollapse": "",
-"WaveFunctionCollapseTemplate": ""
+"WaveFunctionCollapseTemplate": "",
+"WorldManagement": ""
 }
 
 [application]
 
 config/name="Amulet of Iovar"
 config/description="Nethack-inspired roguelike"
-run/main_scene="res://Objects/World/World.tscn"
+run/main_scene="res://UI/Start Screen/Start Screen.tscn"
 config/use_custom_user_dir=true
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://Assets/Amulets/AmuletRainbow.png"
@@ -74,6 +80,7 @@ config/icon="res://Assets/Amulets/AmuletRainbow.png"
 Globals="*res://Objects/Miscellaneous/Globals.gd"
 GlobalItemInfo="*res://Objects/Miscellaneous/GlobalItemInfo.gd"
 GlobalCritterInfo="*res://Objects/Miscellaneous/GlobalCritterInfo.gd"
+StartingData="*res://Objects/Miscellaneous/StartingData.gd"
 
 [debug]
 
