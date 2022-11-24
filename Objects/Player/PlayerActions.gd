@@ -206,13 +206,13 @@ func readItem(_id):
 			"scroll of confusion":
 				if statusEffects.confusion != -1:
 					if _readItem.alignment.matchn("blessed"):
-						statusEffects.confusion = 4
+						statusEffects.confusion += 4
 						Globals.gameConsole.addLog("You feel slightly disoriented.")
 					elif _readItem.alignment.matchn("blessed"):
-						statusEffects.confusion = 10
+						statusEffects.confusion += 10
 						Globals.gameConsole.addLog("You feel confused.")
 					elif _readItem.alignment.matchn("blessed"):
-						statusEffects.confusion = 22
+						statusEffects.confusion += 22
 						Globals.gameConsole.addLog("The world spins!")
 				else:
 					Globals.gameConsole.addLog("You already feel confused enough!")
@@ -221,7 +221,7 @@ func readItem(_id):
 		Globals.isItemIdentified(_readItem)
 		checkAllIdentification(true)
 		if !_readItem.identifiedItemName.to_lower().matchn("blank scroll"):
-			if _readItem.amount > 0:
+			if _readItem.amount > 1:
 				_readItem.amount -= 1
 			else:
 				$"/root/World/Items/Items".removeItem(_id)
@@ -334,10 +334,10 @@ func quaffItem(_id):
 						statusEffects.confusion = 4
 						Globals.gameConsole.addLog("You feel slightly disoriented.")
 					elif _quaffedItem.alignment.matchn("uncursed"):
-						statusEffects.confusion = 10
+						statusEffects.confusion += 10
 						Globals.gameConsole.addLog("You feel confused.")
 					elif _quaffedItem.alignment.matchn("cursed"):
-						statusEffects.confusion = 22
+						statusEffects.confusion += 22
 						Globals.gameConsole.addLog("The world spins!")
 				else:
 					Globals.gameConsole.addLog("You already feel confused enough!")
@@ -345,7 +345,7 @@ func quaffItem(_id):
 				Globals.gameConsole.addLog("Thats not a potion...")
 		Globals.isItemIdentified(_quaffedItem)
 		checkAllIdentification(true)
-		if _quaffedItem.amount > 0:
+		if _quaffedItem.amount > 1:
 			_quaffedItem.amount -= 1
 		else:
 			$"/root/World/Items/Items".removeItem(_id)
@@ -362,7 +362,7 @@ func consumeItem(_id):
 			else:
 				calories += _eatenItem.value
 		checkAllIdentification(true)
-		if _eatenItem.amount > 0:
+		if _eatenItem.amount > 1:
 			_eatenItem.amount -= 1
 		else:
 			$"/root/World/Items/Items".removeItem(_id)
@@ -842,7 +842,7 @@ func dealWithMarker(_scroll, _ink):
 	else:
 		$"/root/World/Items/Items".createItem(_scroll, null, 1, true)
 		Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
-	if get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount > 0:
+	if get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount > 1:
 		get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount -= 1
 	else:
 		$"/root/World/Items/Items".removeItem(_ink.blankPaper)

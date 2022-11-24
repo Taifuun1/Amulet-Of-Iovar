@@ -101,5 +101,11 @@ var statusEffectsData = {
 		"description": "You reflect some magic attacks. (You can take no damage from rock throw and dragon breath.)",
 		"color": "#7bcaea",
 		"texture": load("res://Assets/Status Effects/StatusEffectBackscattering.png")
+	},
+	"toxix": {
+		"label": "tox",
+		"description": "You are poisoned. (You take 1 damage every turn for a duration.)",
+		"color": "#6abe30",
+		"texture": load("res://Assets/Status Effects/StatusEffectToxix.png")
 	}
 }

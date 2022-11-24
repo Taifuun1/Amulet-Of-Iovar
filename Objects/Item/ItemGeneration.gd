@@ -4,15 +4,16 @@ var itemGeneration = {
 		"amount": 6,
 		"type": {
 			"amulet": 25,
-			"armor": 100,
+			"armor": 50,
 			"comestible": 200,
+			"gem": 150,
 			"potion": 150,
 			"ring": 50,
 			"rune": 25,
-			"scroll": 150,
+			"scroll": 100,
 			"tool": 50,
 			"wand": 50,
-			"weapon": 100
+			"weapon": 50
 		},
 		"rarity": {
 			"common": 800,
@@ -25,15 +26,16 @@ var itemGeneration = {
 		"amount": 10,
 		"type": {
 			"amulet": 25,
-			"armor": 175,
-			"comestible": 100,
+			"armor": 100,
+			"comestible": 50,
+			"gem": 350,
 			"potion": 0,
-			"ring": 100,
-			"rune": 0,
+			"ring": 50,
+			"rune": 50,
 			"scroll": 100,
-			"tool": 250,
-			"wand": 75,
-			"weapon": 175
+			"tool": 150,
+			"wand": 25,
+			"weapon": 100
 		},
 		"rarity": {
 			"common": 750,
@@ -42,19 +44,42 @@ var itemGeneration = {
 			"legendary": 25
 		}
 	},
+	"depthsOfTidoh": {
+		"amount": 10,
+		"type": {
+			"amulet": 0,
+			"armor": 50,
+			"comestible": 0,
+			"gem": 700,
+			"potion": 0,
+			"ring": 50,
+			"rune": 50,
+			"scroll": 0,
+			"tool": 100,
+			"wand": 0,
+			"weapon": 50
+		},
+		"rarity": {
+			"common": 700,
+			"uncommon": 200,
+			"rare": 95,
+			"legendary": 5
+		}
+	},
 	"dungeon2": {
 		"amount": 6,
 		"type": {
 			"amulet": 25,
-			"armor": 100,
+			"armor": 50,
 			"comestible": 200,
+			"gem": 150,
 			"potion": 150,
 			"ring": 50,
 			"rune": 25,
-			"scroll": 150,
+			"scroll": 100,
 			"tool": 50,
 			"wand": 50,
-			"weapon": 100
+			"weapon": 50
 		},
 		"rarity": {
 			"common": 800,
@@ -67,15 +92,16 @@ var itemGeneration = {
 		"amount": 5,
 		"type": {
 			"amulet": 200,
-			"armor": 50,
+			"armor": 0,
 			"comestible": 0,
-			"potion": 100,
-			"ring": 300,
+			"gem": 200,
+			"potion": 150,
+			"ring": 250,
 			"rune": 0,
 			"scroll": 0,
 			"tool": 50,
 			"wand": 50,
-			"weapon": 50
+			"weapon": 0
 		},
 		"rarity": {
 			"common": 250,
@@ -85,15 +111,16 @@ var itemGeneration = {
 		}
 	},
 	"dungeon3": {
-		"amount": 6,
+		"amount": 8,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
 			"comestible": 200,
-			"potion": 150,
+			"gem": 100,
+			"potion": 100,
 			"ring": 50,
 			"rune": 25,
-			"scroll": 150,
+			"scroll": 100,
 			"tool": 50,
 			"wand": 50,
 			"weapon": 100
@@ -111,10 +138,11 @@ var itemGeneration = {
 			"amulet": 100,
 			"armor": 0,
 			"comestible": 0,
+			"gem": 50,
 			"potion": 50,
 			"ring": 50,
 			"rune": 0,
-			"scroll": 500,
+			"scroll": 450,
 			"tool": 50,
 			"wand": 0,
 			"weapon": 0
@@ -127,12 +155,13 @@ var itemGeneration = {
 		}
 	},
 	"dungeon4": {
-		"amount": 6,
+		"amount": 8,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
 			"comestible": 200,
-			"potion": 150,
+			"gem": 50,
+			"potion": 100,
 			"ring": 50,
 			"rune": 25,
 			"scroll": 150,
@@ -152,14 +181,15 @@ var itemGeneration = {
 		"type": {
 			"amulet": 0,
 			"armor": 200,
-			"comestible": 400,
+			"comestible": 300,
+			"gem": 150,
 			"potion": 0,
 			"ring": 0,
 			"rune": 0,
 			"scroll": 0,
 			"tool": 75,
 			"wand": 0,
-			"weapon": 200
+			"weapon": 150
 		},
 		"rarity": {
 			"common": 500,
@@ -168,25 +198,158 @@ var itemGeneration = {
 			"legendary": 50
 		}
 	},
-	"elderDragonsLair": {
+	"dungeonHalls1": {
+		"amount": 6,
+		"type": {
+			"amulet": 25,
+			"armor": 100,
+			"comestible": 200,
+			"gem": 100,
+			"potion": 100,
+			"ring": 50,
+			"rune": 25,
+			"scroll": 100,
+			"tool": 50,
+			"wand": 50,
+			"weapon": 100
+		},
+		"rarity": {
+			"common": 800,
+			"uncommon": 150,
+			"rare": 49,
+			"legendary": 1
+		}
+	},
+	"labyrinth": {
+		"amount": 16,
+		"type": {
+			"amulet": 100,
+			"armor": 100,
+			"comestible": 100,
+			"gem": 0,
+			"potion": 100,
+			"ring": 100,
+			"rune": 100,
+			"scroll": 100,
+			"tool": 100,
+			"wand": 100,
+			"weapon": 100
+		},
+		"rarity": {
+			"common": 400,
+			"uncommon": 300,
+			"rare": 280,
+			"legendary": 20
+		}
+	},
+	"dungeonHalls2": {
+		"amount": 6,
+		"type": {
+			"amulet": 25,
+			"armor": 100,
+			"comestible": 200,
+			"potion": 100,
+			"gem": 100,
+			"ring": 50,
+			"rune": 25,
+			"scroll": 100,
+			"tool": 50,
+			"wand": 50,
+			"weapon": 100
+		},
+		"rarity": {
+			"common": 800,
+			"uncommon": 150,
+			"rare": 49,
+			"legendary": 1
+		}
+	},
+	"dragonsPeak": {
 		"amount": 20,
 		"type": {
 			"amulet": 50,
-			"armor": 600,
+			"armor": 500,
 			"comestible": 0,
+			"gem": 250,
 			"potion": 0,
 			"ring": 50,
 			"rune": 0,
 			"scroll": 0,
 			"tool": 0,
-			"wand": 50,
-			"weapon": 250
+			"wand": 0,
+			"weapon": 150
 		},
 		"rarity": {
 			"common": 10,
 			"uncommon": 90,
 			"rare": 400,
 			"legendary": 500
+		}
+	},
+	"dungeonHalls3": {
+		"amount": 6,
+		"type": {
+			"amulet": 25,
+			"armor": 100,
+			"comestible": 200,
+			"gem": 100,
+			"potion": 100,
+			"ring": 50,
+			"rune": 25,
+			"scroll": 100,
+			"tool": 50,
+			"wand": 50,
+			"weapon": 100
+		},
+		"rarity": {
+			"common": 800,
+			"uncommon": 150,
+			"rare": 49,
+			"legendary": 1
+		}
+	},
+	"theGreatShadows": {
+		"amount": 12,
+		"type": {
+			"amulet": 25,
+			"armor": 100,
+			"comestible": 200,
+			"gem": 100,
+			"potion": 100,
+			"ring": 50,
+			"rune": 25,
+			"scroll": 100,
+			"tool": 50,
+			"wand": 50,
+			"weapon": 100
+		},
+		"rarity": {
+			"common": 600,
+			"uncommon": 250,
+			"rare": 125,
+			"legendary": 25
+		}
+	},
+	"fortress": {
+		"amount": 18,
+		"type": {
+			"amulet": 0,
+			"armor": 200,
+			"comestible": 200,
+			"gem": 10,
+			"potion": 150,
+			"ring": 30,
+			"rune": 0,
+			"scroll": 200,
+			"tool": 0,
+			"wand": 10,
+			"weapon": 200
+		},
+		"rarity": {
+			"common": 600,
+			"uncommon": 250,
+			"rare": 125,
+			"legendary": 25
 		}
 	}
 }

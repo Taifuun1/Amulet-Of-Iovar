@@ -34,4 +34,4 @@ func loadSaveData(_saveSlot, _data):
 
 func _on_Button_pressed():
 	if get_tree().change_scene("res://UI/Start Screen/Start Screen.tscn") != OK:
-		print ("Error changing to start screen.")
+		push_error("Error changing to start screen.")

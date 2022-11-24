@@ -28,7 +28,7 @@ var floatingSpheres = {
 			"abilities": [
 				{
 					"abilityName": "reflectStun",
-					"abilityType": "onHit"
+					"abilityType": "onAttack"
 				}
 			],
 			"abilityHits": [],

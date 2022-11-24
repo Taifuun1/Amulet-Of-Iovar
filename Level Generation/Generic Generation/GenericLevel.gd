@@ -111,10 +111,10 @@ func areTilesLegible(_positions, _legibleTiles):
 
 func isTileLegible(_position, _legibleTiles):
 	if (
-		_position.x == 0 or
-		_position.y == 0 or
-		_position.x >= Globals.gridSize.x - 1 or
-		_position.y >= Globals.gridSize.y - 1
+		_position.x < 0 or
+		_position.y < 0 or
+		_position.x >= Globals.gridSize.x or
+		_position.y >= Globals.gridSize.y
 	):
 		return false
 	for _legibleTile in _legibleTiles:

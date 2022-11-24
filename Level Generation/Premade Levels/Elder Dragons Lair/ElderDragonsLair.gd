@@ -20,7 +20,7 @@ func createDungeon():
 		getSpawnableTiles(
 			["GRASS_YELLOW", "GRASS_LIGHT", "FLOOR_DRAGONS_PEAK"],
 			["GRASS_YELLOW", "GRASS_LIGHT"],
-			[]
+			["FLOOR_DRAGONS_PEAK"]
 		)
 		stairs = {
 			"downStair": Vector2(7,16)
@@ -30,7 +30,7 @@ func createDungeon():
 		getSpawnableTiles(
 			["FLOOR_CAVE_DEEP", "FLOOR_DRAGONS_PEAK"],
 			["FLOOR_CAVE_DEEP"],
-			[]
+			["FLOOR_DRAGONS_PEAK"]
 		)
 		stairs = {
 			"downStair": Vector2(55,22)

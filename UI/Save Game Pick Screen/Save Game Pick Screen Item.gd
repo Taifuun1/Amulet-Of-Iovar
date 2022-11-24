@@ -35,5 +35,7 @@ func _on_Save_Button_pressed():
 	StartingData.selectedSave = saveSlot
 	if saveExists:
 		StartingData.selectedClass = className
-		get_tree().change_scene("res://Objects/World/World.tscn")
-	get_tree().change_scene("res://UI/Character Creation/Character Creation.tscn")
+		if get_tree().change_scene("res://Objects/World/World.tscn") != OK:
+			push_error("Error changing to world screen.")
+	if get_tree().change_scene("res://UI/Character Creation/Character Creation.tscn") != OK:
+		push_error("Error changing to character creation screen.")

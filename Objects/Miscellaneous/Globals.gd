@@ -1,7 +1,7 @@
 extends Node
 
-onready var gameConsole = $"/root/World/UI/UITheme/GameConsole"
-onready var gameStats = $"/root/World/UI/UITheme/GameStats"
+var gameConsole
+var gameStats
 
 var gridSize = Vector2(60, 24)
 

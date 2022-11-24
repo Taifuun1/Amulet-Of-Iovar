@@ -1,15 +1,15 @@
 extends GenericLevel
 
-func createNewLevel(_isDouble = false):
+func createNewLevel(_secondStair = null):
 	createGrid()
 	
-	createDungeon(_isDouble)
+	createDungeon(_secondStair)
 	
 	doFinalPathfinding()
 	
 	return self
 
-func createDungeon(_isDouble):
+func createDungeon(_secondStair):
 	for _i in range(10):
 		createRooms()
 		getSpawnableTiles(
@@ -17,7 +17,7 @@ func createDungeon(_isDouble):
 			["FLOOR_DUNGEON"],
 			["FLOOR_DUNGEON", "CORRIDOR_DUNGEON"]
 		)
-		placeStairs("DUNGEON", _isDouble)
+		placeStairs("DUNGEON", _secondStair)
 		connectRooms()
 		if areAllStairsConnected():
 			placeRandomInteractables(["altar"])
@@ -28,9 +28,10 @@ func createDungeon(_isDouble):
 func createRooms():
 	for _roomCount in range(randi() % 2 + 5):
 		var _legibleRoomTiles = getAllLegibleRoomLocations([Globals.tiles.EMPTY], Vector2(4,4), Vector2(9,9))
-		var _room = _legibleRoomTiles[randi() % _legibleRoomTiles.size()]
-		placeRoom(_room.position, _room.size, { "wall": "WALL_DUNGEON", "floor": "FLOOR_DUNGEON" })
-		placeDoors([1,3])
+		if !_legibleRoomTiles.empty():
+			var _room = _legibleRoomTiles[randi() % _legibleRoomTiles.size()]
+			placeRoom(_room.position, _room.size, { "wall": "WALL_DUNGEON", "floor": "FLOOR_DUNGEON" })
+			placeDoors([1,3])
 
 func connectRooms():
 	pathfindDungeonCorridors()
@@ -48,6 +49,3 @@ func connectRooms():
 			for point in path:
 				if grid[point.x][point.y].tile != Globals.tiles.DOOR_CLOSED and grid[point.x][point.y].tile != Globals.tiles.DOOR_OPEN:
 					grid[point.x][point.y].tile = Globals.tiles.CORRIDOR_DUNGEON
-	
-	
-#	push_error("Dungeon generation failed, can't connect rooms")

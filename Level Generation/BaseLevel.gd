@@ -120,11 +120,13 @@ func getSpawnableTiles(_openTiles, _spawnableItemTiles, _spawnableCritterTiles, 
 						floorTiles.append(Vector2(x, y))
 						break
 
-func placeStairs(_stairType = "DUNGEON", _isDouble = false):
+func placeStairs(_stairType = "DUNGEON", _secondStair = null):
 	stairs["downStair"] = placeStair("downStair", "DOWN_STAIR_", _stairType)
-	if _isDouble:
+	if typeof(_secondStair) == TYPE_STRING and _secondStair.matchn("downStair"):
 		stairs["secondDownStair"] = placeStair("secondDownStair", "DOWN_STAIR_", _stairType)
 	stairs["upStair"] = placeStair("secondDownStair", "UP_STAIR_", _stairType)
+	if typeof(_secondStair) == TYPE_STRING and _secondStair.matchn("upStair"):
+		stairs["secondDownStair"] = placeStair("secondUpStair", "UP_STAIR_", _stairType)
 	for _stair in stairs.values():
 		grid[_stair.x][_stair.y].interactable = null
 
@@ -289,11 +291,6 @@ func resetLevel():
 	floorTiles.clear()
 	stairs.clear()
 	critters.clear()
-
-func cleanOutTilemap():
-	for x in range(grid.size()):
-		for y in range(grid[x].size()):
-			set_cellv(Vector2(x,y), -1)
 
 func whichTilesAreOpenAndFreeOfCritters(_tile, _distance):
 	var _legibleTiles = []

@@ -55,12 +55,7 @@ var churchLevel = null
 var tile_size = get_cell_size()
 var half_tile_size = tile_size / 2
 
-var threads = {
-	"threadDungeons": null,
-	"threadDungeonsSidepaths": null,
-	"threadHalls": null,
-	"threadHallsSidepaths": null,
-}
+var gameSetUpThread
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -78,12 +73,12 @@ func _process(_delta):
 			if $Critters/"0".statusEffects["sleep"] > 0: Globals.gameConsole.addLog("You are asleep.")
 			processGameTurn()
 	if generationDone:
-		yield(get_tree().create_timer(0.1), "timeout")
+		generationDone = false
 		
-		setUpGameObjects()
+		yield(get_tree().create_timer(0.01), "timeout")
 		
 		for _level in $Levels.get_children():
-			_level.cleanOutTilemap()
+			_level.clear()
 		
 		updateTiles()
 		drawLevel()
@@ -94,15 +89,14 @@ func _process(_delta):
 		inStartScreen = false
 		inGame = true
 		
+		$UI/UITheme/"Dancing Dragons".hide()
 		show()
-		
-		generationDone = false
 
 func setUpGameObjects():
-	$Items/Items.randomizeRandomItems()
+	Globals.gameConsole = $"/root/World/UI/UITheme/GameConsole"
+	Globals.gameStats = $"/root/World/UI/UITheme/GameStats"
 	
-	level = get_node("Levels/{level}".format({ "level": levels.firstLevel })).createNewLevel()
-	churchLevel = get_node("Levels/{level}".format({ "level": churchLevel })).createNewLevel()
+	$Items/Items.randomizeRandomItems()
 	
 	$Critters.add_child(player, true)
 	player.create()
@@ -149,8 +143,9 @@ func setUpGameObjects():
 			_node.show()
 		if _node.name == "GameStats":
 			_node.show()
-	$UI/UITheme/StartScreen.hide()
 	$FOV.show()
+	
+	generationDone = true
 
 func _input(_event):
 	if !inStartScreen:
@@ -978,24 +973,3 @@ func _debug__go_to_level(_level):
 	drawLevel()
 	$"UI/UITheme/Debug Menu"._on_Hide_pressed()
 	$"/root/World".show()
-
-func _exit_tree():
-	if threads.threadDungeons != null:
-		threads.threadDungeons.wait_to_finish()
-	if threads.threadDungeonsSidepaths != null:
-		threads.threadDungeonsSidepaths.wait_to_finish()
-	if threads.threadHalls != null:
-		threads.threadHalls.wait_to_finish()
-	if threads.threadHallsSidepaths != null:
-		threads.threadHallsSidepaths.wait_to_finish()
-	
-	var nulled = true
-	for _thread in threads.values():
-		if _thread == null:
-			continue
-		nulled = false
-		if _thread.is_alive():
-			generationDone = false
-			return
-	if !nulled:
-		generationDone = true

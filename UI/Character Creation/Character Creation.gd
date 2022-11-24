@@ -33,8 +33,11 @@ func _on_Classes_Pick_mouse_exited(_className):
 		get_node("CharacterCreationContainer/ClassesContainer/{className}".format({ "className": _className })).add_stylebox_override("panel", panelStylebox)
 
 func _on_Start_Button_pressed():
-	get_tree().change_scene("res://Objects/World/World.tscn")
+	$CharacterCreationContainer/StartButton.disabled = true
+	if get_tree().change_scene("res://Objects/World/World.tscn") != OK:
+		push_error("Error changing to character world.")
 
 func _on_Back_Button_pressed():
 	StartingData.selectedClass = null
-	get_tree().change_scene("res://UI/Save Game Pick Screen/Save Game Pick Screen.tscn")
+	if get_tree().change_scene("res://UI/Save Game Pick Screen/Save Game Pick Screen.tscn") != OK:
+		push_error("Error changing to character creation screen.")

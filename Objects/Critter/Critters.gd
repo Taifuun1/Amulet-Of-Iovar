@@ -61,20 +61,21 @@ func create():
 	critters["wraiths"] = wraiths.wraiths
 
 func generateCrittersForLevel(_level):
-	var _levelCritterGeneration = critterLevelGenerationList.critterLevelGenerationList[_level.dungeonType]
-	var _critters = []
-	
-	var _minAmount = _levelCritterGeneration.amount[0]
-	var _randomChange = _levelCritterGeneration.amount[1] - _levelCritterGeneration.amount[0] + 1
-	if _levelCritterGeneration.amount[0] == _levelCritterGeneration.amount[1]:
-		_randomChange = 1
-		_minAmount = _levelCritterGeneration.amount[0]
-	for _i in range(randi() % _randomChange + _minAmount):
-		_critters.append(returnRandomCritter(_levelCritterGeneration))
-	
-	for _critter in _critters:
-		if _critter != null:
-			spawnCritters(_critter, null, _level)
+	if !_level.dungeonType.empty():
+		var _levelCritterGeneration = critterLevelGenerationList.critterLevelGenerationList[_level.dungeonType]
+		var _critters = []
+		
+		var _minAmount = _levelCritterGeneration.amount[0]
+		var _randomChange = _levelCritterGeneration.amount[1] - _levelCritterGeneration.amount[0] + 1
+		if _levelCritterGeneration.amount[0] == _levelCritterGeneration.amount[1]:
+			_randomChange = 1
+			_minAmount = _levelCritterGeneration.amount[0]
+		for _i in range(randi() % _randomChange + _minAmount):
+			_critters.append(returnRandomCritter(_levelCritterGeneration))
+		
+		for _critter in _critters:
+			if _critter != null:
+				spawnCritters(_critter, null, _level)
 
 func returnRandomCritter(_critterGeneration = null):
 	if _critterGeneration != null:
@@ -221,7 +222,7 @@ func checkSpawnableCrittersLevel():
 func getCritterByName(_critterName):
 	for _species in critters.values():
 		for _critter in _species.critterTypes:
-			if _critter.critterName == _critterName:
+			if _critter.critterName.matchn(_critterName):
 				return _critter
 
 func checkAllCrittersIdentification():

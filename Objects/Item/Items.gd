@@ -86,24 +86,25 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
 
 func generateItemsForLevel(_level):
-	var _itemGeneration = itemGeneration.itemGeneration[_level.dungeonType]
-	var _items = []
-	
-	for _i in range(_itemGeneration.amount):
-		var _item = returnRandomItemForItemGeneration(_itemGeneration)
-		if _item != null:
-			_items.append(_item)
-	
-	for _item in _items:
-		if _item != null:
-			var gridPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
-			var newItem = item.instance()
-#			if randomItemLists.has(_item.type):
-#				newItem.createItem(_item, "_extraData")
-#			else:
-			newItem.createItem(_item)
-			_level.grid[gridPosition.x][gridPosition.y].items.append(newItem.id)
-			$"/root/World/Items".add_child(newItem, true)
+	if !_level.dungeonType.empty():
+		var _itemGeneration = itemGeneration.itemGeneration[_level.dungeonType]
+		var _items = []
+		
+		for _i in range(_itemGeneration.amount):
+			var _item = returnRandomItemForItemGeneration(_itemGeneration)
+			if _item != null:
+				_items.append(_item)
+		
+		for _item in _items:
+			if _item != null:
+				var gridPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
+				var newItem = item.instance()
+	#			if randomItemLists.has(_item.type):
+	#				newItem.createItem(_item, "_extraData")
+	#			else:
+				newItem.createItem(_item)
+				_level.grid[gridPosition.x][gridPosition.y].items.append(newItem.id)
+				$"/root/World/Items".add_child(newItem, true)
 
 
 

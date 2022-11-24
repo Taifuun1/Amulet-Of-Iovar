@@ -102,7 +102,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		currentCritterAbilityHit += 1
 	
 	var _pickedAbility
-	if abilityHits.size() != 0 and abilityHits[currentCritterAbilityHit] == 1:
+	if abilityHits.size() != 0 and abilityHits[currentCritterAbilityHit] == 1 and abilities.size() != 0:
 		var _abilities = []
 		for _ability in abilities:
 			if _ability.has("chance"):
@@ -342,7 +342,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				_pickedAbility.abilityType.matchn("onAttack") and
 				mp - _pickedAbility.data.mp >= 0
 			):
-				Globals.gameConsole.addLog("{critterName} {spell}ucts!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+				Globals.gameConsole.addLog("{critterName} {spell}s!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
 				mp -= _pickedAbility.data.mp
 				despawn(_moveCritterTo, false)
@@ -472,14 +472,14 @@ func despawn(_critterTile = null, createCorpse = true):
 	_level.addPointToEnemyPathding(_gridPosition)
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
-	queue_free()
+	call_deferred("queue_free")
 
 func cleanUpCritter(_critterTile, _level):
 	_level.grid[_critterTile.x][_critterTile.y].critter = null
 	_level.addPointToEnemyPathding(_critterTile)
 	_level.critters.erase(id)
 	GlobalCritterInfo.addCritterBackToPopulation(critterName)
-	queue_free()
+	call_deferred("queue_free")
 
 func checkCritterIdentification(_data):
 	if _data.knowledge:

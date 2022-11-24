@@ -19,7 +19,15 @@ var maxhp
 var maxmp
 var shields
 var ac
-var attacks
+var attacks = [{
+	"dmg": [0,0],
+	"bonusDmg": {},
+	"armorPen": 0,
+	"magicDmg": {
+		"dmg": [0,0],
+		"element": null
+	}
+}]
 var currentHit
 var hits
 
@@ -123,7 +131,19 @@ func calculateDmg(_attack):
 func processCritterEffects():
 	for _status in statusEffects.keys():
 		if statusEffects[_status] > 0:
-			statusEffects[_status] -= 1
+			if _status.matchn("confusion") or _status.matchn("fumbling"):
+				if stats.balance > 30:
+					if statusEffects[_status] - 3 < 0:
+						statusEffects[_status] = 0
+					else:
+						statusEffects[_status] -= 3
+				elif stats.balance > 15:
+					if statusEffects[_status] - 2 < 0:
+						statusEffects[_status] = 0
+					else:
+						statusEffects[_status] -= 2
+				else:
+					statusEffects[_status] -= 1
 	
 	if hpRegenTimer >= 20 - ( (stats.legerity / 3) + (stats.strength / 3) ):
 		if hp < maxhp:

@@ -354,12 +354,13 @@ func processPlayerSpecificEffects():
 	## Hunger ##
 	############
 	previousCalories = calories
-	if checkIfStatusEffectIsInEffect("fast digestion"):
-		calories -= 3
-	elif checkIfStatusEffectIsInEffect("slow digestion"):
-		calories -= 1
-	else:
-		calories -= 2
+	if calories > -50:
+		if checkIfStatusEffectIsInEffect("fast digestion"):
+			calories -= 3
+		elif checkIfStatusEffectIsInEffect("slow digestion"):
+			calories -= 1
+		else:
+			calories -= 2
 	
 	# Check if player becomes less hungry
 	if previousCalories <= 800 and calories > 800:

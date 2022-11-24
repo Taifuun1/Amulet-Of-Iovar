@@ -2,9 +2,11 @@ extends Control
 
 var className
 
-func setLoadingText(_text):
-	$DancingDragonsContainer/LoadingText.call_deferred("text", _text)
+func _ready():
+	name = "Dancing Dragons"
 
+func setLoadingText(_text):
+	$DancingDragonsContainer/LoadingText.text = _text
 
 func startDancingDragons():
 	# warning-ignore:return_value_discarded

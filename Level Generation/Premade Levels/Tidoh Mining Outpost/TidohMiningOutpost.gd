@@ -17,7 +17,7 @@ func createDungeon():
 	getSpawnableTiles(
 		["GRASS", "GRASS_LIGHT", "SIDEWALK", "FLOOR_DUNGEON", "FLOOR_CAVE"],
 		["FLOOR_DUNGEON", "FLOOR_CAVE"],
-		["FLOOR_CAVE"]
+		["GRASS", "FLOOR_CAVE"]
 	)
 	
 	var _groups = get_groups()

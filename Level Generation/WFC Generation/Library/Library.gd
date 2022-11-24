@@ -36,8 +36,8 @@ func createDungeon(_isLast):
 		if areAllStairsConnected():
 			if _bossRoomCenter != null:
 				pathFind([Globals.blockedTiles])
-				if calculatePath(stairs.downStair, _bossRoomCenter) != 0:
-					return
+			if calculatePath(stairs.downStair, _bossRoomCenter) != 0:
+				return
 		resetLevel()
 		resetGeneration()
 	push_error("Couldn't generate library")

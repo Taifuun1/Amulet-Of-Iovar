@@ -294,7 +294,7 @@ func addInputs(_name, _path):
 				inputs.append(fileName)
 			fileName = dir.get_next()
 	for fileName in inputs:
-		$Inputs.call_deferred("add_child", load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
+		$Inputs.add_child(load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
 
 func getAllInputs():
 	var _allInputs = []
@@ -307,7 +307,8 @@ func getAllInputs():
 				_allInputs.append(_newInputPatterns)
 			_input = turnInput(_input)
 	for _inputNode in $Inputs.get_children():
-		_inputNode.call_deferred("queue", "free")
+		_inputNode.clear()
+		_inputNode.queue_free()
 	
 	return _allInputs
 
@@ -317,7 +318,6 @@ func createNodeInputGrid(_inputNode):
 		_input.append([])
 		for y in range(_inputNode.gridSize.y):
 			_input[x].append(_inputNode.get_cellv(Vector2(x,y)))
-#			_input[x].append(_inputNode.get_cellv(Vector2(x,y)))
 	return _input
 
 func createInputGrid(_input):
@@ -405,10 +405,7 @@ func getRandomLowestEntropyEdgeTile():
 
 func placeCornerPatterns():
 	var _corners = PoolVector2Array([
-		Vector2(2, 2),
-#		Vector2(2, gridSize.y - 3),
-#		Vector2(gridSize.x - 3, gridSize.y - 3),
-#		Vector2(gridSize.x - 3, 2)
+		Vector2(2, 2)
 	])
 	for _corner in _corners:
 		drawPattern(_corner, getRandomPattern())
@@ -464,11 +461,6 @@ func checkIfPositionHasTile(_position, _testGrid):
 func getGenerationGrid():
 	for x in range(generatedGrid.size()):
 		for y in range(generatedGrid[x].size()):
-#			grid[x][y].tile = get_cellv(Vector2(x,y))
-#			grid[x][y].tileMetaData = {
-#				"xFlip": is_cell_x_flipped(x, y),
-#				"yFlip": is_cell_y_flipped(x, y)
-#			}
 			generatedGrid[x][y].tileMetaData = {
 				"xFlip": is_cell_x_flipped(x, y),
 				"yFlip": is_cell_y_flipped(x, y)

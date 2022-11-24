@@ -142,11 +142,11 @@ func setEquipment(_id):
 		return
 	
 	var _oldItem
-	if _matchingType.matchn("weapon"):
+	if _matchingType.matchn("weapon") and hands[hoveredEquipment.to_lower()] != null:
 		_oldItem = get_node("/root/World/Items/{id}".format({ "id": hands[hoveredEquipment.to_lower()] }))
-	elif _matchingType.matchn("accessory"):
+	elif _matchingType.matchn("accessory") and accessories[hoveredEquipment.to_lower()] != null:
 		_oldItem = get_node("/root/World/Items/{id}".format({ "id": accessories[hoveredEquipment.to_lower()] }))
-	elif _matchingType.matchn("armor"):
+	elif _matchingType.matchn("armor") and equipment[hoveredEquipment.to_lower()] != null:
 		_oldItem = get_node("/root/World/Items/{id}".format({ "id": equipment[hoveredEquipment.to_lower()] }))
 	
 	if _oldItem != null and _oldItem.binds != null and _oldItem.binds.type.matchn("equipment") and _oldItem.binds.state.matchn("bound"):
