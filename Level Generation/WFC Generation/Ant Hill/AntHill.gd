@@ -7,6 +7,7 @@ func createNewLevel():
 	pathFind([])
 	
 	createDungeon()
+	removeInputs()
 	
 	doFinalPathfinding()
 	
@@ -22,6 +23,7 @@ func createDungeon():
 		fillEmptyGenerationTiles("GRASS")
 		fillGridWithGeneratedGrid()
 		resetGeneration()
+		removeInputs()
 		
 		
 		# Forest generation
@@ -32,6 +34,7 @@ func createDungeon():
 		fillEmptyGenerationTiles("GRASS")
 		generateForest()
 		resetGeneration()
+		removeInputs()
 		
 		
 		# Soil tiles

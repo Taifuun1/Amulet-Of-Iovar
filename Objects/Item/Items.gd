@@ -22,12 +22,15 @@ var miscellaneous = preload("res://Objects/Item/Miscellaneous/Miscellaneous.gd")
 var randomItemList = preload("res://Objects/Item/RandomItemList.gd").new()
 var itemGeneration = preload("res://Objects/Item/ItemGeneration.gd").new()
 
+var mutex
+
 var items = {}
 var miscellaneousItems = []
 
 var randomizedItemsByRarity = []
 
 func create():
+	mutex = Mutex.new()
 	name = "Items"
 	items["amulet"] = amulets.amulets
 	items["armor"] = armor.armor
@@ -55,6 +58,8 @@ func create():
 #######################
 
 func createItem(_item, _position = null, _amount = 1, _toInventory = false, _extraData = {  }, _level = $"/root/World".level):
+	mutex.lock()
+	
 	var _itemPosition
 	if _position == null and !_toInventory:
 		_itemPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
@@ -76,14 +81,16 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 		else:
 			newItem.createItem(getItemByName(_item), _extraData)
 	else:
-		newItem.createItem(_item, _extraData)
+		newItem.createItem(_item, _extraData, _amount)
 	
 	$"/root/World/Items".add_child(newItem, true)
 	
 	if _toInventory:
 		$"/root/World/Critters/0".addToInventory([newItem.id])
-	else:
+	elif _level != null:
 		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
+	
+	mutex.unlock()
 
 func generateItemsForLevel(_level):
 	if !_level.dungeonType.empty():
@@ -98,26 +105,18 @@ func generateItemsForLevel(_level):
 		for _item in _items:
 			if _item != null:
 				var gridPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
+				mutex.lock()
 				var newItem = item.instance()
-	#			if randomItemLists.has(_item.type):
-	#				newItem.createItem(_item, "_extraData")
-	#			else:
 				newItem.createItem(_item)
 				_level.grid[gridPosition.x][gridPosition.y].items.append(newItem.id)
 				$"/root/World/Items".add_child(newItem, true)
+				mutex.unlock()
 
 
 
-########################
-### Helper functions ###
-########################
-
-func getItemByName(_itemName):
-	for _types in items.values():
-		for _rarity in _types.values():
-			for _item in _rarity:
-				if _item.itemName.matchn(_itemName) and _item.itemName.length() == _itemName.length():
-					return _item
+############################
+### Randomizer functions ###
+############################
 
 func getRandomItem(_randomByRarity = true):
 	var _items = []
@@ -153,16 +152,6 @@ func getRandomItemByItemTypes(_types, _randomByRarity = false):
 				for _item in items[_type][_rarity]:
 					_items.append(_item)
 	return _items[randi() % _items.size()]
-
-func removeItem(_itemId, _position = null, _grid = $"/root/World".level.grid):
-	var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
-	if _position != null:
-		_grid[_position.x][_position.y].items.erase(_itemId)
-	else:
-		$"/root/World/Critters/0/Inventory".removeFromInventory(_item)
-		$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
-		$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
-	_item.queue_free()
 
 func getRandomizedItemsByRarity():
 	for _type in items:
@@ -260,10 +249,42 @@ func randomizeRandomItems():
 						_item.unidentifiedItemName = _shuffledItems[_itemType][_item.itemName].unidentifiedItemName
 						if !_itemType.matchn("scroll"):
 							_item.texture = _shuffledItems[_itemType][_item.itemName].texture
-							_item.unIdentifiedTexture = _shuffledItems[_itemType][_item.itemName].texture
+							_item.unidentifiedTexture = _shuffledItems[_itemType][_item.itemName].texture
+
+
+
+########################
+### Helper functions ###
+########################
+
+func getItemByName(_itemName):
+	for _types in items.values():
+		for _rarity in _types.values():
+			for _item in _rarity:
+				if _item.itemName.matchn(_itemName) and _item.itemName.length() == _itemName.length():
+					return _item
+
+func removeItem(_itemId, _position = null, _grid = $"/root/World".level.grid):
+	mutex.lock()
+	var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+	if _position != null:
+		_grid[_position.x][_position.y].items.erase(_itemId)
+	else:
+		$"/root/World/Critters/0/Inventory".removeFromInventory(_item)
+		$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
+		$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
+	_item.queue_free()
+	mutex.unlock()
 
 func checkAllItemsIdentification():
 	for _item in $"/root/World/Items".get_children():
 		if _item.name.matchn("Items"):
 			continue
 		_item.checkItemIdentification()
+
+func getItemsSaveData():
+	return {
+		items = items,
+		miscellaneousItems = miscellaneousItems,
+		randomizedItemsByRarity = randomizedItemsByRarity
+	}

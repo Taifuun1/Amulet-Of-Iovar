@@ -3,7 +3,9 @@ extends WaveFunctionCollapse
 func createNewLevel(_secondStair = null):
 	createGrid()
 	
+	addInputs("Dungeon Halls", get_script().get_path().get_base_dir() + "/Inputs")
 	createDungeon(_secondStair)
+	removeInputs()
 	
 	doFinalPathfinding()
 	
@@ -12,7 +14,6 @@ func createNewLevel(_secondStair = null):
 func createDungeon(_secondStair):
 	for _i in range(10):
 		pathFind([])
-		addInputs("Dungeon Halls", get_script().get_path().get_base_dir() + "/Inputs")
 		createDungeonHalls()
 		trimGenerationEdges()
 		getGenerationGrid()

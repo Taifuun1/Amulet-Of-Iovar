@@ -6,7 +6,9 @@ func createNewLevel(_isLast = false):
 	createGrid()
 	pathFind([])
 	
+	addInputs("Labyrinth", get_script().get_path().get_base_dir() + "/Inputs")
 	createDungeon(_isLast)
+	removeInputs()
 	
 	doFinalPathfinding()
 	
@@ -15,7 +17,6 @@ func createNewLevel(_isLast = false):
 func createDungeon(_isLast):
 	for _i in range(10):
 		var _bossRoomCenter = null
-		addInputs("Labyrinth", get_script().get_path().get_base_dir() + "/Inputs")
 		createLabyrinth()
 		trimGenerationEdges()
 		getGenerationGrid()
@@ -34,7 +35,9 @@ func createDungeon(_isLast):
 		if areAllStairsConnected():
 			if _bossRoomCenter != null:
 				pathFind([Globals.blockedTiles])
-			if calculatePath(stairs.downStair, _bossRoomCenter) != 0:
+				if calculatePath(stairs.downStair, _bossRoomCenter) != 0:
+					return
+			else:
 				return
 		resetLevel()
 		resetGeneration()

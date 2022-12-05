@@ -595,6 +595,11 @@ func checkIfMatchingEquipmentAndSlot(_type, _category):
 			return "Armor"
 	return null
 
+func loadEquipmentData(_data):
+	hands = _data.hands
+	equipment = _data.equipment
+	accessories = _data.accessories
+
 func getEquipmentSaveData():
 	return {
 		hands = hands,

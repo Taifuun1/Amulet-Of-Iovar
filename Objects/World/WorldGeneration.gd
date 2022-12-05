@@ -58,9 +58,7 @@ func _ready():
 #	OS.window_size = Vector2(1280, 900)
 #	get_tree().set_screen_stretch(2,1,Vector2(960, 540),.5)
 	
-	$"/root/World/UI/UITheme/Dancing Dragons".show()
-	$"/root/World/UI/UITheme/Dancing Dragons".call_deferred("startDancingDragons")
-	
+	$UI/UITheme/"Dancing Dragons".call_deferred("startDancingDragons")
 	yield(get_tree().create_timer(0.1), "timeout")
 	
 	randomize()
@@ -81,18 +79,83 @@ func _ready():
 		if !_node.name.matchn("dancing dragons"):
 			_node.hide()
 	
-	setUpDungeonLevels()
+	$Items/Items.randomizeRandomItems()
 	
-	var levelCount = 0
-	for section in levels:
-		if typeof(levels[section]) != TYPE_ARRAY:
-			levelCount += 1
-		else:
-			levelCount += levels[section].size()
+	var saveData = $Save.loadData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	if saveData.hasSave:
+		loadGame()
+	else:
+		setUpDungeonLevels()
+		
+		var levelCount = 0
+		for section in levels:
+			if typeof(levels[section]) != TYPE_ARRAY:
+				levelCount += 1
+			else:
+				levelCount += levels[section].size()
+		
+		$FOV.createFOVLevels(levelCount)
+		
+		generateDungeon()
+
+func loadGame():
+	$UI/UITheme/"Dancing Dragons".call_deferred("setLoadingText", "Loading game...")
+	yield(get_tree().create_timer(0.1), "timeout")
 	
-	$FOV.createFOVLevels(levelCount)
+	var dir = Directory.new()
+	if dir.open("SaveSlot{selectedSave}/items".format({ "selectedSave": StartingData.selectedSave })) == OK:
+		dir.list_dir_begin()
+		var fileName = dir.get_next()
+		while fileName != "":
+			if dir.current_is_dir():
+				push_error("Found directory: " + fileName)
+			else:
+				var _item = $Save.loadData(fileName, "SaveSlot{selectedSave}/items/{itemId}".format({ "selectedSave": StartingData.selectedSave, "itemId": fileName }))
+				$Items/Items.createItem(_item, Vector2(0,0), _item.amount, false, {  }, null)
+			fileName = dir.get_next()
+	else:
+		push_error("An error occurred when trying to access the path.")
 	
-	generateDungeon()
+	if dir.open("SaveSlot{selectedSave}/critters".format({ "selectedSave": StartingData.selectedSave })) == OK:
+		dir.list_dir_begin()
+		var fileName = dir.get_next()
+		while fileName != "":
+			if dir.current_is_dir():
+				push_error("Found directory: " + fileName)
+			else:
+				var _critter = $Save.loadData(fileName, "SaveSlot{selectedSave}/critters/{critterId}".format({ "selectedSave": StartingData.selectedSave, "critterId": fileName }))
+				$Critters/Critters.spawnCritter(_critter, Vector2(0,0), null, false, null)
+			fileName = dir.get_next()
+	else:
+		push_error("An error occurred when trying to access the path.")
+	
+	if dir.open("SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave })) == OK:
+		dir.list_dir_begin()
+		var fileName = dir.get_next()
+		while fileName != "":
+			if dir.current_is_dir():
+				push_error("Found directory: " + fileName)
+			else:
+				var _level = $Save.loadData(fileName, "SaveSlot{selectedSave}/levels/{levelId}".format({ "selectedSave": StartingData.selectedSave, "levelId": fileName }))
+				$Levels.add_child(_level)
+			fileName = dir.get_next()
+	else:
+		push_error("An error occurred when trying to access the path.")
+	
+	var _fovData = $Save.loadData("FOVData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), false)
+	$FOV.loadFOVLevel(_fovData)
+	
+#	var _gameConsoleData = $Save.loadData("FOVData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), false)
+#	$FOV.loadFOVLevel(_fovData)
+	
+	var _globalsData = $Save.loadData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	Globals.loadGlobalsData(_globalsData)
+	
+	var _equipmentAndRuneData = $Save.loadData("EquipmentData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	$UI/UITheme/Equipment.loadEquipmentData(_equipmentAndRuneData)
+	$UI/UITheme/Runes.loadRunesData(_equipmentAndRuneData)
+	
+	$UI/UITheme/"Dancing Dragons".hide()
 
 func setUpDungeonLevels():
 	setUpDungeon()
@@ -174,19 +237,6 @@ func setUpDungeon():
 	newStorageArea.create("", "Storage Area", 10000)
 	levels.storageArea.append(newStorageArea)
 	$Levels.add_child(newStorageArea)
-	
-	### Church
-	var newChurch = church.instance()
-	newChurch.create("", "Church", 10000)
-	churchLevel = newChurch
-	$Levels.add_child(newChurch)
-	
-	for _levelSection in levels:
-		if typeof(_levelSection) == TYPE_STRING:
-			totalLevelCount += 1
-		else:
-			totalLevelCount += _levelSection.size()
-	totalLevelCount += 1
 
 func setUpDungeonSidepaths():
 	### Mines of Tidoh
@@ -317,6 +367,19 @@ func setUpHallsSidepaths():
 	newIovarsLair.create("", "Iovars lair", 10000)
 	levels.iovarsLair.append(newIovarsLair)
 	$Levels.add_child(newIovarsLair)
+	
+	### Church
+	var newChurch = church.instance()
+	newChurch.create("", "Church", 10000)
+	churchLevel = newChurch
+	$Levels.add_child(newChurch)
+	
+	for _levelSection in levels:
+		if typeof(_levelSection) == TYPE_STRING:
+			totalLevelCount += 1
+		else:
+			totalLevelCount += _levelSection.size()
+	totalLevelCount += 1
 
 
 
@@ -367,6 +430,8 @@ func createDungeon1(_nothing):
 			_level.createNewLevel("downStair")
 		else:
 			_level.createNewLevel()
+	for _level in levels.dungeon4:
+		_level.createNewLevel()
 	
 	for _level in levels.theGreatShadows:
 		_level.createNewLevel()
@@ -381,9 +446,6 @@ func createDungeon2(_nothing):
 	for _level in levels.banditWarcamp:
 		_level.createNewLevel()
 	
-	for _level in levels.storageArea:
-		_level.createNewLevel()
-	
 	print("dungeon2")
 	call_deferred("checkIfThreadsAreDone")
 
@@ -394,14 +456,11 @@ func createDungeon3():
 	for _level in levels.depthsOfTidoh:
 		_level.createNewLevel()
 	
-	for _level in levels.dungeon4:
-		_level.createNewLevel()
-	
 	print("dungeon3")
 	call_deferred("checkIfThreadsAreDone")
 
 func createDungeon4():
-	for _level in levels.library:
+	for _level in levels.storageArea:
 		_level.createNewLevel()
 	
 	print("dungeon4")
@@ -420,11 +479,14 @@ func createHalls1():
 		else:
 			_level.createNewLevel()
 	
+	for _level in levels.dungeonhalls3:
+		_level.createNewLevel()
+	
 	print("halls1")
 	call_deferred("checkIfThreadsAreDone")
 
 func createHalls2():
-	for _level in levels.dungeonhalls3:
+	for _level in levels.library:
 		_level.createNewLevel()
 	
 	print("halls2")
@@ -466,9 +528,10 @@ func checkIfThreadsAreDone():
 		threadHalls3 != null and
 		!threadHalls4.is_alive()
 	): 
-		$"/root/World/UI/UITheme/Dancing Dragons".call_deferred("setLoadingText", "Setting up game objects...")
+		$UI/UITheme/"Dancing Dragons".call_deferred("setLoadingText", "Setting up game objects...")
 		gameSetUpThread = Thread.new()
 		gameSetUpThread.start(self, "setUpGameObjects")
 
 func _exit_tree():
-	gameSetUpThread.wait_to_finish()
+	if gameSetUpThread != null:
+		gameSetUpThread.wait_to_finish()

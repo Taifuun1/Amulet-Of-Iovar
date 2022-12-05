@@ -78,7 +78,7 @@ func _process(_delta):
 		yield(get_tree().create_timer(0.01), "timeout")
 		
 		for _level in $Levels.get_children():
-			_level.clear()
+			_level.clearOutInputs()
 		
 		updateTiles()
 		drawLevel()
@@ -95,8 +95,6 @@ func _process(_delta):
 func setUpGameObjects():
 	Globals.gameConsole = $"/root/World/UI/UITheme/GameConsole"
 	Globals.gameStats = $"/root/World/UI/UITheme/GameStats"
-	
-	$Items/Items.randomizeRandomItems()
 	
 	$Critters.add_child(player, true)
 	player.create()
@@ -205,13 +203,10 @@ func _input(_event):
 								var _randomOpenTiles = _openTiles.duplicate(true)
 								_randomOpenTiles.shuffle()
 								_tileToMoveTo = _randomOpenTiles[0]
-	#						for _openTile in _openTiles:
-	#							if _openTile == _tileToMoveTo:
 							if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null:
 								keepMovingLoop(_playerTile, _tileToMoveTo)
 							else:
 								processGameTurn(_playerTile, _tileToMoveTo)
-	#						break
 						elif currentGameState == gameState.INTERACT:
 							interactWith(_tileToMoveTo)
 						elif currentGameState == gameState.KICK:
@@ -888,38 +883,46 @@ func resetToDefaulGameState():
 	keepMoving = false
 
 func saveGame():
+	currentGameState = gameState.OUT_OF_PLAYERS_HANDS
+	$UI/UITheme/"Dancing Dragons".call_deferred("setLoadingText", "Saving game...")
+	$UI/UITheme/"Dancing Dragons".call_deferred("startDancingDragons")
+	yield(get_tree().create_timer(0.01), "timeout")
+	
 	for _item in $Items.get_children():
-		if _item.name == "Items":
+		if _item.name.matchn("Items"):
+			var _itemData = _item.getItemsSaveData()
+			$Save.saveData("Items", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _itemData)
 			continue
 		var _itemData = _item.getItemSaveData()
-		$Save.saveGameFile("itemSave", _itemData.id, "{selectedSave}/items".format({ "selectedSave": StartingData.selectedSave }), _itemData)
+		$Save.saveData(_itemData.id, "SaveSlot{selectedSave}/items".format({ "selectedSave": StartingData.selectedSave }), _itemData)
 	
 	for _critter in $Critters.get_children():
 		if _critter.name.matchn("Critters"):
 			continue
 		var _critterData = _critter.getCritterSaveData()
-		$Save.saveGameFile("critterSave", _critterData.id, "{selectedSave}/critters".format({ "selectedSave": StartingData.selectedSave }), _critterData)
+		$Save.saveData(_critterData.id, "SaveSlot{selectedSave}/critters".format({ "selectedSave": StartingData.selectedSave }), _critterData)
 	
 	for _levelSection in levels.values():
 		if typeof(_levelSection) != TYPE_ARRAY:
 			var _levelData = _levelSection.getLevelSaveData()
+			$Save.saveResourceData(_levelData.levelId, "SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _levelSection)
 		else:
 			for _level in _levelSection:
 				var _levelData = _level.getLevelSaveData()
-				$Save.saveGameFile("levelSave", _levelData.levelId, "{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _levelData)
+				$Save.saveResourceData(_levelData.levelId, "SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _level)
 	
-	var _fOVData = $FOV.getFOVSaveData()
-	$Save.saveGameFile("fOVSave", "fov", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _fOVData)
+	var _fovData = $FOV.getFOVSaveData()
+	$Save.saveData("FOVData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _fovData)
 	
 #	var _gameConsoleData = $UI/UITheme/GameConsole.getGameConsoleSaveData()
 #	$Save.saveGameFile("gameConsoleSave", "gameConsole", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _gameConsoleData)
 	
 	var _globalsData = Globals.getGlobalsSaveData()
-	$Save.saveGameFile("globalsSave", "globals", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalsData)
+	$Save.saveData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalsData)
 	
 	var _equipmentData = $UI/UITheme/Equipment.getEquipmentSaveData()
 	_equipmentData.merge($UI/UITheme/Runes.getRunesSaveData())
-	$Save.saveGameFile("equipmentSave", "equipment", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _equipmentData)
+	$Save.saveData("EquipmentData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _equipmentData)
 	
 	var _saveData = {
 		"saveSlot": StartingData.selectedSave,
@@ -929,10 +932,10 @@ func saveGame():
 		"level": Globals.currentDungeonLevel,
 		"points": 0
 	}
-	$Save.saveGameFile("saveDataSave", "saveData", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
+	$Save.saveData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
 	
-	### Resource saver
-#	ResourceSaver.save("user://gameData{saveGameNumber}.save".format({ "saveGameNumber": 1 }), get_node("."))
+	resetToDefaulGameState()
+	$UI/UITheme/"Dancing Dragons".hide()
 
 
 

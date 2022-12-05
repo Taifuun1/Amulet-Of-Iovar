@@ -4,7 +4,9 @@ func createNewLevel():
 	createGrid()
 	pathFind([])
 	
+	addInputs("Bandit Warcamp", get_script().get_path().get_base_dir() + "/Inputs")
 	createDungeon()
+	removeInputs()
 	
 	doFinalPathfinding()
 	
@@ -12,7 +14,6 @@ func createNewLevel():
 
 func createDungeon():
 	for _i in range(10):
-		addInputs("Bandit Warcamp", get_script().get_path().get_base_dir() + "/Inputs")
 		createBanditWarcamp()
 		trimGenerationEdges()
 		getGenerationGrid()

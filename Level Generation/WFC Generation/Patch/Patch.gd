@@ -7,6 +7,7 @@ func createNewLevel(_patchType):
 	pathFind([])
 	
 	createDungeon(_patchType)
+	removeInputs()
 	
 	doFinalPathfinding()
 	
@@ -25,6 +26,7 @@ func createDungeon(_patchType):
 			fillEmptyGenerationTiles("GRASS")
 			fillGridWithGeneratedGrid()
 			resetGeneration()
+			removeInputs()
 		
 		
 		# Forest generation
@@ -41,6 +43,7 @@ func createDungeon(_patchType):
 		else:
 			generateForest("splotches", _patchType)
 		resetGeneration()
+		removeInputs()
 		
 		
 		# Soil areas
@@ -55,6 +58,7 @@ func createDungeon(_patchType):
 		fillEmptyGenerationTiles("GRASS")
 		generateBuildings()
 		resetGeneration()
+		removeInputs()
 		
 		
 		# Soil area items and interactables

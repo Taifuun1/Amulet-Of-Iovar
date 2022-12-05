@@ -22,6 +22,11 @@ func buildFOVLevel():
 			set_cell(x, y, HIDDEN)
 	return grid
 
+func loadFOVLevel(_data):
+	for _level in _data.fovLevels.values():
+		fovLevels.append(_level)
+	currentFOVLevel = fovLevels[0]
+
 func moveLevel(_level):
 	currentFOVLevel = fovLevels[_level]
 
@@ -34,11 +39,11 @@ func greyCell(x, y):
 	set_cell(x, y, FOG)
 
 func getFOVSaveData():
-	var _fovLevels = {}
+	var _fovLevels = { "fovLevels": {  } }
 	for _fovLevel in fovLevels.size():
-		_fovLevels[_fovLevel] = {  }
+		_fovLevels.fovLevels[_fovLevel] = {  }
 		for x in fovLevels[_fovLevel].size():
-			_fovLevels[_fovLevel][x] = {  }
+			_fovLevels.fovLevels[_fovLevel][x] = {  }
 			for y in fovLevels[_fovLevel][x].size():
-				_fovLevels[_fovLevel][x][y] = fovLevels[_fovLevel][x][y]
+				_fovLevels.fovLevels[_fovLevel][x][y] = fovLevels[_fovLevel][x][y]
 	return _fovLevels

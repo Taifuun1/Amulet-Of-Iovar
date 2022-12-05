@@ -48,7 +48,6 @@ mouse_filter = 2
 theme = ExtResource( 12 )
 
 [node name="Dancing Dragons" parent="UI/UITheme" instance=ExtResource( 17 )]
-visible = false
 
 [node name="GameConsole" parent="UI/UITheme" instance=ExtResource( 4 )]
 visible = false

@@ -16,7 +16,8 @@ var enchantment = null
 
 var identifiedItemName
 var unidentifiedItemName
-var texture
+var itemTexture
+var unidenfiedItemTexture
 var notIdentified = {
 	"alignment": false,
 	"enchantment": false
@@ -126,14 +127,15 @@ func createItem(_item, _extraData = {}, _amount = 1):
 			$ItemSprite.texture = load("res://Assets/Miscellaneous/GoldPiecesHigh.png")
 		return
 	
+	itemTexture = _item.texture
+	unidenfiedItemTexture = _item.unidentifiedTexture
 	if (
 		GlobalItemInfo.globalItemInfo.has(_item.itemName) and
 		GlobalItemInfo.globalItemInfo[_item.itemName].identified
 	):
 		$ItemSprite.texture = _item.texture
 	else:
-		$ItemSprite.texture = _item.unIdentifiedTexture
-		texture = _item.texture
+		$ItemSprite.texture = _item.unidentifiedTexture
 
 
 
@@ -291,7 +293,7 @@ func getTexture():
 func checkItemIdentification():
 	if GlobalItemInfo.globalItemInfo.has(identifiedItemName) and GlobalItemInfo.globalItemInfo[identifiedItemName].identified == true:
 		itemName = identifiedItemName
-		$ItemSprite.texture = texture
+		$ItemSprite.texture = itemTexture
 		notIdentified.alignment = true
 		notIdentified.enchantment = true
 
@@ -320,7 +322,8 @@ func getItemSaveData():
 		enchantment = enchantment,
 		identifiedItemName = identifiedItemName,
 		unidentifiedItemName = unidentifiedItemName,
-		texture = texture,
+		itemTexture = itemTexture,
+		unidenfiedItemTexture = unidenfiedItemTexture,
 		notIdentified = notIdentified,
 		container = container,
 		containerWeight = containerWeight,

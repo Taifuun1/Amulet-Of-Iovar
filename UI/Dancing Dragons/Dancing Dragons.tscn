@@ -27,7 +27,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("DancingDragonsContainer/HBoxContainer/TextureRect2:flip_h")
+tracks/1/path = NodePath("DancingDragonsContainer/HBoxContainer/TextureRect3:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -39,7 +39,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("DancingDragonsContainer/HBoxContainer/TextureRect3:flip_h")
+tracks/2/path = NodePath("DancingDragonsContainer/HBoxContainer/TextureRect4:flip_h")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -51,7 +51,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("DancingDragonsContainer/HBoxContainer/TextureRect4:flip_h")
+tracks/3/path = NodePath("DancingDragonsContainer/HBoxContainer2/TextureRect5:flip_h")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -63,7 +63,7 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("DancingDragonsContainer/HBoxContainer2/TextureRect5:flip_h")
+tracks/4/path = NodePath("DancingDragonsContainer/HBoxContainer2/TextureRect6:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -75,7 +75,7 @@ tracks/4/keys = {
 "values": [ true, false ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("DancingDragonsContainer/HBoxContainer2/TextureRect6:flip_h")
+tracks/5/path = NodePath("DancingDragonsContainer/HBoxContainer2/TextureRect7:flip_h")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -87,7 +87,7 @@ tracks/5/keys = {
 "values": [ true, false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("DancingDragonsContainer/HBoxContainer2/TextureRect7:flip_h")
+tracks/6/path = NodePath("DancingDragonsContainer/HBoxContainer2/TextureRect8:flip_h")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -99,7 +99,7 @@ tracks/6/keys = {
 "values": [ true, false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("DancingDragonsContainer/HBoxContainer2/TextureRect8:flip_h")
+tracks/7/path = NodePath("DancingDragonsContainer/HBoxContainer/TextureRect2:flip_h")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false

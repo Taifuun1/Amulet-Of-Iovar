@@ -1,6 +1,8 @@
 extends BaseLevel
 class_name WaveFunctionCollapse
 
+var mutex
+
 var gridSize = Vector2(68,32)
 var entropyVariation = 0
 
@@ -8,6 +10,9 @@ var allInputs
 var generatedGrid = []
 var edgeTiles = []
 var nonLegibleTiles = []
+
+func _ready():
+	mutex = Mutex.new()
 
 class edgeTile:
 	var position
@@ -209,9 +214,13 @@ func getPartialPatternForTile(_tile, _grid = null):
 		for y in range(3):
 			if _grid != null and _grid.has(Vector2(x,y)):
 				_partialPattern[x][y] = _grid[Vector2(x,y)]
-			else:
+			elif (
+				_tile.x + (x - 1) < gridSize.x and
+				_tile.y + (y - 1) < gridSize.y
+			):
 				_partialPattern[x][y] = generatedGrid[_tile.x + (x - 1)][_tile.y + (y - 1)].tile
-#				get_cellv(Vector2(_tile.x + (x - 1), _tile.y + (y - 1)))
+			else:
+				_partialPattern[x][y] = -1
 	return _partialPattern
 
 func findAllPartialPatternMatches(_partialPattern):
@@ -245,6 +254,8 @@ func checkMatchesDoesntHavePattern(_newInputPattern, _array):
 ###############################
 
 func drawPattern(_tile, _pattern):
+	if typeof(_pattern) == TYPE_BOOL:
+		return
 	for x in range(3):
 		for y in range(3):
 			generatedGrid[_tile.x + (x - 1)][_tile.y + (y - 1)].tile = _pattern[x][y]
@@ -294,10 +305,21 @@ func addInputs(_name, _path):
 				inputs.append(fileName)
 			fileName = dir.get_next()
 	for fileName in inputs:
+		mutex.lock()
 		$Inputs.add_child(load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
+		mutex.unlock()
+
+func removeInputs():
+	mutex.lock()
+	for _inputNode in $Inputs.get_children():
+		_inputNode.clear()
+		_inputNode.free()
+	mutex.unlock()
 
 func getAllInputs():
 	var _allInputs = []
+	
+	mutex.lock()
 	for _inputNode in $Inputs.get_children():
 		_inputNode.create()
 		var _input = createNodeInputGrid(_inputNode)
@@ -306,9 +328,7 @@ func getAllInputs():
 			if !_newInputPatterns.empty():
 				_allInputs.append(_newInputPatterns)
 			_input = turnInput(_input)
-	for _inputNode in $Inputs.get_children():
-		_inputNode.clear()
-		_inputNode.queue_free()
+	mutex.unlock()
 	
 	return _allInputs
 
@@ -389,9 +409,11 @@ func makeNewPattern():
 	return _newInputPattern
 
 func getRandomPattern():
-	var _randomInput = randi() % allInputs.size()
-	var _randomPattern = allInputs[_randomInput][randi() % allInputs[_randomInput].size()]
-	return _randomPattern
+	if allInputs.size() != 0:
+		var _randomInput = randi() % allInputs.size()
+		var _randomPattern = allInputs[_randomInput][randi() % allInputs[_randomInput].size()]
+		return _randomPattern
+	return false
 
 func getRandomLowestEntropyEdgeTile():
 	var _lowestEntropyEdgeTiles = []

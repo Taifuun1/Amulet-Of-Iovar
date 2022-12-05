@@ -412,6 +412,11 @@ func calculateMagicDamageIncrease(_type):
 			"d": _d
 		}
 
+func loadRunesData(_data):
+	runes = _data.runes
+	spellDamage = _data.spellDamage
+	manaUsage = _data.manaUsage
+
 func getRunesSaveData():
 	return {
 		runes = runes,

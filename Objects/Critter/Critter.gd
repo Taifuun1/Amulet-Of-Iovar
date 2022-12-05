@@ -474,7 +474,7 @@ func despawn(_critterTile = null, createCorpse = true):
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
 	call_deferred("queue_free")
 
-func cleanUpCritter(_critterTile, _level):
+func addCritterBackToPopulation(_critterTile, _level):
 	_level.grid[_critterTile.x][_critterTile.y].critter = null
 	_level.addPointToEnemyPathding(_critterTile)
 	_level.critters.erase(id)

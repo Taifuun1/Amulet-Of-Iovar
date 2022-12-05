@@ -6,7 +6,9 @@ func createNewLevel():
 	createGrid()
 	pathFind([])
 	
+	addInputs("Depths of Tidoh", get_script().get_path().get_base_dir() + "/Inputs")
 	createDungeon()
+	removeInputs()
 	
 	doFinalPathfinding()
 	
@@ -14,7 +16,6 @@ func createNewLevel():
 
 func createDungeon():
 	for _i in range(10):
-		addInputs("Depths of Tidoh", get_script().get_path().get_base_dir() + "/Inputs")
 		createDepthsOfTidoh()
 		trimGenerationEdges()
 		getGenerationGrid()

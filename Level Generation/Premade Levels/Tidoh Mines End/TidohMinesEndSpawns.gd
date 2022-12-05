@@ -302,7 +302,8 @@ var tidohMinesEndSpawn2 = [
 			"types": {
 				"weapon": ["common", "uncommon", "rare"]
 			},
-			"names": null
+			"names": null,
+			"randomByRarity": true
 		},
 		"chance": 4
 	},

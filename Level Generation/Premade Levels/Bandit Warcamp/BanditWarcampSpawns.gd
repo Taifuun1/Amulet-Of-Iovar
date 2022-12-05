@@ -94,7 +94,7 @@ var banditWarcampSpawn1 = [
 		]),
 		"items": {
 			"types": {
-				"ring": ["common", "uncommon"]
+				"ring": ["uncommon"]
 			},
 			"names": null,
 			"randomByRarity": true
@@ -175,7 +175,7 @@ var banditWarcampSpawn2 = [
 		"tiles": Vector2(31,12),
 		"critters": {
 			"names": [
-				"Outlaw merchandiee'er"
+				"Outlaw Merchandiee'er"
 			]
 		},
 		"chance": 100
