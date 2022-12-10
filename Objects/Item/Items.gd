@@ -32,6 +32,7 @@ var randomizedItemsByRarity = []
 func create():
 	mutex = Mutex.new()
 	name = "Items"
+	
 	items["amulet"] = amulets.amulets
 	items["armor"] = armor.armor
 	items["belt"] = belt.belt
@@ -51,13 +52,30 @@ func create():
 	
 	getRandomizedItemsByRarity()
 
+func loadItems(_items):
+	mutex = Mutex.new()
+	name = "Items"
+	
+	for _type in _items:
+		items[_type] = {  }
+		for _rarity in _items[_type]:
+			items[_type][_rarity] = []
+			for _index in _items[_type][_rarity].size():
+				items[_type][_rarity].append(_items[_type][_rarity][_index])
+				items[_type][_rarity][_index].texture = load(items[_type][_rarity][_index].texture)
+				items[_type][_rarity][_index].unidentifiedTexture = load(items[_type][_rarity][_index].unidentifiedTexture)
+	
+	miscellaneousItems = miscellaneous.miscellaneous
+	
+	getRandomizedItemsByRarity()
+
 
 
 #######################
 ### Item generation ###
 #######################
 
-func createItem(_item, _position = null, _amount = 1, _toInventory = false, _extraData = {  }, _level = $"/root/World".level):
+func createItem(_item, _position = null, _amount = 1, _toInventory = false, _extraData = {  }, _level = $"/root/World".level, _spawnNew = true):
 	mutex.lock()
 	
 	var _itemPosition
@@ -81,7 +99,7 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 		else:
 			newItem.createItem(getItemByName(_item), _extraData)
 	else:
-		newItem.createItem(_item, _extraData, _amount)
+		newItem.createItem(_item, _extraData, _amount, _spawnNew)
 	
 	$"/root/World/Items".add_child(newItem, true)
 	
@@ -93,7 +111,7 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 	mutex.unlock()
 
 func generateItemsForLevel(_level):
-	if !_level.dungeonType.empty():
+	if itemGeneration.itemGeneration.has(_level.dungeonType):
 		var _itemGeneration = itemGeneration.itemGeneration[_level.dungeonType]
 		var _items = []
 		
@@ -128,6 +146,23 @@ func getRandomItem(_randomByRarity = true):
 		var _pick = randi() % items[_randomType][_rarity].size()
 		return items[_randomType][_rarity][_pick]
 
+func getRandomizedItemsByRarity():
+	for _type in items:
+		for _rarity in items[_type]:
+			for _item in items[_type][_rarity]:
+				if _rarity == "common":
+					for _i in range(75):
+						randomizedItemsByRarity.append(_item)
+				elif _rarity == "uncommon":
+					for _i in range(25):
+						randomizedItemsByRarity.append(_item)
+				if _rarity == "rare":
+					for _i in range(10):
+						randomizedItemsByRarity.append(_item)
+				if _rarity == "legendary":
+					for _i in range(1):
+						randomizedItemsByRarity.append(_item)
+
 func getRandomItemByItemTypes(_types, _randomByRarity = false):
 	var _items = []
 	if _randomByRarity:
@@ -152,23 +187,6 @@ func getRandomItemByItemTypes(_types, _randomByRarity = false):
 				for _item in items[_type][_rarity]:
 					_items.append(_item)
 	return _items[randi() % _items.size()]
-
-func getRandomizedItemsByRarity():
-	for _type in items:
-		for _rarity in items[_type]:
-			for _item in items[_type][_rarity]:
-				if _rarity == "common":
-					for _i in range(75):
-						randomizedItemsByRarity.append(_item)
-				elif _rarity == "uncommon":
-					for _i in range(25):
-						randomizedItemsByRarity.append(_item)
-				if _rarity == "rare":
-					for _i in range(10):
-						randomizedItemsByRarity.append(_item)
-				if _rarity == "legendary":
-					for _i in range(1):
-						randomizedItemsByRarity.append(_item)
 
 func returnRandomItemForItemGeneration(_itemGeneration):
 	var type
@@ -283,8 +301,17 @@ func checkAllItemsIdentification():
 		_item.checkItemIdentification()
 
 func getItemsSaveData():
+	var _items = {  }
+	
+	for _type in items:
+		_items[_type] = {  }
+		for _rarity in items[_type]:
+			_items[_type][_rarity] = []
+			for _index in items[_type][_rarity].size():
+				_items[_type][_rarity].append(items[_type][_rarity][_index])
+				_items[_type][_rarity][_index].texture = _items[_type][_rarity][_index].texture.get_path()
+				_items[_type][_rarity][_index].unidentifiedTexture = _items[_type][_rarity][_index].unidentifiedTexture.get_path()
+	
 	return {
-		items = items,
-		miscellaneousItems = miscellaneousItems,
-		randomizedItemsByRarity = randomizedItemsByRarity
+		items = _items
 	}

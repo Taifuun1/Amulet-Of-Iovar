@@ -15,10 +15,13 @@ var currentCritterAbilityHit
 var activationDistance = null
 
 
-func createCritter(_critter, _levelId, _tooltip, _extraData = {}):
-	id = Globals.critterId
+func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = true):
+	if _spawnNew:
+		id = Globals.critterId
+		Globals.critterId += 1
+	else:
+		id = _critter.id
 	name = str(id)
-	Globals.critterId += 1
 	levelId = _levelId
 	
 	critterName = _critter.critterName
@@ -34,7 +37,7 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}):
 	stats.visage = _critter.stats.visage
 	stats.wisdom = _critter.stats.wisdom
 	
-	level = 1
+	level = _critter.level
 	hp = _critter.hp
 	mp = _critter.mp
 	basehp = _critter.hp
@@ -461,7 +464,7 @@ func despawn(_critterTile = null, createCorpse = true):
 				if _drop.amount[0] == _drop.amount[1]:
 					_randomChange = 1
 					_minAmount = _drop.amount[0]
-				var _amount = randi() % _randomChange + _minAmount
+				var _amount = randi() % int(_randomChange) + int(_minAmount)
 				if typeof(_drop.names) == TYPE_ARRAY:
 					$"/root/World/Items/Items".createItem(_drop.names[randi() % _drop.names.size()], _gridPosition, _amount)
 				else:
@@ -488,13 +491,17 @@ func checkCritterIdentification(_data):
 func getCritterSaveData():
 	var _critterData = {
 		levelId = levelId,
-		aI = aI,
+		aI = {
+			aI = aI.aI,
+			aggroDistance = aI.aggroDistance,
+			activationDistance = aI.activationDistance
+		},
 		weight = weight,
 		expDropAmount = expDropAmount,
 		drops = drops,
 		abilityHits = abilityHits,
 		currentCritterAbilityHit = currentCritterAbilityHit,
-		activationDistance = activationDistance
+		texture = $CritterSprite.texture.get_path()
 	}
 	_critterData.merge(getBaseCritterSaveData())
 	return _critterData

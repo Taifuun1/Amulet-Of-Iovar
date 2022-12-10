@@ -16,7 +16,8 @@ var openTiles = []
 var spawnableItemTiles = []
 var spawnableCritterTiles = []
 var floorTiles = []
-var stairs = {}
+var stairs = { }
+var additionalData = { }
 
 var critters = []
 
@@ -28,9 +29,10 @@ func create(_dungeonType, _dungeonLevelName, _visibility):
 	dungeonLevelName = _dungeonLevelName
 	visibility = _visibility
 
-func createGrid(_tile = Globals.tiles.EMPTY):
-	Globals.generatedLevels += 1
-	$"/root/World/UI/UITheme/Dancing Dragons".call_deferred("setLoadingText", "Generating level... \n{generatedLevels}".format({ "generatedLevels": Globals.generatedLevels }))
+func createGrid(_tile = Globals.tiles.EMPTY, _generateNewLevel = true):
+	if _generateNewLevel:
+		Globals.generatedLevels += 1
+		$"/root/World/UI/UITheme/Dancing Dragons".call_deferred("setLoadingText", "Generating level... \n{generatedLevels}".format({ "generatedLevels": Globals.generatedLevels }))
 	for x in range(Globals.gridSize.x):
 		grid.append([])
 		for _y in range(Globals.gridSize.y):
@@ -704,35 +706,84 @@ func clearOutInputs():
 
 func getLevelSaveData():
 	var _grid = {  }
+	var _openTiles = {  }
+	var _spawnableItemTiles = {  }
+	var _spawnableCritterTiles = {  }
+	var _floorTiles = {  }
+	var _stairs = {  }
+	
 	for x in grid.size():
 		_grid[x] = {  }
 		for y in grid[x].size():
 			_grid[x][y] = grid[x][y]
+	for index in openTiles.size():
+		_openTiles[str(index)] = {
+			"x": openTiles[index].x,
+			"y": openTiles[index].y
+		}
+	for index in spawnableItemTiles.size():
+		_spawnableItemTiles[str(index)] = {
+			"x": spawnableItemTiles[index].x,
+			"y": spawnableItemTiles[index].y
+		}
+	for index in spawnableCritterTiles.size():
+		_spawnableCritterTiles[str(index)] = {
+			"x": spawnableCritterTiles[index].x,
+			"y": spawnableCritterTiles[index].y
+		}
+	for index in floorTiles.size():
+		_floorTiles[str(index)] = {
+			"x": floorTiles[index].x,
+			"y": floorTiles[index].y
+		}
+	for key in stairs.keys():
+		_stairs[key] = {
+			"x": stairs[key].x,
+			"y": stairs[key].y
+		}
+	
 	return {
 		levelId = levelId,
 		dungeonType = dungeonType,
 		dungeonLevelName = dungeonLevelName,
 		visibility = visibility,
+		critters = critters,
 
 		grid = _grid,
-		openTiles = openTiles,
-		spawnableItemTiles = spawnableItemTiles,
-		spawnableCritterTiles = spawnableCritterTiles,
-		floorTiles = floorTiles,
-		stairs = stairs,
-		critters = critters
+		openTiles = _openTiles,
+		spawnableItemTiles = _spawnableItemTiles,
+		spawnableCritterTiles = _spawnableCritterTiles,
+		floorTiles = _floorTiles,
+		stairs = _stairs
 	}
 
 func loadLevel(_levelData):
+	createGrid(Globals.tiles.EMPTY, false)
+	
 	levelId = _levelData.levelId
+	name = str(levelId)
 	dungeonType = _levelData.dungeonType
 	dungeonLevelName = _levelData.dungeonLevelName
 	visibility = _levelData.visibility
-	
-	grid = _levelData.grid
-	openTiles = _levelData.openTiles
-	spawnableItemTiles = _levelData.spawnableItemTiles
-	spawnableCritterTiles = _levelData.spawnableCritterTiles
-	floorTiles = _levelData.floorTiles
-	stairs = _levelData.stairs
 	critters = _levelData.critters
+	
+	for x in _levelData.grid.size():
+		for y in _levelData.grid[str(x)].size():
+			grid[x][y] = _levelData.grid[str(x)][str(y)]
+	for index in _levelData.openTiles.size():
+		openTiles.append(Vector2(_levelData.openTiles[str(index)].x, _levelData.openTiles[str(index)].y))
+	for index in _levelData.spawnableItemTiles.size():
+		spawnableItemTiles.append(Vector2(_levelData.spawnableItemTiles[str(index)].x, _levelData.spawnableItemTiles[str(index)].y))
+	for index in _levelData.spawnableCritterTiles.size():
+		spawnableCritterTiles.append(Vector2(_levelData.spawnableCritterTiles[str(index)].x, _levelData.spawnableCritterTiles[str(index)].y))
+	for index in _levelData.floorTiles.size():
+		floorTiles.append(Vector2(_levelData.floorTiles[str(index)].x, _levelData.floorTiles[str(index)].y))
+	for key in _levelData.stairs.keys():
+		stairs[key] = _levelData.stairs[key]
+#	openTiles = _levelData.openTiles
+#	spawnableItemTiles = _levelData.spawnableItemTiles
+#	spawnableCritterTiles = _levelData.spawnableCritterTiles
+#	floorTiles = _levelData.floorTiles
+#	stairs = _levelData.stairs
+	
+	doFinalPathfinding()

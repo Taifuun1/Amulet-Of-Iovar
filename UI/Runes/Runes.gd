@@ -416,6 +416,14 @@ func loadRunesData(_data):
 	runes = _data.runes
 	spellDamage = _data.spellDamage
 	manaUsage = _data.manaUsage
+	
+	setRuneTextures()
+
+func setRuneTextures():
+	for _rune in runes.keys():
+		if runes[_rune] != null:
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": runes[_rune] }))
+			get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = _item.getTexture()
 
 func getRunesSaveData():
 	return {

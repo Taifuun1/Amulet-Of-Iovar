@@ -7,8 +7,6 @@ var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
 var spellData = load("res://Objects/Spell/SpellData.gd").new()
 var statusEffectsData = load("res://Objects/Miscellaneous/StatusEffectsData.gd").new()
 
-var playerClass
-
 var playerVisibility = {
 	"distance": -1,
 	"duration": -1
@@ -77,64 +75,84 @@ var skills = {
 
 var neutralCritters = ["Sugar ant", "Shopkeeper"]
 
-func create():
+func create(_data = null):
 	id = 0
 	name = str(0)
 	
+	var _playerData
+	
+	if _data == null:
+		_playerData = playerClasses[(StartingData.selectedClass[0].to_lower() + StartingData.selectedClass.substr(1,-1)).replace(" ", "")]
+	else:
+		_playerData = _data
+	if _playerData.has("inventory"):
+		inventory.create(_playerData.inventory)
+	else:
+		inventory.create()
 	add_child(inventory)
-	$Inventory.create()
+#	$Inventory.inventory = 
 	
-	var _playerClass = playerClasses[(StartingData.selectedClass[0].to_lower() + StartingData.selectedClass.substr(1,-1)).replace(" ", "")]
+	critterName = _playerData.critterName
+	if _playerData.has("playerClass"):
+		critterClass = _playerData.playerClass
+	else:
+		critterClass = (StartingData.selectedClass[0].to_lower() + StartingData.selectedClass.substr(1,-1)).replace(" ", "")
+	race = _playerData.race
+	justice = _playerData.justice
 	
-	critterName = _playerClass.critterName
-	critterClass = "Humanoid"
-	race = _playerClass.race
-	justice = _playerClass.justice
-	
-	level = 1
-	hp = _playerClass.hp
-	mp = _playerClass.mp
-	basehp = _playerClass.hp
-	basemp = _playerClass.mp
-	maxhp = _playerClass.hp
-	maxmp = _playerClass.mp
+	if _playerData.has("level"):
+		level = _playerData.level
+	else:
+		level = 1
+	hp = _playerData.hp
+	mp = _playerData.mp
+	basehp = _playerData.hp
+	basemp = _playerData.mp
+	maxhp = _playerData.hp
+	maxmp = _playerData.mp
 	shields = 0
 	
-	stats.strength = _playerClass.strength
-	stats.legerity = _playerClass.legerity
-	stats.balance = _playerClass.balance
-	stats.belief = _playerClass.belief
-	stats.visage = _playerClass.visage
-	stats.wisdom = _playerClass.wisdom
+	stats.strength = _playerData.stats.strength
+	stats.legerity = _playerData.stats.legerity
+	stats.balance = _playerData.stats.balance
+	stats.belief = _playerData.stats.belief
+	stats.visage = _playerData.stats.visage
+	stats.wisdom = _playerData.stats.wisdom
 	
-	hpIncrease = _playerClass.hpIncrease
-	mpIncrease = _playerClass.mpIncrease
-	strengthIncrease = _playerClass.strengthIncrease
-	legerityIncrease = _playerClass.legerityIncrease
-	balanceIncrease = _playerClass.balanceIncrease
-	beliefIncrease = _playerClass.beliefIncrease
-	visageIncrease = _playerClass.visageIncrease
-	wisdomIncrease = _playerClass.wisdomIncrease
+	hpIncrease = _playerData.hpIncrease
+	mpIncrease = _playerData.mpIncrease
+	strengthIncrease = _playerData.strengthIncrease
+	legerityIncrease = _playerData.legerityIncrease
+	balanceIncrease = _playerData.balanceIncrease
+	beliefIncrease = _playerData.beliefIncrease
+	visageIncrease = _playerData.visageIncrease
+	wisdomIncrease = _playerData.wisdomIncrease
 	
-	skills = _playerClass.skills
+	skills = _playerData.skills
 	
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 	
-	resistances = _playerClass.resistances
+	resistances = _playerData.resistances
 	
 	calories = 3000
 	previousCalories = calories
 	
-	goldPieces = _playerClass.goldPieces
+	goldPieces = _playerData.goldPieces
 	
-	for _item in _playerClass.items.keys():
-		$"/root/World/Items/Items".createItem(_item, null, _playerClass.items[_item], true)
+	if _playerData.has("items"):
+		for _item in _playerData.items.keys():
+			$"/root/World/Items/Items".createItem(_item, null, _playerData.items[_item], true)
 	
-	$PlayerSprite.texture = _playerClass.texture
+	var _texture
+	if typeof(_playerData.texture) == TYPE_STRING:
+		_texture = load(_playerData.texture)
+	else:
+		_texture = _playerData.texture
 	
-	$Tooltip/TooltipContainer.updateTooltip(critterName, _playerClass.description, _playerClass.texture)
+	$PlayerSprite.texture = _texture
+	$Tooltip/TooltipContainer.updateTooltip(critterName, playerClasses[critterClass].description, _texture)
 
 
 
@@ -707,7 +725,7 @@ func checkSkillExperience():
 func getCritterSaveData():
 	var _critterData = {
 		inventory = $Inventory.inventory,
-		playerClass = playerClass,
+		playerClass = critterClass,
 		playerVisibility = playerVisibility,
 		experiencePoints = experiencePoints,
 		experienceNeededForPreviousLevelGainAmount = experienceNeededForPreviousLevelGainAmount,
@@ -729,7 +747,8 @@ func getCritterSaveData():
 		selectedItem = selectedItem,
 		itemsTurnedOn = itemsTurnedOn,
 		skills = skills,
-		neutralCritters = neutralCritters
+		neutralCritters = neutralCritters,
+		texture = $PlayerSprite.texture.get_path()
 	}
 	_critterData.merge(getBaseCritterSaveData())
 	return _critterData

@@ -30,10 +30,13 @@ var binds = null
 
 var stackable
 
-func createItem(_item, _extraData = {}, _amount = 1):
-	id = Globals.itemId
+func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
+	if _spawnNew:
+		id = Globals.itemId
+		Globals.itemId += 1
+	else:
+		id = _item.id
 	name = str(id)
-	Globals.itemId += 1
 	
 	if _item.itemName.matchn("corpse"):
 		itemName = "{critterName} {itemName}".format({ "critterName": _extraData.critterName, "itemName": "corpse"})
@@ -74,7 +77,7 @@ func createItem(_item, _extraData = {}, _amount = 1):
 		else:
 			alignment = "uncursed"
 	
-	if _item.enchantable:
+	if _item.has("enchantable") and _item.enchantable:
 		if randi() % 8 == 1:
 			if randi() % 2 == 1:
 				enchantment = randi() % 4
@@ -82,12 +85,18 @@ func createItem(_item, _extraData = {}, _amount = 1):
 				enchantment = -randi() % 4
 		else:
 			enchantment = 0
+	elif _item.has("enchantment"):
+		enchantment = _item.enchantment
+	else:
+		enchantment = 0
 	
 	if typeof(_item.value) == TYPE_DICTIONARY:
 		if _item.value.has("charges"):
 			var charges 
 			if typeof(_item.value.charges) != TYPE_ARRAY and _item.value.charges == -1:
 				charges = -1
+			elif typeof(_item.value.charges) != TYPE_INT:
+				charges = _item.value.charges
 			else:
 				charges = randi() % _item.value.charges[1] + _item.value.charges[0]
 			if _item.value.has("turnedOn"):
@@ -105,9 +114,12 @@ func createItem(_item, _extraData = {}, _amount = 1):
 				"worn": false
 			}
 		elif _item.value.has("ink"):
-			value = {
-				"ink": randi() % _item.value.ink[1] + _item.value.ink[0]
-			}
+			if typeof(_item.value.ink) != TYPE_INT:
+				value = _item.value
+			else:
+				value = {
+					"ink": randi() % _item.value.ink[1] + _item.value.ink[0]
+				}
 		elif _item.value.has("binds"):
 			binds = {
 				"type": _item.value.binds,
@@ -127,15 +139,19 @@ func createItem(_item, _extraData = {}, _amount = 1):
 			$ItemSprite.texture = load("res://Assets/Miscellaneous/GoldPiecesHigh.png")
 		return
 	
-	itemTexture = _item.texture
-	unidenfiedItemTexture = _item.unidentifiedTexture
+	if typeof(_item.texture) == TYPE_STRING:
+		itemTexture = load(_item.texture)
+		unidenfiedItemTexture = load(_item.unidentifiedTexture)
+	else:
+		itemTexture = _item.texture
+		unidenfiedItemTexture = _item.unidentifiedTexture
 	if (
 		GlobalItemInfo.globalItemInfo.has(_item.itemName) and
 		GlobalItemInfo.globalItemInfo[_item.itemName].identified
 	):
-		$ItemSprite.texture = _item.texture
+		$ItemSprite.texture = itemTexture
 	else:
-		$ItemSprite.texture = _item.unidentifiedTexture
+		$ItemSprite.texture = unidenfiedItemTexture
 
 
 
@@ -322,8 +338,8 @@ func getItemSaveData():
 		enchantment = enchantment,
 		identifiedItemName = identifiedItemName,
 		unidentifiedItemName = unidentifiedItemName,
-		itemTexture = itemTexture,
-		unidenfiedItemTexture = unidenfiedItemTexture,
+		texture = itemTexture.get_path(),
+		unidentifiedTexture = unidenfiedItemTexture.get_path(),
 		notIdentified = notIdentified,
 		container = container,
 		containerWeight = containerWeight,

@@ -100,15 +100,21 @@ func spawnCritter(_critter, _position = null, _isDeactivated = null, _spawnNew =
 	else:
 		_gridPosition = _position
 	
-	if !_newCritter.has("aI"):
-		print(_newCritter)
 	# Extradata
 	if typeof(_isDeactivated) == TYPE_INT:
 		_aI = "Deactivated"
 	else:
 		_aI = _newCritter.aI
 	
-	if (
+	if !_spawnNew:
+		var newCritter = critter.instance()
+		_newCritter.class = _newCritter.critterClass
+		newCritter.createCritter(_newCritter, _newCritter.levelId, crittersData[_newCritter.critterName], _extraData, _spawnNew)
+		newCritter.createAi(_critter.aI.aI, _critter.aI.aggroDistance, _critter.aI.activationDistance)
+		$"/root/World/Critters".add_child(newCritter, true)
+		mutex.unlock()
+		return _newCritter.critterName
+	elif (
 		_level.grid[_gridPosition.x][_gridPosition.y].critter == null and
 		GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].population != 0 and
 		GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_newCritter.critterName].population
@@ -117,11 +123,10 @@ func spawnCritter(_critter, _position = null, _isDeactivated = null, _spawnNew =
 		newCritter.createCritter(_newCritter, _level.levelId, crittersData[_newCritter.critterName], _extraData)
 		newCritter.createAi(_aI, _newCritter.aggroDistance, _isDeactivated)
 		$"/root/World/Critters".add_child(newCritter, true)
-		if _spawnNew:
-			_level.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
-			_level.critters.append(newCritter.id)
-			_level.removePointFromEnemyPathfinding(_gridPosition)
-			GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
+		_level.grid[_gridPosition.x][_gridPosition.y].critter = newCritter.id
+		_level.critters.append(newCritter.id)
+		_level.removePointFromEnemyPathfinding(_gridPosition)
+		GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
 		mutex.unlock()
 		return _newCritter.critterName
 	mutex.unlock()
@@ -133,7 +138,7 @@ func spawnCritters(_critterName, _position = null, _level = $"/root/World".level
 		spawnCritter(_critterName, _spawnTile, null, true, _level)
 
 func generateCrittersForLevel(_level):
-	if !_level.dungeonType.empty():
+	if critterLevelGenerationList.critterLevelGenerationList.has(_level.dungeonType):
 		var _levelCritterGeneration = critterLevelGenerationList.critterLevelGenerationList[_level.dungeonType]
 		var _critters = []
 		

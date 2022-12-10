@@ -6,11 +6,11 @@ var inventory = []
 var currentWeight = 0
 
 
-func create():
+func create(_inventory = []):
 	name = "Inventory"
 	$InventoryContainer.hide()
-	
 	layer = 10
+	inventory = _inventory
 
 func addToInventory(_item):
 	if !checkIfStackableItemInInventory(_item, "add"):

@@ -27,8 +27,8 @@ func create(_saveSlot, _data):
 	$MarginContainer/HBoxContainer/VBoxContainer/HasSave.append_bbcode(str(_saveData.hasSave))
 	
 	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ClassNameText.append_bbcode(str(_saveData.className))
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/DungeonLevelText.append_bbcode(str(_saveData.dungeonLevelName))
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/DungeonLevelNameText.append_bbcode(str(_saveData.level))
+	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/DungeonLevelText.append_bbcode(str(_saveData.level))
+	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/DungeonLevelNameText.append_bbcode(str(_saveData.dungeonLevelName))
 	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer4/PointsText.append_bbcode(str(_saveData.points))
 
 func _on_Save_Button_pressed():
@@ -37,5 +37,5 @@ func _on_Save_Button_pressed():
 		StartingData.selectedClass = className
 		if get_tree().change_scene("res://Objects/World/World.tscn") != OK:
 			push_error("Error changing to world screen.")
-	if get_tree().change_scene("res://UI/Character Creation/Character Creation.tscn") != OK:
+	elif get_tree().change_scene("res://UI/Character Creation/Character Creation.tscn") != OK:
 		push_error("Error changing to character creation screen.")

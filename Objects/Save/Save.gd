@@ -21,13 +21,10 @@ func saveData(_fileName, _filePath, _data = null):
 	file.store_line(to_json(_data))
 	file.close()
 
-func loadData(_fileName, _filePath, isJson = true):
+func loadData(_fileName, _filePath):
 	var _data = {  }
 	var file = File.new()
-	if isJson:
-		file.open("user://{filePath}/{fileName}.json".format({ "filePath": _filePath, "fileName": _fileName }), File.READ)
-	else:
-		file.open("user://{filePath}/{fileName}.tscn".format({ "filePath": _filePath, "fileName": _fileName }), File.READ)
+	file.open("user://{filePath}/{fileName}.json".format({ "filePath": _filePath, "fileName": _fileName }), File.READ)
 	while file.get_position() < file.get_len():
 		var _lineData = parse_json(file.get_line())
 		for _dataKey in _lineData:

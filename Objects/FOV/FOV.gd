@@ -13,19 +13,22 @@ func createFOVLevels(_levelCount):
 		fovLevels.append(buildFOVLevel())
 	currentFOVLevel = fovLevels[0]
 
-func buildFOVLevel():
+func buildFOVLevel(_fovData = null):
 	var grid = []
 	for x in range(Globals.gridSize.x):
 		grid.append([])
 		for y in range(Globals.gridSize.y):
-			grid[x].append(HIDDEN)
-			set_cell(x, y, HIDDEN)
+			if _fovData == null:
+				grid[x].append(HIDDEN)
+				set_cell(x, y, HIDDEN)
+				continue
+			grid[x].append(_fovData[str(x)][str(y)])
 	return grid
 
 func loadFOVLevel(_data):
 	for _level in _data.fovLevels.values():
-		fovLevels.append(_level)
-	currentFOVLevel = fovLevels[0]
+		fovLevels.append(buildFOVLevel(_level))
+	currentFOVLevel = fovLevels[Globals.currentDungeonLevel - 1]
 
 func moveLevel(_level):
 	currentFOVLevel = fovLevels[_level]

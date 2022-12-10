@@ -599,6 +599,25 @@ func loadEquipmentData(_data):
 	hands = _data.hands
 	equipment = _data.equipment
 	accessories = _data.accessories
+	
+	setEquipmentTextures()
+
+func setEquipmentTextures():
+	for _hand in hands.keys():
+		if hands[_hand] != null:
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": hands[_hand] }))
+			if _hand == "righthand":
+				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = _item.getTexture()
+			else:
+				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = _item.getTexture()
+	for _accessory in accessories.keys():
+		if accessories[_accessory] != null:
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": accessories[_accessory] }))
+			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = _item.getTexture()
+	for _equipment in equipment.keys():
+		if equipment[_equipment] != null:
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": equipment[_equipment] }))
+			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = _item.getTexture()
 
 func getEquipmentSaveData():
 	return {

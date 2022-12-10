@@ -1,7 +1,5 @@
 extends WaveFunctionCollapse
 
-var soilTiles = []
-
 func createNewLevel():
 	createGrid()
 	pathFind([])
@@ -59,7 +57,7 @@ func createDungeon():
 			return
 		resetLevel()
 		resetGeneration()
-	push_error("Couldn't generate mines of tidoh")
+	push_error("Couldn't generate anthill")
 
 func createAntHill():
 	for _i in range(40):
@@ -78,14 +76,15 @@ func generateForest():
 	placeTilesInArea({ "splotches": _splotches }, "SOIL")
 
 func getSoilTiles():
+	additionalData.soilTiles = []
 	for x in grid.size():
 		for y in grid[0].size():
-			if grid[x][y].tile == Globals.tiles.SOIL and !soilTiles.has(Vector2(x, y)):
-				soilTiles.append(Vector2(x, y))
+			if grid[x][y].tile == Globals.tiles.SOIL and !additionalData.soilTiles.has(Vector2(x, y)):
+				additionalData.soilTiles.append(Vector2(x, y))
 
 func generateSoilAreaInteractablesAndItems():
 	var _anthillCount = randi() % 4 + 2
-	for _tile in soilTiles:
+	for _tile in additionalData.soilTiles:
 		if randi() % 21 == 0 and _anthillCount > 0:
 			grid[_tile.x][_tile.y].interactable = Globals.interactables.ANT_HILL
 			_anthillCount -= 1

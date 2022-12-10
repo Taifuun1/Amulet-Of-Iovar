@@ -1,8 +1,6 @@
 extends BaseLevel
 class_name WaveFunctionCollapse
 
-var mutex
-
 var gridSize = Vector2(68,32)
 var entropyVariation = 0
 
@@ -10,9 +8,6 @@ var allInputs
 var generatedGrid = []
 var edgeTiles = []
 var nonLegibleTiles = []
-
-func _ready():
-	mutex = Mutex.new()
 
 class edgeTile:
 	var position
@@ -305,21 +300,21 @@ func addInputs(_name, _path):
 				inputs.append(fileName)
 			fileName = dir.get_next()
 	for fileName in inputs:
-		mutex.lock()
+		Globals.mutex.lock()
 		$Inputs.add_child(load("res://Level Generation/WFC Generation/{name}/Inputs/{fileName}".format({ name = _name, fileName = fileName })).instance())
-		mutex.unlock()
+		Globals.mutex.unlock()
 
 func removeInputs():
-	mutex.lock()
+	Globals.mutex.lock()
 	for _inputNode in $Inputs.get_children():
 		_inputNode.clear()
 		_inputNode.free()
-	mutex.unlock()
+	Globals.mutex.unlock()
 
 func getAllInputs():
 	var _allInputs = []
 	
-	mutex.lock()
+	Globals.mutex.lock()
 	for _inputNode in $Inputs.get_children():
 		_inputNode.create()
 		var _input = createNodeInputGrid(_inputNode)
@@ -328,7 +323,7 @@ func getAllInputs():
 			if !_newInputPatterns.empty():
 				_allInputs.append(_newInputPatterns)
 			_input = turnInput(_input)
-	mutex.unlock()
+	Globals.mutex.unlock()
 	
 	return _allInputs
 

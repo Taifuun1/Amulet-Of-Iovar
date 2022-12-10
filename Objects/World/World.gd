@@ -39,13 +39,13 @@ var levels = {
 	"dungeon4": [],
 	"banditWarcamp": [],
 	"storageArea": [],
-	"dungeonhalls1": [],
+	"dungeonHalls1": [],
 	"labyrinth": [],
-	"dungeonhalls2": [],
+	"dungeonHalls2": [],
 #	"arena": [],
 #	"dungeonhalls3": [],
 	"dragonsPeak": [],
-	"dungeonhalls3": [],
+	"dungeonHalls3": [],
 	"theGreatShadows": [],
 	"fortress": [],
 	"iovarsLair": []
@@ -92,49 +92,52 @@ func _process(_delta):
 		$UI/UITheme/"Dancing Dragons".hide()
 		show()
 
-func setUpGameObjects():
+func setUpGameObjects(_playerData = null):
+	Globals.mutex.lock()
 	Globals.gameConsole = $"/root/World/UI/UITheme/GameConsole"
 	Globals.gameStats = $"/root/World/UI/UITheme/GameStats"
 	
 	$Critters.add_child(player, true)
-	player.create()
-	level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
+	player.create(_playerData)
+	if _playerData == null:
+		level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
 	player.calculateEquipmentStats()
 	
-	for _level in $Levels.get_children():
-		$Items/Items.generateItemsForLevel(_level)
-	
-	for _level in $Levels.get_children():
-		$Critters/Critters.generateCrittersForLevel(_level)
-	
-	$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-	$Items/Items.createItem("cloak of displacement", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("gauntlets of balance", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("bag of weight", null, 1, true, { "alignment": "blessed" })
-	$Items/Items.createItem("bag of holding", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
-	$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
-	$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("Eario of Thunder", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("Luirio of adjacent", null, 1, true, { "alignment": "uncursed" })
-	$Items/Items.createItem("Heario of true", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
-#	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("key", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("wand of summon critter", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
-#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
-#	$Items/Items.createItem("dwarvish laysword", null, 1, true, { "alignment": "uncursed" })
-#	$Items/Items.createItem("eario of toxix", null, 1, true)
-#	$Items/Items.createItem("eario of fleir", null, 1, true)
-#	$Items/Items.createItem("eario of frost", null, 1, true)
-#	$Items/Items.createItem("luirio of cone", null, 1, true)
-#	$Items/Items.createItem("luirio of point", null, 1, true)
-#	$Items/Items.createItem("heario of flow", null, 1, true)
+	if _playerData == null:
+		for _level in $Levels.get_children():
+			$Items/Items.generateItemsForLevel(_level)
+		
+		for _level in $Levels.get_children():
+			$Critters/Critters.generateCrittersForLevel(_level)
+		
+		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
+		$Items/Items.createItem("cloak of displacement", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("gauntlets of balance", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("bag of weight", null, 1, true, { "alignment": "blessed" })
+		$Items/Items.createItem("bag of holding", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
+		$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
+		$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("Eario of Thunder", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("Luirio of adjacent", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("Heario of true", null, 1, true, { "alignment": "uncursed" })
+	#	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
+	#	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
+	#	$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
+	#	$Items/Items.createItem("key", null, 1, true, { "alignment": "uncursed" })
+	#	$Items/Items.createItem("wand of summon critter", null, 1, true, { "alignment": "uncursed" })
+	#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
+	#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
+	#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
+	#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
+	#	$Items/Items.createItem("dwarvish laysword", null, 1, true, { "alignment": "uncursed" })
+	#	$Items/Items.createItem("eario of toxix", null, 1, true)
+	#	$Items/Items.createItem("eario of fleir", null, 1, true)
+	#	$Items/Items.createItem("eario of frost", null, 1, true)
+	#	$Items/Items.createItem("luirio of cone", null, 1, true)
+	#	$Items/Items.createItem("luirio of point", null, 1, true)
+	#	$Items/Items.createItem("heario of flow", null, 1, true)
 	
 	for _node in $UI/UITheme.get_children():
 		if _node.name == "GameConsole":
@@ -143,6 +146,7 @@ func setUpGameObjects():
 			_node.show()
 	$FOV.show()
 	
+	Globals.mutex.unlock()
 	generationDone = true
 
 func _input(_event):
@@ -884,8 +888,8 @@ func resetToDefaulGameState():
 
 func saveGame():
 	currentGameState = gameState.OUT_OF_PLAYERS_HANDS
-	$UI/UITheme/"Dancing Dragons".call_deferred("setLoadingText", "Saving game...")
-	$UI/UITheme/"Dancing Dragons".call_deferred("startDancingDragons")
+	$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
+	$UI/UITheme/"Dancing Dragons".startDancingDragons()
 	yield(get_tree().create_timer(0.01), "timeout")
 	
 	for _item in $Items.get_children():
@@ -905,11 +909,11 @@ func saveGame():
 	for _levelSection in levels.values():
 		if typeof(_levelSection) != TYPE_ARRAY:
 			var _levelData = _levelSection.getLevelSaveData()
-			$Save.saveResourceData(_levelData.levelId, "SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _levelSection)
+			$Save.saveData(_levelData.levelId, "SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _levelData)
 		else:
 			for _level in _levelSection:
 				var _levelData = _level.getLevelSaveData()
-				$Save.saveResourceData(_levelData.levelId, "SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _level)
+				$Save.saveData(_levelData.levelId, "SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _levelData)
 	
 	var _fovData = $FOV.getFOVSaveData()
 	$Save.saveData("FOVData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _fovData)
@@ -927,7 +931,7 @@ func saveGame():
 	var _saveData = {
 		"saveSlot": StartingData.selectedSave,
 		"hasSave": true,
-		"className": $Critters/"0".playerClass,
+		"className": $Critters/"0".critterClass,
 		"dungeonLevelName": Globals.currentDungeonLevelName,
 		"level": Globals.currentDungeonLevel,
 		"points": 0

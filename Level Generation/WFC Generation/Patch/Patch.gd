@@ -1,7 +1,5 @@
 extends WaveFunctionCollapse
 
-var generatedRooms = []
-
 func createNewLevel(_patchType):
 	createGrid()
 	pathFind([])
@@ -138,9 +136,9 @@ func generateBuildings():
 		}
 	])
 	var _pickedRooms = []
-	var _generatedRooms = generatedRooms.duplicate(true)
+	var rooms = rooms.duplicate(true)
 	for _roomCount in randi() % 4 + 2:
-		_pickedRooms.append(_generatedRooms.pop_at(randi() % _generatedRooms.size()))
+		_pickedRooms.append(rooms.pop_at(randi() % rooms.size()))
 	rooms = _pickedRooms
 	for _room in rooms:
 		for _floor in _room.floors:
@@ -176,14 +174,14 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 		for y in range(grid[x].size()):
 			for _tileType in _tileTypes:
 				if generatedGrid[x][y].tile == Globals.tiles[_tileType.floor] and !isTileAlreadyInAGeneratedRoom(Vector2(x,y)):
-					generatedRooms.append({
+					rooms.append({
 						"floors": getGeneratedRoom(Vector2(x, y), _tileType),
 						"walls": []
 					})
 					break
 	
 	# Clean up missing walls
-	for _room in generatedRooms:
+	for _room in rooms:
 		for _floorTile in _room.floors:
 			for _tileType in _tileTypes:
 				if generatedGrid[_floorTile.x][_floorTile.y].tile == Globals.tiles[_tileType.floor]:
@@ -191,7 +189,7 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 						generatedGrid[_adjacentTile.x][_adjacentTile.y].tile = Globals.tiles[_tileType.wall]
 	
 	# Get walls
-	for _room in generatedRooms:
+	for _room in rooms:
 		var _walls = []
 		for _floorTile in _room.floors:
 			for _tileType in _tileTypes:
@@ -200,13 +198,13 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 		_room.walls = _walls
 	
 	# Remove small rooms
-	for _roomIndex in generatedRooms.duplicate(true).size():
-		if generatedRooms[_roomIndex].floors.size() < 4:
-			for _floor in generatedRooms[_roomIndex].floors:
+	for _roomIndex in rooms.duplicate(true).size():
+		if rooms[_roomIndex].floors.size() < 4:
+			for _floor in rooms[_roomIndex].floors:
 				generatedGrid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
-			for _wall in generatedRooms[_roomIndex].walls:
+			for _wall in rooms[_roomIndex].walls:
 				generatedGrid[_wall.x][_wall.y].tile = Globals.tiles.GRASS
-		generatedRooms.remove(_roomIndex)
+		rooms.remove(_roomIndex)
 
 func getGeneratedRoom(_tile, _tileType):
 	var _roomTiles = [_tile]
@@ -220,7 +218,7 @@ func getGeneratedRoom(_tile, _tileType):
 	return _roomTiles
 
 func isTileAlreadyInAGeneratedRoom(_tile):
-	for _room in generatedRooms:
+	for _room in rooms:
 		for _floor in _room.floors:
 			if _floor == _tile:
 				return true

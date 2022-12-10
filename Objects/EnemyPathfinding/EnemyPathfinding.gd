@@ -15,16 +15,11 @@ func _ready():
 func calculatePathFindingPath(pathStartPosition, pathEndPosition):
 	return pathFindingAstarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
 
-
-
-#########################
-### Enemy pathfinding ###
-#########################
-
 func enemyPathfinding(grid):
 	pathFindingAstarNode.clear()
 	var walkableTiles = addWalkableTiles(grid)
 	connectWalkableCells(walkableTiles)
+	disableCritterCells(grid, walkableTiles)
 
 func addWalkableTiles(grid):
 	var points = []
@@ -57,6 +52,11 @@ func connectWalkableCells(points):
 			if not pathFindingAstarNode.has_point(pointRelativeIndex):
 				continue
 			pathFindingAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
+
+func disableCritterCells(grid, points):
+	for point in points:
+		if grid[point.x][point.y].critter != null and grid[point.x][point.y].critter != 0:
+			removePointFromEnemyPathfinding(point)
 
 func addPointToEnemyPathding(point):
 	var _pointId = id(point)

@@ -3,6 +3,8 @@ extends Node
 var gameConsole
 var gameStats
 
+var mutex = Mutex.new()
+
 var gridSize = Vector2(60, 24)
 
 enum tiles {
@@ -106,7 +108,7 @@ enum interactables {
 }
 
 var currentDungeonLevel = 1
-var currentDungeonLevelName = ""
+var currentDungeonLevelName = "Dungeon 1"
 var generatedLevels = 0
 
 var levelId = 1
