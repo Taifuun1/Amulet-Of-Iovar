@@ -93,7 +93,7 @@ var wraiths = {
 					"abilityType": "onHit"
 				}
 			],
-			"abilityHits": [0,0,0,0,1],
+			"abilityHits": [1,1,0],
 			"resistances": [],
 			"drops": [  ]
 		}

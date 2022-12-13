@@ -81,7 +81,7 @@ func generateOutpostBuilding():
 	])
 	var _selectedRoom = rooms[randi() % rooms.size()]
 	rooms = [_selectedRoom]
-	var _floorChance = randi() % 5 + 1
+	var _floorChance = randi() % 3 + 3
 	for _wall in _selectedRoom.walls:
 		grid[_wall.x][_wall.y].tile = Globals.tiles.WALL_STONE_BRICK
 	for _floor in _selectedRoom.floors:

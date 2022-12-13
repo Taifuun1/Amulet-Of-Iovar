@@ -31,7 +31,7 @@ var floatingSpheres = {
 					"abilityType": "onAttack"
 				}
 			],
-			"abilityHits": [],
+			"abilityHits": [1],
 			"resistances": [],
 			"drops": [  ]
 		},

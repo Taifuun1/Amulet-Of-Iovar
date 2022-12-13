@@ -42,6 +42,23 @@ var displaceSelf = {
 
 ### On attack abilities
 
+var ghostTouch = {
+	"name": "Ghost touch",
+	"attacks": [
+		{
+			"dmg": [2,2],
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [0,0],
+				"element": null
+			}
+		}
+	],
+	"distance": 0,
+	"mp": 3
+}
+
 var selfdestruct = {
 	"name": "Selfdestruct",
 	"attacks": [
@@ -68,7 +85,7 @@ var frostSelfdestruct = {
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": [8,12],
-				"element": null
+				"element": "frost"
 			}
 		}
 	],
@@ -85,7 +102,7 @@ var thunderSelfdestruct = {
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": [13,17],
-				"element": null
+				"element": "thunder"
 			}
 		}
 	],
@@ -450,7 +467,7 @@ var voidBlast = {
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": [64,148],
-				"element": "Void"
+				"element": "void"
 			}
 		}
 	],

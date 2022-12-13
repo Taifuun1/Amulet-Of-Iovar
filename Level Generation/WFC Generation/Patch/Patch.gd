@@ -11,7 +11,7 @@ func createNewLevel(_patchType):
 	
 	return self
 
-func createDungeon(_patchType):
+func createDungeon(_patchType = "carrot"):
 	for _i in range(10):
 		# Farm land generation
 		if _patchType.matchn("carrot") or _patchType.matchn("fruit"):

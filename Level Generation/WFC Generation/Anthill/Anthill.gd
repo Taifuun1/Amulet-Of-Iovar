@@ -14,7 +14,7 @@ func createNewLevel():
 func createDungeon():
 	for _i in range(10):
 		# Farm land generation
-		addInputs("Ant Hill", get_script().get_path().get_base_dir() + "/Patch")
+		addInputs("Anthill", get_script().get_path().get_base_dir() + "/Patch")
 		createAntHill()
 		trimGenerationEdges()
 		getGenerationGrid()
@@ -25,7 +25,7 @@ func createDungeon():
 		
 		
 		# Forest generation
-		addInputs("Ant Hill", get_script().get_path().get_base_dir() + "/Forest")
+		addInputs("Anthill", get_script().get_path().get_base_dir() + "/Forest")
 		createAntHill()
 		trimGenerationEdges()
 		getGenerationGrid()

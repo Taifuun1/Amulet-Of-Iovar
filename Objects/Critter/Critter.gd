@@ -338,6 +338,12 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			if currentHit == 15:
 				currentHit = 0
 			currentHit += 1
+			if _pickedAbility == null:
+				for _ability in abilities:
+					if _ability.abilityType.matchn("onAttack"):
+						_pickedAbility = _ability
+						_pickedAbility.data = critterSpellData[_pickedAbility.abilityName]
+						break
 			if (
 				abilityHits.size() != 0 and
 				abilityHits[currentCritterAbilityHit] == 1 and
@@ -345,10 +351,25 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				_pickedAbility.abilityType.matchn("onAttack") and
 				mp - _pickedAbility.data.mp >= 0
 			):
-				Globals.gameConsole.addLog("{critterName} {spell}s!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
 				mp -= _pickedAbility.data.mp
-				despawn(_moveCritterTo, false)
+				if (
+					_pickedAbility.abilityName.matchn("selfdestruct") or
+					_pickedAbility.abilityName.matchn("frostSelfdestruct") or
+					_pickedAbility.abilityName.matchn("selfdestruct")
+				):
+					Globals.gameConsole.addLog("{critterName} {spell}s!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+					despawn(_critterTile, false)
+				elif _pickedAbility.abilityName.matchn("lifesteal"):
+					if hp + 2 <= maxhp:
+						hp += 2
+					else:
+						hp = maxhp
+					Globals.gameConsole.addLog("{critterName} steals your life-energy!".format({ "critterName": critterName.capitalize() }))
+				elif _pickedAbility.abilityName.matchn("ghostTouch"):
+					if !checkIfStatusEffectIsPermanent("fumbling"):
+						statusEffects.fumbling = 3
+					Globals.gameConsole.addLog("{critterName} touches you. The cold makes you shiver shiver!".format({ "critterName": critterName.capitalize() }))
 			elif (
 				abilityHits.size() != 0 and
 				abilityHits[currentCritterAbilityHit] == 1 and
@@ -475,7 +496,7 @@ func despawn(_critterTile = null, createCorpse = true):
 	_level.addPointToEnemyPathding(_gridPosition)
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
-	call_deferred("queue_free")
+	queue_free()
 
 func addCritterBackToPopulation(_critterTile, _level):
 	_level.grid[_critterTile.x][_critterTile.y].critter = null

@@ -16,7 +16,7 @@ onready var vacationResort = preload("res://Level Generation/Generic Generation/
 onready var minesOfTidoh = preload("res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn")
 onready var depthsOfTidoh = preload("res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn")
 onready var abandonedOutpost = preload("res://Level Generation/WFC Generation/Abandoned Outpost/AbandonedOutpost.tscn")
-onready var antHill = preload("res://Level Generation/WFC Generation/Ant Hill/AntHill.tscn")
+onready var anthill = preload("res://Level Generation/WFC Generation/Anthill/Anthill.tscn")
 onready var patch = preload("res://Level Generation/WFC Generation/Patch/Patch.tscn")
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
 onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
@@ -88,7 +88,7 @@ func _ready():
 	else:
 		$Items/Items.randomizeRandomItems()
 		
-		setUpDungeonLevels()
+		setUpDungeon()
 		
 		var levelCount = 0
 		for section in levels:
@@ -169,48 +169,151 @@ func loadGame():
 	setUpGameObjects($Save.loadData(0, "SaveSlot{selectedSave}/critters".format({ "selectedSave": StartingData.selectedSave })))
 	generationDone = true
 
-func setUpDungeonLevels():
-	setUpDungeon()
-	setUpDungeonSidepaths()
-	setUpHalls()
-	setUpHallsSidepaths()
-
 func setUpDungeon():
+	
+	var _firstSectionRandomLevels = 2
+	var _patchLevels = 0
+	var _abandonedOutpostLevels = 0
+	var _anthillLevels = 0
+	
 	### Dungeon 1
 	var firstLevel = dungeon.instance()
 	firstLevel.create("dungeon1", "Dungeon 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
-	
+
 	for _level in range(randi() % 3 + 1):
 		var newDungeon = dungeon.instance()
 		newDungeon.create("dungeon1", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() }), 10000)
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
+
+	### Mines of Tidoh
+	for _level in range(randi() % 3 + 2):
+		var newCave = minesOfTidoh.instance()
+		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": 1 + levels.minesOfTidoh.size() }), 2)
+		levels.minesOfTidoh.append(newCave)
+		$Levels.add_child(newCave)
+
+	var newMiningOutpost
+	if randi() % 2 == 0:
+		newMiningOutpost = tidohMiningOutpost1.instance()
+	else:
+		newMiningOutpost = tidohMiningOutpost2.instance()
+	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
+	levels.minesOfTidoh.append(newMiningOutpost)
+	$Levels.add_child(newMiningOutpost)
+
+	for _level in range(randi() % 3 + 2):
+		var newCave = depthsOfTidoh.instance()
+		newCave.create("depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": 1 + levels.depthsOfTidoh.size() }), 1)
+		levels.depthsOfTidoh.append(newCave)
+		$Levels.add_child(newCave)
+
+	var newMinesEnd
+	if randi() % 2 == 0:
+		newMinesEnd = tidohMinesEnd1.instance()
+	else:
+		newMinesEnd = tidohMinesEnd2.instance()
+	newMinesEnd.create("depthsOfTidoh", "Mines end", 1)
+	levels.depthsOfTidoh.append(newMinesEnd)
+	$Levels.add_child(newMinesEnd)
 	
 	### Dungeon 2
 	for _level in range(randi() % 3 + 4):
-		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon2", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + 1 }), 10000)
+		var newDungeon
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0:
+			if randi() % 3 == 0:
+				_patchLevels += 1
+				newDungeon = patch.instance()
+				newDungeon.create("patch", "Patch {level}".format({ "level": _patchLevels }), 10000)
+			elif randi() % 3 == 0:
+				_abandonedOutpostLevels += 1
+				newDungeon = abandonedOutpost.instance()
+				newDungeon.create("abandonedOutpost", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
+			else:
+				_anthillLevels += 1
+				newDungeon = anthill.instance()
+				newDungeon.create("anthill", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			_firstSectionRandomLevels -= 1
+		else:
+			newDungeon = dungeon.instance()
+			newDungeon.create("dungeon2", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() }), 10000)
 		levels.dungeon2.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
+	### Beach
+	var newBeach = beach.instance()
+	newBeach.create("beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
+	levels.beach.append(newBeach)
+	$Levels.add_child(newBeach)
+	
+	var newVacationResort = vacationResort.instance()
+	newVacationResort.create("beach", "Vacation resort", 10000)
+	levels.beach.append(newVacationResort)
+	$Levels.add_child(newVacationResort)
+	
+	for _level in range(randi() % 3 + 3):
+		var newBeach2 = beach.instance()
+		newBeach2.create("beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
+		levels.beach.append(newBeach2)
+		$Levels.add_child(newBeach2)
+	
 	### Dungeon 3
 	for _level in range(randi() % 3 + 4):
-		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon3", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + 1 }), 10000)
+		var newDungeon
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0:
+			if randi() % 3 == 0:
+				_patchLevels += 1
+				newDungeon = patch.instance()
+				newDungeon.create("patch", "Patch {level}".format({ "level": _patchLevels }), 10000)
+			elif randi() % 3 == 0:
+				_abandonedOutpostLevels += 1
+				newDungeon = abandonedOutpost.instance()
+				newDungeon.create("abandonedOutpost", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
+			else:
+				_anthillLevels += 1
+				newDungeon = anthill.instance()
+				newDungeon.create("anthill", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			_firstSectionRandomLevels -= 1
+		else:
+			newDungeon = dungeon.instance()
+			newDungeon.create("dungeon3", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() }), 10000)
 		levels.dungeon3.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
+	### Library
+	for _level in range(randi() % 3 + 3):
+		var newlibrary = library.instance()
+		newlibrary.create("library", "Library {level}".format({ "level": 1 + levels.library.size() }), 10000)
+		levels.library.append(newlibrary)
+		$Levels.add_child(newlibrary)
+	
 	### Dungeon 4
 	for _level in range(3):
-		var newDungeon = dungeon.instance()
-		newDungeon.create("dungeon4", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() + 1 }), 10000)
+		var newDungeon
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0:
+			if randi() % 3 == 0:
+				_patchLevels += 1
+				newDungeon = patch.instance()
+				newDungeon.create("patch", "Patch {level}".format({ "level": _patchLevels }), 10000)
+			elif randi() % 3 == 0:
+				_abandonedOutpostLevels += 1
+				newDungeon = abandonedOutpost.instance()
+				newDungeon.create("abandonedOutpost", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
+			else:
+				_anthillLevels += 1
+				newDungeon = anthill.instance()
+				newDungeon.create("anthill", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			_firstSectionRandomLevels -= 1
+		else:
+			newDungeon = dungeon.instance()
+			newDungeon.create("dungeon4", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() }), 10000)
 		levels.dungeon4.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
 	### Bandit warcamp
-	for _level in range(randi() % 3 + 1):
+	for _level in range(2):
 		var newBanditWarcamp = banditWarcamp.instance()
 		newBanditWarcamp.create("banditWarcamp", "Bandit warcamp {level}".format({ "level": 1 + levels.banditWarcamp.size() }), 10000)
 		levels.banditWarcamp.append(newBanditWarcamp)
@@ -249,64 +352,7 @@ func setUpDungeon():
 	newStorageArea.create("storageArea", "Storage Area", 10000)
 	levels.storageArea.append(newStorageArea)
 	$Levels.add_child(newStorageArea)
-
-func setUpDungeonSidepaths():
-	### Mines of Tidoh
-	for _level in range(randi() % 3 + 2):
-		var newCave = minesOfTidoh.instance()
-		newCave.create("minesOfTidoh", "Mines of tidoh {level}".format({ "level": 1 + levels.minesOfTidoh.size() }), 2)
-		levels.minesOfTidoh.append(newCave)
-		$Levels.add_child(newCave)
-
-	var newMiningOutpost
-	if randi() % 2 == 0:
-		newMiningOutpost = tidohMiningOutpost1.instance()
-	else:
-		newMiningOutpost = tidohMiningOutpost2.instance()
-	newMiningOutpost.create("minesOfTidoh", "Tidoh mining outpost", 5)
-	levels.minesOfTidoh.append(newMiningOutpost)
-	$Levels.add_child(newMiningOutpost)
-
-	for _level in range(randi() % 3 + 2):
-		var newCave = depthsOfTidoh.instance()
-		newCave.create("depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": 1 + levels.depthsOfTidoh.size() }), 1)
-		levels.depthsOfTidoh.append(newCave)
-		$Levels.add_child(newCave)
-
-	var newMinesEnd
-	if randi() % 2 == 0:
-		newMinesEnd = tidohMinesEnd1.instance()
-	else:
-		newMinesEnd = tidohMinesEnd2.instance()
-	newMinesEnd.create("depthsOfTidoh", "Mines end", 1)
-	levels.depthsOfTidoh.append(newMinesEnd)
-	$Levels.add_child(newMinesEnd)
 	
-	### Beach
-	var newBeach = beach.instance()
-	newBeach.create("beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
-	levels.beach.append(newBeach)
-	$Levels.add_child(newBeach)
-	
-	var newVacationResort = vacationResort.instance()
-	newVacationResort.create("beach", "Vacation resort", 10000)
-	levels.beach.append(newVacationResort)
-	$Levels.add_child(newVacationResort)
-	
-	for _level in range(randi() % 3 + 3):
-		var newBeach2 = beach.instance()
-		newBeach2.create("beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
-		levels.beach.append(newBeach2)
-		$Levels.add_child(newBeach2)
-	
-	### Library
-	for _level in range(randi() % 3 + 3):
-		var newlibrary = library.instance()
-		newlibrary.create("library", "Library {level}".format({ "level": 1 + levels.library.size() }), 10000)
-		levels.library.append(newlibrary)
-		$Levels.add_child(newlibrary)
-
-func setUpHalls():
 	### Dungeon halls 1
 	for _level in range(randi() % 4 + 3):
 		var newDungeonHallways = dungeonHallways.instance()
@@ -327,8 +373,7 @@ func setUpHalls():
 		newDungeonHallways.create("dungeonHalls3", "Dungeon halls {level}".format({ "level": 1 + levels.dungeonHalls1.size() + levels.dungeonHalls2.size() + levels.dungeonHalls3.size() }), 10000)
 		levels.dungeonHalls3.append(newDungeonHallways)
 		$Levels.add_child(newDungeonHallways)
-
-func setUpHallsSidepaths():
+	
 	### Labyrinth
 	for _level in range(5):
 		var newlabyrinth = labyrinth.instance()
@@ -430,7 +475,7 @@ func createDungeon1(_nothing):
 	
 	for _level in levels.dungeon2:
 		if _level == levels.dungeon2.back():
-			_level.createNewLevel("downStair")
+			_level.createNewLevel()
 		else:
 			_level.createNewLevel()
 	

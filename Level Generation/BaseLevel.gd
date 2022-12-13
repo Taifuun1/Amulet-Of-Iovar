@@ -61,7 +61,7 @@ func placeStairs(_stairType = "DUNGEON", _secondStair = null):
 			stairs["secondDownStair"] = placeStair("secondDownStair", "DOWN_STAIR_", _stairType)
 		stairs["upStair"] = placeStair("secondDownStair", "UP_STAIR_", _stairType)
 		if typeof(_secondStair) == TYPE_STRING and _secondStair.matchn("upStair"):
-			stairs["secondDownStair"] = placeStair("secondUpStair", "UP_STAIR_", _stairType)
+			stairs["secondUpStair"] = placeStair("secondUpStair", "UP_STAIR_", _stairType)
 		for _stair in stairs.values():
 			grid[_stair.x][_stair.y].interactable = null
 
@@ -779,7 +779,7 @@ func loadLevel(_levelData):
 	for index in _levelData.floorTiles.size():
 		floorTiles.append(Vector2(_levelData.floorTiles[str(index)].x, _levelData.floorTiles[str(index)].y))
 	for key in _levelData.stairs.keys():
-		stairs[key] = _levelData.stairs[key]
+		stairs[key] = Vector2(_levelData.stairs[key].x, _levelData.stairs[key].y)
 #	openTiles = _levelData.openTiles
 #	spawnableItemTiles = _levelData.spawnableItemTiles
 #	spawnableCritterTiles = _levelData.spawnableCritterTiles

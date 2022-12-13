@@ -561,7 +561,7 @@ func moveLevel(_direction):
 	if $Critters/"0".inventory.checkIfItemInInventoryByName("Amulet of Iovar") and randi() % 14 == 0:
 		var _openTiles = level.checkAdjacentTilesForOpenSpace(level.stairs[_placePlayerOnStair], false, true)
 		$Critters/Critters.spawnCritter("Iovar", _openTiles[randi() % _openTiles.size()])
-		Globals.gameConsole.addLog("Iovar appears next to you!")
+		Globals.gameConsole.addLog("Iovar appears before you!")
 		Globals.gameConsole.addLog("Iovar: \"You cant escape, cur!\"")
 	
 	drawLevel()
@@ -584,12 +584,6 @@ func goToLevel(_tile, _level):
 	drawLevel()
 	$"/root/World".show()
 
-func whichStairIsPlayerOn(_playerTile):
-	for stair in level.stairs.keys():
-		if level.stairs[stair] == _playerTile:
-			return stair
-	return false
-
 func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 	var _stair = whichStairIsPlayerOn(_playerPosition)
 	if _direction == 1:
@@ -600,13 +594,48 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 			if _stair.matchn("downStair"):
 				Globals.currentDungeonLevel = levels.dungeon2.front().levelId
 				return "upStair"
-#		elif levels.dungeon3.back().levelId == Globals.currentDungeonLevel:
-#			if _stair.matchn("secondDownStair"):
-#				Globals.currentDungeonLevel = levels.library.front().levelId
-#				return "upStair"
-#			if _stair.matchn("downStair"):
-#				Globals.currentDungeonLevel = levels.dungeon4.front().levelId
-#				return "upStair"
+		elif levels.dungeon2.back().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.beach.front().levelId
+			return "upStair"
+		elif levels.beach.back().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeon3.front().levelId
+			return "upStair"
+		elif levels.dungeon3.back().levelId == Globals.currentDungeonLevel:
+			if _stair.matchn("secondDownStair"):
+				Globals.currentDungeonLevel = levels.library.front().levelId
+				return "upStair"
+			if _stair.matchn("downStair"):
+				Globals.currentDungeonLevel = levels.dungeon4.front().levelId
+				return "upStair"
+		elif levels.dungeon4.back().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.banditWarcamp.front().levelId
+			return "upStair"
+		elif levels.banditWarcamp.back().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.storageArea.front().levelId
+			return "upStair"
+		elif levels.dungeonHalls1.back().levelId == Globals.currentDungeonLevel:
+			if _stair.matchn("secondDownStair"):
+				Globals.currentDungeonLevel = levels.labyrinth.front().levelId
+				return "upStair"
+			if _stair.matchn("downStair"):
+				Globals.currentDungeonLevel = levels.dungeonHalls2.front().levelId
+				return "upStair"
+		elif levels.dungeonHalls2.back().levelId == Globals.currentDungeonLevel:
+			if _stair.matchn("secondUpStair"):
+				Globals.currentDungeonLevel = levels.dragonsPeak.front().levelId
+				return "upStair"
+			if _stair.matchn("downStair"):
+				Globals.currentDungeonLevel = levels.dungeonHalls3.front().levelId
+				return "upStair"
+		elif levels.dungeonHalls3.back().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.theGreatShadows.front().levelId
+			return "upStair"
+		elif levels.theGreatShadows.back().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.fortress.front().levelId
+			return "upStair"
+		elif levels.fortress.back().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.iovarsLair.front().levelId
+			return "upStair"
 		else:
 			Globals.currentDungeonLevel += _direction
 			return "upStair"
@@ -617,15 +646,54 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 		elif levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon1.back().levelId
 			return "secondDownStair"
-#		elif levels.dungeon4.front().levelId == Globals.currentDungeonLevel:
-#			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
-#			return "downStair"
-#		elif levels.library.front().levelId == Globals.currentDungeonLevel:
-#			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
-#			return "secondDownStair"
+		elif levels.dungeon3.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeon2.back().levelId
+			return "downStair"
+		elif levels.dungeon4.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
+			return "downStair"
+		elif levels.library.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
+			return "secondDownStair"
+		elif levels.banditWarcamp.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeon4.back().levelId
+			return "downStair"
+		elif levels.storageArea.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.banditWarcamp.back().levelId
+			return "downStair"
+		elif levels.dungeonHalls1.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.storageArea.back().levelId
+			return "downStair"
+		elif levels.dungeonHalls2.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeonHalls1.back().levelId
+			return "downStair"
+		elif levels.labyrinth.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeonHalls1.back().levelId
+			return "secondDownStair"
+		elif levels.dungeonHalls3.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeonHalls2.back().levelId
+			return "downStair"
+		elif levels.dragonsPeak.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeonHalls2.back().levelId
+			return "secondUpStair"
+		elif levels.theGreatShadows.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeonHalls3.back().levelId
+			return "downStair"
+		elif levels.fortress.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.theGreatShadows.back().levelId
+			return "downStair"
+		elif levels.iovarsLair.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.fortress.back().levelId
+			return "downStair"
 		else:
 			Globals.currentDungeonLevel += _direction
 			return "downStair"
+
+func whichStairIsPlayerOn(_playerTile):
+	for stair in level.stairs.keys():
+		if level.stairs[stair] == _playerTile:
+			return stair
+	return false
 
 func openMenu(_menu, _playerTile = null):
 	match _menu:
