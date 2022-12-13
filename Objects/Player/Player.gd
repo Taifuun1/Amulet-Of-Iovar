@@ -664,7 +664,7 @@ func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.ALTAR:
 		Globals.gameConsole.addLog("You see an altar here.")
 	
-	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.HIDDEN_ITEM:
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.HIDDEN_ITEM or _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.DIGGABLE:
 		Globals.gameConsole.addLog("There's something hidden in the ground here.")
 	
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.PLANT:

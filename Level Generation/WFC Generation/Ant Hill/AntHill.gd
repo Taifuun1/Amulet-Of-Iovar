@@ -35,11 +35,8 @@ func createDungeon():
 		removeInputs()
 		
 		
-		# Soil tiles
-		getSoilTiles()
-		
-		
 		# Soil interactables
+		getSoilTiles()
 		generateSoilAreaInteractablesAndItems()
 		
 		

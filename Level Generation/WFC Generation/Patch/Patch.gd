@@ -204,7 +204,7 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 				generatedGrid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
 			for _wall in rooms[_roomIndex].walls:
 				generatedGrid[_wall.x][_wall.y].tile = Globals.tiles.GRASS
-		rooms.remove(_roomIndex)
+			rooms.remove(_roomIndex)
 
 func getGeneratedRoom(_tile, _tileType):
 	var _roomTiles = [_tile]

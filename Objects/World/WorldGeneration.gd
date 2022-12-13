@@ -15,8 +15,9 @@ onready var vacationResort = preload("res://Level Generation/Generic Generation/
 ######################
 onready var minesOfTidoh = preload("res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn")
 onready var depthsOfTidoh = preload("res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn")
-onready var patch = preload("res://Level Generation/WFC Generation/Patch/Patch.tscn")
+onready var abandonedOutpost = preload("res://Level Generation/WFC Generation/Abandoned Outpost/AbandonedOutpost.tscn")
 onready var antHill = preload("res://Level Generation/WFC Generation/Ant Hill/AntHill.tscn")
+onready var patch = preload("res://Level Generation/WFC Generation/Patch/Patch.tscn")
 onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
 onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
 onready var dungeonHallways = preload("res://Level Generation/WFC Generation/Dungeon Halls/DungeonHalls.tscn")
@@ -176,7 +177,7 @@ func setUpDungeonLevels():
 
 func setUpDungeon():
 	### Dungeon 1
-	var firstLevel = dungeon.instance()
+	var firstLevel = dungeon1.instance()
 	firstLevel.create("dungeon1", "Dungeon 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)

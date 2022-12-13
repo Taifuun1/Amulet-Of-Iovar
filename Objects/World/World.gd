@@ -722,6 +722,15 @@ func interactWith(_tileToInteractWith):
 				processGameTurn()
 			else:
 				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.DIGGABLE:
+			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
+				Globals.gameConsole.addLog("You dig up the item from the ground.")
+				$Items/Items.createItem($Items/Items.getRandomItem(), _tileToInteractWith)
+				Globals.gameConsole.addLog("You discover an item!")
+				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				processGameTurn()
+			else:
+				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.LOCKED:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):
 				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null

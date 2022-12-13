@@ -105,6 +105,7 @@ enum interactables {
 	ANT_HILL
 	SPIDER_WEB
 	GEMS
+	DIGGABLE
 }
 
 var currentDungeonLevel = 1

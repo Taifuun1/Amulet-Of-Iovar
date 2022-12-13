@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=12 format=2]
+[gd_resource type="TileSet" load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Interactables/Altar.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Interactables/HiddenItem.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Interactables/AntHill.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Interactables/SpiderWeb.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Interactables/Gems.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Interactables/Diggable.png" type="Texture" id=12]
 
 [resource]
 0/name = "LOCKED"
@@ -167,3 +168,17 @@
 10/shape_one_way_margin = 0.0
 10/shapes = [  ]
 10/z_index = 0
+11/name = "DIGGABLE"
+11/texture = ExtResource( 12 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 0, 0, 32, 32 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
+11/shapes = [  ]
+11/z_index = 0
