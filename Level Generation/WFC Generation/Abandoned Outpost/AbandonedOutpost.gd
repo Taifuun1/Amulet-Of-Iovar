@@ -114,9 +114,11 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 		_room.walls = _walls
 	
 	# Remove small rooms
-	for _roomIndex in rooms.duplicate(true).size():
-		if rooms[_roomIndex].floors.size() < 8:
-			rooms.remove(_roomIndex)
+	var _indexCount = 0
+	for _roomIndex in rooms.duplicate(true).size() - 1:
+		if rooms[_roomIndex - _indexCount].floors.size() < 8:
+			rooms.remove(_roomIndex - _indexCount)
+			_indexCount += 1
 
 func getGeneratedRoom(_tile, _tileType):
 	var _roomTiles = [_tile]

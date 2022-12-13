@@ -177,7 +177,7 @@ func setUpDungeonLevels():
 
 func setUpDungeon():
 	### Dungeon 1
-	var firstLevel = dungeon1.instance()
+	var firstLevel = dungeon.instance()
 	firstLevel.create("dungeon1", "Dungeon 1", 10000)
 	levels.firstLevel = firstLevel
 	$Levels.add_child(firstLevel)
