@@ -22,7 +22,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.0431373, 0.0627451, 0.231373, 1 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 draw_center = false
@@ -30,7 +30,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.0941176, 0.117647, 0.341176, 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
 draw_center = false
@@ -38,7 +38,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.0431373, 0.0627451, 0.231373, 1 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 draw_center = false
@@ -46,7 +46,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.0431373, 0.0627451, 0.231373, 1 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 draw_center = false
@@ -54,7 +54,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.0431373, 0.0627451, 0.231373, 1 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 draw_center = false
@@ -62,7 +62,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.0431373, 0.0627451, 0.231373, 1 )
 
 [sub_resource type="StyleBoxFlat" id=9]
 draw_center = false
@@ -70,7 +70,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.0431373, 0.0627451, 0.231373, 1 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 draw_center = false
@@ -78,7 +78,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0.0431373, 0.0627451, 0.231373, 1 )
 
 [node name="Character Creation" type="Control"]
 anchor_right = 1.0
@@ -91,26 +91,29 @@ script = ExtResource( 1 )
 margin_right = 1920.0
 margin_bottom = 1004.0
 mouse_filter = 2
+alignment = 1
 
 [node name="Title" type="Label" parent="CharacterCreationContainer"]
 margin_right = 1920.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 250, 40 )
+margin_bottom = 58.0
+rect_min_size = Vector2( 250, 58 )
 custom_fonts/font = SubResource( 1 )
 text = "Create Character"
 align = 1
 valign = 1
 
 [node name="ClassesContainer" type="GridContainer" parent="CharacterCreationContainer"]
-margin_top = 44.0
-margin_right = 1920.0
-margin_bottom = 858.0
-rect_min_size = Vector2( 1920, 814 )
+margin_left = 4.0
+margin_top = 62.0
+margin_right = 1916.0
+margin_bottom = 876.0
+rect_min_size = Vector2( 0, 814 )
 mouse_filter = 2
+size_flags_horizontal = 4
 columns = 4
 
 [node name="Archeologist" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_right = 477.0
+margin_right = 475.0
 margin_bottom = 400.0
 mouse_filter = 1
 custom_styles/panel = SubResource( 2 )
@@ -118,14 +121,14 @@ custom_styles/panel = SubResource( 2 )
 [node name="ArcheologistContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Archeologist"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 475.0
+margin_right = 473.0
 margin_bottom = 398.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 370.0
-rect_min_size = Vector2( 473, 370 )
+rect_min_size = Vector2( 471, 370 )
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 9 )
@@ -133,7 +136,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
 margin_top = 374.0
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 0, 22 )
 mouse_filter = 2
@@ -143,22 +146,22 @@ text = "Archeologist"
 fit_content_height = true
 
 [node name="Banker" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 481.0
-margin_right = 958.0
+margin_left = 479.0
+margin_right = 954.0
 margin_bottom = 400.0
 custom_styles/panel = SubResource( 4 )
 
 [node name="BankerContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Banker"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 475.0
+margin_right = 473.0
 margin_bottom = 398.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Banker/BankerContainer"]
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 370.0
-rect_min_size = Vector2( 473, 370 )
+rect_min_size = Vector2( 471, 370 )
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 10 )
@@ -166,7 +169,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Banker/BankerContainer"]
 margin_top = 374.0
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 0, 22 )
 mouse_filter = 2
@@ -176,22 +179,22 @@ text = "Banker"
 fit_content_height = true
 
 [node name="FreedomFighter" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 962.0
-margin_right = 1439.0
+margin_left = 958.0
+margin_right = 1433.0
 margin_bottom = 400.0
 custom_styles/panel = SubResource( 5 )
 
 [node name="FreedomFighterContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/FreedomFighter"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 475.0
+margin_right = 473.0
 margin_bottom = 398.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/FreedomFighter/FreedomFighterContainer"]
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 370.0
-rect_min_size = Vector2( 473, 370 )
+rect_min_size = Vector2( 471, 370 )
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 3 )
@@ -199,7 +202,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/FreedomFighter/FreedomFighterContainer"]
 margin_top = 374.0
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 0, 22 )
 mouse_filter = 2
@@ -209,22 +212,22 @@ text = "Freedom Fighter"
 fit_content_height = true
 
 [node name="Herbalogue" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 1443.0
-margin_right = 1920.0
+margin_left = 1437.0
+margin_right = 1912.0
 margin_bottom = 400.0
 custom_styles/panel = SubResource( 6 )
 
 [node name="HerbalogueContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Herbalogue"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 475.0
+margin_right = 473.0
 margin_bottom = 398.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Herbalogue/HerbalogueContainer"]
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 370.0
-rect_min_size = Vector2( 473, 370 )
+rect_min_size = Vector2( 471, 370 )
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 8 )
@@ -232,7 +235,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Herbalogue/HerbalogueContainer"]
 margin_top = 374.0
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 0, 22 )
 mouse_filter = 2
@@ -243,21 +246,21 @@ fit_content_height = true
 
 [node name="Mercenary" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
 margin_top = 404.0
-margin_right = 477.0
+margin_right = 475.0
 margin_bottom = 804.0
 custom_styles/panel = SubResource( 7 )
 
 [node name="MercenaryContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Mercenary"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 475.0
+margin_right = 473.0
 margin_bottom = 398.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Mercenary/MercenaryContainer"]
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 370.0
-rect_min_size = Vector2( 473, 370 )
+rect_min_size = Vector2( 471, 370 )
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 5 )
@@ -265,7 +268,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Mercenary/MercenaryContainer"]
 margin_top = 374.0
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 0, 22 )
 mouse_filter = 2
@@ -275,23 +278,23 @@ text = "Mercenary"
 fit_content_height = true
 
 [node name="Exterminator" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 481.0
+margin_left = 479.0
 margin_top = 404.0
-margin_right = 958.0
+margin_right = 954.0
 margin_bottom = 804.0
 custom_styles/panel = SubResource( 8 )
 
 [node name="ExterminatorContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Exterminator"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 475.0
+margin_right = 473.0
 margin_bottom = 398.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Exterminator/ExterminatorContainer"]
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 370.0
-rect_min_size = Vector2( 473, 370 )
+rect_min_size = Vector2( 471, 370 )
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 6 )
@@ -299,7 +302,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Exterminator/ExterminatorContainer"]
 margin_top = 374.0
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 0, 22 )
 mouse_filter = 2
@@ -309,23 +312,23 @@ text = "Exterminator"
 fit_content_height = true
 
 [node name="Rogue" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 962.0
+margin_left = 958.0
 margin_top = 404.0
-margin_right = 1439.0
+margin_right = 1433.0
 margin_bottom = 804.0
 custom_styles/panel = SubResource( 9 )
 
 [node name="RogueContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Rogue"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 475.0
+margin_right = 473.0
 margin_bottom = 398.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Rogue/RogueContainer"]
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 370.0
-rect_min_size = Vector2( 473, 370 )
+rect_min_size = Vector2( 471, 370 )
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 4 )
@@ -333,7 +336,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Rogue/RogueContainer"]
 margin_top = 374.0
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 0, 22 )
 mouse_filter = 2
@@ -343,23 +346,23 @@ text = "Rogue"
 fit_content_height = true
 
 [node name="Savant" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 1443.0
+margin_left = 1437.0
 margin_top = 404.0
-margin_right = 1920.0
+margin_right = 1912.0
 margin_bottom = 804.0
 custom_styles/panel = SubResource( 10 )
 
 [node name="SavantContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Savant"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 475.0
+margin_right = 473.0
 margin_bottom = 398.0
 mouse_filter = 2
 
 [node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Savant/SavantContainer"]
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 370.0
-rect_min_size = Vector2( 473, 370 )
+rect_min_size = Vector2( 471, 370 )
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 7 )
@@ -367,7 +370,7 @@ stretch_mode = 6
 
 [node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Savant/SavantContainer"]
 margin_top = 374.0
-margin_right = 473.0
+margin_right = 471.0
 margin_bottom = 396.0
 rect_min_size = Vector2( 0, 22 )
 mouse_filter = 2
@@ -376,22 +379,31 @@ bbcode_text = "[center]Savant[/center]"
 text = "Savant"
 fit_content_height = true
 
-[node name="StartButton" type="Button" parent="CharacterCreationContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="CharacterCreationContainer"]
+margin_top = 880.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 1920, 200 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreationContainer/CenterContainer"]
 margin_left = 928.0
-margin_top = 862.0
+margin_top = 62.0
 margin_right = 991.0
-margin_bottom = 898.0
+margin_bottom = 138.0
+
+[node name="StartButton" type="Button" parent="CharacterCreationContainer/CenterContainer/VBoxContainer"]
+margin_right = 63.0
+margin_bottom = 36.0
 mouse_filter = 1
 size_flags_horizontal = 4
 disabled = true
 action_mode = 0
 text = "Okay"
 
-[node name="BackButton" type="Button" parent="CharacterCreationContainer"]
-margin_left = 929.0
-margin_top = 902.0
-margin_right = 991.0
-margin_bottom = 938.0
+[node name="BackButton" type="Button" parent="CharacterCreationContainer/CenterContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 62.0
+margin_bottom = 76.0
 mouse_filter = 1
 size_flags_horizontal = 4
 action_mode = 0
@@ -421,5 +433,5 @@ text = "Back"
 [connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_input" binds= [ "Savant" ]]
 [connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Savant" ]]
 [connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Savant" ]]
-[connection signal="pressed" from="CharacterCreationContainer/StartButton" to="." method="_on_Start_Button_pressed"]
-[connection signal="pressed" from="CharacterCreationContainer/BackButton" to="." method="_on_Back_Button_pressed"]
+[connection signal="pressed" from="CharacterCreationContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_Start_Button_pressed"]
+[connection signal="pressed" from="CharacterCreationContainer/CenterContainer/VBoxContainer/BackButton" to="." method="_on_Back_Button_pressed"]

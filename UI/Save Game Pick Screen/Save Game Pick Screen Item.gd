@@ -10,9 +10,9 @@ func create(_saveSlot, _data):
 		_saveData = {
 			"saveSlot": _saveSlot,
 			"hasSave": false,
-			"className": "-",
-			"dungeonLevelName": "-",
-			"level": "-",
+			"className": null,
+			"dungeonLevelName": null,
+			"level": null,
 			"points": 0
 		}
 	else:
@@ -23,13 +23,40 @@ func create(_saveSlot, _data):
 	saveExists = _saveData.hasSave
 	className = _saveData.className
 	
-	$MarginContainer/HBoxContainer/VBoxContainer/SaveSlot.append_bbcode(str(_saveData.saveSlot))
-	$MarginContainer/HBoxContainer/VBoxContainer/HasSave.append_bbcode(str(_saveData.hasSave))
+	var _saveSlotText = "Save %s" % saveSlot
+	var _hasSaveText
+	var _classTexture
+	var _classNameText
+	var _dungeonLevelNameText
+	var _pointsText
+	if _saveData.hasSave:
+		_hasSaveText = "Has save"
+	else:
+		_hasSaveText = "No save"
+	if _saveData.className != null:
+		_classTexture = load("res://Assets/Classes/{className}.png".format({ "className": _saveData.className.capitalize().replace(" ", "") }))
+	else:
+		_classTexture = null
+	if _saveData.className != null:
+		_classNameText = _saveData.className.capitalize()
+	else:
+		_classNameText = "-"
+	if _saveData.dungeonLevelName != null:
+		_dungeonLevelNameText = _saveData.dungeonLevelName
+	else:
+		_dungeonLevelNameText =  "-"
+	if _saveData.points != null:
+		_pointsText = _saveData.points
+	else:
+		_pointsText =  "-"
 	
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ClassNameText.append_bbcode(str(_saveData.className))
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/DungeonLevelText.append_bbcode(str(_saveData.level))
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/DungeonLevelNameText.append_bbcode(str(_saveData.dungeonLevelName))
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer4/PointsText.append_bbcode(str(_saveData.points))
+	$MarginContainer/HBoxContainer/VBoxContainer/SaveSlot.append_bbcode(_saveSlotText)
+	$MarginContainer/HBoxContainer/VBoxContainer/HasSave.append_bbcode(_hasSaveText)
+	$MarginContainer/HBoxContainer/VBoxContainer/ClassTexture.texture = _classTexture
+	
+	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ClassNameText.append_bbcode(_classNameText)
+	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/DungeonLevelNameText.append_bbcode(str(_dungeonLevelNameText))
+	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer4/PointsText.append_bbcode(str(_pointsText))
 
 func _on_Save_Button_pressed():
 	StartingData.selectedSave = saveSlot

@@ -1015,8 +1015,7 @@ func saveGame():
 	}
 	$Save.saveData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
 	
-	resetToDefaulGameState()
-	$UI/UITheme/"Dancing Dragons".hide()
+	get_tree().quit()
 
 
 

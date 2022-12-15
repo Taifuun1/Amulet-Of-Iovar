@@ -21,10 +21,10 @@ func loadSaveData(_saveSlot, _data):
 		file.store_line(to_json({
 			"saveSlot": _saveSlot,
 			"hasSave": false,
-			"className": "",
-			"dungeonLevelName": "",
-			"level": "",
-			"points": null
+			"className": null,
+			"dungeonLevelName": null,
+			"level": null,
+			"points": 0
 		}))
 		file.close()
 	file.open("user://SaveSlot{saveSlot}/SaveData.json".format({ "saveSlot": _saveSlot }), File.READ)
