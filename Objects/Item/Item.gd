@@ -44,12 +44,15 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 		_item.itemName.matchn("box") or
 		_item.itemName.matchn("chest") or
 		(GlobalItemInfo.globalItemInfo.has(_item.itemName) and GlobalItemInfo.globalItemInfo[_item.itemName].identified) or
-		_item.type.to_lower() == "comestible"
+		_item.type.to_lower().matchn("comestible")
 	):
 		itemName = _item.itemName
 	else:
 		itemName = _item.unidentifiedItemName
-	identifiedItemName = _item.itemName
+	if _item.has("identifiedItemName"):
+		identifiedItemName = _item.identifiedItemName
+	else:
+		identifiedItemName = _item.itemName
 	unidentifiedItemName = _item.unidentifiedItemName
 	
 	type = _item.type
@@ -58,13 +61,13 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	if _extraData.has("weight"):
 		weight = _extraData.weight
 	else:
-		weight = _item.weight
+		weight = int(_item.weight)
 	
 	if category != null and category.matchn("container"):
 		addContainer()
 	
 	value = _item.value
-	amount = _amount
+	amount = int(_amount)
 	
 	if _extraData.has("alignment"):
 		alignment = _extraData.alignment
@@ -209,7 +212,7 @@ func calculateWeaponAttackIncrease(_stats):
 			_d += 1
 		
 		return {
-			"dmg": _stats.balance / 3 + _additionalDamage,
+			"dmg": int(_stats.balance / 3 + _additionalDamage),
 			"d": _d
 		}
 	if category.matchn("two-hander"):
@@ -226,7 +229,7 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 3
 		
 		return {
-			"dmg": _stats.strength / 3 + _additionalDamage,
+			"dmg": int(_stats.strength / 3 + _additionalDamage),
 			"d": 0
 		}
 	if category.matchn("dagger"):
@@ -250,7 +253,7 @@ func calculateWeaponAttackIncrease(_stats):
 			_d += 1
 		
 		return {
-			"dmg": _stats.legerity / 5 + _additionalDamage,
+			"dmg": int(_stats.legerity / 5 + _additionalDamage),
 			"d": _d
 		}
 	if category.matchn("mace"):
@@ -267,7 +270,7 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 3
 		
 		return {
-			"dmg": (_stats.strength / 4) + (_stats.balance / 4) + _additionalDamage,
+			"dmg": int((_stats.strength / 4) + (_stats.balance / 4) + _additionalDamage),
 			"d": 0
 		}
 	if category.matchn("flail"):
@@ -293,7 +296,7 @@ func calculateWeaponAttackIncrease(_stats):
 			_d += 1
 		
 		return {
-			"dmg": _stats.legerity / 5 + _additionalDamage,
+			"dmg": int(_stats.legerity / 5 + _additionalDamage),
 			"d": _d
 		}
 

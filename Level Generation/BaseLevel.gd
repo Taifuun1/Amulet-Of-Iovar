@@ -6,6 +6,7 @@ onready var weightedAstarNode = AStar2D.new()
 
 var levelId
 var dungeonType
+var dungeonSection
 var dungeonLevelName
 var visibility
 
@@ -21,11 +22,12 @@ var additionalData = { }
 
 var critters = []
 
-func create(_dungeonType, _dungeonLevelName, _visibility):
+func create(_dungeonType, _dungeonSection, _dungeonLevelName, _visibility):
 	levelId = Globals.levelId
 	name = str(Globals.levelId)
 	Globals.levelId += 1
 	dungeonType = _dungeonType
+	dungeonSection = _dungeonSection
 	dungeonLevelName = _dungeonLevelName
 	visibility = _visibility
 
@@ -745,6 +747,7 @@ func getLevelSaveData():
 	return {
 		levelId = levelId,
 		dungeonType = dungeonType,
+		dungeonSection = dungeonSection,
 		dungeonLevelName = dungeonLevelName,
 		visibility = visibility,
 		critters = critters,
@@ -763,6 +766,7 @@ func loadLevel(_levelData):
 	levelId = _levelData.levelId
 	name = str(levelId)
 	dungeonType = _levelData.dungeonType
+	dungeonSection = _levelData.dungeonSection
 	dungeonLevelName = _levelData.dungeonLevelName
 	visibility = _levelData.visibility
 	critters = _levelData.critters
@@ -780,10 +784,5 @@ func loadLevel(_levelData):
 		floorTiles.append(Vector2(_levelData.floorTiles[str(index)].x, _levelData.floorTiles[str(index)].y))
 	for key in _levelData.stairs.keys():
 		stairs[key] = Vector2(_levelData.stairs[key].x, _levelData.stairs[key].y)
-#	openTiles = _levelData.openTiles
-#	spawnableItemTiles = _levelData.spawnableItemTiles
-#	spawnableCritterTiles = _levelData.spawnableCritterTiles
-#	floorTiles = _levelData.floorTiles
-#	stairs = _levelData.stairs
 	
 	doFinalPathfinding()

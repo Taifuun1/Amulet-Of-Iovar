@@ -129,6 +129,12 @@ func calculateDmg(_attack):
 ###############################
 
 func processCritterEffects():
+	if abilities != null:
+		for _ability in abilities:
+			match _ability.abilityName:
+				"reflection":
+					statusEffects.backscattering = -1
+	
 	for _status in statusEffects.keys():
 		if statusEffects[_status] > 0:
 			if _status.matchn("confusion") or _status.matchn("fumbling"):

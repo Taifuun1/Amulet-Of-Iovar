@@ -415,7 +415,7 @@ func calculateMagicDamageIncrease(_type):
 func loadRunesData(_data):
 	runes = _data.runes
 	spellDamage = _data.spellDamage
-	manaUsage = _data.manaUsage
+	manaUsage = int(_data.manaUsage)
 	
 	setRuneTextures()
 

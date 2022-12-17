@@ -40,6 +40,25 @@ var displaceSelf = {
 
 
 
+### Onhit abilities
+
+var toxixSplash = {
+	"name": "Toxix splash",
+	"attacks": [
+		{
+			"dmg": [0,0],
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [2,5],
+				"element": "toxix"
+			}
+		}
+	]
+}
+
+
+
 ### On attack abilities
 
 var ghostTouch = {

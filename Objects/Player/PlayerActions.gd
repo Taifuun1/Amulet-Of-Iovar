@@ -16,7 +16,7 @@ func readItem(_id):
 				Globals.gameConsole.addLog("Its a blank scroll. Wow.")
 				Globals.isItemIdentified(_readItem)
 			"official mail":
-				Globals.gameConsole.addLog("Its a grocery list of milk, eggs and carrots. Riveting.")
+				Globals.gameConsole.addLog("Its a grocery list of milk and eggs. Riveting.")
 				Globals.gameConsole.addLog("The mail disappears!")
 			"scroll of identify":
 				var _items = $"/root/World/Critters/0/Inventory".inventory.duplicate(true)

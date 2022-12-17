@@ -6,6 +6,7 @@ var inventory = load("res://UI/Inventory/Inventory.tscn").instance()
 var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
 var spellData = load("res://Objects/Spell/SpellData.gd").new()
 var statusEffectsData = load("res://Objects/Miscellaneous/StatusEffectsData.gd").new()
+var critterSpellData = load("res://Objects/Spell/CritterSpells.gd").new()
 
 var playerVisibility = {
 	"distance": -1,
@@ -171,6 +172,15 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo)
 				if _didCritterDespawn != null:
 					addExp(_didCritterDespawn)
+				# Onhit abilities
+				if _critter.abilities.size() != 0:
+					var _onHitAbility = null
+					for _ability in _critter.abilities:
+						if _ability.abilityName.matchn("toxixSplash"):
+							_onHitAbility = _ability
+							_onHitAbility.data = critterSpellData[_onHitAbility.abilityName]
+							takeDamage(_onHitAbility.data.attacks, _playerTile, _critter.critterName)
+							break
 			else:
 				Globals.gameConsole.addLog("You miss!")
 			
@@ -557,7 +567,7 @@ func calculateEquipmentStats():
 	else:
 		attacks = [
 			{
-				"dmg": [1 + stats.strength / 6, 1 + stats.strength / 6],
+				"dmg": [int(1 + stats.strength / 6), int(1 + stats.strength / 6)],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

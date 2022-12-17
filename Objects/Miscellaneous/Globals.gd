@@ -137,12 +137,12 @@ func isItemIdentified(_item):
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _item.identifiedItemName, "unidentifiedItemName": _item.unidentifiedItemName }))
 
 func loadGlobalsData(_data):
-	currentDungeonLevel = _data.currentDungeonLevel
+	currentDungeonLevel = int(_data.currentDungeonLevel)
 	currentDungeonLevelName = _data.currentDungeonLevelName
-	generatedLevels = _data.generatedLevels
-	levelId = _data.levelId
-	itemId = _data.itemId
-	critterId = _data.critterId
+	generatedLevels = int(_data.generatedLevels)
+	levelId = int(_data.levelId)
+	itemId = int(_data.itemId)
+	critterId = int(_data.critterId)
 
 func getGlobalsSaveData():
 	return {

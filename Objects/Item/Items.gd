@@ -56,12 +56,12 @@ func loadItems(_items):
 	mutex = Mutex.new()
 	name = "Items"
 	
-	for _type in _items:
+	for _type in _items.items:
 		items[_type] = {  }
-		for _rarity in _items[_type]:
+		for _rarity in _items.items[_type]:
 			items[_type][_rarity] = []
-			for _index in _items[_type][_rarity].size():
-				items[_type][_rarity].append(_items[_type][_rarity][_index])
+			for _index in _items.items[_type][_rarity].size():
+				items[_type][_rarity].append(_items.items[_type][_rarity][_index])
 				items[_type][_rarity][_index].texture = load(items[_type][_rarity][_index].texture)
 				items[_type][_rarity][_index].unidentifiedTexture = load(items[_type][_rarity][_index].unidentifiedTexture)
 	

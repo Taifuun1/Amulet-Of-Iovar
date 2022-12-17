@@ -11,8 +11,9 @@ var weight
 var expDropAmount
 var drops
 var abilityHits
-var currentCritterAbilityHit
+var currentCritterAbilityHit = null
 var activationDistance = null
+var etherealnessHit = false
 
 
 func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = true):
@@ -30,35 +31,46 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 	weight = _critter.weight
 #	justice = _critter.justice
 	
-	stats.strength = _critter.stats.strength
-	stats.legerity = _critter.stats.legerity
-	stats.balance = _critter.stats.balance
-	stats.belief = _critter.stats.belief
-	stats.visage = _critter.stats.visage
-	stats.wisdom = _critter.stats.wisdom
+	stats.strength = float(_critter.stats.strength)
+	stats.legerity = float(_critter.stats.legerity)
+	stats.balance = float(_critter.stats.balance)
+	stats.belief = float(_critter.stats.belief)
+	stats.visage = float(_critter.stats.visage)
+	stats.wisdom = float(_critter.stats.wisdom)
 	
 	level = _critter.level
-	hp = _critter.hp
-	mp = _critter.mp
+	hp = int(_critter.hp)
+	mp = int(_critter.mp)
 	basehp = _critter.hp
 	basemp = _critter.mp
-	maxhp = _critter.hp
-	maxmp = _critter.mp
+	if _critter.has("maxhp"):
+		maxhp = int(_critter.maxhp)
+	else:
+		maxhp = int(_critter.hp)
+	if _critter.has("maxmp"):
+		maxmp = int(_critter.maxmp)
+	else:
+		maxmp = int(_critter.mp)
 	shields = 0
-	ac = _critter.ac
+	ac = int(_critter.ac)
 	attacks = _critter.attacks
-	currentHit = 0
+	if _critter.has("currentHit"):
+		currentHit = _critter.currentHit
+	else:
+		currentHit = 0
 	hits = _critter.hits
 	
 	abilities = _critter.abilities
 	abilityHits = _critter.abilityHits
-	if _critter.abilityHits.size() != 0:
+	if _critter.has("currentAbilityHit"):
+		currentCritterAbilityHit = _critter.currentAbilityHit
+	elif _critter.abilityHits.size() != 0:
 		currentCritterAbilityHit = randi() % _critter.abilityHits.size()
 	resistances = _critter.resistances
 	
 	$CritterSprite.texture = _critter.texture
 	
-	expDropAmount = _critter.expDropAmount
+	expDropAmount = int(_critter.expDropAmount)
 	drops = _critter.drops
 	
 	$Tooltip/TooltipContainer.updateTooltip(critterName, _tooltip.description, _critter.texture)
@@ -101,8 +113,9 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	
 	if currentCritterAbilityHit != null:
 		if currentCritterAbilityHit == abilityHits.size() - 1:
-			currentCritterAbilityHit = -1
-		currentCritterAbilityHit += 1
+			currentCritterAbilityHit = 0
+		else:
+			currentCritterAbilityHit += 1
 	
 	var _pickedAbility
 	if abilityHits.size() != 0 and abilityHits[currentCritterAbilityHit] == 1 and abilities.size() != 0:
@@ -404,11 +417,53 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 		for _attack in _attacks:
 			var _damage = calculateDmg(_attack)
 			var _attackLog = ""
+			var _isPhysicalHit = true
+			
+			# Magic spell
+			if _damage.dmg == 0 and _damage.magicDmg != 0:
+				hp -= _damage.magicDmg
+				_attackLog += "{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
+			# Physical attack
+			else:
+				# Onhit abilities
+				if abilities.size() != 0:
+					var _onHitAbility = null
+					for _ability in abilities:
+						if _ability.abilityType.matchn("onHit"):
+							_onHitAbility = _ability
+							if critterSpellData.has(_onHitAbility.abilityName):
+								_onHitAbility.data = critterSpellData[_onHitAbility.abilityName]
+					if _onHitAbility != null:
+						match _onHitAbility.abilityName:
+							"etherealness":
+								if etherealnessHit:
+									_isPhysicalHit = false
+									_attackLog += "Your attack passes through {critter}!".format({ "critter": critterName })
+								etherealnessHit = !etherealnessHit
+							"corrosion":
+								_damage.dmg -= 2
+								_attackLog += "{critter}s skin dulls your attack!".format({ "critter": critterName })
+				
+				if _isPhysicalHit:
+					# Physical damage
+					if _damage.dmg < 1 and _damage.dmg >= -2:
+						hp -= 1
+						_attackLog += "You hit the {critter} for 1 damage...".format({ "critter": critterName })
+					elif _damage.dmg < -2:
+						_attackLog += "Your attack bounces off!"
+					else:
+						hp -= _damage.dmg
+						_attackLog += "You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damage.dmg + _damage.magicDmg })
+				
+				# Magic damage
+				if _damage.magicDmg != 0:
+					hp -= _damage.magicDmg
+					_attackLog += " ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
 			
 			var _damageNumber = damageNumber.instance()
 			var _damageText
 			var _damageColor = "#000"
-			if _damage.dmg == 0 and _damage.magicDmg != 0:
+			if (_damage.dmg == 0 and _damage.magicDmg != 0) or !_isPhysicalHit:
 				_damageText = _damage.magicDmg
 			elif _damage.dmg < 1 and _damage.dmg >= -2:
 				_damageText = 1 + _damage.magicDmg
@@ -420,27 +475,6 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 				_damageColor = spellData[_attack.magicDmg.element.to_lower()].color
 			_damageNumber.create(_critterTile, _damageText, _damageColor)
 			$"/root/World/Texts".add_child(_damageNumber)
-			
-			# Magic spell
-			if _damage.dmg == 0 and _damage.magicDmg != 0:
-				hp -= _damage.magicDmg
-				_attackLog += "{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
-			# Physical attack
-			else:
-				# Physical damage
-				if _damage.dmg < 1 and _damage.dmg >= -2:
-					hp -= 1
-					_attackLog += "You hit the {critter} for 1 damage...".format({ "critter": critterName })
-				elif _damage.dmg < -2:
-					_attackLog += "Your attack bounces off!"
-				else:
-					hp -= _damage.dmg
-					_attackLog += "You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damage.dmg + _damage.magicDmg })
-				
-				# Magic damage
-				if _damage.magicDmg != 0:
-					hp -= _damage.magicDmg
-					_attackLog += " ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
 			
 			_attacksLog.append(_attackLog)
 			

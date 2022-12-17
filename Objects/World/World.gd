@@ -48,7 +48,8 @@ var levels = {
 	"dungeonHalls3": [],
 	"theGreatShadows": [],
 	"fortress": [],
-	"iovarsLair": []
+	"iovarsLair": [],
+	"church": []
 }
 var churchLevel = null
 
@@ -287,6 +288,10 @@ func _input(_event):
 				currentGameState = gameState.KICK
 				Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
 			elif Input.is_action_just_pressed("SAVE") and currentGameState == gameState.GAME:
+				currentGameState = gameState.OUT_OF_PLAYERS_HANDS
+				$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
+				$UI/UITheme/"Dancing Dragons".startDancingDragons()
+				yield(get_tree().create_timer(0.01), "timeout")
 				saveGame()
 			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
 				keepMoving = true
@@ -964,10 +969,27 @@ func resetToDefaulGameState():
 	keepMoving = false
 
 func saveGame():
-	currentGameState = gameState.OUT_OF_PLAYERS_HANDS
-	$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
-	$UI/UITheme/"Dancing Dragons".startDancingDragons()
-	yield(get_tree().create_timer(0.01), "timeout")
+	var dir = Directory.new()
+	
+	if dir.open("user://SaveSlot{selectedSave}/items".format({ "selectedSave": StartingData.selectedSave })) == OK:
+		dir.list_dir_begin()
+		var fileName = dir.get_next()
+		while fileName != "":
+			if !dir.current_is_dir():
+				dir.remove("user://SaveSlot{selectedSave}/items/{fileName}".format({ "selectedSave": StartingData.selectedSave, "fileName": fileName }))
+			fileName = dir.get_next()
+	else:
+		push_error("An error occurred when trying to access the path.")
+	
+	if dir.open("user://SaveSlot{selectedSave}/critters".format({ "selectedSave": StartingData.selectedSave })) == OK:
+		dir.list_dir_begin()
+		var fileName = dir.get_next()
+		while fileName != "":
+			if !dir.current_is_dir():
+				dir.remove("user://SaveSlot{selectedSave}/critters/{fileName}".format({ "selectedSave": StartingData.selectedSave, "fileName": fileName }))
+			fileName = dir.get_next()
+	else:
+		push_error("An error occurred when trying to access the path.")
 	
 	for _item in $Items.get_children():
 		if _item.name.matchn("Items"):
