@@ -46,3 +46,4 @@ func _on_EquipmentItemArea_input_event(_event):
 		get_node("/root/World/UI/UITheme/Equipment/DragSprite").texture = equipmentTexture
 		$"/root/World/UI/UITheme/Equipment/DragSprite".global_position = get_global_mouse_position()
 		selected = true
+		accept_event()

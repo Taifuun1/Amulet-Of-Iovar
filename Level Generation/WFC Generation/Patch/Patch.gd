@@ -135,38 +135,39 @@ func generateBuildings():
 			"wall": "WALL_WOOD_PLANK"
 		}
 	])
-	var _pickedRooms = []
-	var rooms = rooms.duplicate(true)
-	for _roomCount in randi() % 4 + 2:
-		_pickedRooms.append(rooms.pop_at(randi() % rooms.size()))
-	rooms = _pickedRooms
-	for _room in rooms:
-		for _floor in _room.floors:
-			if isTileAlreadyInAnArea(_floor):
-				for _area in areas.duplicate(true):
-					if _area.has(_floor):
-						for _tile in _area:
-							grid[_tile.x][_tile.y].tile = Globals.tiles.GRASS
-						areas.erase(_area)
-						break
-			grid[_floor.x][_floor.y].tile = Globals.tiles.FLOOR_WOOD_BRICK
-		for _wall in _room.walls:
-			if isTileAlreadyInAnArea(_wall):
-				for _area in areas.duplicate(true):
-					if _area.has(_wall):
-						for _tile in _area:
-							grid[_tile.x][_tile.y].tile = Globals.tiles.GRASS
-						areas.erase(_area)
-						break
-			var _soilTiles = checkAdjacentTilesForTile(_wall, ["SOIL"])
-			for _soilTile in _soilTiles:
-				for _area in areas.duplicate(true):
-					if _area.has(_soilTile):
-						for _tile in _area:
-							grid[_tile.x][_tile.y].tile = Globals.tiles.GRASS
-						areas.erase(_area)
-						break
-			grid[_wall.x][_wall.y].tile = Globals.tiles.WALL_WOOD_PLANK
+	if rooms != null and rooms.size() > 0:
+		var _pickedRooms = []
+		var rooms = rooms.duplicate(true)
+		for _roomCount in randi() % 4 + 2:
+			_pickedRooms.append(rooms.pop_at(randi() % rooms.size()))
+		rooms = _pickedRooms
+		for _room in rooms:
+			for _floor in _room.floors:
+				if isTileAlreadyInAnArea(_floor):
+					for _area in areas.duplicate(true):
+						if _area.has(_floor):
+							for _tile in _area:
+								grid[_tile.x][_tile.y].tile = Globals.tiles.GRASS
+							areas.erase(_area)
+							break
+				grid[_floor.x][_floor.y].tile = Globals.tiles.FLOOR_WOOD_BRICK
+			for _wall in _room.walls:
+				if isTileAlreadyInAnArea(_wall):
+					for _area in areas.duplicate(true):
+						if _area.has(_wall):
+							for _tile in _area:
+								grid[_tile.x][_tile.y].tile = Globals.tiles.GRASS
+							areas.erase(_area)
+							break
+				var _soilTiles = checkAdjacentTilesForTile(_wall, ["SOIL"])
+				for _soilTile in _soilTiles:
+					for _area in areas.duplicate(true):
+						if _area.has(_soilTile):
+							for _tile in _area:
+								grid[_tile.x][_tile.y].tile = Globals.tiles.GRASS
+							areas.erase(_area)
+							break
+				grid[_wall.x][_wall.y].tile = Globals.tiles.WALL_WOOD_PLANK
 
 func getAndCleanUpGeneratedRooms(_tileTypes):
 	# Get floors
@@ -197,7 +198,6 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 					_walls.append(_adjacentTile)
 		_room.walls = _walls
 	
-	print(rooms)
 	# Remove small rooms
 	var _removedRooms = []
 	for _roomIndex in rooms.duplicate(true).size():
@@ -209,7 +209,6 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 		for _wall in _room.walls:
 			generatedGrid[_wall.x][_wall.y].tile = Globals.tiles.GRASS
 		rooms.erase(_room)
-	print(rooms)
 
 func getGeneratedRoom(_tile, _tileType):
 	var _roomTiles = [_tile]

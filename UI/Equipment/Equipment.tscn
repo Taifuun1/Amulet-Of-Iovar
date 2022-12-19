@@ -233,7 +233,8 @@ color = Color( 0.027451, 0.0705882, 0.227451, 1 )
 
 [node name="ItemContainer" type="ScrollContainer" parent="ItemsBackground"]
 rect_min_size = Vector2( 990, 720 )
-mouse_filter = 2
+mouse_filter = 1
+scroll_horizontal_enabled = false
 
 [node name="ItemList" type="VBoxContainer" parent="ItemsBackground/ItemContainer"]
 margin_right = 990.0
@@ -267,3 +268,4 @@ mouse_filter = 2
 [connection signal="mouse_exited" from="EquipmentBackground/Greaves/Sprite" to="." method="_on_mouse_exited_equipment_slot"]
 [connection signal="mouse_entered" from="EquipmentBackground/Boots/Sprite" to="." method="_on_mouse_entered_equipment_slot" binds= [ "Boots" ]]
 [connection signal="mouse_exited" from="EquipmentBackground/Boots/Sprite" to="." method="_on_mouse_exited_equipment_slot"]
+[connection signal="gui_input" from="ItemsBackground/ItemContainer" to="." method="_on_ItemContainer_gui_input"]

@@ -88,7 +88,7 @@ func calculateDmg(_attack):
 	}
 	
 	if _attack.dmg != null:
-		var _armorClassAfterArmorPen = ac - _attack.armorPen
+		var _armorClassAfterArmorPen = (ac / 2) - _attack.armorPen
 		if _armorClassAfterArmorPen < 0: _armorClassAfterArmorPen = 0
 		
 		var _floorDmg = int(_attack.dmg[0])
@@ -150,21 +150,75 @@ func processCritterEffects():
 						statusEffects[_status] -= 2
 				else:
 					statusEffects[_status] -= 1
+			elif _status.matchn("stun"):
+				if stats.legerity > 27:
+					if statusEffects[_status] - 2 < 0:
+						statusEffects[_status] = 0
+					else:
+						statusEffects[_status] -= 2
+				else:
+					statusEffects[_status] -= 1
+			elif _status.matchn("blindness"):
+				if stats.belief > 32:
+					if statusEffects[_status] - 3 < 0:
+						statusEffects[_status] = 0
+					else:
+						statusEffects[_status] -= 3
+				elif stats.belief > 18:
+					if statusEffects[_status] - 2 < 0:
+						statusEffects[_status] = 0
+					else:
+						statusEffects[_status] -= 2
+				else:
+					statusEffects[_status] -= 11
+#			elif _status.matchn("invisibility"):
+#				if stats.visage > 32:
+#					if statusEffects[_status] - 3 < 0:
+#						statusEffects[_status] = 0
+#					else:
+#						statusEffects[_status] -= 3
+#				elif stats.visage > 18:
+#					if statusEffects[_status] - 2 < 0:
+#						statusEffects[_status] = 0
+#					else:
+#						statusEffects[_status] -= 2
+#				else:
+#					statusEffects[_status] -= 1
+			else:
+				statusEffects[_status] -= 1
 	
 	if hpRegenTimer >= 20 - ( (stats.legerity / 3) + (stats.strength / 3) ):
 		if hp < maxhp:
 			if checkIfStatusEffectIsInEffect("regen"):
-				hp += 3
+				if hp + 3 > maxhp:
+					hp = maxhp
+				else:
+					hp += 3
 			if (stats.legerity / 3) + (stats.strength / 3) >= 20:
-				hp += 8
+				if hp + 8 > maxhp:
+					hp = maxhp
+				else:
+					hp += 8
 			elif (stats.legerity / 3) + (stats.strength / 3) >= 15:
-				hp += 5
+				if hp + 5 > maxhp:
+					hp = maxhp
+				else:
+					hp += 5
 			elif (stats.legerity / 3) + (stats.strength / 3) >= 10:
-				hp += 3
+				if hp + 3 > maxhp:
+					hp = maxhp
+				else:
+					hp += 3
 			elif (stats.legerity / 3) + (stats.strength / 3) >= 5:
-				hp += 2
+				if hp + 2 > maxhp:
+					hp = maxhp
+				else:
+					hp += 2
 			else:
-				hp += 1
+				if hp + 1 > maxhp:
+					hp = maxhp
+				else:
+					hp += 1
 		hpRegenTimer = 0
 	else:
 		hpRegenTimer += 1
@@ -172,15 +226,30 @@ func processCritterEffects():
 	if mpRegenTimer >= 20 - ( stats.belief / 2 ):
 		if mp < maxmp:
 			if stats.belief / 2 >= 20:
-				mp += 8
+				if mp + 8 > maxmp:
+					mp = maxmp
+				else:
+					mp += 8
 			elif stats.belief / 2 >= 15:
-				mp += 5
+				if mp + 5 > maxmp:
+					mp = maxmp
+				else:
+					mp += 5
 			elif stats.belief / 2 >= 10:
-				mp += 3
+				if mp + 3 > maxmp:
+					mp = maxmp
+				else:
+					mp += 3
 			elif stats.belief / 2 >= 5:
-				mp += 2
+				if mp + 2 > maxmp:
+					mp = maxmp
+				else:
+					mp += 2
 			else:
-				mp += 1
+				if mp + 1 > maxmp:
+					mp = maxmp
+				else:
+					mp += 1
 		mpRegenTimer = 0
 	else:
 		mpRegenTimer += 1

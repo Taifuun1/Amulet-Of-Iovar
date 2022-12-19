@@ -172,6 +172,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo)
 				if _didCritterDespawn != null:
 					addExp(_didCritterDespawn)
+				
 				# Onhit abilities
 				if _critter.abilities.size() != 0:
 					var _onHitAbility = null
@@ -181,24 +182,25 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 							_onHitAbility.data = critterSpellData[_onHitAbility.abilityName]
 							takeDamage(_onHitAbility.data.attacks, _playerTile, _critter.critterName)
 							break
+				
+				# Skill experience
+				if (
+					$"/root/World/UI/UITheme/Equipment".hands.lefthand == $"/root/World/UI/UITheme/Equipment".hands.righthand and
+					$"/root/World/UI/UITheme/Equipment".hands.lefthand != null and
+					$"/root/World/UI/UITheme/Equipment".hands.righthand != null
+				):
+					skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
+				else:
+					if $"/root/World/UI/UITheme/Equipment".hands.lefthand != null:
+						skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
+					if $"/root/World/UI/UITheme/Equipment".hands.righthand != null:
+						skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.righthand })).category.to_lower()].experience += 1
 			else:
 				Globals.gameConsole.addLog("You miss!")
 			
 			if currentHit == 15:
 				currentHit = 0
 			currentHit += 1
-			
-			if (
-				$"/root/World/UI/UITheme/Equipment".hands.lefthand == $"/root/World/UI/UITheme/Equipment".hands.righthand and
-				$"/root/World/UI/UITheme/Equipment".hands.lefthand != null and
-				$"/root/World/UI/UITheme/Equipment".hands.righthand != null
-			):
-				skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
-			else:
-				if $"/root/World/UI/UITheme/Equipment".hands.lefthand != null:
-					skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
-				if $"/root/World/UI/UITheme/Equipment".hands.righthand != null:
-					skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.righthand })).category.to_lower()].experience += 1
 			checkSkillExperience()
 		elif _critter.aI.aI.matchn("neutral") or _critter.aI.aI.matchn("miner"):
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level, _critter.id)
@@ -588,16 +590,16 @@ func addExp(_expAmount):
 func gainLevel():
 	level += 1
 	
-	maxhp += hpIncrease
-	maxmp += mpIncrease
-	if hp + hpIncrease >= maxhp:
+	maxhp += hpIncrease + (stats.balance / 5)
+	maxmp += mpIncrease + (stats.wisdom / 5)
+	if hp + hpIncrease + (stats.balance / 5) >= maxhp:
 		hp = maxhp
 	else:
-		hp += hpIncrease
-	if mp + mpIncrease >= maxmp:
+		hp += hpIncrease + (stats.balance / 5)
+	if mp + mpIncrease + (stats.wisdom / 5) >= maxmp:
 		mp = maxmp
 	else:
-		mp += mpIncrease
+		mp += mpIncrease + (stats.wisdom / 5)
 	stats.strength += strengthIncrease
 	stats.legerity += legerityIncrease
 	stats.balance += balanceIncrease

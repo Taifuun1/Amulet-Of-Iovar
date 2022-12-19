@@ -25,4 +25,4 @@ func setValues(_item):
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		$"../.."._on_Container_List_Clicked(id)
+		$"../../../../.."._on_Container_List_Clicked(id)

@@ -208,10 +208,10 @@ func readItem(_id):
 					if _readItem.alignment.matchn("blessed"):
 						statusEffects.confusion += 4
 						Globals.gameConsole.addLog("You feel slightly disoriented.")
-					elif _readItem.alignment.matchn("blessed"):
+					elif _readItem.alignment.matchn("uncursed"):
 						statusEffects.confusion += 10
 						Globals.gameConsole.addLog("You feel confused.")
-					elif _readItem.alignment.matchn("blessed"):
+					elif _readItem.alignment.matchn("cursed"):
 						statusEffects.confusion += 22
 						Globals.gameConsole.addLog("The world spins!")
 				else:

@@ -13,7 +13,7 @@ func create():
 
 func showContainerList(_id, _containerTitle, _containerItems, _inventoryItems):
 	containerItemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
-	$ContainerTitle.text = _containerTitle
+	$DividerContainer/ContainerContainer/ContainerTitle.text = _containerTitle
 	containerItems = _containerItems
 	inventoryItems = _inventoryItems
 	for _itemId in containerItems:
@@ -26,9 +26,9 @@ func showContainerList(_id, _containerTitle, _containerItems, _inventoryItems):
 	show()
 
 func hideContainerList():
-	for _item in $ContainerList.get_children():
+	for _item in $DividerContainer/ContainerContainer/ContainerListScroll/ContainerList.get_children():
 		_item.queue_free()
-	for _item in $InventoryList.get_children():
+	for _item in $DividerContainer/InventoryContainer/InventoryListScroll/InventoryList.get_children():
 		_item.queue_free()
 	containerItems = []
 	inventoryItems = []
@@ -37,10 +37,10 @@ func hideContainerList():
 func createContainerItem(_item, _listType):
 	var newItem = containerItem.instance()
 	newItem.setValues(_item)
-	get_node("{listType}List".format({ "listType": _listType })).add_child(newItem)
+	get_node("DividerContainer/{listType}Container/{listType}ListScroll/{listType}List".format({ "listType": _listType })).add_child(newItem)
 
 func removeContainerItem(_itemId, _listType):
-	get_node("{listType}List/{itemId}".format({ "listType": _listType, "itemId": _itemId })).queue_free()
+	get_node("DividerContainer/{listType}Container/{listType}ListScroll/{listType}List/{itemId}".format({ "listType": _listType, "itemId": _itemId })).queue_free()
 
 func _on_Container_List_Clicked(_id):
 	var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
@@ -51,14 +51,16 @@ func _on_Container_List_Clicked(_id):
 		if _item.itemName.matchn("Gold pieces"):
 			$"/root/World/Critters/0".goldPieces += _item.amount
 			containerItems.erase(_id)
+			removeContainerItem(_id, "Container")
 			return
 		if $"/root/World/Critters/0".inventory.checkIfStackableItemInInventory(_item, "add"):
 			containerItems.erase(_id)
+			removeContainerItem(_id, "Container")
 			return
 		containerItems.erase(_id)
 		inventoryItems.append(_id)
-		createContainerItem(_item, "Inventory")
 		removeContainerItem(_id, "Container")
+		createContainerItem(_item, "Inventory")
 		if containerItemNode.identifiedItemName.matchn("bag of holding"):
 			containerItemNode.containerWeight -= _item.weight - _item.weight / 3
 		elif containerItemNode.identifiedItemName.matchn("bag of weight"):
@@ -71,8 +73,8 @@ func _on_Container_List_Clicked(_id):
 			return
 		inventoryItems.erase(_id)
 		containerItems.append(_id)
-		createContainerItem(_item, "Container")
 		removeContainerItem(_id, "Inventory")
+		createContainerItem(_item, "Container")
 		$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_id)
 		if containerItemNode.identifiedItemName.matchn("bag of holding"):
 			containerItemNode.containerWeight += _item.weight - _item.weight / 3

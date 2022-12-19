@@ -133,7 +133,7 @@ func spawnCritter(_critter, _position = null, _isDeactivated = null, _spawnNew =
 	return false
 
 func spawnCritters(_critterName, _position = null, _level = $"/root/World".level):
-	var _spawnTiles = getCritterSpawns(critterSpawnBehaviour.critterSpawnBehaviour[_critterName], _level)
+	var _spawnTiles = getCritterSpawns(critterSpawnBehaviour.critterSpawnBehaviour[_critterName], _level, _position)
 	for _spawnTile in _spawnTiles:
 		spawnCritter(_critterName, _spawnTile, null, true, _level)
 
@@ -209,11 +209,15 @@ func getCritterByName(_critterName):
 			if _critter.critterName.matchn(_critterName):
 				return _critter
 
-func getCritterSpawns(_spawnData, _level):
+func getCritterSpawns(_spawnData, _level, _spawnPosition = null):
 	if _spawnData.amount[0] == 0:
 		return []
 	var _tiles = []
-	var _tile = _level.spawnableCritterTiles[randi() % _level.spawnableCritterTiles.size()]
+	var _tile
+	if _spawnPosition != null:
+		_tile = _spawnPosition
+	else:
+		_tile = _level.spawnableCritterTiles[randi() % _level.spawnableCritterTiles.size()]
 	var _distance = _spawnData.distance
 	var _legibleTiles = []
 	for _spawnableFloor in _level.spawnableCritterTiles:

@@ -302,7 +302,7 @@ func setUpDungeon():
 			elif randi() % 3 == 0:
 				_abandonedOutpostLevels += 1
 				newDungeon = abandonedOutpost.instance()
-				newDungeon.create("abandonedOutpost", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
+				newDungeon.create("abandonedOutpost", "dungeon4", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
 			else:
 				_anthillLevels += 1
 				newDungeon = anthill.instance()

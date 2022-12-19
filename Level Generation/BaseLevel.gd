@@ -157,7 +157,7 @@ func placeContainers(_containers):
 		for _index in _containers[_container].amount:
 			var _tile
 			if _containers[_container].has("tile"):
-				_tile = _container.tile
+				_tile = _containers[_container].tile
 			else:
 				_tile = spawnableItemTiles[randi() % spawnableItemTiles.size()]
 			if _containers[_container].has("types"):

@@ -369,7 +369,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				if (
 					_pickedAbility.abilityName.matchn("selfdestruct") or
 					_pickedAbility.abilityName.matchn("frostSelfdestruct") or
-					_pickedAbility.abilityName.matchn("selfdestruct")
+					_pickedAbility.abilityName.matchn("thunderSelfdestruct")
 				):
 					Globals.gameConsole.addLog("{critterName} {spell}s!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 					despawn(_critterTile, false)
@@ -431,18 +431,17 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 					for _ability in abilities:
 						if _ability.abilityType.matchn("onHit"):
 							_onHitAbility = _ability
-							if critterSpellData.has(_onHitAbility.abilityName):
-								_onHitAbility.data = critterSpellData[_onHitAbility.abilityName]
+#							_onHitAbility.data = critterSpellData[_onHitAbility.abilityName]
 					if _onHitAbility != null:
 						match _onHitAbility.abilityName:
 							"etherealness":
 								if etherealnessHit:
 									_isPhysicalHit = false
-									_attackLog += "Your attack passes through {critter}!".format({ "critter": critterName })
+									_attackLog += "Your attack passes through {critter}! ".format({ "critter": critterName })
 								etherealnessHit = !etherealnessHit
 							"corrosion":
 								_damage.dmg -= 2
-								_attackLog += "{critter}s skin dulls your attack!".format({ "critter": critterName })
+								_attackLog += "{critter}s skin dulls your attack! ".format({ "critter": critterName })
 				
 				if _isPhysicalHit:
 					# Physical damage

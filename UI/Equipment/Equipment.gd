@@ -156,9 +156,9 @@ func setEquipment(_id):
 		if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
 			hands["lefthand"] = null
 			hands["righthand"] = null
-			$"EquipmentBackground/LeftHand/Sprite".texture = null
-			$"EquipmentBackground/RightHand/Sprite".texture = null
-		if _item.category == "Two-hander":
+			$"EquipmentBackground/LeftHand/Sprite".texture = load(equipmentUITemplatePaths["lefthand"])
+			$"EquipmentBackground/RightHand/Sprite".texture = load(equipmentUITemplatePaths["righthand"])
+		if _item.category.matchn("Two-hander"):
 			hands["lefthand"] = _item.id
 			hands["righthand"] = _item.id
 			$"EquipmentBackground/LeftHand/Sprite".texture = _item.getTexture()
@@ -284,7 +284,7 @@ func getArmorClass():
 		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })))
 	if accessories["ring2"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).category.matchn("ring"):
 		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })))
-	return _ac / 2
+	return _ac
 
 func checkIfRingIsRingOfProtection(_ring):
 	match _ring.identifiedItemName.to_lower():
@@ -636,3 +636,7 @@ func _on_mouse_entered_equipment_slot(_equipmentSlot):
 
 func _on_mouse_exited_equipment_slot():
 	hoveredEquipment = null
+
+func _on_ItemContainer_gui_input(event):
+	if event is InputEventScreenDrag:
+		accept_event( )

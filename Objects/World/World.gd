@@ -252,6 +252,8 @@ func _input(_event):
 			elif Input.is_action_just_pressed("ACCEPT") and (currentGameState == gameState.PICK_UP_ITEMS or currentGameState == gameState.DROP_ITEMS):
 				processGameTurn(_playerTile)
 			elif (Input.is_action_just_pressed("BACK")):
+				if Input.is_mouse_button_pressed(2) and currentGameState == gameState.EQUIPMENT:
+					return
 				closeMenu()
 			elif (Input.is_action_just_pressed("INVENTORY") and currentGameState == gameState.GAME):
 				openMenu("inventory")
@@ -964,6 +966,7 @@ func closeMenu(_additionalChoices = false, _pickDirection = false):
 
 func resetToDefaulGameState():
 	$"Critters/0".selectedItem = null
+	$UI/UITheme/Equipment.hoveredEquipment = null
 	currentGameState = gameState.GAME
 	inGame = true
 	keepMoving = false
