@@ -1,10 +1,10 @@
 extends WaveFunctionCollapse
 
-func createNewLevel(_patchType):
+func createNewLevel():
 	createGrid()
 	pathFind([])
 	
-	createDungeon(_patchType)
+	createDungeon()
 	removeInputs()
 	
 	doFinalPathfinding()
@@ -197,14 +197,19 @@ func getAndCleanUpGeneratedRooms(_tileTypes):
 					_walls.append(_adjacentTile)
 		_room.walls = _walls
 	
+	print(rooms)
 	# Remove small rooms
+	var _removedRooms = []
 	for _roomIndex in rooms.duplicate(true).size():
 		if rooms[_roomIndex].floors.size() < 4:
-			for _floor in rooms[_roomIndex].floors:
-				generatedGrid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
-			for _wall in rooms[_roomIndex].walls:
-				generatedGrid[_wall.x][_wall.y].tile = Globals.tiles.GRASS
-			rooms.remove(_roomIndex)
+			_removedRooms.append(rooms[_roomIndex])
+	for _room in _removedRooms:
+		for _floor in _room.floors:
+			generatedGrid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
+		for _wall in _room.walls:
+			generatedGrid[_wall.x][_wall.y].tile = Globals.tiles.GRASS
+		rooms.erase(_room)
+	print(rooms)
 
 func getGeneratedRoom(_tile, _tileType):
 	var _roomTiles = [_tile]

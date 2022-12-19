@@ -45,8 +45,12 @@ func removeContainerItem(_itemId, _listType):
 func _on_Container_List_Clicked(_id):
 	var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
 	if containerItems.has(_id):
-		if containerItemNode.binds.state.matchn("bound"):
+		if containerItemNode.binds != null and containerItemNode.binds.state.matchn("bound"):
 			Globals.gameConsole.addLog("{storageItem} doesn't let you remove the {itemName} while its bound!".format({ "storageItem": containerItemNode.itemName, "itemName": _item.itemName}))
+			return
+		if _item.itemName.matchn("Gold pieces"):
+			$"/root/World/Critters/0".goldPieces += _item.amount
+			containerItems.erase(_id)
 			return
 		if $"/root/World/Critters/0".inventory.checkIfStackableItemInInventory(_item, "add"):
 			containerItems.erase(_id)

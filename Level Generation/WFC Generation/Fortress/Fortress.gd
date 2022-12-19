@@ -35,6 +35,14 @@ func createDungeon():
 		checkAllRoomsAreAccessible()
 		addSomeDoors()
 		if areAllStairsConnected():
+			placeContainers({
+				"box": {
+					"amount": randi() % 6
+				},
+				"chest": {
+					"amount": randi() % 6
+				}
+			})
 			return
 		resetLevel()
 		resetGeneration()

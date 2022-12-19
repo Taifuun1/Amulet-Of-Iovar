@@ -78,6 +78,7 @@ func loadItems(_items):
 func createItem(_item, _position = null, _amount = 1, _toInventory = false, _extraData = {  }, _level = $"/root/World".level, _spawnNew = true):
 	mutex.lock()
 	
+	var _id
 	var _itemPosition
 	if _position == null and !_toInventory:
 		_itemPosition = _level.spawnableItemTiles[randi() % (_level.spawnableItemTiles.size())]
@@ -85,23 +86,24 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 		_itemPosition = _position
 	
 	var newItem = item.instance()
-	if typeof(_item) == TYPE_STRING:
-		if _item.matchn("goldPieces"):
-			newItem.createItem(miscellaneousItems["goldPieces"], _extraData, _amount)
-		elif _item.matchn("amulet of iovar"):
-			newItem.createItem(miscellaneousItems["Amulet of Iovar"], _extraData, 1)
-		elif _item.matchn("corpse"):
-			newItem.createItem(miscellaneousItems["corpse"], _extraData, 1)
-		elif _item.matchn("box"):
-			newItem.createItem(miscellaneousItems["box"], _extraData, 1)
-		elif _item.matchn("chest"):
-			newItem.createItem(miscellaneousItems["chest"], _extraData, 1)
-		else:
-			newItem.createItem(getItemByName(_item), _extraData)
-	else:
-		newItem.createItem(_item, _extraData, _amount, _spawnNew)
 	
 	$"/root/World/Items".add_child(newItem, true)
+	
+	if typeof(_item) == TYPE_STRING:
+		if _item.matchn("goldPieces"):
+			_id = newItem.createItem(miscellaneousItems["goldPieces"], _extraData, _amount)
+		elif _item.matchn("amulet of iovar"):
+			_id = newItem.createItem(miscellaneousItems["Amulet of Iovar"], _extraData, 1)
+		elif _item.matchn("corpse"):
+			_id = newItem.createItem(miscellaneousItems["corpse"], _extraData, 1)
+		elif _item.matchn("box"):
+			_id = newItem.createItem(miscellaneousItems["box"], _extraData, 1)
+		elif _item.matchn("chest"):
+			_id = newItem.createItem(miscellaneousItems["chest"], _extraData, 1)
+		else:
+			_id = newItem.createItem(getItemByName(_item), _extraData)
+	else:
+		_id = newItem.createItem(_item, _extraData, _amount, _spawnNew)
 	
 	if _toInventory:
 		$"/root/World/Critters/0".addToInventory([newItem.id])
@@ -109,6 +111,8 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
 	
 	mutex.unlock()
+	
+	return _id
 
 func generateItemsForLevel(_level):
 	if itemGeneration.itemGeneration.has(_level.dungeonType):

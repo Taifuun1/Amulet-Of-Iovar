@@ -28,6 +28,14 @@ func createDungeon(_secondStair):
 		placeStairs("DUNGEON", _secondStair)
 		checkAllRoomsAreAccessible()
 		if areAllStairsConnected():
+			placeContainers({
+				"box": {
+					"amount": randi() % 3 + 2
+				},
+				"chest": {
+					"amount": randi() % 3 + 1
+				}
+			})
 			return
 		resetLevel()
 		resetGeneration()

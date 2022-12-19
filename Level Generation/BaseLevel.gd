@@ -152,6 +152,19 @@ func placeRandomInteractables(_interactables):
 					):
 						grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable = Globals.interactables.GEMS
 
+func placeContainers(_containers):
+	for _container in _containers:
+		for _index in _containers[_container].amount:
+			var _tile
+			if _containers[_container].has("tile"):
+				_tile = _container.tile
+			else:
+				_tile = spawnableItemTiles[randi() % spawnableItemTiles.size()]
+			if _containers[_container].has("types"):
+				$"/root/World/Items/Items".createItem(_container, _tile, 1, false, { "specificSpawn": _containers[_container].types }, self)
+			else:
+				$"/root/World/Items/Items".createItem(_container, _tile, 1, false, { "randomSpawn": true }, self)
+
 func resetLevel():
 	for x in range(grid.size()):
 		for y in range(grid[x].size()):

@@ -33,6 +33,11 @@ func createDungeon(_isLast):
 		)
 		placeStairs()
 		if areAllStairsConnected():
+			placeContainers({
+				"chest": {
+					"amount": randi() % 8
+				}
+			})
 			if _bossRoomCenter != null:
 				pathFind([Globals.blockedTiles])
 				if calculatePath(stairs.downStair, _bossRoomCenter) != 0:

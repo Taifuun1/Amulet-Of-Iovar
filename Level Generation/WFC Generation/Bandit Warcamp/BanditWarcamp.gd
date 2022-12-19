@@ -40,6 +40,14 @@ func createDungeon():
 			"max": 1
 		})
 		if areAllStairsConnected():
+			placeContainers({
+				"box": {
+					"amount": randi() % 6 + 2
+				},
+				"chest": {
+					"amount": randi() % 2
+				}
+			})
 			return
 		resetLevel()
 		resetGeneration()

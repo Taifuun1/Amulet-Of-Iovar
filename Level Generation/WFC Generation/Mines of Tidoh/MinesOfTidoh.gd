@@ -29,6 +29,17 @@ func createDungeon():
 		)
 		placeStairs()
 		if areAllStairsConnected():
+			placeContainers({
+				"box": {
+					"amount": randi() % 3,
+					"types": {
+						"armor": ["common", "uncommon"],
+						"comestible": ["uncommon"],
+						"tool": ["common"],
+						"weapon": ["common", "uncommon"]
+					}
+				}
+			})
 			return
 		resetLevel()
 		resetGeneration()

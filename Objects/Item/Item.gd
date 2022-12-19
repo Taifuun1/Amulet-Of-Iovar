@@ -64,7 +64,7 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 		weight = int(_item.weight)
 	
 	if category != null and category.matchn("container"):
-		addContainer()
+		addContainer(_extraData)
 	
 	value = _item.value
 	amount = int(_amount)
@@ -155,6 +155,8 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 		$ItemSprite.texture = itemTexture
 	else:
 		$ItemSprite.texture = unidenfiedItemTexture
+	
+	return id
 
 
 
@@ -324,9 +326,17 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 	if _identifyEnchantment:
 		notIdentified.enchantment = true
 
-func addContainer():
+func addContainer(_extraData):
 	container = []
 	containerWeight = weight
+	
+	if _extraData.has("randomSpawn") and _extraData.randomSpawn == true:
+		for _index in randi() % 3 + 1:
+			container.append($"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), Vector2(0,0), 1, false, {  }, null))
+		if randi() % 3 == 0:
+			container.append($"/root/World/Items/Items".createItem("goldPieces", Vector2(0,0), randi() % 57 + 1, false, {  }, null))
+	elif _extraData.has("specificSpawn"):
+		container.append($"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItemByItemTypes(_extraData.specificSpawn, true), Vector2(0,0), 1, false, {  }, null))
 
 func getItemSaveData():
 	return {

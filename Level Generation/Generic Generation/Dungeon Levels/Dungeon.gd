@@ -20,6 +20,14 @@ func createDungeon(_secondStair):
 		placeStairs("DUNGEON", _secondStair)
 		connectRooms()
 		if areAllStairsConnected():
+			placeContainers({
+				"box": {
+					"amount": randi() % 3
+				},
+				"chest": {
+					"amount": randi() % 2
+				}
+			})
 			placeRandomInteractables(["altar"])
 			return
 		resetLevel()

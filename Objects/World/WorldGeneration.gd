@@ -220,9 +220,10 @@ func setUpDungeon():
 	$Levels.add_child(newMinesEnd)
 	
 	### Dungeon 2
-	for _level in range(randi() % 3 + 4):
+	var _dungeon2Count = randi() % 3 + 4
+	for _level in _dungeon2Count:
 		var newDungeon
-		if randi() % 7 == 0 and _firstSectionRandomLevels != 0:
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon2Count - 1:
 			if randi() % 3 == 0:
 				_patchLevels += 1
 				newDungeon = patch.instance()
@@ -260,9 +261,10 @@ func setUpDungeon():
 		$Levels.add_child(newBeach2)
 	
 	### Dungeon 3
-	for _level in range(randi() % 3 + 4):
+	var _dungeon3Count = randi() % 3 + 4
+	for _level in _dungeon3Count:
 		var newDungeon
-		if randi() % 7 == 0 and _firstSectionRandomLevels != 0:
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon3Count - 1:
 			if randi() % 3 == 0:
 				_patchLevels += 1
 				newDungeon = patch.instance()
@@ -292,7 +294,7 @@ func setUpDungeon():
 	### Dungeon 4
 	for _level in range(3):
 		var newDungeon
-		if randi() % 7 == 0 and _firstSectionRandomLevels != 0:
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < 2:
 			if randi() % 3 == 0:
 				_patchLevels += 1
 				newDungeon = patch.instance()

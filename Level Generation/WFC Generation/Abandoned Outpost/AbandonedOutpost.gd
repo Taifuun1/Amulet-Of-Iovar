@@ -87,8 +87,15 @@ func generateOutpostBuilding():
 	for _floor in _selectedRoom.floors:
 		if randi() % 4 + 2 < _floorChance:
 			grid[_floor.x][_floor.y].tile = Globals.tiles.FLOOR_STONE_BRICK
-			if randi() % 20 == 0:
+			if randi() % 8 == 0:
 				$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(false), _floor, 1, false, {  }, self)
+			if randi() % 20:
+				placeContainers({
+					"chest": {
+						"amount": 1,
+						"tile": _floor
+					}
+				})
 		else:
 			grid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
 
