@@ -64,6 +64,7 @@ var cloak = {
 				"ac": 7,
 				"resistance": null
 			},
+			"points": 25,
 			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
@@ -80,6 +81,7 @@ var cloak = {
 				"ac": 7,
 				"resistance": null
 			},
+			"points": 25,
 			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"
@@ -130,6 +132,7 @@ var cloak = {
 				"ac": 7,
 				"resistance": null
 			},
+			"points": 250,
 			"enchantable": true,
 			"stackable": false,
 			"rarity": "Legendary"

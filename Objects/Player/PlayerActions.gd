@@ -783,11 +783,12 @@ func dealWithScrollOfGenocide(_name, _alignment):
 			for _critter in $"/root/World/Critters".get_children():
 				if _critter.name.matchn("Critters"):
 					continue
-				if _critter.critterName == _genocidableCritter.critterName:
+				if _critter.critterName.matchn(_genocidableCritter.critterName):
 					_critter.despawn(null, false)
 			GlobalCritterInfo.globalCritterInfo[_genocidableCritter.critterName].population = 0
 			Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _genocidableCritter.critterName.capitalize() }))
-	if _alignment.matchn("uncursed"):
+			GlobalGameStats.gameStats["Species genocided"] += 1
+	elif _alignment.matchn("uncursed"):
 		for _critter in $"/root/World/Critters".get_children():
 			if _critter.name.matchn("Critters"):
 				continue
@@ -795,7 +796,8 @@ func dealWithScrollOfGenocide(_name, _alignment):
 				_critter.despawn(null, false)
 		GlobalCritterInfo.globalCritterInfo[_name].population = 0
 		Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _name.capitalize() }))
-	if _alignment.matchn("cursed"):
+		GlobalGameStats.gameStats["Species genocided"] += 1
+	elif _alignment.matchn("cursed"):
 		var _level = $"/root/World".level
 		for _populationCount in range(GlobalCritterInfo.globalCritterInfo[_name].population):
 			if !$"/root/World/Critters/Critters".spawnCritter(_name):
@@ -813,6 +815,7 @@ func dealWithWandOfWishing(_name, _alignment):
 	else:
 		$"/root/World/Items/Items".createItem(_name, $"/root/World".level.getCritterTile(0))
 		Globals.gameConsole.addLog("An item appears at your feet.")
+	GlobalGameStats.gameStats["Items wished"] += 1
 	$"/root/World".closeMenu()
 
 func dealWithMarker(_scroll, _ink):

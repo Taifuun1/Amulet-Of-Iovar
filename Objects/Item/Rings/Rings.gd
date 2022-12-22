@@ -9,6 +9,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -21,6 +22,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -33,6 +35,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -45,6 +48,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -57,6 +61,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -69,6 +74,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": 3,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -95,6 +101,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -123,6 +130,7 @@ var rings = {
 			"value": {
 				"turnedOn": null
 			},
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -135,6 +143,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -147,6 +156,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 15,
 			"enchantable": false,
 			"stackable": true
 		}
@@ -161,6 +171,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 35,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -173,6 +184,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 35,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -185,6 +197,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 35,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -197,6 +210,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 35,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -209,6 +223,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 35,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -221,6 +236,7 @@ var rings = {
 			"category": "Ring",
 			"weight": 10,
 			"value": null,
+			"points": 35,
 			"enchantable": false,
 			"stackable": true
 		}

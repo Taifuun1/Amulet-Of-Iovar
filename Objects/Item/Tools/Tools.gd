@@ -206,6 +206,7 @@ var tools = {
 			"category": "Container",
 			"weight": 10,
 			"value": null,
+			"points": 500,
 			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
@@ -240,6 +241,7 @@ var tools = {
 				"charges": -1,
 				"value": 7
 			},
+			"points": 250,
 			"enchantable": false,
 			"stackable": false,
 			"rarity": "Rare",
@@ -254,6 +256,7 @@ var tools = {
 			"category": null,
 			"weight": 25,
 			"value": null,
+			"points": 250,
 			"enchantable": false,
 			"stackable": true,
 			"rarity": "Rare",

@@ -5,10 +5,12 @@ var itemName
 
 var type
 var category
+var rarity
 
 var weight
 
 var value
+var points = null
 var amount = 1
 
 var alignment
@@ -57,6 +59,8 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	
 	type = _item.type
 	category = _item.category
+	if _item.has("rarity"):
+		rarity = _item.rarity
 	
 	if _extraData.has("weight"):
 		weight = _extraData.weight
@@ -67,6 +71,8 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 		addContainer(_extraData)
 	
 	value = _item.value
+	if _item.has("points"):
+		points = _item.points
 	amount = int(_amount)
 	
 	if _extraData.has("alignment"):
@@ -172,13 +178,13 @@ func getAttacks(_stats):
 		var _newDamage = value.dmg.duplicate(true)
 		var _newBonusDamage = value.bonusDmg.duplicate(true)
 		var _newMagicDamage = value.magicDmg.duplicate(true)
-		if _critterClass.matchn("exterminator") and _newMagicDamage.element.matchn("fleir"):
+		if _critterClass.matchn("exterminator") and _newMagicDamage.element != null and _newMagicDamage.element.matchn("fleir"):
 			_newMagicDamage.dmg[0] += 2
 			_newMagicDamage.dmg[1] += 2
-		elif _critterClass.matchn("freedom fighter") and _newMagicDamage.element.matchn("gleeie'er"):
+		elif _critterClass.matchn("freedom fighter") and _newMagicDamage.element != null and _newMagicDamage.element.matchn("gleeie'er"):
 			_newMagicDamage.dmg[0] += 2
 			_newMagicDamage.dmg[1] += 2
-		elif _critterClass.matchn("rogue") and _newMagicDamage.element.matchn("toxix"):
+		elif _critterClass.matchn("rogue") and _newMagicDamage.element != null and _newMagicDamage.element.matchn("toxix"):
 			_newMagicDamage.dmg[0] += 1
 			_newMagicDamage.dmg[1] += 1
 		if _critterClass.matchn("rogue") and category.matchn("dagger"):
@@ -346,6 +352,7 @@ func getItemSaveData():
 		category = category,
 		weight = weight,
 		value = value,
+		points = points,
 		amount = amount,
 		alignment = alignment,
 		enchantment = enchantment,

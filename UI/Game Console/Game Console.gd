@@ -13,8 +13,10 @@ func createLabel(_text):
 	label.text = _text
 	label.set_autowrap(true)
 	$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.add_child(label)
+	consoleLog.append(_text)
 	if $Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child_count() >= 30:
 		$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.remove_child($Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child(0))
+		consoleLog.pop_back()
 	# Wait a frame for Godot to realize the new label
 	yield(get_tree().create_timer(.01), "timeout")
 	$Background/GameConsoleContainer/GameConsoleScrollContainer.scroll_vertical = $Background/GameConsoleContainer/GameConsoleScrollContainer.get_v_scrollbar().max_value
@@ -29,6 +31,7 @@ func createRichLabel(_text):
 func updateGameConsole():
 	if $Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child_count() >= 30:
 		$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.remove_child($Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child(0))
+		consoleLog.pop_back()
 	# Wait a frame for Godot to realize the new label
 	yield(get_tree().create_timer(.01), "timeout")
 	$Background/GameConsoleContainer/GameConsoleScrollContainer.scroll_vertical = $Background/GameConsoleContainer/GameConsoleScrollContainer.get_v_scrollbar().max_value

@@ -477,6 +477,12 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 			
 			_attacksLog.append(_attackLog)
 			
+			# Damage dealt game stats
+			if _damageText > GlobalGameStats.gameStats["Highest damage dealt"]:
+				GlobalGameStats.gameStats["Highest damage dealt"] = _damageText
+			GlobalGameStats.gameStats["Times attacked"] += 1
+			GlobalGameStats.gameStats["Damage dealt"] += _damageText
+			
 			if hp <= 0:
 				despawn(_critterTile)
 				_didCritterDie = expDropAmount

@@ -355,6 +355,7 @@ var weapons = {
 					"element": null
 				}
 			},
+			"points": 250,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -378,8 +379,6 @@ var weapons = {
 			},
 			"enchantable": true,
 			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
 		},
 		{
 			"itemName": "Mithril two-hander",
@@ -424,10 +423,9 @@ var weapons = {
 					"element": "Toxix"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Dagger of Elbier",
@@ -447,10 +445,9 @@ var weapons = {
 					"element": "Thunder"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Crustel flail",
@@ -470,10 +467,9 @@ var weapons = {
 					"element": "Gleeie'er"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Loperiels Destiny",
@@ -493,10 +489,9 @@ var weapons = {
 					"element": "Toxix"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Star Love",
@@ -516,10 +511,9 @@ var weapons = {
 					"element": "Frost"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Dumpel Pompel",
@@ -539,10 +533,9 @@ var weapons = {
 					"element": null
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Final Dawn",
@@ -562,10 +555,9 @@ var weapons = {
 					"element": "Fleir"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Titan Slayer",
@@ -587,10 +579,9 @@ var weapons = {
 					"element": null
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Fleirflare",
@@ -610,10 +601,9 @@ var weapons = {
 					"element": "Fleir"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Frostfury",
@@ -633,10 +623,9 @@ var weapons = {
 					"element": "Frost"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Thunderstruck",
@@ -656,10 +645,9 @@ var weapons = {
 					"element": "Thunder"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Stormbringer",
@@ -679,10 +667,9 @@ var weapons = {
 					"element": "Gleeie'er"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Vorpal sword",
@@ -702,10 +689,9 @@ var weapons = {
 					"element": null
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Dragonslayer",
@@ -727,10 +713,9 @@ var weapons = {
 					"element": null
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Brittleleaf",
@@ -750,10 +735,9 @@ var weapons = {
 					"element": "Gleeie'er"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Icesplitter",
@@ -773,10 +757,9 @@ var weapons = {
 					"element": "Frost"
 				}
 			},
+			"points": 500,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary",
-			"identified": false
+			"stackable": false
 		}
 	]
 }

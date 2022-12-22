@@ -9,6 +9,7 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
+			"points": 25,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -21,6 +22,7 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
+			"points": 25,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -33,6 +35,7 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
+			"points": 25,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -44,6 +47,7 @@ var amulets = {
 			"type": "Accessory",
 			"category": "Amulet",
 			"weight": 35,
+			"points": 25,
 			"value": {
 				"binds": "Equipment"
 			},
@@ -58,6 +62,7 @@ var amulets = {
 			"type": "Accessory",
 			"category": "Amulet",
 			"weight": 35,
+			"points": 25,
 			"value": {
 				"binds": "Equipment"
 			},
@@ -72,6 +77,7 @@ var amulets = {
 			"type": "Accessory",
 			"category": "Amulet",
 			"weight": 35,
+			"points": 25,
 			"value": {
 				"binds": "Equipment"
 			},
@@ -88,6 +94,7 @@ var amulets = {
 			"type": "Accessory",
 			"category": "Amulet",
 			"weight": 35,
+			"points": 75,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -103,6 +110,7 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
+			"points": 100,
 			"enchantable": false,
 			"stackable": true
 		},
@@ -115,6 +123,7 @@ var amulets = {
 			"category": "Amulet",
 			"weight": 35,
 			"value": null,
+			"points": 100,
 			"enchantable": false,
 			"stackable": true
 		}

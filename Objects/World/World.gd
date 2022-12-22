@@ -4,6 +4,7 @@ class_name WorldManagement
 onready var player = preload("res://Objects/Player/Player.tscn").instance()
 
 enum gameState {
+	GAME_OVER
 	OUT_OF_PLAYERS_HANDS
 	GAME
 	INVENTORY
@@ -112,14 +113,15 @@ func setUpGameObjects(_playerData = null):
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("cloak of displacement", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("gauntlets of balance", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("cloak of displacement", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("gauntlets of balance", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("gauntlets of balance", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("bag of weight", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("bag of holding", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("bag of holding", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
-#		$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("Eario of Thunder", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("Luirio of adjacent", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("Heario of true", null, 1, true, { "alignment": "uncursed" })
@@ -297,6 +299,18 @@ func _input(_event):
 				saveGame()
 			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
 				keepMoving = true
+			elif Input.is_action_just_pressed("takedmg") and currentGameState == gameState.GAME:
+				$Critters/"0".takeDamage([
+					{
+						"dmg": [9999, 99999],
+						"bonusDmg": {},
+						"armorPen": 0,
+						"magicDmg": {
+							"dmg": [0,0],
+							"element": null
+						}
+					}
+				], _playerTile, "God")
 		updateUI()
 
 func processGameTurn(_playerTile = null, _tileToMoveTo = null):
@@ -307,9 +321,9 @@ func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	processEnemyActions()
 	processEffects()
 	processCrittersSpawnStatus()
-#	checkIfGameOver()
 	drawLevel()
 	updateTiles()
+	updateStats()
 
 func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
 	for _turn in $Critters/"0".turnsUntilAction:
@@ -317,9 +331,9 @@ func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
 		processEnemyActions()
 		processEffects()
 		processCrittersSpawnStatus()
-#		checkIfGameOver()
 		drawLevel()
 		updateTiles()
+		updateStats()
 
 func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
 	for _turn in _turnAmount:
@@ -327,9 +341,9 @@ func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
 		var _isPlayerHit = processEnemyActions()
 		processEffects()
 		processCrittersSpawnStatus()
-#		checkIfGameOver()
 		drawLevel()
 		updateTiles()
+		updateStats()
 		if _isPlayerHit:
 			return false
 	return true
@@ -484,6 +498,9 @@ func drawCrittersAndItems():
 
 func updateUI():
 	$"Critters/0".updatePlayerStats()
+
+func updateStats():
+	GlobalGameStats.gameStats["Turn count"] += 1
 
 func keepMovingLoop(_playerTile, _tileToMoveTo):
 	var _currentTile = _playerTile

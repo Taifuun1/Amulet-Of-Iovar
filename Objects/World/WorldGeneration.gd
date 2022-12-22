@@ -27,9 +27,9 @@ onready var fortressEntrance = preload("res://Level Generation/WFC Generation/Fo
 onready var fortress = preload("res://Level Generation/WFC Generation/Fortress/Fortress.tscn")
 onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
 
-#####################
+######################
 ### Premade levels ###
-#####################
+######################
 onready var banditCompound1 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound1.tscn")
 onready var banditCompound2 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound2.tscn")
 onready var banditWarcamp1 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp1.tscn")
@@ -45,6 +45,10 @@ onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels
 onready var iovarsLair1 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair1.tscn")
 onready var iovarsLair2 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair2.tscn")
 onready var church = preload("res://Level Generation/Premade Levels/Church/Church.tscn")
+
+##################################
+### Dungeon generation threads ###
+##################################
 
 var threadDungeon1
 var threadDungeon2

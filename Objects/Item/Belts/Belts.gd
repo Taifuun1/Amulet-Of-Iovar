@@ -13,8 +13,7 @@ var belt = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		}
 	],
 	"uncommon": [
@@ -31,8 +30,7 @@ var belt = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		}
 	],
 	"legendary": [
@@ -48,9 +46,9 @@ var belt = {
 				"ac": 7,
 				"resistance": null
 			},
+			"points": 50,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Belt of Faith",
@@ -64,9 +62,9 @@ var belt = {
 				"ac": 7,
 				"resistance": null
 			},
+			"points": 50,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Belt of Symmetry",
@@ -80,9 +78,9 @@ var belt = {
 				"ac": 7,
 				"resistance": null
 			},
+			"points": 50,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		}
 	]
 }

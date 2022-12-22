@@ -13,8 +13,7 @@ var gauntlets = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		}
 	],
 	"uncommon": [
@@ -31,8 +30,7 @@ var gauntlets = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		}
 	],
 	"legendary": [
@@ -48,9 +46,9 @@ var gauntlets = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
+			"points": 75,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Gauntlets of Nimbleness",
@@ -64,9 +62,9 @@ var gauntlets = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
+			"points": 75,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Gauntlets of Balance",
@@ -80,9 +78,9 @@ var gauntlets = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
+			"points": 75,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Gehennors gauntlets",
@@ -96,9 +94,9 @@ var gauntlets = {
 				"ac": 7,
 				"resistance": null
 			},
+			"points": 250,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		}
 	]
 }

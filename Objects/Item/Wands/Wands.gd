@@ -390,6 +390,7 @@ var wands = {
 			"value": {
 				"charges": [4, 8]
 			},
+			"points": 150,
 			"enchantable": false,
 			"stackable": false,
 			"rarity": "Legendary"

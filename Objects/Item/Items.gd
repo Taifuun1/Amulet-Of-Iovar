@@ -48,6 +48,11 @@ func create():
 	items["wand"] = wands.wands
 	items["weapon"] = weapons.weapons
 	
+	for _type in items:
+		for _rarity in items[_type]:
+			for _index in items[_type][_rarity].size():
+				items[_type][_rarity][_index].rarity = _rarity
+	
 	miscellaneousItems = miscellaneous.miscellaneous
 	
 	getRandomizedItemsByRarity()

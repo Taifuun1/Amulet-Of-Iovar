@@ -289,6 +289,7 @@ var armor = {
 				"ac": 12,
 				"resistance": "Frost"
 			},
+			"points": 500,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -304,6 +305,7 @@ var armor = {
 				"ac": 12,
 				"resistance": "Gleeie'er"
 			},
+			"points": 500,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -319,6 +321,7 @@ var armor = {
 				"ac": 12,
 				"resistance": "Flier"
 			},
+			"points": 500,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -334,6 +337,7 @@ var armor = {
 				"ac": 12,
 				"resistance": "Thunder"
 			},
+			"points": 500,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -349,6 +353,7 @@ var armor = {
 				"ac": 12,
 				"resistance": "Toxix"
 			},
+			"points": 500,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -364,6 +369,7 @@ var armor = {
 				"ac": 15,
 				"resistance": null
 			},
+			"points": 750,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -379,6 +385,7 @@ var armor = {
 				"ac": 10,
 				"resistance": "Flier"
 			},
+			"points": 400,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -394,6 +401,7 @@ var armor = {
 				"ac": 10,
 				"resistance": "Frost"
 			},
+			"points": 400,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -409,6 +417,7 @@ var armor = {
 				"ac": 10,
 				"resistance": "Thunder"
 			},
+			"points": 400,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -424,6 +433,7 @@ var armor = {
 				"ac": 10,
 				"resistance": "Gleeie'er"
 			},
+			"points": 400,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -439,6 +449,7 @@ var armor = {
 				"ac": 10,
 				"resistance": "Toxix"
 			},
+			"points": 400,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -454,6 +465,7 @@ var armor = {
 				"ac": 4,
 				"resistance": null
 			},
+			"points": 350,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -469,6 +481,7 @@ var armor = {
 				"ac": 4,
 				"resistance": null
 			},
+			"points": 350,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -484,6 +497,7 @@ var armor = {
 				"ac": 5,
 				"resistance": null
 			},
+			"points": 350,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -499,6 +513,7 @@ var armor = {
 				"ac": 7,
 				"resistance": "Flier"
 			},
+			"points": 400,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -514,6 +529,7 @@ var armor = {
 #				"ac": 7,
 #				"resistance": "Flier"
 #			},
+#			"points": 400,
 #			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Artefact"
@@ -530,6 +546,7 @@ var armor = {
 				"ac": 6,
 				"resistance": null
 			},
+			"points": 750,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -546,6 +563,7 @@ var armor = {
 				"ac": 4,
 				"resistance": null
 			},
+			"points": 400,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -561,6 +579,7 @@ var armor = {
 				"ac": 4,
 				"resistance": null
 			},
+			"points": 300,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -576,6 +595,7 @@ var armor = {
 				"ac": 4,
 				"resistance": null
 			},
+			"points": 300,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -591,6 +611,7 @@ var armor = {
 				"ac": 3,
 				"resistance": null
 			},
+			"points": 250,
 			"enchantable": true,
 			"stackable": false
 		},
@@ -606,6 +627,7 @@ var armor = {
 				"ac": 1,
 				"resistance": null
 			},
+			"points": 250,
 			"enchantable": true,
 			"stackable": false
 		}

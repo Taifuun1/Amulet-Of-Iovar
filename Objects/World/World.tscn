@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Objects/World/WorldGeneration.gd" type="Script" id=1]
 [ext_resource path="res://Objects/World/World.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://UI/Equipment/Equipment.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Game Stats/Game Stats.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/List Menu/List Menu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/Game Over Stats/Game Over Stats.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Interactable/Interactable.tscn" type="PackedScene" id=10]
 [ext_resource path="res://UI/Debug Menu/Debug Menu.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Miscellaneous/Theme.tres" type="Theme" id=12]
@@ -70,6 +71,9 @@ visible = false
 visible = false
 
 [node name="Container" parent="UI/UITheme" instance=ExtResource( 15 )]
+visible = false
+
+[node name="Game Over Stats" parent="UI/UITheme" instance=ExtResource( 9 )]
 visible = false
 
 [node name="DialogMenu" parent="UI/UITheme" instance=ExtResource( 14 )]

@@ -294,11 +294,20 @@ func takeDamage(_attacks, _critterTile, _crittername):
 				if _damage.magicDmg != 0:
 					hp -= _damage.magicDmg
 					_attacksLog.append(" ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
-				
+			
+			# Damage taken game stats
+			if _damageText > GlobalGameStats.gameStats["Highest damage taken"]:
+				GlobalGameStats.gameStats["Highest damage taken"] = _damageText
+			GlobalGameStats.gameStats["Damage taken"] += _damageText
 			
 			if hp <= 0:
-				_attacksLog.append("You die...")
-				break
+				var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
+				Globals.gameConsole.addLog(_attacksLogString)
+				Globals.gameConsole.addLog("You die...")
+				$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
+				$"/root/World/UI/UITheme/Game Over Stats".setValues("You die!", getGameOverStats())
+				$"/root/World/UI/UITheme/Game Over Stats".show()
+				return
 			
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
@@ -350,6 +359,14 @@ func dropItem(_playerTile, _item, _grid):
 		$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
 		_dropLog.append("You drop {item}.".format({ "item": _item.itemName }))
 		if _grid[_playerTile.x][_playerTile.y].interactable == Globals.interactables.ALTAR:
+			if (
+				_item.identifiedItemName.matchn("amulet of iovar") and
+				$"/root/World".level.dungeonLevelName.matchn("church") and
+				_playerTile == Vector2(53, 11)
+			):
+				$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
+				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats())
+				GlobalGameStats["Times ascended"] += 1
 			_item.identifyItem(false, true, false)
 			if _item.alignment.matchn("blessed"):
 				_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
@@ -711,6 +728,15 @@ func checkIfLightSourceIsTurnedOn():
 		):
 			return true
 	return false
+
+func getGameOverStats():
+	var _stats = {  }
+	
+	_stats.points = $"/root/World/Critters/0".inventory.getPoints()
+	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
+	_stats.inventoryItems = $"/root/World/Critters/0".inventory.getInventoryItems()
+	
+	return _stats
 
 func checkIfCritterHasEffect(_critter):
 	if _critter.critterName.matchn("floating eye"):

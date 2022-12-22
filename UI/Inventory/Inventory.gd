@@ -51,11 +51,61 @@ func getItemsOfType(_types, _category = null, _miscellaneousTypes = null):
 				_items.erase(_itemId)
 	return _items
 
-func checkIfItemInInventoryByName(_itemName):
-	for _itemId in inventory:
-		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn(_itemName):
-			return true
-	return false
+func getPoints():
+	var _points = {  }
+	var _totalPoints = 0
+	for _item in inventory:
+		var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
+		if _itemNode.container != null:
+			for _containerItem in _itemNode.container:
+				var _containerItemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _containerItem }))
+				if _containerItemNode != null and _containerItemNode.points != null:
+					if _points.has(_containerItemNode.identifiedItemName):
+						_points[_containerItemNode.identifiedItemName] = {
+							"rarity": _itemNode.rarity,
+							"points": _points[_containerItemNode.identifiedItemName].points + _containerItemNode.points,
+							"amount": _points[_containerItemNode.identifiedItemName].amount + _containerItemNode.amount
+						}
+					else:
+						_points[_containerItemNode.identifiedItemName] = {
+							"rarity": _containerItemNode.rarity,
+							"points": _containerItemNode.points,
+							"amount": _containerItemNode.amount
+						}
+					_totalPoints += _containerItemNode.amount * _containerItemNode.points
+		if _itemNode.points != null:
+			if _points.has(_itemNode.identifiedItemName):
+				_points[_itemNode.identifiedItemName] = {
+					"rarity": _itemNode.rarity,
+					"points": _points[_itemNode.identifiedItemName].points + _itemNode.points,
+					"amount": _points[_itemNode.identifiedItemName].amount + _itemNode.amount
+				}
+			else:
+				_points[_itemNode.identifiedItemName] = {
+					"rarity": _itemNode.rarity,
+					"points": _itemNode.points,
+					"amount": _itemNode.amount
+				}
+			_totalPoints += _itemNode.amount * _itemNode.points
+	return {
+		"totalPoints": _totalPoints,
+		"points": _points
+	}
+
+func getInventoryItems():
+	var _inventoryItems = {  }
+	for _item in inventory:
+		var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
+		_inventoryItems[_itemNode.identifiedItemName] = { "item": {  } }
+		_inventoryItems[_itemNode.identifiedItemName].item.rarity = _itemNode.rarity
+		if _itemNode.container != null:
+			_inventoryItems[_itemNode.identifiedItemName].items = {  }
+			for _containerItem in _itemNode.container:
+				var _containerItemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _containerItem }))
+#				_inventoryItems[_containerItemNode.identifiedItemName].items[_containerItemNode.identifiedItemName] = {  }
+				_inventoryItems[_itemNode.identifiedItemName].items[_containerItemNode.identifiedItemName] = { "rarity": null }
+				_inventoryItems[_itemNode.identifiedItemName].items[_containerItemNode.identifiedItemName].rarity = _containerItemNode.rarity
+	return _inventoryItems
 
 func updateWeight():
 	currentWeight = 0
@@ -67,6 +117,12 @@ func updateWeight():
 			currentWeight += _item.weight
 	$"..".calculateWeightStats()
 	$"..".updatePlayerStats()
+
+func checkIfItemInInventoryByName(_itemName):
+	for _itemId in inventory:
+		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn(_itemName):
+			return true
+	return false
 
 func checkIfStackableItemInInventory(_item, _operation):
 	for _itemId in inventory:
