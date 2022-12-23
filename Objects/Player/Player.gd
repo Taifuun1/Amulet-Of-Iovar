@@ -729,15 +729,6 @@ func checkIfLightSourceIsTurnedOn():
 			return true
 	return false
 
-func getGameOverStats():
-	var _stats = {  }
-	
-	_stats.points = $"/root/World/Critters/0".inventory.getPoints()
-	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
-	_stats.inventoryItems = $"/root/World/Critters/0".inventory.getInventoryItems()
-	
-	return _stats
-
 func checkIfCritterHasEffect(_critter):
 	if _critter.critterName.matchn("floating eye"):
 		statusEffects.stun = 10
@@ -759,6 +750,16 @@ func checkSkillExperience():
 		elif skills[_skill].skillCap > skills[_skill].level and  skills[_skill].experience >= 1000 and skills[_skill].level == 2:
 			skills[_skill].level = 3
 			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
+
+func getGameOverStats():
+	var _stats = {  }
+	
+	_stats.points = $"/root/World/Critters/0".inventory.getPoints()
+	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
+	_stats.inventoryItems = $"/root/World/Critters/0".inventory.getInventoryItems()
+	_stats.gameStats = GlobalGameStats.getGameStats()
+	
+	return _stats
 
 func getCritterSaveData():
 	var _critterData = {

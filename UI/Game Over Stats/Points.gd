@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends ScrollContainer
 
 onready var RichTextLabelExtended = preload("res://UI/RichTextLabel Extended/RichTextLabel Extended.tscn")
 
@@ -15,10 +15,10 @@ func createPointItem(_itemName, _item):
 	
 	_pointsContainer.name = "PointsContainer%s" % [_pointItemCount]
 	_pointsContainer.set_h_size_flags(SIZE_EXPAND_FILL)
-	add_child(_pointsContainer)
-	get_node("PointsContainer%s" % [_pointItemCount]).add_child(_itemLabel)
-	get_node("PointsContainer%s" % [_pointItemCount]).add_child(_amountLabel)
-	get_node("PointsContainer%s" % [_pointItemCount]).add_child(_pointsLabel)
+	$"Points List".add_child(_pointsContainer)
+	get_node("Points List/PointsContainer%s" % [_pointItemCount]).add_child(_itemLabel)
+	get_node("Points List/PointsContainer%s" % [_pointItemCount]).add_child(_amountLabel)
+	get_node("Points List/PointsContainer%s" % [_pointItemCount]).add_child(_pointsLabel)
 	
 	_itemLabel.createRichTextLabel(_itemName, _item.rarity)
 	_amountLabel.createRichTextLabel(_item.amount, null, "center")

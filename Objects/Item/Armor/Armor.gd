@@ -258,23 +258,22 @@ var armor = {
 			},
 			"enchantable": true,
 			"stackable": false
+		},
+		{
+			"itemName": "Dwarvish chausses",
+			"unidentifiedItemName": "Blue chausses",
+			"texture": load("res://Assets/Armor/GreavesDwarvishChausses.png"),
+			"unidentifiedTexture": load("res://Assets/Armor/GreavesDwarvishChausses.png"),
+			"type": "Armor",
+			"category": "Greaves",
+			"weight": 75,
+			"value": {
+				"ac": 2,
+				"resistance": null
+			},
+			"enchantable": true,
+			"stackable": false
 		}
-#		{
-#			"itemName": "Adorned cloak",
-#			"unidentifiedItemName": "Adorned cloak",
-#			"texture": load("res://Assets/Armor/CloakAdornedCloak.png"),
-#			"unidentifiedTexture": load("res://Assets/Armor/CloakAdornedCloak.png"),
-#			"type": "Armor",
-#			"category": "Cloak",
-#			"weight": 75,
-#			"value": {
-#				"ac": 4,
-#				"resistance": null
-#			},
-#			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Rare"
-#		}
 	],
 	"legendary": [
 		{
@@ -438,7 +437,7 @@ var armor = {
 			"stackable": false
 		},
 		{
-			"itemName": "Bubbly mail",
+			"itemName": "Toxix mail",
 			"unidentifiedItemName": "Bubbly mail",
 			"texture": load("res://Assets/Armor/PlateBubblyMail.png"),
 			"unidentifiedTexture": load("res://Assets/Armor/PlateBubblyMail.png"),

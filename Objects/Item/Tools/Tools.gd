@@ -10,9 +10,7 @@ var tools = {
 			"weight": 25,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Lockpick",
@@ -24,9 +22,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Blindfold",
@@ -40,9 +36,7 @@ var tools = {
 				"worn": null
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Candle",
@@ -58,9 +52,7 @@ var tools = {
 				"value": 3
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Credit card",
@@ -72,9 +64,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Shovel",
@@ -86,9 +76,7 @@ var tools = {
 			"weight": 50,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"stackable": false
 		}
 #		{
 #			"itemName": "Fancy whistle",
@@ -99,9 +87,7 @@ var tools = {
 #			"category": null,
 #			"weight": 5,
 #			"value": null,
-#			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Common"
+#			"enchantable": true
 #		}
 	],
 	"uncommon": [
@@ -119,9 +105,7 @@ var tools = {
 				"value": 5
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Common",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Pickaxe",
@@ -133,9 +117,7 @@ var tools = {
 			"weight": 50,
 			"value": null,
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Marker",
@@ -147,9 +129,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Ink bottle",
@@ -163,9 +143,7 @@ var tools = {
 				"ink": [0, 31]
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Key",
@@ -177,9 +155,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Message in a bottle",
@@ -191,9 +167,7 @@ var tools = {
 			"weight": 25,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		}
 	],
 	"rare": [
@@ -208,9 +182,7 @@ var tools = {
 			"value": null,
 			"points": 500,
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Bag of weight",
@@ -224,9 +196,7 @@ var tools = {
 				"binds": "Inventory"
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Magic lamp",
@@ -243,9 +213,7 @@ var tools = {
 			},
 			"points": 250,
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": false
 		},
 		{
 			"itemName": "Tome of Knowledge",
@@ -258,9 +226,7 @@ var tools = {
 			"value": null,
 			"points": 250,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Magic marker",
@@ -272,9 +238,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Magic key",
@@ -286,9 +250,7 @@ var tools = {
 			"weight": 5,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": true
 		}
 	]
 }

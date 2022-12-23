@@ -2,9 +2,13 @@
 
 [ext_resource path="res://UI/Game Over Stats/Points.gd" type="Script" id=1]
 
-[node name="Points" type="VBoxContainer"]
+[node name="Points" type="ScrollContainer"]
 margin_right = 100.0
-margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
+
+[node name="Points List" type="VBoxContainer" parent="."]
+margin_right = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3

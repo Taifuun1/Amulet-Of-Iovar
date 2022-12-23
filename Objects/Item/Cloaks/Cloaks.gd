@@ -13,14 +13,13 @@ var cloak = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		}
 	],
 	"uncommon": [
 		{
 			"itemName": "Orc cloak",
-			"unidentifiedItemName": "Orc cloak",
+			"unidentifiedItemName": "Dark cloak",
 			"texture": load("res://Assets/Cloaks/CloakOrc.png"),
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakOrc.png"),
 			"type": "Armor",
@@ -35,7 +34,39 @@ var cloak = {
 			"rarity": "Uncommon"
 		},
 		{
-			"itemName": "Roman robe",
+			"itemName": "Elvish cloak",
+			"unidentifiedItemName": "Green cloak",
+			"texture": load("res://Assets/Cloaks/CloakElven.png"),
+			"unidentifiedTexture": load("res://Assets/Cloaks/CloakElven.png"),
+			"type": "Armor",
+			"category": "Cloak",
+			"weight": 75,
+			"value": {
+				"ac": 2,
+				"resistance": null
+			},
+			"enchantable": true,
+			"stackable": false,
+			"rarity": "Uncommon"
+		},
+		{
+			"itemName": "Dwarven cloak",
+			"unidentifiedItemName": "Blue cloak",
+			"texture": load("res://Assets/Cloaks/CloakDwarven.png"),
+			"unidentifiedTexture": load("res://Assets/Cloaks/CloakDwarven.png"),
+			"type": "Armor",
+			"category": "Cloak",
+			"weight": 75,
+			"value": {
+				"ac": 2,
+				"resistance": null
+			},
+			"enchantable": true,
+			"stackable": false,
+			"rarity": "Uncommon"
+		},
+		{
+			"itemName": "Toga",
 			"unidentifiedItemName": "Roman robe",
 			"texture": load("res://Assets/Cloaks/CloakRomanRobe.png"),
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakRomanRobe.png"),
@@ -47,8 +78,7 @@ var cloak = {
 				"resistance": null
 			},
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		}
 	],
 	"rare": [
@@ -66,8 +96,7 @@ var cloak = {
 			},
 			"points": 25,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		},
 		{
 			"itemName": "Cloak of magical ambiguity",
@@ -83,8 +112,7 @@ var cloak = {
 			},
 			"points": 25,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		}
 #		{
 #			"itemName": "Adorned cloak",
@@ -99,8 +127,7 @@ var cloak = {
 #				"resistance": null
 #			},
 #			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Rare"
+#			"stackable": false
 #		},
 #		{
 #			"itemName": "Cloak of invisibility",
@@ -115,8 +142,7 @@ var cloak = {
 #				"resistance": null
 #			},
 #			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Legendary"
+#			"stackable": false
 #		}
 	],
 	"legendary": [
@@ -134,8 +160,7 @@ var cloak = {
 			},
 			"points": 250,
 			"enchantable": true,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		}
 	]
 }

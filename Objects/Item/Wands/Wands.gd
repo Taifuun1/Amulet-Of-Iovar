@@ -12,8 +12,7 @@ var wands = {
 				"charges": [4, 8]
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of turn lock",
@@ -28,8 +27,7 @@ var wands = {
 				"distance": 3
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of digging",
@@ -48,8 +46,7 @@ var wands = {
 				}
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Common"
+			"stackable": false
 		}
 	],
 	"uncommon": [
@@ -105,8 +102,7 @@ var wands = {
 				}
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of Frost",
@@ -160,8 +156,7 @@ var wands = {
 				}
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of Fleir",
@@ -215,8 +210,7 @@ var wands = {
 				}
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of Thunder",
@@ -270,8 +264,7 @@ var wands = {
 				}
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of sleep",
@@ -286,8 +279,7 @@ var wands = {
 				"distance": 4
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of backwards magic sphere",
@@ -325,8 +317,7 @@ var wands = {
 				}
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Uncommon"
+			"stackable": false
 		}
 	],
 	"rare": [
@@ -343,8 +334,7 @@ var wands = {
 				"distance": 6
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Rare"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of item polymorph",
@@ -359,8 +349,7 @@ var wands = {
 				"distance": 5
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Rare"
+			"stackable": false
 		},
 		{
 			"itemName": "Wand of summon critter",
@@ -374,8 +363,7 @@ var wands = {
 				"charges": [4, 8]
 			},
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Rare"
+			"stackable": false
 		}
 	],
 	"legendary": [
@@ -392,8 +380,7 @@ var wands = {
 			},
 			"points": 150,
 			"enchantable": false,
-			"stackable": false,
-			"rarity": "Legendary"
+			"stackable": false
 		}
 	]
 }

@@ -12,9 +12,7 @@ var scrolls = {
 				"letters": 18
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Blank scroll",
@@ -28,9 +26,7 @@ var scrolls = {
 				"letters": 0
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of identify",
@@ -44,9 +40,7 @@ var scrolls = {
 				"letters": 6
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of create food",
@@ -60,9 +54,7 @@ var scrolls = {
 				"letters": 4
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of confusion",
@@ -76,9 +68,7 @@ var scrolls = {
 				"letters": 5
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		}
 	],
 	"uncommon": [
@@ -94,9 +84,7 @@ var scrolls = {
 				"letters": 18
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of enchant weapon",
@@ -110,9 +98,7 @@ var scrolls = {
 				"letters": 13
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of enchant armor",
@@ -126,9 +112,7 @@ var scrolls = {
 				"letters": 11
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of destroy armor",
@@ -142,9 +126,7 @@ var scrolls = {
 				"letters": 10
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of summon critter",
@@ -158,9 +140,7 @@ var scrolls = {
 				"letters": 8
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of create potion",
@@ -174,9 +154,7 @@ var scrolls = {
 				"letters": 8
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of teleport",
@@ -190,9 +168,7 @@ var scrolls = {
 				"letters": 6
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		}
 	],
 #	"rare": [
@@ -205,9 +181,7 @@ var scrolls = {
 #			"category": null,
 #			"value": null,
 #			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Rare",
-#			"identified": false
+#			"stackable": false
 #		},
 #		{
 #			"itemName": "Scroll of unholy scripture",
@@ -218,9 +192,7 @@ var scrolls = {
 #			"category": null,
 #			"value": null,
 #			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Rare",
-#			"identified": false
+#			"stackable": false
 #		}
 #	],
 	"rare": [
@@ -236,9 +208,7 @@ var scrolls = {
 				"letters": 34
 			},
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": true
 		}
 	]
 }

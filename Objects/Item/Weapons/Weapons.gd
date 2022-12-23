@@ -154,6 +154,48 @@ var weapons = {
 			"stackable": false
 		},
 		{
+			"itemName": "Elvish mace",
+			"unidentifiedItemName": "Green mace",
+			"texture": load("res://Assets/Weapons/MaceElvishMace.png"),
+			"unidentifiedTexture": load("res://Assets/Weapons/MaceElvishMace.png"),
+			"type": "Weapon",
+			"category": "Mace",
+			"weight": 25,
+			"value": {
+				"dmg": [5,6],
+				"d": 1,
+				"bonusDmg": {},
+				"armorPen": 2,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			},
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Dwarvish mace",
+			"unidentifiedItemName": "Blue mace",
+			"texture": load("res://Assets/Weapons/MaceDwarvishMace.png"),
+			"unidentifiedTexture": load("res://Assets/Weapons/MaceDwarvishMace.png"),
+			"type": "Weapon",
+			"category": "Mace",
+			"weight": 25,
+			"value": {
+				"dmg": [5,6],
+				"d": 1,
+				"bonusDmg": {},
+				"armorPen": 2,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			},
+			"enchantable": true,
+			"stackable": false
+		},
+		{
 			"itemName": "Dwarvish laysword",
 			"unidentifiedItemName": "Dwarvish laysword",
 			"texture": load("res://Assets/Weapons/SwordDwarvishLaysword.png"),

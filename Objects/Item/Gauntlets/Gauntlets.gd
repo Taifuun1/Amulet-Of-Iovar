@@ -18,6 +18,21 @@ var gauntlets = {
 	],
 	"uncommon": [
 		{
+			"itemName": "Studded gauntlets",
+			"unidentifiedItemName": "Grey gauntlets",
+			"texture": load("res://Assets/Gauntlets/GauntletsStuddedGauntlets.png"),
+			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsStuddedGauntlets.png"),
+			"type": "Armor",
+			"category": "Gauntlets",
+			"weight": 75,
+			"value": {
+				"ac": 2,
+				"resistance": null
+			},
+			"enchantable": true,
+			"stackable": false
+		},
+		{
 			"itemName": "Fabric gloves",
 			"unidentifiedItemName": "Fabric gloves",
 			"texture": load("res://Assets/Gauntlets/GauntletsFabricGloves.png"),
@@ -43,8 +58,8 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 3,
+				"resistance": null
 			},
 			"points": 75,
 			"enchantable": true,
@@ -59,8 +74,8 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 3,
+				"resistance": null
 			},
 			"points": 75,
 			"enchantable": true,
@@ -75,8 +90,8 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 75,
 			"value": {
-				"ac": 7,
-				"resistance": "Flier"
+				"ac": 3,
+				"resistance": null
 			},
 			"points": 75,
 			"enchantable": true,
@@ -91,7 +106,7 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 75,
 			"value": {
-				"ac": 7,
+				"ac": 4,
 				"resistance": null
 			},
 			"points": 250,

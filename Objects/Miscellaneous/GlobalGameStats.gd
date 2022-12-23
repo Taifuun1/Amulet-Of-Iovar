@@ -1,5 +1,13 @@
 extends Node
 
+func getGameStats():
+	var _gameStats = {
+		"gameStats": gameStats,
+		"critters": critters,
+	}
+	
+	return _gameStats
+
 var gameStats = {
 	"Turn count": 0,
 	"Times attacked": 0,

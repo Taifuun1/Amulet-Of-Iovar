@@ -12,8 +12,6 @@ func _ready():
 	colors.uncommon = "#1f7dc4"
 	colors.rare = "#b8c41f"
 	colors.legendary = "#e19f28"
-#	colors.blue = "#1f7dc4"
-#	colors.blue = "#1f7dc4"
 #	colors.ring = "#1fc437"
 
 func createRichTextLabel(_text, _color = null, _textAlignment = null):

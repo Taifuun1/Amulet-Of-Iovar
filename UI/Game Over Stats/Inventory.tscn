@@ -1,11 +1,11 @@
 [gd_scene format=2]
 
-[node name="Console Log" type="ScrollContainer"]
+[node name="Inventory" type="ScrollContainer"]
 margin_right = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Console Log List" type="VBoxContainer" parent="."]
+[node name="Inventory List" type="VBoxContainer" parent="."]
 margin_right = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

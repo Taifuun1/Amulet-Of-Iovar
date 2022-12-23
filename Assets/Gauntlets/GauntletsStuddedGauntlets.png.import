@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MaceElvishMace2.png-aa84e79049163ee36099c7da7f827442.stex"
+path="res://.import/GauntletsStuddedGauntlets.png-d7eb2673d43f76d79a55a3cbe2e4cf71.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Weapons/MaceElvishMace2.png"
-dest_files=[ "res://.import/MaceElvishMace2.png-aa84e79049163ee36099c7da7f827442.stex" ]
+source_file="res://Assets/Gauntlets/GauntletsStuddedGauntlets.png"
+dest_files=[ "res://.import/GauntletsStuddedGauntlets.png-d7eb2673d43f76d79a55a3cbe2e4cf71.stex" ]
 
 [params]
 

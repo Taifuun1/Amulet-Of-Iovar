@@ -487,6 +487,7 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 				despawn(_critterTile)
 				_didCritterDie = expDropAmount
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))
+				GlobalGameStats.critters[critterName].killCount += 1
 				break
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
