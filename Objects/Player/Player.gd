@@ -134,6 +134,9 @@ func create(_data = null):
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+#var armorSets = {
+#	"frost": {
+#		"allPieces": false,
 	
 	resistances = _playerData.resistances
 	

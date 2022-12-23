@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GreavesGreenPants.png-39606c745828da130e6e9d161807bfe9.stex"
+path="res://.import/GauntletsYellow.png-706cab0fa00f679c74783b94096ba91f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Armor/GreavesGreenPants.png"
-dest_files=[ "res://.import/GreavesGreenPants.png-39606c745828da130e6e9d161807bfe9.stex" ]
+source_file="res://Assets/Gauntlets/GauntletsYellow.png"
+dest_files=[ "res://.import/GauntletsYellow.png-706cab0fa00f679c74783b94096ba91f.stex" ]
 
 [params]
 

@@ -48,7 +48,7 @@ var gauntlets = {
 			"stackable": false
 		}
 	],
-	"legendary": [
+	"rare": [
 		{
 			"itemName": "Gauntlets of Devastation",
 			"unidentifiedItemName": null,
@@ -94,6 +94,40 @@ var gauntlets = {
 				"resistance": null
 			},
 			"points": 75,
+			"enchantable": true,
+			"stackable": false
+		}
+	],
+	"legendary": [
+		{
+			"itemName": "Garden gloves",
+			"unidentifiedItemName": "Garden gloves",
+			"texture": load("res://Assets/Gauntlets/GauntletsGardenGloves.png"),
+			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsGardenGloves.png"),
+			"type": "Armor",
+			"category": "Gauntlets",
+			"weight": 75,
+			"value": {
+				"ac": 4,
+				"resistance": null
+			},
+			"points": 250,
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Burning gauntlets",
+			"unidentifiedItemName": "Burning gauntlets",
+			"texture": load("res://Assets/Gauntlets/GauntletsBurningGauntlets.png"),
+			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsBurningGauntlets.png"),
+			"type": "Armor",
+			"category": "Gauntlets",
+			"weight": 75,
+			"value": {
+				"ac": 4,
+				"resistance": null
+			},
+			"points": 250,
 			"enchantable": true,
 			"stackable": false
 		},

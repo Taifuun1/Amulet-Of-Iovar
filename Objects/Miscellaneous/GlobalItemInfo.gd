@@ -69,16 +69,7 @@ var globalItemInfo = {
 	"Frozen mail": {
 		"identified": false
 	},
-	"Flaming mail": {
-		"identified": false
-	},
 	"Thunder mail": {
-		"identified": false
-	},
-	"Gleeie'er mail": {
-		"identified": false
-	},
-	"Bubbly mail": {
 		"identified": false
 	},
 	"Leather cap": {
@@ -96,10 +87,10 @@ var globalItemInfo = {
 	"Uiroel helmet": {
 		"identified": false
 	},
-	"Mossy helmet": {
+	"Winged helmet": {
 		"identified": false
 	},
-	"Winged helmet": {
+	"Mossy helmet": {
 		"identified": false
 	},
 	"Leather gloves": {
@@ -115,6 +106,12 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Gauntlets of Balance": {
+		"identified": false
+	},
+	"Burning gauntlets": {
+		"identified": false
+	},
+	"Garden gloves": {
 		"identified": false
 	},
 	"Gehennors gauntlets": {
@@ -135,28 +132,40 @@ var globalItemInfo = {
 	"Belt of Symmetry": {
 		"identified": false
 	},
+	"Slithery belt": {
+		"identified": false
+	},
 	"Leather cloak": {
 		"identified": false,
 	},
 	"Orc cloak": {
 		"identified": false,
 	},
-	"Roman robe": {
+	"Elven cloak": {
 		"identified": false,
 	},
-	"Adorned cloak": {
+	"Dwarven cloak": {
+		"identified": false,
+	},
+	"Roman robe": {
 		"identified": false,
 	},
 	"Cloak of displacement": {
 		"identified": false,
 	},
+	"Cloak of magical ambiguity": {
+		"identified": false,
+	},
+#	"Adorned cloak": {
+#		"identified": false,
+#	},
 #	"Cloak of invisibility": {
 #		"identified": false,
 #	},
 	"Alchemists robes": {
 		"identified": false,
 	},
-	"Cloak of magical ambiguity": {
+	"Fumy cloth": {
 		"identified": false,
 	},
 	"Battered buckler": {
@@ -180,6 +189,9 @@ var globalItemInfo = {
 	"Scale ring mail chausses": {
 		"identified": false,
 	},
+	"Dwarvish chausses": {
+		"identified": false,
+	},
 	"Thunder greaves": {
 		"identified": false,
 	},
@@ -199,6 +211,9 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Chilly boots": {
+		"identified": false
+	},
+	"Venom riders": {
 		"identified": false
 	},
 	"Cool Mikeys": {
@@ -519,6 +534,9 @@ var globalItemInfo = {
 	"Chipped sword": {
 		"identified": false
 	},
+	"Elvish sword": {
+		"identified": false
+	},
 	"Dwarvish laysword": {
 		"identified": false
 	},
@@ -532,6 +550,9 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Frostfury": {
+		"identified": false
+	},
+	"Thunderstruck": {
 		"identified": false
 	},
 	"Justice'eer sword": {
@@ -567,6 +588,12 @@ var globalItemInfo = {
 	"Glowing dagger": {
 		"identified": false
 	},
+	"Dwarvish dagger": {
+		"identified": false
+	},
+	"Elvish flail": {
+		"identified": false
+	},
 	"Krakag Orraig": {
 		"identified": false
 	},
@@ -574,6 +601,12 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Worn mace": {
+		"identified": false
+	},
+	"Elvish mace": {
+		"identified": false
+	},
+	"Dwarvish mace": {
 		"identified": false
 	},
 	"Morning star": {
@@ -598,6 +631,9 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Loperiels Destiny": {
+		"identified": false
+	},
+	"Star Love": {
 		"identified": false
 	}
 }

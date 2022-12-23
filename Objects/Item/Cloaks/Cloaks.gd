@@ -34,7 +34,7 @@ var cloak = {
 			"rarity": "Uncommon"
 		},
 		{
-			"itemName": "Elvish cloak",
+			"itemName": "Elven cloak",
 			"unidentifiedItemName": "Green cloak",
 			"texture": load("res://Assets/Cloaks/CloakElven.png"),
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakElven.png"),
@@ -151,6 +151,22 @@ var cloak = {
 			"unidentifiedItemName": "Alchemists robes",
 			"texture": load("res://Assets/Cloaks/CloakAlchemistsRobes.png"),
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakAlchemistsRobes.png"),
+			"type": "Armor",
+			"category": "Cloak",
+			"weight": 75,
+			"value": {
+				"ac": 7,
+				"resistance": null
+			},
+			"points": 250,
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Fumy cloth",
+			"unidentifiedItemName": "Green cloth",
+			"texture": load("res://Assets/Cloaks/CloakFumyCloth.png"),
+			"unidentifiedTexture": load("res://Assets/Cloaks/CloakFumyCloth.png"),
 			"type": "Armor",
 			"category": "Cloak",
 			"weight": 75,

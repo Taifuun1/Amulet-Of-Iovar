@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PlateGreenMail.png-13db9607772235bdbbc8e38efda6d15f.stex"
+path="res://.import/CloakFumyCloth.png-22d001ac964de5777b7a28b3362fe425.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Armor/PlateGreenMail.png"
-dest_files=[ "res://.import/PlateGreenMail.png-13db9607772235bdbbc8e38efda6d15f.stex" ]
+source_file="res://Assets/Cloaks/CloakFumyCloth.png"
+dest_files=[ "res://.import/CloakFumyCloth.png-22d001ac964de5777b7a28b3362fe425.stex" ]
 
 [params]
 

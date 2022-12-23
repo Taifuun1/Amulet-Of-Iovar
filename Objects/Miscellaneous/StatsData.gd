@@ -109,19 +109,7 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
-	"Flaming mail": {
-		"knowledge": false,
-		"description": ""
-	},
 	"Thunder mail": {
-		"knowledge": false,
-		"description": ""
-	},
-	"Gleeie'er mail": {
-		"knowledge": false,
-		"description": ""
-	},
-	"Bubbly mail": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -145,11 +133,11 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
-	"Mossy helmet": {
+	"Winged helmet": {
 		"knowledge": false,
 		"description": ""
 	},
-	"Winged helmet": {
+	"Mossy helmet": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -170,6 +158,14 @@ var items = {
 		"description": ""
 	},
 	"Gauntlets of Balance": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Burning gauntlets": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Garden gloves": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -197,6 +193,10 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
+	"Slithery belt": {
+		"knowledge": false,
+		"description": ""
+	},
 	"Leather cloak": {
 		"knowledge": false,
 		"description": ""
@@ -205,11 +205,15 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
-	"Roman robe": {
+	"Elven cloak": {
 		"knowledge": false,
 		"description": ""
 	},
-	"Adorned cloak": {
+	"Dwarven cloak": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Roman robe": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -217,7 +221,15 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
+	"Cloak of magical ambiguity": {
+		"knowledge": false,
+		"description": ""
+	},
 #	"Cloak of invisibility": {
+#		"knowledge": false,
+#		"description": ""
+#	},
+#	"Adorned cloak": {
 #		"knowledge": false,
 #		"description": ""
 #	},
@@ -225,7 +237,7 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
-	"Cloak of magical ambiguity": {
+	"Fumy cloth": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -254,6 +266,10 @@ var items = {
 		"description": ""
 	},
 	"Scale ring mail chausses": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Dwarvish chausses": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -286,6 +302,10 @@ var items = {
 		"description": ""
 	},
 	"Cool Mikeys": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Venom riders": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -597,6 +617,10 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
+	"Elvish sword": {
+		"knowledge": false,
+		"description": ""
+	},
 	"Dwarvish laysword": {
 		"knowledge": false,
 		"description": ""
@@ -614,6 +638,10 @@ var items = {
 		"description": ""
 	},
 	"Frostfury": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Thunderstruck": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -661,6 +689,10 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
+	"Dwarvish dagger": {
+		"knowledge": false,
+		"description": ""
+	},
 	"Krakag Orraig": {
 		"knowledge": false,
 		"description": ""
@@ -670,6 +702,14 @@ var items = {
 		"description": ""
 	},
 	"Worn mace": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Elvish mace": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Dwarvish mace": {
 		"knowledge": false,
 		"description": ""
 	},
@@ -697,11 +737,19 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
+	"Elvish flail": {
+		"knowledge": false,
+		"description": ""
+	},
 	"Crustel flail": {
 		"knowledge": false,
 		"description": ""
 	},
 	"Loperiels Destiny": {
+		"knowledge": false,
+		"description": ""
+	},
+	"Star Love": {
 		"knowledge": false,
 		"description": ""
 	}

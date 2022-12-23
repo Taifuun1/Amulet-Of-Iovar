@@ -103,7 +103,7 @@ var amulets = {
 	"legendary": [
 		{
 			"itemName": "Thunderous roar",
-			"unidentifiedItemName": "Thunderous roar",
+			"unidentifiedItemName": "Electric amulet",
 			"texture": load("res://Assets/Amulets/AmuletThunderousRoar.png"),
 			"unidentifiedTexture": load("res://Assets/Amulets/AmuletThunderousRoar.png"),
 			"type": "Accessory",
@@ -116,7 +116,7 @@ var amulets = {
 		},
 		{
 			"itemName": "Cold breeze",
-			"unidentifiedItemName": "Cold breeze",
+			"unidentifiedItemName": "Frozen amulet",
 			"texture": load("res://Assets/Amulets/AmuletColdBreeze.png"),
 			"unidentifiedTexture": load("res://Assets/Amulets/AmuletColdBreeze.png"),
 			"type": "Accessory",

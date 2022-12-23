@@ -33,7 +33,7 @@ var belt = {
 			"stackable": false
 		}
 	],
-	"legendary": [
+	"rare": [
 		{
 			"itemName": "Belt of Plato",
 			"unidentifiedItemName": null,
@@ -79,6 +79,24 @@ var belt = {
 				"resistance": null
 			},
 			"points": 50,
+			"enchantable": true,
+			"stackable": false
+		}
+	],
+	"legendary": [
+		{
+			"itemName": "Slithery belt",
+			"unidentifiedItemName": "Slippy belt",
+			"texture": load("res://Assets/Belts/BeltSlitheryBelt.png"),
+			"unidentifiedTexture": load("res://Assets/Cloaks/BeltSlitheryBelt.png"),
+			"type": "Armor",
+			"category": "Belt",
+			"weight": 75,
+			"value": {
+				"ac": 7,
+				"resistance": null
+			},
+			"points": 250,
 			"enchantable": true,
 			"stackable": false
 		}

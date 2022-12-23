@@ -10,9 +10,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Soda bottle",
@@ -24,9 +22,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Potion of confusion",
@@ -38,9 +34,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Potion of Toxix",
@@ -52,9 +46,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
+			"stackable": true
 		}
 	],
 	"uncommon": [
@@ -68,9 +60,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Potion of sleep",
@@ -82,9 +72,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Potion of blindness",
@@ -96,9 +84,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 #		{
 #			"itemName": "Potion of invisibility",
@@ -110,9 +96,7 @@ var potions = {
 #			"weight": 15,
 #			"value": null,
 #			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Uncommon",
-#			"identified": false
+#			"stackable": false
 #		},
 #		{
 #			"itemName": "Potion of levitation",
@@ -123,9 +107,7 @@ var potions = {
 #			"category": null,
 #			"value": null,
 #			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Uncommon",
-#			"identified": false
+#			"stackable": false
 #		},
 		{
 			"itemName": "Potion of paralysis",
@@ -137,9 +119,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Potion of hunger",
@@ -151,9 +131,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Uncommon",
-			"identified": false
+			"stackable": true
 		}
 	],
 	"rare": [
@@ -167,9 +145,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Potion of gain level",
@@ -181,9 +157,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Potion of up stat",
@@ -195,9 +169,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": true
 		},
 		{
 			"itemName": "Potion of down stat",
@@ -209,9 +181,7 @@ var potions = {
 			"weight": 15,
 			"value": null,
 			"enchantable": false,
-			"stackable": true,
-			"rarity": "Rare",
-			"identified": false
+			"stackable": true
 		},
 	]
 }

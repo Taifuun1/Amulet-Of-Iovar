@@ -2,7 +2,7 @@ extends Control
 
 var equipmentItem = load("res://UI/Equipment/Equipment Item.tscn")
 
-var equipmentUITemplatePaths = {
+const equipmentUITemplatePaths = {
 	"lefthand": "res://Assets/UI/EquipmentHand.png",
 	"righthand": "res://Assets/UI/EquipmentHand.png",
 	"amulet": "res://Assets/UI/EquipmentAmulet.png",
@@ -36,6 +36,48 @@ var equipment = {
 	"belt": null,
 	"greaves": null,
 	"boots": null
+}
+
+var armorSets = {
+	"frost": {
+		"allPieces": false,
+		"pieces": {
+			"Cold breeze": false,
+			"Frozen mail": false,
+			"Chilly boots": false
+		}
+	},
+	"fleir": {
+		"allPieces": false,
+		"pieces": {
+			"Burning gauntlets": false,
+			"Burning shield": false,
+			"Burning mail chausses": false
+		}
+	},
+	"thunder": {
+		"allPieces": false,
+		"pieces": {
+			"Thunderous roar": false,
+			"Thunder mail": false,
+			"Thunder greaves": false
+		}
+	},
+	"gleeie'er": {
+		"allPieces": false,
+		"pieces": {
+			"Mossy helmet": false,
+			"Garden gloves": false,
+			"Slithery belt": false
+		}
+	},
+	"toxix": {
+		"allPieces": false,
+		"pieces": {
+			"Fumy cloth": false,
+			"Venom riders": false
+		}
+	}
 }
 
 var hoveredEquipment = null
@@ -118,6 +160,7 @@ func _process(_delta):
 				panelStylebox.set_border_color(Color(1, 0, 0, 0))
 				get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
 			
+			checkArmorSetPieces()
 			$"/root/World/Critters/0".calculateEquipmentStats()
 			$"/root/World/Critters/0".checkAllIdentification(true)
 			if _changed:
@@ -206,12 +249,14 @@ func setEquipment(_id):
 		panelStylebox.set_border_width_all(1)
 		panelStylebox.set_border_color(Color(1, 0, 0))
 		get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
+	checkArmorSetPieces()
 	$"/root/World/Critters/0".calculateEquipmentStats()
 	$"/root/World/Critters/0".checkAllIdentification(true)
 	$"/root/World".processGameTurn()
 
 func takeOfEquipmentWhenDroppingItem(_id):
 	checkIfEquipmentNeedsToBeUnequipped(_id)
+	checkArmorSetPieces()
 	$"/root/World/Critters/0".calculateEquipmentStats()
 	$"/root/World/Critters/0".checkAllIdentification(true)
 
@@ -285,6 +330,28 @@ func getArmorClass():
 	if accessories["ring2"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).category.matchn("ring"):
 		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })))
 	return _ac
+
+func checkArmorSetPieces():
+	for _set in armorSets:
+		var _allArmorSetPiecesWorn = true
+		for _piece in armorSets[_set].pieces:
+			var _armorPieceWorn = false
+			armorSets[_set].pieces[_piece] = false
+			for _itemId in hands.values():
+				if get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
+					armorSets[_set].pieces[_piece] = true
+					_armorPieceWorn = true
+			for _itemId in accessories.values():
+				if get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
+					armorSets[_set].pieces[_piece] = true
+					_armorPieceWorn = true
+			for _itemId in equipment.values():
+				if get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
+					armorSets[_set].pieces[_piece] = true
+					_armorPieceWorn = true
+			if !_armorPieceWorn:
+				_allArmorSetPiecesWorn = false
+		armorSets[_set].allPieces = _allArmorSetPiecesWorn
 
 func checkIfRingIsRingOfProtection(_ring):
 	match _ring.identifiedItemName.to_lower():

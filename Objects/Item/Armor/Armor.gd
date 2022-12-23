@@ -373,24 +373,8 @@ var armor = {
 			"stackable": false
 		},
 		{
-			"itemName": "Flaming mail",
-			"unidentifiedItemName": "Flaming mail",
-			"texture": load("res://Assets/Armor/PlateFlamingMail.png"),
-			"unidentifiedTexture": load("res://Assets/Armor/PlateFlamingMail.png"),
-			"type": "Armor",
-			"category": "Plate",
-			"weight": 75,
-			"value": {
-				"ac": 10,
-				"resistance": "Flier"
-			},
-			"points": 400,
-			"enchantable": true,
-			"stackable": false
-		},
-		{
 			"itemName": "Frozen mail",
-			"unidentifiedItemName": "Frozen mail",
+			"unidentifiedItemName": "Icy mail",
 			"texture": load("res://Assets/Armor/PlateFrozenMail.png"),
 			"unidentifiedTexture": load("res://Assets/Armor/PlateFrozenMail.png"),
 			"type": "Armor",
@@ -415,38 +399,6 @@ var armor = {
 			"value": {
 				"ac": 10,
 				"resistance": "Thunder"
-			},
-			"points": 400,
-			"enchantable": true,
-			"stackable": false
-		},
-		{
-			"itemName": "Gleeie'er mail",
-			"unidentifiedItemName": "Brittle mail",
-			"texture": load("res://Assets/Armor/PlateBrittleMail.png"),
-			"unidentifiedTexture": load("res://Assets/Armor/PlateBrittleMail.png"),
-			"type": "Armor",
-			"category": "Plate",
-			"weight": 75,
-			"value": {
-				"ac": 10,
-				"resistance": "Gleeie'er"
-			},
-			"points": 400,
-			"enchantable": true,
-			"stackable": false
-		},
-		{
-			"itemName": "Toxix mail",
-			"unidentifiedItemName": "Bubbly mail",
-			"texture": load("res://Assets/Armor/PlateBubblyMail.png"),
-			"unidentifiedTexture": load("res://Assets/Armor/PlateBubblyMail.png"),
-			"type": "Armor",
-			"category": "Plate",
-			"weight": 75,
-			"value": {
-				"ac": 10,
-				"resistance": "Toxix"
 			},
 			"points": 400,
 			"enchantable": true,
@@ -568,7 +520,7 @@ var armor = {
 		},
 		{
 			"itemName": "Thunder greaves",
-			"unidentifiedItemName": "Thunder greaves",
+			"unidentifiedItemName": "Sizzly greaves",
 			"texture": load("res://Assets/Armor/GreavesThunderGreaves.png"),
 			"unidentifiedTexture": load("res://Assets/Armor/GreavesThunderGreaves.png"),
 			"type": "Armor",
@@ -600,7 +552,7 @@ var armor = {
 		},
 		{
 			"itemName": "Chilly boots",
-			"unidentifiedItemName": "Chilly boots",
+			"unidentifiedItemName": "Icy boots",
 			"texture": load("res://Assets/Armor/BootsChillyBoots.png"),
 			"unidentifiedTexture": load("res://Assets/Armor/BootsChillyBoots.png"),
 			"type": "Armor",
@@ -619,6 +571,22 @@ var armor = {
 			"unidentifiedItemName": "Slick boots",
 			"texture": load("res://Assets/Armor/BootsCoolMikeys.png"),
 			"unidentifiedTexture": load("res://Assets/Armor/BootsCoolMikeys.png"),
+			"type": "Armor",
+			"category": "Boots",
+			"weight": 75,
+			"value": {
+				"ac": 1,
+				"resistance": null
+			},
+			"points": 250,
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Venom riders",
+			"unidentifiedItemName": "Green boots",
+			"texture": load("res://Assets/Armor/BootsVenomRiders.png"),
+			"unidentifiedTexture": load("res://Assets/Armor/BootsVenomRiders.png"),
 			"type": "Armor",
 			"category": "Boots",
 			"weight": 75,
