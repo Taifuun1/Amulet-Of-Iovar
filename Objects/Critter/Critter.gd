@@ -314,6 +314,13 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_level.addPointToWeightedPathding(_tileToMoveTo)
 								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
 									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
+								if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:
+#									if critterClass.matchn("archeologist") and randi() % 2:
+#										$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, randi() % 4 + 1, false, { "alignment": "Uncursed" })
+#										Globals.gameConsole.addLog("You find several gems in the wall!")
+									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "alignment": "Uncursed" })
+									Globals.gameConsole.addLog("The {critterName} finds a gem in the wall.".format({ "critterName": critterName }))
+									_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable = null
 							if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP:
 								_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
 								_level.addPointToEnemyPathding(_tileToMoveTo)
@@ -321,6 +328,13 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_level.addPointToWeightedPathding(_tileToMoveTo)
 								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
 									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
+								if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:
+#									if critterClass.matchn("archeologist") and randi() % 2:
+#										$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, randi() % 4 + 1, false, { "alignment": "Uncursed" })
+#										Globals.gameConsole.addLog("You find several gems in the wall!")
+									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "alignment": "Uncursed" })
+									Globals.gameConsole.addLog("The {critterName} finds a gem in the wall.".format({ "critterName": critterName }))
+									_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable = null
 						"mimicBox":
 							return false
 						"mimicChest":
@@ -338,7 +352,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				_moveCritterTo = _randomOpenTiles[0]
 			else:
 				aI.getNeutralCritterMove()
-			Globals.gameConsole.addLog("{critterName} blindly stumbles!".format({ "critterName": critterName.capitalize() }))
+			Globals.gameConsole.addLog("{critterName} blindly stumbles!".format({ "critterName": critterName }))
 		
 		# Confused check
 		if statusEffects["confusion"] > 0 and randi() % 3 == 0:
@@ -371,18 +385,18 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					_pickedAbility.abilityName.matchn("frostSelfdestruct") or
 					_pickedAbility.abilityName.matchn("thunderSelfdestruct")
 				):
-					Globals.gameConsole.addLog("{critterName} {spell}s!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
+					Globals.gameConsole.addLog("{critterName} {spell}s!".format({ "critterName": critterName, "spell": _pickedAbility.data.name }))
 					despawn(_critterTile, false)
 				elif _pickedAbility.abilityName.matchn("lifesteal"):
 					if hp + 2 <= maxhp:
 						hp += 2
 					else:
 						hp = maxhp
-					Globals.gameConsole.addLog("{critterName} steals your life-energy!".format({ "critterName": critterName.capitalize() }))
+					Globals.gameConsole.addLog("{critterName} steals your life-energy!".format({ "critterName": critterName }))
 				elif _pickedAbility.abilityName.matchn("ghostTouch"):
 					if !checkIfStatusEffectIsPermanent("fumbling"):
 						statusEffects.fumbling = 3
-					Globals.gameConsole.addLog("{critterName} touches you. The cold makes you shiver shiver!".format({ "critterName": critterName.capitalize() }))
+					Globals.gameConsole.addLog("{critterName} touches you. The cold makes you shiver shiver!".format({ "critterName": critterName }))
 			elif (
 				abilityHits.size() != 0 and
 				abilityHits[currentCritterAbilityHit] == 1 and
@@ -399,7 +413,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					return false
 				$"/root/World/Critters/0".takeDamage(attacks, _moveCritterTo, critterName)
 			else:
-				Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName.capitalize() }))
+				Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName }))
 				return false
 			return true
 		# Movement check
@@ -415,7 +429,16 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 	var _attacksLog = []
 	if _attacks.size() != 0:
 		for _attack in _attacks:
-			var _damage = calculateDmg(_attack)
+			# Armor sets
+			var _activeArmorSets = {
+				"frost": $"/root/World/UI/UITheme/Equipment".armorSets.frost.allPieces,
+				"fleir": $"/root/World/UI/UITheme/Equipment".armorSets.fleir.allPieces,
+				"thunder": $"/root/World/UI/UITheme/Equipment".armorSets.thunder.allPieces,
+				"gleeie'er": $"/root/World/UI/UITheme/Equipment".armorSets["gleeie'er"].allPieces,
+				"toxix": $"/root/World/UI/UITheme/Equipment".armorSets.toxix.allPieces
+			}
+			
+			var _damage = calculateDmg(_attack, _activeArmorSets)
 			var _attackLog = ""
 			var _isPhysicalHit = true
 			
@@ -458,6 +481,23 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 				if _damage.magicDmg != 0:
 					hp -= _damage.magicDmg
 					_attackLog += " ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
+				
+				# Armor set effects
+				if _activeArmorSets.frost and !checkIfStatusEffectIsInEffect("stun"):
+					statusEffects.stun = 2
+					_attackLog += " {critterName} is stunned from your frozen armor!".format({ "critterName":critterName })
+				if _activeArmorSets.fleir and !checkIfStatusEffectIsPermanent("onFleir"):
+					statusEffects.onFleir += 2
+					_attackLog += " {critterName} is on fleir from your burning armor!".format({ "critterName":critterName })
+				if _activeArmorSets.thunder and !checkIfStatusEffectIsInEffect("stun"):
+					statusEffects.stun = 1
+					_attackLog += " Bolt of lighting summoned by your armor stuns the {critterName}!".format({ "critterName":critterName })
+				if _activeArmorSets["gleeie'er"] and !checkIfStatusEffectIsInEffect("confusion"):
+					statusEffects.confusion = 5
+					_attackLog += " {critterName} is confused by your flamboyant armor!".format({ "critterName":critterName })
+				if _activeArmorSets.toxix and !checkIfStatusEffectIsPermanent("toxix"):
+					statusEffects.toxix += 4
+					_attackLog += " {critterName} is poisoned by your slick armor!".format({ "critterName":critterName })
 			
 			var _damageNumber = damageNumber.instance()
 			var _damageText

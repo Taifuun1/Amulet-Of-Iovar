@@ -66,7 +66,7 @@ var generationDone = false
 var inGame = false
 var currentGameState = gameState.GAME
 var keepMoving = false
-var totalLevelCount = 0
+var totalLevelCount = 1
 
 func _process(_delta):
 	if inGame:
@@ -112,35 +112,34 @@ func setUpGameObjects(_playerData = null):
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-		$Items/Items.createItem("cloak of displacement", null, 1, true, { "alignment": "uncursed" })
-		$Items/Items.createItem("gauntlets of balance", null, 1, true, { "alignment": "uncursed" })
-		$Items/Items.createItem("gauntlets of balance", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("bag of weight", null, 1, true, { "alignment": "blessed" })
 		$Items/Items.createItem("bag of holding", null, 1, true, { "alignment": "uncursed" })
-		$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
 		$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("Eario of Thunder", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("Luirio of adjacent", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("Heario of true", null, 1, true, { "alignment": "uncursed" })
-	#	$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
-	#	$Items/Items.createItem("ring of protection", null, 1, true, { "alignment": "uncursed" })
-	#	$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
-	#	$Items/Items.createItem("key", null, 1, true, { "alignment": "uncursed" })
-	#	$Items/Items.createItem("wand of summon critter", null, 1, true, { "alignment": "uncursed" })
-	#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
-	#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
-	#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
-	#	$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
-	#	$Items/Items.createItem("dwarvish laysword", null, 1, true, { "alignment": "uncursed" })
-	#	$Items/Items.createItem("eario of toxix", null, 1, true)
-	#	$Items/Items.createItem("eario of fleir", null, 1, true)
-	#	$Items/Items.createItem("eario of frost", null, 1, true)
-	#	$Items/Items.createItem("luirio of cone", null, 1, true)
-	#	$Items/Items.createItem("luirio of point", null, 1, true)
-	#	$Items/Items.createItem("heario of flow", null, 1, true)
+#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
+		$Items/Items.createItem("burning shield", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("burning gauntlets", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("burning mail chausses", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("key", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("wand of summon critter", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
+#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
+#		$Items/Items.createItem("dwarvish laysword", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("eario of toxix", null, 1, true)
+#		$Items/Items.createItem("eario of fleir", null, 1, true)
+#		$Items/Items.createItem("eario of frost", null, 1, true)
+#		$Items/Items.createItem("luirio of cone", null, 1, true)
+#		$Items/Items.createItem("luirio of point", null, 1, true)
+#		$Items/Items.createItem("heario of flow", null, 1, true)
 	
 	for _node in $UI/UITheme.get_children():
 		if _node.name == "GameConsole":

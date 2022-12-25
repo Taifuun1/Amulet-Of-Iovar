@@ -104,8 +104,6 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 			var charges 
 			if typeof(_item.value.charges) != TYPE_ARRAY and _item.value.charges == -1:
 				charges = -1
-			elif typeof(_item.value.charges) != TYPE_INT:
-				charges = _item.value.charges
 			else:
 				charges = randi() % _item.value.charges[1] + _item.value.charges[0]
 			if _item.value.has("turnedOn"):
@@ -321,12 +319,11 @@ func checkItemIdentification():
 	if GlobalItemInfo.globalItemInfo.has(identifiedItemName) and GlobalItemInfo.globalItemInfo[identifiedItemName].identified == true:
 		itemName = identifiedItemName
 		$ItemSprite.texture = itemTexture
-		notIdentified.alignment = true
-		notIdentified.enchantment = true
 
 func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 	if _identifyName:
 		itemName = identifiedItemName
+		$ItemSprite.texture = itemTexture
 	if _identifyAlignment:
 		notIdentified.alignment = true
 	if _identifyEnchantment:

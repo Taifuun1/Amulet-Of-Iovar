@@ -134,9 +134,6 @@ func create(_data = null):
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-#var armorSets = {
-#	"frost": {
-#		"allPieces": false,
 	
 	resistances = _playerData.resistances
 	
@@ -194,9 +191,9 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 				):
 					skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
 				else:
-					if $"/root/World/UI/UITheme/Equipment".hands.lefthand != null:
+					if $"/root/World/UI/UITheme/Equipment".hands.lefthand != null and !get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.matchn("shield"):
 						skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
-					if $"/root/World/UI/UITheme/Equipment".hands.righthand != null:
+					if $"/root/World/UI/UITheme/Equipment".hands.righthand != null and !get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.righthand })).category.matchn("shield"):
 						skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.righthand })).category.to_lower()].experience += 1
 			else:
 				Globals.gameConsole.addLog("You miss!")
@@ -302,16 +299,6 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			if _damageText > GlobalGameStats.gameStats["Highest damage taken"]:
 				GlobalGameStats.gameStats["Highest damage taken"] = _damageText
 			GlobalGameStats.gameStats["Damage taken"] += _damageText
-			
-			if hp <= 0:
-				var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
-				Globals.gameConsole.addLog(_attacksLogString)
-				Globals.gameConsole.addLog("You die...")
-				$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
-				$"/root/World/UI/UITheme/Game Over Stats".setValues("You die!", getGameOverStats())
-				$"/root/World/UI/UITheme/Game Over Stats".show()
-				return
-			
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
 	else:
@@ -403,7 +390,6 @@ func processPlayerSpecificEffects():
 	############
 	## Hunger ##
 	############
-	previousCalories = calories
 	if calories > -50:
 		if checkIfStatusEffectIsInEffect("fast digestion"):
 			calories -= 3
@@ -413,17 +399,17 @@ func processPlayerSpecificEffects():
 			calories -= 2
 	
 	# Check if player becomes less hungry
-	if previousCalories <= 800 and calories > 800:
+	if previousCalories < 800 and calories >= 800:
 		Globals.gameConsole.addLog("You are no longer hungry.")
-	elif previousCalories <= 400 and calories > 400 and calories < 800:
+	elif previousCalories < 400 and calories >= 400 and calories < 800:
 		Globals.gameConsole.addLog("You only feel hungry.")
-	elif previousCalories <= 200 and calories > 200 and calories < 400:
+	elif previousCalories < 200 and calories >= 200 and calories < 400:
 		Globals.gameConsole.addLog("You are still very hungry.")
 	
 	# Check if player becomes more hungry
-	if previousCalories >= 800 and calories < 800 and calories > 400:
+	if previousCalories >= 800 and calories < 800 and calories >= 400:
 		Globals.gameConsole.addLog("You are beginning to feel hungry.")
-	elif previousCalories >= 400 and calories < 400 and calories > 200:
+	elif previousCalories >= 400 and calories < 400 and calories >= 200:
 		Globals.gameConsole.addLog("You feel very hungry.")
 	elif previousCalories >= 200 and calories < 200 and calories > 0:
 		Globals.gameConsole.addLog("You are starving!")
@@ -431,6 +417,8 @@ func processPlayerSpecificEffects():
 		hp -= 2
 		if previousCalories > 0:
 			Globals.gameConsole.addLog("You are famished!")
+	
+	previousCalories = calories
 	
 	############
 	## Weight ##
@@ -521,6 +509,12 @@ func processPlayerSpecificEffects():
 			"magic lamp":
 				if playerVisibility.distance != 0:
 					playerVisibility.distance = _item.value.value
+	
+	if hp <= 0:
+		Globals.gameConsole.addLog("You die...")
+		$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
+		$"/root/World/UI/UITheme/Game Over Stats".setValues("You die!", getGameOverStats())
+		$"/root/World/UI/UITheme/Game Over Stats".show()
 
 func calculateWeightStats():
 	maxCarryWeight = {
@@ -610,16 +604,16 @@ func addExp(_expAmount):
 func gainLevel():
 	level += 1
 	
-	maxhp += hpIncrease + (stats.balance / 5)
-	maxmp += mpIncrease + (stats.wisdom / 5)
-	if hp + hpIncrease + (stats.balance / 5) >= maxhp:
+	maxhp += hpIncrease + int(stats.balance / 5)
+	maxmp += mpIncrease + int(stats.wisdom / 5)
+	if hp + hpIncrease + int(stats.balance / 5) >= maxhp:
 		hp = maxhp
 	else:
-		hp += hpIncrease + (stats.balance / 5)
-	if mp + mpIncrease + (stats.wisdom / 5) >= maxmp:
+		hp += hpIncrease + int(stats.balance / 5)
+	if mp + mpIncrease + int(stats.wisdom / 5) >= maxmp:
 		mp = maxmp
 	else:
-		mp += mpIncrease + (stats.wisdom / 5)
+		mp += mpIncrease + int(stats.wisdom / 5)
 	stats.strength += strengthIncrease
 	stats.legerity += legerityIncrease
 	stats.balance += balanceIncrease
@@ -716,7 +710,7 @@ func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.SPIDER_WEB:
 		Globals.gameConsole.addLog("You're stuck in the spider web!")
 
-func checkAllIdentification(_items = false, _critters = null):
+func checkAllIdentification(_items = false, _critters = false):
 	if _items:
 		$"/root/World/Items/Items".checkAllItemsIdentification()
 	if _critters:

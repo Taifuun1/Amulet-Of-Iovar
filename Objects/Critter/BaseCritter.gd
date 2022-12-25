@@ -56,7 +56,8 @@ var statusEffects = {
 	"seeing": 0,
 	"toxix": 0,
 	"backscattering": 0,
-	"displacement": 0
+	"displacement": 0,
+	"onFleir": 0
 }
 
 var statusStates = {
@@ -81,7 +82,7 @@ func moveCritter(_moveFrom, _moveTo, _movingCritter, _level, _movedCritter = nul
 ### Damage calculation function ###
 ####################################
 
-func calculateDmg(_attack):
+func calculateDmg(_attack, _activeArmorSets = null):
 	var damage = {
 		"dmg": [0,0],
 		"magicDmg": 0
@@ -114,6 +115,8 @@ func calculateDmg(_attack):
 			_magicDmg = _magicFloorDmg
 		else:
 			_magicDmg = randi() % int(_magicDmgVariation) + _magicFloorDmg
+		if _activeArmorSets != null and _activeArmorSets.has(_attack.magicDmg.element) and _activeArmorSets[_attack.magicDmg.element]:
+			_magicDmg += 3
 		if _attack.magicDmg.element != null and resistances.has(_attack.magicDmg.element.to_lower()):
 			_magicDmg /= 2
 		damage.magicDmg = _magicDmg
@@ -136,8 +139,16 @@ func processCritterEffects():
 					statusEffects.backscattering = -1
 	
 	for _status in statusEffects.keys():
-		if statusEffects[_status] > 0:
-			if _status.matchn("confusion") or _status.matchn("fumbling"):
+		if statusEffects[_status] > 0 or statusEffects[_status] == -1:
+			if _status.matchn("toxix"):
+				var _toxixDmg = 1
+				hp -= _toxixDmg
+				Globals.gameConsole.addLog("{critterName} takes {dmg} toxix damage.".format({ "critterName": critterName, "dmg": _toxixDmg }))
+			elif _status.matchn("onfleir"):
+				var _fleirDmg = 2
+				hp -= _fleirDmg
+				Globals.gameConsole.addLog("{critterName} takes {dmg} fleir damage.".format({ "critterName": critterName, "dmg": _fleirDmg }))
+			elif _status.matchn("confusion") or _status.matchn("fumbling"):
 				if stats.balance > 30:
 					if statusEffects[_status] - 3 < 0:
 						statusEffects[_status] = 0

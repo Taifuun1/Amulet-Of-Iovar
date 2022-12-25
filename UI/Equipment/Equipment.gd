@@ -338,20 +338,31 @@ func checkArmorSetPieces():
 			var _armorPieceWorn = false
 			armorSets[_set].pieces[_piece] = false
 			for _itemId in hands.values():
-				if get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
+				if _itemId != null and get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
 					armorSets[_set].pieces[_piece] = true
 					_armorPieceWorn = true
 			for _itemId in accessories.values():
-				if get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
+				if _itemId != null and get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
 					armorSets[_set].pieces[_piece] = true
 					_armorPieceWorn = true
 			for _itemId in equipment.values():
-				if get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
+				if _itemId != null and get_node("/root/World/Items/{id}".format({ "id": _itemId })).identifiedItemName.matchn(_piece):
 					armorSets[_set].pieces[_piece] = true
 					_armorPieceWorn = true
 			if !_armorPieceWorn:
 				_allArmorSetPiecesWorn = false
 		armorSets[_set].allPieces = _allArmorSetPiecesWorn
+		if armorSets[_set].allPieces:
+			if _set.matchn("frost"):
+				Globals.gameConsole.addLog("The frozen armor steams with cold!")
+			if _set.matchn("fleir"):
+				Globals.gameConsole.addLog("The burning armor flares!")
+			if _set.matchn("thunder"):
+				Globals.gameConsole.addLog("The sizzly armor crackles!")
+			if _set.matchn("gleeie'er"):
+				Globals.gameConsole.addLog("The mossy armor looks livelier!")
+			if _set.matchn("toxix"):
+				Globals.gameConsole.addLog("The slithery armor fizzles aggressively!")
 
 func checkIfRingIsRingOfProtection(_ring):
 	match _ring.identifiedItemName.to_lower():

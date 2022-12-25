@@ -61,6 +61,12 @@ var toxixSplash = {
 
 ### On attack abilities
 
+var lifesteal = {
+	"name": "Lifesteal",
+	"distance": 0,
+	"mp": 1
+}
+
 var ghostTouch = {
 	"name": "Ghost touch",
 	"attacks": [

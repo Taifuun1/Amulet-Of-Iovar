@@ -137,7 +137,6 @@ func generateBuildings():
 	])
 	if rooms != null and rooms.size() > 0:
 		var _pickedRooms = []
-		var rooms = rooms.duplicate(true)
 		for _roomCount in randi() % 4 + 2:
 			_pickedRooms.append(rooms.pop_at(randi() % rooms.size()))
 		rooms = _pickedRooms

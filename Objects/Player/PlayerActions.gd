@@ -33,9 +33,7 @@ func readItem(_id):
 									GlobalItemInfo.globalItemInfo[_itemInInventory.identifiedItemName].identified == false
 								):
 									_identifiableItemsInInventory = true
-									GlobalItemInfo.globalItemInfo[_itemInInventory.identifiedItemName].identified = true
-									_itemInInventory.notIdentified.alignment = true
-									_itemInInventory.notIdentified.enchantment = true
+									_itemInInventory.identifyItem(true, true, true)
 									Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _itemInInventory.identifiedItemName, "unidentifiedItemName": _itemInInventory.unidentifiedItemName }))
 						else:
 							while true:
@@ -47,9 +45,7 @@ func readItem(_id):
 									GlobalItemInfo.globalItemInfo.has(_randomItemInInventory.identifiedItemName) and
 									GlobalItemInfo.globalItemInfo[_randomItemInInventory.identifiedItemName].identified == false
 								):
-									GlobalItemInfo.globalItemInfo[_randomItemInInventory.identifiedItemName].identified = true
-									_randomItemInInventory.notIdentified.alignment = true
-									_randomItemInInventory.notIdentified.enchantment = true
+									_randomItemInInventory.identifyItem(true, true, true)
 									Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _randomItemInInventory.identifiedItemName, "unidentifiedItemName": _randomItemInInventory.unidentifiedItemName }))
 									_identifiableItemsInInventory = true
 									break
@@ -63,8 +59,7 @@ func readItem(_id):
 									_itemInInventory.notIdentified.alignment or
 									_itemInInventory.notIdentified.enchantment
 								):
-									_itemInInventory.notIdentified.alignment = true
-									_itemInInventory.notIdentified.enchantment = true
+									_itemInInventory.identifyItem(true, true, true)
 									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _itemInInventory.itemName }))
 						else:
 							while true:
@@ -77,8 +72,7 @@ func readItem(_id):
 									_randomItemInInventory.notIdentified.alignment or
 									_randomItemInInventory.notIdentified.enchantment
 								):
-									_randomItemInInventory.notIdentified.alignment = true
-									_randomItemInInventory.notIdentified.enchantment = true
+									_randomItemInInventory.identifyItem(true, true, true)
 									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _randomItemInInventory.itemName }))
 									break
 								_items.erase(_item)

@@ -3,48 +3,43 @@ extends WorldManagement
 onready var critters = preload("res://Objects/Critter/Critters.tscn").instance()
 onready var items = preload("res://Objects/Item/Items.tscn").instance()
 
-##################################
-### Generic dungeon generation ###
-##################################
-onready var dungeon = preload("res://Level Generation/Generic Generation/Dungeon Levels/Dungeon.tscn")
-onready var beach = preload("res://Level Generation/Generic Generation/Beach/Beach.tscn")
-onready var vacationResort = preload("res://Level Generation/Generic Generation/Beach/VacationResort.tscn")
+#####################################
+### Dungeon generation node paths ###
+#####################################
 
-######################
-### WFC Generation ###
-######################
-onready var minesOfTidoh = preload("res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn")
-onready var depthsOfTidoh = preload("res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn")
-onready var abandonedOutpost = preload("res://Level Generation/WFC Generation/Abandoned Outpost/AbandonedOutpost.tscn")
-onready var anthill = preload("res://Level Generation/WFC Generation/Anthill/Anthill.tscn")
-onready var patch = preload("res://Level Generation/WFC Generation/Patch/Patch.tscn")
-onready var library = preload("res://Level Generation/WFC Generation/Library/Library.tscn")
-onready var banditWarcamp = preload("res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn")
-onready var dungeonHallways = preload("res://Level Generation/WFC Generation/Dungeon Halls/DungeonHalls.tscn")
-onready var labyrinth = preload("res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn")
-onready var dragonsPeak = preload("res://Level Generation/WFC Generation/Dragons Peak/DragonsPeak.tscn")
-onready var fortressEntrance = preload("res://Level Generation/WFC Generation/Fortress Entrance/FortressEntrance.tscn")
-onready var fortress = preload("res://Level Generation/WFC Generation/Fortress/Fortress.tscn")
-onready var theGreatShadows = preload("res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn")
-
-######################
-### Premade levels ###
-######################
-onready var banditCompound1 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound1.tscn")
-onready var banditCompound2 = preload("res://Level Generation/Premade Levels/Bandit Compound/BanditCompound2.tscn")
-onready var banditWarcamp1 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp1.tscn")
-onready var banditWarcamp2 = preload("res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp2.tscn")
-onready var elderDragonsLair1 = preload("res://Level Generation/Premade Levels/Elder Dragons Lair/ElderDragonsLair1.tscn")
-onready var elderDragonsLair2 = preload("res://Level Generation/Premade Levels/Elder Dragons Lair/ElderDragonsLair2.tscn")
-onready var storageArea1 = preload("res://Level Generation/Premade Levels/Storage Area/StorageArea1.tscn")
-onready var storageArea2 = preload("res://Level Generation/Premade Levels/Storage Area/StorageArea2.tscn")
-onready var tidohMinesEnd1 = preload("res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd1.tscn")
-onready var tidohMinesEnd2 = preload("res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd2.tscn")
-onready var tidohMiningOutpost1 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost1.tscn")
-onready var tidohMiningOutpost2 = preload("res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn")
-onready var iovarsLair1 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair1.tscn")
-onready var iovarsLair2 = preload("res://Level Generation/Premade Levels/Iovars Lair/IovarsLair2.tscn")
-onready var church = preload("res://Level Generation/Premade Levels/Church/Church.tscn")
+const levelPaths = {
+	"dungeon": "res://Level Generation/Generic Generation/Dungeon Levels/Dungeon.tscn",
+	"beach": "res://Level Generation/Generic Generation/Beach/Beach.tscn",
+	"vacationResort": "res://Level Generation/Generic Generation/Beach/VacationResort.tscn",
+	"minesOfTidoh": "res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn",
+	"depthsOfTidoh": "res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn",
+	"abandonedOutpost": "res://Level Generation/WFC Generation/Abandoned Outpost/AbandonedOutpost.tscn",
+	"anthill": "res://Level Generation/WFC Generation/Anthill/Anthill.tscn",
+	"patch": "res://Level Generation/WFC Generation/Patch/Patch.tscn",
+	"library": "res://Level Generation/WFC Generation/Library/Library.tscn",
+	"banditWarcamp": "res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn",
+	"dungeonHallways": "res://Level Generation/WFC Generation/Dungeon Halls/DungeonHalls.tscn",
+	"labyrinth": "res://Level Generation/WFC Generation/Labyrinth/Labyrinth.tscn",
+	"dragonsPeak": "res://Level Generation/WFC Generation/Dragons Peak/DragonsPeak.tscn",
+	"fortressEntrance": "res://Level Generation/WFC Generation/Fortress Entrance/FortressEntrance.tscn",
+	"fortress": "res://Level Generation/WFC Generation/Fortress/Fortress.tscn",
+	"theGreatShadows": "res://Level Generation/WFC Generation/The Great Shadows/TheGreatShadows.tscn",
+	"banditCompound1": "res://Level Generation/Premade Levels/Bandit Compound/BanditCompound1.tscn",
+	"banditCompound2": "res://Level Generation/Premade Levels/Bandit Compound/BanditCompound2.tscn",
+	"banditWarcamp1": "res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp1.tscn",
+	"banditWarcamp2": "res://Level Generation/Premade Levels/Bandit Warcamp/BanditWarcamp2.tscn",
+	"elderDragonsLair1": "res://Level Generation/Premade Levels/Elder Dragons Lair/ElderDragonsLair1.tscn",
+	"elderDragonsLair2": "res://Level Generation/Premade Levels/Elder Dragons Lair/ElderDragonsLair2.tscn",
+	"storageArea1": "res://Level Generation/Premade Levels/Storage Area/StorageArea1.tscn",
+	"storageArea2": "res://Level Generation/Premade Levels/Storage Area/StorageArea2.tscn",
+	"tidohMinesEnd1": "res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd1.tscn",
+	"tidohMinesEnd2": "res://Level Generation/Premade Levels/Tidoh Mines End/TidohMinesEnd2.tscn",
+	"tidohMiningOutpost1": "res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost1.tscn",
+	"tidohMiningOutpost2": "res://Level Generation/Premade Levels/Tidoh Mining Outpost/TidohMiningOutpost2.tscn",
+	"iovarsLair1": "res://Level Generation/Premade Levels/Iovars Lair/IovarsLair1.tscn",
+	"iovarsLair2": "res://Level Generation/Premade Levels/Iovars Lair/IovarsLair2.tscn",
+	"church": "res://Level Generation/Premade Levels/Church/Church.tscn"
+}
 
 ##################################
 ### Dungeon generation threads ###
@@ -54,20 +49,17 @@ var threadDungeon1
 var threadDungeon2
 var threadDungeon3
 var threadDungeon4
-var threadHalls1
-var threadHalls2
-var threadHalls3
-var threadHalls4
+var threadDungeon5
+var threadDungeon6
+var threadDungeon7
+var threadDungeon8
+
+var dungeonGenLevel = 1
 
 func _ready():
-#	OS.window_size = Vector2(1280, 900)
-#	get_tree().set_screen_stretch(2,1,Vector2(960, 540),.5)
-	
 	randomize()
 	
 	$UI/UITheme/"Dancing Dragons".startDancingDragons()
-	
-	var saveData = $Save.loadData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
 	
 	$UI/UITheme/GameConsole.create()
 	$UI/UITheme/ItemManagement.create()
@@ -79,6 +71,7 @@ func _ready():
 		if !_node.name.matchn("dancing dragons"):
 			_node.hide()
 	
+	var saveData = $Save.loadData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
 	if saveData.hasSave:
 		$UI/UITheme/"Dancing Dragons".setLoadingText("Loading game...")
 		
@@ -94,14 +87,14 @@ func _ready():
 		
 		setUpDungeon()
 		
-		var levelCount = 0
-		for section in levels:
-			if typeof(levels[section]) != TYPE_ARRAY:
-				levelCount += 1
+		for _section in levels:
+			if typeof(levels[_section]) != TYPE_ARRAY:
+				totalLevelCount += 1
 			else:
-				levelCount += levels[section].size()
+				totalLevelCount += levels[_section].size()
+#		totalLevelCount += 1
 		
-		$FOV.createFOVLevels(levelCount)
+		$FOV.createFOVLevels(totalLevelCount)
 		
 		generateDungeon()
 
@@ -181,44 +174,45 @@ func setUpDungeon():
 	var _anthillLevels = 0
 	
 	### Dungeon 1
-	var firstLevel = dungeon.instance()
+	var firstLevel = load(levelPaths.dungeon).instance()
 	firstLevel.create("dungeon1", "dungeon1", "Dungeon 1", 10000)
 	levels.firstLevel = firstLevel
+	level = firstLevel
 	$Levels.add_child(firstLevel)
 
 	for _level in range(randi() % 3 + 1):
-		var newDungeon = dungeon.instance()
+		var newDungeon = load(levelPaths.dungeon).instance()
 		newDungeon.create("dungeon1", "dungeon1", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() }), 10000)
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
 
 	### Mines of Tidoh
 	for _level in range(randi() % 3 + 2):
-		var newCave = minesOfTidoh.instance()
+		var newCave = load(levelPaths.minesOfTidoh).instance()
 		newCave.create("minesOfTidoh", "minesOfTidoh", "Mines of tidoh {level}".format({ "level": 1 + levels.minesOfTidoh.size() }), 2)
 		levels.minesOfTidoh.append(newCave)
 		$Levels.add_child(newCave)
 
 	var newMiningOutpost
 	if randi() % 2 == 0:
-		newMiningOutpost = tidohMiningOutpost1.instance()
+		newMiningOutpost = load(levelPaths.tidohMiningOutpost1).instance()
 	else:
-		newMiningOutpost = tidohMiningOutpost2.instance()
+		newMiningOutpost = load(levelPaths.tidohMiningOutpost2).instance()
 	newMiningOutpost.create("minesOfTidoh", "minesOfTidoh", "Tidoh mining outpost", 5)
 	levels.minesOfTidoh.append(newMiningOutpost)
 	$Levels.add_child(newMiningOutpost)
 
 	for _level in range(randi() % 3 + 2):
-		var newCave = depthsOfTidoh.instance()
+		var newCave = load(levelPaths.depthsOfTidoh).instance()
 		newCave.create("depthsOfTidoh", "depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": 1 + levels.depthsOfTidoh.size() }), 1)
 		levels.depthsOfTidoh.append(newCave)
 		$Levels.add_child(newCave)
 
 	var newMinesEnd
 	if randi() % 2 == 0:
-		newMinesEnd = tidohMinesEnd1.instance()
+		newMinesEnd = load(levelPaths.tidohMinesEnd1).instance()
 	else:
-		newMinesEnd = tidohMinesEnd2.instance()
+		newMinesEnd = load(levelPaths.tidohMinesEnd2).instance()
 	newMinesEnd.create("depthsOfTidoh", "depthsOfTidoh", "Mines end", 1)
 	levels.depthsOfTidoh.append(newMinesEnd)
 	$Levels.add_child(newMinesEnd)
@@ -230,36 +224,36 @@ func setUpDungeon():
 		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon2Count - 1:
 			if randi() % 3 == 0:
 				_patchLevels += 1
-				newDungeon = patch.instance()
+				newDungeon = load(levelPaths.patch).instance()
 				newDungeon.create("patch", "dungeon2", "Patch {level}".format({ "level": _patchLevels }), 10000)
 			elif randi() % 3 == 0:
 				_abandonedOutpostLevels += 1
-				newDungeon = abandonedOutpost.instance()
+				newDungeon = load(levelPaths.abandonedOutpost).instance()
 				newDungeon.create("abandonedOutpost", "dungeon2", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
 			else:
 				_anthillLevels += 1
-				newDungeon = anthill.instance()
+				newDungeon = load(levelPaths.anthill).instance()
 				newDungeon.create("anthill", "dungeon2", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
 			_firstSectionRandomLevels -= 1
 		else:
-			newDungeon = dungeon.instance()
+			newDungeon = load(levelPaths.dungeon).instance()
 			newDungeon.create("dungeon2", "dungeon2", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() }), 10000)
 		levels.dungeon2.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
 	### Beach
-	var newBeach = beach.instance()
+	var newBeach = load(levelPaths.beach).instance()
 	newBeach.create("beach", "beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
 	levels.beach.append(newBeach)
 	$Levels.add_child(newBeach)
 	
-	var newVacationResort = vacationResort.instance()
+	var newVacationResort = load(levelPaths.vacationResort).instance()
 	newVacationResort.create("beach", "beach", "Vacation resort", 10000)
 	levels.beach.append(newVacationResort)
 	$Levels.add_child(newVacationResort)
 	
-	for _level in range(randi() % 3 + 3):
-		var newBeach2 = beach.instance()
+	for _level in range(randi() % 2 + 3):
+		var newBeach2 = load(levelPaths.beach).instance()
 		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
 		levels.beach.append(newBeach2)
 		$Levels.add_child(newBeach2)
@@ -271,26 +265,26 @@ func setUpDungeon():
 		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon3Count - 1:
 			if randi() % 3 == 0:
 				_patchLevels += 1
-				newDungeon = patch.instance()
+				newDungeon = load(levelPaths.patch).instance()
 				newDungeon.create("patch", "dungeon3", "Patch {level}".format({ "level": _patchLevels }), 10000)
 			elif randi() % 3 == 0:
 				_abandonedOutpostLevels += 1
-				newDungeon = abandonedOutpost.instance()
+				newDungeon = load(levelPaths.abandonedOutpost).instance()
 				newDungeon.create("abandonedOutpost", "dungeon3", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
 			else:
 				_anthillLevels += 1
-				newDungeon = anthill.instance()
+				newDungeon = load(levelPaths.anthill).instance()
 				newDungeon.create("anthill", "dungeon3", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
 			_firstSectionRandomLevels -= 1
 		else:
-			newDungeon = dungeon.instance()
+			newDungeon = load(levelPaths.dungeon).instance()
 			newDungeon.create("dungeon3", "dungeon3", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() }), 10000)
 		levels.dungeon3.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
 	### Library
 	for _level in range(randi() % 3 + 3):
-		var newlibrary = library.instance()
+		var newlibrary = load(levelPaths.library).instance()
 		newlibrary.create("library", "library", "Library {level}".format({ "level": 1 + levels.library.size() }), 10000)
 		levels.library.append(newlibrary)
 		$Levels.add_child(newlibrary)
@@ -301,50 +295,50 @@ func setUpDungeon():
 		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < 2:
 			if randi() % 3 == 0:
 				_patchLevels += 1
-				newDungeon = patch.instance()
+				newDungeon = load(levelPaths.patch).instance()
 				newDungeon.create("patch", "dungeon4", "Patch {level}".format({ "level": _patchLevels }), 10000)
 			elif randi() % 3 == 0:
 				_abandonedOutpostLevels += 1
-				newDungeon = abandonedOutpost.instance()
+				newDungeon = load(levelPaths.abandonedOutpost).instance()
 				newDungeon.create("abandonedOutpost", "dungeon4", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
 			else:
 				_anthillLevels += 1
-				newDungeon = anthill.instance()
+				newDungeon = load(levelPaths.anthill).instance()
 				newDungeon.create("anthill", "dungeon4", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
 			_firstSectionRandomLevels -= 1
 		else:
-			newDungeon = dungeon.instance()
+			newDungeon = load(levelPaths.dungeon).instance()
 			newDungeon.create("dungeon4", "dungeon4", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() }), 10000)
 		levels.dungeon4.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
 	### Bandit warcamp
 	for _level in range(2):
-		var newBanditWarcamp = banditWarcamp.instance()
+		var newBanditWarcamp = load(levelPaths.banditWarcamp).instance()
 		newBanditWarcamp.create("banditWarcamp", "banditWarcamp", "Bandit warcamp {level}".format({ "level": 1 + levels.banditWarcamp.size() }), 10000)
 		levels.banditWarcamp.append(newBanditWarcamp)
 		$Levels.add_child(newBanditWarcamp)
 	
 	var newBanditWarcampLevel
 	if randi() % 2 == 0:
-		newBanditWarcampLevel = banditWarcamp1.instance()
+		newBanditWarcampLevel = load(levelPaths.banditWarcamp1).instance()
 	else:
-		newBanditWarcampLevel = banditWarcamp2.instance()
+		newBanditWarcampLevel = load(levelPaths.banditWarcamp2).instance()
 	newBanditWarcampLevel.create("banditWarcamp", "banditWarcamp", "Bandit warcamp", 10000)
 	levels.banditWarcamp.append(newBanditWarcampLevel)
 	$Levels.add_child(newBanditWarcampLevel)
 	
 	for _level in range(2):
-		var newBanditWarcamp = banditWarcamp.instance()
+		var newBanditWarcamp = load(levelPaths.banditWarcamp).instance()
 		newBanditWarcamp.create("banditWarcamp", "banditWarcamp", "Bandit warcamp {level}".format({ "level": 1 + levels.banditWarcamp.size() }), 10000)
 		levels.banditWarcamp.append(newBanditWarcamp)
 		$Levels.add_child(newBanditWarcamp)
 	
 	var newCompound
 	if randi() % 2 == 0:
-		newCompound = banditCompound1.instance()
+		newCompound = load(levelPaths.banditCompound1).instance()
 	else:
-		newCompound = banditCompound2.instance()
+		newCompound = load(levelPaths.banditCompound2).instance()
 	newCompound.create("banditWarcamp", "banditWarcamp", "Bandit compound", 10000)
 	levels.banditWarcamp.append(newCompound)
 	$Levels.add_child(newCompound)
@@ -352,71 +346,71 @@ func setUpDungeon():
 	### Storage area
 	var newStorageArea
 	if randi() % 2 == 0:
-		newStorageArea = storageArea1.instance()
+		newStorageArea = load(levelPaths.storageArea1).instance()
 	else:
-		newStorageArea = storageArea2.instance()
+		newStorageArea = load(levelPaths.storageArea2).instance()
 	newStorageArea.create("storageArea", "storageArea", "Storage Area", 10000)
 	levels.storageArea.append(newStorageArea)
 	$Levels.add_child(newStorageArea)
 	
 	### Dungeon halls 1
 	for _level in range(randi() % 4 + 3):
-		var newDungeonHallways = dungeonHallways.instance()
+		var newDungeonHallways = load(levelPaths.dungeonHallways).instance()
 		newDungeonHallways.create("dungeonHalls1", "dungeonHalls1", "Dungeon halls {level}".format({ "level": 1 + levels.dungeonHalls1.size() }), 10000)
 		levels.dungeonHalls1.append(newDungeonHallways)
 		$Levels.add_child(newDungeonHallways)
 	
 	### Dungeon halls 2
 	for _level in range(randi() % 4 + 3):
-		var newDungeonHallways = dungeonHallways.instance()
+		var newDungeonHallways = load(levelPaths.dungeonHallways).instance()
 		newDungeonHallways.create("dungeonHalls2", "dungeonHalls2", "Dungeon halls {level}".format({ "level": 1 + levels.dungeonHalls1.size() + levels.dungeonHalls2.size() }), 10000)
 		levels.dungeonHalls2.append(newDungeonHallways)
 		$Levels.add_child(newDungeonHallways)
 	
 	### Dungeon halls 3
 	for _level in range(randi() % 4 + 3):
-		var newDungeonHallways = dungeonHallways.instance()
+		var newDungeonHallways = load(levelPaths.dungeonHallways).instance()
 		newDungeonHallways.create("dungeonHalls3", "dungeonHalls3", "Dungeon halls {level}".format({ "level": 1 + levels.dungeonHalls1.size() + levels.dungeonHalls2.size() + levels.dungeonHalls3.size() }), 10000)
 		levels.dungeonHalls3.append(newDungeonHallways)
 		$Levels.add_child(newDungeonHallways)
 	
 	### Labyrinth
 	for _level in range(5):
-		var newlabyrinth = labyrinth.instance()
+		var newlabyrinth = load(levelPaths.labyrinth).instance()
 		newlabyrinth.create("labyrinth", "labyrinth", "Labyrinth {level}".format({ "level": 1 + levels.labyrinth.size() }), 10000)
 		levels.labyrinth.append(newlabyrinth)
 		$Levels.add_child(newlabyrinth)
 	
 	### Dragons peak
 	for _level in range(randi() % 2 + 3):
-		var newDragonsPeak = dragonsPeak.instance()
+		var newDragonsPeak = load(levelPaths.dragonsPeak).instance()
 		newDragonsPeak.create("dragonsPeak", "dragonsPeak", "Dragons peak {level}".format({ "level": 1 + levels.dragonsPeak.size() }), 10000)
 		levels.dragonsPeak.append(newDragonsPeak)
 		$Levels.add_child(newDragonsPeak)
 	
 	var newElderDragonsLair
 	if randi() % 2 == 0:
-		newElderDragonsLair = elderDragonsLair1.instance()
+		newElderDragonsLair = load(levelPaths.elderDragonsLair1).instance()
 	else:
-		newElderDragonsLair = elderDragonsLair2.instance()
+		newElderDragonsLair = load(levelPaths.elderDragonsLair2).instance()
 	newElderDragonsLair.create("dragonsPeak", "dragonsPeak", "Elder dragons lair", 10000)
 	levels.dragonsPeak.append(newElderDragonsLair)
 	$Levels.add_child(newElderDragonsLair)
 	
 	### The Great Shadows
 	for _level in range(3):
-		var newGreatShadows = theGreatShadows.instance()
+		var newGreatShadows = load(levelPaths.theGreatShadows).instance()
 		newGreatShadows.create("theGreatShadows", "theGreatShadows", "The Great Shadows {level}".format({ "level": 1 + levels.theGreatShadows.size() }), 10000)
 		levels.theGreatShadows.append(newGreatShadows)
 		$Levels.add_child(newGreatShadows)
 	
 	### Fortress
-	var newFortressEntrance = fortressEntrance.instance()
+	var newFortressEntrance = load(levelPaths.fortressEntrance).instance()
 	newFortressEntrance.create("fortress", "fortress", "Fortress entrance", 10000)
 	levels.fortress.append(newFortressEntrance)
 	$Levels.add_child(newFortressEntrance)
 	for _level in range(randi() % 3 + 3):
-		var newFortress = fortress.instance()
+		var newFortress = load(levelPaths.fortress).instance()
 		newFortress.create("fortress", "fortress", "Fortress {level}".format({ "level": levels.fortress.size() }), 10000)
 		levels.fortress.append(newFortress)
 		$Levels.add_child(newFortress)
@@ -424,25 +418,18 @@ func setUpDungeon():
 	### Iovars lair
 	var newIovarsLair
 	if randi() % 2 == 0:
-		newIovarsLair = iovarsLair1.instance()
+		newIovarsLair = load(levelPaths.iovarsLair1).instance()
 	else:
-		newIovarsLair = iovarsLair2.instance()
+		newIovarsLair = load(levelPaths.iovarsLair2).instance()
 	newIovarsLair.create("iovarsLair", "iovarsLair", "Iovars lair", 10000)
 	levels.iovarsLair.append(newIovarsLair)
 	$Levels.add_child(newIovarsLair)
 	
 	### Church
-	var newChurch = church.instance()
+	var newChurch = load(levelPaths.church).instance()
 	newChurch.create("church", "church", "Church", 10000)
 	churchLevel = newChurch
 	$Levels.add_child(newChurch)
-	
-	for _levelSection in levels:
-		if typeof(_levelSection) == TYPE_STRING:
-			totalLevelCount += 1
-		else:
-			totalLevelCount += _levelSection.size()
-	totalLevelCount += 1
 
 
 
@@ -452,133 +439,58 @@ func setUpDungeon():
 
 func generateDungeon():
 	threadDungeon1 = Thread.new()
-	threadDungeon1.start(self, "createDungeon1", null, Thread.PRIORITY_NORMAL)
+	threadDungeon1.start(self, "createDungeon", threadDungeon1)
 	threadDungeon2 = Thread.new()
-	threadDungeon2.start(self, "createDungeon2", null, Thread.PRIORITY_NORMAL)
+	threadDungeon2.start(self, "createDungeon", threadDungeon2)
 	threadDungeon3 = Thread.new()
-	threadDungeon3.start(self, "createDungeon3", null, Thread.PRIORITY_NORMAL)
+	threadDungeon3.start(self, "createDungeon", threadDungeon3)
 	threadDungeon4 = Thread.new()
-	threadDungeon4.start(self, "createDungeon4", null, Thread.PRIORITY_NORMAL)
-	
-	threadHalls1 = Thread.new()
-	threadHalls1.start(self, "createHalls1", null, Thread.PRIORITY_NORMAL)
-	threadHalls2 = Thread.new()
-	threadHalls2.start(self, "createHalls2", null, Thread.PRIORITY_NORMAL)
-	threadHalls3 = Thread.new()
-	threadHalls3.start(self, "createHalls3", null, Thread.PRIORITY_NORMAL)
-	threadHalls4 = Thread.new()
-	threadHalls4.start(self, "createHalls4", null, Thread.PRIORITY_NORMAL)
+	threadDungeon4.start(self, "createDungeon", threadDungeon4)
+	threadDungeon5 = Thread.new()
+	threadDungeon5.start(self, "createDungeon", threadDungeon5)
+	threadDungeon6 = Thread.new()
+	threadDungeon6.start(self, "createDungeon", threadDungeon6)
+	threadDungeon7 = Thread.new()
+	threadDungeon7.start(self, "createDungeon", threadDungeon7)
+	threadDungeon8 = Thread.new()
+	threadDungeon8.start(self, "createDungeon", threadDungeon8)
 
-func createDungeon1(_nothing):
-	level = levels.firstLevel.createNewLevel()
-	churchLevel = churchLevel.createNewLevel()
-	
-	for _level in levels.dungeon1:
-		if _level == levels.dungeon1.back():
-			_level.createNewLevel("downStair")
+func createDungeon(_thread):
+	while(dungeonGenLevel < totalLevelCount):
+		Globals.mutex.lock()
+		var _level = getNextDungeonGenLevel()
+		Globals.mutex.unlock()
+		if !checkIfGenerateLevelWithStair(_level):
+			_level.createNewLevel()
+	call_deferred("checkIfThreadsAreDone")
+	_thread.call_deferred("wait_to_finish")
+
+func getNextDungeonGenLevel():
+	for section in levels:
+		if typeof(levels[section]) != TYPE_ARRAY:
+			if levels[section].levelId == dungeonGenLevel:
+				dungeonGenLevel += 1
+				return levels[section]
 		else:
-			_level.createNewLevel()
-	
-	for _level in levels.dungeon2:
-		if _level == levels.dungeon2.back():
-			_level.createNewLevel()
-		else:
-			_level.createNewLevel()
-	
-	for _level in levels.beach:
-		_level.createNewLevel()
-	
-	for _level in levels.dungeon3:
-		if _level == levels.dungeon3.back():
-			_level.createNewLevel("downStair")
-		else:
-			_level.createNewLevel()
-	for _level in levels.dungeon4:
-		_level.createNewLevel()
-	
-	for _level in levels.theGreatShadows:
-		_level.createNewLevel()
-	
-	for _level in levels.iovarsLair:
-		_level.createNewLevel()
-	
-	print("dungeon1")
-	call_deferred("checkIfThreadsAreDone")
-	threadDungeon1.call_deferred("wait_to_finish")
+			for _level in levels[section]:
+				if _level.levelId == dungeonGenLevel:
+					dungeonGenLevel += 1
+					return _level
 
-func createDungeon2(_nothing):
-	for _level in levels.banditWarcamp:
-		_level.createNewLevel()
-	
-	print("dungeon2")
-	call_deferred("checkIfThreadsAreDone")
-	threadDungeon2.call_deferred("wait_to_finish")
-
-func createDungeon3():
-	for _level in levels.minesOfTidoh:
-		_level.createNewLevel()
-	
-	for _level in levels.depthsOfTidoh:
-		_level.createNewLevel()
-	
-	print("dungeon3")
-	call_deferred("checkIfThreadsAreDone")
-	threadDungeon3.call_deferred("wait_to_finish")
-
-func createDungeon4():
-	for _level in levels.storageArea:
-		_level.createNewLevel()
-	
-	print("dungeon4")
-	call_deferred("checkIfThreadsAreDone")
-	threadDungeon4.call_deferred("wait_to_finish")
-
-func createHalls1():
-	for _level in levels.dungeonHalls1:
-		if _level == levels.dungeonHalls1.back():
-			_level.createNewLevel("downStair")
-		else:
-			_level.createNewLevel()
-	
-	for _level in levels.dungeonHalls2:
-		if _level == levels.dungeonHalls2.back():
-			_level.createNewLevel("upStair")
-		else:
-			_level.createNewLevel()
-	
-	for _level in levels.dungeonHalls3:
-		_level.createNewLevel()
-	
-	print("halls1")
-	call_deferred("checkIfThreadsAreDone")
-	threadHalls1.call_deferred("wait_to_finish")
-
-func createHalls2():
-	for _level in levels.library:
-		_level.createNewLevel()
-	
-	print("halls2")
-	call_deferred("checkIfThreadsAreDone")
-	threadHalls2.call_deferred("wait_to_finish")
-
-func createHalls3():
-	for _level in levels.labyrinth:
-		_level.createNewLevel()
-	
-	for _level in levels.dragonsPeak:
-		_level.createNewLevel()
-	
-	print("halls3")
-	call_deferred("checkIfThreadsAreDone")
-	threadHalls3.call_deferred("wait_to_finish")
-
-func createHalls4():
-	for _level in levels.fortress:
-		_level.createNewLevel()
-	
-	print("halls4")
-	call_deferred("checkIfThreadsAreDone")
-	threadHalls4.call_deferred("wait_to_finish")
+func checkIfGenerateLevelWithStair(_level):
+	if _level == levels.dungeon1.back():
+		_level.createNewLevel("downStair")
+		return true
+	if _level == levels.dungeon3.back():
+		_level.createNewLevel("downStair")
+		return true
+	if _level == levels.dungeonHalls1.back():
+		_level.createNewLevel("downStair")
+		return true
+	if _level == levels.dungeonHalls2.back():
+		_level.createNewLevel("upStair")
+		return true
+	return false
 
 func checkIfThreadsAreDone():
 	if (
@@ -590,14 +502,14 @@ func checkIfThreadsAreDone():
 		!threadDungeon3.is_alive() and
 		threadDungeon4 != null and
 		!threadDungeon4.is_alive() and
-		threadHalls1 != null and
-		!threadHalls1.is_alive() and
-		threadHalls2 != null and
-		!threadHalls2.is_alive() and
-		threadHalls3 != null and
-		!threadHalls3.is_alive() and
-		threadHalls4 != null and
-		!threadHalls4.is_alive()
+		threadDungeon5 != null and
+		!threadDungeon5.is_alive() and
+		threadDungeon6 != null and
+		!threadDungeon6.is_alive() and
+		threadDungeon7 != null and
+		!threadDungeon7.is_alive() and
+		threadDungeon8 != null and
+		!threadDungeon8.is_alive()
 	):
 		$UI/UITheme/"Dancing Dragons".call_deferred("setLoadingText", "Setting up game objects...")
 		gameSetUpThread = Thread.new()

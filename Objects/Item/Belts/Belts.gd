@@ -88,7 +88,7 @@ var belt = {
 			"itemName": "Slithery belt",
 			"unidentifiedItemName": "Slippy belt",
 			"texture": load("res://Assets/Belts/BeltSlitheryBelt.png"),
-			"unidentifiedTexture": load("res://Assets/Cloaks/BeltSlitheryBelt.png"),
+			"unidentifiedTexture": load("res://Assets/Belts/BeltSlitheryBelt.png"),
 			"type": "Armor",
 			"category": "Belt",
 			"weight": 75,
