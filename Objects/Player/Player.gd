@@ -86,12 +86,11 @@ func create(_data = null):
 		_playerData = playerClasses[(StartingData.selectedClass[0].to_lower() + StartingData.selectedClass.substr(1,-1)).replace(" ", "")]
 	else:
 		_playerData = _data
+	add_child(inventory)
 	if _playerData.has("inventory"):
 		inventory.create(_playerData.inventory)
 	else:
 		inventory.create()
-	add_child(inventory)
-#	$Inventory.inventory = 
 	
 	critterName = _playerData.critterName
 	if _playerData.has("playerClass"):

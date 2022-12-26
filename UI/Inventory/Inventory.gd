@@ -8,9 +8,22 @@ var currentWeight = 0
 
 func create(_inventory = []):
 	name = "Inventory"
-	$InventoryContainer.hide()
+	$InventoryBackground.hide()
 	layer = 10
 	inventory = _inventory
+	
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/AmuletContainer/Amulets.createRichTextLabel("Amulets", "amulet")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ArmorContainer/Armor.createRichTextLabel("Armor", "armor")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ComestibleContainer/Comestible.createRichTextLabel("Comestibles", "comestible")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/GemContainer/Gem.createRichTextLabel("Gems", "gem")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/MiscellaneousContainer/Miscellaneous.createRichTextLabel("Miscellaneous", "miscellaneous")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/PotionContainer/Potion.createRichTextLabel("Potions", "potion")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RingContainer/Ring.createRichTextLabel("Rings", "ring")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RuneContainer/Rune.createRichTextLabel("Runes", "rune")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ScrollContainer/Scroll.createRichTextLabel("Scrolls", "scroll")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ToolContainer/Tool.createRichTextLabel("Tools", "tool")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/WandContainer/Wand.createRichTextLabel("Wands", "wand")
+	$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/WeaponContainer/Weapon.createRichTextLabel("Weapons", "weapon")
 
 func addToInventory(_item):
 	if !checkIfStackableItemInInventory(_item, "add"):
@@ -25,14 +38,75 @@ func removeFromInventory(_item):
 func showInventory():
 	for _itemId in inventory:
 		var _newItem = inventoryItem.instance()
+		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).type.matchn("corpse"):
+			get_node("InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/{itemType}Container".format({ "itemType": "Miscellaneous" })).add_child(_newItem)
+		else:
+			get_node("InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/{itemType}Container".format({ "itemType": get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).type })).add_child(_newItem)
 		_newItem.setValues(get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })))
-		$InventoryContainer/InventoryListMargin/InventoryListContainer/ListMenuContent.add_child(_newItem)
-	$InventoryContainer.show()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/AmuletContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/AmuletContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ArmorContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ArmorContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ComestibleContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ComestibleContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/GemContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/GemContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/MiscellaneousContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/MiscellaneousContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/PotionContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/PotionContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RingContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RingContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RuneContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RuneContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ScrollContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ScrollContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ToolContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ToolContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/WandContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/WandContainer.hide()
+	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/WeaponContainer.get_child_count() == 1:
+		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/WeaponContainer.hide()
+	$InventoryBackground.show()
 
 func hideInventory():
-	for item in $InventoryContainer/InventoryListMargin/InventoryListContainer/ListMenuContent.get_children():
-		item.queue_free()
-	$InventoryContainer.hide()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/AmuletContainer.get_children():
+		if !_item.name.matchn("Amulet"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ArmorContainer.get_children():
+		if !_item.name.matchn("Armor"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ComestibleContainer.get_children():
+		if !_item.name.matchn("Comestible"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/GemContainer.get_children():
+		if !_item.name.matchn("Gem"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/MiscellaneousContainer.get_children():
+		if !_item.name.matchn("Miscellaneous"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/PotionContainer.get_children():
+		if !_item.name.matchn("Potion"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RingContainer.get_children():
+		if !_item.name.matchn("Ring"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RuneContainer.get_children():
+		if !_item.name.matchn("Rune"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ScrollContainer.get_children():
+		if !_item.name.matchn("Scroll"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ToolContainer.get_children():
+		if !_item.name.matchn("Tool"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/WandContainer.get_children():
+		if !_item.name.matchn("Wand"):
+			_item.queue_free()
+	for _item in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/WeaponContainer.get_children():
+		if !_item.name.matchn("Weapon"):
+			_item.queue_free()
+	$InventoryBackground.hide()
 
 func getItemsOfType(_types, _category = null, _miscellaneousTypes = null):
 	var _items = []

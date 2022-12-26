@@ -12,12 +12,12 @@ func setValues(_item):
 	id = _item.id
 	name = str(_item.id)
 	
-	$Name.text = _item.itemName
+	$Name.createRichTextLabel(_item.itemName, _item.rarity)
 	if _item.notIdentified.alignment:
-		$Alignment.text = _item.alignment
+		$Alignment.createRichTextLabel(_item.alignment)
 	else:
-		$Alignment.text = "Unknown"
+		$Alignment.createRichTextLabel("Unknown")
 	if _item.notIdentified.enchantment:
-		$Enchantment.text = str(_item.enchantment)
+		$Enchantment.createRichTextLabel(str(_item.enchantment))
 	else:
-		$Enchantment.text = "Unknown"
+		$Enchantment.createRichTextLabel("Unknown")

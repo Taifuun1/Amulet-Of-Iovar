@@ -13,15 +13,15 @@ func setValues(_item):
 	name = str(_item.id)
 	itemName = _item.itemName
 	
-	$Name.text = _item.itemName
+	$Name.createRichTextLabel(_item.itemName, _item.rarity)
 	if _item.notIdentified.alignment:
-		$Alignment.text = _item.alignment
+		$Alignment.createRichTextLabel(_item.alignment)
 	else:
-		$Alignment.text = "Unknown"
+		$Alignment.createRichTextLabel("Unknown")
 	if _item.notIdentified.enchantment:
-		$Enchantment.text = str(_item.enchantment)
+		$Enchantment.createRichTextLabel(str(_item.enchantment))
 	else:
-		$Enchantment.text = "Unknown"
+		$Enchantment.createRichTextLabel("Unknown")
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:

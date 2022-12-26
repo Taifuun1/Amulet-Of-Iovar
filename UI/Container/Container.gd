@@ -1,6 +1,6 @@
 extends Control
 
-onready var containerItem = preload("res://UI/Container/Container Item.tscn")
+onready var containerItem = preload("res://UI/Item Menu Item/Item Menu Item.tscn")
 
 var containerItemNode
 
@@ -36,8 +36,8 @@ func hideContainerList():
 
 func createContainerItem(_item, _listType):
 	var newItem = containerItem.instance()
-	newItem.setValues(_item)
 	get_node("DividerContainer/{listType}Container/{listType}ListScroll/{listType}List".format({ "listType": _listType })).add_child(newItem)
+	newItem.setValues(_item)
 
 func removeContainerItem(_itemId, _listType):
 	get_node("DividerContainer/{listType}Container/{listType}ListScroll/{listType}List/{itemId}".format({ "listType": _listType, "itemId": _itemId })).queue_free()
