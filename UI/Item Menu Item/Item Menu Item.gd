@@ -18,7 +18,7 @@ func setValues(_item, _menuItemType, _hideChecked = false):
 	
 	if _hideChecked:
 		$Check.hide()
-	if _item.notIdentified.name:
+	if _item.notIdentified.name or (GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified == true):
 		$Name.createRichTextLabel(_item.itemName, _item.rarity)
 	else:
 		$Name.createRichTextLabel(_item.itemName)

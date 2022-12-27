@@ -7,15 +7,25 @@ var floatingSpheres = {
 			"class": "Natural hazard",
 			"weight": 150,
 			"aI": "Neutral",
-			"aggroDistance": 6,
+			"aggroDistance": 2,
 			"texture": load("res://Assets/Critters/FloatingSphereFloatingEye.png"),
-			"alignment": "Neutral",
+			"alignment": "Slow Aggressive",
 			"level": 3,
 			"expDropAmount": 10,
 			"hp": 8,
 			"mp": 4,
 			"ac": 0,
-			"attacks": [  ],
+			"attacks": [
+				{
+					"dmg": [1,1],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": [0,0],
+						"element": null
+					}
+				}
+			],
 			"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 			"stats": {
 				"strength": 1,
@@ -40,7 +50,7 @@ var floatingSpheres = {
 			"race": "Floating sphere",
 			"class": "Natural hazard",
 			"weight": 150,
-			"aI": "Aggressive",
+			"aI": "Slow Aggressive",
 			"aggroDistance": 3,
 			"texture": load("res://Assets/Critters/FloatingSphereUnstableFloatingSphere.png"),
 			"level": 4,

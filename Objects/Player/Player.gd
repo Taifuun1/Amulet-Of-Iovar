@@ -163,7 +163,7 @@ func create(_data = null):
 func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter != null:
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
-		if _critter.aI.aI.matchn("Aggressive") or _critter.aI.aI.matchn("Skulking"):
+		if _critter.aI.aI.matchn("Aggressive") or _critter.aI.aI.matchn("Slow Aggressive") or _critter.aI.aI.matchn("Mimicking"):
 			if checkIfCritterHasEffect(_critter):
 				return
 			

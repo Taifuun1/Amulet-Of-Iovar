@@ -6,7 +6,7 @@ var mimics = {
 			"race": "Mimic",
 			"class": "Natural hazard",
 			"weight": 100,
-			"aI": "Skulking",
+			"aI": "Mimicking",
 			"aggroDistance": 4,
 			"texture": load("res://Assets/Critters/MimicMimic.png"),
 			"alignment": "Neutral",
@@ -46,8 +46,8 @@ var mimics = {
 			},
 			"abilities": [
 				{
-					"abilityName": "mimicBox",
-					"abilityType": "selfCastSpell"
+					"abilityName": "mimic",
+					"abilityType": "skill"
 				}
 			],
 			"abilityHits": [0,0,0,0,0,0,0,1],
@@ -65,8 +65,8 @@ var mimics = {
 			"race": "Mimic",
 			"class": "Natural hazard",
 			"weight": 350,
-			"aI": "Skulking",
-			"aggroDistance": 6,
+			"aI": "Mimicking",
+			"aggroDistance": 5,
 			"texture": load("res://Assets/Critters/MimicHumongousMimic.png"),
 			"alignment": "Neutral",
 			"level": 14,
@@ -105,8 +105,8 @@ var mimics = {
 			},
 			"abilities": [
 				{
-					"abilityName": "mimicChest",
-					"abilityType": "selfCastSpell"
+					"abilityName": "mimic",
+					"abilityType": "skill"
 				}
 			],
 			"abilityHits": [0,0,0,0,0,0,0,1],

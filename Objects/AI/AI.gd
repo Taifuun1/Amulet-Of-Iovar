@@ -12,10 +12,13 @@ func create(_aI, _aggroDistance, _activationDistance = null):
 
 func getCritterMove(_critterTile, _playerTile, _level):
 	if aI.matchn("Aggressive"):
-		var _path = _level.calculatePathFindingPath(_critterTile, _playerTile)
-		if (_path.size() == 0 or _path.size() >= aggroDistance) and aggroDistance != -1:
-			return getNeutralCritterMove(_critterTile, _level)
-		return _path
+		return getAggressiveCritterMove(_critterTile, _playerTile, _level)
+	elif aI.matchn("Slow Aggressive"):
+		if randi() % 3 != 0:
+			return []
+		return getAggressiveCritterMove(_critterTile, _playerTile, _level)
+	elif aI.matchn("Mimicking"):
+		return getMimickingCritterMove(_critterTile, _playerTile, _level)
 	elif aI.matchn("Deactivated"):
 		return false
 	elif aI.matchn("Miner"):
@@ -24,6 +27,21 @@ func getCritterMove(_critterTile, _playerTile, _level):
 		return getNeutralCritterMove(_critterTile, _level)
 	else:
 		return getNeutralCritterMove(_critterTile, _level)
+
+func getAggressiveCritterMove(_critterTile, _playerTile, _level):
+	var _path = _level.calculatePathFindingPath(_critterTile, _playerTile)
+	if (_path.size() == 0 or _path.size() >= aggroDistance) and aggroDistance != -1:
+		return getNeutralCritterMove(_critterTile, _level)
+	return _path
+
+func getMimickingCritterMove(_critterTile, _playerTile, _level):
+	if $"../".isMimicked:
+		return []
+	var _path = _level.calculatePathFindingPath(_critterTile, _playerTile)
+	if randi() % 12 == 0 or ((_path.size() == 0 or _path.size() >= aggroDistance) and aggroDistance != -1):
+		return getNeutralCritterMove(_critterTile, _level)
+	else:
+		return _path
 
 func getNeutralCritterMove(_critterTile, _level):
 	var _chosenPoint
@@ -44,7 +62,7 @@ func getNeutralCritterMove(_critterTile, _level):
 			_points.append(Vector2(_point))
 	if _points.size() == 0:
 		return []
-	elif(randi() % 3 + 1) == 1:
+	elif randi() % 7 > 3:
 		return []
 	else:
 		_chosenPoint = _points[randi() % _points.size()]

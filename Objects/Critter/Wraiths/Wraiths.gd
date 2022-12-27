@@ -6,7 +6,7 @@ var wraiths = {
 			"race": "Wraith",
 			"class": "Spiritual",
 			"weight": 1,
-			"aI": "Aggressive",
+			"aI": "Slow Aggressive",
 			"aggroDistance": 31,
 			"texture": load("res://Assets/Critters/WraithSpectralWraith.png"),
 			"alignment": "Neutral",

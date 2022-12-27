@@ -99,7 +99,6 @@ valign = 1
 margin_top = 113.0
 margin_right = 1516.0
 margin_bottom = 696.0
-mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = SubResource( 4 )
@@ -107,16 +106,16 @@ custom_styles/bg = SubResource( 4 )
 [node name="InventoryListContent" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer"]
 margin_top = 0.5
 margin_right = 1508.0
-margin_bottom = 644.5
+margin_bottom = 590.5
 size_flags_horizontal = 3
 
-[node name="AmuletContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
+[node name="AccessoryContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
 margin_right = 1508.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Amulets" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/AmuletContainer" instance=ExtResource( 2 )]
+[node name="Accessory" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/AccessoryContainer" instance=ExtResource( 2 )]
 margin_right = 1508.0
 margin_bottom = 50.0
 custom_fonts/normal_font = SubResource( 3 )
@@ -181,22 +180,10 @@ margin_right = 1508.0
 margin_bottom = 50.0
 custom_fonts/normal_font = SubResource( 3 )
 
-[node name="RingContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
+[node name="RuneContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
 margin_top = 324.0
 margin_right = 1508.0
 margin_bottom = 374.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Ring" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/RingContainer" instance=ExtResource( 2 )]
-margin_right = 1508.0
-margin_bottom = 50.0
-custom_fonts/normal_font = SubResource( 3 )
-
-[node name="RuneContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
-margin_top = 378.0
-margin_right = 1508.0
-margin_bottom = 428.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -206,9 +193,9 @@ margin_bottom = 50.0
 custom_fonts/normal_font = SubResource( 3 )
 
 [node name="ScrollContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
-margin_top = 432.0
+margin_top = 378.0
 margin_right = 1508.0
-margin_bottom = 482.0
+margin_bottom = 428.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -218,9 +205,9 @@ margin_bottom = 50.0
 custom_fonts/normal_font = SubResource( 3 )
 
 [node name="ToolContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
-margin_top = 486.0
+margin_top = 432.0
 margin_right = 1508.0
-margin_bottom = 536.0
+margin_bottom = 482.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -230,9 +217,9 @@ margin_bottom = 50.0
 custom_fonts/normal_font = SubResource( 3 )
 
 [node name="WandContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
-margin_top = 540.0
+margin_top = 486.0
 margin_right = 1508.0
-margin_bottom = 590.0
+margin_bottom = 536.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -242,9 +229,9 @@ margin_bottom = 50.0
 custom_fonts/normal_font = SubResource( 3 )
 
 [node name="WeaponContainer" type="VBoxContainer" parent="InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent"]
-margin_top = 594.0
+margin_top = 540.0
 margin_right = 1508.0
-margin_bottom = 644.0
+margin_bottom = 590.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 

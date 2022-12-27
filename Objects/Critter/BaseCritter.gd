@@ -59,7 +59,6 @@ var statusEffects = {
 	"displacement": 0,
 	"onFleir": 0
 }
-
 var statusStates = {
 	"hunger": 0,
 	"weight": 0

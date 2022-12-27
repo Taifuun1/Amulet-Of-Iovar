@@ -14,6 +14,7 @@ var abilityHits
 var currentCritterAbilityHit = null
 var activationDistance = null
 var etherealnessHit = false
+var isMimicked = false
 
 
 func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = true):
@@ -108,7 +109,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
 		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
 	
-	if typeof(_path) == TYPE_BOOL:
+	if typeof(_path) == TYPE_BOOL or isMimicked:
 		return false
 	
 	if currentCritterAbilityHit != null:
@@ -335,10 +336,11 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "alignment": "Uncursed" })
 									Globals.gameConsole.addLog("The {critterName} finds a gem in the wall.".format({ "critterName": critterName }))
 									_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable = null
-						"mimicBox":
-							return false
-						"mimicChest":
-							return false
+						"mimic":
+							if !isMimicked and (_distanceFromPlayer.size() > 12 or _distanceFromPlayer.size() == 0) and randi() % 18 == 0:
+								isMimicked = true
+								$CritterSprite.texture = $"/root/World/Items/Items".getRandomItem(false).texture
+								return false
 	
 	# Critter move
 	if _path.size() > 1:
@@ -534,6 +536,10 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 		if aI.aI.matchn("Deactivated"):
 			awakeCritter()
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
+		if isMimicked:
+			isMimicked = false
+			$CritterSprite.texture = $"/root/World/Critters/Critters".getCritterByName(critterName).texture
+			Globals.gameConsole.addLog("The item is a mimic!")
 		if statusEffects.sleep > 0:
 			statusEffects.sleep = 0
 			Globals.gameConsole.addLog("The {critterName} wakes up!".format({ "critterName": critterName }))

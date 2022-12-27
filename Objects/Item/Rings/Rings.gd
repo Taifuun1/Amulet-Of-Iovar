@@ -100,7 +100,9 @@ var rings = {
 			"type": "Accessory",
 			"category": "Ring",
 			"weight": 10,
-			"value": null,
+			"value": {
+				"binds": "Equipment"
+			},
 			"points": 15,
 			"enchantable": false,
 			"stackable": true
@@ -113,7 +115,9 @@ var rings = {
 #			"type": "Accessory",
 #			"category": "Ring",
 #			"weight": 10,
-#			"value": null,
+#			"value": {
+#				"binds": "Equipment"
+#			},
 #			"enchantable": true,
 #			"stackable": false,
 #			"rarity": "Uncommon",
@@ -155,7 +159,9 @@ var rings = {
 			"type": "Accessory",
 			"category": "Ring",
 			"weight": 10,
-			"value": null,
+			"value": {
+				"binds": "Equipment"
+			},
 			"points": 15,
 			"enchantable": false,
 			"stackable": true
