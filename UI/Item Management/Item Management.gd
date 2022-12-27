@@ -1,6 +1,6 @@
 extends Control
 
-onready var inventoryItem = preload("res://UI/Item Management/Item Management Item.tscn")
+onready var inventoryItem = preload("res://UI/Item Menu Item/Item Menu Item.tscn")
 
 var items = []
 var selectedItems = []
@@ -11,17 +11,18 @@ func create():
 	name = "ItemManagement"
 	hide()
 
-func showItemManagementList(_chooseOnClick = false):
+func showItemManagementList(_title, _chooseOnClick = false):
+	$ItemManagementContainer/Title.text = _title
 	chooseOnClick = _chooseOnClick
 	for item in items:
 		var newItem = inventoryItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
-		newItem.setValues(_item)
-		$ItemManagementListScrollContainer/ItemManagementList.add_child(newItem)
+		$ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList.add_child(newItem)
+		newItem.setValues(_item, "Item management", _chooseOnClick)
 	show()
 
 func hideItemManagementList():
-	for _item in $ItemManagementListScrollContainer/ItemManagementList.get_children():
+	for _item in $ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList.get_children():
 		_item.queue_free()
 	items = []
 	selectedItems = []
@@ -75,14 +76,14 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 			$"/root/World".processGameTurn()
 			return
 	
-	var clickedItem = get_node("ItemManagementListScrollContainer/ItemManagementList/{id}".format({ "id": _id }))
+	var clickedItem = get_node("ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList/{id}".format({ "id": _id }))
 	var isRemoved = false
 	for _item in range(selectedItems.duplicate().size()):
-		if selectedItems[_item] == clickedItem.item.id:
+		if selectedItems[_item] == clickedItem.id:
 			selectedItems.remove(_item)
 			isRemoved = true
-			clickedItem.get_node("Checked").pressed = false
+			clickedItem.get_node("Check").pressed = false
 			break
 	if !isRemoved:
 		selectedItems.append(_id)
-		clickedItem.get_node("Checked").pressed = true
+		clickedItem.get_node("Check").pressed = true

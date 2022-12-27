@@ -730,12 +730,12 @@ func openMenu(_menu, _playerTile = null):
 				$"/root/World".processGameTurn()
 			elif level.grid[_playerTile.x][_playerTile.y].items.size() != 0 and currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
-				$UI/UITheme/ItemManagement.showItemManagementList()
+				$UI/UITheme/ItemManagement.showItemManagementList("Pick up what?")
 				currentGameState = gameState.PICK_UP_ITEMS
 		"drop":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.inventory
-				$UI/UITheme/ItemManagement.showItemManagementList()
+				$UI/UITheme/ItemManagement.showItemManagementList("Drop what?")
 				currentGameState = gameState.DROP_ITEMS
 		"loot":
 			if currentGameState == gameState.GAME:
@@ -745,7 +745,7 @@ func openMenu(_menu, _playerTile = null):
 					if get_node("Items/{itemId}".format({ "itemId": _itemId })).category != null and get_node("Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
 						_items.append(_itemId)
 				$UI/UITheme/ItemManagement.items = _items
-				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Loot what?", true)
 				currentGameState = gameState.PICK_LOOTABLE
 		"equipment":
 			if currentGameState == gameState.GAME:
@@ -754,7 +754,7 @@ func openMenu(_menu, _playerTile = null):
 		"read":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["scroll"])
-				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Read what?", true)
 				currentGameState = gameState.READ
 		"runes":
 			if currentGameState == gameState.GAME:
@@ -763,27 +763,27 @@ func openMenu(_menu, _playerTile = null):
 		"quaff":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["potion"])
-				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Quaff what?", true)
 				currentGameState = gameState.QUAFF
 		"consume":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["comestible"])
-				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Consume what?", true)
 				currentGameState = gameState.CONSUME
 		"zap":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["wand"])
-				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Zap what?", true)
 				currentGameState = gameState.ZAP
 		"dip":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["amulet", "armor", "belt", "cloak", "gauntlets", "comestible", "gem", "ring", "rune", "scroll", "tool", "wand", "weapon"])
-				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Dip what?", true)
 				currentGameState = gameState.DIP_ITEM
 		"use":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"], null, ["corpse"])
-				$UI/UITheme/ItemManagement.showItemManagementList(true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Use what?", true)
 				currentGameState = gameState.USE
 
 func castWith(_playerTile):

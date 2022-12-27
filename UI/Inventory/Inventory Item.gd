@@ -12,7 +12,10 @@ func setValues(_item):
 	id = _item.id
 	name = str(_item.id)
 	
-	$Name.createRichTextLabel(_item.itemName, _item.rarity)
+	if _item.notIdentified.name:
+		$Name.createRichTextLabel(_item.itemName, _item.rarity)
+	else:
+		$Name.createRichTextLabel(_item.itemName)
 	if _item.notIdentified.alignment:
 		$Alignment.createRichTextLabel(_item.alignment)
 	else:

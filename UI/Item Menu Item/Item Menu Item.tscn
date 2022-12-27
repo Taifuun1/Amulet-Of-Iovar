@@ -12,19 +12,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 2 )
 
+[node name="Check" type="CheckBox" parent="."]
+margin_right = 24.0
+margin_bottom = 24.0
+
 [node name="Name" parent="." instance=ExtResource( 1 )]
-margin_right = 0.0
-margin_bottom = 15.0
+margin_left = 28.0
+margin_right = 28.0
 mouse_filter = 2
 
 [node name="Alignment" parent="." instance=ExtResource( 1 )]
-margin_left = 4.0
-margin_right = 4.0
-margin_bottom = 15.0
+margin_left = 32.0
+margin_right = 32.0
 mouse_filter = 2
 
 [node name="Enchantment" parent="." instance=ExtResource( 1 )]
-margin_left = 8.0
-margin_right = 9.0
-margin_bottom = 15.0
+margin_left = 36.0
+margin_right = 36.0
 mouse_filter = 2

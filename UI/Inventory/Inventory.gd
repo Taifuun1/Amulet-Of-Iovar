@@ -43,6 +43,10 @@ func showInventory():
 		else:
 			get_node("InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/{itemType}Container".format({ "itemType": get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).type })).add_child(_newItem)
 		_newItem.setValues(get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })))
+	
+	for _typeContainer in $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent.get_children():
+		_typeContainer.show()
+	
 	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/AmuletContainer.get_child_count() == 1:
 		$InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/AmuletContainer.hide()
 	if $InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/ArmorContainer.get_child_count() == 1:

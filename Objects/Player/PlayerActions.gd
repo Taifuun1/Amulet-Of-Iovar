@@ -699,7 +699,7 @@ func dipItem(_id):
 	if !_dippedItem.type.matchn("potion"):
 		$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
 		$"/root/World/UI/UITheme/ItemManagement".items = $"/root/World/Critters/0/Inventory".getItemsOfType(["potion"])
-		$"/root/World/UI/UITheme/ItemManagement".showItemManagementList(true)
+		$"/root/World/UI/UITheme/ItemManagement".showItemManagementList("Dip into what?", true)
 		$"/root/World".currentGameState = $"/root/World".gameState.DIP
 	elif _dippedItem.type.matchn("potion"):
 		match _dippedItem.identifiedItemName.to_lower():

@@ -33,4 +33,5 @@ func createRichTextLabel(_text, _color = null, _textAlignment = null):
 		_bbcode = _bbcode.join(["[color=%s]" % colors[_color.to_lower()], "[/color]"])
 	if _textAlignment != null:
 		_bbcode = _bbcode.join(["[%s]" % _textAlignment, "[/%s]" % _textAlignment])
-	append_bbcode(_bbcode)
+	if append_bbcode(_bbcode) != OK:
+		push_error("Error appending bbcode.")

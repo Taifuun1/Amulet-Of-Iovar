@@ -99,6 +99,7 @@ valign = 1
 margin_top = 113.0
 margin_right = 1516.0
 margin_bottom = 696.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = SubResource( 4 )

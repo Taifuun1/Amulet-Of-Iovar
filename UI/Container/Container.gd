@@ -37,7 +37,7 @@ func hideContainerList():
 func createContainerItem(_item, _listType):
 	var newItem = containerItem.instance()
 	get_node("DividerContainer/{listType}Container/{listType}ListScroll/{listType}List".format({ "listType": _listType })).add_child(newItem)
-	newItem.setValues(_item)
+	newItem.setValues(_item, "Container", true)
 
 func removeContainerItem(_itemId, _listType):
 	get_node("DividerContainer/{listType}Container/{listType}ListScroll/{listType}List/{itemId}".format({ "listType": _listType, "itemId": _itemId })).queue_free()

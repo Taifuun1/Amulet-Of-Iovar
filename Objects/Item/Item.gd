@@ -21,6 +21,7 @@ var unidentifiedItemName
 var itemTexture
 var unidenfiedItemTexture
 var notIdentified = {
+	"name": false,
 	"alignment": false,
 	"enchantment": false
 }
@@ -324,6 +325,7 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 	if _identifyName:
 		itemName = identifiedItemName
 		$ItemSprite.texture = itemTexture
+		notIdentified.name = true
 	if _identifyAlignment:
 		notIdentified.alignment = true
 	if _identifyEnchantment:

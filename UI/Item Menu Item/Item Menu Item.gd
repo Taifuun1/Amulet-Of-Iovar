@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+var menuItemType
+
 var id
 var itemName
 var unidentifiedItemName
@@ -8,12 +10,18 @@ var itemAlignment
 var enchantment
 var stackable
 
-func setValues(_item):
+func setValues(_item, _menuItemType, _hideChecked = false):
 	id = _item.id
 	name = str(_item.id)
 	itemName = _item.itemName
+	menuItemType = _menuItemType
 	
-	$Name.createRichTextLabel(_item.itemName, _item.rarity)
+	if _hideChecked:
+		$Check.hide()
+	if _item.notIdentified.name:
+		$Name.createRichTextLabel(_item.itemName, _item.rarity)
+	else:
+		$Name.createRichTextLabel(_item.itemName)
 	if _item.notIdentified.alignment:
 		$Alignment.createRichTextLabel(_item.alignment)
 	else:
@@ -25,4 +33,10 @@ func setValues(_item):
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		$"../../../../.."._on_Container_List_Clicked(id)
+		if menuItemType.matchn("item management"):
+			if itemName.matchn("scroll of genocide"):
+				$"../../../.."._on_Item_Management_List_Clicked(id, false)
+			else:
+				$"../../../.."._on_Item_Management_List_Clicked(id)
+		else:
+			$"../../../../.."._on_Container_List_Clicked(id)
