@@ -187,8 +187,6 @@ func updateWeight():
 			currentWeight += _item.containerWeight
 		else:
 			currentWeight += _item.weight
-	$"..".calculateWeightStats()
-	$"..".updatePlayerStats()
 
 func checkIfItemInInventoryByName(_itemName):
 	for _itemId in inventory:

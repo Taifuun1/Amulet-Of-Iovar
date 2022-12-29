@@ -38,6 +38,7 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 	stats.belief = float(_critter.stats.belief)
 	stats.visage = float(_critter.stats.visage)
 	stats.wisdom = float(_critter.stats.wisdom)
+	baseStats = stats.duplicate(true)
 	
 	level = _critter.level
 	hp = int(_critter.hp)

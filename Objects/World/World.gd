@@ -150,6 +150,7 @@ func setUpGameObjects(_playerData = null):
 	
 	Globals.mutex.unlock()
 	generationDone = true
+	call_deferred("wait_to_finish")
 
 func _input(_event):
 	if !inStartScreen:

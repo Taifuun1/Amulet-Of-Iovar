@@ -112,12 +112,13 @@ func create(_data = null):
 	maxmp = _playerData.mp
 	shields = 0
 	
-	stats.strength = _playerData.stats.strength
-	stats.legerity = _playerData.stats.legerity
-	stats.balance = _playerData.stats.balance
-	stats.belief = _playerData.stats.belief
-	stats.visage = _playerData.stats.visage
-	stats.wisdom = _playerData.stats.wisdom
+	stats.strength = float(_playerData.stats.strength)
+	stats.legerity = float(_playerData.stats.legerity)
+	stats.balance = float(_playerData.stats.balance)
+	stats.belief = float(_playerData.stats.belief)
+	stats.visage = float(_playerData.stats.visage)
+	stats.wisdom = float(_playerData.stats.wisdom)
+	baseStats = stats.duplicate(true)
 	
 	hpIncrease = _playerData.hpIncrease
 	mpIncrease = _playerData.mpIncrease
@@ -136,7 +137,9 @@ func create(_data = null):
 	
 	resistances = _playerData.resistances
 	
-	calories = 3000
+	statusEffects.confusion = 10
+	
+	calories = 808
 	previousCalories = calories
 	
 	goldPieces = _playerData.goldPieces
@@ -397,24 +400,33 @@ func processPlayerSpecificEffects():
 		else:
 			calories -= 2
 	
+	statusStates.hunger.previous = statusStates.hunger.current
+	
 	# Check if player becomes less hungry
 	if previousCalories < 800 and calories >= 800:
+		statusStates.hunger.current = 0
 		Globals.gameConsole.addLog("You are no longer hungry.")
 	elif previousCalories < 400 and calories >= 400 and calories < 800:
+		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You only feel hungry.")
 	elif previousCalories < 200 and calories >= 200 and calories < 400:
+		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You are still very hungry.")
 	
 	# Check if player becomes more hungry
 	if previousCalories >= 800 and calories < 800 and calories >= 400:
+		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You are beginning to feel hungry.")
 	elif previousCalories >= 400 and calories < 400 and calories >= 200:
+		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You feel very hungry.")
 	elif previousCalories >= 200 and calories < 200 and calories > 0:
+		statusStates.hunger.current = 2
 		Globals.gameConsole.addLog("You are starving!")
 	elif calories <= 0:
 		hp -= 2
 		if previousCalories > 0:
+			statusStates.hunger = 0
 			Globals.gameConsole.addLog("You are famished!")
 	
 	previousCalories = calories
@@ -457,6 +469,78 @@ func processPlayerSpecificEffects():
 		else:
 			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_statusEffect)
+	
+	# Deal with status states in UI
+	var _currentHungerStateType = null
+	var _currentWeightStateType = null
+	var _previousHungerStateType = null
+	var _previousWeightStateType = null
+	for _statusState in statusStates:
+		if _statusState.matchn("hunger"):
+			if statusStates[_statusState].current == 1:
+				_currentHungerStateType = "hungry"
+			elif statusStates[_statusState].current == 2:
+				_currentHungerStateType = "malnourished"
+			elif statusStates[_statusState].current == 3:
+				_currentHungerStateType = "famished"
+			if statusStates[_statusState].previous == 1:
+				_previousHungerStateType = "hungry"
+			elif statusStates[_statusState].previous == 2:
+				_previousHungerStateType = "malnourished"
+			elif statusStates[_statusState].previous == 3:
+				_previousHungerStateType = "famished"
+			if (statusStates[_statusState].current > 0 or statusStates[_statusState].current == -1) and _currentHungerStateType != null:
+				if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_currentHungerStateType):
+					$"/root/World/UI/UITheme/GameStats".addStatusEffect(_currentHungerStateType)
+					var _damageNumber = damageNumber.instance()
+					_damageNumber.create($"/root/World".level.getCritterTile(0), _currentHungerStateType.capitalize(), statusEffectsData.statusEffectsData[_currentHungerStateType].color)
+					$"/root/World/Texts".add_child(_damageNumber)
+			if (
+				(_previousHungerStateType != null and _currentHungerStateType != null and !_previousHungerStateType.matchn(_currentHungerStateType)) or
+				(_previousHungerStateType != null and _currentHungerStateType == null)
+			):
+				if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_previousHungerStateType):
+					$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_previousHungerStateType)
+		elif _statusState.matchn("weight"):
+			if statusStates[_statusState].current == 1:
+				_currentWeightStateType = "overencumbured"
+			elif statusStates[_statusState].current == 2:
+				_currentWeightStateType = "burdened"
+			elif statusStates[_statusState].current == 3:
+				_currentWeightStateType = "flattened"
+			if statusStates[_statusState].previous == 1:
+				_previousWeightStateType = "overencumbured"
+			elif statusStates[_statusState].previous == 2:
+				_previousWeightStateType = "burdened"
+			elif statusStates[_statusState].previous == 3:
+				_previousWeightStateType = "flattened"
+			if (statusStates[_statusState].current > 0 or statusStates[_statusState].current == -1) and _currentWeightStateType != null:
+				if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_currentWeightStateType):
+					$"/root/World/UI/UITheme/GameStats".addStatusEffect(_currentWeightStateType)
+					var _damageNumber = damageNumber.instance()
+					_damageNumber.create($"/root/World".level.getCritterTile(0), _currentWeightStateType.capitalize(), statusEffectsData.statusEffectsData[_currentWeightStateType].color)
+					$"/root/World/Texts".add_child(_damageNumber)
+			if (
+				(_previousWeightStateType != null and _currentWeightStateType != null and !_previousWeightStateType.matchn(_currentWeightStateType)) or
+				(_previousWeightStateType != null and _currentWeightStateType == null)
+			):
+				if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_previousWeightStateType):
+					$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_previousWeightStateType)
+	
+	# Deal with status effect and status state stat changes
+	var _stats = baseStats.duplicate(true)
+	for _statusEffect in statusEffects.keys():
+		if statusEffects[_statusEffect] > 0 and statusEffectsData.statusEffectsData[_statusEffect].has("effects"):
+			for _stat in statusEffectsData.statusEffectsData[_statusEffect].effects:
+				_stats[_stat] += statusEffectsData.statusEffectsData[_statusEffect].effects[_stat]
+	if _currentWeightStateType != null and statusEffectsData.statusEffectsData[_currentWeightStateType].has("effects"):
+		for _stat in statusEffectsData.statusEffectsData[_currentWeightStateType].effects:
+			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
+	if _currentWeightStateType != null and statusEffectsData.statusEffectsData[_currentWeightStateType].has("effects"):
+		for _stat in statusEffectsData.statusEffectsData[_currentWeightStateType].effects:
+			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
+	
+	stats = _stats
 	
 	###########
 	## Tools ##
@@ -524,13 +608,19 @@ func calculateWeightStats():
 	
 	var _weight = $Inventory.currentWeight
 	
+	statusStates.weight.previous = statusStates.weight.current
+	
 	if _weight <= maxCarryWeight.overEncumbured:
+		statusStates.weight.current = 0
 		turnsUntilAction = 0
 	elif _weight > maxCarryWeight.overEncumbured and _weight <= maxCarryWeight.burdened:
+		statusStates.weight.current = 1
 		turnsUntilAction = 1
 	elif _weight > maxCarryWeight.burdened and _weight <= maxCarryWeight.flattened:
+		statusStates.weight.current = 2
 		turnsUntilAction = 2
 	elif _weight > maxCarryWeight.flattened:
+		statusStates.weight.current = 3
 		turnsUntilAction = 3
 	
 	if _weight > 0 and _weight <= maxCarryWeight.overEncumbured:
@@ -603,30 +693,27 @@ func addExp(_expAmount):
 func gainLevel():
 	level += 1
 	
-	maxhp += hpIncrease + int(stats.balance / 5)
-	maxmp += mpIncrease + int(stats.wisdom / 5)
-	if hp + hpIncrease + int(stats.balance / 5) >= maxhp:
+	maxhp += hpIncrease + int(baseStats.balance / 5)
+	maxmp += mpIncrease + int(baseStats.wisdom / 5)
+	if hp + hpIncrease + int(baseStats.balance / 5) >= maxhp:
 		hp = maxhp
 	else:
-		hp += hpIncrease + int(stats.balance / 5)
-	if mp + mpIncrease + int(stats.wisdom / 5) >= maxmp:
+		hp += hpIncrease + int(baseStats.balance / 5)
+	if mp + mpIncrease + int(baseStats.wisdom / 5) >= maxmp:
 		mp = maxmp
 	else:
-		mp += mpIncrease + int(stats.wisdom / 5)
-	stats.strength += strengthIncrease
-	stats.legerity += legerityIncrease
-	stats.balance += balanceIncrease
-	stats.belief += beliefIncrease
-	stats.visage += visageIncrease
-	stats.wisdom += wisdomIncrease
+		mp += mpIncrease + int(baseStats.wisdom / 5)
+	baseStats.strength += strengthIncrease
+	baseStats.legerity += legerityIncrease
+	baseStats.balance += balanceIncrease
+	baseStats.belief += beliefIncrease
+	baseStats.visage += visageIncrease
+	baseStats.wisdom += wisdomIncrease
 	
 	experienceNeededForPreviousLevelGainAmount = experienceNeededForLevelGainAmount
 	experienceNeededForLevelGainAmount = experienceNeededForLevelGainAmount + (experienceNeededForLevelGainAmount / 2)
 	
 	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
-	
-	calculateWeightStats()
-	updatePlayerStats()
 
 func updatePlayerStats():
 	var _totalBonusDamage = 0

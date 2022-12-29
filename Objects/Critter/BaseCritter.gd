@@ -31,6 +31,14 @@ var attacks = [{
 var currentHit
 var hits
 
+var baseStats = {
+	"strength": 0,
+	"legerity": 0,
+	"balance": 0,
+	"belief": 0,
+	"visage": 0,
+	"wisdom": 0
+}
 var stats = {
 	"strength": 0,
 	"legerity": 0,
@@ -60,8 +68,14 @@ var statusEffects = {
 	"onFleir": 0
 }
 var statusStates = {
-	"hunger": 0,
-	"weight": 0
+	"hunger": {
+		"current": 0,
+		"previous": 0
+	},
+	"weight": {
+		"current": 0,
+		"previous": 0
+	}
 }
 
 var hpRegenTimer = 0
@@ -293,6 +307,7 @@ func getBaseCritterSaveData():
 		attacks = attacks,
 		currentHit = currentHit,
 		hits = hits,
+		baseStats = baseStats,
 		stats = stats,
 		abilities = abilities,
 		resistances = resistances,
