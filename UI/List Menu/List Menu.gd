@@ -13,7 +13,7 @@ func create():
 	hide()
 
 func showListMenuList(_title, _items, _usedItem = null, _changeMenuItems = false, _additionalData = null):
-	$ListMenuMargin/Title.text = _title
+	$ListMenuContainer/Title.text = _title
 	items = _items
 	if _usedItem != null:
 		usedItemName = _usedItem.identifiedItemName
@@ -26,11 +26,11 @@ func showListMenuList(_title, _items, _usedItem = null, _changeMenuItems = false
 			newItem.setValues(_item, _changeMenuItems, _additionalData.letters[_item])
 		else:
 			newItem.setValues(_item, _changeMenuItems)
-		$ListMenuMargin/ListMenuScrollMargin/ListMenuContainer/ListMenuContent.add_child(newItem)
+		$ListMenuContainer/ListMenuCenterContainer/ListMenuContent.add_child(newItem)
 	show()
 
 func hideListMenuList(_resetData = false):
-	for _item in $ListMenuMargin/ListMenuScrollMargin/ListMenuContainer/ListMenuContent.get_children():
+	for _item in $ListMenuContainer/ListMenuCenterContainer/ListMenuContent.get_children():
 		_item.queue_free()
 	items = []
 	if _resetData:
