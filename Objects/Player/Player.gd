@@ -221,7 +221,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE or
 		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP
 	):
-		if inventory.checkIfItemInInventoryByName("pickaxe"):
+		if $Inventory.checkIfItemInInventoryByName("pickaxe"):
 			if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.EMPTY:
 				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE
 			elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE:
@@ -249,7 +249,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 				Globals.gameConsole.addLog("You free yourself from the spider web.")
 				if randi() % 8 == 0:
 					# TODO: spider spawn
-					Globals.gameConsole.addLog("Spider jumps out from the spider web!")
+					Globals.gameConsole.addLog("Spider jumps out from the spider web! (UN_IMPL)")
 			else:
 				Globals.gameConsole.addLog("You are still stuck in the spider web.")
 		else:
@@ -831,9 +831,9 @@ func checkSkillExperience():
 func getGameOverStats():
 	var _stats = {  }
 	
-	_stats.points = $"/root/World/Critters/0".inventory.getPoints()
+	_stats.points = $"/root/World/Critters/0/nventory".getPoints()
 	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
-	_stats.inventoryItems = $"/root/World/Critters/0".inventory.getInventoryItems()
+	_stats.inventoryItems = $"/root/World/Critters/0/Inventory".getInventoryItems()
 	_stats.gameStats = GlobalGameStats.getGameStats()
 	
 	return _stats

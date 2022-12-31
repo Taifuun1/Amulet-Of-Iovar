@@ -149,6 +149,52 @@ func readItem(_id):
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
 				Globals.isItemIdentified(_readItem)
+			"scroll of remove curse":
+				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
+				var _uncursableItems = []
+				for _itemId in _equipmentNode.hands:
+					if _itemId != null:
+						var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+						if _item.binds != null:
+							_uncursableItems.append(_item)
+				if (
+					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
+					_uncursableItems.empty()
+				):
+					for _itemId in _equipmentNode.accessories:
+						if _itemId != null:
+							var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+							if _item.binds != null:
+								_uncursableItems.append(_item)
+				if (
+					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
+					_uncursableItems.empty()
+				):
+					for _itemId in _equipmentNode.equipment:
+						if _itemId != null:
+							var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+							if _item.binds != null:
+								_uncursableItems.append(_item)
+				if (
+					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
+					_uncursableItems.empty()
+				):
+					for _itemId in $Inventory.inventory:
+						if _itemId != null:
+							var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+							if _item.binds != null:
+								_uncursableItems.append(_item)
+				if !_uncursableItems.empty():
+					for _item in _uncursableItems:
+						if _readItem.alignment.matchn("cursed"):
+							_item.binds.state = "Bound"
+							Globals.gameConsole.addLog("The {itemname} glows with a violet light.".format({ "itemName": _item.itemName }))
+							continue
+						_item.binds.state = "Unbound"
+						Globals.gameConsole.addLog("The {itemname} glows with a light yellow light.".format({ "itemName": _item.itemName }))
+					Globals.isItemIdentified(_readItem)
+				else:
+					Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of enchant weapon":
 				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
 				var _areHandsEmpty = true
@@ -184,6 +230,69 @@ func readItem(_id):
 									Globals.gameConsole.addLog("The {itemname} glows with a cyan light.".format({ "itemName": _item.itemName }))
 								else:
 									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+					Globals.isItemIdentified(_readItem)
+				else:
+					Globals.gameConsole.addLog("Nothing happens...")
+			"scroll of enchant armor":
+				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
+				var _areEquipmentEmpty = true
+				for _itemId in _equipmentNode.equipment:
+					if _itemId != null:
+						_areEquipmentEmpty = false
+				if !_areEquipmentEmpty:
+					if _readItem.alignment.matchn("blessed"):
+						for _itemId in _equipmentNode.equipment.values():
+							if _itemId != null:
+								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+								if _item.enchantment < 5:
+									_item.enchantment += 1
+									Globals.gameConsole.addLog("The {itemname} glows with a light green light.".format({ "itemName": _item.itemName }))
+								else:
+									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+					elif _readItem.alignment.matchn("uncursed"):
+						for _itemId in _equipmentNode.equipment.values():
+							if _itemId != null:
+								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+								if _item.enchantment < 5:
+									_item.enchantment += 1
+									Globals.gameConsole.addLog("The {itemname} glows with a light green light.".format({ "itemName": _item.itemName }))
+								else:
+									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+								break
+					elif _readItem.alignment.matchn("cursed"):
+						for _itemId in _equipmentNode.equipment.values():
+							if _itemId != null:
+								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+								if _item.enchantment > -5:
+									_item.enchantment -= 1
+									Globals.gameConsole.addLog("The {itemname} glows with a cyan light.".format({ "itemName": _item.itemName }))
+								else:
+									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+					Globals.isItemIdentified(_readItem)
+				else:
+					Globals.gameConsole.addLog("Nothing happens...")
+			"scroll of destroy armor":
+				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
+				var _areEquipmentEmpty = true
+				for _itemId in _equipmentNode.equipment:
+					if _itemId != null:
+						_areEquipmentEmpty = false
+				if !_areEquipmentEmpty:
+					if _readItem.alignment.matchn("blessed"):
+						for _itemId in _equipmentNode.equipment.values():
+							if _itemId != null:
+								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+								if _item.enchantment > -5:
+									_item.enchantment -= 1
+									Globals.gameConsole.addLog("The {itemname} glows with a cyan light.".format({ "itemName": _item.itemName }))
+								else:
+									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+								break
+					else:
+						for _itemId in _equipmentNode.equipment.values():
+							if _itemId != null:
+								$"/root/World/Items/Items".removeItem(_itemId)
+								break
 					Globals.isItemIdentified(_readItem)
 				else:
 					Globals.gameConsole.addLog("Nothing happens...")

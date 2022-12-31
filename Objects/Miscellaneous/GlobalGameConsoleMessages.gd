@@ -3,7 +3,7 @@ extends Node
 var globalGameConsoleMessages = {
 	"Iovar": {
 		"spawn": [
-			"Thee shall not escape, cur!",
+			"Thou shalt not escape, cur!",
 			"I return!",
 			"Thee cannot run!"
 		],
@@ -13,8 +13,8 @@ var globalGameConsoleMessages = {
 			"Hell awaits thee!",
 			"Hell awaits ye!",
 			"Hell awaits ye, thug!",
-			"Thee shall not steal mine trinket!",
-			"Thee royalty is inadequate, cur!",
+			"Thee shalt not steal mine trinket!",
+			"Thee royalty is inadequate, jester!",
 			"Thee hairline is receding!"
 		],
 		"spell": [
@@ -25,6 +25,7 @@ var globalGameConsoleMessages = {
 		"despawn": [
 			"'Tis but a scratch...",
 			"I shall return...",
+			"I shall return... Cur...",
 			"Mine innards, leave not..."
 		]
 	}
