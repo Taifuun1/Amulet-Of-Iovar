@@ -301,7 +301,7 @@ func _input(_event):
 				saveGame()
 			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
 				keepMoving = true
-			elif Input.is_action_just_pressed("takedmg") and currentGameState == gameState.GAME:
+			elif Input.is_action_just_pressed("GODS_WRATH") and currentGameState == gameState.GAME:
 				$Critters/"0".takeDamage([
 					{
 						"dmg": [9999, 99999],

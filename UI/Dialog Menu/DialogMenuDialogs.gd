@@ -31,7 +31,7 @@ var dialogMenuDialogs = {
 		"""
 	},
 	"Iovar": {
-		"title": "Iovar, The Cultist",
+		"title": "Iovar, The Cultist Leader",
 		"text": """You face Iovar.
 		"Die, fiend!"
 		"""

@@ -71,6 +71,8 @@ func _ready():
 		if !_node.name.matchn("dancing dragons"):
 			_node.hide()
 	
+	yield(get_tree().create_timer(0.01), "timeout")
+	
 	var saveData = $Save.loadData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
 	if saveData.hasSave:
 		$UI/UITheme/"Dancing Dragons".setLoadingText("Loading game...")

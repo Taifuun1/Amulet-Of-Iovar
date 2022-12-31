@@ -201,15 +201,15 @@ var globalCritterInfo = {
 		"population": 32,
 		"crittersInPlay": 0
 	},
+	"Unstable floating sphere": {
+		"population": 32,
+		"crittersInPlay": 0
+	},
 	"Freezing floating sphere": {
 		"population": 32,
 		"crittersInPlay": 0
 	},
 	"Thunderous floating sphere": {
-		"population": 32,
-		"crittersInPlay": 0
-	},
-	"Unstable floating sphere": {
 		"population": 32,
 		"crittersInPlay": 0
 	},

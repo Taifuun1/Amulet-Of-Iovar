@@ -381,8 +381,6 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				_pickedAbility.abilityType.matchn("onAttack") and
 				mp - _pickedAbility.data.mp >= 0
 			):
-				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
-				mp -= _pickedAbility.data.mp
 				if (
 					_pickedAbility.abilityName.matchn("selfdestruct") or
 					_pickedAbility.abilityName.matchn("frostSelfdestruct") or
@@ -400,6 +398,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					if !checkIfStatusEffectIsPermanent("fumbling"):
 						statusEffects.fumbling = 3
 					Globals.gameConsole.addLog("{critterName} touches you. The cold makes you shiver shiver!".format({ "critterName": critterName }))
+				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
+				mp -= _pickedAbility.data.mp
 			elif (
 				abilityHits.size() != 0 and
 				abilityHits[currentCritterAbilityHit] == 1 and
@@ -557,6 +557,9 @@ func despawn(_critterTile = null, createCorpse = true):
 		_gridPosition = _level.getCritterTile(id)
 	else:
 		_gridPosition = _critterTile
+	
+	if GlobalGameConsoleMessages.globalGameConsoleMessages.has(critterName):
+		Globals.gameConsole.addLog(GlobalGameConsoleMessages.getRandomMessageByType(critterName, "despawn"))
 	
 	if createCorpse:
 		$"/root/World/Items/Items".createItem("corpse", _gridPosition, 1, false, { "weight": weight, "critterName": critterName })

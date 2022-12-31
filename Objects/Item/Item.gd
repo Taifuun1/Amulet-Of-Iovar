@@ -68,7 +68,9 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	else:
 		weight = int(_item.weight)
 	
-	if category != null and category.matchn("container"):
+	if _item.has("container") and _item.container != null:
+		addContainer({  }, _item.container)
+	elif category != null and category.matchn("container"):
 		addContainer(_extraData)
 	
 	value = _item.value
@@ -331,8 +333,8 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 	if _identifyEnchantment:
 		notIdentified.enchantment = true
 
-func addContainer(_extraData):
-	container = []
+func addContainer(_extraData = {  }, _containerContents = []):
+	container = _containerContents
 	containerWeight = weight
 	
 	if _extraData.has("randomSpawn") and _extraData.randomSpawn == true:
