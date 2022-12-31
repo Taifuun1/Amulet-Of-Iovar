@@ -87,7 +87,9 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 		else:
 			alignment = "uncursed"
 	
-	if _item.has("enchantable") and _item.enchantable:
+	if _item.has("enchantment"):
+		enchantment = _item.enchantment
+	elif _item.has("enchantable") and _item.enchantable:
 		if randi() % 8 == 1:
 			if randi() % 2 == 1:
 				enchantment = randi() % 4
@@ -95,8 +97,6 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 				enchantment = -randi() % 4
 		else:
 			enchantment = 0
-	elif _item.has("enchantment"):
-		enchantment = _item.enchantment
 	else:
 		enchantment = 0
 	

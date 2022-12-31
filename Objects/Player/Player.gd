@@ -592,12 +592,6 @@ func processPlayerSpecificEffects():
 			"magic lamp":
 				if playerVisibility.distance != 0:
 					playerVisibility.distance = _item.value.value
-	
-	if hp <= 0:
-		Globals.gameConsole.addLog("You die...")
-		$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
-		$"/root/World/UI/UITheme/Game Over Stats".setValues("You die!", getGameOverStats())
-		$"/root/World/UI/UITheme/Game Over Stats".show()
 
 func calculateWeightStats():
 	maxCarryWeight = {

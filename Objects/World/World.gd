@@ -318,7 +318,8 @@ func _input(_event):
 func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	if _playerTile != null:
 		processPlayerAction(_playerTile, _tileToMoveTo)
-		processManyGameTurnsWithoutPlayerActionsAndWithoutSafety()
+		if !processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
+			return false
 	processPlayerEffects()
 	processEnemyActions()
 	processEffects()
@@ -326,6 +327,7 @@ func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	drawLevel()
 	updateTiles()
 	updateStats()
+	checkGameOver()
 
 func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
 	for _turn in $Critters/"0".turnsUntilAction:
@@ -336,6 +338,8 @@ func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
 		drawLevel()
 		updateTiles()
 		updateStats()
+		if checkGameOver():
+			return false
 
 func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
 	for _turn in _turnAmount:
@@ -346,6 +350,8 @@ func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
 		drawLevel()
 		updateTiles()
 		updateStats()
+		if checkGameOver():
+			return false
 		if _isPlayerHit:
 			return false
 	return true
@@ -503,6 +509,14 @@ func updateUI():
 
 func updateStats():
 	GlobalGameStats.gameStats["Turn count"] += 1
+
+func checkGameOver():
+	if $Critters/"0".hp <= 0:
+		Globals.gameConsole.addLog("You die...")
+		currentGameState = $"/root/World".gameState.GAME_OVER
+		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".getGameOverStats())
+		$"UI/UITheme/Game Over Stats".show()
+		return false
 
 func keepMovingLoop(_playerTile, _tileToMoveTo):
 	var _currentTile = _playerTile
@@ -923,7 +937,22 @@ func interactWith(_tileToInteractWith):
 	resetToDefaulGameState()
 
 func kickAt(_tileToKickAt):
-	if level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
+	if level.grid[_tileToKickAt.x][_tileToKickAt.y].critter != null:
+		Globals.gameConsole.addLog("You kick the {critterName}!".format({ "critterName": "Critters/{critterId}".format({ "critterId": level.grid[_tileToKickAt.x][_tileToKickAt.y].critter }) }))
+		var _randomDmg = randi() % 3 + 1
+		var _strengthDmgIncrease = int($Critter/"0".stats.strength / 5)
+		get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToKickAt.x][_tileToKickAt.y].critter })).takeDamage(
+			{
+				"dmg": [_randomDmg, _randomDmg + _strengthDmgIncrease],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			}
+		)
+	elif level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
 		if randi () % 20 == 0:
 			level.grid[_tileToKickAt.x][_tileToKickAt.y].tile = Globals.tiles.DOOR_OPEN
 			level.grid[_tileToKickAt.x][_tileToKickAt.y].interactable = null

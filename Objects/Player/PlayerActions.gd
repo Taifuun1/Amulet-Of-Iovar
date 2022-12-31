@@ -18,10 +18,11 @@ func readItem(_id):
 			"official mail":
 				Globals.gameConsole.addLog("Its a grocery list of milk and eggs. Riveting.")
 				Globals.gameConsole.addLog("The mail disappears!")
+				Globals.isItemIdentified(_readItem)
 			"scroll of identify":
 				var _items = $"/root/World/Critters/0/Inventory".inventory.duplicate(true)
 				if _items.empty():
-					Globals.gameConsole.addLog("You hear strange whispers in your head. LLLLLL......")
+					Globals.gameConsole.addLog("Nothing happens...")
 				else:
 					var _identifiableItemsInInventory = false
 					if !_readItem.alignment.matchn("cursed"):
@@ -35,6 +36,7 @@ func readItem(_id):
 									_identifiableItemsInInventory = true
 									_itemInInventory.identifyItem(true, true, true)
 									Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _itemInInventory.identifiedItemName, "unidentifiedItemName": _itemInInventory.unidentifiedItemName }))
+									Globals.isItemIdentified(_readItem)
 						else:
 							while true:
 								if _items.empty():
@@ -46,8 +48,9 @@ func readItem(_id):
 									GlobalItemInfo.globalItemInfo[_randomItemInInventory.identifiedItemName].identified == false
 								):
 									_randomItemInInventory.identifyItem(true, true, true)
-									Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _randomItemInInventory.identifiedItemName, "unidentifiedItemName": _randomItemInInventory.unidentifiedItemName }))
 									_identifiableItemsInInventory = true
+									Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _randomItemInInventory.identifiedItemName, "unidentifiedItemName": _randomItemInInventory.unidentifiedItemName }))
+									Globals.isItemIdentified(_readItem)
 									break
 								_items.erase(_item)
 					if !_identifiableItemsInInventory:
@@ -61,10 +64,11 @@ func readItem(_id):
 								):
 									_itemInInventory.identifyItem(true, true, true)
 									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _itemInInventory.itemName }))
+									Globals.isItemIdentified(_readItem)
 						else:
 							while true:
 								if _items.empty():
-									Globals.gameConsole.addLog("You hear strange whispers in your head. LLLLLL......")
+									Globals.gameConsole.addLog("Nothing happens...")
 									break
 								var _item = _items[randi() % _items.size()]
 								var _randomItemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
@@ -74,6 +78,7 @@ func readItem(_id):
 								):
 									_randomItemInInventory.identifyItem(true, true, true)
 									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _randomItemInInventory.itemName }))
+									Globals.isItemIdentified(_readItem)
 									break
 								_items.erase(_item)
 			"scroll of create food":
@@ -109,6 +114,7 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				Globals.isItemIdentified(_readItem)
 			"scroll of create potion":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.alignment.matchn("blessed"):
@@ -142,6 +148,45 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				Globals.isItemIdentified(_readItem)
+			"scroll of enchant weapon":
+				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
+				var _areHandsEmpty = true
+				for _itemId in _equipmentNode.hands:
+					if _itemId != null:
+						_areHandsEmpty = false
+				if !_areHandsEmpty:
+					if _readItem.alignment.matchn("blessed"):
+						for _itemId in _equipmentNode.hands.values():
+							if _itemId != null:
+								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+								if _item.enchantment < 5:
+									_item.enchantment += 1
+									Globals.gameConsole.addLog("The {itemname} glows with a light green light.".format({ "itemName": _item.itemName }))
+								else:
+									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+					elif _readItem.alignment.matchn("uncursed"):
+						for _itemId in _equipmentNode.hands.values():
+							if _itemId != null:
+								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+								if _item.enchantment < 5:
+									_item.enchantment += 1
+									Globals.gameConsole.addLog("The {itemname} glows with a light green light.".format({ "itemName": _item.itemName }))
+								else:
+									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+								break
+					elif _readItem.alignment.matchn("cursed"):
+						for _itemId in _equipmentNode.hands.values():
+							if _itemId != null:
+								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+								if _item.enchantment > -5:
+									_item.enchantment -= 1
+									Globals.gameConsole.addLog("The {itemname} glows with a cyan light.".format({ "itemName": _item.itemName }))
+								else:
+									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+					Globals.isItemIdentified(_readItem)
+				else:
+					Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of summon critter":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.alignment.matchn("blessed"):
@@ -150,6 +195,7 @@ func readItem(_id):
 					if !_tiles.empty():
 						for _tile in _tiles:
 							Globals.gameConsole.addLog("A {critterName} appears beside you. It seems friendly.".format({ "critterName": $"/root/World/Critters/Critters".spawnCritter(_critter, _tile) }))
+						Globals.isItemIdentified(_readItem)
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
 				elif _readItem.alignment.matchn("uncursed"):
@@ -157,6 +203,7 @@ func readItem(_id):
 					if !_tiles.empty():
 						for _tile in _tiles:
 							Globals.gameConsole.addLog("A {critterName} appears beside you!".format({ "critterName": $"/root/World/Critters/Critters".spawnRandomCritter(_tile) }))
+						Globals.isItemIdentified(_readItem)
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
 				elif _readItem.alignment.matchn("cursed"):
@@ -165,6 +212,7 @@ func readItem(_id):
 						for _tile in _tiles:
 							$"/root/World/Critters/Critters".spawnRandomCritter(_tile)
 						Globals.gameConsole.addLog("A bucketload of critters appear around you!")
+						Globals.isItemIdentified(_readItem)
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of genocide":
@@ -192,11 +240,13 @@ func readItem(_id):
 							_aliveCritters.append(_critterName)
 				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters, _readItem)
 				_additionalChoices = true
+				Globals.isItemIdentified(_readItem)
 			"scroll of teleport":
 				if dealWithTeleport(0, _readItem.alignment):
 					Globals.gameConsole.addLog("Whoosh! You reappear somewhere!")
+					Globals.isItemIdentified(_readItem)
 				else:
-					Globals.gameConsole.addLog("It doesn't seem you have space to teleport...")
+					Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of confusion":
 				if statusEffects.confusion != -1:
 					if _readItem.alignment.matchn("blessed"):
@@ -210,9 +260,9 @@ func readItem(_id):
 						Globals.gameConsole.addLog("The world spins!")
 				else:
 					Globals.gameConsole.addLog("You already feel confused enough!")
+				Globals.isItemIdentified(_readItem)
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
-		Globals.isItemIdentified(_readItem)
 		checkAllIdentification(true)
 		if !_readItem.identifiedItemName.to_lower().matchn("blank scroll"):
 			if _readItem.amount > 1:
