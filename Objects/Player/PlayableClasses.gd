@@ -1,7 +1,8 @@
 
 var archeologist = {
 	critterName = "Archeologist",
-	description = "Archeologist scours temples and dungeons for valuables. Has a chance of getting multiple gems from mined minerals.",
+	skill = "Has a chance of getting multiple gems from mined minerals.",
+	quote = "That belongs in a museum!",
 	race = "Human",
 	justice = "Grilling",
 	hp = 14,
@@ -67,7 +68,8 @@ var archeologist = {
 
 var banker = {
 	critterName = "Banker",
-	description = "Banker exploits the free markets for gold and valuables. Has high starting gold and gets discounts at shops.",
+	skill = "Banker exploits the free markets for gold and valuables. Has high starting gold and gets discounts at shops.",
+	quote = "The free market is the cornerstone of society.",
 	race = "Human",
 	justice = "Laissez-faire",
 	hp = 11,
@@ -136,7 +138,8 @@ var banker = {
 
 var freedomFighter = {
 	critterName = "Freedom fighter",
-	description = "Get +2 to all Gleeie'er damage.",
+	skill = "Get +2 to all Gleeie'er damage.",
+	quote = "Overthrow the burgoisee!",
 	race = "Human",
 	justice = "Draconian",
 	hp = 18,
@@ -202,7 +205,8 @@ var freedomFighter = {
 
 var herbalogue = {
 	critterName = "Herbalogue",
-	description = "Herbalogue has extensive knowledge of herbs. Gets a third more calories from eating.",
+	skill = "Gets a third more calories from eating.",
+	quote = "I need to wash my hands. Wheres the cleansing powder?",
 	race = "Human",
 	justice = "Grilling",
 	hp = 10,
@@ -268,7 +272,8 @@ var herbalogue = {
 
 var mercenary = {
 	critterName = "Mercenary",
-	description = "Gets +1 to all physical damage.",
+	skill = "Gets +1 to all physical damage.",
+	quote = "Theres three important things in life: Combat, Coin, and Women.",
 	race = "Human",
 	justice = "Grilling",
 	hp = 20,
@@ -339,7 +344,8 @@ var mercenary = {
 
 var exterminator = {
 	critterName = "Exterminator",
-	description = "Exterminator has gone mad with power. Gets +2 to all fleir damage.",
+	skill = "Exterminator has gone mad with power. Gets +2 to all fleir damage.",
+	quote = "He tells me to burn things.",
 	race = "Human",
 	justice = "Draconian",
 	hp = 8,
@@ -397,7 +403,8 @@ var exterminator = {
 
 var rogue = {
 	critterName = "Rogue",
-	description = "Rogue uses a cloak and dagger from the shadows. Gets +1 to all toxix damage and +1 bonus damage from using daggers.",
+	skill = "Rogue uses a cloak and dagger from the shadows. Gets +1 to all toxix damage and +1 bonus damage from using daggers.",
+	quote = "I'm darker than the blackest night.",
 	race = "Human",
 	justice = "Laissez-faire",
 	hp = 12,
@@ -468,7 +475,8 @@ var rogue = {
 
 var savant = {
 	critterName = "Savant",
-	description = "Savant is a 1400 year old wizard. Gets +3 frost and thunder spell damage.",
+	skill = "Savant is a 1400 year old wizard. Gets +3 frost and thunder spell damage.",
+	quote = "We used to cast spells uphill both ways.",
 	race = "Human",
 	justice = "Grilling",
 	hp = 8,

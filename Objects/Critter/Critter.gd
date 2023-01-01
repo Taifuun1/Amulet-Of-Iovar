@@ -86,21 +86,23 @@ func createAi(_aI = "aggressive", _aggroDistance = -1, _activationDistance = nul
 func isCritterAwakened(_critterTile, _playerTile, _level):
 	if aI.activationDistance != null:
 		if _level.calculatePath(_critterTile, _playerTile).size() <= aI.activationDistance:
-			awakeCritter()
+			awakeCritter(_critterTile, _playerTile)
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
 
-func awakeCritter(_level = $"/root/World".level):
+func awakeCritter(_critterTile, _playerTile):
 	aI.aI = "Aggressive"
 	aI.activationDistance = null
-	for _critter in _level.critters:
-		if get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).aI.aI.matchn("Deactivated"):
-			get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).awakeCritter()
+	if GlobalGameConsoleMessages.globalGameConsoleMessages.has(critterName) and $"/root/World".level.calculatePath(_critterTile, _playerTile).size() <= 11:
+		Globals.gameConsole.addLog(GlobalGameConsoleMessages.getRandomMessageByType(critterName, "activated"))
+	for _critterId in $"/root/World".level.critters:
+		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _critterId }))
+		if _critter.aI.aI.matchn("Deactivated"):
+			_critter.aI.aI = "Aggressive"
+			_critter.aI.activationDistance = null
+			if GlobalGameConsoleMessages.globalGameConsoleMessages.has(_critter.critterName) and $"/root/World".level.calculatePath(_critterTile, _playerTile).size() <= 11:
+				Globals.gameConsole.addLog(GlobalGameConsoleMessages.getRandomMessageByType(get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).critterName, "activated"))
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
-	if statusEffects.stun > 0:
-		Globals.gameConsole.addLog("The {critter} cant move!".format({ "critter": critterName.capitalize() }))
-		return false
-	
 	var _path = []
 	var _distanceFromPlayer = []
 	
@@ -110,6 +112,9 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
 		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
 	
+	if statusEffects.stun > 0:
+		Globals.gameConsole.addLog("The {critter} cant move!".format({ "critter": critterName.capitalize() }))
+		return false
 	if typeof(_path) == TYPE_BOOL or isMimicked:
 		return false
 	
@@ -118,6 +123,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			currentCritterAbilityHit = 0
 		else:
 			currentCritterAbilityHit += 1
+	
+	checkIfAddFlavorGamelog("taunt")
 	
 	var _pickedAbility
 	if abilityHits.size() != 0 and abilityHits[currentCritterAbilityHit] == 1 and abilities.size() != 0:
@@ -135,6 +142,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					Globals.gameConsole.addLog("{critter} tries to cast a spell but nothing happens!".format({ "critter": critterName }))
 					return false
 			else:
+				checkIfAddFlavorGamelog("spell")
 				match _pickedAbility.abilityType:
 					"rangedSpell":
 						var _tiles = []
@@ -348,6 +356,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		# Tile to move to
 		var _moveCritterTo = _path[1]
 		
+		# Blindness check
 		if statusEffects.blindness > 0:
 			if randi() % 2 == 0:
 				var _randomOpenTiles = level.checkAdjacentTilesForOpenSpace(_critterTile)
@@ -363,7 +372,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			_randomOpenTiles.shuffle()
 			_moveCritterTo = _randomOpenTiles[0]
 		
-		# Player hit check
+		# Hitting player check
 		if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 			if currentHit == 15:
 				currentHit = 0
@@ -381,6 +390,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				_pickedAbility.abilityType.matchn("onAttack") and
 				mp - _pickedAbility.data.mp >= 0
 			):
+				checkIfAddFlavorGamelog("spell")
 				if (
 					_pickedAbility.abilityName.matchn("selfdestruct") or
 					_pickedAbility.abilityName.matchn("frostSelfdestruct") or
@@ -407,6 +417,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				_pickedAbility.abilityType.matchn("meleeSpell") and
 				mp - _pickedAbility.data.mp >= 0
 			):
+				checkIfAddFlavorGamelog("spell")
 				Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
 				mp -= _pickedAbility.data.mp
@@ -535,7 +546,7 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
 		if aI.aI.matchn("Deactivated"):
-			awakeCritter()
+			awakeCritter(_critterTile, $"/root/World".level.getCritterTile(0))
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
 		if isMimicked:
 			isMimicked = false
@@ -594,6 +605,12 @@ func addCritterBackToPopulation(_critterTile, _level):
 	_level.critters.erase(id)
 	GlobalCritterInfo.addCritterBackToPopulation(critterName)
 	call_deferred("queue_free")
+
+func checkIfAddFlavorGamelog(_logType):
+	if GlobalGameConsoleMessages.globalGameConsoleMessages.has(critterName) and $"/root/World".level.calculatePath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 11:
+		var _flavorMessage = GlobalGameConsoleMessages.getRandomMessageByType(critterName, _logType)
+		if _flavorMessage != null:
+			Globals.gameConsole.addLog(_flavorMessage)
 
 func checkCritterIdentification(_data):
 	if _data.knowledge:

@@ -1,7 +1,14 @@
 extends Node
 
 func getRandomMessageByType(_critterName, _messageType):
-	return GlobalGameConsoleMessages.globalGameConsoleMessages[_critterName][_messageType][randi() % GlobalGameConsoleMessages.globalGameConsoleMessages[_critterName][_messageType].size()]
+	if typeof(globalGameConsoleMessages[_critterName][_messageType]) == TYPE_STRING:
+		return globalGameConsoleMessages[_critterName][_messageType]
+	if globalGameConsoleMessages[_critterName][_messageType].has("frequency"):
+		if randi() % globalGameConsoleMessages[_critterName][_messageType].frequency == 0:
+			return globalGameConsoleMessages[_critterName][_messageType].lines[randi() % globalGameConsoleMessages[_critterName][_messageType].lines.size()]
+		return null
+	else:
+		return globalGameConsoleMessages[_critterName][_messageType][randi() % globalGameConsoleMessages[_critterName][_messageType].size()]
 
 var globalGameConsoleMessages = {
 	"Iovar": {
