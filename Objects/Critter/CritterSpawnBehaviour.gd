@@ -292,10 +292,10 @@ var critterSpawnBehaviour = {
 		"amount": [2, 4],
 		"distance": 4
 	},
-	"Grid bug": {
-		"amount": [1, 2],
-		"distance": 2
-	},
+#	"Grid bug": {
+#		"amount": [1, 2],
+#		"distance": 2
+#	},
 	"Chicken": {
 		"amount": [3, 8],
 		"distance": 6

@@ -337,10 +337,10 @@ var globalCritterInfo = {
 		"population": 68,
 		"crittersInPlay": 0
 	},
-	"Grid bug": {
-		"population": 32,
-		"crittersInPlay": 0
-	},
+#	"Grid bug": {
+#		"population": 32,
+#		"crittersInPlay": 0
+#	},
 	"Brontotheridae": {
 		"population": 46,
 		"crittersInPlay": 0

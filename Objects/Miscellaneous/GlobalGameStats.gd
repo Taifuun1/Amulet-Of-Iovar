@@ -262,9 +262,9 @@ var critters = {
 	"Chicken": {
 		"killCount": 0
 	},
-	"Grid bug": {
-		"killCount": 0
-	},
+#	"Grid bug": {
+#		"killCount": 0
+#	},
 	"Brontotheridae": {
 		"killCount": 0
 	},

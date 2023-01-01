@@ -1,56 +1,56 @@
 var others = {
 	"hostile": [],
 	"critterTypes": [
-		{
-			"critterName": "Grid bug",
-			"race": "Grid bug",
-			"class": "Other",
-			"weight": 50,
-			"aI": "Aggressive",
-			"aggroDistance": 16,
-			"texture": load("res://Assets/Critters/OtherGridBug.png"),
-			"alignment": "Neutral",
-			"level": 1,
-			"expDropAmount": 1,
-			"hp": 4,
-			"mp": 0,
-			"ac": 0,
-			"attacks": [
-				{
-					"dmg": [1,1],
-					"bonusDmg": {},
-					"armorPen": 0,
-					"magicDmg": {
-						"dmg": [0,0],
-						"element": null
-					}
-				}
-			],
-			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
-			"stats": {
-				"strength": 4,
-				"legerity": 4,
-				"balance": 4,
-				"belief": 4,
-				"visage": 4,
-				"wisdom": 3
-			},
-			"abilities": [
-				{
-					"abilityName": "gridMovement",
-					"abilityType": "skill"
-				}
-			],
-			"abilityHits": [1],
-			"resistances": ["thunder"],
-			"drops": [
-				{
-					"names": "goldPieces",
-					"chance": 50,
-					"amount": [10, 20]
-				}
-			]
-		},
+#		{
+#			"critterName": "Grid bug",
+#			"race": "Grid bug",
+#			"class": "Other",
+#			"weight": 50,
+#			"aI": "Aggressive",
+#			"aggroDistance": 16,
+#			"texture": load("res://Assets/Critters/OtherGridBug.png"),
+#			"alignment": "Neutral",
+#			"level": 1,
+#			"expDropAmount": 1,
+#			"hp": 4,
+#			"mp": 0,
+#			"ac": 0,
+#			"attacks": [
+#				{
+#					"dmg": [1,1],
+#					"bonusDmg": {},
+#					"armorPen": 0,
+#					"magicDmg": {
+#						"dmg": [0,0],
+#						"element": null
+#					}
+#				}
+#			],
+#			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+#			"stats": {
+#				"strength": 4,
+#				"legerity": 4,
+#				"balance": 4,
+#				"belief": 4,
+#				"visage": 4,
+#				"wisdom": 3
+#			},
+#			"abilities": [
+#				{
+#					"abilityName": "gridMovement",
+#					"abilityType": "skill"
+#				}
+#			],
+#			"abilityHits": [1],
+#			"resistances": ["thunder"],
+#			"drops": [
+#				{
+#					"names": "goldPieces",
+#					"chance": 50,
+#					"amount": [10, 20]
+#				}
+#			]
+#		},
 		{
 			"critterName": "Chicken",
 			"race": "Chicken",

@@ -7,7 +7,7 @@ var critterLevelGenerationList = {
 			"floatingSpheres": ["Floating eye"],
 			"kobolds": ["Tiny kobold"],
 			"newts": ["River newt"],
-			"others": ["Grid bug"],
+#			"others": ["Grid bug"],
 			"orcs": ["Goblin"]
 		}
 	},

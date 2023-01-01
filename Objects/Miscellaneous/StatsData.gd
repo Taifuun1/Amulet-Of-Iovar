@@ -1156,11 +1156,11 @@ var critters = {
 		"description": "",
 		"killCount": 0
 	},
-	"Grid bug": {
-		"knowledge": false,
-		"description": "",
-		"killCount": 0
-	},
+#	"Grid bug": {
+#		"knowledge": false,
+#		"description": "",
+#		"killCount": 0
+#	},
 	"Brontotheridae": {
 		"knowledge": false,
 		"description": "",
