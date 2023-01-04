@@ -1,6 +1,8 @@
 extends Node
 
 func getRandomMessageByType(_critterName, _messageType):
+	if !globalGameConsoleMessages.has(_critterName) or !globalGameConsoleMessages[_critterName].has(_messageType):
+		return null
 	if typeof(globalGameConsoleMessages[_critterName][_messageType]) == TYPE_STRING:
 		return globalGameConsoleMessages[_critterName][_messageType]
 	if globalGameConsoleMessages[_critterName][_messageType].has("frequency"):
@@ -169,7 +171,7 @@ I wither away"""
 		]
 	},
 	"Leaf ant": {
-		"taunt": {
+		"speech": {
 			"frequency": 10,
 			"lines": [
 				"Skitters"
@@ -180,7 +182,7 @@ I wither away"""
 		]
 	},
 	"Soldier ant": {
-		"taunt": {
+		"speech": {
 			"frequency": 10,
 			"lines": [
 				"Skitters"
@@ -191,7 +193,7 @@ I wither away"""
 		]
 	},
 	"Sugar ant": {
-		"taunt": {
+		"speech": {
 			"frequency": 10,
 			"lines": [
 				"Skitters"
@@ -202,7 +204,7 @@ I wither away"""
 		]
 	},
 	"Fiddler crab": {
-		"taunt": {
+		"speech": {
 			"frequency": 3,
 			"lines": [
 				"Click",
@@ -214,7 +216,7 @@ I wither away"""
 		]
 	},
 	"Dark bat": {
-		"taunt": {
+		"speech": {
 			"frequency": 7,
 			"lines": [
 				"Sqwueeek!"
@@ -225,7 +227,7 @@ I wither away"""
 		]
 	},
 	"Spooky bat": {
-		"taunt": {
+		"speech": {
 			"frequency": 7,
 			"lines": [
 				"Skreeee!",
@@ -237,7 +239,7 @@ I wither away"""
 		]
 	},
 	"Squinting bat": {
-		"taunt": {
+		"speech": {
 			"frequency": 7,
 			"lines": [
 				"Sqwueeek!"
@@ -248,7 +250,7 @@ I wither away"""
 		]
 	},
 	"Slerp": {
-		"taunt": {
+		"speech": {
 			"frequency": 5,
 			"lines": [
 				"Slerp",
@@ -260,7 +262,7 @@ I wither away"""
 		]
 	},
 	"Sluerp": {
-		"taunt": {
+		"speech": {
 			"frequency": 5,
 			"lines": [
 				"Sluerp",
@@ -434,11 +436,10 @@ I wither away"""
 	"Dwarven contirer": {
 		"spawn": "What happened? Elven trickery!",
 		"taunt": {
-			"frequency": 8,
+			"frequency": 22,
 			"lines": [
 				"Protect the treasury!",
-				"You slimy elf!",
-				"Our ways are superior!"
+				"You slimy elf!"
 			],
 		},
 		"despawn": [
@@ -449,11 +450,10 @@ I wither away"""
 	"Dwarf engineer": {
 		"spawn": "What happened? Elven trickery!",
 		"taunt": {
-			"frequency": 8,
+			"frequency": 22,
 			"lines": [
 				"Protect the treasury!",
-				"You slimy elf!",
-				"Our ways are superior!"
+				"You slimy elf!"
 			],
 		},
 		"despawn": [
@@ -464,11 +464,10 @@ I wither away"""
 	"Dwarf miner": {
 		"spawn": "What happened? Elven trickery!",
 		"taunt": {
-			"frequency": 8,
+			"frequency": 22,
 			"lines": [
 				"Protect the treasury!",
-				"You slimy elf!",
-				"Our ways are superior!"
+				"You slimy elf!"
 			],
 		},
 		"despawn": [
@@ -479,11 +478,10 @@ I wither away"""
 	"Dwarf smith": {
 		"spawn": "What happened? Elven trickery!",
 		"taunt": {
-			"frequency": 8,
+			"frequency": 22,
 			"lines": [
 				"Protect the treasury!",
-				"You slimy elf!",
-				"Our ways are superior!"
+				"You slimy elf!"
 			],
 		},
 		"despawn": [
@@ -499,11 +497,10 @@ I wither away"""
 	"Elf hunter": {
 		"spawn": "What happened? Dwarven trickery!",
 		"taunt": {
-			"frequency": 8,
+			"frequency": 22,
 			"lines": [
-				"Protect nature!",
+				"Protect the trees!",
 				"You fat dwarf!",
-				"Our ways are superior!"
 			],
 		},
 		"spell": {
@@ -540,11 +537,10 @@ I wither away"""
 	"Elf noble": {
 		"spawn": "What happened? Dwarven trickery!",
 		"taunt": {
-			"frequency": 8,
+			"frequency": 22,
 			"lines": [
-				"Protect nature!",
+				"Protect the trees!",
 				"You fat dwarf!",
-				"Our ways are superior!"
 			],
 		},
 		"spell": {
@@ -564,13 +560,18 @@ I wither away"""
 			"lines": [
 				"Roars cutely",
 				"Raawwrr!",
-				"Hissss!",
+				"Hissss!"
+			],
+		},
+		"speech": {
+			"frequency": 12,
+			"lines": [
 				"Meow!",
 				"Mau?",
 				"Nau!",
 				"Mrrvvv.",
 				"Purrs"
-			],
+			]
 		},
 		"despawn": [
 			"Meow..."

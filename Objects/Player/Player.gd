@@ -155,7 +155,7 @@ func create(_data = null):
 		_texture = _playerData.texture
 	
 	$PlayerSprite.texture = _texture
-	$Tooltip/TooltipContainer.updateTooltip(critterName, playerClasses[critterClass].description, _texture)
+	$Tooltip/TooltipContainer.updateTooltip(critterName, playerClasses[critterClass].quote, _texture)
 
 
 
@@ -171,7 +171,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 				return
 			
 			if hits[currentHit] == 1:
-				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo)
+				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo, critterName)
 				if _didCritterDespawn != null:
 					addExp(_didCritterDespawn)
 				

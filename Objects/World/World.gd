@@ -152,7 +152,6 @@ func setUpGameObjects(_playerData = null):
 	
 	Globals.mutex.unlock()
 	generationDone = true
-	call_deferred("wait_to_finish")
 
 func _input(_event):
 	if !inStartScreen:
@@ -340,6 +339,7 @@ func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
 		updateStats()
 		if checkGameOver():
 			return false
+	return true
 
 func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
 	for _turn in _turnAmount:
@@ -950,7 +950,9 @@ func kickAt(_tileToKickAt):
 					"dmg": [0,0],
 					"element": null
 				}
-			}
+			},
+			_tileToKickAt,
+			$Critter/"0".critterName
 		)
 	elif level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
 		if randi () % 20 == 0:

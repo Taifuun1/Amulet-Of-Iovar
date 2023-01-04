@@ -427,7 +427,7 @@ func isTileADoor(_tile):
 func calculatePath(pathStartPosition, pathEndPosition):
 	return astarNode.get_point_path(id(pathStartPosition), id(pathEndPosition))
 
-func pathFind(_illegibleTiles):
+func pathFind(_illegibleTiles = []):
 	astarNode.clear()
 	connectAllCells(addLegibleTiles(_illegibleTiles))
 
@@ -461,7 +461,7 @@ func connectAllCells(points):
 				continue
 			if not astarNode.has_point(pointRelativeIndex):
 				continue
-			astarNode.connect_points(pointIndex, pointRelativeIndex, true)
+			astarNode.connect_points(pointIndex, pointRelativeIndex, false)
 
 func isTileIllegibleInPathfind(_point, _illegibleTiles):
 	for _illegibleTile in _illegibleTiles:
@@ -491,7 +491,7 @@ func addPointToPathPathding(point):
 				continue
 			if not astarNode.has_point(pointRelativeIndex):
 				continue
-			astarNode.connect_points(_pointId, pointRelativeIndex, true)
+			astarNode.connect_points(_pointId, pointRelativeIndex, false)
 
 
 ### Weighted pathfinding ###

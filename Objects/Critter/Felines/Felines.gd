@@ -3,7 +3,7 @@ var felines = {
 	"critterTypes": [
 		{
 			"critterName": "Cat",
-			"race": "Feline",
+			"race": "Felines",
 			"class": "Animal",
 			"weight": 150,
 			"aI": "Aggressive",
@@ -38,11 +38,12 @@ var felines = {
 			"abilities": [],
 			"abilityHits": [],
 			"resistances": [],
-			"drops": [  ]
+			"drops": [  ],
+			"hostileClasses": ["Canines"]
 		},
 		{
 			"critterName": "Lynx",
-			"race": "Feline",
+			"race": "Felines",
 			"class": "Animal",
 			"weight": 150,
 			"aI": "Aggressive",
@@ -86,11 +87,12 @@ var felines = {
 			"abilities": [],
 			"abilityHits": [],
 			"resistances": [],
-			"drops": [  ]
+			"drops": [  ],
+			"hostileClasses": ["Canines"]
 		},
 		{
 			"critterName": "Tiger",
-			"race": "Feline",
+			"race": "Felines",
 			"class": "Animal",
 			"weight": 150,
 			"aI": "Aggressive",
@@ -134,7 +136,8 @@ var felines = {
 			"abilities": [],
 			"abilityHits": [],
 			"resistances": [],
-			"drops": [  ]
+			"drops": [  ],
+			"hostileClasses": ["Canines"]
 		}
 	]
 }

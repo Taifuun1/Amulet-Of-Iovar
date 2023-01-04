@@ -2,6 +2,7 @@ extends Node
 
 var aI = "Aggressive"
 var aggroDistance = -1
+var aggroTarget = null
 var activationDistance
 
 func create(_aI, _aggroDistance, _activationDistance = null):
@@ -10,7 +11,24 @@ func create(_aI, _aggroDistance, _activationDistance = null):
 	aggroDistance = _aggroDistance
 	activationDistance = _activationDistance
 
-func getCritterMove(_critterTile, _playerTile, _level):
+func getCritterMove(_critterTile, _playerTile, _level, _hostileClasses = null):
+	if aggroTarget != null and !_level.critters.has(aggroTarget):
+		aggroTarget = null
+	if aggroTarget == null and _hostileClasses != null:
+		for _critterId in _level.critters:
+			var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterId }))
+			var _otherCritterTile = _level.getCritterTile(_critterId)
+			for _hostileClass in _hostileClasses:
+				if (
+					_critter.critterClass.matchn(_hostileClass) and
+					_level.calculatePathFindingPath(_critterTile, _otherCritterTile).size() < 8 and
+					_level.calculatePathFindingPath(_critterTile, _otherCritterTile).size() != 0
+				):
+					aggroTarget = _critterId
+					return _level.calculatePathFindingPath(_critterTile, _otherCritterTile)
+		aggroTarget = null
+	elif aggroTarget != null:
+		return _level.calculatePathFindingPath(_critterTile, _level.getCritterTile(get_node("/root/World/Critters/{critterId}".format({ "critterId": aggroTarget })).id))
 	if aI.matchn("Aggressive"):
 		return getAggressiveCritterMove(_critterTile, _playerTile, _level)
 	elif aI.matchn("Slow Aggressive"):

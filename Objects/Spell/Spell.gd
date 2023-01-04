@@ -35,7 +35,7 @@ func animateTile(_position, _angle):
 func checkIfCritterIsHit(_tile):
 	var _hitCritter = $"/root/World".level.grid[_tile.x][_tile.y].critter
 	if _hitCritter != null:
-		get_node("/root/World/Critters/{critter}".format({ "critter": _hitCritter })).takeDamage($"/root/World/UI/UITheme/Runes".spellDamage, _tile)
+		get_node("/root/World/Critters/{critter}".format({ "critter": _hitCritter })).takeDamage($"/root/World/UI/UITheme/Runes".spellDamage, _tile, "")
 
 
 func _on_Timer_timeout():

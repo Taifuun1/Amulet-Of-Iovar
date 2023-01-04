@@ -211,4 +211,4 @@ func connectCorridorCells(points):
 				continue
 			if not corridorsAstarNode.has_point(pointRelativeIndex):
 				continue
-			corridorsAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
+			corridorsAstarNode.connect_points(pointIndex, pointRelativeIndex, false)

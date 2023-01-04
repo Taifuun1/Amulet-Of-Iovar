@@ -103,7 +103,8 @@ var humans = {
 					"chance": 100,
 					"amount": [1, 1]
 				}
-			]
+			],
+			"hostileClasses": ["Goblins", "Orcs", "Rats", "Snakes", "Wraiths"]
 		},
 		{
 			"critterName": "Guard captain",
@@ -171,7 +172,8 @@ var humans = {
 					"chance": 100,
 					"amount": [1, 1]
 				}
-			]
+			],
+			"hostileClasses": ["Goblins", "Orcs", "Rats", "Snakes", "Wraiths"]
 		},
 		{
 			"critterName": "Outlaw watcher",
@@ -230,7 +232,8 @@ var humans = {
 					"chance": 100,
 					"amount": [1, 1]
 				}
-			]
+			],
+			"hostileClasses": ["Rats", "Snakes", "Wraiths"]
 		},
 		{
 			"critterName": "Outlaw fusiee'er",
@@ -304,7 +307,8 @@ var humans = {
 					"chance": 100,
 					"amount": [1, 1]
 				}
-			]
+			],
+			"hostileClasses": ["Rats", "Snakes", "Wraiths"]
 		},
 		{
 			"critterName": "Outlaw merchandiee'er",
@@ -363,7 +367,8 @@ var humans = {
 					"chance": 100,
 					"amount": [1, 1]
 				}
-			]
+			],
+			"hostileClasses": ["Rats", "Snakes", "Wraiths"]
 		},
 		{
 			"critterName": "Iovars cultist acolyte",
@@ -437,7 +442,8 @@ var humans = {
 					"chance": 100,
 					"amount": [1, 1]
 				}
-			]
+			],
+			"hostileClasses": ["Wraiths"]
 		},
 		{
 			"critterName": "Iovars cultist",
@@ -511,7 +517,8 @@ var humans = {
 					"chance": 100,
 					"amount": [1, 1]
 				}
-			]
+			],
+			"hostileClasses": ["Wraiths"]
 		}
 	]
 }

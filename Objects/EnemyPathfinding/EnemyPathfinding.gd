@@ -51,7 +51,7 @@ func connectWalkableCells(points):
 				continue
 			if not pathFindingAstarNode.has_point(pointRelativeIndex):
 				continue
-			pathFindingAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
+			pathFindingAstarNode.connect_points(pointIndex, pointRelativeIndex, false)
 
 func disableCritterCells(grid, points):
 	for point in points:

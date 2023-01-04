@@ -13,6 +13,7 @@ var drops
 var abilityHits
 var currentCritterAbilityHit = null
 var activationDistance = null
+var hostileClasses = []
 var etherealnessHit = false
 var isMimicked = false
 
@@ -75,6 +76,9 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 	expDropAmount = int(_critter.expDropAmount)
 	drops = _critter.drops
 	
+	if _critter.has("hostileClasses"):
+		hostileClasses = _critter.hostileClasses
+	
 	$Tooltip/TooltipContainer.updateTooltip(critterName, _tooltip.description, _critter.texture)
 
 func createAi(_aI = "aggressive", _aggroDistance = -1, _activationDistance = null):
@@ -124,7 +128,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		else:
 			currentCritterAbilityHit += 1
 	
-	checkIfAddFlavorGamelog("taunt")
+	if !aI.aI.matchn("deactivated"): 
+		checkIfAddFlavorGamelog("taunt")
 	
 	var _pickedAbility
 	if abilityHits.size() != 0 and abilityHits[currentCritterAbilityHit] == 1 and abilities.size() != 0:
@@ -438,7 +443,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		else:
 			return false
 
-func takeDamage(_attacks, _critterTile, _critterName = null):
+func takeDamage(_attacks, _critterTile, _critterName):
 	var _didCritterDie = null
 	var _attacksLog = []
 	if _attacks.size() != 0:
@@ -474,22 +479,22 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 							"etherealness":
 								if etherealnessHit:
 									_isPhysicalHit = false
-									_attackLog += "Your attack passes through {critter}! ".format({ "critter": critterName })
+									_attackLog += "{attackingCritter}s attack passes through {critter}! ".format({ "attackingCritter": _critterName, "critter": critterName })
 								etherealnessHit = !etherealnessHit
 							"corrosion":
 								_damage.dmg -= 2
-								_attackLog += "{critter}s skin dulls your attack! ".format({ "critter": critterName })
+								_attackLog += "{critter}s skin dulls {attackingCritter}s attack! ".format({ "attackingCritter": _critterName, "critter": critterName })
 				
 				if _isPhysicalHit:
 					# Physical damage
 					if _damage.dmg < 1 and _damage.dmg >= -2:
 						hp -= 1
-						_attackLog += "You hit the {critter} for 1 damage...".format({ "critter": critterName })
+						_attackLog += "{attackingCritter} hits the {critter} for 1 damage...".format({ "attackingCritter": _critterName, "critter": critterName })
 					elif _damage.dmg < -2:
-						_attackLog += "Your attack bounces off!"
+						_attackLog += "{attackingCritter}s attack bounces off!".format({ "attackingCritter": _critterName })
 					else:
 						hp -= _damage.dmg
-						_attackLog += "You hit the {critter} for {dmg} damage.".format({ "critter": critterName, "dmg": _damage.dmg + _damage.magicDmg })
+						_attackLog += "{attackingCritter} hits the {critter} for {dmg} damage.".format({ "attackingCritter": _critterName, "critter": critterName, "dmg": _damage.dmg + _damage.magicDmg })
 				
 				# Magic damage
 				if _damage.magicDmg != 0:
@@ -497,21 +502,22 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 					_attackLog += " ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
 				
 				# Armor set effects
-				if _activeArmorSets.frost and !checkIfStatusEffectIsInEffect("stun"):
-					statusEffects.stun = 2
-					_attackLog += " {critterName} is stunned from your frozen armor!".format({ "critterName":critterName })
-				if _activeArmorSets.fleir and !checkIfStatusEffectIsPermanent("onFleir"):
-					statusEffects.onFleir += 2
-					_attackLog += " {critterName} is on fleir from your burning armor!".format({ "critterName":critterName })
-				if _activeArmorSets.thunder and !checkIfStatusEffectIsInEffect("stun"):
-					statusEffects.stun = 1
-					_attackLog += " Bolt of lighting summoned by your armor stuns the {critterName}!".format({ "critterName":critterName })
-				if _activeArmorSets["gleeie'er"] and !checkIfStatusEffectIsInEffect("confusion"):
-					statusEffects.confusion = 5
-					_attackLog += " {critterName} is confused by your flamboyant armor!".format({ "critterName":critterName })
-				if _activeArmorSets.toxix and !checkIfStatusEffectIsPermanent("toxix"):
-					statusEffects.toxix += 4
-					_attackLog += " {critterName} is poisoned by your slick armor!".format({ "critterName":critterName })
+				if checkIfCritterIsPlayer(_critterName):
+					if _activeArmorSets.frost and !checkIfStatusEffectIsInEffect("stun"):
+						statusEffects.stun = 2
+						_attackLog += " {critterName} is stunned from your frozen armor!".format({ "critterName":critterName })
+					if _activeArmorSets.fleir and !checkIfStatusEffectIsPermanent("onFleir"):
+						statusEffects.onFleir += 2
+						_attackLog += " {critterName} is on fleir from your burning armor!".format({ "critterName":critterName })
+					if _activeArmorSets.thunder and !checkIfStatusEffectIsInEffect("stun"):
+						statusEffects.stun = 1
+						_attackLog += " Bolt of lighting summoned by your armor stuns the {critterName}!".format({ "critterName":critterName })
+					if _activeArmorSets["gleeie'er"] and !checkIfStatusEffectIsInEffect("confusion"):
+						statusEffects.confusion = 5
+						_attackLog += " {critterName} is confused by your flamboyant armor!".format({ "critterName":critterName })
+					if _activeArmorSets.toxix and !checkIfStatusEffectIsPermanent("toxix"):
+						statusEffects.toxix += 4
+						_attackLog += " {critterName} is poisoned by your slick armor!".format({ "critterName":critterName })
 			
 			var _damageNumber = damageNumber.instance()
 			var _damageText
@@ -532,20 +538,22 @@ func takeDamage(_attacks, _critterTile, _critterName = null):
 			_attacksLog.append(_attackLog)
 			
 			# Damage dealt game stats
-			if _damageText > GlobalGameStats.gameStats["Highest damage dealt"]:
-				GlobalGameStats.gameStats["Highest damage dealt"] = _damageText
-			GlobalGameStats.gameStats["Times attacked"] += 1
-			GlobalGameStats.gameStats["Damage dealt"] += _damageText
+			if checkIfCritterIsPlayer(_critterName):
+				if _damageText > GlobalGameStats.gameStats["Highest damage dealt"]:
+					GlobalGameStats.gameStats["Highest damage dealt"] = _damageText
+				GlobalGameStats.gameStats["Times attacked"] += 1
+				GlobalGameStats.gameStats["Damage dealt"] += _damageText
 			
 			if hp <= 0:
 				despawn(_critterTile)
 				_didCritterDie = expDropAmount
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))
-				GlobalGameStats.critters[critterName].killCount += 1
+				if checkIfCritterIsPlayer(_critterName):
+					GlobalGameStats.critters[critterName].killCount += 1
 				break
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
-		if aI.aI.matchn("Deactivated"):
+		if aI.aI.matchn("Deactivated") and checkIfCritterIsPlayer(_critterName):
 			awakeCritter(_critterTile, $"/root/World".level.getCritterTile(0))
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
 		if isMimicked:
@@ -569,8 +577,9 @@ func despawn(_critterTile = null, createCorpse = true):
 	else:
 		_gridPosition = _critterTile
 	
-	if GlobalGameConsoleMessages.globalGameConsoleMessages.has(critterName):
-		Globals.gameConsole.addLog(GlobalGameConsoleMessages.getRandomMessageByType(critterName, "despawn"))
+	var _logMessage = GlobalGameConsoleMessages.getRandomMessageByType(critterName, "despawn")
+	if _logMessage != null:
+		Globals.gameConsole.addLog(_logMessage)
 	
 	if createCorpse:
 		$"/root/World/Items/Items".createItem("corpse", _gridPosition, 1, false, { "weight": weight, "critterName": critterName })
@@ -607,10 +616,27 @@ func addCritterBackToPopulation(_critterTile, _level):
 	call_deferred("queue_free")
 
 func checkIfAddFlavorGamelog(_logType):
-	if GlobalGameConsoleMessages.globalGameConsoleMessages.has(critterName) and $"/root/World".level.calculatePath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 11:
+	if (
+		$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 11 and
+		$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0
+	):
 		var _flavorMessage = GlobalGameConsoleMessages.getRandomMessageByType(critterName, _logType)
 		if _flavorMessage != null:
 			Globals.gameConsole.addLog(_flavorMessage)
+
+func checkIfCritterIsPlayer(_critterName):
+	if (
+		_critterName.matchn("archeologist") or
+		_critterName.matchn("banker") or
+		_critterName.matchn("freedom fighter") or
+		_critterName.matchn("herbalogue") or
+		_critterName.matchn("mercenary") or
+		_critterName.matchn("exterminator") or
+		_critterName.matchn("rogue") or
+		_critterName.matchn("savant")
+	):
+		return true
+	return false
 
 func checkCritterIdentification(_data):
 	if _data.knowledge:

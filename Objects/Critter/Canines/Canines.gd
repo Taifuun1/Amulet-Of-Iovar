@@ -38,7 +38,8 @@ var canines = {
 			"abilities": [],
 			"abilityHits": [],
 			"resistances": [],
-			"drops": [  ]
+			"drops": [  ],
+			"hostileClasses": ["Felines"]
 		},
 		{
 			"critterName": "Warg",
@@ -77,7 +78,8 @@ var canines = {
 			"abilities": [],
 			"abilityHits": [],
 			"resistances": [],
-			"drops": [  ]
+			"drops": [  ],
+			"hostileClasses": ["Felines"]
 		},
 		{
 			"critterName": "Gearh",
@@ -125,7 +127,8 @@ var canines = {
 			"abilities": [],
 			"abilityHits": [],
 			"resistances": [],
-			"drops": [  ]
+			"drops": [  ],
+			"hostileClasses": ["Felines"]
 		}
 	]
 }

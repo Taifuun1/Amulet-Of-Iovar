@@ -89,7 +89,8 @@ var dwarves = {
 					"chance": 5,
 					"amount": [1, 1]
 				}
-			]
+			],
+			"hostileClasses": ["Elves", "Goblins", "Orcs"]
 		},
 		{
 			"critterName": "Dwarf engineer",

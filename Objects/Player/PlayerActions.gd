@@ -596,10 +596,10 @@ func zapItem(_direction):
 					if _zappedItem.alignment.matchn("blessed"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("uncursed"):
-						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, "Wand of backwards magic sphere")
+						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, _zappedItem.itemName)
 						Globals.gameConsole.addLog("{itemName} hits you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("cursed"):
-						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, "Wand of backwards magic sphere")
+						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, _zappedItem.itemName)
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
 					Globals.isItemIdentified(_zappedItem)
 				"wand of item polymorph":
@@ -697,7 +697,7 @@ func zapItem(_direction):
 							break
 						if _grid[_tile.x][_tile.y].critter != null:
 							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
-							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _tile)
+							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _tile, _zappedItem.itemName)
 							Globals.isItemIdentified(_zappedItem)
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
