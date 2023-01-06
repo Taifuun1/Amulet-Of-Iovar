@@ -29,6 +29,8 @@ func readItem(_id):
 						if _readItem.alignment.matchn("blessed"):
 							for _item in _items:
 								var _itemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
+								print(_itemInInventory.itemName)
+								print(GlobalItemInfo.globalItemInfo.has(_itemInInventory.identifiedItemName))
 								if (
 									GlobalItemInfo.globalItemInfo.has(_itemInInventory.identifiedItemName) and
 									GlobalItemInfo.globalItemInfo[_itemInInventory.identifiedItemName].identified == false

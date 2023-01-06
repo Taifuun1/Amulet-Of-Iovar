@@ -249,6 +249,19 @@ func setEquipment(_id):
 		panelStylebox.set_border_width_all(1)
 		panelStylebox.set_border_color(Color(1, 0, 0))
 		get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
+	print($"/root/World/Critters/0".attacks.size())
+	if $"/root/World/Critters/0".attacks.size() == 0:
+		$"/root/World/Critters/0".attacks = [
+			{
+				"dmg": [int(1 + $"/root/World/Critters/0".stats.strength / 6), int(1 + $"/root/World/Critters/0".stats.strength / 6)],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			}
+		]
 	checkArmorSetPieces()
 	$"/root/World/Critters/0".calculateEquipmentStats()
 	$"/root/World/Critters/0".checkAllIdentification(true)
@@ -326,9 +339,11 @@ func getArmorClass():
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] }))
 		_ac += (_item.value.ac + _item.enchantment)
 	if accessories["ring1"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).category.matchn("ring"):
-		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })))
+		if get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).identifiedItemName.to_lower():
+			_ac += get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).value
 	if accessories["ring2"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).category.matchn("ring"):
-		_ac += checkIfRingIsRingOfProtection(get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })))
+		if get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).identifiedItemName.to_lower():
+			_ac += get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).value
 	return _ac
 
 func checkArmorSetPieces():
@@ -364,13 +379,6 @@ func checkArmorSetPieces():
 			if _set.matchn("toxix"):
 				Globals.gameConsole.addLog("The slithery armor fizzles aggressively!")
 
-func checkIfRingIsRingOfProtection(_ring):
-	match _ring.identifiedItemName.to_lower():
-		"ring of protection":
-			return _ring.value
-		_:
-			return 0
-
 func checkWhatAmuletIsWorn(_amulet):
 	if (
 		GlobalItemInfo.globalItemInfo.has(_amulet.identifiedItemName) and
@@ -393,11 +401,11 @@ func checkWhatAmuletIsWorn(_amulet):
 			if _playerNode.itemsTurnedOn.has(_amulet):
 				$"/root/World/Critters/0".bonusDmg.magicDmg -= 3
 				_playerNode.itemsTurnedOn.erase(_amulet)
-				Globals.gameConsole.addLog("Your magic energy feels weaker.")
+				Globals.gameConsole.addLog("Your magic energy subsides.")
 			else:
 				$"/root/World/Critters/0".bonusDmg.magicDmg += 3
 				_playerNode.itemsTurnedOn.append(_amulet)
-				Globals.gameConsole.addLog("Your magic energy feels stronger.")
+				Globals.gameConsole.addLog("Your magic energy surges!")
 		"amulet of life power":
 			if _playerNode.itemsTurnedOn.has(_amulet):
 				$"/root/World/Critters/0".maxhp -= 20

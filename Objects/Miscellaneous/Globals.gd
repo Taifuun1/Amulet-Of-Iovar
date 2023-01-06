@@ -133,7 +133,7 @@ func isItemIdentified(_item):
 		GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and
 		GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified == false
 	):
-		GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified = true
+		_item.identifyItem(true, true, true)
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _item.identifiedItemName, "unidentifiedItemName": _item.unidentifiedItemName }))
 
 func loadGlobalsData(_data):

@@ -155,7 +155,7 @@ func create(_data = null):
 		_texture = _playerData.texture
 	
 	$PlayerSprite.texture = _texture
-	$Tooltip/TooltipContainer.updateTooltip(critterName, playerClasses[critterClass].quote, _texture)
+	$Tooltip/TooltipContainer.updateTooltip(critterName, playerClasses[critterClass].skill, _texture)
 
 
 
@@ -412,6 +412,9 @@ func processPlayerSpecificEffects():
 	elif previousCalories < 200 and calories >= 200 and calories < 400:
 		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You are still very hungry.")
+	elif previousCalories < 0 and calories >= 0:
+		statusStates.hunger.current = 1
+		Globals.gameConsole.addLog("You are still starving!")
 	
 	# Check if player becomes more hungry
 	if previousCalories >= 800 and calories < 800 and calories >= 400:
@@ -426,7 +429,7 @@ func processPlayerSpecificEffects():
 	elif calories <= 0:
 		hp -= 2
 		if previousCalories > 0:
-			statusStates.hunger = 0
+			statusStates.hunger.current = 3
 			Globals.gameConsole.addLog("You are famished!")
 	
 	previousCalories = calories

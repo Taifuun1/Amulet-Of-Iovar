@@ -27,47 +27,47 @@ var gameStats = {
 var items = {
 	"Amulet of seeing": {
 		"knowledge": false,
-		"description": ""
+		"description": "Allows you see in dark places."
 	},
 	"Amulet of magic power": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives +3 magic damage."
 	},
 	"Amulet of life power": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives +20 maxhp."
 	},
 	"Amulet of backscattering": {
 		"knowledge": false,
-		"description": ""
+		"description": "Blocks Rock throw and Dragon breath abilities."
 	},
 	"Amulet of strangulation": {
 		"knowledge": false,
-		"description": ""
+		"description": "Binds on equip and deals -5 dmg every turn."
 	},
 	"Amulet of sleep": {
 		"knowledge": false,
-		"description": ""
+		"description": "Binds on equip and inflicts sleep randomly."
 	},
 	"Amulet of Toxix": {
 		"knowledge": false,
-		"description": ""
+		"description": "Binds on equip and inflicts toxix."
 	},
 	"Thunderous roar": {
 		"knowledge": false,
-		"description": ""
+		"description": ". Third of the Thunder armor set."
 	},
 	"Cold breeze": {
 		"knowledge": false,
-		"description": ""
+		"description": ". Third of the Frost armor set."
 	},
 	"Leather mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Low level armor. "
 	},
 	"Orc mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Medium level armor. "
 	},
 	"Scale ring mail": {
 		"knowledge": false,
@@ -758,7 +758,7 @@ var items = {
 var critters = {
 	"Iovar": {
 		"knowledge": false,
-		"description": "Iovar, the ancient mage",
+		"description": "Iovar, the ancient mage who rules over the dungeon.",
 		"killCount": 0
 	},
 	"Elder Dragon": {
@@ -788,97 +788,97 @@ var critters = {
 	},
 	"Double-pattern ant": {
 		"knowledge": false,
-		"description": "",
+		"description": "Non-exoskeletal ant.",
 		"killCount": 0
 	},
 	"Leaf ant": {
 		"knowledge": false,
-		"description": "",
+		"description": "Leaf-carrier ant.",
 		"killCount": 0
 	},
 	"Soldier ant": {
 		"knowledge": false,
-		"description": "",
+		"description": "An ant made for war.",
 		"killCount": 0
 	},
 	"Sugar ant": {
 		"knowledge": false,
-		"description": "",
+		"description": "Regular worker ant.",
 		"killCount": 0
 	},
 	"Eyebrow seal": {
 		"knowledge": false,
-		"description": "",
+		"description": "Eyebrow-looking ass.",
 		"killCount": 0
 	},
 	"Fiddler crab": {
 		"knowledge": false,
-		"description": "",
+		"description": "Crab with a huge claw. And a small one.",
 		"killCount": 0
 	},
 	"Ringed seal": {
 		"knowledge": false,
-		"description": "",
+		"description": "A seal with rings.",
 		"killCount": 0
 	},
 	"Tonatuna": {
 		"knowledge": false,
-		"description": "",
+		"description": "A slumbering fish. An adult weighs around 1200kg.",
 		"killCount": 0
 	},
 	"Dark bat": {
 		"knowledge": false,
-		"description": "",
+		"description": "A regular bat.",
 		"killCount": 0
 	},
 	"Spooky bat": {
 		"knowledge": false,
-		"description": "",
+		"description": "An extra spooky bat.",
 		"killCount": 0
 	},
 	"Squinting bat": {
 		"knowledge": false,
-		"description": "",
+		"description": "Daytime bat. It cant see very well.",
 		"killCount": 0
 	},
 	"Vampire bat": {
 		"knowledge": false,
-		"description": "",
+		"description": "A blood sucking vermin. Beware its lifestealing bite!",
 		"killCount": 0
 	},
 	"Slerp": {
 		"knowledge": false,
-		"description": "",
+		"description": "A blob of acid.",
 		"killCount": 0
 	},
 	"Sluerp": {
 		"knowledge": false,
-		"description": "",
+		"description": "A blob of acid.",
 		"killCount": 0
 	},
 	"Gearh": {
 		"knowledge": false,
-		"description": "",
+		"description": "Powerful, hairy, hunchbacked creature.",
 		"killCount": 0
 	},
 	"Wolf": {
 		"knowledge": false,
-		"description": "",
+		"description": "Dogs relative. Hunts in packs.",
 		"killCount": 0
 	},
 	"Warg": {
 		"knowledge": false,
-		"description": "",
+		"description": "Wolfs more powerful relative.",
 		"killCount": 0
 	},
 	"Gryonem centaur": {
 		"knowledge": false,
-		"description": "",
+		"description": "Flatlands centaur.",
 		"killCount": 0
 	},
 	"Hill centaur": {
 		"knowledge": false,
-		"description": "",
+		"description": "Centaur hill people. Not smart enough for talk.",
 		"killCount": 0
 	},
 	"Black dragon": {
@@ -898,12 +898,12 @@ var critters = {
 	},
 	"Green dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A green dragon. Gleeie'er resistant.",
 		"killCount": 0
 	},
 	"Red dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A red dragon. Fleir resistant.",
 		"killCount": 0
 	},
 	"Silver dragon": {
@@ -958,7 +958,7 @@ var critters = {
 	},
 	"Elf king": {
 		"knowledge": false,
-		"description": "",
+		"description": "King of the Elves. Rules from the halls of Lemqueviun.",
 		"killCount": 0
 	},
 	"Elf noble": {
@@ -1048,167 +1048,167 @@ var critters = {
 	},
 	"Iovars cultist acolyte": {
 		"knowledge": false,
-		"description": "",
+		"description": "An Iovar cult recruit.",
 		"killCount": 0
 	},
 	"Iovars cultist": {
 		"knowledge": false,
-		"description": "",
+		"description": "A senior cultist. Can cast powerful magics.",
 		"killCount": 0
 	},
 	"Shopkeeper": {
 		"knowledge": false,
-		"description": "",
+		"description": "He runs a shop. Shops come in many varieties.",
 		"killCount": 0
 	},
 	"Large kobold": {
 		"knowledge": false,
-		"description": "",
+		"description": "Large critter of more than average height.",
 		"killCount": 0
 	},
 	"Tiny kobold": {
 		"knowledge": false,
-		"description": "",
+		"description": "Tiny critter of less than average height.",
 		"killCount": 0
 	},
 	"Half-lich": {
 		"knowledge": false,
-		"description": "",
+		"description": "One who sook eternal life, but couldn't retain his vitality.",
 		"killCount": 0
 	},
 	"Lich": {
 		"knowledge": false,
-		"description": "",
+		"description": "A wizard who sook the mysteries of eternal life.",
 		"killCount": 0
 	},
 	"Grand lich": {
 		"knowledge": false,
-		"description": "",
+		"description": "Ancient royal court wizard who sought to overthrow the monarchy. Magical repertoire includes summoning hordes of critters.",
 		"killCount": 0
 	},
 	"Arch-lich": {
 		"knowledge": false,
-		"description": "",
+		"description": "Arch-mage of a distant pasts turned dark. Magical repertoire includes summoning hordes of critters.",
 		"killCount": 0
 	},
 	"Humongous mimic": {
 		"knowledge": false,
-		"description": "",
+		"description": "It's a chest. Ah, its alive!",
 		"killCount": 0
 	},
 	"Mimic": {
 		"knowledge": false,
-		"description": "",
+		"description": "It's an apple. Ah, its alive!",
 		"killCount": 0
 	},
 	"Arctic newt": {
 		"knowledge": false,
-		"description": "",
+		"description": "Lizard from the far south.",
 		"killCount": 0
 	},
 	"Highlands newt": {
 		"knowledge": false,
-		"description": "",
+		"description": "Medium-sized newt from the badlands.",
 		"killCount": 0
 	},
 	"Mine newt": {
 		"knowledge": false,
-		"description": "",
+		"description": "Newt that lives of of minerals.",
 		"killCount": 0
 	},
 	"Paper newt": {
 		"knowledge": false,
-		"description": "",
+		"description": "Lizard that feeds on paper and bamboo. Scourge of librarians and  alike",
 		"killCount": 0
 	},
 	"River newt": {
 		"knowledge": false,
-		"description": "",
+		"description": "Small river newt.",
 		"killCount": 0
 	},
 	"Dungeon orc": {
 		"knowledge": false,
-		"description": "",
+		"description": "Orc originating from Iovars dungeon.",
 		"killCount": 0
 	},
 	"Flatlands orc": {
 		"knowledge": false,
-		"description": "",
+		"description": "A regular orc.",
 		"killCount": 0
 	},
 	"Goblin": {
 		"knowledge": false,
-		"description": "",
+		"description": "A little gremlin-looking creature. Makes high-pitched screeching noises.",
 		"killCount": 0
 	},
 	"Mountain orc": {
 		"knowledge": false,
-		"description": "",
+		"description": "Big mountain orc. Grown in the hostile highlands.",
 		"killCount": 0
 	},
 	"Yrak-i": {
 		"knowledge": false,
-		"description": "",
+		"description": "Biggest of the orckind. Yrak-is never bathe, so they are permanently covered in the blood of their enemies.",
 		"killCount": 0
 	},
 	"Chicken": {
 		"knowledge": false,
-		"description": "",
+		"description": "Little mammal that quawks and pa-toots.",
 		"killCount": 0
 	},
 #	"Grid bug": {
 #		"knowledge": false,
-#		"description": "",
+#		"description": "Little bug that moves in a particular pattern.",
 #		"killCount": 0
 #	},
 	"Brontotheridae": {
 		"knowledge": false,
-		"description": "",
+		"description": "Huge beast from the distant past. Brought back by Iovars spell.",
 		"killCount": 0
 	},
 	"Rhino": {
 		"knowledge": false,
-		"description": "",
+		"description": "A huge rhino. Cant see very well.",
 		"killCount": 0
 	},
 	"Big rat": {
 		"knowledge": false,
-		"description": "",
+		"description": "Big ol' rat.",
 		"killCount": 0
 	},
 	"Cave rat": {
 		"knowledge": false,
-		"description": "",
+		"description": "Cave-dwelling rat.",
 		"killCount": 0
 	},
 	"Sewer rat": {
 		"knowledge": false,
-		"description": "",
+		"description": "Rat grown in the sewers.",
 		"killCount": 0
 	},
 	"Garnered snake": {
 		"knowledge": false,
-		"description": "",
+		"description": "Regular snake.",
 		"killCount": 0
 	},
 	"Marsh snake": {
 		"knowledge": false,
-		"description": "",
+		"description": "Marsh snakes like to live in swamps and lakes. Has a poisonous bite.",
 		"killCount": 0
 	},
 	"Sawtooth-pattern snake": {
 		"knowledge": false,
-		"description": "",
+		"description": "The deadliest of snakes. Has a poisonous bite.",
 		"killCount": 0
 	},
 	"Spectral wraith": {
 		"knowledge": false,
-		"description": "",
+		"description": "A spectral wraith from the grave. Etherealness-ability allows the spectral wraith to dodge every other physical attack.",
 		"killCount": 0
 	},
 	"Spooky ghost": {
 		"knowledge": false,
-		"description": "",
+		"description": "A spooky ghost from folk tales. Etherealness-ability allows the spooky ghost to dodge every other physical attack.",
 		"killCount": 0
 	}
 }

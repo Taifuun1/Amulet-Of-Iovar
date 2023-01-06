@@ -2,8 +2,6 @@ extends Control
 
 var tooltipTexts = load("res://UI/Game Stats/GameStatsTooltipTexts.gd").new()
 
-onready var statusEffectItem = preload("res://UI/Game Stats/Status Effect Item.tscn")
-
 var attacks
 var magicAttacks
 var weight
@@ -136,7 +134,7 @@ func isStatusEffectInGameStats(_statusEffect):
 	return false
 
 func addStatusEffect(_statusEffect):
-	var _newStatusEffect = statusEffectItem.instance()
+	var _newStatusEffect = load("res://UI/Game Stats/Status Effect Item.tscn").instance()
 	_newStatusEffect.create(_statusEffect)
 	$Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer.add_child(_newStatusEffect)
 

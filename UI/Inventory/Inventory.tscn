@@ -70,7 +70,7 @@ rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 
 [node name="Name" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
-margin_right = 502.0
+margin_right = 376.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -78,8 +78,8 @@ text = "Name"
 valign = 1
 
 [node name="Alignment" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
-margin_left = 506.0
-margin_right = 1009.0
+margin_left = 380.0
+margin_right = 756.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -87,12 +87,21 @@ text = "Alignment"
 valign = 1
 
 [node name="Enchantment" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
-margin_left = 1013.0
-margin_right = 1516.0
+margin_left = 760.0
+margin_right = 1136.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
 text = "Enchantment"
+valign = 1
+
+[node name="Amount" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
+margin_left = 1140.0
+margin_right = 1516.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Amount"
 valign = 1
 
 [node name="InventoryListContainer" type="ScrollContainer" parent="InventoryBackground/InventoryContainer"]

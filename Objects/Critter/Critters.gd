@@ -1,8 +1,8 @@
 extends Node
 
 onready var critter = preload("res://Objects/Critter/Critter.tscn")
-onready var critterSpawnBehaviour = preload("res://Objects/Critter/CritterSpawnBehaviour.gd").new()
-onready var critterLevelGenerationList = preload("res://Objects/Critter/CritterLevelGenerationList.gd").new()
+onready var critterSpawnBehaviour = preload("res://Objects/Miscellaneous/CritterSpawnBehaviour.gd").new()
+onready var critterLevelGenerationList = preload("res://Objects/Miscellaneous/CritterLevelGenerationList.gd").new()
 onready var crittersData = preload("res://Objects/Miscellaneous/StatsData.gd").new().critters
 
 var ants = preload("res://Objects/Critter/Ants/Ants.gd").new()

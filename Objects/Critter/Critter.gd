@@ -96,15 +96,13 @@ func isCritterAwakened(_critterTile, _playerTile, _level):
 func awakeCritter(_critterTile, _playerTile):
 	aI.aI = "Aggressive"
 	aI.activationDistance = null
-	if GlobalGameConsoleMessages.globalGameConsoleMessages.has(critterName) and $"/root/World".level.calculatePath(_critterTile, _playerTile).size() <= 11:
-		Globals.gameConsole.addLog(GlobalGameConsoleMessages.getRandomMessageByType(critterName, "activated"))
+	checkIfAddFlavorGamelog("activated")
 	for _critterId in $"/root/World".level.critters:
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _critterId }))
 		if _critter.aI.aI.matchn("Deactivated"):
 			_critter.aI.aI = "Aggressive"
 			_critter.aI.activationDistance = null
-			if GlobalGameConsoleMessages.globalGameConsoleMessages.has(_critter.critterName) and $"/root/World".level.calculatePath(_critterTile, _playerTile).size() <= 11:
-				Globals.gameConsole.addLog(GlobalGameConsoleMessages.getRandomMessageByType(get_node("/root/World/Critters/{critter}".format({ "critter": _critter })).critterName, "activated"))
+			checkIfAddFlavorGamelog("activated")
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	var _path = []
@@ -128,8 +126,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		else:
 			currentCritterAbilityHit += 1
 	
-	if !aI.aI.matchn("deactivated"): 
+	if aI.aggroTarget != null or aI.aI.matchn("aggressive") or aI.aI.matchn("slow aggressive"): 
 		checkIfAddFlavorGamelog("taunt")
+	if aI.aggroTarget == null: 
+		checkIfAddFlavorGamelog("speech")
 	
 	var _pickedAbility
 	if abilityHits.size() != 0 and abilityHits[currentCritterAbilityHit] == 1 and abilities.size() != 0:
@@ -577,9 +577,7 @@ func despawn(_critterTile = null, createCorpse = true):
 	else:
 		_gridPosition = _critterTile
 	
-	var _logMessage = GlobalGameConsoleMessages.getRandomMessageByType(critterName, "despawn")
-	if _logMessage != null:
-		Globals.gameConsole.addLog(_logMessage)
+	checkIfAddFlavorGamelog("despawn")
 	
 	if createCorpse:
 		$"/root/World/Items/Items".createItem("corpse", _gridPosition, 1, false, { "weight": weight, "critterName": critterName })
@@ -617,7 +615,10 @@ func addCritterBackToPopulation(_critterTile, _level):
 
 func checkIfAddFlavorGamelog(_logType):
 	if (
-		$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 11 and
+		(
+			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 4 or
+			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
+		) and
 		$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0
 	):
 		var _flavorMessage = GlobalGameConsoleMessages.getRandomMessageByType(critterName, _logType)

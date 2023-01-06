@@ -24,3 +24,5 @@ func setValues(_item):
 		$Enchantment.createRichTextLabel(str(_item.enchantment))
 	else:
 		$Enchantment.createRichTextLabel("Unknown")
+	if _item.amount:
+		$Amount.createRichTextLabel(str(_item.amount))

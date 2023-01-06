@@ -41,7 +41,9 @@ var globalGameConsoleMessages = {
 		"spell": [
 			"Have at thee, cur!",
 			"Perish, fiend!",
-			"Qpgoq lmmgotath!"
+			"Qpgoq lmmgotath!",
+			"Szop'gk lm'tagh!",
+			"Umqg'vat gqopz!"
 		],
 		"despawn": [
 			"'Tis but a scratch...",
@@ -83,7 +85,7 @@ var globalGameConsoleMessages = {
 			"lines": [
 				"Give banana!",
 				"You have banana?",
-				"Monke give banana!",
+				"Monke give banana!"
 			],
 		},
 		"despawn": [
@@ -257,12 +259,27 @@ I wither away"""
 				"Slorp"
 			],
 		},
+		"taunt": {
+			"frequency": 5,
+			"lines": [
+				"Slerp",
+				"Slorp"
+			],
+		},
 		"despawn": [
 			"Splat!"
 		]
 	},
 	"Sluerp": {
 		"speech": {
+			"frequency": 5,
+			"lines": [
+				"Sluerp",
+				"Slarp",
+				"Splorp"
+			],
+		},
+		"taunt": {
 			"frequency": 5,
 			"lines": [
 				"Sluerp",
@@ -585,6 +602,11 @@ I wither away"""
 				"Raawwrr!",
 				"Grrrrr...",
 				"Hissss!",
+			],
+		},
+		"speech": {
+			"frequency": 10,
+			"lines": [
 				"Mrrvvv.",
 				"Purrs"
 			],
@@ -600,7 +622,12 @@ I wither away"""
 				"Roars",
 				"RAAAaawwrrr!",
 				"GRRRrrrrrrr...",
-				"Haz-hhsssssss!",
+				"Haz-hhsssssss!"
+			],
+		},
+		"speech": {
+			"frequency": 10,
+			"lines": [
 				"Purrs"
 			],
 		},
@@ -705,12 +732,21 @@ I wither away"""
 				"For the Guard!",
 				"Fight! Fight! Fight!",
 				"I won't give in!",
-				"Shall we gather for whisky and cigars tonight?",
-				"Indeed, I believe so.",
 				"What?",
 				"What!",
 				"See?",
 				"Grunts"
+			],
+		},
+		"speech": {
+			"frequency": 12,
+			"lines": [
+				"Shall we gather for whisky and cigars tonight?",
+				"Indeed, I believe so.",
+				"Nothing to report.",
+				"What?",
+				"Who's there?",
+				"Must'ave been the wind..."
 			],
 		},
 		"despawn": [
@@ -725,7 +761,16 @@ I wither away"""
 			"lines": [
 				"For the Guard!",
 				"Charge!",
-				"I won't give in!"
+				"I won't give in!",
+				"Grunts"
+			],
+		},
+		"speech": {
+			"frequency": 25,
+			"lines": [
+				"Report, grunt!",
+				"Straighten that gardbrace, soldier.",
+				"Easy now."
 			],
 		},
 		"despawn": [
@@ -738,7 +783,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 21,
 			"lines": [
-				"I forgot my hat...",
+				"I forgot me hat...",
 				"Come e're!",
 				"Ye oaf!",
 				"I'll shank ya, mate!"
@@ -783,12 +828,36 @@ I wither away"""
 		]
 	},
 	"Iovars cultist acolyte": {
-		"population": 64,
-		"crittersInPlay": 0
+		"spawn": "Huh? Where am I?",
+		"taunt": {
+			"frequency": 7,
+			"lines": [
+				"Thy shalt not utter Iovars name!",
+				"Die, interloper!",
+				"For Iovar!"
+			],
+		},
+		"despawn": [
+			"Ooooofff...",
+			"UUuuugghhfff...",
+			"For Iovar..."
+		]
 	},
 	"Iovars cultist": {
-		"population": 38,
-		"crittersInPlay": 0
+		"spawn": "Huh? Where am I?",
+		"taunt": {
+			"frequency": 7,
+			"lines": [
+				"Thy shalt not utter Iovars name!",
+				"Die, interloper!",
+				"For Iovar!"
+			],
+		},
+		"despawn": [
+			"Ooooofff...",
+			"UUuuugghhfff...",
+			"For Iovar..."
+		]
 	},
 	"Shopkeeper": {
 		"spawn": "Huh? Where am I?",
@@ -815,12 +884,25 @@ I wither away"""
 				"Clack. Clack! Clack."
 			],
 		},
+		"speech": {
+			"frequency": 15,
+			"lines": [
+				"Rattles bones chattily"
+			],
+		},
 		"despawn": [
 			"Clomps!",
 		]
 	},
 	"Lich": {
 		"spawn": "I rise!",
+		"speech": {
+			"frequency": 15,
+			"lines": [
+				"You came from outside the dungeon? Haven't heard of that in 144 years!",
+				"I'm 237 years young, mind you."
+			],
+		},
 		"taunt": {
 			"frequency": 7,
 			"lines": [
@@ -847,6 +929,13 @@ I wither away"""
 	},
 	"Grand lich": {
 		"spawn": "I rise!",
+		"speech": {
+			"frequency": 15,
+			"lines": [
+				"You came from outside the dungeon? Haven't heard of that in 301 years!",
+				"I'm 587 years young, mind you."
+			],
+		},
 		"taunt": {
 			"frequency": 7,
 			"lines": [
@@ -873,6 +962,13 @@ I wither away"""
 	},
 	"Arch-lich": {
 		"spawn": "I rise once more!",
+		"speech": {
+			"frequency": 15,
+			"lines": [
+				"You came from outside the dungeon? Haven't heard of that in 770 years!",
+				"I'm 898 years young, mind you."
+			],
+		},
 		"taunt": {
 			"frequency": 7,
 			"lines": [
@@ -898,6 +994,13 @@ I wither away"""
 		]
 	},
 	"Arctic newt": {
+		"speech": {
+			"frequency": 17,
+			"lines": [
+				"Ssss.",
+				"Sss?"
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -911,6 +1014,13 @@ I wither away"""
 		]
 	},
 	"Highlands newt": {
+		"speech": {
+			"frequency": 17,
+			"lines": [
+				"Ssss.",
+				"Sss?"
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -924,6 +1034,13 @@ I wither away"""
 		]
 	},
 	"Mine newt": {
+		"speech": {
+			"frequency": 17,
+			"lines": [
+				"Ssss.",
+				"Sss?"
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -937,6 +1054,13 @@ I wither away"""
 		]
 	},
 	"Paper newt": {
+		"speech": {
+			"frequency": 17,
+			"lines": [
+				"Ssss.",
+				"Sss?"
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -950,6 +1074,13 @@ I wither away"""
 		]
 	},
 	"River newt": {
+		"speech": {
+			"frequency": 17,
+			"lines": [
+				"Ssss.",
+				"Sss?"
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -963,6 +1094,13 @@ I wither away"""
 		]
 	},
 	"Dungeon orc": {
+		"speech": {
+			"frequency": 17,
+			"lines": [
+				"Blergh.",
+				"Blurg."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -976,6 +1114,13 @@ I wither away"""
 		]
 	},
 	"Flatlands orc": {
+		"speech": {
+			"frequency": 17,
+			"lines": [
+				"Blergh.",
+				"Blurg."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -1002,6 +1147,13 @@ I wither away"""
 		]
 	},
 	"Mountain orc": {
+		"speech": {
+			"frequency": 17,
+			"lines": [
+				"Blergh.",
+				"Blurg."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -1028,13 +1180,20 @@ I wither away"""
 		]
 	},
 	"Chicken": {
+		"speech": {
+			"frequency": 7,
+			"lines": [
+				"Po-blaaat!",
+				"Pa-tooooot!",
+				"Ptt. Ptt. Ptt.",
+				"Cluck. Cluck. Pt."
+			],
+		},
 		"taunt": {
 			"frequency": 5,
 			"lines": [
 				"Po-blaaat!",
 				"Pa-tooooot!",
-				"Ptt. Ptt. Ptt.",
-				"Cluck. Cluck. Pt.",
 				"Buk, buk, buk, ba-GAWK!"
 			],
 		},
@@ -1069,12 +1228,17 @@ I wither away"""
 		]
 	},
 	"Big rat": {
+		"speech": {
+			"frequency": 7,
+			"lines": [
+				"Sqwik.",
+				"Sqwk. Sqwk."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"Sqwueeek!",
-				"Sqwik.",
-				"Sqwk. Sqwk."
+				"Sqwueeek!"
 			],
 		},
 		"despawn": [
@@ -1082,12 +1246,17 @@ I wither away"""
 		]
 	},
 	"Cave rat": {
+		"speech": {
+			"frequency": 7,
+			"lines": [
+				"Sqwik.",
+				"Sqwk. Sqwk."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"Sqwueeek!",
-				"Sqwik.",
-				"Sqwk. Sqwk."
+				"Sqwueeek!"
 			],
 		},
 		"despawn": [
@@ -1095,12 +1264,17 @@ I wither away"""
 		]
 	},
 	"Sewer rat": {
+		"speech": {
+			"frequency": 7,
+			"lines": [
+				"Sqwik.",
+				"Sqwk. Sqwk."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"Sqwueeek!",
-				"Sqwik.",
-				"Sqwk. Sqwk."
+				"Sqwueeek!"
 			],
 		},
 		"despawn": [
@@ -1108,6 +1282,12 @@ I wither away"""
 		]
 	},
 	"Garnered snake": {
+		"speech": {
+			"frequency": 14,
+			"lines": [
+				"Ssss."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -1123,6 +1303,12 @@ I wither away"""
 		]
 	},
 	"Marsh snake": {
+		"speech": {
+			"frequency": 14,
+			"lines": [
+				"Ssss."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -1138,6 +1324,12 @@ I wither away"""
 		]
 	},
 	"Sawtooth-pattern snake": {
+		"speech": {
+			"frequency": 14,
+			"lines": [
+				"Ssss."
+			],
+		},
 		"taunt": {
 			"frequency": 6,
 			"lines": [
@@ -1153,6 +1345,12 @@ I wither away"""
 		]
 	},
 	"Spectral wraith": {
+		"speech": {
+			"frequency": 14,
+			"lines": [
+				"OOOOOooooooaaaa..."
+			],
+		},
 		"taunt": {
 			"frequency": 4,
 			"lines": [
@@ -1167,6 +1365,12 @@ I wither away"""
 		]
 	},
 	"Spooky ghost": {
+		"speech": {
+			"frequency": 14,
+			"lines": [
+				"OOOOOooooooaaaa..."
+			],
+		},
 		"taunt": {
 			"frequency": 2,
 			"lines": [
