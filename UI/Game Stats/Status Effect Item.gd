@@ -5,7 +5,6 @@ var statusEffectsData = load("res://Objects/Miscellaneous/StatusEffectsData.gd")
 func create(_statusEffect):
 	name = str(_statusEffect)
 	$StatusEffectContainer/StatusEffectText.append_bbcode("[center][color=%s]%s[/color][/center]" % [statusEffectsData.statusEffectsData[_statusEffect].color, statusEffectsData.statusEffectsData[_statusEffect].label.to_upper()])
-	$StatusEffectContainer.hint_tooltip = statusEffectsData.statusEffectsData[_statusEffect].description
 #	$Background.color = Color(statusEffects[_statusEffect].color).darkened(0.5)
 #	$Background.color = Color(statusEffects[_statusEffect].color).lightened(0.5)
 #	$Background.color = Color(statusEffects[_statusEffect].color).contrasted()

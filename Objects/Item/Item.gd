@@ -332,7 +332,6 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 		notIdentified.alignment = true
 	if _identifyEnchantment:
 		notIdentified.enchantment = true
-	print(notIdentified)
 
 func addContainer(_extraData = {  }, _containerContents = []):
 	container = _containerContents

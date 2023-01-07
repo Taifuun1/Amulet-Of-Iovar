@@ -39,7 +39,7 @@ var items = {
 	},
 	"Amulet of backscattering": {
 		"knowledge": false,
-		"description": "Blocks Rock throw and Dragon breath abilities."
+		"description": "Blocks Rock throw and Dragon breath -abilities."
 	},
 	"Amulet of strangulation": {
 		"knowledge": false,
@@ -51,7 +51,7 @@ var items = {
 	},
 	"Amulet of Toxix": {
 		"knowledge": false,
-		"description": "Binds on equip and inflicts toxix."
+		"description": "Binds on equip and inflicts toxix status effect."
 	},
 	"Thunderous roar": {
 		"knowledge": false,

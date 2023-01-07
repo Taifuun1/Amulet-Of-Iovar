@@ -575,7 +575,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 12,
 			"lines": [
-				"Roars cutely",
+				"[i]Roars cutely[/i]",
 				"Raawwrr!",
 				"Hissss!"
 			],
@@ -770,7 +770,8 @@ I wither away"""
 			"lines": [
 				"Report, grunt!",
 				"Straighten that gardbrace, soldier.",
-				"Easy now."
+				"Easy now.",
+				"Hmmm..."
 			],
 		},
 		"despawn": [

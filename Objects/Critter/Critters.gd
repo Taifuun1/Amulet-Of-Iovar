@@ -127,8 +127,7 @@ func spawnCritter(_critter, _position = null, _isDeactivated = null, _spawnNew =
 		_level.critters.append(newCritter.id)
 		_level.removePointFromEnemyPathfinding(_gridPosition)
 		GlobalCritterInfo.addCritterToPlay(newCritter.critterName)
-		if GlobalGameConsoleMessages.globalGameConsoleMessages.has(newCritter.critterName) and _level.getCritterTile(0) and _level.calculatePath(_level.getCritterTile(newCritter.id), _level.getCritterTile(0)).size() <= 11:
-			Globals.gameConsole.addLog(GlobalGameConsoleMessages.getRandomMessageByType(newCritter.critterName, "activated"))
+		newCritter.checkIfAddFlavorGamelog("activated", newCritter.critterName)
 		mutex.unlock()
 		return _newCritter.critterName
 	mutex.unlock()

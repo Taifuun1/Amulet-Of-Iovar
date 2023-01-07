@@ -85,7 +85,7 @@ var statusEffectsData = {
 	"flattened": {
 		"label": "flat",
 		"description": "You are flattened. (+3 turns on move or attack)",
-		"color": "#031e63",
+		"color": "#0b3296",
 		"texture": load("res://Assets/Status Effects/StatusEffectFlattened.png")
 	},
 	"fast digestion": {

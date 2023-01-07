@@ -18,9 +18,6 @@ var laissezFaire = {
 
 var grilling = {
 	"armor": [
-		"Flaming mail",
-		"Frozen mail",
-		"Thunder mail",
 		"Thunder greaves",
 		"Gehennors gauntlets",
 		"Cold breeze"

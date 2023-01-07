@@ -26,6 +26,8 @@ func _ready():
 	colors.tool = "#c95720"
 	colors.wand = "#ed1313"
 	colors.weapon = "#84002a"
+	
+	colors.flavorMessage = "#ef379a"
 
 func createRichTextLabel(_text, _color = null, _textAlignment = null):
 	var _bbcode = str(_text)
@@ -33,5 +35,13 @@ func createRichTextLabel(_text, _color = null, _textAlignment = null):
 		_bbcode = _bbcode.join(["[color=%s]" % colors[_color.to_lower()], "[/color]"])
 	if _textAlignment != null:
 		_bbcode = _bbcode.join(["[%s]" % _textAlignment, "[/%s]" % _textAlignment])
+	if append_bbcode(_bbcode) != OK:
+		push_error("Error appending bbcode.")
+
+func createRichTextLabelForGameConsole(_critterName, _text):
+	var _bbcode = str(_critterName) + ": "
+	_bbcode = _bbcode.join(["[color=%s]" % colors.flavorMessage, "[/color]"])
+	_bbcode += str(_text)
+	print(_bbcode)
 	if append_bbcode(_bbcode) != OK:
 		push_error("Error appending bbcode.")

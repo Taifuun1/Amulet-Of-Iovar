@@ -834,7 +834,7 @@ func checkSkillExperience():
 func getGameOverStats():
 	var _stats = {  }
 	
-	_stats.points = $"/root/World/Critters/0/nventory".getPoints()
+	_stats.points = $"/root/World/Critters/0/Inventory".getPoints()
 	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
 	_stats.inventoryItems = $"/root/World/Critters/0/Inventory".getInventoryItems()
 	_stats.gameStats = GlobalGameStats.getGameStats()

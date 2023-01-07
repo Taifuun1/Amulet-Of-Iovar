@@ -102,7 +102,7 @@ func awakeCritter(_critterTile, _playerTile):
 		if _critter.aI.aI.matchn("Deactivated"):
 			_critter.aI.aI = "Aggressive"
 			_critter.aI.activationDistance = null
-			checkIfAddFlavorGamelog("activated")
+			checkIfAddFlavorGamelog("activated", _critter.critterName)
 
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	var _path = []
@@ -128,7 +128,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	
 	if aI.aggroTarget != null or aI.aI.matchn("aggressive") or aI.aI.matchn("slow aggressive"): 
 		checkIfAddFlavorGamelog("taunt")
-	if aI.aggroTarget == null: 
+	elif aI.aggroTarget == null: 
 		checkIfAddFlavorGamelog("speech")
 	
 	var _pickedAbility
@@ -613,17 +613,19 @@ func addCritterBackToPopulation(_critterTile, _level):
 	GlobalCritterInfo.addCritterBackToPopulation(critterName)
 	call_deferred("queue_free")
 
-func checkIfAddFlavorGamelog(_logType):
+func checkIfAddFlavorGamelog(_logType, _critterName = critterName):
 	if (
+		$"/root/World".level.getCritterTile(0) and
+		$"/root/World".level.getCritterTile(id) and
+		$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
 		(
 			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 4 or
 			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
-		) and
-		$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0
+		)
 	):
-		var _flavorMessage = GlobalGameConsoleMessages.getRandomMessageByType(critterName, _logType)
+		var _flavorMessage = GlobalGameConsoleMessages.getRandomMessageByType(_critterName, _logType)
 		if _flavorMessage != null:
-			Globals.gameConsole.addLog(_flavorMessage)
+			Globals.gameConsole.addLog(_flavorMessage, _critterName)
 
 func checkIfCritterIsPlayer(_critterName):
 	if (
