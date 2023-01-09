@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=27 format=2]
+[gd_resource type="Theme" load_steps=29 format=2]
 
-[ext_resource path="res://Assets/Miscellaneous/DungeonFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Theme/dum2Ital.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/CheckboxChecked.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/CheckboxUnchecked.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Miscellaneous/raleway.medium.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/Theme/raleway.medium.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/UI/DialogMenu.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Theme/GameConsoleFont.tres" type="DynamicFont" id=6]
 
 [sub_resource type="StyleBoxFlat" id=3]
 content_margin_left = 16.0
@@ -78,6 +79,9 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id=11]
 
+[sub_resource type="DynamicFont" id=24]
+font_data = ExtResource( 1 )
+
 [sub_resource type="DynamicFont" id=21]
 size = 24
 extra_spacing_top = 8
@@ -146,7 +150,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [resource]
-default_font = ExtResource( 1 )
+default_font = ExtResource( 6 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 1, 1, 1, 0.25098 )
 Button/colors/font_color_focus = Color( 1, 1, 1, 1 )
@@ -165,6 +169,7 @@ CheckBox/styles/hover = SubResource( 8 )
 CheckBox/styles/hover_pressed = SubResource( 9 )
 CheckBox/styles/normal = SubResource( 10 )
 CheckBox/styles/pressed = SubResource( 11 )
+RichTextLabel/fonts/italics_font = SubResource( 24 )
 TabContainer/fonts/font = SubResource( 21 )
 TabContainer/styles/panel = SubResource( 17 )
 TabContainer/styles/tab_bg = SubResource( 22 )

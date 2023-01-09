@@ -31,7 +31,7 @@ var tools = {
 			"unidentifiedTexture": load("res://Assets/Tools/Blindfold.png"),
 			"type": "Tool",
 			"category": null,
-			"weight": 5,
+			"weight": 10,
 			"value": {
 				"worn": null
 			},
@@ -45,7 +45,7 @@ var tools = {
 			"unidentifiedTexture": load("res://Assets/Tools/Candle.png"),
 			"type": "Tool",
 			"category": null,
-			"weight": 5,
+			"weight": 1,
 			"value": {
 				"turnedOn": null,
 				"charges": [150, 100],
@@ -61,7 +61,7 @@ var tools = {
 			"unidentifiedTexture": load("res://Assets/Tools/CreditCard.png"),
 			"type": "Tool",
 			"category": null,
-			"weight": 5,
+			"weight": 2,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -114,7 +114,7 @@ var tools = {
 			"unidentifiedTexture": load("res://Assets/Tools/Pickaxe.png"),
 			"type": "Tool",
 			"category": null,
-			"weight": 50,
+			"weight": 100,
 			"value": null,
 			"enchantable": false,
 			"stackable": false
@@ -138,7 +138,7 @@ var tools = {
 			"unidentifiedTexture": load("res://Assets/Tools/InkBottle.png"),
 			"type": "Tool",
 			"category": null,
-			"weight": 5,
+			"weight": 10,
 			"value": {
 				"ink": [0, 31]
 			},
@@ -178,7 +178,7 @@ var tools = {
 			"unidentifiedTexture": load("res://Assets/Tools/BagLeather.png"),
 			"type": "Tool",
 			"category": "Container",
-			"weight": 10,
+			"weight": 25,
 			"value": null,
 			"points": 500,
 			"enchantable": false,
@@ -191,7 +191,7 @@ var tools = {
 			"unidentifiedTexture": load("res://Assets/Tools/BagLeather.png"),
 			"type": "Tool",
 			"category": "Container",
-			"weight": 150,
+			"weight": 250,
 			"value": {
 				"binds": "Inventory"
 			},

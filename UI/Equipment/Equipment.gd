@@ -249,7 +249,7 @@ func setEquipment(_id):
 		panelStylebox.set_border_width_all(1)
 		panelStylebox.set_border_color(Color(1, 0, 0))
 		get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
-	print($"/root/World/Critters/0".attacks.size())
+	print($"/root/World/Critters/0".attacks)
 	if $"/root/World/Critters/0".attacks.size() == 0:
 		$"/root/World/Critters/0".attacks = [
 			{
@@ -339,10 +339,10 @@ func getArmorClass():
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] }))
 		_ac += (_item.value.ac + _item.enchantment)
 	if accessories["ring1"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).category.matchn("ring"):
-		if get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).identifiedItemName.to_lower():
+		if get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).identifiedItemName.matchn("ring of protection"):
 			_ac += get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).value
 	if accessories["ring2"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).category.matchn("ring"):
-		if get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).identifiedItemName.to_lower():
+		if get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).identifiedItemName.matchn("ring of protection"):
 			_ac += get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).value
 	return _ac
 
@@ -399,12 +399,14 @@ func checkWhatAmuletIsWorn(_amulet):
 				Globals.gameConsole.addLog("You can see everything!")
 		"amulet of magic power":
 			if _playerNode.itemsTurnedOn.has(_amulet):
-				$"/root/World/Critters/0".bonusDmg.magicDmg -= 3
+				$"/root/World/Critters/0".bonusMagicDmg -= 3
 				_playerNode.itemsTurnedOn.erase(_amulet)
+				$"/root/World/UI/UITheme/Runes".calculateMagicDamage()
 				Globals.gameConsole.addLog("Your magic energy subsides.")
 			else:
-				$"/root/World/Critters/0".bonusDmg.magicDmg += 3
+				$"/root/World/UI/UITheme/Runes".bonusMagicDmg += 3
 				_playerNode.itemsTurnedOn.append(_amulet)
+				$"/root/World/UI/UITheme/Runes".calculateMagicDamage()
 				Globals.gameConsole.addLog("Your magic energy surges!")
 		"amulet of life power":
 			if _playerNode.itemsTurnedOn.has(_amulet):

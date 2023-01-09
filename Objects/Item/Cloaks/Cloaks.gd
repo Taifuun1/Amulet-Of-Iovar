@@ -7,7 +7,7 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakLeather.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 35,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -24,7 +24,7 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakOrc.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 45,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -40,7 +40,7 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakElven.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -56,7 +56,7 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakDwarven.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 35,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -72,7 +72,7 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakRomanRobe.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 20,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -89,7 +89,7 @@ var cloak = {
 			"unidentifiedTexture": null,
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 35,
 			"value": {
 				"ac": 7,
 				"resistance": null
@@ -105,7 +105,7 @@ var cloak = {
 			"unidentifiedTexture": null,
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 35,
 			"value": {
 				"ac": 7,
 				"resistance": null
@@ -121,7 +121,7 @@ var cloak = {
 #			"unidentifiedTexture": load("res://Assets/Armor/CloakAdornedCloak.png"),
 #			"type": "Armor",
 #			"category": "Cloak",
-#			"weight": 75,
+#			"weight": 55,
 #			"value": {
 #				"ac": 4,
 #				"resistance": null
@@ -136,7 +136,7 @@ var cloak = {
 #			"unidentifiedTexture": null,
 #			"type": "Armor",
 #			"category": "Cloak",
-#			"weight": 75,
+#			"weight": 35,
 #			"value": {
 #				"ac": 7,
 #				"resistance": null
@@ -153,7 +153,7 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakAlchemistsRobes.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 35,
 			"value": {
 				"ac": 7,
 				"resistance": null
@@ -169,7 +169,7 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakFumyCloth.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 75,
+			"weight": 35,
 			"value": {
 				"ac": 7,
 				"resistance": null

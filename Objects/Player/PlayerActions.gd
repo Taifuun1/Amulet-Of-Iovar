@@ -301,7 +301,8 @@ func readItem(_id):
 			"scroll of summon critter":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.alignment.matchn("blessed"):
-					var _critter = neutralCritters[randi() % neutralCritters.size()]
+					var _neutralClass = neutralClasses[randi() % neutralClasses.size()]
+					var _critter = $"/root/World/Critters/Critters".critters[_neutralClass][randi() % $"/root/World/Critters/Critters".critters[_neutralClass].size()]
 					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
 					if !_tiles.empty():
 						for _tile in _tiles:
@@ -349,6 +350,7 @@ func readItem(_id):
 							)
 						):
 							_aliveCritters.append(_critterName)
+				$"/root/World".closeMenu()
 				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters, _readItem)
 				_additionalChoices = true
 				Globals.isItemIdentified(_readItem)
@@ -384,7 +386,6 @@ func readItem(_id):
 
 func quaffItem(_id):
 	var _quaffedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
-	var _additionalChoices = false
 	if _quaffedItem.type.matchn("potion"):
 		Globals.gameConsole.addLog("You quaff a {itemName}.".format({ "itemName": _quaffedItem.itemName }))
 		match _quaffedItem.identifiedItemName.to_lower():
@@ -504,12 +505,12 @@ func quaffItem(_id):
 			_quaffedItem.amount -= 1
 		else:
 			$"/root/World/Items/Items".removeItem(_id)
-	$"/root/World".closeMenu(_additionalChoices)
+	$"/root/World".closeMenu()
 
 func consumeItem(_id):
 	var _eatenItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if _eatenItem.type.matchn("comestible"):
-		if calories > 5000:
+		if calories > 4500:
 			calories += _eatenItem.value / 3
 		else:
 			if critterClass.matchn("herbalogue"):
@@ -522,7 +523,7 @@ func consumeItem(_id):
 		else:
 			$"/root/World/Items/Items".removeItem(_id)
 		Globals.gameConsole.addLog("You eat {comestible}.".format({ "comestible": _eatenItem.itemName }))
-		if calories > 5000:
+		if calories > 4500:
 			Globals.gameConsole.addLog("You feel full.")
 	$"/root/World".closeMenu()
 
@@ -571,7 +572,8 @@ func zapItem(_direction):
 							break
 				"wand of summon critter":
 					if _zappedItem.alignment.matchn("blessed"):
-						var _critter = neutralCritters[randi() % neutralCritters.size()]
+						var _neutralClass = neutralClasses[randi() % neutralClasses.size()]
+						var _critter = $"/root/World/Critters/Critters".critters[_neutralClass][randi() % $"/root/World/Critters/Critters".critters[_neutralClass].size()]
 						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
 						if !_tiles.empty():
 							for _tile in _tiles:
@@ -856,7 +858,6 @@ func dipItem(_id):
 	var _selectedItem
 	if selectedItem != null:
 		_selectedItem = get_node("/root/World/Items/{id}".format({ "id": selectedItem }))
-	var _additionalChoices = false
 	if !_dippedItem.type.matchn("potion"):
 		$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
 		$"/root/World/UI/UITheme/ItemManagement".items = $"/root/World/Critters/0/Inventory".getItemsOfType(["potion"])
@@ -892,7 +893,7 @@ func dipItem(_id):
 		selectedItem = null
 		checkAllIdentification(true)
 		$"/root/World/Items/Items".removeItem(_id)
-		$"/root/World".closeMenu(_additionalChoices)
+		$"/root/World".closeMenu()
 		$"/root/World".processGameTurn()
 
 
@@ -939,7 +940,7 @@ func dealWithScrollOfGenocide(_name, _alignment):
 				if _critter.name.matchn("Critters"):
 					continue
 				if _critter.critterName.matchn(_genocidableCritter.critterName):
-					_critter.despawn(null, false)
+					_critter.despawn(null, false, false)
 			GlobalCritterInfo.globalCritterInfo[_genocidableCritter.critterName].population = 0
 			Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _genocidableCritter.critterName.capitalize() }))
 			GlobalGameStats.gameStats["Species genocided"] += 1
@@ -948,7 +949,7 @@ func dealWithScrollOfGenocide(_name, _alignment):
 			if _critter.name.matchn("Critters"):
 				continue
 			if _critter.critterName.matchn(_name):
-				_critter.despawn(null, false)
+				_critter.despawn(null, false, false)
 		GlobalCritterInfo.globalCritterInfo[_name].population = 0
 		Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _name.capitalize() }))
 		GlobalGameStats.gameStats["Species genocided"] += 1

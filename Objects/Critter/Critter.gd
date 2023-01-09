@@ -126,7 +126,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		else:
 			currentCritterAbilityHit += 1
 	
-	if aI.aggroTarget != null or aI.aI.matchn("aggressive") or aI.aI.matchn("slow aggressive"): 
+	if aI.aggroTarget != null or aI.aI.matchn("aggressive") or aI.aI.matchn("slow aggressive") or aI.aI.matchn("mimicking"):
 		checkIfAddFlavorGamelog("taunt")
 	elif aI.aggroTarget == null: 
 		checkIfAddFlavorGamelog("speech")
@@ -175,7 +175,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 								match _pickedAbility.abilityName:
 									"rockThrow", "crackerThrow", "fleirpoint", "fleirnado", "frostpoint", "frostBite", "thunderPoint", "thundersplit", "voidBlast":
-										if _level.grid[_tile.x][_tile.y].critter == 0:
+										if _level.grid[_tile.x][_tile.y].critter == 0 or (aI.aggroTarget != null and _level.grid[_tile.x][_tile.y].critter == aI.aggroTarget):
 											yield(get_tree(), "idle_frame")
 											var _newSpell = spell.instance()
 											var _color = "#000"
@@ -203,11 +203,13 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 											_critterNode.takeDamage(_pickedAbility.data.attacks, _tile, critterName)
 											if !_pickedAbility.abilityType.matchn("skill"):
 												mp -= _pickedAbility.data.mp
+											if aI.aggroTarget != null and _level.grid[_tile.x][_tile.y].critter == aI.aggroTarget:
+												return false
 											return true
 									"dragonBreath", "fleirBreath", "frostBreath", "thunderBreath", "gleeieerBreath", "toxixBreath", "elderDragonBreath":
 										if _level.grid[_tile.x][_tile.y].critter != null:
 											_critters.append(_level.grid[_tile.x][_tile.y].critter)
-							if _critters.has(0) or statusEffects.blindness > 0 or statusEffects.blindness == -1:
+							if _critters.has(0) or (aI.aggroTarget != null and _critters.has(aI.aggroTarget)) or statusEffects.blindness > 0 or statusEffects.blindness == -1:
 								break
 							else:
 								_critters.clear()
@@ -246,6 +248,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 							mp -= _pickedAbility.data.mp
 						if _critters.has(0):
 							return true
+						if aI.aggroTarget != null and _critters.has(aI.aggroTarget):
+							return false
 					"selfCastSpell":
 						match _pickedAbility.abilityName:
 							"createShield":
@@ -265,11 +269,11 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 									elif _attack.bonusDmg.bonusDmg < 5:
 										_attack.bonusDmg.bonusDmg += 1
 									else:
-										Globals.gameConsole.addLog("{critter} sharpens its sword. SSHhhrrrr...".format({ "critter": critterName.capitalize() }))
+										Globals.gameConsole.addLog("{critter} sharpens its sword. SSHhhhaaah...".format({ "critter": critterName.capitalize() }))
 										continue
 								if !_pickedAbility.abilityType.matchn("skill"):
 									mp -= _pickedAbility.data.mp
-								Globals.gameConsole.addLog("{critter} sharpens its sword. SKKRRrrr!".format({ "critter": critterName.capitalize() }))
+								Globals.gameConsole.addLog("{critter} sharpens its sword. SKKSSHHH!".format({ "critter": critterName.capitalize() }))
 								return false
 							"displaceSelf":
 								return false
@@ -377,8 +381,11 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			_randomOpenTiles.shuffle()
 			_moveCritterTo = _randomOpenTiles[0]
 		
-		# Hitting player check
-		if _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
+		# Hitting check
+		if aI.aggroTarget != null and _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == aI.aggroTarget:
+			$"/root/World/Critters/{critterId}".takeDamage(attacks, _moveCritterTo, critterName)
+			return false
+		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 			if currentHit == 15:
 				currentHit = 0
 			currentHit += 1
@@ -402,7 +409,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					_pickedAbility.abilityName.matchn("thunderSelfdestruct")
 				):
 					Globals.gameConsole.addLog("{critterName} {spell}s!".format({ "critterName": critterName, "spell": _pickedAbility.data.name }))
-					despawn(_critterTile, false)
+					despawn(_critterTile, false, false)
 				elif _pickedAbility.abilityName.matchn("lifesteal"):
 					if hp + 2 <= maxhp:
 						hp += 2
@@ -567,7 +574,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 		Globals.gameConsole.addLog("Looks like you cant attack...")
 	return _didCritterDie
 
-func despawn(_critterTile = null, createCorpse = true):
+func despawn(_critterTile = null, _createCorpse = true, _createDrops = true):
 	var _level = get_node("/root/World/Levels/{level}".format({ "level": levelId }))
 	var _gridPosition
 	
@@ -579,25 +586,26 @@ func despawn(_critterTile = null, createCorpse = true):
 	
 	checkIfAddFlavorGamelog("despawn")
 	
-	if createCorpse:
+	if _createCorpse:
 		$"/root/World/Items/Items".createItem("corpse", _gridPosition, 1, false, { "weight": weight, "critterName": critterName })
 	
-	for _drop in drops:
-		var _dropTries = 1
-		if _drop.has("tries"):
-			_dropTries = _drop.tries
-		for _index in range(_dropTries):
-			if randi() % 101 <= _drop.chance:
-				var _minAmount = _drop.amount[0]
-				var _randomChange = _drop.amount[1] - _drop.amount[0] + 1
-				if _drop.amount[0] == _drop.amount[1]:
-					_randomChange = 1
-					_minAmount = _drop.amount[0]
-				var _amount = randi() % int(_randomChange) + int(_minAmount)
-				if typeof(_drop.names) == TYPE_ARRAY:
-					$"/root/World/Items/Items".createItem(_drop.names[randi() % _drop.names.size()], _gridPosition, _amount)
-				else:
-					$"/root/World/Items/Items".createItem(_drop.names, _gridPosition, _amount)
+	if _createDrops:
+		for _drop in drops:
+			var _dropTries = 1
+			if _drop.has("tries"):
+				_dropTries = _drop.tries
+			for _index in range(_dropTries):
+				if randi() % 101 <= _drop.chance:
+					var _minAmount = _drop.amount[0]
+					var _randomChange = _drop.amount[1] - _drop.amount[0] + 1
+					if _drop.amount[0] == _drop.amount[1]:
+						_randomChange = 1
+						_minAmount = _drop.amount[0]
+					var _amount = randi() % int(_randomChange) + int(_minAmount)
+					if typeof(_drop.names) == TYPE_ARRAY:
+						$"/root/World/Items/Items".createItem(_drop.names[randi() % _drop.names.size()], _gridPosition, _amount)
+					else:
+						$"/root/World/Items/Items".createItem(_drop.names, _gridPosition, _amount)
 	
 	$"/root/World".hideObjectsWhenDrawingNextFrame = true
 	_level.grid[_gridPosition.x][_gridPosition.y].critter = null

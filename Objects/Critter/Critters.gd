@@ -62,6 +62,11 @@ func create():
 	critters["rats"] = rats.rats
 	critters["snakes"] = snakes.snakes
 	critters["wraiths"] = wraiths.wraiths
+	
+	for _neutralClass in $"/root/World/Critters/0".neutralClasses:
+		if critters.has(_neutralClass):
+			for _critter in critters[_neutralClass].critterTypes:
+				_critter.aI = "Neutral"
 
 
 

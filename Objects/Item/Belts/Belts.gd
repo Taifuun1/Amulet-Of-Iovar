@@ -7,7 +7,7 @@ var belt = {
 			"unidentifiedTexture": load("res://Assets/Belts/BeltLeather.png"),
 			"type": "Armor",
 			"category": "Belt",
-			"weight": 75,
+			"weight": 15,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -24,7 +24,7 @@ var belt = {
 			"unidentifiedTexture": load("res://Assets/Belts/BeltStudded.png"),
 			"type": "Armor",
 			"category": "Belt",
-			"weight": 75,
+			"weight": 35,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -41,7 +41,7 @@ var belt = {
 			"unidentifiedTexture": null,
 			"type": "Armor",
 			"category": "Belt",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 7,
 				"resistance": null
@@ -57,7 +57,7 @@ var belt = {
 			"unidentifiedTexture": null,
 			"type": "Armor",
 			"category": "Belt",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 7,
 				"resistance": null
@@ -73,7 +73,7 @@ var belt = {
 			"unidentifiedTexture": null,
 			"type": "Armor",
 			"category": "Belt",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 7,
 				"resistance": null
@@ -91,7 +91,7 @@ var belt = {
 			"unidentifiedTexture": load("res://Assets/Belts/BeltSlitheryBelt.png"),
 			"type": "Armor",
 			"category": "Belt",
-			"weight": 75,
+			"weight": 15,
 			"value": {
 				"ac": 7,
 				"resistance": null

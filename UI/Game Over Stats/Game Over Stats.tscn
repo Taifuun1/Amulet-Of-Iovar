@@ -2,7 +2,7 @@
 
 [ext_resource path="res://UI/Game Over Stats/Game Over Stats.gd" type="Script" id=1]
 [ext_resource path="res://UI/Game Over Stats/Points.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Miscellaneous/Theme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Theme/UITheme.tres" type="Theme" id=3]
 [ext_resource path="res://UI/Game Over Stats/Console Log.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/Game Over Stats/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Game Over Stats/Kill Count.tscn" type="PackedScene" id=6]

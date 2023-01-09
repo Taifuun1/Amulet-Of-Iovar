@@ -57,7 +57,7 @@ var critterSpawnBehaviour = {
 		"distance": 0
 	},
 	"Wolf": {
-		"amount": [2, 3],
+		"amount": [2, 5],
 		"distance": 4
 	},
 	"Warg": {
@@ -65,7 +65,7 @@ var critterSpawnBehaviour = {
 		"distance": 4
 	},
 	"Gearh": {
-		"amount": [2, 3],
+		"amount": [1, 2],
 		"distance": 4
 	},
 	"Hill centaur": {
@@ -77,39 +77,39 @@ var critterSpawnBehaviour = {
 		"distance": 2
 	},
 	"Black dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"Blue dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"Cyan dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"Green dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"Red dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"Silver dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"Violet dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"White dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"Yellow dragon": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 3
 	},
 	"Dwarf miner": {
@@ -133,7 +133,7 @@ var critterSpawnBehaviour = {
 		"distance": 2
 	},
 	"Elf assassin": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 8
 	},
 	"Elf noble": {
@@ -149,11 +149,11 @@ var critterSpawnBehaviour = {
 		"distance": 1
 	},
 	"Lynx": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 1
 	},
 	"Tiger": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 1
 	},
 	"Floating eye": {
@@ -193,7 +193,7 @@ var critterSpawnBehaviour = {
 		"distance": 0
 	},
 	"Guard": {
-		"amount": [2, 4],
+		"amount": [3, 5],
 		"distance": 2
 	},
 	"Guard captain": {
@@ -201,7 +201,7 @@ var critterSpawnBehaviour = {
 		"distance": 0
 	},
 	"Outlaw watcher": {
-		"amount": [3, 5],
+		"amount": [1, 4],
 		"distance": 6
 	},
 	"Outlaw fusiee'er": {
@@ -221,7 +221,7 @@ var critterSpawnBehaviour = {
 		"distance": 4
 	},
 	"Tiny kobold": {
-		"amount": [2, 3],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Large kobold": {
@@ -229,11 +229,11 @@ var critterSpawnBehaviour = {
 		"distance": 3
 	},
 	"Half-lich": {
-		"amount": [1, 3],
+		"amount": [1, 2],
 		"distance": 2
 	},
 	"Lich": {
-		"amount": [1, 2],
+		"amount": [1, 1],
 		"distance": 1
 	},
 	"Grand lich": {
@@ -257,11 +257,11 @@ var critterSpawnBehaviour = {
 		"distance": 4
 	},
 	"Mine newt": {
-		"amount": [2, 4],
+		"amount": [1, 3],
 		"distance": 4
 	},
 	"Highlands newt": {
-		"amount": [3, 5],
+		"amount": [2, 5],
 		"distance": 4
 	},
 	"Paper newt": {
@@ -273,11 +273,11 @@ var critterSpawnBehaviour = {
 		"distance": 4
 	},
 	"Goblin": {
-		"amount": [2, 4],
+		"amount": [1, 2],
 		"distance": 4
 	},
 	"Flatlands orc": {
-		"amount": [2, 4],
+		"amount": [2, 3],
 		"distance": 4
 	},
 	"Mountain orc": {
@@ -297,7 +297,7 @@ var critterSpawnBehaviour = {
 #		"distance": 2
 #	},
 	"Chicken": {
-		"amount": [3, 8],
+		"amount": [1, 7],
 		"distance": 6
 	},
 	"Rhino": {
@@ -309,27 +309,27 @@ var critterSpawnBehaviour = {
 		"distance": 2
 	},
 	"Big rat": {
-		"amount": [3, 5],
+		"amount": [1, 3],
 		"distance": 4
 	},
 	"Sewer rat": {
-		"amount": [3, 5],
+		"amount": [1, 3],
 		"distance": 4
 	},
 	"Cave rat": {
-		"amount": [3, 5],
+		"amount": [1, 3],
 		"distance": 4
 	},
 	"Garnered snake": {
-		"amount": [1, 3],
+		"amount": [1, 2],
 		"distance": 2
 	},
 	"Marsh snake": {
-		"amount": [1, 3],
+		"amount": [1, 2],
 		"distance": 2
 	},
 	"Sawtooth-pattern snake": {
-		"amount": [1, 3],
+		"amount": [1, 2],
 		"distance": 2
 	},
 	"Spectral wraith": {

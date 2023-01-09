@@ -176,7 +176,7 @@ I wither away"""
 		"speech": {
 			"frequency": 10,
 			"lines": [
-				"Skitters"
+				"Chp-chp-chp"
 			],
 		},
 		"despawn": [
@@ -187,18 +187,18 @@ I wither away"""
 		"speech": {
 			"frequency": 10,
 			"lines": [
-				"Skitters"
+				"Chp-chp-chp"
 			],
 		},
 		"despawn": [
-			"RRRrrrr..."
+			"CLAK-CLAK"
 		]
 	},
 	"Sugar ant": {
 		"speech": {
 			"frequency": 10,
 			"lines": [
-				"Skitters"
+				"Chp-chp-chp"
 			],
 		},
 		"despawn": [
@@ -255,47 +255,47 @@ I wither away"""
 		"speech": {
 			"frequency": 5,
 			"lines": [
-				"Slerp",
-				"Slorp"
+				"[i]Slerp[/i]",
+				"[i]Slorp[/i]"
 			],
 		},
 		"taunt": {
 			"frequency": 5,
 			"lines": [
-				"Slerp",
-				"Slorp"
+				"[i]Slerp[/i]",
+				"[i]Slorp[/i]"
 			],
 		},
 		"despawn": [
-			"Splat!"
+			"[i]Splat![/i]"
 		]
 	},
 	"Sluerp": {
 		"speech": {
 			"frequency": 5,
 			"lines": [
-				"Sluerp",
-				"Slarp",
-				"Splorp"
+				"[i]Sluerp[/i]",
+				"[i]Slarp[/i]",
+				"[i]Splorp[/i]"
 			],
 		},
 		"taunt": {
 			"frequency": 5,
 			"lines": [
-				"Sluerp",
-				"Slarp",
-				"Splorp"
+				"[i]Sluerp[/i]",
+				"[i]Slarp[/i]",
+				"[i]Splorp[/i]"
 			],
 		},
 		"despawn": [
-			"Splat!"
+			"[i]Splat![/i]"
 		]
 	},
 	"Gearh": {
 		"taunt": {
 			"frequency": 4,
 			"lines": [
-				"Roars",
+				"[i]Roars[/i]",
 				"RAAAAARRRRRR!",
 				"GGRRRRRRRRR!!!"
 			],
@@ -308,13 +308,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 12,
 			"lines": [
-				"Roars",
+				"[i]Roars[/i]",
 				"Raaarrr!",
 				"Grrrrrrr..."
 			],
 		},
 		"despawn": [
-			"Whimpers",
+			"[i]Whimpers[/i]",
 			"Grrrr..."
 		]
 	},
@@ -322,13 +322,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 8,
 			"lines": [
-				"Roars",
+				"[i]Roars[/i]",
 				"Raaarrr!",
 				"Grrrrrrr..."
 			],
 		},
 		"despawn": [
-			"Whimpers",
+			"[i]Whimpers[/i]",
 			"Grrrr..."
 		]
 	},
@@ -461,7 +461,7 @@ I wither away"""
 		},
 		"despawn": [
 			"I return to earth...",
-			"Yells"
+			"[i]Yells[/i]"
 		]
 	},
 	"Dwarf engineer": {
@@ -475,7 +475,7 @@ I wither away"""
 		},
 		"despawn": [
 			"I return to earth...",
-			"Yells"
+			"[i]Yells[/i]"
 		]
 	},
 	"Dwarf miner": {
@@ -489,7 +489,7 @@ I wither away"""
 		},
 		"despawn": [
 			"I return to earth...",
-			"Yells"
+			"[i]Yells[/i]"
 		]
 	},
 	"Dwarf smith": {
@@ -503,7 +503,7 @@ I wither away"""
 		},
 		"despawn": [
 			"I return to earth...",
-			"Yells"
+			"[i]Yells[/i]"
 		]
 	},
 	"Elf assassin": {
@@ -528,7 +528,7 @@ I wither away"""
 		},
 		"despawn": [
 			"I return to earth...",
-			"Screams"
+			"[i]Screams[/i]"
 		]
 	},
 	"Elf king": {
@@ -568,7 +568,7 @@ I wither away"""
 		},
 		"despawn": [
 			"I return to earth...",
-			"Screams"
+			"[i]Screams[/i]"
 		]
 	},
 	"Cat": {
@@ -587,7 +587,7 @@ I wither away"""
 				"Mau?",
 				"Nau!",
 				"Mrrvvv.",
-				"Purrs"
+				"[i]Purrs[/i]"
 			]
 		},
 		"despawn": [
@@ -608,7 +608,7 @@ I wither away"""
 			"frequency": 10,
 			"lines": [
 				"Mrrvvv.",
-				"Purrs"
+				"[i]Purrs[/i]"
 			],
 		},
 		"despawn": [
@@ -628,11 +628,11 @@ I wither away"""
 		"speech": {
 			"frequency": 10,
 			"lines": [
-				"Purrs"
+				"[i]Purrs[/i]"
 			],
 		},
 		"despawn": [
-			"Whimpers",
+			"[i]Whimpers[/i]",
 			"Grrrrrrr..."
 		]
 	},
@@ -661,7 +661,7 @@ I wither away"""
 				"Ogg.",
 				"Me strong!",
 				"Egghh.",
-				"Grunts",
+				"[i]Grunts[/i]",
 				"Your hair... You... Too?"
 			],
 		},
@@ -680,7 +680,7 @@ I wither away"""
 				"Ogg.",
 				"Me strong!",
 				"Egghh.",
-				"Grunts"
+				"[i]Grunts[/i]"
 			],
 		},
 		"despawn": [
@@ -698,7 +698,7 @@ I wither away"""
 				"Ogg.",
 				"Me strong!",
 				"Egghh.",
-				"Grunts"
+				"[i]Grunts[/i]"
 			],
 		},
 		"despawn": [
@@ -716,7 +716,7 @@ I wither away"""
 				"Ogg.",
 				"Me strong!",
 				"Egghh.",
-				"Grunts"
+				"[i]Grunts[/i]"
 			],
 		},
 		"despawn": [
@@ -735,7 +735,7 @@ I wither away"""
 				"What?",
 				"What!",
 				"See?",
-				"Grunts"
+				"[i]Grunts[/i]"
 			],
 		},
 		"speech": {
@@ -762,7 +762,7 @@ I wither away"""
 				"For the Guard!",
 				"Charge!",
 				"I won't give in!",
-				"Grunts"
+				"[i]Grunts[/i]"
 			],
 		},
 		"speech": {
@@ -876,23 +876,23 @@ I wither away"""
 		]
 	},
 	"Half-lich": {
-		"spawn": "Rattles bones enthusiastically",
+		"spawn": "[i]Rattles bones enthusiastically[/i]",
 		"taunt": {
 			"frequency": 7,
 			"lines": [
-				"Rattles bones",
-				"Rattles bones aggressively",
+				"[i]Rattles bones[/i]",
+				"[i]Rattles bones aggressively[/i]",
 				"Clack. Clack! Clack."
 			],
 		},
 		"speech": {
 			"frequency": 15,
 			"lines": [
-				"Rattles bones chattily"
+				"[i]Rattles bones chattily[/i]"
 			],
 		},
 		"despawn": [
-			"Clomps!",
+			"[i]Clomps![/i]",
 		]
 	},
 	"Lich": {
@@ -1138,7 +1138,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"REeeeEE!",
+				"EeeeEE!",
 				"REEEeeee!",
 				"REEEEE!"
 			],

@@ -23,6 +23,7 @@ var spellDamage = [{
 }]
 
 var manaUsage = 0
+var bonusMagicDmg = 0
 
 var hoveredEquipment = null
 
@@ -331,6 +332,8 @@ func calculateMagicDamage():
 		manaUsage = 0
 		for _rune in runes:
 			manaUsage += runeData.runeData[_rune][runes[_rune].value.to_lower()].mp
+	if _magicAttacks.magicDmg.dmg[0] != 0 and _magicAttacks.magicDmg.dmg[1] != 0:
+		_magicAttacks.magicDmg.dmg = [_magicAttacks.magicDmg.dmg[0] + bonusMagicDmg, _magicAttacks.magicDmg.dmg[1] + bonusMagicDmg]
 	spellDamage = _magicAttacks
 	$"/root/World/Critters/0".updatePlayerStats()
 

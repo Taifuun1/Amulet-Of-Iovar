@@ -1,7 +1,7 @@
 extends BaseCritter
 class_name Player
 
-var inventory = load("res://UI/Inventory/Inventory.tscn").instance()
+onready var inventory = preload("res://UI/Inventory/Inventory.tscn").instance()
 
 var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
 var spellData = load("res://Objects/Spell/SpellData.gd").new()
@@ -74,7 +74,7 @@ var skills = {
 	}
 }
 
-var neutralCritters = ["Sugar ant", "Shopkeeper"]
+var neutralClasses
 
 func create(_data = null):
 	id = 0
@@ -137,12 +137,12 @@ func create(_data = null):
 	
 	resistances = _playerData.resistances
 	
-	statusEffects.confusion = 10
-	
-	calories = 808
+	calories = 1500
 	previousCalories = calories
 	
 	goldPieces = _playerData.goldPieces
+	
+	neutralClasses = _playerData.neutralClasses
 	
 	if _playerData.has("items"):
 		for _item in _playerData.items.keys():
@@ -170,6 +170,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			if checkIfCritterHasEffect(_critter):
 				return
 			
+			# On enemy hit
 			if hits[currentHit] == 1:
 				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo, critterName)
 				if _didCritterDespawn != null:
@@ -598,9 +599,9 @@ func processPlayerSpecificEffects():
 
 func calculateWeightStats():
 	maxCarryWeight = {
-		"overEncumbured": (stats.strength / 2) * 50,
-		"burdened": (stats.strength / 2) * 70,
-		"flattened": (stats.strength / 2) * 90
+		"overEncumbured": int(stats.strength / 4 * 3) * 60,
+		"burdened": int(stats.strength / 4 * 3) * 80,
+		"flattened": int(stats.strength / 4 * 3) * 100
 	}
 	
 	var _weight = $Inventory.currentWeight
@@ -866,7 +867,7 @@ func getCritterSaveData():
 		selectedItem = selectedItem,
 		itemsTurnedOn = itemsTurnedOn,
 		skills = skills,
-		neutralCritters = neutralCritters,
+		neutralClasses = neutralClasses,
 		texture = $PlayerSprite.texture.get_path()
 	}
 	_critterData.merge(getBaseCritterSaveData())

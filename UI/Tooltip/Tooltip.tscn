@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/Tooltip/Tooltip.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Theme/UITheme.tres" type="Theme" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.121569, 0.223529, 0.458824, 1 )
@@ -25,10 +26,13 @@ layer = 2
 visible = false
 
 [node name="TooltipContainer" type="PanelContainer" parent="."]
-margin_right = 264.0
-margin_bottom = 132.0
-rect_min_size = Vector2( 328, 132 )
+margin_right = 328.0
+margin_bottom = 196.0
+rect_min_size = Vector2( 328, 196 )
 mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 
@@ -36,14 +40,16 @@ script = ExtResource( 1 )
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 326.0
-margin_bottom = 130.0
+margin_bottom = 194.0
 rect_min_size = Vector2( 260, 128 )
 mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Sprite" type="TextureRect" parent="TooltipContainer/TooltipContentContainer"]
 margin_right = 128.0
-margin_bottom = 128.0
-rect_min_size = Vector2( 128, 0 )
+margin_bottom = 192.0
+rect_min_size = Vector2( 128, 128 )
 mouse_filter = 2
 size_flags_vertical = 3
 stretch_mode = 5
@@ -51,20 +57,18 @@ stretch_mode = 5
 [node name="TooltipTextContainer" type="PanelContainer" parent="TooltipContainer/TooltipContentContainer"]
 margin_left = 132.0
 margin_right = 324.0
-margin_bottom = 128.0
+margin_bottom = 192.0
 rect_min_size = Vector2( 128, 128 )
 mouse_filter = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="TooltipTextContentContainer" type="VBoxContainer" parent="TooltipContainer/TooltipContentContainer/TooltipTextContainer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 188.0
-margin_bottom = 124.0
+margin_bottom = 188.0
 mouse_filter = 2
-size_flags_horizontal = 3
 
 [node name="Title" type="RichTextLabel" parent="TooltipContainer/TooltipContentContainer/TooltipTextContainer/TooltipTextContentContainer"]
 margin_right = 184.0
@@ -76,7 +80,7 @@ scroll_active = false
 [node name="Description" type="RichTextLabel" parent="TooltipContainer/TooltipContentContainer/TooltipTextContainer/TooltipTextContentContainer"]
 margin_top = 36.0
 margin_right = 184.0
-margin_bottom = 120.0
+margin_bottom = 184.0
 mouse_filter = 2
 size_flags_vertical = 3
 scroll_active = false

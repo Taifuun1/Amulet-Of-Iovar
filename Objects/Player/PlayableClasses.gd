@@ -515,7 +515,7 @@ var savant = {
 	hp = 8,
 	mp = 18,
 	stats = {
-		strength = 4,
+		strength = 5,
 		legerity = 8,
 		balance = 9,
 		belief = 12,
@@ -540,7 +540,6 @@ var savant = {
 		"Amulet of magic power": 1,
 		"Scroll of remove curse": 1,
 		"Scroll of identify": [2, 3],
-		"Oil lamp": 1,
 		"Magic marker": 1,
 		"Wand of light": 1,
 		"Orange": 1,

@@ -7,7 +7,7 @@ var gauntlets = {
 			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsLeatherGloves.png"),
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 20,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -24,7 +24,7 @@ var gauntlets = {
 			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsStuddedGauntlets.png"),
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 45,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -39,7 +39,7 @@ var gauntlets = {
 			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsFabricGloves.png"),
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 5,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -56,7 +56,7 @@ var gauntlets = {
 			"unidentifiedTexture": null,
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 3,
 				"resistance": null
@@ -72,7 +72,7 @@ var gauntlets = {
 			"unidentifiedTexture": null,
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 3,
 				"resistance": null
@@ -88,7 +88,7 @@ var gauntlets = {
 			"unidentifiedTexture": null,
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 3,
 				"resistance": null
@@ -106,7 +106,7 @@ var gauntlets = {
 			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsGardenGloves.png"),
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 10,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -122,7 +122,7 @@ var gauntlets = {
 			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsBurningGauntlets.png"),
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -138,7 +138,7 @@ var gauntlets = {
 			"unidentifiedTexture": load("res://Assets/Gauntlets/GauntletsGehennorsGauntlets.png"),
 			"type": "Armor",
 			"category": "Gauntlets",
-			"weight": 75,
+			"weight": 40,
 			"value": {
 				"ac": 4,
 				"resistance": null

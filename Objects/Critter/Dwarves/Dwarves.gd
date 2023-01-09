@@ -97,7 +97,7 @@ var dwarves = {
 			"race": "Dwarf",
 			"class": "Humanoid",
 			"weight": 200,
-			"aI": "Neutral",
+			"aI": "Aggressive",
 			"aggroDistance": 7,
 			"texture": load("res://Assets/Critters/DwarfEngineer.png"),
 			"alignment": "Neutral",

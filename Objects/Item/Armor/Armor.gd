@@ -7,7 +7,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateLeatherMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 45,
 			"value": {
 				"ac": 3,
 				"resistance": null
@@ -22,7 +22,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/HelmetLeatherCap.png"),
 			"type": "Armor",
 			"category": "Helmet",
-			"weight": 75,
+			"weight": 15,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -37,7 +37,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/HelmetBucketHelmet.png"),
 			"type": "Armor",
 			"category": "Helmet",
-			"weight": 75,
+			"weight": 35,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -52,7 +52,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/ShieldBatteredBuckler.png"),
 			"type": "Armor",
 			"category": "Shield",
-			"weight": 75,
+			"weight": 32,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -67,7 +67,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/GreavesLeatherPants.png"),
 			"type": "Armor",
 			"category": "Greaves",
-			"weight": 75,
+			"weight": 34,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -82,7 +82,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/BootsLowBoots.png"),
 			"type": "Armor",
 			"category": "Boots",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -99,7 +99,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateOrcMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 88,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -114,7 +114,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateScaleRingMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 112,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -129,7 +129,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateDwarvishCoat.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 65,
 			"value": {
 				"ac": 5,
 				"resistance": null
@@ -144,7 +144,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/ShieldLargeOrcShield.png"),
 			"type": "Armor",
 			"category": "Shield",
-			"weight": 75,
+			"weight": 76,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -159,7 +159,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/GreavesScaleRingMailChausses.png"),
 			"type": "Armor",
 			"category": "Greaves",
-			"weight": 75,
+			"weight": 70,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -174,7 +174,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/BootsStuddedBoots.png"),
 			"type": "Armor",
 			"category": "Boots",
-			"weight": 75,
+			"weight": 47,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -189,7 +189,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/BootsLowBoots.png"),
 			"type": "Armor",
 			"category": "Boots",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -204,7 +204,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/BootsLowBoots.png"),
 			"type": "Armor",
 			"category": "Boots",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -221,7 +221,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlatePlatemail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 187,
 			"value": {
 				"ac": 8,
 				"resistance": null
@@ -236,7 +236,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/HelmetAdornedHelmet.png"),
 			"type": "Armor",
 			"category": "Helmet",
-			"weight": 75,
+			"weight": 78,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -251,7 +251,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/HelmetOfEgo.png"),
 			"type": "Armor",
 			"category": "Helmet",
-			"weight": 75,
+			"weight": 84,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -266,7 +266,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/GreavesDwarvishChausses.png"),
 			"type": "Armor",
 			"category": "Greaves",
-			"weight": 75,
+			"weight": 51,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -283,7 +283,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateBlueDragonScaleMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 151,
 			"value": {
 				"ac": 12,
 				"resistance": "Frost"
@@ -299,7 +299,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateGreenDragonScaleMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 151,
 			"value": {
 				"ac": 12,
 				"resistance": "Gleeie'er"
@@ -315,7 +315,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateRedDragonScaleMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 151,
 			"value": {
 				"ac": 12,
 				"resistance": "Flier"
@@ -331,7 +331,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateYellowDragonScaleMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 151,
 			"value": {
 				"ac": 12,
 				"resistance": "Thunder"
@@ -347,7 +347,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateVioletDragonScaleMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 151,
 			"value": {
 				"ac": 12,
 				"resistance": "Toxix"
@@ -363,7 +363,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateGreatUlromirsPlatemail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 250,
 			"value": {
 				"ac": 15,
 				"resistance": null
@@ -379,7 +379,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateFrozenMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 163,
 			"value": {
 				"ac": 10,
 				"resistance": "Frost"
@@ -395,7 +395,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateSizzlyMail.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 75,
+			"weight": 163,
 			"value": {
 				"ac": 10,
 				"resistance": "Thunder"
@@ -411,7 +411,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/HelmetKnightsHelmet.png"),
 			"type": "Armor",
 			"category": "Helmet",
-			"weight": 75,
+			"weight": 66,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -427,7 +427,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/HelmetMossyHelmet.png"),
 			"type": "Armor",
 			"category": "Helmet",
-			"weight": 75,
+			"weight": 54,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -443,7 +443,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/HelmetWingedHelmet.png"),
 			"type": "Armor",
 			"category": "Helmet",
-			"weight": 75,
+			"weight": 58,
 			"value": {
 				"ac": 5,
 				"resistance": null
@@ -459,10 +459,10 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/ShieldJustice'eerShield.png"),
 			"type": "Armor",
 			"category": "Shield",
-			"weight": 75,
+			"weight": 73,
 			"value": {
 				"ac": 7,
-				"resistance": "Flier"
+				"resistance": null
 			},
 			"points": 400,
 			"enchantable": true,
@@ -492,7 +492,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/ShieldLordsTowerBoardShield.png"),
 			"type": "Armor",
 			"category": "Shield",
-			"weight": 75,
+			"weight": 173,
 			"value": {
 				"ac": 6,
 				"resistance": null
@@ -509,7 +509,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/ShieldBurningShield.png"),
 			"type": "Armor",
 			"category": "Shield",
-			"weight": 75,
+			"weight": 85,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -525,7 +525,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/GreavesThunderGreaves.png"),
 			"type": "Armor",
 			"category": "Greaves",
-			"weight": 75,
+			"weight": 59,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -541,7 +541,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/GreavesBurningMailChausses.png"),
 			"type": "Armor",
 			"category": "Greaves",
-			"weight": 75,
+			"weight": 59,
 			"value": {
 				"ac": 4,
 				"resistance": null
@@ -557,7 +557,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/BootsChillyBoots.png"),
 			"type": "Armor",
 			"category": "Boots",
-			"weight": 75,
+			"weight": 38,
 			"value": {
 				"ac": 3,
 				"resistance": null
@@ -573,7 +573,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/BootsCoolMikeys.png"),
 			"type": "Armor",
 			"category": "Boots",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 1,
 				"resistance": null
@@ -589,7 +589,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/BootsVenomRiders.png"),
 			"type": "Armor",
 			"category": "Boots",
-			"weight": 75,
+			"weight": 25,
 			"value": {
 				"ac": 1,
 				"resistance": null

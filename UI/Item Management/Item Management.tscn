@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/Item Management/Item Management.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Miscellaneous/raleway.medium.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Theme/UITitleFont.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 1 )
@@ -10,12 +10,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.129412, 0.219608, 0.403922, 1 )
-
-[sub_resource type="DynamicFont" id=1]
-size = 32
-extra_spacing_top = 8
-extra_spacing_bottom = 8
-font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxLine" id=3]
 content_margin_top = 16.0
@@ -48,12 +42,12 @@ size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="ItemManagementContainer"]
 margin_right = 1516.0
-margin_bottom = 55.0
-custom_fonts/font = SubResource( 1 )
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
 text = "-"
 
 [node name="ItemManagementListScrollContainer" type="ScrollContainer" parent="ItemManagementContainer"]
-margin_top = 59.0
+margin_top = 37.0
 margin_right = 1516.0
 margin_bottom = 696.0
 size_flags_horizontal = 3

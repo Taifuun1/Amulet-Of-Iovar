@@ -52,42 +52,42 @@ func updateStats(stats = {
 	goldPieces = null
 }):
 	if stats.critterName != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/NameContainer/Name.text = str(stats.critterName)
+		$GameStatsContainer/DetailsContainer/NameContainer/Name.text = str(stats.critterName)
 	if stats.race != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/RaceContainer/Race.text = str(stats.race)
+		$GameStatsContainer/DetailsContainer/RaceContainer/Race.text = str(stats.race)
 	if stats.justice != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/JusticeContainer/Justice.text = str(stats.justice)
+		$GameStatsContainer/DetailsContainer/JusticeContainer/Justice.text = str(stats.justice)
 	if stats.dungeonLevel != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/DungeonLevelContainer/DungeonLevel.text = str(stats.dungeonLevel)
+		$GameStatsContainer/DetailsContainer/DungeonLevelContainer/DungeonLevel.text = str(stats.dungeonLevel)
 	if stats.level != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LevelContainer/Level.text = str(stats.level)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer/Experience.text = str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount)
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/ExperienceContainer/Experience.set_tooltip("First value is your current exp, second value is next level\n" + str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount))
+		$GameStatsContainer/DetailsContainer/LevelContainer/Level.text = str(stats.level)
+		$GameStatsContainer/DetailsContainer/ExperienceContainer/Experience.text = str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount)
+		$GameStatsContainer/DetailsContainer/ExperienceContainer/Experience.set_tooltip("First value is your current exp, second value is next level\n" + str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount))
 	if stats.strength != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/StrengthContainer/Strength.text = str(stats.strength)
+		$GameStatsContainer/DetailsContainer/StrengthContainer/Strength.text = str(stats.strength)
 	if stats.legerity != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/LegerityContainer/Legerity.text = str(stats.legerity)
+		$GameStatsContainer/DetailsContainer/LegerityContainer/Legerity.text = str(stats.legerity)
 	if stats.balance != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BalanceContainer/Balance.text = str(stats.balance)
+		$GameStatsContainer/DetailsContainer/BalanceContainer/Balance.text = str(stats.balance)
 	if stats.belief != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/BeliefContainer/Belief.text = str(stats.belief)
+		$GameStatsContainer/DetailsContainer/BeliefContainer/Belief.text = str(stats.belief)
 	if stats.visage != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/VisageContainer/Visage.text = str(stats.visage)
+		$GameStatsContainer/DetailsContainer/VisageContainer/Visage.text = str(stats.visage)
 	if stats.wisdom != null:
-		$Background/GameStatsContainer/GameStatsColumns/DetailsContainer/WisdomContainer/Wisdom.text = str(stats.wisdom)
+		$GameStatsContainer/DetailsContainer/WisdomContainer/Wisdom.text = str(stats.wisdom)
 	
 	if stats.maxhp != null:
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer/HPAmount.max_value = stats.maxhp
+		$GameStatsContainer/StatsContainer/HPContainer/HPAmount.max_value = stats.maxhp
 	if stats.hp != null:
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer/HP.text = str(stats.hp)
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/HPContainer/HPAmount.value = stats.hp
+		$GameStatsContainer/StatsContainer/HPContainer/HP.text = str(stats.hp)
+		$GameStatsContainer/StatsContainer/HPContainer/HPAmount.value = stats.hp
 	if stats.maxmp != null:
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer/MPAmount.max_value = stats.maxmp
+		$GameStatsContainer/StatsContainer/MPContainer/MPAmount.max_value = stats.maxmp
 	if stats.mp != null:
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer/MP.text = str(stats.mp)
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/MPContainer/MPAmount.value = stats.mp
+		$GameStatsContainer/StatsContainer/MPContainer/MP.text = str(stats.mp)
+		$GameStatsContainer/StatsContainer/MPContainer/MPAmount.value = stats.mp
 	if stats.ac != null:
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/ACContainer/AC.text = str(stats.ac)
+		$GameStatsContainer/StatsContainer/ACContainer/AC.text = str(stats.ac)
 	if stats.attacks != null:
 		var _attackString = "{damage}d{hits}+{bonusDmg}({ap})/{magicDmg}".format({
 			"damage": str(stats.attacks.attack.dmg[0]) + "-" + str(stats.attacks.attack.dmg[1]),
@@ -97,7 +97,7 @@ func updateStats(stats = {
 			"magicDmg": str(stats.attacks.attack.magicDmg.dmg[0]) + "-" + str(stats.attacks.attack.magicDmg.dmg[1])
 		})
 		attacks = stats.attacks
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/AttacksContainer/Attacks.text = str(_attackString)
+		$GameStatsContainer/StatsContainer/AttacksContainer/Attacks.text = str(_attackString)
 	if stats.magicAttacks != null:
 		var _attackString = "{damage}d{hits}+{bonusDmg}({ap})/{magicDmg}".format({
 			"damage": str(stats.magicAttacks.attack.dmg[0]) + "-" + str(stats.magicAttacks.attack.dmg[1]),
@@ -107,28 +107,28 @@ func updateStats(stats = {
 			"magicDmg": str(stats.magicAttacks.attack.magicDmg.dmg[0]) + "-" + str(stats.magicAttacks.attack.magicDmg.dmg[1])
 		})
 		magicAttacks = stats.magicAttacks
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/MagicAttacksContainer/MagicAttacks.text = str(_attackString)
+		$GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacks.text = str(_attackString)
 	if stats.goldPieces != null:
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/GoldPiecesContainer/GoldPieces.text = str(stats.goldPieces)
+		$GameStatsContainer/StatsContainer/GoldPiecesContainer/GoldPieces.text = str(stats.goldPieces)
 	if stats.weight != null and stats.weightBounds != null:
 		weight = stats.weight
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value = stats.weightBounds.min
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.max_value = stats.weightBounds.max
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = 0
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = stats.weight
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/PreviousWeightBound.text = str(stats.weightBounds.min)
-		$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/NextWeightBound.text = str(stats.weightBounds.max)
+		$GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value = stats.weightBounds.min
+		$GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth.max_value = stats.weightBounds.max
+		$GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = 0
+		$GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth.value = stats.weight
+		$GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/PreviousWeightBound.text = str(stats.weightBounds.min)
+		$GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/NextWeightBound.text = str(stats.weightBounds.max)
 
 func _on_Weigth_value_changed(value):
-	var _min = $Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value
-	var _max = $Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.max_value
+	var _min = $GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth.min_value
+	var _max = $GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth.max_value
 	var _r = range_lerp(value, _min, _max, 0, 1)
 	var _g = range_lerp(value, _min, _max, 1, 0)
 #	progress_bar.get("custom_styles/fg").set_bg_color(Color(red_amnt, green_amnt, 0.00, 1.00))
-	$Background/GameStatsContainer/GameStatsColumns/StatsContainer/WeightContainer/WeightBarContainer/Weigth.tint_progress = Color(_r, _g, 0)
+	$GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth.tint_progress = Color(_r, _g, 0)
 
 func isStatusEffectInGameStats(_statusEffect):
-	for _node in $Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer.get_children():
+	for _node in $GameStatsContainer/StatusEffectsContainer.get_children():
 		if _node.name.matchn(_statusEffect):
 			return true
 	return false
@@ -136,10 +136,10 @@ func isStatusEffectInGameStats(_statusEffect):
 func addStatusEffect(_statusEffect):
 	var _newStatusEffect = load("res://UI/Game Stats/Status Effect Item.tscn").instance()
 	_newStatusEffect.create(_statusEffect)
-	$Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer.add_child(_newStatusEffect)
+	$GameStatsContainer/StatusEffectsContainer.add_child(_newStatusEffect)
 
 func removeStatusEffect(_statusEffect):
-	get_node("Background/GameStatsContainer/GameStatsColumns/StatusEffectsContainer/{statusEffect}".format({ "statusEffect": _statusEffect })).queue_free()
+	get_node("GameStatsContainer/StatusEffectsContainer/{statusEffect}".format({ "statusEffect": _statusEffect })).queue_free()
 
 
 
@@ -175,8 +175,8 @@ func _onMouseEnteredStat(_nodePath, _stat):
 		})
 	elif _stat.matchn("weight"):
 		_tooltipDescription = _tooltipDescription.format({ "weight": weight })
-	get_node("Background/GameStatsContainer/GameStatsColumns/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).updateTooltip(tooltipTexts[_stat].title, _tooltipDescription)
-	get_node("Background/GameStatsContainer/GameStatsColumns/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).showTooltip()
+	get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).updateTooltip(tooltipTexts[_stat].title, _tooltipDescription)
+	get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).showTooltip()
 
 func _onMouseExitedStat(_nodePath):
-	get_node("Background/GameStatsContainer/GameStatsColumns/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).hideTooltip()
+	get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).hideTooltip()
