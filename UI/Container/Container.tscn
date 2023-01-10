@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/Container/Container.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Theme/raleway.medium.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Theme/UITitleFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 1 )
@@ -11,18 +11,10 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.129412, 0.219608, 0.403922, 1 )
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 2 )
-
 [sub_resource type="StyleBoxLine" id=4]
 content_margin_top = 16.0
 color = Color( 0.129412, 0.219608, 0.403922, 1 )
 grow_end = -25.0
-
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxLine" id=5]
 content_margin_top = 16.0
@@ -59,13 +51,13 @@ size_flags_horizontal = 3
 
 [node name="ContainerTitle" type="Label" parent="DividerContainer/ContainerContainer"]
 margin_right = 756.0
-margin_bottom = 39.0
-custom_fonts/font = SubResource( 1 )
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 3 )
 text = "-"
 valign = 1
 
 [node name="ContainerListScroll" type="ScrollContainer" parent="DividerContainer/ContainerContainer"]
-margin_top = 43.0
+margin_top = 37.0
 margin_right = 756.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
@@ -87,13 +79,13 @@ size_flags_horizontal = 3
 
 [node name="InventoryTitle" type="Label" parent="DividerContainer/InventoryContainer"]
 margin_right = 756.0
-margin_bottom = 39.0
-custom_fonts/font = SubResource( 2 )
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 3 )
 text = "Inventory"
 valign = 1
 
 [node name="InventoryListScroll" type="ScrollContainer" parent="DividerContainer/InventoryContainer"]
-margin_top = 43.0
+margin_top = 37.0
 margin_right = 756.0
 margin_bottom = 696.0
 size_flags_horizontal = 3

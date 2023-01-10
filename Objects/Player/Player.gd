@@ -242,7 +242,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 					Globals.gameConsole.addLog("You find a gem in the wall.")
 				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable = null
 	else:
-		if checkIfStatusEffectIsInEffect("fumbling") and randi() % 4 == 0:
+		if checkIfStatusEffectIsInEffect("fumbling") and randi() % 7 == 0:
 			Globals.gameConsole.addLog("You fumble on your feet.")
 		elif _level.grid[_playerTile.x][_playerTile.y].interactable == Globals.interactables.SPIDER_WEB:
 			if randi() % 3 == 0:
@@ -811,7 +811,7 @@ func checkIfLightSourceIsTurnedOn():
 	return false
 
 func checkIfCritterHasEffect(_critter):
-	if _critter.critterName.matchn("floating eye"):
+	if _critter.critterName.matchn("floating eye") and !checkIfStatusEffectIsInEffect("blindness"):
 		statusEffects.stun = 10
 		Globals.gameConsole.addLog("The {critterName}s gaze stuns you!".format({ "critterName": _critter.critterName }))
 		return true

@@ -7,7 +7,7 @@ var humans = {
 			"class": "Humanoid",
 			"weight": 200,
 			"aI": "Neutral",
-			"aggroDistance": 2,
+			"aggroDistance": 3,
 			"texture": load("res://Assets/Critters/HumanShopkeeper.png"),
 			"alignment": "Neutral",
 			"level": 8,

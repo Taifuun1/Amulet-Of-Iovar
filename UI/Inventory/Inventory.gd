@@ -197,7 +197,7 @@ func checkIfItemInInventoryByName(_itemName):
 func checkIfStackableItemInInventory(_item, _operation):
 	for _itemId in inventory:
 		var _inventoryItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
-		if _inventoryItem.identifiedItemName.matchn(_item.identifiedItemName) and _inventoryItem.alignment.matchn(_item.alignment):
+		if _inventoryItem.itemName.matchn(_item.itemName) and _inventoryItem.alignment.matchn(_item.alignment):
 			if !_inventoryItem.stackable:
 				return false
 			elif _operation.match("add"):

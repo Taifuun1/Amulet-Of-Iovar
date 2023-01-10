@@ -7,7 +7,7 @@ var floatingSpheres = {
 			"class": "Natural hazard",
 			"weight": 150,
 			"aI": "Slow aggressive",
-			"aggroDistance": 2,
+			"aggroDistance": 3,
 			"texture": load("res://Assets/Critters/FloatingSphereFloatingEye.png"),
 			"alignment": "Slow Aggressive",
 			"level": 3,
@@ -38,7 +38,7 @@ var floatingSpheres = {
 			"abilities": [
 				{
 					"abilityName": "reflectStun",
-					"abilityType": "onAttack"
+					"abilityType": "onHit"
 				}
 			],
 			"abilityHits": [1],

@@ -42,6 +42,5 @@ func createRichTextLabelForGameConsole(_critterName, _text):
 	var _bbcode = str(_critterName) + ": "
 	_bbcode = _bbcode.join(["[color=%s]" % colors.flavorMessage, "[/color]"])
 	_bbcode += str(_text)
-	print(_bbcode)
 	if append_bbcode(_bbcode) != OK:
 		push_error("Error appending bbcode.")

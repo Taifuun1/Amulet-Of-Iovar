@@ -714,8 +714,9 @@ I wither away"""
 				"You big smelly willy!",
 				"Ugg?",
 				"Ogg.",
-				"Me strong!",
+				"Me thirsty!",
 				"Egghh.",
+				"You drink?",
 				"[i]Grunts[/i]"
 			],
 		},

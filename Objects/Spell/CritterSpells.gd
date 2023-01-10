@@ -63,6 +63,17 @@ var toxixSplash = {
 
 var lifesteal = {
 	"name": "Lifesteal",
+	"attacks": [
+		{
+			"dmg": [3,6],
+			"bonusDmg": {},
+			"armorPen": 0,
+			"magicDmg": {
+				"dmg": [0,0],
+				"element": null
+			}
+		}
+	],
 	"distance": 0,
 	"mp": 1
 }

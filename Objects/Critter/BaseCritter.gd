@@ -162,39 +162,42 @@ func processCritterEffects():
 				hp -= _fleirDmg
 				Globals.gameConsole.addLog("{critterName} takes {dmg} fleir damage.".format({ "critterName": critterName, "dmg": _fleirDmg }))
 			elif _status.matchn("confusion") or _status.matchn("fumbling"):
-				if stats.balance > 30:
-					if statusEffects[_status] - 3 < 0:
-						statusEffects[_status] = 0
+				if statusEffects[_status] != -1:
+					if stats.balance > 30:
+						if statusEffects[_status] - 3 < 0:
+							statusEffects[_status] = 0
+						else:
+							statusEffects[_status] -= 3
+					elif stats.balance > 15:
+						if statusEffects[_status] - 2 < 0:
+							statusEffects[_status] = 0
+						else:
+							statusEffects[_status] -= 2
 					else:
-						statusEffects[_status] -= 3
-				elif stats.balance > 15:
-					if statusEffects[_status] - 2 < 0:
-						statusEffects[_status] = 0
-					else:
-						statusEffects[_status] -= 2
-				else:
-					statusEffects[_status] -= 1
+						statusEffects[_status] -= 1
 			elif _status.matchn("stun"):
-				if stats.legerity > 27:
-					if statusEffects[_status] - 2 < 0:
-						statusEffects[_status] = 0
+				if statusEffects[_status] != -1:
+					if stats.legerity > 27:
+						if statusEffects[_status] - 2 < 0:
+							statusEffects[_status] = 0
+						else:
+							statusEffects[_status] -= 2
 					else:
-						statusEffects[_status] -= 2
-				else:
-					statusEffects[_status] -= 1
+						statusEffects[_status] -= 1
 			elif _status.matchn("blindness"):
-				if stats.belief > 32:
-					if statusEffects[_status] - 3 < 0:
-						statusEffects[_status] = 0
+				if statusEffects[_status] != -1:
+					if stats.belief > 32:
+						if statusEffects[_status] - 3 < 0:
+							statusEffects[_status] = 0
+						else:
+							statusEffects[_status] -= 3
+					elif stats.belief > 18:
+						if statusEffects[_status] - 2 < 0:
+							statusEffects[_status] = 0
+						else:
+							statusEffects[_status] -= 2
 					else:
-						statusEffects[_status] -= 3
-				elif stats.belief > 18:
-					if statusEffects[_status] - 2 < 0:
-						statusEffects[_status] = 0
-					else:
-						statusEffects[_status] -= 2
-				else:
-					statusEffects[_status] -= 11
+						statusEffects[_status] -= 11
 #			elif _status.matchn("invisibility"):
 #				if stats.visage > 32:
 #					if statusEffects[_status] - 3 < 0:

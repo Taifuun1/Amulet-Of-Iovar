@@ -57,7 +57,7 @@ var others = {
 			"class": "Animal",
 			"weight": 50,
 			"aI": "Aggressive",
-			"aggroDistance": 2,
+			"aggroDistance": 3,
 			"texture": load("res://Assets/Critters/OtherChicken.png"),
 			"alignment": "Neutral",
 			"level": 2,

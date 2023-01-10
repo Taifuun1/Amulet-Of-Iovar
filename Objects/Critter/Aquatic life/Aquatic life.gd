@@ -61,7 +61,7 @@ var aquaticLife = {
 			"class": "Animal",
 			"weight": 50,
 			"aI": "Aggressive",
-			"aggroDistance": 2,
+			"aggroDistance": 3,
 			"texture": load("res://Assets/Critters/AquaticLifeRingedSeal.png"),
 			"alignment": "Neutral",
 			"level": 9,

@@ -16,6 +16,21 @@ var armor = {
 			"stackable": false
 		},
 		{
+			"itemName": "Leather vest",
+			"unidentifiedItemName": "Leather vest",
+			"texture": load("res://Assets/Armor/PlateLeatherVest.png"),
+			"unidentifiedTexture": load("res://Assets/Armor/PlateLeatherVest.png"),
+			"type": "Armor",
+			"category": "Plate",
+			"weight": 30,
+			"value": {
+				"ac": 2,
+				"resistance": null
+			},
+			"enchantable": true,
+			"stackable": false
+		},
+		{
 			"itemName": "Leather cap",
 			"unidentifiedItemName": "Leather cap",
 			"texture": load("res://Assets/Armor/HelmetLeatherCap.png"),

@@ -120,6 +120,8 @@ func setUpGameObjects(_playerData = null):
 	player.calculateEquipmentStats()
 	print("Calculated")
 	
+	$Critters/Critters.setNeutralClasses()
+	
 	if _playerData == null:
 		for _level in $Levels.get_children():
 			print(_level)
@@ -128,6 +130,9 @@ func setUpGameObjects(_playerData = null):
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
+		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "blessed" })
+		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "cursed" })
 #		$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })

@@ -152,7 +152,7 @@ func readItem(_id):
 					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
 				Globals.isItemIdentified(_readItem)
 			"scroll of remove curse":
-				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
+				var _equipmentNode = $"/root/World/UI/UITheme/Equipment"
 				var _uncursableItems = []
 				for _itemId in _equipmentNode.hands:
 					if _itemId != null:
@@ -198,7 +198,7 @@ func readItem(_id):
 				else:
 					Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of enchant weapon":
-				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
+				var _equipmentNode = $"/root/World/UI/UITheme/Equipment"
 				var _areHandsEmpty = true
 				for _itemId in _equipmentNode.hands:
 					if _itemId != null:
@@ -236,7 +236,7 @@ func readItem(_id):
 				else:
 					Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of enchant armor":
-				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
+				var _equipmentNode = $"/root/World/UI/UITheme/Equipment"
 				var _areEquipmentEmpty = true
 				for _itemId in _equipmentNode.equipment:
 					if _itemId != null:
@@ -248,18 +248,18 @@ func readItem(_id):
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 								if _item.enchantment < 5:
 									_item.enchantment += 1
-									Globals.gameConsole.addLog("The {itemname} glows with a light green light.".format({ "itemName": _item.itemName }))
+									Globals.gameConsole.addLog("The {itemName} glows with a light green light.".format({ "itemName": _item.itemName }))
 								else:
-									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
 					elif _readItem.alignment.matchn("uncursed"):
 						for _itemId in _equipmentNode.equipment.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 								if _item.enchantment < 5:
 									_item.enchantment += 1
-									Globals.gameConsole.addLog("The {itemname} glows with a light green light.".format({ "itemName": _item.itemName }))
+									Globals.gameConsole.addLog("The {itemName} glows with a light green light.".format({ "itemName": _item.itemName }))
 								else:
-									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
 								break
 					elif _readItem.alignment.matchn("cursed"):
 						for _itemId in _equipmentNode.equipment.values():
@@ -267,14 +267,14 @@ func readItem(_id):
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 								if _item.enchantment > -5:
 									_item.enchantment -= 1
-									Globals.gameConsole.addLog("The {itemname} glows with a cyan light.".format({ "itemName": _item.itemName }))
+									Globals.gameConsole.addLog("The {itemName} glows with a cyan light.".format({ "itemName": _item.itemName }))
 								else:
-									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
 					Globals.isItemIdentified(_readItem)
 				else:
 					Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of destroy armor":
-				var _equipmentNode = "/root/World/UI/UITheme/Equipment"
+				var _equipmentNode = $"/root/World/UI/UITheme/Equipment"
 				var _areEquipmentEmpty = true
 				for _itemId in _equipmentNode.equipment:
 					if _itemId != null:
@@ -286,14 +286,15 @@ func readItem(_id):
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 								if _item.enchantment > -5:
 									_item.enchantment -= 1
-									Globals.gameConsole.addLog("The {itemname} glows with a cyan light.".format({ "itemName": _item.itemName }))
+									Globals.gameConsole.addLog("The {itemName} glows with a cyan light.".format({ "itemName": _item.itemName }))
 								else:
-									Globals.gameConsole.addLog("The {itemname} vibrates slightly.".format({ "itemName": _item.itemName }))
+									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
 								break
 					else:
 						for _itemId in _equipmentNode.equipment.values():
 							if _itemId != null:
 								$"/root/World/Items/Items".removeItem(_itemId)
+								Globals.gameConsole.addLog("The {itemName} turns to dust!".format({ "itemName": get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).itemName }))
 								break
 					Globals.isItemIdentified(_readItem)
 				else:
@@ -906,7 +907,7 @@ func dealWithTeleport(_critterId, _alignment, _itemType = "scroll"):
 	var _world = $"/root/World"
 	var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterId }))
 	if _alignment.matchn("uncursed") or _alignment.matchn("blessed") or _itemType.matchn("wand"):
-		var _playerPosition = _world.level.getCritterTile(_critter)
+		var _playerPosition = _world.level.getCritterTile(_critter.id)
 		var _level = _world.level
 		var _openTiles = _level.openTiles.duplicate(true)
 		for _openTile in _openTiles:

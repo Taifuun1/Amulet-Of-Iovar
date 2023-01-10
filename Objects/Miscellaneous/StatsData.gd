@@ -63,23 +63,27 @@ var items = {
 	},
 	"Leather mail": {
 		"knowledge": false,
-		"description": "Low level armor. "
+		"description": "Basic leather armor. +3 ac"
+	},
+	"Leather vest": {
+		"knowledge": false,
+		"description": "Cool looking jacket for adventurers. +2 ac"
 	},
 	"Orc mail": {
 		"knowledge": false,
-		"description": "Medium level armor. "
+		"description": "It's gleaming darkness."
 	},
 	"Scale ring mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Scales layered on top of each other."
 	},
 	"Dwarvish coat": {
 		"knowledge": false,
-		"description": ""
+		"description": "Lightweight bluish coat made by dwarves. Finest craftsdwarfship."
 	},
 	"Platemail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Heavy platemail armor."
 	},
 	"Blue dragon scale mail": {
 		"knowledge": false,
@@ -115,15 +119,15 @@ var items = {
 	},
 	"Leather cap": {
 		"knowledge": false,
-		"description": ""
+		"description": "Basic leather cap. +1 ac"
 	},
 	"Bucket helmet": {
 		"knowledge": false,
-		"description": ""
+		"description": "Basic metal helmet. A little funny looking. +2 ac"
 	},
 	"Adorned helmet": {
 		"knowledge": false,
-		"description": ""
+		"description": "Expensive fine-made helmet. Worn by royalty. +3 ac"
 	},
 	"Helm of ego": {
 		"knowledge": false,
@@ -143,7 +147,7 @@ var items = {
 	},
 	"Leather gloves": {
 		"knowledge": false,
-		"description": ""
+		"description": "Basic leather gloves. +1 ac"
 	},
 	"Fabric gloves": {
 		"knowledge": false,
@@ -167,7 +171,7 @@ var items = {
 	},
 	"Garden gloves": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gloves made for gardening. Third of the Gleeie'er armor set. +1 ac"
 	},
 	"Gehennors gauntlets": {
 		"knowledge": false,
@@ -303,11 +307,11 @@ var items = {
 	},
 	"Cool Mikeys": {
 		"knowledge": false,
-		"description": ""
+		"description": "Sick shoes. Wicked style! +2 magic dmg"
 	},
 	"Venom riders": {
 		"knowledge": false,
-		"description": ""
+		"description": " Half of the Toxix armor set."
 	},
 	"Water potion": {
 		"knowledge": false,
@@ -788,22 +792,22 @@ var critters = {
 	},
 	"Double-pattern ant": {
 		"knowledge": false,
-		"description": "Non-exoskeletal ant.",
+		"description": "Non-exoskeletal ant. Terrifyingly strong.",
 		"killCount": 0
 	},
 	"Leaf ant": {
 		"knowledge": false,
-		"description": "Leaf-carrier ant.",
+		"description": "Leaf-carrier ant. Dangerous in large packs.",
 		"killCount": 0
 	},
 	"Soldier ant": {
 		"knowledge": false,
-		"description": "An ant made for war.",
+		"description": "An ant made for war. Has sharp pincers.",
 		"killCount": 0
 	},
 	"Sugar ant": {
 		"knowledge": false,
-		"description": "Regular worker ant.",
+		"description": "Regular worker ant. Pretty weak",
 		"killCount": 0
 	},
 	"Eyebrow seal": {
@@ -838,7 +842,7 @@ var critters = {
 	},
 	"Squinting bat": {
 		"knowledge": false,
-		"description": "Daytime bat. It cant see very well.",
+		"description": "Daytime bat. It can't see very well.",
 		"killCount": 0
 	},
 	"Vampire bat": {
@@ -873,7 +877,7 @@ var critters = {
 	},
 	"Gryonem centaur": {
 		"knowledge": false,
-		"description": "Flatlands centaur.",
+		"description": "Flatlands centaur. Very territorial.",
 		"killCount": 0
 	},
 	"Hill centaur": {
@@ -883,67 +887,67 @@ var critters = {
 	},
 	"Black dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A black dragon. Breathes dragonfire.",
 		"killCount": 0
 	},
 	"Blue dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A blue dragon. Frost resistant. Breathes Frost fire.",
 		"killCount": 0
 	},
 	"Cyan dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A cyan dragon. Breathes dragonfire.",
 		"killCount": 0
 	},
 	"Green dragon": {
 		"knowledge": false,
-		"description": "A green dragon. Gleeie'er resistant.",
+		"description": "A green dragon. Gleeie'er resistant. Breathes Gleeie'er fire.",
 		"killCount": 0
 	},
 	"Red dragon": {
 		"knowledge": false,
-		"description": "A red dragon. Fleir resistant.",
+		"description": "A red dragon. Fleir resistant. Breathes Fleir fire.",
 		"killCount": 0
 	},
 	"Silver dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A silver dragon. Breathes dragonfire.",
 		"killCount": 0
 	},
 	"Violet dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A red dragon. Toxix resistant. Breathes Toxix fir.e",
 		"killCount": 0
 	},
 	"White dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A red dragon. Breathes dragonfire.",
 		"killCount": 0
 	},
 	"Yellow dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "A red dragon. Thunder resistant. Breathes Thunder fire.",
 		"killCount": 0
 	},
 	"Dwarven contirer": {
 		"knowledge": false,
-		"description": "",
+		"description": "A noble dwarf. A little uppity.",
 		"killCount": 0
 	},
 	"Dwarf engineer": {
 		"knowledge": false,
-		"description": "",
+		"description": "A dwarven engineer. Constructs equipment for dwarven conquest.",
 		"killCount": 0
 	},
 	"Dwarf miner": {
 		"knowledge": false,
-		"description": "",
+		"description": "A dwarven miner. Mines too greedily and too deeply.",
 		"killCount": 0
 	},
 	"Dwarf smith": {
 		"knowledge": false,
-		"description": "",
+		"description": "A dwarven smith. Forges equipment for the dwarven army.",
 		"killCount": 0
 	},
 	"Elf assassin": {
@@ -963,7 +967,7 @@ var critters = {
 	},
 	"Elf noble": {
 		"knowledge": false,
-		"description": "",
+		"description": "A noble elf. A little uppity.",
 		"killCount": 0
 	},
 	"Cat": {
@@ -983,7 +987,7 @@ var critters = {
 	},
 	"Floating eye": {
 		"knowledge": false,
-		"description": "",
+		"description": "Creepy floating eye. Its piercing gaze will stun you! You can blind yourself to hit the eye.",
 		"killCount": 0
 	},
 	"Freezing floating sphere": {
@@ -1003,22 +1007,22 @@ var critters = {
 	},
 	"Balding giant": {
 		"knowledge": false,
-		"description": "",
+		"description": "A small-brained giant. Its hairline is receding.",
 		"killCount": 0
 	},
 	"Hill giant": {
 		"knowledge": false,
-		"description": "",
+		"description": "A small-brained giant from the hills.",
 		"killCount": 0
 	},
 	"One-eyed ogre": {
 		"knowledge": false,
-		"description": "",
+		"description": "A one-eyed ogre. Pretty strong.",
 		"killCount": 0
 	},
 	"Parched giant": {
 		"knowledge": false,
-		"description": "",
+		"description": "A small-brained giant. It needs a drink.",
 		"killCount": 0
 	},
 	"Guard": {
