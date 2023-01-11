@@ -1,131 +1,167 @@
-var rats = {
-	"hostile": [],
-	"critterTypes": [
-		{
-			"critterName": "Big rat",
-			"race": "Rat",
-			"class": "Animal",
-			"weight": 100,
-			"aI": "Aggressive",
-			"aggroDistance": 11,
-			"texture": load("res://Assets/Critters/RatBigRat.png"),
-			"alignment": "Neutral",
-			"level": 3,
-			"expDropAmount": 11,
-			"hp": 9,
-			"mp": 0,
-			"ac": 0,
-			"attacks": [
-				{
-					"dmg": [2,3],
-					"bonusDmg": {},
-					"armorPen": 0,
-					"magicDmg": {
-						"dmg": [0,0],
-						"element": null
-					}
+var rats = [
+	{
+		"critterName": "Big rat",
+		"race": "Rat",
+		"class": "Animal",
+		"weight": 100,
+		"aI": "Aggressive",
+		"aggroDistance": 11,
+		"texture": load("res://Assets/Critters/RatBigRat.png"),
+		"alignment": "Neutral",
+		"level": 3,
+		"expDropAmount": 4,
+		"hp": 7,
+		"mp": 0,
+		"ac": 0,
+		"attacks": [
+			{
+				"dmg": [2,4],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
 				}
-			],
-			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
-			"stats": {
-				"strength": 7,
-				"legerity": 7,
-				"balance": 7,
-				"belief": 0,
-				"visage": 1,
-				"wisdom": 2
-			},
-			"abilities": [],
-			"abilityHits": [],
-			"resistances": [],
-			"drops": [  ]
+			}
+		],
+		"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+		"stats": {
+			"strength": 7,
+			"legerity": 7,
+			"balance": 7,
+			"belief": 0,
+			"visage": 1,
+			"wisdom": 2
 		},
-		{
-			"critterName": "Sewer rat",
-			"race": "Rat",
-			"class": "Animal",
-			"weight": 100,
-			"aI": "Aggressive",
-			"aggroDistance": 13,
-			"texture": load("res://Assets/Critters/RatSewerRat.png"),
-			"alignment": "Neutral",
-			"level": 5,
-			"expDropAmount": 30,
-			"hp": 17,
-			"mp": 0,
-			"ac": 0,
-			"attacks": [
-				{
-					"dmg": [4,5],
-					"bonusDmg": {},
-					"armorPen": 0,
-					"magicDmg": {
-						"dmg": [0,0],
-						"element": null
-					}
-				}
-			],
-			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
-			"stats": {
-				"strength": 8,
-				"legerity": 8,
-				"balance": 8,
-				"belief": 0,
-				"visage": 2,
-				"wisdom": 4
+		"abilities": [],
+		"abilityHits": [],
+		"resistances": [],
+		"drops": [
+			{
+				"names": "goldPieces",
+				"chance": 90,
+				"amount": [25, 35]
 			},
-			"abilities": [],
-			"abilityHits": [],
-			"resistances": [],
-			"drops": [  ]
-		},
-		{
-			"critterName": "Cave rat",
-			"race": "Rat",
-			"class": "Animal",
-			"weight": 100,
-			"aI": "Aggressive",
-			"aggroDistance": 15,
-			"texture": load("res://Assets/Critters/RatCaveRat.png"),
-			"alignment": "Neutral",
-			"level": 7,
-			"expDropAmount": 60,
-			"hp": 30,
-			"mp": 0,
-			"ac": 0,
-			"attacks": [
-				{
-					"dmg": [5,6],
-					"bonusDmg": {},
-					"armorPen": 0,
-					"magicDmg": {
-						"dmg": [0,0],
-						"element": null
-					}
+			{
+				"types": {
+					"ring": ["common", "uncommon"]
 				},
-				{
-					"dmg": [1,1],
-					"bonusDmg": {},
-					"armorPen": 0,
-					"magicDmg": {
-						"dmg": [0,0],
-						"element": null
-					}
+				"chance": 10,
+				"amount": [1, 1]
+			}
+		]
+	},
+	{
+		"critterName": "Sewer rat",
+		"race": "Rat",
+		"class": "Animal",
+		"weight": 100,
+		"aI": "Aggressive",
+		"aggroDistance": 13,
+		"texture": load("res://Assets/Critters/RatSewerRat.png"),
+		"alignment": "Neutral",
+		"level": 5,
+		"expDropAmount": 7,
+		"hp": 15,
+		"mp": 0,
+		"ac": 0,
+		"attacks": [
+			{
+				"dmg": [4,5],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
 				}
-			],
-			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
-			"stats": {
-				"strength": 12,
-				"legerity": 12,
-				"balance": 12,
-				"belief": 0,
-				"visage": 3,
-				"wisdom": 6
+			}
+		],
+		"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+		"stats": {
+			"strength": 8,
+			"legerity": 8,
+			"balance": 8,
+			"belief": 0,
+			"visage": 2,
+			"wisdom": 4
+		},
+		"abilities": [],
+		"abilityHits": [],
+		"resistances": [],
+		"drops": [
+			{
+				"names": "goldPieces",
+				"chance": 90,
+				"amount": [30, 45]
 			},
-			"abilities": [],
-			"abilityHits": [],
-			"resistances": [],
-			"drops": [  ]
-		}
-	]
-}
+			{
+				"types": {
+					"ring": ["common", "uncommon"]
+				},
+				"chance": 15,
+				"amount": [1, 1]
+			}
+		]
+	},
+	{
+		"critterName": "Cave rat",
+		"race": "Rat",
+		"class": "Animal",
+		"weight": 100,
+		"aI": "Aggressive",
+		"aggroDistance": 15,
+		"texture": load("res://Assets/Critters/RatCaveRat.png"),
+		"alignment": "Neutral",
+		"level": 7,
+		"expDropAmount": 11,
+		"hp": 22,
+		"mp": 0,
+		"ac": 0,
+		"attacks": [
+			{
+				"dmg": [5,6],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			},
+			{
+				"dmg": [1,1],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			}
+		],
+		"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+		"stats": {
+			"strength": 12,
+			"legerity": 12,
+			"balance": 12,
+			"belief": 0,
+			"visage": 3,
+			"wisdom": 6
+		},
+		"abilities": [],
+		"abilityHits": [],
+		"resistances": [],
+		"drops": [
+			{
+				"names": "goldPieces",
+				"chance": 90,
+				"amount": [45, 60]
+			},
+			{
+				"types": {
+					"ring": ["uncommon", "rare"]
+				},
+				"chance": 20,
+				"amount": [1, 1]
+			}
+		]
+	}
+]

@@ -134,8 +134,8 @@ func calculateDmg(_attack, _activeArmorSets = null):
 			_magicDmg /= 2
 		damage.magicDmg = _magicDmg
 	
-	if damage.dmg < 0: damage.dmg = 0
-	if damage.magicDmg < 0: damage.magicDmg = 0
+#	if damage.dmg < 0: damage.dmg = 0
+#	if damage.magicDmg < 0: damage.magicDmg = 0
 	return damage
 
 
@@ -214,29 +214,32 @@ func processCritterEffects():
 			else:
 				statusEffects[_status] -= 1
 	
-	if hpRegenTimer >= 20 - ( (stats.legerity / 3) + (stats.strength / 3) ):
+	var hpRegenStat = (stats.legerity / 3) + (stats.strength / 3)
+	if hpRegenStat > 17:
+		hpRegenStat = 17
+	if hpRegenTimer >= 20 - hpRegenStat:
 		if hp < maxhp:
 			if checkIfStatusEffectIsInEffect("regen"):
 				if hp + 3 > maxhp:
 					hp = maxhp
 				else:
 					hp += 3
-			if (stats.legerity / 3) + (stats.strength / 3) >= 20:
+			if (stats.legerity / 3) + (stats.strength / 3) >= 34:
 				if hp + 8 > maxhp:
 					hp = maxhp
 				else:
 					hp += 8
-			elif (stats.legerity / 3) + (stats.strength / 3) >= 15:
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 22:
 				if hp + 5 > maxhp:
 					hp = maxhp
 				else:
 					hp += 5
-			elif (stats.legerity / 3) + (stats.strength / 3) >= 10:
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 16:
 				if hp + 3 > maxhp:
 					hp = maxhp
 				else:
 					hp += 3
-			elif (stats.legerity / 3) + (stats.strength / 3) >= 5:
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 10:
 				if hp + 2 > maxhp:
 					hp = maxhp
 				else:

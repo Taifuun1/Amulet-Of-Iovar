@@ -87,9 +87,9 @@ var globalItemInfo = {
 	"Uiroel helmet": {
 		"identified": false
 	},
-	"Winged helmet": {
-		"identified": false
-	},
+#	"Winged helmet": {
+#		"identified": false
+#	},
 	"Mossy helmet": {
 		"identified": false
 	},

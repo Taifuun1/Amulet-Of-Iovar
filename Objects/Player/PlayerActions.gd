@@ -333,7 +333,7 @@ func readItem(_id):
 				if _readItem.alignment.matchn("blessed"):
 					for _critterRace in $"/root/World/Critters/Critters".critters.keys():
 						if !_critterRace.matchn("bosses"):
-							for _critterName in $"/root/World/Critters/Critters".critters[_critterRace].critterTypes:
+							for _critterName in $"/root/World/Critters/Critters".critters[_critterRace]:
 								if GlobalCritterInfo.globalCritterInfo[_critterName.critterName].population != 0:
 									_aliveCritters.append(_critterRace)
 									break
@@ -936,7 +936,7 @@ func dealWithTeleport(_critterId, _alignment, _itemType = "scroll"):
 
 func dealWithScrollOfGenocide(_name, _alignment):
 	if _alignment.matchn("blessed"):
-		for _genocidableCritter in $"/root/World/Critters/Critters".critters[_name].critterTypes:
+		for _genocidableCritter in $"/root/World/Critters/Critters".critters[_name]:
 			for _critter in $"/root/World/Critters".get_children():
 				if _critter.name.matchn("Critters"):
 					continue

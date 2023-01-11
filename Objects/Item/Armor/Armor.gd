@@ -84,7 +84,7 @@ var armor = {
 			"category": "Greaves",
 			"weight": 34,
 			"value": {
-				"ac": 2,
+				"ac": 1,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -131,7 +131,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 112,
 			"value": {
-				"ac": 4,
+				"ac": 5,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -144,7 +144,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/PlateDwarvishCoat.png"),
 			"type": "Armor",
 			"category": "Plate",
-			"weight": 65,
+			"weight": 77,
 			"value": {
 				"ac": 5,
 				"resistance": null
@@ -238,7 +238,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 187,
 			"value": {
-				"ac": 8,
+				"ac": 7,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -253,7 +253,7 @@ var armor = {
 			"category": "Helmet",
 			"weight": 78,
 			"value": {
-				"ac": 4,
+				"ac": 3,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -268,7 +268,7 @@ var armor = {
 			"category": "Helmet",
 			"weight": 84,
 			"value": {
-				"ac": 1,
+				"ac": 2,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -283,7 +283,7 @@ var armor = {
 			"category": "Greaves",
 			"weight": 51,
 			"value": {
-				"ac": 2,
+				"ac": 3,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -300,7 +300,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 12,
+				"ac": 8,
 				"resistance": "Frost"
 			},
 			"points": 500,
@@ -316,7 +316,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 12,
+				"ac": 8,
 				"resistance": "Gleeie'er"
 			},
 			"points": 500,
@@ -332,7 +332,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 12,
+				"ac": 8,
 				"resistance": "Flier"
 			},
 			"points": 500,
@@ -348,7 +348,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 12,
+				"ac": 8,
 				"resistance": "Thunder"
 			},
 			"points": 500,
@@ -364,7 +364,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 12,
+				"ac": 8,
 				"resistance": "Toxix"
 			},
 			"points": 500,
@@ -380,7 +380,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 250,
 			"value": {
-				"ac": 15,
+				"ac": 10,
 				"resistance": null
 			},
 			"points": 750,
@@ -396,7 +396,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 163,
 			"value": {
-				"ac": 10,
+				"ac": 8,
 				"resistance": "Frost"
 			},
 			"points": 400,
@@ -412,7 +412,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 163,
 			"value": {
-				"ac": 10,
+				"ac": 8,
 				"resistance": "Thunder"
 			},
 			"points": 400,
@@ -444,29 +444,29 @@ var armor = {
 			"category": "Helmet",
 			"weight": 54,
 			"value": {
-				"ac": 4,
+				"ac": 2,
 				"resistance": null
 			},
 			"points": 350,
 			"enchantable": true,
 			"stackable": false
 		},
-		{
-			"itemName": "Winged helmet",
-			"unidentifiedItemName": "Winged helmet",
-			"texture": load("res://Assets/Armor/HelmetWingedHelmet.png"),
-			"unidentifiedTexture": load("res://Assets/Armor/HelmetWingedHelmet.png"),
-			"type": "Armor",
-			"category": "Helmet",
-			"weight": 58,
-			"value": {
-				"ac": 5,
-				"resistance": null
-			},
-			"points": 350,
-			"enchantable": true,
-			"stackable": false
-		},
+#		{
+#			"itemName": "Winged helmet",
+#			"unidentifiedItemName": "Winged helmet",
+#			"texture": load("res://Assets/Armor/HelmetWingedHelmet.png"),
+#			"unidentifiedTexture": load("res://Assets/Armor/HelmetWingedHelmet.png"),
+#			"type": "Armor",
+#			"category": "Helmet",
+#			"weight": 58,
+#			"value": {
+#				"ac": 4,
+#				"resistance": null
+#			},
+#			"points": 350,
+#			"enchantable": true,
+#			"stackable": false
+#		},
 		{
 			"itemName": "Justice'eer shield",
 			"unidentifiedItemName": "Justice'eer shield",
@@ -476,13 +476,14 @@ var armor = {
 			"category": "Shield",
 			"weight": 73,
 			"value": {
-				"ac": 7,
+				"ac": 3,
 				"resistance": null
 			},
 			"points": 400,
 			"enchantable": true,
 			"stackable": false
 		},
+#			"itemName": "Shield of justice",shining shield
 #		{
 #			"itemName": "Shield of Backscattering",
 #			"unidentifiedItemName": "Shield of Backscattering",
@@ -507,7 +508,7 @@ var armor = {
 			"unidentifiedTexture": load("res://Assets/Armor/ShieldLordsTowerBoardShield.png"),
 			"type": "Armor",
 			"category": "Shield",
-			"weight": 173,
+			"weight": 210,
 			"value": {
 				"ac": 6,
 				"resistance": null
@@ -517,7 +518,6 @@ var armor = {
 			"stackable": false
 		},
 		{
-#			"itemName": "Shield of justice",shining shield
 			"itemName": "Burning shield",
 			"unidentifiedItemName": "Burning shield",
 			"texture": load("res://Assets/Armor/ShieldBurningShield.png"),
@@ -526,7 +526,7 @@ var armor = {
 			"category": "Shield",
 			"weight": 85,
 			"value": {
-				"ac": 4,
+				"ac": 3,
 				"resistance": null
 			},
 			"points": 400,
@@ -542,7 +542,7 @@ var armor = {
 			"category": "Greaves",
 			"weight": 59,
 			"value": {
-				"ac": 4,
+				"ac": 2,
 				"resistance": null
 			},
 			"points": 300,
@@ -558,7 +558,7 @@ var armor = {
 			"category": "Greaves",
 			"weight": 59,
 			"value": {
-				"ac": 4,
+				"ac": 2,
 				"resistance": null
 			},
 			"points": 300,

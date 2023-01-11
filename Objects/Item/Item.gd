@@ -211,11 +211,11 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills.sword.level >= 3:
-			_additionalDamage += 7
+			_additionalDamage += 5
 		elif _playerSkills.sword.level >= 2:
-			_additionalDamage += 4
+			_additionalDamage += 3
 		elif _playerSkills.sword.level >= 1:
-			_additionalDamage += 2
+			_additionalDamage += 1
 		
 		if _playerSkills.sword.level > 3:
 			_d += 1
@@ -231,11 +231,11 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills["two-hander"].level >= 3:
-			_additionalDamage += 12
+			_additionalDamage += 8
 		elif _playerSkills["two-hander"].level >= 2:
-			_additionalDamage += 6
+			_additionalDamage += 4
 		elif _playerSkills["two-hander"].level >= 1:
-			_additionalDamage += 3
+			_additionalDamage += 2
 		
 		return {
 			"dmg": int(_stats.strength / 3 + _additionalDamage),
@@ -272,11 +272,11 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills.mace.level >= 3:
-			_additionalDamage += 11
+			_additionalDamage += 8
 		elif _playerSkills.mace.level >= 2:
-			_additionalDamage += 7
+			_additionalDamage += 4
 		elif _playerSkills.mace.level >= 1:
-			_additionalDamage += 3
+			_additionalDamage += 1
 		
 		return {
 			"dmg": int((_stats.strength / 4) + (_stats.balance / 4) + _additionalDamage),

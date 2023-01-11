@@ -137,10 +137,10 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
-	"Winged helmet": {
-		"knowledge": false,
-		"description": ""
-	},
+#	"Winged helmet": {
+#		"knowledge": false,
+#		"description": ""
+#	},
 	"Mossy helmet": {
 		"knowledge": false,
 		"description": ""

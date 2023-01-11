@@ -9,7 +9,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 1,
+				"ac": 0,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -24,7 +24,7 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakOrc.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 45,
+			"weight": 83,
 			"value": {
 				"ac": 2,
 				"resistance": null
@@ -42,7 +42,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 25,
 			"value": {
-				"ac": 2,
+				"ac": 1,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -58,7 +58,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 2,
+				"ac": 1,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -74,7 +74,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 20,
 			"value": {
-				"ac": 1,
+				"ac": 0,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -91,7 +91,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 7,
+				"ac": 1,
 				"resistance": null
 			},
 			"points": 25,
@@ -107,7 +107,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 7,
+				"ac": 1,
 				"resistance": null
 			},
 			"points": 25,
@@ -138,7 +138,7 @@ var cloak = {
 #			"category": "Cloak",
 #			"weight": 35,
 #			"value": {
-#				"ac": 7,
+#				"ac": 1,
 #				"resistance": null
 #			},
 #			"enchantable": true,
@@ -155,7 +155,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 7,
+				"ac": 3,
 				"resistance": null
 			},
 			"points": 250,
@@ -171,7 +171,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 7,
+				"ac": 2,
 				"resistance": null
 			},
 			"points": 250,

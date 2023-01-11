@@ -179,8 +179,8 @@ func setUpDungeon():
 	var firstLevel = load(levelPaths.dungeon).instance()
 	firstLevel.create("dungeon1", "dungeon1", "Dungeon 1", 10000)
 	levels.firstLevel = firstLevel
-	level = firstLevel
 	$Levels.add_child(firstLevel)
+	level = levels.firstLevel
 
 	for _level in range(randi() % 3 + 1):
 		var newDungeon = load(levelPaths.dungeon).instance()
@@ -254,7 +254,7 @@ func setUpDungeon():
 	levels.beach.append(newVacationResort)
 	$Levels.add_child(newVacationResort)
 	
-	for _level in range(randi() % 2 + 3):
+	for _level in range(randi() % 2 + 1):
 		var newBeach2 = load(levelPaths.beach).instance()
 		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
 		levels.beach.append(newBeach2)

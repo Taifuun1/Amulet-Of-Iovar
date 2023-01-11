@@ -9,7 +9,7 @@ var belt = {
 			"category": "Belt",
 			"weight": 15,
 			"value": {
-				"ac": 1,
+				"ac": 0,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -26,7 +26,7 @@ var belt = {
 			"category": "Belt",
 			"weight": 35,
 			"value": {
-				"ac": 2,
+				"ac": 1,
 				"resistance": null
 			},
 			"enchantable": true,
@@ -43,7 +43,7 @@ var belt = {
 			"category": "Belt",
 			"weight": 25,
 			"value": {
-				"ac": 7,
+				"ac": 1,
 				"resistance": null
 			},
 			"points": 50,
@@ -59,7 +59,7 @@ var belt = {
 			"category": "Belt",
 			"weight": 25,
 			"value": {
-				"ac": 7,
+				"ac": 1,
 				"resistance": null
 			},
 			"points": 50,
@@ -75,7 +75,7 @@ var belt = {
 			"category": "Belt",
 			"weight": 25,
 			"value": {
-				"ac": 7,
+				"ac": 1,
 				"resistance": null
 			},
 			"points": 50,
@@ -93,7 +93,7 @@ var belt = {
 			"category": "Belt",
 			"weight": 15,
 			"value": {
-				"ac": 7,
+				"ac": 1,
 				"resistance": null
 			},
 			"points": 250,

@@ -1,6 +1,4 @@
-var others = {
-	"hostile": [],
-	"critterTypes": [
+var others = [
 #		{
 #			"critterName": "Grid bug",
 #			"race": "Grid bug",
@@ -43,52 +41,52 @@ var others = {
 #			],
 #			"abilityHits": [1],
 #			"resistances": ["thunder"],
-#			"drops": [
-#				{
-#					"names": "goldPieces",
-#					"chance": 50,
-#					"amount": [10, 20]
-#				}
-#			]
+#			"drops": []
 #		},
-		{
-			"critterName": "Chicken",
-			"race": "Chicken",
-			"class": "Animal",
-			"weight": 50,
-			"aI": "Aggressive",
-			"aggroDistance": 3,
-			"texture": load("res://Assets/Critters/OtherChicken.png"),
-			"alignment": "Neutral",
-			"level": 2,
-			"expDropAmount": 2,
-			"hp": 6,
-			"mp": 0,
-			"ac": 0,
-			"attacks": [
-				{
-					"dmg": [1,2],
-					"bonusDmg": {},
-					"armorPen": 0,
-					"magicDmg": {
-						"dmg": [0,0],
-						"element": null
-					}
+	{
+		"critterName": "Chicken",
+		"race": "Chicken",
+		"class": "Animal",
+		"weight": 50,
+		"aI": "Aggressive",
+		"aggroDistance": 3,
+		"texture": load("res://Assets/Critters/OtherChicken.png"),
+		"alignment": "Neutral",
+		"level": 2,
+		"expDropAmount": 12,
+		"hp": 6,
+		"mp": 0,
+		"ac": 0,
+		"attacks": [
+			{
+				"dmg": [2,4],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
 				}
-			],
-			"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
-			"stats": {
-				"strength": 3,
-				"legerity": 5,
-				"balance": 3,
-				"belief": 4,
-				"visage": 4,
-				"wisdom": 12
+			}
+		],
+		"hits": [1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0],
+		"stats": {
+			"strength": 3,
+			"legerity": 5,
+			"balance": 3,
+			"belief": 4,
+			"visage": 4,
+			"wisdom": 12
+		},
+		"abilities": [],
+		"abilityHits": [],
+		"resistances": [],
+		"drops": [
+			{
+				"names": "Egg",
+				"chance": 90,
+				"amount": [1, 5],
+				"tries": 2
 			},
-			"abilities": [],
-			"abilityHits": [],
-			"resistances": [],
-			"drops": [  ]
-		}
-	]
-}
+		]
+	}
+]

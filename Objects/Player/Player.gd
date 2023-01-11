@@ -667,7 +667,7 @@ func calculateEquipmentStats():
 			!get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands["righthand"] })).category.matchn("shield")
 		):
 			attacks.append_array(get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands["righthand"] })).getAttacks(stats))
-	else:
+	if attacks.size() == 0:
 		attacks = [
 			{
 				"dmg": [int(1 + stats.strength / 6), int(1 + stats.strength / 6)],

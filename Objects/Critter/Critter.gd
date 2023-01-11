@@ -602,10 +602,14 @@ func despawn(_critterTile = null, _createCorpse = true, _createDrops = true):
 						_randomChange = 1
 						_minAmount = _drop.amount[0]
 					var _amount = randi() % int(_randomChange) + int(_minAmount)
-					if typeof(_drop.names) == TYPE_ARRAY:
-						$"/root/World/Items/Items".createItem(_drop.names[randi() % _drop.names.size()], _gridPosition, _amount)
+					if _drop.has("types"):
+						var _randomItem = $"/root/World/Items/Items".getRandomItemByItemTypes(_drop.types, true)
+						$"/root/World/Items/Items".createItem(_randomItem, _gridPosition, _amount)
 					else:
-						$"/root/World/Items/Items".createItem(_drop.names, _gridPosition, _amount)
+						if typeof(_drop.names) == TYPE_ARRAY:
+							$"/root/World/Items/Items".createItem(_drop.names[randi() % _drop.names.size()], _gridPosition, _amount)
+						else:
+							$"/root/World/Items/Items".createItem(_drop.names, _gridPosition, _amount)
 	
 	$"/root/World".hideObjectsWhenDrawingNextFrame = true
 	_level.grid[_gridPosition.x][_gridPosition.y].critter = null

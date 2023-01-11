@@ -55,7 +55,7 @@ func create():
 	
 	miscellaneousItems = miscellaneous.miscellaneous
 	
-	getRandomizedItemsByRarity()
+	randomizeItemsByRarity()
 
 func loadItems(_items):
 	mutex = Mutex.new()
@@ -72,7 +72,7 @@ func loadItems(_items):
 	
 	miscellaneousItems = miscellaneous.miscellaneous
 	
-	getRandomizedItemsByRarity()
+	randomizeItemsByRarity()
 
 
 
@@ -155,23 +155,6 @@ func getRandomItem(_randomByRarity = true):
 		var _pick = randi() % items[_randomType][_rarity].size()
 		return items[_randomType][_rarity][_pick]
 
-func getRandomizedItemsByRarity():
-	for _type in items:
-		for _rarity in items[_type]:
-			for _item in items[_type][_rarity]:
-				if _rarity == "common":
-					for _i in range(75):
-						randomizedItemsByRarity.append(_item)
-				elif _rarity == "uncommon":
-					for _i in range(25):
-						randomizedItemsByRarity.append(_item)
-				if _rarity == "rare":
-					for _i in range(10):
-						randomizedItemsByRarity.append(_item)
-				if _rarity == "legendary":
-					for _i in range(1):
-						randomizedItemsByRarity.append(_item)
-
 func getRandomItemByItemTypes(_types, _randomByRarity = false):
 	var _items = []
 	if _randomByRarity:
@@ -222,6 +205,23 @@ func returnRandomItemForItemGeneration(_itemGeneration):
 		return items[type][rarity][randi() % items[type][rarity].size()]
 	else:
 		return null
+
+func randomizeItemsByRarity():
+	for _type in items:
+		for _rarity in items[_type]:
+			for _item in items[_type][_rarity]:
+				if _rarity == "common":
+					for _i in range(75):
+						randomizedItemsByRarity.append(_item)
+				elif _rarity == "uncommon":
+					for _i in range(25):
+						randomizedItemsByRarity.append(_item)
+				if _rarity == "rare":
+					for _i in range(10):
+						randomizedItemsByRarity.append(_item)
+				if _rarity == "legendary":
+					for _i in range(1):
+						randomizedItemsByRarity.append(_item)
 
 func randomizeRandomItems():
 	var _randomItemList = randomItemList.randomItemList.duplicate(true)

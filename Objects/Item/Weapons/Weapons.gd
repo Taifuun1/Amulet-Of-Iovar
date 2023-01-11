@@ -9,7 +9,7 @@ var weapons = {
 			"category": "Sword",
 			"weight": 35,
 			"value": {
-				"dmg": [2,4],
+				"dmg": [1,3],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,
@@ -30,7 +30,7 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 60,
 			"value": {
-				"dmg": [4,7],
+				"dmg": [2,5],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,
@@ -74,7 +74,7 @@ var weapons = {
 			"category": "Mace",
 			"weight": 55,
 			"value": {
-				"dmg": [3,5],
+				"dmg": [2,4],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 1,
@@ -95,7 +95,7 @@ var weapons = {
 			"category": "Flail",
 			"weight": 35,
 			"value": {
-				"dmg": [1,3],
+				"dmg": [1,1],
 				"d": 3,
 				"bonusDmg": {},
 				"armorPen": 0,
@@ -176,7 +176,7 @@ var weapons = {
 		},
 		{
 			"itemName": "Dwarvish mace",
-			"unidentifiedItemName": "Blue mace",
+			"unidentifiedItemName": "Blueish mace",
 			"texture": load("res://Assets/Weapons/MaceDwarvishMace.png"),
 			"unidentifiedTexture": load("res://Assets/Weapons/MaceDwarvishMace.png"),
 			"type": "Weapon",
@@ -197,7 +197,7 @@ var weapons = {
 		},
 		{
 			"itemName": "Dwarvish laysword",
-			"unidentifiedItemName": "Dwarvish laysword",
+			"unidentifiedItemName": "Blueish laysword",
 			"texture": load("res://Assets/Weapons/SwordDwarvishLaysword.png"),
 			"unidentifiedTexture": load("res://Assets/Weapons/SwordDwarvishLaysword.png"),
 			"type": "Weapon",
@@ -273,7 +273,7 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 75,
 			"value": {
-				"dmg": [5,10],
+				"dmg": [4,9],
 				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 2
@@ -431,7 +431,7 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 40,
 			"value": {
-				"dmg": [8,14],
+				"dmg": [6,13],
 				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 3
@@ -790,7 +790,7 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 150,
 			"value": {
-				"dmg": [12,15],
+				"dmg": [10,14],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,

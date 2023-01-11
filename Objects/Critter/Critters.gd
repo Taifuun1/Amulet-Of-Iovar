@@ -66,7 +66,7 @@ func create():
 func setNeutralClasses():
 	for _neutralClass in $"/root/World/Critters/0".neutralClasses:
 		if critters.has(_neutralClass):
-			for _critter in critters[_neutralClass].critterTypes:
+			for _critter in critters[_neutralClass]:
 				_critter.aI = "Neutral"
 
 
@@ -186,7 +186,7 @@ func spawnRandomCritter(_position, _spawnLiches = true):
 		if !_species.matchn("bosses"):
 			if !_spawnLiches and _species.matchn("liches"):
 				return null
-			var _critter = critters[_species].critterTypes[randi() % critters[_species].critterTypes.size()].duplicate(true)
+			var _critter = critters[_species][randi() % critters[_species].size()].duplicate(true)
 			if (
 				GlobalCritterInfo.globalCritterInfo[_critter.critterName].population != 0 and
 				GlobalCritterInfo.globalCritterInfo[_critter.critterName].crittersInPlay < GlobalCritterInfo.globalCritterInfo[_critter.critterName].population
@@ -212,7 +212,7 @@ func spawnRandomCritter(_position, _spawnLiches = true):
 
 func getCritterByName(_critterName):
 	for _species in critters.values():
-		for _critter in _species.critterTypes:
+		for _critter in _species:
 			if _critter.critterName.matchn(_critterName):
 				return _critter
 
@@ -252,7 +252,7 @@ func getCritterSpawns(_spawnData, _level, _spawnPosition = null):
 
 func checkSpawnableCrittersLevel():
 	for _species in critters.keys():
-		for _critter in critters[_species].critterTypes:
+		for _critter in critters[_species]:
 			if _critter.level <= $"/root/World/Critters/0".level and !spawnableCritters.has(critter) and !_species.matchn("bosses"):
 				spawnableCritters.append(_critter.critterName)
 

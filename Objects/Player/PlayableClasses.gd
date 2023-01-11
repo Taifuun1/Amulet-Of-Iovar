@@ -306,11 +306,9 @@ var mercenary = {
 	resistances = [ "frost" ],
 	neutralClasses = [ "human" ],
 	items = {
-		"Mithril two-hander": 1,
+		"Dull two-hander": 1,
 		"Bucket helmet": 1,
 		"Scale ring mail": 1,
-		"Studded belt": 1,
-		"Studded gauntlets": 1,
 		"Scale ring mail chausses": 1,
 		"Studded boots": 1,
 		"Potion of heal": [2, 4],

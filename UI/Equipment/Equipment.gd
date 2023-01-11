@@ -249,7 +249,6 @@ func setEquipment(_id):
 #		panelStylebox.set_border_width_all(1)
 #		panelStylebox.set_border_color(Color(1, 0, 0))
 #		get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
-	print($"/root/World/Critters/0".attacks)
 	if $"/root/World/Critters/0".attacks.size() == 0:
 		$"/root/World/Critters/0".attacks = [
 			{
