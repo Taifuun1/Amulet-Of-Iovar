@@ -9,8 +9,8 @@ var blobs = [
 		"texture": load("res://Assets/Critters/BlobSlerp.png"),
 		"alignment": "Neutral",
 		"level": 4,
-		"expDropAmount": 8,
-		"hp": 9,
+		"expDropAmount": 6,
+		"hp": 11,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [
@@ -52,7 +52,7 @@ var blobs = [
 					"amulet": ["uncommon", "rare", "legendary"],
 					"armor": ["common", "uncommon", "rare", "legendary"],
 					"gem": ["common", "uncommon", "rare"],
-					"ring": ["common", "uncommon", "rare"],
+					"ring": ["uncommon", "rare"],
 					"tool": ["common", "uncommon", "rare"],
 					"weapon": ["common", "uncommon", "rare", "legendary"]
 				},
@@ -71,8 +71,8 @@ var blobs = [
 		"texture": load("res://Assets/Critters/BlobSluerp.png"),
 		"alignment": "Neutral",
 		"level": 4,
-		"expDropAmount": 8,
-		"hp": 9,
+		"expDropAmount": 6,
+		"hp": 11,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [
@@ -114,7 +114,7 @@ var blobs = [
 					"amulet": ["uncommon", "rare", "legendary"],
 					"armor": ["common", "uncommon", "rare", "legendary"],
 					"gem": ["common", "uncommon", "rare"],
-					"ring": ["common", "uncommon", "rare"],
+					"ring": ["uncommon", "rare"],
 					"tool": ["common", "uncommon", "rare"],
 					"weapon": ["common", "uncommon", "rare", "legendary"]
 				},

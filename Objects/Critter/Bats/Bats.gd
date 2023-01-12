@@ -9,8 +9,8 @@ var bats = [
 		"texture": load("res://Assets/Critters/BatDarkBat.png"),
 		"alignment": "Neutral",
 		"level": 3,
-		"expDropAmount": 6,
-		"hp": 8,
+		"expDropAmount": 3,
+		"hp": 10,
 		"mp": 2,
 		"ac": 0,
 		"attacks": [
@@ -54,8 +54,8 @@ var bats = [
 		"texture": load("res://Assets/Critters/BatSquintingBat.png"),
 		"alignment": "Neutral",
 		"level": 6,
-		"expDropAmount": 13,
-		"hp": 13,
+		"expDropAmount": 8,
+		"hp": 14,
 		"mp": 4,
 		"ac": 0,
 		"attacks": [
@@ -108,8 +108,8 @@ var bats = [
 		"texture": load("res://Assets/Critters/BatSpookyBat.png"),
 		"alignment": "Neutral",
 		"level": 9,
-		"expDropAmount": 27,
-		"hp": 21,
+		"expDropAmount": 13,
+		"hp": 22,
 		"mp": 2,
 		"ac": 2,
 		"attacks": [
@@ -162,8 +162,8 @@ var bats = [
 		"texture": load("res://Assets/Critters/BatVampireBat.png"),
 		"alignment": "Neutral",
 		"level": 8,
-		"expDropAmount": 38,
-		"hp": 16,
+		"expDropAmount": 14,
+		"hp": 18,
 		"mp": 2,
 		"ac": 0,
 		"attacks": [

@@ -189,7 +189,7 @@ func setUpDungeon():
 		$Levels.add_child(newDungeon)
 
 	### Mines of Tidoh
-	for _level in range(randi() % 3 + 2):
+	for _level in range(randi() % 2 + 2):
 		var newCave = load(levelPaths.minesOfTidoh).instance()
 		newCave.create("minesOfTidoh", "minesOfTidoh", "Mines of tidoh {level}".format({ "level": 1 + levels.minesOfTidoh.size() }), 2)
 		levels.minesOfTidoh.append(newCave)
@@ -204,7 +204,7 @@ func setUpDungeon():
 	levels.minesOfTidoh.append(newMiningOutpost)
 	$Levels.add_child(newMiningOutpost)
 
-	for _level in range(randi() % 3 + 2):
+	for _level in range(randi() % 2 + 2):
 		var newCave = load(levelPaths.depthsOfTidoh).instance()
 		newCave.create("depthsOfTidoh", "depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": 1 + levels.depthsOfTidoh.size() }), 1)
 		levels.depthsOfTidoh.append(newCave)

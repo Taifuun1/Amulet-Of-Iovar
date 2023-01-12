@@ -52,10 +52,8 @@ var weapons = {
 			"weight": 15,
 			"value": {
 				"dmg": [1,3],
-				"d": 2,
-				"bonusDmg": {
-					"baseWeapon": 1
-				},
+				"d": 1,
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": [0,0],
@@ -119,7 +117,7 @@ var weapons = {
 			"weight": 25,
 			"value": {
 				"dmg": [2,4],
-				"d": 2,
+				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 1
 				},

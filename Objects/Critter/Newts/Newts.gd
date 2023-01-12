@@ -62,7 +62,7 @@ var newts = [
 		"alignment": "Neutral",
 		"level": 5,
 		"expDropAmount": 6,
-		"hp": 14,
+		"hp": 15,
 		"mp": 0,
 		"ac": 1,
 		"attacks": [
@@ -114,7 +114,7 @@ var newts = [
 		"alignment": "Neutral",
 		"level": 8,
 		"expDropAmount": 14,
-		"hp": 23,
+		"hp": 26,
 		"mp": 0,
 		"ac": 4,
 		"attacks": [
@@ -165,8 +165,8 @@ var newts = [
 		"texture": load("res://Assets/Critters/NewtHighlandsNewt.png"),
 		"alignment": "Neutral",
 		"level": 11,
-		"expDropAmount": 52,
-		"hp": 33,
+		"expDropAmount": 37,
+		"hp": 37,
 		"mp": 0,
 		"ac": 2,
 		"attacks": [
@@ -217,8 +217,8 @@ var newts = [
 		"texture": load("res://Assets/Critters/NewtArcticNewt.png"),
 		"alignment": "Neutral",
 		"level": 15,
-		"expDropAmount": 156,
-		"hp": 51,
+		"expDropAmount": 115,
+		"hp": 58,
 		"mp": 0,
 		"ac": 5,
 		"attacks": [

@@ -278,7 +278,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			$"/root/World/Texts".add_child(_damageNumber)
 			
 			# Magic spell
-			if _damage.dmg == 0 and _damage.magicDmg != 0:
+			if _damage.dmg <= 0 and _damage.magicDmg != 0:
 				hp -= _damage.magicDmg
 				_attacksLog.append("{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
 			# Physical attack
@@ -454,13 +454,6 @@ func processPlayerSpecificEffects():
 		if playerVisibility.distance > 0:
 			Globals.gameConsole.addLog("Your vision changes.")
 		playerVisibility.distance = -1
-	
-	if checkIfStatusEffectIsInEffect("toxix"):
-		hp -= 1
-		if hp > 12:
-			Globals.gameConsole.addLog("You take damage from the poison.")
-		else:
-			Globals.gameConsole.addLog("You take damage from the poison!")
 	
 	# Deal with status effects in the UI
 	for _statusEffect in statusEffects.keys():
@@ -709,7 +702,10 @@ func gainLevel():
 	baseStats.wisdom += wisdomIncrease
 	
 	experienceNeededForPreviousLevelGainAmount = experienceNeededForLevelGainAmount
-	experienceNeededForLevelGainAmount = experienceNeededForLevelGainAmount + (experienceNeededForLevelGainAmount / 2)
+	var _nextLevelExpGain = int(experienceNeededForLevelGainAmount + (2 * experienceNeededForLevelGainAmount / 3))
+	if _nextLevelExpGain > 5280:
+		_nextLevelExpGain = 5280
+	experienceNeededForLevelGainAmount = _nextLevelExpGain
 	
 	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
 

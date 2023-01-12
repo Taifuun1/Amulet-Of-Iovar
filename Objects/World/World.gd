@@ -274,8 +274,6 @@ func _input(_event):
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_DUNGEON or
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_SAND
 				) and
-#				levels.minesOfTidoh.back().levelId != Globals.currentDungeonLevel and
-#				levels.library.back().levelId != Globals.currentDungeonLevel and
 				Globals.currentDungeonLevel < Globals.generatedLevels and
 				currentGameState == gameState.GAME
 			):
@@ -827,7 +825,12 @@ func openMenu(_menu, _playerTile = null):
 				currentGameState = gameState.DIP_ITEM
 		"use":
 			if currentGameState == gameState.GAME:
-				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["tool"], null, ["corpse"])
+				var _items
+				_items = $Critters/"0"/Inventory.getItemsOfType(["tool"], null, ["corpse"])
+				for _itemId in _items:
+					if get_node("Items/{itemId}".format({ "itemId": _itemId })).category != null and get_node("Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+						_items.erase(_itemId)
+				$UI/UITheme/ItemManagement.items = _items
 				$UI/UITheme/ItemManagement.showItemManagementList("Use what?", true)
 				currentGameState = gameState.USE
 

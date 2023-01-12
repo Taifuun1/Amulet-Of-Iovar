@@ -880,6 +880,7 @@ func dipItem(_id):
 				elif _dippedItem.alignment.matchn("cursed"):
 					_selectedItem.alignment = "cursed"
 					Globals.gameConsole.addLog("The {itemName} glows with a black light!".format({ "itemName": _selectedItem.itemName }))
+				$"/root/World/Items/Items".removeItem(_id)
 				Globals.gameConsole.addLog("The {itemName} is consumed.".format({ "itemName": _dippedItem.itemName }))
 			"soda bottle":
 				Globals.gameConsole.addLog("The {itemName} is soaked with sugar.".format({ "itemName": _selectedItem.itemName }))
@@ -893,7 +894,6 @@ func dipItem(_id):
 				Globals.gameConsole.addLog("You soak the {itemName} into the potion. Nothing happens.".format({ "itemName": _selectedItem.itemName }))
 		selectedItem = null
 		checkAllIdentification(true)
-		$"/root/World/Items/Items".removeItem(_id)
 		$"/root/World".closeMenu()
 		$"/root/World".processGameTurn()
 

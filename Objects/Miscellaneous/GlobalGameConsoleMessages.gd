@@ -173,19 +173,22 @@ I wither away"""
 		]
 	},
 	"Leaf ant": {
-		"speech": {
-			"frequency": 10,
+		"taunt": {
+			"frequency": 18,
 			"lines": [
-				"Chp-chp-chp"
+				"[i]Moves skitterishly[/i]"
 			],
-		},
-		"despawn": [
-			"Eeeee!"
-		]
+		}
 	},
 	"Soldier ant": {
+		"taunt": {
+			"frequency": 5,
+			"lines": [
+				"CHP-CHP-CHP"
+			],
+		},
 		"speech": {
-			"frequency": 10,
+			"frequency": 15,
 			"lines": [
 				"Chp-chp-chp"
 			],
@@ -200,10 +203,7 @@ I wither away"""
 			"lines": [
 				"Chp-chp-chp"
 			],
-		},
-		"despawn": [
-			"Eeeeee..."
-		]
+		}
 	},
 	"Fiddler crab": {
 		"speech": {

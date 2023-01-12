@@ -62,8 +62,8 @@ var mimics = [
 		"texture": load("res://Assets/Critters/MimicHumongousMimic.png"),
 		"alignment": "Neutral",
 		"level": 14,
-		"expDropAmount": 78,
-		"hp": 38,
+		"expDropAmount": 68,
+		"hp": 46,
 		"mp": 23,
 		"ac": 7,
 		"attacks": [

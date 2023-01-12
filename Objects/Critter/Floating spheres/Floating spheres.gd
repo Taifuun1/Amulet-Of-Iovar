@@ -62,7 +62,7 @@ var floatingSpheres = [
 		"hp": 13,
 		"mp": 4,
 		"ac": 0,
-		"attacks": [  ],
+		"attacks": [],
 		"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 		"stats": {
 			"strength": 1,
@@ -101,7 +101,7 @@ var floatingSpheres = [
 		"hp": 14,
 		"mp": 5,
 		"ac": 0,
-		"attacks": [  ],
+		"attacks": [],
 		"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 		"stats": {
 			"strength": 1,
@@ -140,7 +140,7 @@ var floatingSpheres = [
 		"hp": 17,
 		"mp": 7,
 		"ac": 0,
-		"attacks": [  ],
+		"attacks": [],
 		"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 		"stats": {
 			"strength": 1,

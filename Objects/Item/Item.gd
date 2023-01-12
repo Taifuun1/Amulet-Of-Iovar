@@ -211,17 +211,15 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills.sword.level >= 3:
-			_additionalDamage += 5
+			_additionalDamage += 4
+			_d += 1
 		elif _playerSkills.sword.level >= 2:
-			_additionalDamage += 3
+			_additionalDamage += 2
 		elif _playerSkills.sword.level >= 1:
 			_additionalDamage += 1
 		
-		if _playerSkills.sword.level > 3:
-			_d += 1
-		
 		return {
-			"dmg": int(_stats.balance / 3 + _additionalDamage),
+			"dmg": int(_stats.balance / 9 + _additionalDamage),
 			"d": _d
 		}
 	if category.matchn("two-hander"):
@@ -231,14 +229,14 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills["two-hander"].level >= 3:
-			_additionalDamage += 8
+			_additionalDamage += 7
 		elif _playerSkills["two-hander"].level >= 2:
-			_additionalDamage += 4
+			_additionalDamage += 3
 		elif _playerSkills["two-hander"].level >= 1:
-			_additionalDamage += 2
+			_additionalDamage += 1
 		
 		return {
-			"dmg": int(_stats.strength / 3 + _additionalDamage),
+			"dmg": int(_stats.strength / 9 + _additionalDamage),
 			"d": 0
 		}
 	if category.matchn("dagger"):
@@ -249,20 +247,20 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills.dagger.level >= 3:
-			_additionalDamage += 4
-		elif _playerSkills.dagger.level >= 2:
 			_additionalDamage += 2
+		elif _playerSkills.dagger.level >= 2:
+			_additionalDamage += 1
 			_d += 1
 		elif _playerSkills.dagger.level >= 1:
 			_additionalDamage += 1
 		
-		if _stats.legerity > 25:
+		if _stats.legerity > 29:
 			_d += 2
-		elif _stats.legerity > 11:
+		elif _stats.legerity > 19:
 			_d += 1
 		
 		return {
-			"dmg": int(_stats.legerity / 5 + _additionalDamage),
+			"dmg": int(_stats.legerity / 8 + _additionalDamage),
 			"d": _d
 		}
 	if category.matchn("mace"):
@@ -272,14 +270,14 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills.mace.level >= 3:
-			_additionalDamage += 8
+			_additionalDamage += 6
 		elif _playerSkills.mace.level >= 2:
-			_additionalDamage += 4
+			_additionalDamage += 3
 		elif _playerSkills.mace.level >= 1:
 			_additionalDamage += 1
 		
 		return {
-			"dmg": int((_stats.strength / 4) + (_stats.balance / 4) + _additionalDamage),
+			"dmg": int((_stats.strength / 10) + (_stats.balance / 10) + _additionalDamage),
 			"d": 0
 		}
 	if category.matchn("flail"):
@@ -297,15 +295,15 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _playerSkills.flail.level >= 1:
 			_d += 1
 		
-		if _stats.legerity > 22:
+		if _stats.legerity > 31:
 			_d += 3
-		elif _stats.legerity > 15:
+		elif _stats.legerity > 22:
 			_d += 2
-		elif _stats.legerity > 8:
+		elif _stats.legerity > 15:
 			_d += 1
 		
 		return {
-			"dmg": int(_stats.legerity / 5 + _additionalDamage),
+			"dmg": int(_stats.legerity / 15 + _additionalDamage),
 			"d": _d
 		}
 
@@ -328,6 +326,7 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 		itemName = identifiedItemName
 		$ItemSprite.texture = itemTexture
 		notIdentified.name = true
+		GlobalItemInfo.globalItemInfo[identifiedItemName].identified = true
 	if _identifyAlignment:
 		notIdentified.alignment = true
 	if _identifyEnchantment:

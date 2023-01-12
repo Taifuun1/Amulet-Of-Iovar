@@ -9,8 +9,8 @@ var elves = [
 		"texture": load("res://Assets/Critters/ElfHunter.png"),
 		"alignment": "Neutral",
 		"level": 5,
-		"expDropAmount": 7,
-		"hp": 13,
+		"expDropAmount": 4,
+		"hp": 16,
 		"mp": 15,
 		"ac": 1,
 		"attacks": [
@@ -72,8 +72,8 @@ var elves = [
 		"texture": load("res://Assets/Critters/ElfAssassin.png"),
 		"alignment": "Neutral",
 		"level": 10,
-		"expDropAmount": 30,
-		"hp": 19,
+		"expDropAmount": 24,
+		"hp": 23,
 		"mp": 22,
 		"ac": 2,
 		"attacks": [
@@ -87,7 +87,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [3,5],
+				"dmg": [4,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -96,7 +96,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [2,3],
+				"dmg": [2,4],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -143,8 +143,8 @@ var elves = [
 		"texture": load("res://Assets/Critters/ElfNoble.png"),
 		"alignment": "Neutral",
 		"level": 15,
-		"expDropAmount": 214,
-		"hp": 48,
+		"expDropAmount": 164,
+		"hp": 56,
 		"mp": 37,
 		"ac": 4,
 		"attacks": [
@@ -209,7 +209,7 @@ var elves = [
 		"alignment": "Neutral",
 		"level": 20,
 		"expDropAmount": 1000,
-		"hp": 72,
+		"hp": 79,
 		"mp": 55,
 		"ac": 7,
 		"attacks": [

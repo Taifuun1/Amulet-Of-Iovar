@@ -726,4 +726,4 @@ func _on_mouse_exited_equipment_slot():
 
 func _on_ItemContainer_gui_input(event):
 	if event is InputEventScreenDrag:
-		accept_event( )
+		accept_event()

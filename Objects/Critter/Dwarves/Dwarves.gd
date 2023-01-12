@@ -9,8 +9,8 @@ var dwarves = [
 		"texture": load("res://Assets/Critters/DwarfMiner.png"),
 		"alignment": "Neutral",
 		"level": 6,
-		"expDropAmount": 15,
-		"hp": 15,
+		"expDropAmount": 8,
+		"hp": 17,
 		"mp": 5,
 		"ac": 2,
 		"attacks": [
@@ -80,8 +80,8 @@ var dwarves = [
 		"texture": load("res://Assets/Critters/DwarfEngineer.png"),
 		"alignment": "Neutral",
 		"level": 8,
-		"expDropAmount": 21,
-		"hp": 22,
+		"expDropAmount": 12,
+		"hp": 24,
 		"mp": 5,
 		"ac": 2,
 		"attacks": [
@@ -126,8 +126,8 @@ var dwarves = [
 		"texture": load("res://Assets/Critters/DwarfSmith.png"),
 		"alignment": "Neutral",
 		"level": 10,
-		"expDropAmount": 28,
-		"hp": 29,
+		"expDropAmount": 18,
+		"hp": 33,
 		"mp": 5,
 		"ac": 4,
 		"attacks": [
@@ -189,8 +189,8 @@ var dwarves = [
 		"texture": load("res://Assets/Critters/DwarfContirer.png"),
 		"alignment": "Neutral",
 		"level": 18,
-		"expDropAmount": 498,
-		"hp": 56,
+		"expDropAmount": 378,
+		"hp": 62,
 		"mp": 5,
 		"ac": 10,
 		"attacks": [

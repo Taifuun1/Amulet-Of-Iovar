@@ -9,8 +9,8 @@ var aquaticLife = [
 		"texture": load("res://Assets/Critters/AquaticLifeFiddlerCrab.png"),
 		"alignment": "Neutral",
 		"level": 6,
-		"expDropAmount": 22,
-		"hp": 14,
+		"expDropAmount": 9,
+		"hp": 18,
 		"mp": 13,
 		"ac": 2,
 		"attacks": [
@@ -70,8 +70,8 @@ var aquaticLife = [
 		"texture": load("res://Assets/Critters/AquaticLifeRingedSeal.png"),
 		"alignment": "Neutral",
 		"level": 9,
-		"expDropAmount": 39,
-		"hp": 27,
+		"expDropAmount": 27,
+		"hp": 32,
 		"mp": 16,
 		"ac": 2,
 		"attacks": [
@@ -115,8 +115,8 @@ var aquaticLife = [
 		"texture": load("res://Assets/Critters/AquaticLifeEyebrowSeal.png"),
 		"alignment": "Neutral",
 		"level": 13,
-		"expDropAmount": 56,
-		"hp": 36,
+		"expDropAmount": 32,
+		"hp": 42,
 		"mp": 18,
 		"ac": 3,
 		"attacks": [
@@ -160,8 +160,8 @@ var aquaticLife = [
 		"texture": load("res://Assets/Critters/AquaticLifeTonatuna.png"),
 		"alignment": "Neutral",
 		"level": 17,
-		"expDropAmount": 531,
-		"hp": 68,
+		"expDropAmount": 431,
+		"hp": 77,
 		"mp": 32,
 		"ac": 1,
 		"attacks": [

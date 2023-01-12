@@ -9,8 +9,8 @@ var centaurs = [
 		"texture": load("res://Assets/Critters/CentaurHillCentaur.png"),
 		"alignment": "Neutral",
 		"level": 7,
-		"expDropAmount": 17,
-		"hp": 21,
+		"expDropAmount": 12,
+		"hp": 25,
 		"mp": 13,
 		"ac": 1,
 		"attacks": [
@@ -69,8 +69,8 @@ var centaurs = [
 		"texture": load("res://Assets/Critters/CentaurGryonemCentaur.png"),
 		"alignment": "Neutral",
 		"level": 16,
-		"expDropAmount": 454,
-		"hp": 67,
+		"expDropAmount": 254,
+		"hp": 74,
 		"mp": 36,
 		"ac": 5,
 		"attacks": [

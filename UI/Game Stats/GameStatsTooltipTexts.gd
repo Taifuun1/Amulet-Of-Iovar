@@ -49,14 +49,14 @@ var belief = {
 	"description": "Belief determines your fleir damage. Higher belief also improves MP regen and lowers blindness turn count."
 }
 
-var visage = {
-	"title": "Visage",
-	"description": "Visage determines your frost and thunder damage. Higher visage also gives higher maximum MP."
-}
-
 var wisdom = {
 	"title": "Wisdom",
-	"description": "Wisdom determines your gleeie'er and toxix damage. Higher wisdom also lowers shop prices and invisibility turn count."
+	"description": "Wisdom determines your frost and thunder damage. Higher Wisdom also gives higher maximum MP."
+}
+
+var visage = {
+	"title": "Visage",
+	"description": "Visage determines your gleeie'er and toxix damage. Higher visage also lowers shop prices and invisibility turn count."
 }
 
 var hp = {
@@ -114,4 +114,64 @@ var weight = {
 	"description": """Your overall carried weight. Crossing a weight treshold gives a more punishing status effect.
 Carried weight: {weight}
 """
+}
+
+var inventory = {
+	"title": "Inventory",
+	"sprite": load("res://Assets/UI/IconInventory.png")
+}
+
+var equipment = {
+	"title": "Equipment",
+	"sprite": load("res://Assets/UI/IconEquipment.png")
+}
+
+var read = {
+	"title": "Read",
+	"sprite": load("res://Assets/UI/IconRead.png")
+}
+
+var quaff = {
+	"title": "Quaff",
+	"sprite": load("res://Assets/UI/IconQuaff.png")
+}
+
+var consume = {
+	"title": "Consume",
+	"sprite": load("res://Assets/UI/IconConsume.png")
+}
+
+var zap = {
+	"title": "Zap",
+	"sprite": load("res://Assets/UI/IconZap.png")
+}
+
+var use = {
+	"title": "Use",
+	"sprite": load("res://Assets/UI/IconUse.png")
+}
+
+var runes = {
+	"title": "Runes",
+	"sprite": load("res://Assets/UI/IconRunes.png")
+}
+
+var loot = {
+	"title": "Loot",
+	"sprite": load("res://Assets/UI/IconLoot.png")
+}
+
+var dip = {
+	"title": "Dip",
+	"sprite": load("res://Assets/UI/IconDip.png")
+}
+
+var automine = {
+	"title": "Auto-mine",
+	"sprite": load("res://Assets/UI/IconAutoMine.png")
+}
+
+var attackNeutral = {
+	"title": "Attack neutral",
+	"sprite": load("res://Assets/UI/IconAttackNeutral.png")
 }

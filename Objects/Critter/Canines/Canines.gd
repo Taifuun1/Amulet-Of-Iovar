@@ -9,8 +9,8 @@ var canines = [
 		"texture": load("res://Assets/Critters/CanineWolf.png"),
 		"alignment": "Neutral",
 		"level": 4,
-		"expDropAmount": 6,
-		"hp": 11,
+		"expDropAmount": 4,
+		"hp": 13,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [
@@ -57,8 +57,8 @@ var canines = [
 		"texture": load("res://Assets/Critters/CanineWarg.png"),
 		"alignment": "Neutral",
 		"level": 7,
-		"expDropAmount": 14,
-		"hp": 17,
+		"expDropAmount": 10,
+		"hp": 19,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [
@@ -105,8 +105,8 @@ var canines = [
 		"texture": load("res://Assets/Critters/CanineGearh.png"),
 		"alignment": "Neutral",
 		"level": 11,
-		"expDropAmount": 42,
-		"hp": 28,
+		"expDropAmount": 30,
+		"hp": 37,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [

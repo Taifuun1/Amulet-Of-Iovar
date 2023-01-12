@@ -92,7 +92,7 @@ var liches = [
 		"texture": load("res://Assets/Critters/LichLich.png"),
 		"alignment": "Neutral",
 		"level": 15,
-		"expDropAmount": 205,
+		"expDropAmount": 155,
 		"hp": 52,
 		"mp": 84,
 		"ac": 0,

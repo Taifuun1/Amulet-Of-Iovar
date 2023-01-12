@@ -80,6 +80,7 @@ corner_radius_bottom_left = 4
 [sub_resource type="StyleBoxEmpty" id=11]
 
 [sub_resource type="DynamicFont" id=24]
+size = 20
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=21]

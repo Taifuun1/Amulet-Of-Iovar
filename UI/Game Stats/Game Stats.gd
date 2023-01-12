@@ -128,7 +128,7 @@ func _on_Weigth_value_changed(value):
 	$GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth.tint_progress = Color(_r, _g, 0)
 
 func isStatusEffectInGameStats(_statusEffect):
-	for _node in $GameStatsContainer/StatusEffectsContainer.get_children():
+	for _node in $GameStatsContainer/EffectsAndIconsContainer/StatusEffectsContainer.get_children():
 		if _node.name.matchn(_statusEffect):
 			return true
 	return false
@@ -136,10 +136,10 @@ func isStatusEffectInGameStats(_statusEffect):
 func addStatusEffect(_statusEffect):
 	var _newStatusEffect = load("res://UI/Game Stats/Status Effect Item.tscn").instance()
 	_newStatusEffect.create(_statusEffect)
-	$GameStatsContainer/StatusEffectsContainer.add_child(_newStatusEffect)
+	$GameStatsContainer/EffectsAndIconsContainer/StatusEffectsContainer.add_child(_newStatusEffect)
 
 func removeStatusEffect(_statusEffect):
-	get_node("GameStatsContainer/StatusEffectsContainer/{statusEffect}".format({ "statusEffect": _statusEffect })).queue_free()
+	get_node("GameStatsContainer/EffectsAndIconsContainer/StatusEffectsContainer/{statusEffect}".format({ "statusEffect": _statusEffect })).queue_free()
 
 
 
@@ -148,7 +148,9 @@ func removeStatusEffect(_statusEffect):
 ########################
 
 func _onMouseEnteredStat(_nodePath, _stat):
-	var _tooltipDescription = tooltipTexts[_stat].description
+	var _tooltipDescription
+	if tooltipTexts[_stat].has("description"):
+		_tooltipDescription = tooltipTexts[_stat].description
 	if _stat.matchn("attacks"):
 		var _magicElement = ""
 		if attacks.attack.magicDmg.element != null:
@@ -175,8 +177,45 @@ func _onMouseEnteredStat(_nodePath, _stat):
 		})
 	elif _stat.matchn("weight"):
 		_tooltipDescription = _tooltipDescription.format({ "weight": weight })
-	get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).updateTooltip(tooltipTexts[_stat].title, _tooltipDescription)
+	if tooltipTexts[_stat].has("description"):
+		get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).updateTooltip(tooltipTexts[_stat].title, _tooltipDescription)
+	else:
+		get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).updateTooltip(tooltipTexts[_stat].title, tooltipTexts[_stat].sprite)
 	get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).showTooltip()
 
 func _onMouseExitedStat(_nodePath):
 	get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).hideTooltip()
+
+
+func _onIconClicked(event, _icon):
+	if (
+		event is InputEventMouseButton and
+		event.pressed and
+		event.button_index == BUTTON_LEFT and
+		$"/root/World".inGame
+	):
+		match _icon:
+			"inventory":
+				$"/root/World".openMenu("inventory")
+			"equipment":
+				$"/root/World".openMenu("equipment")
+			"read":
+				$"/root/World".openMenu("read")
+			"quaff":
+				$"/root/World".openMenu("quaff")
+			"consume":
+				$"/root/World".openMenu("consume")
+			"zap":
+				$"/root/World".openMenu("zap")
+			"use":
+				$"/root/World".openMenu("use")
+			"runes":
+				$"/root/World".openMenu("runes")
+			"loot":
+				$"/root/World".openMenu("loot", $"/root/World".level.getCritterTile(0))
+			"dip":
+				$"/root/World".openMenu("dip")
+			"autoMine":
+				pass
+			"attackNeutral":
+				pass

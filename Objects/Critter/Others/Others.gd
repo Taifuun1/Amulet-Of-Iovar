@@ -53,7 +53,7 @@ var others = [
 		"texture": load("res://Assets/Critters/OtherChicken.png"),
 		"alignment": "Neutral",
 		"level": 2,
-		"expDropAmount": 12,
+		"expDropAmount": 2,
 		"hp": 6,
 		"mp": 0,
 		"ac": 0,

@@ -23,8 +23,8 @@ var archeologist = {
 	beliefIncrease = 0.5,
 	visageIncrease = 1,
 	wisdomIncrease = 1.5,
-	resistances = [ "thunder" ],
-	neutralClasses = [ "dwarf" ],
+	resistances = ["thunder"],
+	neutralClasses = ["dwarves"],
 	items = {
 		"Rigid flail": 1,
 		"Leather vest": 1,
@@ -97,7 +97,7 @@ var banker = {
 	visageIncrease = 1.2,
 	wisdomIncrease = 1,
 	resistances = [  ],
-	neutralClasses = [ "snake" ],
+	neutralClasses = ["snakes"],
 	items = {
 		"Orc dagger": 1,
 		"Adorned helmet": 1,
@@ -164,8 +164,8 @@ var freedomFighter = {
 	beliefIncrease = 1.5,
 	visageIncrease = 2.5,
 	wisdomIncrease = 0,
-	resistances = [ "fleir" ],
-	neutralClasses = [ "orc" ],
+	resistances = ["fleir"],
+	neutralClasses = ["orcs"],
 	items = {
 		"Chipped sword": 1,
 		"Battered buckler": 1,
@@ -232,8 +232,8 @@ var herbalogue = {
 	beliefIncrease = 1,
 	visageIncrease = 1,
 	wisdomIncrease = 2,
-	resistances = [ "toxix" ],
-	neutralClasses = [ "ant", "aquatic life", "canine", "feline", "rat" ],
+	resistances = ["toxix"],
+	neutralClasses = ["ants", "aquaticLife", "canines", "felines", "rats"],
 	items = {
 		"Chipped sword": 1,
 		"Bag of holding": 1,
@@ -303,8 +303,8 @@ var mercenary = {
 	beliefIncrease = -0.2,
 	visageIncrease = 1,
 	wisdomIncrease = 1,
-	resistances = [ "frost" ],
-	neutralClasses = [ "human" ],
+	resistances = ["frost"],
+	neutralClasses = ["humans"],
 	items = {
 		"Dull two-hander": 1,
 		"Bucket helmet": 1,
@@ -377,8 +377,8 @@ var exterminator = {
 	beliefIncrease = 1.4,
 	visageIncrease = 1.4,
 	wisdomIncrease = 1.4,
-	resistances = [ "fleir" ],
-	neutralClasses = [  ],
+	resistances = ["fleir"],
+	neutralClasses = [],
 	items = {
 		"Chipped sword": 1,
 		"Toga": 1,
@@ -453,8 +453,8 @@ var rogue = {
 	beliefIncrease = 0.8,
 	visageIncrease = 1.5,
 	wisdomIncrease = 1,
-	resistances = [ "toxix" ],
-	neutralClasses = [ "bat", "wraith" ],
+	resistances = ["toxix"],
+	neutralClasses = ["bats", "wraiths"],
 	items = {
 		"Cut dagger": 1,
 		"Orc cloak": 1,
@@ -479,7 +479,7 @@ var rogue = {
 		},
 		"dagger": {
 			"experience": 0,
-			"level": 2,
+			"level": 1,
 			"skillCap": 3
 		},
 		"mace": {
@@ -505,11 +505,11 @@ var savant = {
 	hp = 8,
 	mp = 18,
 	stats = {
-		strength = 5,
+		strength = 4,
 		legerity = 8,
-		balance = 9,
-		belief = 12,
-		visage = 5,
+		balance = 8,
+		belief = 10,
+		visage = 4,
 		wisdom = 13
 	},
 	hpIncrease = 2,
@@ -520,8 +520,8 @@ var savant = {
 	beliefIncrease = 1.5,
 	visageIncrease = 0.5,
 	wisdomIncrease = 3,
-	resistances = [  ],
-	neutralClasses = [ "human", "centaur" ],
+	resistances = [],
+	neutralClasses = ["humans", "centaurs"],
 	items = {
 		"Worn mace": 1,
 		"Boots of magic": 1,
@@ -533,7 +533,7 @@ var savant = {
 		"Magic marker": 1,
 		"Wand of light": 1,
 		"Orange": 1,
-		"RFG Ration": 1
+		"SPAM": 1
 	},
 	goldPieces = 110,
 	skills = {

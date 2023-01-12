@@ -469,7 +469,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			var _isPhysicalHit = true
 			
 			# Magic spell
-			if _damage.dmg == 0 and _damage.magicDmg != 0:
+			if _damage.dmg <= 0 and _damage.magicDmg != 0:
 				hp -= _damage.magicDmg
 				_attackLog += "{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
 			# Physical attack
@@ -512,13 +512,13 @@ func takeDamage(_attacks, _critterTile, _critterName):
 				if checkIfCritterIsPlayer(_critterName):
 					if _activeArmorSets.frost and !checkIfStatusEffectIsInEffect("stun"):
 						statusEffects.stun = 2
-						_attackLog += " {critterName} is stunned from your frozen armor!".format({ "critterName":critterName })
+						_attackLog += " {critterName} is chilled by your frozen armor!".format({ "critterName":critterName })
 					if _activeArmorSets.fleir and !checkIfStatusEffectIsPermanent("onFleir"):
 						statusEffects.onFleir += 2
 						_attackLog += " {critterName} is on fleir from your burning armor!".format({ "critterName":critterName })
 					if _activeArmorSets.thunder and !checkIfStatusEffectIsInEffect("stun"):
 						statusEffects.stun = 1
-						_attackLog += " Bolt of lighting summoned by your armor stuns the {critterName}!".format({ "critterName":critterName })
+						_attackLog += " Bolt of lighting from your armor stuns the {critterName}!".format({ "critterName":critterName })
 					if _activeArmorSets["gleeie'er"] and !checkIfStatusEffectIsInEffect("confusion"):
 						statusEffects.confusion = 5
 						_attackLog += " {critterName} is confused by your flamboyant armor!".format({ "critterName":critterName })

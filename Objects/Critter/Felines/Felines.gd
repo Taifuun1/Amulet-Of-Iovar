@@ -10,7 +10,7 @@ var felines = [
 		"alignment": "Neutral",
 		"level": 5,
 		"expDropAmount": 5,
-		"hp": 10,
+		"hp": 13,
 		"mp": 5,
 		"ac": 0,
 		"attacks": [
@@ -49,8 +49,8 @@ var felines = [
 		"texture": load("res://Assets/Critters/FelineLynx.png"),
 		"alignment": "Neutral",
 		"level": 8,
-		"expDropAmount": 19,
-		"hp": 22,
+		"expDropAmount": 14,
+		"hp": 25,
 		"mp": 5,
 		"ac": 0,
 		"attacks": [
@@ -98,8 +98,8 @@ var felines = [
 		"texture": load("res://Assets/Critters/FelineTiger.png"),
 		"alignment": "Neutral",
 		"level": 10,
-		"expDropAmount": 35,
-		"hp": 32,
+		"expDropAmount": 25,
+		"hp": 36,
 		"mp": 5,
 		"ac": 0,
 		"attacks": [
