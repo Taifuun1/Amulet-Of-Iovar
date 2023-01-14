@@ -384,6 +384,7 @@ func checkWhatAmuletIsWorn(_amulet):
 		GlobalItemInfo.globalItemInfo[_amulet.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_amulet.identifiedItemName].identified = true
+		_amulet.notAligned.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _amulet.identifiedItemName, "unidentifiedItemName": _amulet.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _amulet.identifiedItemName.to_lower():
@@ -460,6 +461,7 @@ func checkWhatRingIsWorn(_ring):
 		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified = true
+		_ring.notAligned.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _ring.identifiedItemName, "unidentifiedItemName": _ring.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _ring.identifiedItemName.to_lower():
@@ -507,6 +509,7 @@ func checkWhatBeltIsWorn(_belt):
 		GlobalItemInfo.globalItemInfo[_belt.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_belt.identifiedItemName].identified = true
+		_belt.notAligned.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _belt.identifiedItemName, "unidentifiedItemName": _belt.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _belt.identifiedItemName.to_lower():
@@ -545,6 +548,7 @@ func checkWhatCloakIsWorn(_cloak):
 		GlobalItemInfo.globalItemInfo[_cloak.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_cloak.identifiedItemName].identified = true
+		_cloak.notAligned.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _cloak.identifiedItemName, "unidentifiedItemName": _cloak.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _cloak.identifiedItemName.to_lower():
@@ -574,6 +578,7 @@ func checkWhatGauntletsAreWorn(_gauntlets):
 		GlobalItemInfo.globalItemInfo[_gauntlets.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_gauntlets.identifiedItemName].identified = true
+		_gauntlets.notAligned.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _gauntlets.identifiedItemName, "unidentifiedItemName": _gauntlets.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _gauntlets.identifiedItemName.to_lower():

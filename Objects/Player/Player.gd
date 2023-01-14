@@ -378,11 +378,6 @@ func addToInventory(_items):
 				"state": "Bound"
 			}
 
-func removeFromInventory(_items):
-	for _itemId in _items:
-		var _item = get_node("/root/World/Items/{id}".format({ "id": _itemId }))
-		$Inventory.removeFromInventory(_item)
-
 
 
 ####################################

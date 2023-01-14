@@ -46,8 +46,15 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	elif (
 		_item.itemName.matchn("box") or
 		_item.itemName.matchn("chest") or
-		(GlobalItemInfo.globalItemInfo.has(_item.itemName) and GlobalItemInfo.globalItemInfo[_item.itemName].identified) or
-		_item.type.to_lower().matchn("comestible")
+		_item.type.to_lower().matchn("comestible") or
+		(
+			GlobalItemInfo.globalItemInfo.has(_item.itemName) and
+			GlobalItemInfo.globalItemInfo[_item.itemName].identified
+		) or
+		(
+			_item.has("notAligned") and
+			_item.notAligned.name == true
+		)
 	):
 		itemName = _item.itemName
 	else:
@@ -57,6 +64,8 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	else:
 		identifiedItemName = _item.itemName
 	unidentifiedItemName = _item.unidentifiedItemName
+	if _item.has("notIdentified"):
+		notIdentified = _item.notIdentified
 	
 	type = _item.type
 	category = _item.category
@@ -78,7 +87,9 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 		points = _item.points
 	amount = int(_amount)
 	
-	if _extraData.has("alignment"):
+	if _item.has("alignment"):
+		alignment = _item.alignment
+	elif _extraData.has("alignment"):
 		alignment = _extraData.alignment
 	else:
 		if randi() % 5 == 0:
@@ -114,6 +125,17 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 					"turnedOn": false,
 					"charges": charges,
 					"value": _item.value.value
+				}
+			elif _item.value.has("distance") and _item.value.has("dmg"):
+				value = {
+					"charges": charges,
+					"distance": _item.value.distance,
+					"dmg": _item.value.dmg
+				}
+			elif _item.value.has("distance"):
+				value = {
+					"charges": charges,
+					"distance": _item.value.distance
 				}
 			else:
 				value = {
@@ -350,6 +372,7 @@ func getItemSaveData():
 		itemName = itemName,
 		type = type,
 		category = category,
+		rarity = rarity,
 		weight = weight,
 		value = value,
 		points = points,

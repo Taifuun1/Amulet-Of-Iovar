@@ -1,6 +1,9 @@
 extends Node
 
-func getGlobalCritterSaveData():
+func loadGlobalItemData(_data):
+	globalItemInfo = _data.globalItemInfo
+
+func getGlobalItemSaveData():
 	return {
 		globalItemInfo = globalItemInfo
 	}

@@ -29,10 +29,9 @@ func addToInventory(_item):
 		inventory.append(_item.id)
 		updateWeight()
 
-func removeFromInventory(_item, _removeItem = false):
+func removeFromInventory(_item):
 	if !checkIfStackableItemInInventory(_item, "substract"):
-		if _removeItem:
-			$"/root/World/Items/Items".removeItem(_item, null, false)
+		inventory.erase(_item.id)
 		updateWeight()
 
 func showInventory():

@@ -112,6 +112,12 @@ func loadGame():
 	var _globalsData = $Save.loadData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
 	Globals.loadGlobalsData(_globalsData)
 	
+	var _globalItemData = $Save.loadData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	GlobalItemInfo.loadGlobalItemData(_globalItemData)
+	
+	var _globalCritterData = $Save.loadData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	GlobalCritterInfo.loadGlobalCritterSaveData(_globalCritterData)
+	
 	var baseLevel = load("res://Level Generation/BaseLevel.tscn")
 	if dir.open("user://SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave })) == OK:
 		dir.list_dir_begin()
@@ -519,4 +525,9 @@ func checkIfThreadsAreDone():
 
 func _exit_tree():
 	if gameSetUpThread != null:
+		print("game set up")
 		gameSetUpThread.wait_to_finish()
+	if saveGameThread != null:
+		saveGameThread.wait_to_finish()
+		print("done")
+		get_tree().quit()

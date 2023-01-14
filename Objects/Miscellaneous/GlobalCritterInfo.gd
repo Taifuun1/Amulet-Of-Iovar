@@ -1,5 +1,8 @@
 extends Node
 
+func loadGlobalCritterSaveData(_data):
+	globalCritterInfo = _data.globalCritterInfo
+
 func getGlobalCritterSaveData():
 	return {
 		globalCritterInfo = globalCritterInfo

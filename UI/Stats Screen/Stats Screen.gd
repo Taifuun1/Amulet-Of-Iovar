@@ -1,6 +1,6 @@
 extends Control
 
-var statsData = load("res://Objects/Miscellaneous/StatsData.gd").new()
+var statsData = load("res://Objects/Miscellaneous/LifeTimeStatsData.gd").new()
 
 var statsList = load("res://UI/Stats/Stats List.tscn")
 

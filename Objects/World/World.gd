@@ -57,7 +57,8 @@ var churchLevel = null
 var tile_size = get_cell_size()
 var half_tile_size = tile_size / 2
 
-var gameSetUpThread
+var gameSetUpThread = Thread.new()
+var saveGameThread = Thread.new()
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -130,14 +131,14 @@ func setUpGameObjects(_playerData = null):
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
-		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "blessed" })
-		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "uncursed" })
-		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "cursed" })
+#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "blessed" })
+#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "cursed" })
 #		$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
+		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
+		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
@@ -323,7 +324,8 @@ func _input(_event):
 				$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
 				$UI/UITheme/"Dancing Dragons".startDancingDragons()
 				yield(get_tree().create_timer(0.01), "timeout")
-				saveGame()
+#				saveGame()
+				saveGameThread.start(self, "saveGame")
 			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
 				keepMoving = true
 			elif Input.is_action_just_pressed("GODS_WRATH") and currentGameState == gameState.GAME:
@@ -1107,6 +1109,12 @@ func saveGame():
 	var _globalsData = Globals.getGlobalsSaveData()
 	$Save.saveData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalsData)
 	
+	var _globalItemData = GlobalItemInfo.getGlobalItemSaveData()
+	$Save.saveData("GlobalItemData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalItemData)
+	
+	var _globalCritterData = GlobalCritterInfo.getGlobalCritterSaveData()
+	$Save.saveData("GlobalCritterData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalCritterData)
+	
 	var _equipmentData = $UI/UITheme/Equipment.getEquipmentSaveData()
 	_equipmentData.merge($UI/UITheme/Runes.getRunesSaveData())
 	$Save.saveData("EquipmentData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _equipmentData)
@@ -1121,7 +1129,7 @@ func saveGame():
 	}
 	$Save.saveData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
 	
-	get_tree().quit()
+	saveGameThread.call_deferred("wait_to_finish")
 
 
 

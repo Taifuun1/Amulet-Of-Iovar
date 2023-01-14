@@ -32,8 +32,13 @@ func readItem(_id):
 								print(_itemInInventory.itemName)
 								print(GlobalItemInfo.globalItemInfo.has(_itemInInventory.identifiedItemName))
 								if (
-									GlobalItemInfo.globalItemInfo.has(_itemInInventory.identifiedItemName) and
-									GlobalItemInfo.globalItemInfo[_itemInInventory.identifiedItemName].identified == false
+									(
+										GlobalItemInfo.globalItemInfo.has(_itemInInventory.identifiedItemName) and
+										GlobalItemInfo.globalItemInfo[_itemInInventory.identifiedItemName].identified == false
+									) or
+									_itemInInventory.notIdentified.name == false or
+									_itemInInventory.notIdentified.alignment == false or
+									_itemInInventory.notIdentified.enchantment == false
 								):
 									_identifiableItemsInInventory = true
 									_itemInInventory.identifyItem(true, true, true)
@@ -46,8 +51,13 @@ func readItem(_id):
 								var _item = _items[randi() % _items.size()]
 								var _randomItemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
 								if (
-									GlobalItemInfo.globalItemInfo.has(_randomItemInInventory.identifiedItemName) and
-									GlobalItemInfo.globalItemInfo[_randomItemInInventory.identifiedItemName].identified == false
+									(
+										GlobalItemInfo.globalItemInfo.has(_randomItemInInventory.identifiedItemName) and
+										GlobalItemInfo.globalItemInfo[_randomItemInInventory.identifiedItemName].identified == false
+									) or
+									_randomItemInInventory.notIdentified.name == false or
+									_randomItemInInventory.notIdentified.alignment == false or
+									_randomItemInInventory.notIdentified.enchantment == false
 								):
 									_randomItemInInventory.identifyItem(true, true, true)
 									_identifiableItemsInInventory = true
@@ -61,8 +71,8 @@ func readItem(_id):
 							for _item in _items:
 								var _itemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
 								if (
-									_itemInInventory.notIdentified.alignment or
-									_itemInInventory.notIdentified.enchantment
+									_itemInInventory.notIdentified.alignment == false or
+									_itemInInventory.notIdentified.enchantment == false
 								):
 									_itemInInventory.identifyItem(true, true, true)
 									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _itemInInventory.itemName }))
@@ -75,10 +85,10 @@ func readItem(_id):
 								var _item = _items[randi() % _items.size()]
 								var _randomItemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
 								if (
-									_randomItemInInventory.notIdentified.alignment or
-									_randomItemInInventory.notIdentified.enchantment
+									_randomItemInInventory.notIdentified.alignment == false or
+									_randomItemInInventory.notIdentified.enchantment == false
 								):
-									_randomItemInInventory.identifyItem(true, true, true)
+									_randomItemInInventory.identifyItem(false, true, true)
 									Globals.gameConsole.addLog("You know more about {itemName}.".format({ "itemName": _randomItemInInventory.itemName }))
 									Globals.isItemIdentified(_readItem)
 									break
@@ -558,6 +568,36 @@ func zapItem(_direction):
 						Globals.gameConsole.addLog("The light illuminates your surroundings dimly.")
 					$"/root/World".drawLevel()
 					Globals.isItemIdentified(_zappedItem)
+				"wand of turn lock":
+					var _grid = $"/root/World".level.grid
+					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
+						var _tile = _playerPosition + _direction * i
+						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+							if _zappedItem.alignment.matchn("blessed"):
+								if _grid[_tile.x][_tile.y].interactable == null:
+									_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
+								else:
+									_grid[_tile.x][_tile.y].interactable = null
+								Globals.gameConsole.addLog("The doors lock turns!")
+							elif _zappedItem.alignment.matchn("uncursed"):
+								if randi() % 4 == 0:
+									if _grid[_tile.x][_tile.y].interactable == null:
+										_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
+									else:
+										_grid[_tile.x][_tile.y].interactable = null
+									Globals.gameConsole.addLog("The doors lock turns!")
+								else:
+									Globals.gameConsole.addLog("Doors lock doesn't move.")
+							elif _zappedItem.alignment.matchn("cursed"):
+								if randi() % 8 == 0:
+									if _grid[_tile.x][_tile.y].interactable == null:
+										_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
+									else:
+										_grid[_tile.x][_tile.y].interactable = null
+									Globals.gameConsole.addLog("The doors lock turns!")
+								else:
+									Globals.gameConsole.addLog("Doors lock doesn't move...")
+							Globals.isItemIdentified(_zappedItem)
 				"wand of teleport":
 					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
@@ -617,12 +657,13 @@ func zapItem(_direction):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
-								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									_newItems.append($"/root/World/Items/Items".getRandomItem())
-									$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
-									_itemCount += 1
-								for _item in _newItems:
-									$"/root/World/Items/Items".createItem(_item, _playerPosition + _direction * i)
+								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
+									if !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+										_newItems.append($"/root/World/Items/Items".getRandomItem())
+										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
+										_itemCount += 1
+								for _itemId in _newItems:
+									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
 									_newItemIds.append(Globals.itemId - 1)
 								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 								if _itemCount == 1:
@@ -635,13 +676,13 @@ func zapItem(_direction):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
-								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									if randi() % 2 == 0:
+								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
+									if randi() % 2 == 0 and !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
-										$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
+										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
 										_itemCount += 1
-								for _item in _newItems:
-									$"/root/World/Items/Items".createItem(_item, _playerPosition + _direction * i)
+								for _itemId in _newItems:
+									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
 									_newItemIds.append(Globals.itemId - 1)
 								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 								if _itemCount > 0:
@@ -651,13 +692,13 @@ func zapItem(_direction):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
-								for _item in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									if randi() % 4 == 0:
+								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
+									if randi() % 4 == 0 and !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
-										$"/root/World/Items/Items".removeItem(_item, _playerPosition + _direction * i)
+										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
 										_itemCount += 1
-								for _item in _newItems:
-									$"/root/World/Items/Items".createItem(_item, _playerPosition + _direction * i)
+								for _itemId in _newItems:
+									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
 									_newItemIds.append(Globals.itemId - 1)
 								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
 							if _itemCount > 0:
@@ -738,6 +779,8 @@ func useItem(_id):
 				Globals.gameConsole.addLog("An item appears on the ground!")
 			else:
 				Globals.gameConsole.addLog("The gods seem unresponsive for now.")
+		else:
+			Globals.gameConsole.addLog("You need to be on an altar to use that.")
 	if _usedItem.type.matchn("tool"):
 		match _usedItem.identifiedItemName.to_lower():
 			"blindfold":
@@ -873,7 +916,10 @@ func dipItem(_id):
 				elif _dippedItem.alignment.matchn("uncursed"):
 					if _selectedItem.type.matchn("scroll"):
 						$"/root/World/Items/Items".createItem("blank scroll", null, _selectedItem.amount, true)
-						$"/root/World/Items/Items".removeItem(selectedItem)
+						if selectedItem.amount > 1:
+							selectedItem.amount -= 1
+						else:
+							$"/root/World/Items/Items".removeItem(selectedItem)
 						Globals.gameConsole.addLog("Ink fades from the {itemName}.".format({ "itemName": _selectedItem.itemName }))
 					else:
 						Globals.gameConsole.addLog("The {itemName} gets wet.".format({ "itemName": _selectedItem.itemName }))

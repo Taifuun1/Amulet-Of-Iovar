@@ -165,6 +165,7 @@ var randomItemList = {
 	"wand": {
 		"type": [
 			"light",
+			"turn lock",
 			"digging",
 			"turn lock",
 			"magic sphere",

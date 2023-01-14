@@ -296,9 +296,8 @@ func removeItem(_itemId, _position = null, _removeFromInventory = true, _grid = 
 	var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 	if _position != null:
 		_grid[_position.x][_position.y].items.erase(_itemId)
-	else:
-		if _removeFromInventory:
-			$"/root/World/Critters/0/Inventory".removeFromInventory(_item, true)
+	if _removeFromInventory:
+		$"/root/World/Critters/0/Inventory".removeFromInventory(_item)
 		$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
 		$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
 	_item.queue_free()
