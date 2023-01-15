@@ -12,11 +12,6 @@ func setValues(_item):
 	id = _item.id
 	name = str(_item.id)
 	
-	print("")
-	print(_item.identifiedItemName)
-	print(GlobalItemInfo.globalItemInfo[_item.identifiedItemName])
-	print(_item.notIdentified)
-	print(_item.notIdentified.name)
 	if (
 		(
 			GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and

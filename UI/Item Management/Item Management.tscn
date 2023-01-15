@@ -40,11 +40,41 @@ margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Title" type="Label" parent="ItemManagementContainer"]
+[node name="TitleContainer" type="HBoxContainer" parent="ItemManagementContainer"]
 margin_right = 1516.0
 margin_bottom = 33.0
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ItemManagementContainer/TitleContainer"]
+margin_right = 376.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "-"
+
+[node name="Alignment" type="Label" parent="ItemManagementContainer/TitleContainer"]
+margin_left = 380.0
+margin_right = 756.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Alignment"
+
+[node name="Enchantment" type="Label" parent="ItemManagementContainer/TitleContainer"]
+margin_left = 760.0
+margin_right = 1136.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Enchantment"
+
+[node name="Amount" type="Label" parent="ItemManagementContainer/TitleContainer"]
+margin_left = 1140.0
+margin_right = 1516.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Amount"
 
 [node name="ItemManagementListScrollContainer" type="ScrollContainer" parent="ItemManagementContainer"]
 margin_top = 37.0

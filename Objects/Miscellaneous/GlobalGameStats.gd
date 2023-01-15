@@ -1,6 +1,10 @@
 extends Node
 
-func getGameStats():
+func loadGlobalGameStatsData(_data):
+	gameStats = _data.gameStats
+	critters = _data.critters
+
+func getGlobalGameStats():
 	var _gameStats = {
 		"gameStats": gameStats,
 		"critters": critters,

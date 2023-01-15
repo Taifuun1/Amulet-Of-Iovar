@@ -39,6 +39,9 @@ var globalItemInfo = {
 	"Leather mail": {
 		"identified": false
 	},
+	"Leather vest": {
+		"identified": false
+	},
 	"Orc mail": {
 		"identified": false
 	},

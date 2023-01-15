@@ -30,6 +30,10 @@ func setValues(_item, _menuItemType, _hideChecked = false):
 		$Enchantment.createRichTextLabel(str(_item.enchantment))
 	else:
 		$Enchantment.createRichTextLabel("Unknown")
+	if _item.amount != null:
+		$Amount.createRichTextLabel(str(_item.amount))
+	else:
+		$Amount.createRichTextLabel("Unknown")
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:

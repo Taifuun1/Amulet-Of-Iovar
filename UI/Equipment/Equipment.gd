@@ -80,6 +80,8 @@ var armorSets = {
 	}
 }
 
+var dualWielding = false
+
 var hoveredEquipment = null
 
 func create():
@@ -95,6 +97,14 @@ func _process(_delta):
 		):
 			if hands[hoveredEquipment.to_lower()] != null:
 				_item = get_node("/root/World/Items/{id}".format({ "id": hands[hoveredEquipment.to_lower()] }))
+			if (
+				hands.lefthand == null or
+				hands.righthand == null or
+				hands.lefthand == hands.righthand or
+				get_node("/root/World/Items/{itemId}".format({ "itemId": hands.lefthand })).category.matchn("shield") or
+				get_node("/root/World/Items/{itemId}".format({ "itemId": hands.righthand })).category.matchn("shield")
+			):
+				dualWielding = false
 		elif (
 				hoveredEquipment.matchn("ring1") or
 				hoveredEquipment.matchn("ring2") or
@@ -261,6 +271,14 @@ func setEquipment(_id):
 				}
 			}
 		]
+	if (
+		hands.lefthand != null and
+		hands.righthand != null and
+		hands.lefthand != hands.righthand and
+		!get_node("/root/World/Items/{itemId}".format({ "itemId": hands.lefthand })).category.matchn("shield") and
+		!get_node("/root/World/Items/{itemId}".format({ "itemId": hands.righthand })).category.matchn("shield")
+	):
+		dualWielding = true
 	checkArmorSetPieces()
 	$"/root/World/Critters/0".calculateEquipmentStats()
 	$"/root/World/Critters/0".checkAllIdentification(true)
@@ -289,6 +307,14 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = load(equipmentUITemplatePaths[_hand.to_lower()])
 			else:
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = load(equipmentUITemplatePaths[_hand.to_lower()])
+			if (
+				hands.lefthand == null or
+				hands.righthand == null or
+				hands.lefthand == hands.righthand or
+				get_node("/root/World/Items/{itemId}".format({ "itemId": hands.lefthand })).category.matchn("shield") or
+				get_node("/root/World/Items/{itemId}".format({ "itemId": hands.righthand })).category.matchn("shield")
+			):
+				dualWielding = false
 			return
 	for _accessory in accessories.keys():
 		if accessories[_accessory] == _id:
@@ -384,7 +410,7 @@ func checkWhatAmuletIsWorn(_amulet):
 		GlobalItemInfo.globalItemInfo[_amulet.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_amulet.identifiedItemName].identified = true
-		_amulet.notAligned.name = true
+		_amulet.notIdentified.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _amulet.identifiedItemName, "unidentifiedItemName": _amulet.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _amulet.identifiedItemName.to_lower():
@@ -461,7 +487,7 @@ func checkWhatRingIsWorn(_ring):
 		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified = true
-		_ring.notAligned.name = true
+		_ring.notIdentified.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _ring.identifiedItemName, "unidentifiedItemName": _ring.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _ring.identifiedItemName.to_lower():
@@ -509,7 +535,7 @@ func checkWhatBeltIsWorn(_belt):
 		GlobalItemInfo.globalItemInfo[_belt.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_belt.identifiedItemName].identified = true
-		_belt.notAligned.name = true
+		_belt.notIdentified.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _belt.identifiedItemName, "unidentifiedItemName": _belt.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _belt.identifiedItemName.to_lower():
@@ -530,7 +556,7 @@ func checkWhatBeltIsWorn(_belt):
 			else:
 				_playerNode.stats["belief"] += 1
 				_playerNode.itemsTurnedOn.append(_belt)
-				Globals.gameConsole.addLog("Your feel rapturous faith fill you.")
+				Globals.gameConsole.addLog("Your feel a rapturous faith fill you.")
 		"belt of symmetry":
 			if _playerNode.itemsTurnedOn.has(_belt):
 				_playerNode.stats["visage"] -= 1
@@ -548,7 +574,7 @@ func checkWhatCloakIsWorn(_cloak):
 		GlobalItemInfo.globalItemInfo[_cloak.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_cloak.identifiedItemName].identified = true
-		_cloak.notAligned.name = true
+		_cloak.notIdentified.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _cloak.identifiedItemName, "unidentifiedItemName": _cloak.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _cloak.identifiedItemName.to_lower():
@@ -578,7 +604,7 @@ func checkWhatGauntletsAreWorn(_gauntlets):
 		GlobalItemInfo.globalItemInfo[_gauntlets.identifiedItemName].identified == false
 	):
 		GlobalItemInfo.globalItemInfo[_gauntlets.identifiedItemName].identified = true
-		_gauntlets.notAligned.name = true
+		_gauntlets.notIdentified.name = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _gauntlets.identifiedItemName, "unidentifiedItemName": _gauntlets.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _gauntlets.identifiedItemName.to_lower():

@@ -52,8 +52,8 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 			GlobalItemInfo.globalItemInfo[_item.itemName].identified
 		) or
 		(
-			_item.has("notAligned") and
-			_item.notAligned.name == true
+			_item.has("notIdentified") and
+			_item.notIdentified.name == true
 		)
 	):
 		itemName = _item.itemName
@@ -118,6 +118,8 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 			var charges 
 			if typeof(_item.value.charges) != TYPE_ARRAY and _item.value.charges == -1:
 				charges = -1
+			elif typeof(_item.value.charges) != TYPE_ARRAY and _item.value.charges != -1:
+				pass
 			else:
 				charges = randi() % _item.value.charges[1] + _item.value.charges[0]
 			if _item.value.has("turnedOn"):
@@ -225,7 +227,9 @@ func getAttacks(_stats):
 func calculateWeaponAttackIncrease(_stats):
 	var _playerSkills = $"/root/World/Critters/0".skills
 	var _critterClass = $"/root/World/Critters/0".critterClass
+	var _dualWielding =$"/root/World/UI/UITheme/Equipment".dualWielding
 	if category.matchn("sword"):
+		var _dmg
 		var _additionalDamage = 0
 		var _d = 0
 		
@@ -240,11 +244,17 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _playerSkills.sword.level >= 1:
 			_additionalDamage += 1
 		
+		_dmg = int(_stats.balance / 9 + _additionalDamage)
+		
+		if _dualWielding and _playerSkills["dualWield"].level < 1:
+			_dmg -= 2
+		
 		return {
-			"dmg": int(_stats.balance / 9 + _additionalDamage),
+			"dmg": _dmg,
 			"d": _d
 		}
 	if category.matchn("two-hander"):
+		var _dmg
 		var _additionalDamage = 0
 		
 		if _critterClass.matchn("mercenary"):
@@ -257,11 +267,17 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _playerSkills["two-hander"].level >= 1:
 			_additionalDamage += 1
 		
+		_dmg = int(_stats.strength / 9 + _additionalDamage)
+		
+		if _dualWielding and _playerSkills["dualWield"].level < 1:
+			_dmg -= 2
+		
 		return {
-			"dmg": int(_stats.strength / 9 + _additionalDamage),
+			"dmg": _dmg,
 			"d": 0
 		}
 	if category.matchn("dagger"):
+		var _dmg
 		var _additionalDamage = 0
 		var _d = 0
 		
@@ -281,11 +297,17 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _stats.legerity > 19:
 			_d += 1
 		
+		_dmg = int(_stats.legerity / 8 + _additionalDamage)
+		
+		if _dualWielding and _playerSkills["dualWield"].level < 1:
+			_dmg -= 2
+		
 		return {
-			"dmg": int(_stats.legerity / 8 + _additionalDamage),
+			"dmg": _dmg,
 			"d": _d
 		}
 	if category.matchn("mace"):
+		var _dmg
 		var _additionalDamage = 0
 		
 		if _critterClass.matchn("mercenary"):
@@ -298,11 +320,17 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _playerSkills.mace.level >= 1:
 			_additionalDamage += 1
 		
+		_dmg = int((_stats.strength / 10) + (_stats.balance / 10) + _additionalDamage)
+		
+		if _dualWielding and _playerSkills["dualWield"].level < 1:
+			_dmg -= 2
+		
 		return {
-			"dmg": int((_stats.strength / 10) + (_stats.balance / 10) + _additionalDamage),
+			"dmg": _dmg,
 			"d": 0
 		}
 	if category.matchn("flail"):
+		var _dmg
 		var _additionalDamage = 0
 		var _d = 0
 		
@@ -324,8 +352,13 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _stats.legerity > 15:
 			_d += 1
 		
+		_dmg = int(_stats.legerity / 15 + _additionalDamage)
+		
+		if _dualWielding and _playerSkills["dualWield"].level < 1:
+			_dmg -= 2
+		
 		return {
-			"dmg": int(_stats.legerity / 15 + _additionalDamage),
+			"dmg": _dmg,
 			"d": _d
 		}
 
@@ -348,7 +381,11 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 		itemName = identifiedItemName
 		$ItemSprite.texture = itemTexture
 		notIdentified.name = true
-		GlobalItemInfo.globalItemInfo[identifiedItemName].identified = true
+		if (
+			GlobalItemInfo.globalItemInfo.has(identifiedItemName) and
+			GlobalItemInfo.globalItemInfo[identifiedItemName].identified == false
+		):
+			GlobalItemInfo.globalItemInfo[identifiedItemName].identified = true
 	if _identifyAlignment:
 		notIdentified.alignment = true
 	if _identifyEnchantment:

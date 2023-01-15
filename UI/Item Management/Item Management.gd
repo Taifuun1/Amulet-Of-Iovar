@@ -1,6 +1,6 @@
 extends Control
 
-onready var inventoryItem = preload("res://UI/Item Menu Item/Item Menu Item.tscn")
+onready var menuItem = preload("res://UI/Item Menu Item/Item Menu Item.tscn")
 
 var items = []
 var selectedItems = []
@@ -12,10 +12,10 @@ func create():
 	hide()
 
 func showItemManagementList(_title, _chooseOnClick = false):
-	$ItemManagementContainer/Title.text = _title
+	$ItemManagementContainer/TitleContainer/Title.text = _title
 	chooseOnClick = _chooseOnClick
 	for item in items:
-		var newItem = inventoryItem.instance()
+		var newItem = menuItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
 		$ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList.add_child(newItem)
 		newItem.setValues(_item, "Item management", _chooseOnClick)

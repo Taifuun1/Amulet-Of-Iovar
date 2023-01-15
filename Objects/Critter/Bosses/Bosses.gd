@@ -1,90 +1,5 @@
 var bosses = [
 	{
-		"critterName": "Tidoh Tel'hydrad",
-		"race": "Human",
-		"class": "Humanoid",
-		"weight": 200,
-		"aI": "Aggressive",
-		"aggroDistance": 12,
-		"texture": load("res://Assets/Critters/TidohTel'hydrad.png"),
-		"alignment": "Neutral",
-		"level": 11,
-		"expDropAmount": 135,
-		"hp": 51,
-		"mp": 67,
-		"ac": 6,
-		"attacks": [
-			{
-				"dmg": [3,5],
-				"bonusDmg": {},
-				"armorPen": 0,
-				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
-				}
-			},
-			{
-				"dmg": [3,5],
-				"bonusDmg": {},
-				"armorPen": 0,
-				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
-				}
-			}
-		],
-		"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
-		"stats": {
-			"strength": 13,
-			"legerity": 13,
-			"balance": 12,
-			"belief": 21,
-			"visage": 18,
-			"wisdom": 18
-		},
-		"abilities": [
-			{
-				"abilityName": "rockThrow",
-				"abilityType": "rangedSpell",
-				"chance": 5
-			},
-			{
-				"abilityName": "frostBite",
-				"abilityType": "rangedSpell",
-				"chance": 2
-			},
-			{
-				"abilityName": "createShield",
-				"abilityType": "selfCastspell",
-				"chance": 1
-			}
-		],
-		"abilityHits": [1,0,1,0,0],
-		"resistances": [],
-		"drops": [
-			{
-				"names": "goldPieces",
-				"chance": 50,
-				"amount": [50, 150]
-			},
-			{
-				"types": {
-					"wand": ["common", "uncommon", "rare"]
-				},
-				"chance": 50,
-				"amount": [1, 2],
-				"tries": 8
-			},
-			{
-				"types": {
-					"rune": ["rare"]
-				},
-				"chance": 15,
-				"amount": [1, 1]
-			}
-		]
-	},
-	{
 		"critterName": "Elhybar",
 		"race": "Human",
 		"class": "Humanoid",
@@ -93,14 +8,14 @@ var bosses = [
 		"aggroDistance": 12,
 		"texture": load("res://Assets/Critters/Elhybar.png"),
 		"alignment": "Neutral",
-		"level": 7,
+		"level": 6,
 		"expDropAmount": 77,
-		"hp": 51,
+		"hp": 48,
 		"mp": 67,
-		"ac": 6,
+		"ac": 2,
 		"attacks": [
 			{
-				"dmg": [2,3],
+				"dmg": [4,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -111,37 +26,27 @@ var bosses = [
 		],
 		"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 		"stats": {
-			"strength": 13,
-			"legerity": 13,
-			"balance": 12,
-			"belief": 21,
-			"visage": 18,
-			"wisdom": 18
+			"strength": 12,
+			"legerity": 10,
+			"balance": 10,
+			"belief": 18,
+			"visage": 16,
+			"wisdom": 16
 		},
 		"abilities": [
 			{
-				"abilityName": "fleirnado",
+				"abilityName": "frostpoint",
 				"abilityType": "rangedSpell",
-				"chance": 2
+				"chance": 4
 			},
 			{
 				"abilityName": "frostBite",
 				"abilityType": "rangedSpell",
-				"chance": 2
-			},
-			{
-				"abilityName": "thundersplit",
-				"abilityType": "rangedSpell",
-				"chance": 2
+				"chance": 3
 			},
 			{
 				"abilityName": "createShield",
 				"abilityType": "selfCastSpell",
-				"chance": 1
-			},
-			{
-				"abilityName": "fleirMiasma",
-				"abilityType": "spell",
 				"chance": 1
 			}
 		],
@@ -168,6 +73,101 @@ var bosses = [
 				"chance": 75,
 				"amount": [1, 1],
 				"tries": 4
+			}
+		]
+	},
+	{
+		"critterName": "Tidoh Tel'hydrad",
+		"race": "Human",
+		"class": "Humanoid",
+		"weight": 200,
+		"aI": "Aggressive",
+		"aggroDistance": 12,
+		"texture": load("res://Assets/Critters/TidohTel'hydrad.png"),
+		"alignment": "Neutral",
+		"level": 11,
+		"expDropAmount": 135,
+		"hp": 77,
+		"mp": 86,
+		"ac": 3,
+		"attacks": [
+			{
+				"dmg": [3,5],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			},
+			{
+				"dmg": [3,5],
+				"bonusDmg": {},
+				"armorPen": 0,
+				"magicDmg": {
+					"dmg": [0,0],
+					"element": null
+				}
+			}
+		],
+		"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
+		"stats": {
+			"strength": 8,
+			"legerity": 15,
+			"balance": 10,
+			"belief": 23,
+			"visage": 19,
+			"wisdom": 21
+		},
+		"abilities": [
+			{
+				"abilityName": "rockThrow",
+				"abilityType": "rangedSpell",
+				"chance": 2
+			},
+			{
+				"abilityName": "frostBite",
+				"abilityType": "rangedSpell",
+				"chance": 2
+			},
+			{
+				"abilityName": "thundersplit",
+				"abilityType": "rangedSpell",
+				"chance": 2
+			},
+			{
+				"abilityName": "fleirMiasma",
+				"abilityType": "spell",
+				"chance": 1
+			},
+			{
+				"abilityName": "createShield",
+				"abilityType": "selfCastspell",
+				"chance": 1
+			}
+		],
+		"abilityHits": [1,0,1,0],
+		"resistances": [],
+		"drops": [
+			{
+				"names": "goldPieces",
+				"chance": 50,
+				"amount": [50, 150]
+			},
+			{
+				"types": {
+					"wand": ["common", "uncommon", "rare"]
+				},
+				"chance": 50,
+				"amount": [1, 2],
+				"tries": 8
+			},
+			{
+				"types": {
+					"rune": ["rare"]
+				},
+				"chance": 15,
+				"amount": [1, 1]
 			}
 		]
 	},

@@ -112,11 +112,14 @@ func loadGame():
 	var _globalsData = $Save.loadData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
 	Globals.loadGlobalsData(_globalsData)
 	
-	var _globalItemData = $Save.loadData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	var _globalItemData = $Save.loadData("GlobalItemData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
 	GlobalItemInfo.loadGlobalItemData(_globalItemData)
 	
-	var _globalCritterData = $Save.loadData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	var _globalCritterData = $Save.loadData("GlobalCritterData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
 	GlobalCritterInfo.loadGlobalCritterSaveData(_globalCritterData)
+	
+	var _globalGameStats = $Save.loadData("GlobalGameStats", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	GlobalGameStats.loadGlobalGameStatsData(_globalGameStats)
 	
 	var baseLevel = load("res://Level Generation/BaseLevel.tscn")
 	if dir.open("user://SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave })) == OK:
@@ -193,6 +196,37 @@ func setUpDungeon():
 		newDungeon.create("dungeon1", "dungeon1", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() }), 10000)
 		levels.dungeon1.append(newDungeon)
 		$Levels.add_child(newDungeon)
+	
+	### Library
+	for _level in range(randi() % 3 + 3):
+		var newlibrary = load(levelPaths.library).instance()
+		newlibrary.create("library", "library", "Library {level}".format({ "level": 1 + levels.library.size() }), 10000)
+		levels.library.append(newlibrary)
+		$Levels.add_child(newlibrary)
+	
+	### Dungeon 2
+	var _dungeon2Count = randi() % 3 + 4
+	for _level in _dungeon2Count:
+		var newDungeon
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon2Count - 1:
+			if randi() % 3 == 0:
+				_patchLevels += 1
+				newDungeon = load(levelPaths.patch).instance()
+				newDungeon.create("patch", "dungeon2", "Patch {level}".format({ "level": _patchLevels }), 10000)
+			elif randi() % 3 == 0:
+				_abandonedOutpostLevels += 1
+				newDungeon = load(levelPaths.abandonedOutpost).instance()
+				newDungeon.create("abandonedOutpost", "dungeon2", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
+			else:
+				_anthillLevels += 1
+				newDungeon = load(levelPaths.anthill).instance()
+				newDungeon.create("anthill", "dungeon2", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			_firstSectionRandomLevels -= 1
+		else:
+			newDungeon = load(levelPaths.dungeon).instance()
+			newDungeon.create("dungeon2", "dungeon2", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() }), 10000)
+		levels.dungeon2.append(newDungeon)
+		$Levels.add_child(newDungeon)
 
 	### Mines of Tidoh
 	for _level in range(randi() % 2 + 2):
@@ -225,47 +259,6 @@ func setUpDungeon():
 	levels.depthsOfTidoh.append(newMinesEnd)
 	$Levels.add_child(newMinesEnd)
 	
-	### Dungeon 2
-	var _dungeon2Count = randi() % 3 + 4
-	for _level in _dungeon2Count:
-		var newDungeon
-		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon2Count - 1:
-			if randi() % 3 == 0:
-				_patchLevels += 1
-				newDungeon = load(levelPaths.patch).instance()
-				newDungeon.create("patch", "dungeon2", "Patch {level}".format({ "level": _patchLevels }), 10000)
-			elif randi() % 3 == 0:
-				_abandonedOutpostLevels += 1
-				newDungeon = load(levelPaths.abandonedOutpost).instance()
-				newDungeon.create("abandonedOutpost", "dungeon2", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
-			else:
-				_anthillLevels += 1
-				newDungeon = load(levelPaths.anthill).instance()
-				newDungeon.create("anthill", "dungeon2", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
-			_firstSectionRandomLevels -= 1
-		else:
-			newDungeon = load(levelPaths.dungeon).instance()
-			newDungeon.create("dungeon2", "dungeon2", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() }), 10000)
-		levels.dungeon2.append(newDungeon)
-		$Levels.add_child(newDungeon)
-	
-	### Beach
-	var newBeach = load(levelPaths.beach).instance()
-	newBeach.create("beach", "beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
-	levels.beach.append(newBeach)
-	$Levels.add_child(newBeach)
-	
-	var newVacationResort = load(levelPaths.vacationResort).instance()
-	newVacationResort.create("beach", "beach", "Vacation resort", 10000)
-	levels.beach.append(newVacationResort)
-	$Levels.add_child(newVacationResort)
-	
-	for _level in range(randi() % 2 + 1):
-		var newBeach2 = load(levelPaths.beach).instance()
-		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
-		levels.beach.append(newBeach2)
-		$Levels.add_child(newBeach2)
-	
 	### Dungeon 3
 	var _dungeon3Count = randi() % 3 + 4
 	for _level in _dungeon3Count:
@@ -290,12 +283,22 @@ func setUpDungeon():
 		levels.dungeon3.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
-	### Library
-	for _level in range(randi() % 3 + 3):
-		var newlibrary = load(levelPaths.library).instance()
-		newlibrary.create("library", "library", "Library {level}".format({ "level": 1 + levels.library.size() }), 10000)
-		levels.library.append(newlibrary)
-		$Levels.add_child(newlibrary)
+	### Beach
+	var newBeach = load(levelPaths.beach).instance()
+	newBeach.create("beach", "beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
+	levels.beach.append(newBeach)
+	$Levels.add_child(newBeach)
+	
+	var newVacationResort = load(levelPaths.vacationResort).instance()
+	newVacationResort.create("beach", "beach", "Vacation resort", 10000)
+	levels.beach.append(newVacationResort)
+	$Levels.add_child(newVacationResort)
+	
+	for _level in range(randi() % 2 + 1):
+		var newBeach2 = load(levelPaths.beach).instance()
+		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
+		levels.beach.append(newBeach2)
+		$Levels.add_child(newBeach2)
 	
 	### Dungeon 4
 	for _level in range(3):
@@ -528,6 +531,5 @@ func _exit_tree():
 		print("game set up")
 		gameSetUpThread.wait_to_finish()
 	if saveGameThread != null:
-		saveGameThread.wait_to_finish()
 		print("done")
-		get_tree().quit()
+		saveGameThread.wait_to_finish()

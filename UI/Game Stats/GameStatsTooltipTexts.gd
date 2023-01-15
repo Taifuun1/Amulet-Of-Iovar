@@ -14,6 +14,11 @@ var justice = {
 	"description": "Your bent on justice determines what items you can get from sacrificing."
 }
 
+var turnCount = {
+	"title": "Turn count",
+	"description": "Turns passed this game."
+}
+
 var dungeonLevel = {
 	"title": "Dungeon level",
 	"description": "Current dungeon level."

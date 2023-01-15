@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://UI/Game Over Stats/Game Over Stats.gd" type="Script" id=1]
 [ext_resource path="res://UI/Game Over Stats/Points.tscn" type="PackedScene" id=2]
@@ -10,6 +10,16 @@
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 0 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [node name="Game Over Stats" type="PanelContainer"]
 anchor_left = 0.5
@@ -33,20 +43,84 @@ size_flags_vertical = 3
 custom_constants/side_margin = 0
 tab_align = 0
 
-[node name="Points" parent="GameOverTabs" instance=ExtResource( 2 )]
+[node name="Points" type="Panel" parent="GameOverTabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 61.0
-margin_right = 0.0
+custom_styles/panel = SubResource( 2 )
 
-[node name="Console Log" parent="GameOverTabs" instance=ExtResource( 4 )]
-visible = false
+[node name="Points" parent="GameOverTabs/Points" instance=ExtResource( 2 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
 
-[node name="Inventory" parent="GameOverTabs" instance=ExtResource( 5 )]
+[node name="Console log" type="Panel" parent="GameOverTabs"]
 visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
 
-[node name="Kill Count" parent="GameOverTabs" instance=ExtResource( 6 )]
-visible = false
+[node name="Console Log" parent="GameOverTabs/Console log" instance=ExtResource( 4 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
 
-[node name="Game Stats" parent="GameOverTabs" instance=ExtResource( 7 )]
+[node name="Inventory" type="Panel" parent="GameOverTabs"]
 visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 4 )
+
+[node name="Inventory" parent="GameOverTabs/Inventory" instance=ExtResource( 5 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+
+[node name="Kill count" type="Panel" parent="GameOverTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 5 )
+
+[node name="Kill Count" parent="GameOverTabs/Kill count" instance=ExtResource( 6 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+
+[node name="Game stats" type="Panel" parent="GameOverTabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 6 )
+
+[node name="Game Stats" parent="GameOverTabs/Game stats" instance=ExtResource( 7 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0

@@ -69,8 +69,24 @@ var critterLevelGenerationList = {
 			"snakes": ["Garnered snake", "Marsh snake"]
 		}
 	},
+	"library": {
+		"amount": [6, 10],
+		"critters": {
+			"blobs": ["Sluerp"],
+			"bats": ["Spooky bat", "Vampire bat"],
+			"felines": ["Cat", "Lynx", "Tiger"],
+			"giants": ["Balding giant"],
+			"humans": ["Outlaw watcher", "Outlaw fusiee'er", "Outlaw merchandiee'er"],
+			"liches": ["Half-lich"],
+			"mimics": ["Mimic"],
+			"newts": ["Paper newt"],
+			"rats": ["Big rat"],
+			"snakes": ["Garnered snake"],
+			"wraiths": ["Spooky ghost"]
+		}
+	},
 	"minesOfTidoh": {
-		"amount": [3, 6],
+		"amount": [4, 6],
 		"critters": {
 			"bats": ["Dark bat"],
 			"dwarves": ["Dwarf miner"],
@@ -84,7 +100,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"depthsOfTidoh": {
-		"amount": [6, 10],
+		"amount": [6, 14],
 		"critters": {
 			"ants": ["Leaf ant"],
 			"bats": ["Dark bat"],
@@ -100,7 +116,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"beach": {
-		"amount": [6, 8],
+		"amount": [4, 6],
 		"critters": {
 			"aquaticLife": ["Fiddler crab", "Ringed seal"],
 			"blobs": ["Slerp", "Sluerp"],
@@ -114,24 +130,8 @@ var critterLevelGenerationList = {
 			"snakes": ["Marsh snake"]
 		}
 	},
-	"library": {
-		"amount": [8, 12],
-		"critters": {
-			"blobs": ["Sluerp"],
-			"bats": ["Spooky bat", "Vampire bat"],
-			"felines": ["Cat", "Lynx", "Tiger"],
-			"giants": ["Balding giant"],
-			"humans": ["Outlaw watcher", "Outlaw fusiee'er", "Outlaw merchandiee'er"],
-			"liches": ["Half-lich"],
-			"mimics": ["Mimic"],
-			"newts": ["Paper newt"],
-			"rats": ["Big rat"],
-			"snakes": ["Garnered snake"],
-			"wraiths": ["Spooky ghost"]
-		}
-	},
 	"banditWarcamp": {
-		"amount": [14, 16],
+		"amount": [12, 14],
 		"critters": {
 			"ants": ["Soldier ant"],
 			"blobs": ["Slerp"],

@@ -55,11 +55,11 @@ var items = {
 	},
 	"Thunderous roar": {
 		"knowledge": false,
-		"description": ". Third of the Thunder armor set."
+		"description": "Amulet sizzling with electricity. Third of the Thunder armor set."
 	},
 	"Cold breeze": {
 		"knowledge": false,
-		"description": ". Third of the Frost armor set."
+		"description": "Amulet frozen right through. Third of the Frost armor set."
 	},
 	"Leather mail": {
 		"knowledge": false,
@@ -71,51 +71,51 @@ var items = {
 	},
 	"Orc mail": {
 		"knowledge": false,
-		"description": "It's gleaming darkness."
+		"description": "It's gleaming darkness. +4 ac"
 	},
 	"Scale ring mail": {
 		"knowledge": false,
-		"description": "Scales layered on top of each other."
+		"description": "Scales layered on top of each other. +5 ac"
 	},
 	"Dwarvish coat": {
 		"knowledge": false,
-		"description": "Lightweight bluish coat made by dwarves. Finest craftsdwarfship."
+		"description": "Lightweight bluish coat made by dwarves. Finest craftsdwarfship. +5 ac"
 	},
 	"Platemail": {
 		"knowledge": false,
-		"description": "Heavy platemail armor."
+		"description": "Heavy platemail armor. +7 ac"
 	},
 	"Blue dragon scale mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Blue dragon scale mail. Gives frost resistance. +8 ac"
 	},
 	"Green dragon scale mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Green dragon scale mail. Gives gleeie'er resistance. +8 ac"
 	},
 	"Red dragon scale mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Red dragon scale mail. Gives fleir resistance. +8 ac"
 	},
 	"Yellow dragon scale mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Yellow dragon scale mail. Gives thunder resistance. +8 ac"
 	},
 	"Violet dragon scale mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Violet dragon scale mail. Gives toxix resistance. +8 ac"
 	},
 	"Great Ulromirs platemail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Massive, thick platemail. Highest ac value possible. +10 ac"
 	},
 	"Frozen mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Mail frozen right through. Third of the Frost armor set. +8 ac"
 	},
 	"Thunder mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Mail sizzling with electricity. Third of the Thunder armor set. +8 ac"
 	},
 	"Leather cap": {
 		"knowledge": false,
@@ -139,7 +139,7 @@ var items = {
 	},
 #	"Winged helmet": {
 #		"knowledge": false,
-#		"description": ""
+#		"description": "Helmet with wings."
 #	},
 	"Mossy helmet": {
 		"knowledge": false,
@@ -151,23 +151,23 @@ var items = {
 	},
 	"Fabric gloves": {
 		"knowledge": false,
-		"description": ""
+		"description": "Light, silky smooth gloves. +1 magic dmg, +0 ac"
 	},
 	"Gauntlets of Devastation": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives a +1 strength bonus. +2 ac"
 	},
 	"Gauntlets of Nimbleness": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives a +1 legerity bonus. +2 ac"
 	},
 	"Gauntlets of Balance": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives a +1 balance bonus. +2 ac"
 	},
 	"Burning gauntlets": {
 		"knowledge": false,
-		"description": ""
+		"description": "Flaming gauntlets. Third of the Fleir armor set. +2 ac"
 	},
 	"Garden gloves": {
 		"knowledge": false,
@@ -203,63 +203,63 @@ var items = {
 	},
 	"Leather cloak": {
 		"knowledge": false,
-		"description": ""
+		"description": "Basic leather cloak. +0 ac"
 	},
 	"Orc cloak": {
 		"knowledge": false,
-		"description": ""
+		"description": "Heavily armored cloak. +2 ac"
 	},
 	"Elven cloak": {
 		"knowledge": false,
-		"description": ""
+		"description": "Light green cloak. +1 ac"
 	},
 	"Dwarven cloak": {
 		"knowledge": false,
-		"description": ""
+		"description": "Good quality cloak. +1 ac"
 	},
 	"Roman robe": {
 		"knowledge": false,
-		"description": ""
+		"description": "Robe used by royalty. +0 ac"
 	},
 	"Cloak of displacement": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives displacement. +1 ac"
 	},
 	"Cloak of magical ambiguity": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives magical resistance. -2 magic damage taken. +1 ac"
 	},
 #	"Cloak of invisibility": {
 #		"knowledge": false,
-#		"description": ""
+#		"description": "Gives invisibility."
 #	},
 #	"Adorned cloak": {
 #		"knowledge": false,
-#		"description": ""
+#		"description": "Cloak worn by royalty."
 #	},
 	"Alchemists robes": {
 		"knowledge": false,
-		"description": ""
+		"description": "Robes of an alchemist who sought to bring back the dead. +3 ac"
 	},
 	"Fumy cloth": {
 		"knowledge": false,
-		"description": ""
+		"description": "Piece of cloth that exudes fumes. Half of the Toxix armor set. +2 ac"
 	},
 	"Battered buckler": {
 		"knowledge": false,
-		"description": ""
+		"description": "Small, worn buckler. +1 ac"
 	},
 	"Large orc shield": {
 		"knowledge": false,
-		"description": ""
+		"description": "Large orcish shield. +2 ac"
 	},
 	"Justice'eer shield": {
 		"knowledge": false,
-		"description": ""
+		"description": "Shield of the religious forces. Gives backscattering. +3 ac"
 	},
 	"Lords tower board shield": {
 		"knowledge": false,
-		"description": ""
+		"description": "A huge shield. +6 ac"
 	},
 	"Burning shield": {
 		"knowledge": false,
@@ -279,15 +279,15 @@ var items = {
 	},
 	"Thunder greaves": {
 		"knowledge": false,
-		"description": ""
+		"description": "Greaves sizzling with electricity. Third of the Thunder armor set. +2 ac"
 	},
 	"Burning mail chausses": {
 		"knowledge": false,
-		"description": ""
+		"description": "Flaming chausses. Third of the Fleir armor set. +2 ac"
 	},
 	"Low boots": {
 		"knowledge": false,
-		"description": ""
+		"description": "Regular boots. +1 ac"
 	},
 	"Studded boots": {
 		"knowledge": false,
@@ -311,51 +311,51 @@ var items = {
 	},
 	"Venom riders": {
 		"knowledge": false,
-		"description": " Half of the Toxix armor set."
+		"description": "Toxix-soaked slick shoes. Half of the Toxix armor set."
 	},
 	"Water potion": {
 		"knowledge": false,
-		"description": ""
+		"description": "Water. Dip scroll into uncursed water potion to get a blank scroll. Bless or curse items by dipping into respective variants of water potion."
 	},
 	"Soda bottle": {
 		"knowledge": false,
-		"description": ""
+		"description": "Juice. Tasty."
 	},
 	"Potion of confusion": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives confusion status effect."
 	},
 	"Potion of Toxix": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives Toxix status effect."
 	},
 	"Potion of heal": {
 		"knowledge": false,
-		"description": ""
+		"description": "Restores hp. Hp amount scales with level."
 	},
 	"Potion of sleep": {
 		"knowledge": false,
-		"description": ""
+		"description": "Makes you fall asleep."
 	},
 	"Potion of blindness": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives temporary blindness."
 	},
 #	"Potion of invisibility": {
 #		"knowledge": false,
-#		"description": ""
+#		"description": "Makes you invisible."
 #	},
 #	"Potion of levitation": {
 #		"knowledge": false,
-#		"description": ""
+#		"description": "Makes you levitate."
 #	},
 	"Potion of paralysis": {
 		"knowledge": false,
-		"description": ""
+		"description": "Stuns when quaffed."
 	},
 	"Potion of hunger": {
 		"knowledge": false,
-		"description": ""
+		"description": "Makes you more hungry. Blessed potion gives nourishment."
 	},
 	"Potion of Healaga": {
 		"knowledge": false,
@@ -375,83 +375,83 @@ var items = {
 	},
 	"Ring of Fleir resistance": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives Fleir resistance when worn."
 	},
 	"Ring of Frost resistance": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives Frost resistance when worn."
 	},
 	"Ring of Thunder resistance": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives Thunder resistance when worn."
 	},
 	"Ring of Gleeie'er resistance": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives Gleeie'er resistance when worn."
 	},
 	"Ring of Toxix resistance": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives Toxix resistance when worn."
 	},
 	"Ring of protection": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives +3 ac when worn."
 	},
 	"Ring of hunger": {
 		"knowledge": false,
-		"description": ""
+		"description": "Makes you hungry faster. Binds on equip."
 	},
 #	"Ring of levitation": {
 #		"knowledge": false,
-#		"description": ""
+#		"description": "Makes you levitate. Binds on equip."
 #	},
 	"Ring of slow digestion": {
 		"knowledge": false,
-		"description": ""
+		"description": "Makes you hungry slower."
 	},
 	"Ring of regen": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives +3 hp on each hp regen tick."
 	},
 	"Ring of fumbling": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives fumbling status effect when worn. Binds on equip."
 	},
 	"Ring of Strength": {
 		"knowledge": false,
-		"description": ""
+		"description": "Ring that boosts your strength."
 	},
 	"Ring of Legerity": {
 		"knowledge": false,
-		"description": ""
+		"description": "Ring that boosts your belief."
 	},
 	"Ring of Balance": {
 		"knowledge": false,
-		"description": ""
+		"description": "Ring that boosts your belief."
 	},
 	"Ring of Wisdom": {
 		"knowledge": false,
-		"description": ""
+		"description": "Ring that boosts your belief."
 	},
 	"Ring of Belief": {
 		"knowledge": false,
-		"description": ""
+		"description": "Ring that boosts your belief."
 	},
 	"Ring of Visage": {
 		"knowledge": false,
-		"description": ""
+		"description": "Ring that boosts your belief."
 	},
 	"Official mail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Official mail. Doesn't do anything."
 	},
 	"Blank scroll": {
 		"knowledge": false,
-		"description": ""
+		"description": "A blank scroll. You can write scrolls with a marker and ink."
 	},
 	"Scroll of identify": {
 		"knowledge": false,
-		"description": ""
+		"description": "Identifies an item in your inventory. Blessed scroll identifies all items."
 	},
 	"Scroll of create food": {
 		"knowledge": false,
@@ -475,75 +475,75 @@ var items = {
 	},
 	"Scroll of destroy armor": {
 		"knowledge": false,
-		"description": ""
+		"description": "Destroys a piece of worn armor. Blessed scroll disenchants an item."
 	},
 	"Scroll of summon critter": {
 		"knowledge": false,
-		"description": ""
+		"description": "Summons critters to you. Blessed scroll summons neutral critters."
 	},
 	"Scroll of create potion": {
 		"knowledge": false,
-		"description": ""
+		"description": "Creates potions. Blessed scroll creates more."
 	},
 	"Scroll of teleport": {
 		"knowledge": false,
-		"description": ""
+		"description": "Scroll that teleports you. Cursed scroll teleports between levels."
 	},
 	"Scroll of genocide": {
 		"knowledge": false,
-		"description": ""
+		"description": "Genocides a type of monster. Blessed scroll genocides a whole race of critters. Cursed scroll summons all the critters to you."
 	},
 	"Leather bag": {
 		"knowledge": false,
-		"description": ""
+		"description": "A bag that can store things."
 	},
 	"Lockpick": {
 		"knowledge": false,
-		"description": ""
+		"description": "Can open and lock doors, albeit slowly. (4 turns for action)"
 	},
 	"Blindfold": {
 		"knowledge": false,
-		"description": ""
+		"description": "Put it on to lose sight temporarily."
 	},
 	"Candle": {
 		"knowledge": false,
-		"description": ""
+		"description": "Gives a small amount of light in dark places."
 	},
 	"Credit card": {
 		"knowledge": false,
-		"description": ""
+		"description": "Can open locked doors."
 	},
 	"Shovel": {
 		"knowledge": false,
-		"description": ""
+		"description": "Allows you to dig items on the beach."
 	},
 	"Message in a bottle": {
 		"knowledge": false,
-		"description": ""
+		"description": "A bottle that holds a message. What could it be?"
 	},
 	"Fancy whistle": {
 		"knowledge": false,
-		"description": ""
+		"description": "Fancy looking whistle."
 	},
 	"Oil lamp": {
 		"knowledge": false,
-		"description": ""
+		"description": "An oil lamp. Gives a good amount of light in darkness."
 	},
 	"Pickaxe": {
 		"knowledge": false,
-		"description": ""
+		"description": "Allows mining stone walls."
 	},
 	"Marker": {
 		"knowledge": false,
-		"description": ""
+		"description": "Write scrolls on empty paper with marker and ink."
 	},
 	"Ink bottle": {
 		"knowledge": false,
-		"description": ""
+		"description": "Write scrolls on empty paper with marker and ink."
 	},
 	"Key": {
 		"knowledge": false,
-		"description": ""
+		"description": "A key. Open and lock doors."
 	},
 	"Bag of weight": {
 		"knowledge": false,
@@ -555,7 +555,7 @@ var items = {
 	},
 	"Magic lamp": {
 		"knowledge": false,
-		"description": ""
+		"description": "Magical lamp. Never runs out of oil."
 	},
 	"Magic marker": {
 		"knowledge": false,
@@ -567,43 +567,43 @@ var items = {
 	},
 	"Wand of light": {
 		"knowledge": false,
-		"description": ""
+		"description": "Lights your surroundings for awhile."
 	},
 	"Wand of turn lock": {
 		"knowledge": false,
-		"description": ""
+		"description": "Point it at a door to turn the lock. Doesn't always work, unless its blessed."
 	},
 	"Wand of digging": {
 		"knowledge": false,
-		"description": ""
+		"description": "Point it at a stone wall to bore a tunnel."
 	},
 	"Wand of Frost": {
 		"knowledge": false,
-		"description": ""
+		"description": "Point it at a critter to strike them with Frost."
 	},
 	"Wand of Fleir": {
 		"knowledge": false,
-		"description": ""
+		"description": "Point it at a critter to strike them with Fleir."
 	},
 	"Wand of Thunder": {
 		"knowledge": false,
-		"description": ""
+		"description": "Point it at a critter to strike them with Thunder."
 	},
 	"Wand of sleep": {
 		"knowledge": false,
-		"description": ""
+		"description": "Point it at a critter to put them to sleep."
 	},
 	"Wand of magic sphere": {
 		"knowledge": false,
-		"description": ""
+		"description": "Launches a magical sphere."
 	},
 	"Wand of backwards magic sphere": {
 		"knowledge": false,
-		"description": ""
+		"description": "Launches a magical sphere, at you!"
 	},
 	"Wand of teleport": {
 		"knowledge": false,
-		"description": ""
+		"description": "Point it at a critter to teleport it."
 	},
 	"Wand of item polymorph": {
 		"knowledge": false,
@@ -611,15 +611,15 @@ var items = {
 	},
 	"Wand of summon critter": {
 		"knowledge": false,
-		"description": ""
+		"description": "Summons critters to you. Blessed wand summons neutral critters."
 	},
 	"Wand of wishing": {
 		"knowledge": false,
-		"description": ""
+		"description": "Make a wish for an item."
 	},
 	"Chipped sword": {
 		"knowledge": false,
-		"description": ""
+		"description": "An old, chipped sword."
 	},
 	"Elvish sword": {
 		"knowledge": false,
@@ -631,31 +631,31 @@ var items = {
 	},
 	"Orcish sword": {
 		"knowledge": false,
-		"description": ""
+		"description": "Brutish sword made by orcs."
 	},
 	"Adorned sword": {
 		"knowledge": false,
-		"description": ""
+		"description": "Fancy sword carried by royalty."
 	},
 	"Fleirflare": {
 		"knowledge": false,
-		"description": ""
+		"description": "Sword of Fleir."
 	},
 	"Frostfury": {
 		"knowledge": false,
-		"description": ""
+		"description": "Sword of Frost."
 	},
 	"Thunderstruck": {
 		"knowledge": false,
-		"description": ""
+		"description": "Sword of Thunder."
 	},
 	"Justice'eer sword": {
 		"knowledge": false,
-		"description": ""
+		"description": "Sword of the religious forces. Deals extra damage against evil."
 	},
 	"Stormbringer": {
 		"knowledge": false,
-		"description": ""
+		"description": "Sword that carries a storm around it."
 	},
 	"Vorpal sword": {
 		"knowledge": false,
@@ -667,23 +667,23 @@ var items = {
 	},
 	"Mithril two-hander": {
 		"knowledge": false,
-		"description": ""
+		"description": "Dwarven made two-handed sword."
 	},
 	"Dragonslayer": {
 		"knowledge": false,
-		"description": ""
+		"description": "A huge slab of iron. Too large to be called a sword."
 	},
 	"Brittleleaf": {
 		"knowledge": false,
-		"description": ""
+		"description": "A brittle branch with leaves."
 	},
 	"Icesplitter": {
 		"knowledge": false,
-		"description": ""
+		"description": "Two-handed weapon of Frost and Thunder."
 	},
 	"Cut dagger": {
 		"knowledge": false,
-		"description": ""
+		"description": "Broken dagger."
 	},
 	"Orc dagger": {
 		"knowledge": false,
@@ -691,11 +691,11 @@ var items = {
 	},
 	"Glowing dagger": {
 		"knowledge": false,
-		"description": ""
+		"description": "It glows with lightning."
 	},
 	"Dwarvish dagger": {
 		"knowledge": false,
-		"description": ""
+		"description": "A well-made dagger."
 	},
 	"Krakag Orraig": {
 		"knowledge": false,
@@ -711,19 +711,19 @@ var items = {
 	},
 	"Elvish mace": {
 		"knowledge": false,
-		"description": ""
+		"description": "Elven mace. Pretty light."
 	},
 	"Dwarvish mace": {
 		"knowledge": false,
-		"description": ""
+		"description": "Dwarven mace. Pretty powerful."
 	},
 	"Morning star": {
 		"knowledge": false,
-		"description": ""
+		"description": "Mace with spikes."
 	},
 	"Dumpel Pompel": {
 		"knowledge": false,
-		"description": ""
+		"description": "Fancy looking mace."
 	},
 	"Final Dawn": {
 		"knowledge": false,
@@ -731,19 +731,19 @@ var items = {
 	},
 	"Titan Slayer": {
 		"knowledge": false,
-		"description": ""
+		"description": "Mace made for slaying large opponents."
 	},
 	"Rigid flail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Rusty flail."
 	},
 	"Sharp flail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Flail with sharpened spikes."
 	},
 	"Elvish flail": {
 		"knowledge": false,
-		"description": ""
+		"description": "Elven flail. Pretty light."
 	},
 	"Crustel flail": {
 		"knowledge": false,
@@ -755,39 +755,39 @@ var items = {
 	},
 	"Star Love": {
 		"knowledge": false,
-		"description": ""
+		"description": "Flail made of the stars themselves."
 	}
 }
 
 var critters = {
 	"Iovar": {
 		"knowledge": false,
-		"description": "Iovar, the ancient mage who rules over the dungeon.",
+		"description": "Iovar, the ancient mage who rules over the dungeon. Seeks godhood with obsessive conviction.",
 		"killCount": 0
 	},
 	"Elder Dragon": {
 		"knowledge": false,
-		"description": "",
+		"description": "An elderly dragon. Exceedingly powerful. Likes to hoard valuables.",
 		"killCount": 0
 	},
 	"Mad Banana-hunter Ogre": {
 		"knowledge": false,
-		"description": "",
+		"description": "Give banana?",
 		"killCount": 0
 	},
 	"Shin'kor Leve'er": {
 		"knowledge": false,
-		"description": "",
+		"description": "His backstory is as edgy as his blade.",
 		"killCount": 0
 	},
 	"Elhybar": {
 		"knowledge": false,
-		"description": "",
+		"description": "Book enthusiast. Scroll lover. Library vacator.",
 		"killCount": 0
 	},
 	"Tidoh Tel'hydrad": {
 		"knowledge": false,
-		"description": "",
+		"description": "A court wizard gone mad with grief. Likes to tell jokes.",
 		"killCount": 0
 	},
 	"Double-pattern ant": {
@@ -807,7 +807,7 @@ var critters = {
 	},
 	"Sugar ant": {
 		"knowledge": false,
-		"description": "Regular worker ant. Pretty weak",
+		"description": "Regular worker ant. Pretty weak.",
 		"killCount": 0
 	},
 	"Eyebrow seal": {
@@ -852,12 +852,12 @@ var critters = {
 	},
 	"Slerp": {
 		"knowledge": false,
-		"description": "A blob of acid.",
+		"description": "A blob of acid. Dulls damage when hit.",
 		"killCount": 0
 	},
 	"Sluerp": {
 		"knowledge": false,
-		"description": "A blob of acid.",
+		"description": "A blob of acid. Deals back damage when hit.",
 		"killCount": 0
 	},
 	"Gearh": {
@@ -912,22 +912,22 @@ var critters = {
 	},
 	"Silver dragon": {
 		"knowledge": false,
-		"description": "A silver dragon. Breathes dragonfire.",
+		"description": "A silver dragon. Has backscattering ability. Breathes dragonfire.",
 		"killCount": 0
 	},
 	"Violet dragon": {
 		"knowledge": false,
-		"description": "A red dragon. Toxix resistant. Breathes Toxix fir.e",
+		"description": "A violet dragon. Toxix resistant. Breathes Toxix fire",
 		"killCount": 0
 	},
 	"White dragon": {
 		"knowledge": false,
-		"description": "A red dragon. Breathes dragonfire.",
+		"description": "A white dragon. Breathes dragonfire.",
 		"killCount": 0
 	},
 	"Yellow dragon": {
 		"knowledge": false,
-		"description": "A red dragon. Thunder resistant. Breathes Thunder fire.",
+		"description": "A yellow dragon. Thunder resistant. Breathes Thunder fire.",
 		"killCount": 0
 	},
 	"Dwarven contirer": {
@@ -952,12 +952,12 @@ var critters = {
 	},
 	"Elf assassin": {
 		"knowledge": false,
-		"description": "",
+		"description": "Lone assassin.",
 		"killCount": 0
 	},
 	"Elf hunter": {
 		"knowledge": false,
-		"description": "",
+		"description": "A bow wielding hunter.",
 		"killCount": 0
 	},
 	"Elf king": {
@@ -972,37 +972,37 @@ var critters = {
 	},
 	"Cat": {
 		"knowledge": false,
-		"description": "",
+		"description": "Cat.",
 		"killCount": 0
 	},
 	"Lynx": {
 		"knowledge": false,
-		"description": "",
+		"description": "A big cat that lives in coniferous forests.",
 		"killCount": 0
 	},
 	"Tiger": {
 		"knowledge": false,
-		"description": "",
+		"description": "Ferocious beast of the jungle. Beware its sharp claws!",
 		"killCount": 0
 	},
 	"Floating eye": {
 		"knowledge": false,
-		"description": "Creepy floating eye. Its piercing gaze will stun you! You can blind yourself to hit the eye.",
+		"description": "A creepy floating eye. Its piercing gaze will stun you! You can blind yourself to hit the eye.",
 		"killCount": 0
 	},
 	"Freezing floating sphere": {
 		"knowledge": false,
-		"description": "",
+		"description": "A floating spherical shape of frost. It explodes!",
 		"killCount": 0
 	},
 	"Thunderous floating sphere": {
 		"knowledge": false,
-		"description": "",
+		"description": "A floating spherical shape of thunder. It explodes!",
 		"killCount": 0
 	},
 	"Unstable floating sphere": {
 		"knowledge": false,
-		"description": "",
+		"description": "A floating spherical shape. It explodes!",
 		"killCount": 0
 	},
 	"Balding giant": {
@@ -1027,32 +1027,32 @@ var critters = {
 	},
 	"Guard": {
 		"knowledge": false,
-		"description": "",
+		"description": "A city guard.",
 		"killCount": 0
 	},
 	"Guard captain": {
 		"knowledge": false,
-		"description": "",
+		"description": "Captain of the guard.",
 		"killCount": 0
 	},
 	"Outlaw watcher": {
 		"knowledge": false,
-		"description": "",
+		"description": "An outlaw.",
 		"killCount": 0
 	},
 	"Outlaw fusiee'er": {
 		"knowledge": false,
-		"description": "",
+		"description": "Outlaw with a slingshot.",
 		"killCount": 0
 	},
 	"Outlaw merchandiee'er": {
 		"knowledge": false,
-		"description": "",
+		"description": "A more thuggish outlaw.",
 		"killCount": 0
 	},
 	"Iovars cultist acolyte": {
 		"knowledge": false,
-		"description": "An Iovar cult recruit.",
+		"description": "An Iovar cult acolyte.",
 		"killCount": 0
 	},
 	"Iovars cultist": {
@@ -1097,7 +1097,7 @@ var critters = {
 	},
 	"Humongous mimic": {
 		"knowledge": false,
-		"description": "It's a chest. Ah, its alive!",
+		"description": "It's a sword. Ah, its alive!",
 		"killCount": 0
 	},
 	"Mimic": {
@@ -1122,7 +1122,7 @@ var critters = {
 	},
 	"Paper newt": {
 		"knowledge": false,
-		"description": "Lizard that feeds on paper and bamboo. Scourge of librarians and  alike",
+		"description": "Lizard that feeds on paper and bamboo. Scourge of librarians and archivists alike",
 		"killCount": 0
 	},
 	"River newt": {
@@ -1197,7 +1197,7 @@ var critters = {
 	},
 	"Marsh snake": {
 		"knowledge": false,
-		"description": "Marsh snakes like to live in swamps and lakes. Has a poisonous bite.",
+		"description": "Marsh snakes live near swamps and lakes. Has a poisonous bite.",
 		"killCount": 0
 	},
 	"Sawtooth-pattern snake": {

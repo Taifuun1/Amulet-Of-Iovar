@@ -45,6 +45,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 10
 
 [node name="DetailsContainer" type="VBoxContainer" parent="GameStatsContainer"]
 margin_right = 377.0
@@ -123,10 +124,34 @@ clip_text = true
 
 [node name="Tooltip" parent="GameStatsContainer/DetailsContainer/JusticeContainer" instance=ExtResource( 8 )]
 
-[node name="DungeonLevelContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+[node name="TurnCountContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
 margin_top = 54.0
 margin_right = 377.0
 margin_bottom = 68.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="TurnCountContainer" type="Label" parent="GameStatsContainer/DetailsContainer/TurnCountContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Turns"
+clip_text = true
+
+[node name="TurnCount" type="Label" parent="GameStatsContainer/DetailsContainer/TurnCountContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/TurnCountContainer" instance=ExtResource( 8 )]
+
+[node name="DungeonLevelContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 72.0
+margin_right = 377.0
+margin_bottom = 86.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="DungeonLevelText" type="Label" parent="GameStatsContainer/DetailsContainer/DungeonLevelContainer"]
@@ -147,58 +172,10 @@ clip_text = true
 
 [node name="Tooltip" parent="GameStatsContainer/DetailsContainer/DungeonLevelContainer" instance=ExtResource( 8 )]
 
-[node name="LevelContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
-margin_top = 72.0
-margin_right = 377.0
-margin_bottom = 86.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="LevelText" type="Label" parent="GameStatsContainer/DetailsContainer/LevelContainer"]
-margin_right = 186.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 186, 0 )
-text = "Level"
-clip_text = true
-
-[node name="Level" type="Label" parent="GameStatsContainer/DetailsContainer/LevelContainer"]
-margin_left = 190.0
-margin_right = 377.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 187, 0 )
-text = "0"
-align = 2
-clip_text = true
-
-[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/LevelContainer" instance=ExtResource( 8 )]
-
-[node name="ExperienceContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+[node name="StrengthContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
 margin_top = 90.0
 margin_right = 377.0
 margin_bottom = 104.0
-rect_min_size = Vector2( 377, 0 )
-
-[node name="ExperienceText" type="Label" parent="GameStatsContainer/DetailsContainer/ExperienceContainer"]
-margin_right = 186.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 186, 0 )
-text = "Experience"
-clip_text = true
-
-[node name="Experience" type="Label" parent="GameStatsContainer/DetailsContainer/ExperienceContainer"]
-margin_left = 190.0
-margin_right = 377.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 187, 0 )
-text = "0"
-align = 2
-clip_text = true
-
-[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/ExperienceContainer" instance=ExtResource( 8 )]
-
-[node name="StrengthContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
-margin_top = 108.0
-margin_right = 377.0
-margin_bottom = 122.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="StrengthText" type="Label" parent="GameStatsContainer/DetailsContainer/StrengthContainer"]
@@ -220,9 +197,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/DetailsContainer/StrengthContainer" instance=ExtResource( 8 )]
 
 [node name="LegerityContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
-margin_top = 126.0
+margin_top = 108.0
 margin_right = 377.0
-margin_bottom = 140.0
+margin_bottom = 122.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="LegerityText" type="Label" parent="GameStatsContainer/DetailsContainer/LegerityContainer"]
@@ -244,9 +221,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/DetailsContainer/LegerityContainer" instance=ExtResource( 8 )]
 
 [node name="BalanceContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
-margin_top = 144.0
+margin_top = 126.0
 margin_right = 377.0
-margin_bottom = 158.0
+margin_bottom = 140.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="BalanceText" type="Label" parent="GameStatsContainer/DetailsContainer/BalanceContainer"]
@@ -268,9 +245,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/DetailsContainer/BalanceContainer" instance=ExtResource( 8 )]
 
 [node name="BeliefContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
-margin_top = 162.0
+margin_top = 144.0
 margin_right = 377.0
-margin_bottom = 176.0
+margin_bottom = 158.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="BeliefText" type="Label" parent="GameStatsContainer/DetailsContainer/BeliefContainer"]
@@ -292,9 +269,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/DetailsContainer/BeliefContainer" instance=ExtResource( 8 )]
 
 [node name="VisageContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
-margin_top = 180.0
+margin_top = 162.0
 margin_right = 377.0
-margin_bottom = 194.0
+margin_bottom = 176.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="VisageText" type="Label" parent="GameStatsContainer/DetailsContainer/VisageContainer"]
@@ -316,9 +293,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/DetailsContainer/VisageContainer" instance=ExtResource( 8 )]
 
 [node name="WisdomContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
-margin_top = 198.0
+margin_top = 180.0
 margin_right = 377.0
-margin_bottom = 212.0
+margin_bottom = 194.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="WisdomText" type="Label" parent="GameStatsContainer/DetailsContainer/WisdomContainer"]
@@ -340,8 +317,8 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/DetailsContainer/WisdomContainer" instance=ExtResource( 8 )]
 
 [node name="StatsContainer" type="VBoxContainer" parent="GameStatsContainer"]
-margin_left = 381.0
-margin_right = 758.0
+margin_left = 387.0
+margin_right = 764.0
 margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -520,10 +497,58 @@ text = "-"
 align = 2
 clip_text = true
 
-[node name="GoldPiecesContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+[node name="LevelContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
 margin_top = 126.0
 margin_right = 377.0
 margin_bottom = 140.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="LevelText" type="Label" parent="GameStatsContainer/StatsContainer/LevelContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Level"
+clip_text = true
+
+[node name="Level" type="Label" parent="GameStatsContainer/StatsContainer/LevelContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "0"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/LevelContainer" instance=ExtResource( 8 )]
+
+[node name="ExperienceContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 144.0
+margin_right = 377.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="ExperienceText" type="Label" parent="GameStatsContainer/StatsContainer/ExperienceContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Experience"
+clip_text = true
+
+[node name="Experience" type="Label" parent="GameStatsContainer/StatsContainer/ExperienceContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "0"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/ExperienceContainer" instance=ExtResource( 8 )]
+
+[node name="GoldPiecesContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 162.0
+margin_right = 377.0
+margin_bottom = 176.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="GoldPiecesText" type="Label" parent="GameStatsContainer/StatsContainer/GoldPiecesContainer"]
@@ -545,9 +570,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/StatsContainer/GoldPiecesContainer" instance=ExtResource( 8 )]
 
 [node name="WeightContainer" type="VBoxContainer" parent="GameStatsContainer/StatsContainer"]
-margin_top = 144.0
+margin_top = 180.0
 margin_right = 377.0
-margin_bottom = 182.0
+margin_bottom = 218.0
 
 [node name="WeightLabel" type="Label" parent="GameStatsContainer/StatsContainer/WeightContainer"]
 margin_right = 377.0
@@ -592,14 +617,14 @@ align = 2
 [node name="Tooltip" parent="GameStatsContainer/StatsContainer/WeightContainer" instance=ExtResource( 8 )]
 
 [node name="EffectsAndIconsContainer" type="VBoxContainer" parent="GameStatsContainer"]
-margin_left = 762.0
+margin_left = 774.0
 margin_right = 1112.0
 margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="StatusEffectsContainer" type="GridContainer" parent="GameStatsContainer/EffectsAndIconsContainer"]
-margin_right = 350.0
+margin_right = 338.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -607,14 +632,14 @@ columns = 3
 
 [node name="IconsContainer" type="GridContainer" parent="GameStatsContainer/EffectsAndIconsContainer"]
 margin_top = 154.0
-margin_right = 350.0
+margin_right = 338.0
 margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 6
 
 [node name="InventoryIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_right = 55.0
+margin_right = 53.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -624,8 +649,8 @@ stretch_mode = 6
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/InventoryIcon" instance=ExtResource( 9 )]
 
 [node name="EquipmentIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 59.0
-margin_right = 114.0
+margin_left = 57.0
+margin_right = 110.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -635,8 +660,8 @@ stretch_mode = 6
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/EquipmentIcon" instance=ExtResource( 9 )]
 
 [node name="ReadIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 118.0
-margin_right = 173.0
+margin_left = 114.0
+margin_right = 167.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -646,8 +671,8 @@ stretch_mode = 6
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ReadIcon" instance=ExtResource( 9 )]
 
 [node name="QuaffIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 177.0
-margin_right = 232.0
+margin_left = 171.0
+margin_right = 224.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -657,8 +682,8 @@ stretch_mode = 6
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/QuaffIcon" instance=ExtResource( 9 )]
 
 [node name="ConsumeIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 236.0
-margin_right = 291.0
+margin_left = 228.0
+margin_right = 281.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -668,8 +693,8 @@ stretch_mode = 6
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ConsumeIcon" instance=ExtResource( 9 )]
 
 [node name="ZapIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 295.0
-margin_right = 350.0
+margin_left = 285.0
+margin_right = 338.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -680,7 +705,7 @@ stretch_mode = 6
 
 [node name="UseIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
 margin_top = 77.0
-margin_right = 55.0
+margin_right = 53.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -690,9 +715,9 @@ stretch_mode = 6
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/UseIcon" instance=ExtResource( 9 )]
 
 [node name="RunesIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 59.0
+margin_left = 57.0
 margin_top = 77.0
-margin_right = 114.0
+margin_right = 110.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -702,9 +727,9 @@ stretch_mode = 6
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/RunesIcon" instance=ExtResource( 9 )]
 
 [node name="LootIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 118.0
+margin_left = 114.0
 margin_top = 77.0
-margin_right = 173.0
+margin_right = 167.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -714,9 +739,9 @@ stretch_mode = 6
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/LootIcon" instance=ExtResource( 9 )]
 
 [node name="DipIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 177.0
+margin_left = 171.0
 margin_top = 77.0
-margin_right = 232.0
+margin_right = 224.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -725,29 +750,29 @@ stretch_mode = 6
 
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" instance=ExtResource( 9 )]
 
-[node name="ZapIcon6" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 236.0
+[node name="AutoMineIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 228.0
 margin_top = 77.0
-margin_right = 291.0
+margin_right = 281.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 12 )
 stretch_mode = 6
 
-[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon6" instance=ExtResource( 9 )]
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" instance=ExtResource( 9 )]
 
-[node name="ZapIcon7" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
-margin_left = 295.0
+[node name="AttackNeutralIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 285.0
 margin_top = 77.0
-margin_right = 350.0
+margin_right = 338.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 12 )
 stretch_mode = 6
 
-[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon7" instance=ExtResource( 9 )]
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" instance=ExtResource( 9 )]
 
 [connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/NameContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/NameContainer", "className" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/NameContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/NameContainer" ]]
@@ -755,12 +780,10 @@ stretch_mode = 6
 [connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/RaceContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/RaceContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/JusticeContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/JusticeContainer", "justice" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/JusticeContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/JusticeContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/TurnCountContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/TurnCountContainer", "turnCount" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/TurnCountContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/TurnCountContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/DungeonLevelContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/DungeonLevelContainer", "dungeonLevel" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/DungeonLevelContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/DungeonLevelContainer" ]]
-[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/LevelContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/LevelContainer", "level" ]]
-[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/LevelContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/LevelContainer" ]]
-[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/ExperienceContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/ExperienceContainer", "experience" ]]
-[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/ExperienceContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/ExperienceContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/StrengthContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/StrengthContainer", "strength" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/StrengthContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/StrengthContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/LegerityContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/LegerityContainer", "legerity" ]]
@@ -787,6 +810,10 @@ stretch_mode = 6
 [connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacksText" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MagicAttacksContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacks" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MagicAttacksContainer", "magicAttacks" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacks" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MagicAttacksContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/LevelContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/LevelContainer", "level" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/LevelContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/LevelContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/ExperienceContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/ExperienceContainer", "experience" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/ExperienceContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/ExperienceContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/GoldPiecesContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/GoldPiecesContainer", "goldPieces" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/GoldPiecesContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/GoldPiecesContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/WeightContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/WeightContainer", "weight" ]]
@@ -822,7 +849,7 @@ stretch_mode = 6
 [connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onIconClicked" binds= [ "dip" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/DipIcon", "dip" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/DipIcon" ]]
-[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon6" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon", "zap" ]]
-[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon6" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon" ]]
-[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon7" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon", "zap" ]]
-[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon7" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon", "zap" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon", "zap" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon" ]]

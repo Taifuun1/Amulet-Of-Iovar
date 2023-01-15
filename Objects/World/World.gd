@@ -31,12 +31,12 @@ var level = null
 var levels = {
 	"firstLevel": null,
 	"dungeon1": [],
+	"library": [],
+	"dungeon2": [],
 	"minesOfTidoh": [],
 	"depthsOfTidoh": [],
-	"dungeon2": [],
-	"beach": [],
 	"dungeon3": [],
-	"library": [],
+	"beach": [],
 	"dungeon4": [],
 	"banditWarcamp": [],
 	"storageArea": [],
@@ -657,7 +657,7 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 	if _direction == 1:
 		if levels.dungeon1.back().levelId == Globals.currentDungeonLevel:
 			if _stair.matchn("secondDownStair"):
-				Globals.currentDungeonLevel = levels.minesOfTidoh.front().levelId
+				Globals.currentDungeonLevel = levels.library.front().levelId
 				return "upStair"
 			if _stair.matchn("downStair"):
 				Globals.currentDungeonLevel = levels.dungeon2.front().levelId
@@ -670,7 +670,7 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 			return "upStair"
 		elif levels.dungeon3.back().levelId == Globals.currentDungeonLevel:
 			if _stair.matchn("secondDownStair"):
-				Globals.currentDungeonLevel = levels.library.front().levelId
+				Globals.currentDungeonLevel = levels.minesOfTidoh.front().levelId
 				return "upStair"
 			if _stair.matchn("downStair"):
 				Globals.currentDungeonLevel = levels.dungeon4.front().levelId
@@ -711,7 +711,7 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 		if levels.dungeon2.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon1.back().levelId
 			return "downStair"
-		elif levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel:
+		elif levels.library.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon1.back().levelId
 			return "secondDownStair"
 		elif levels.dungeon3.front().levelId == Globals.currentDungeonLevel:
@@ -720,7 +720,7 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 		elif levels.dungeon4.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
 			return "downStair"
-		elif levels.library.front().levelId == Globals.currentDungeonLevel:
+		elif levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
 			return "secondDownStair"
 		elif levels.banditWarcamp.front().levelId == Globals.currentDungeonLevel:
@@ -1115,6 +1115,9 @@ func saveGame():
 	var _globalCritterData = GlobalCritterInfo.getGlobalCritterSaveData()
 	$Save.saveData("GlobalCritterData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalCritterData)
 	
+	var _globalGameStats = GlobalGameStats.getGlobalGameStats()
+	$Save.saveData("GlobalGameStats", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalGameStats)
+	
 	var _equipmentData = $UI/UITheme/Equipment.getEquipmentSaveData()
 	_equipmentData.merge($UI/UITheme/Runes.getRunesSaveData())
 	$Save.saveData("EquipmentData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _equipmentData)
@@ -1129,7 +1132,9 @@ func saveGame():
 	}
 	$Save.saveData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
 	
+	print("waiting")
 	saveGameThread.call_deferred("wait_to_finish")
+	get_tree().quit()
 
 
 

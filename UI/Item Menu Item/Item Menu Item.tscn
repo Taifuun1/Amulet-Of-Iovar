@@ -30,3 +30,8 @@ mouse_filter = 2
 margin_left = 36.0
 margin_right = 36.0
 mouse_filter = 2
+
+[node name="Amount" parent="." instance=ExtResource( 1 )]
+margin_left = 40.0
+margin_right = 40.0
+mouse_filter = 2

@@ -64,9 +64,14 @@ var archeologist = {
 			"skillCap": 1
 		},
 		"flail": {
-			"experience": 0,
+			"experience": 200,
 			"level": 1,
 			"skillCap": 3
+		},
+		"dualWield": {
+			"experience": 0,
+			"level": 0,
+			"skillCap": 0
 		}
 	},
 	"texture": load("res://Assets/Classes/Archeologist.png")
@@ -135,6 +140,11 @@ var banker = {
 			"experience": 0,
 			"level": 0,
 			"skillCap": 1
+		},
+		"dualWield": {
+			"experience": 0,
+			"level": 0,
+			"skillCap": 2
 		}
 	},
 	"texture": load("res://Assets/Classes/Banker.png")
@@ -165,7 +175,7 @@ var freedomFighter = {
 	visageIncrease = 2.5,
 	wisdomIncrease = 0,
 	resistances = ["fleir"],
-	neutralClasses = ["orcs"],
+	neutralClasses = ["dwarves"],
 	items = {
 		"Chipped sword": 1,
 		"Battered buckler": 1,
@@ -180,7 +190,7 @@ var freedomFighter = {
 	goldPieces = 8,
 	skills = {
 		"sword": {
-			"experience": 0,
+			"experience": 200,
 			"level": 1,
 			"skillCap": 1
 		},
@@ -203,6 +213,11 @@ var freedomFighter = {
 			"experience": 0,
 			"level": 0,
 			"skillCap": 1
+		},
+		"dualWield": {
+			"experience": 0,
+			"level": 0,
+			"skillCap": 0
 		}
 	},
 	"texture": load("res://Assets/Classes/FreedomFighter.png")
@@ -274,6 +289,11 @@ var herbalogue = {
 			"experience": 0,
 			"level": 0,
 			"skillCap": 2
+		},
+		"dualWield": {
+			"experience": 0,
+			"level": 0,
+			"skillCap": 1
 		}
 	},
 	"texture": load("res://Assets/Classes/Herbalogue.png")
@@ -330,7 +350,7 @@ var mercenary = {
 			"skillCap": 3
 		},
 		"two-hander": {
-			"experience": 0,
+			"experience": 200,
 			"level": 1,
 			"skillCap": 3
 		},
@@ -348,6 +368,11 @@ var mercenary = {
 			"experience": 0,
 			"level": 0,
 			"skillCap": 2
+		},
+		"dualWield": {
+			"experience": 0,
+			"level": 0,
+			"skillCap": 1
 		}
 	},
 	"texture": load("res://Assets/Classes/Mercenary.png")
@@ -424,6 +449,11 @@ var exterminator = {
 			"experience": 0,
 			"level": 0,
 			"skillCap": 1
+		},
+		"dualWield": {
+			"experience": 0,
+			"level": 0,
+			"skillCap": 0
 		}
 	},
 	"texture": load("res://Assets/Classes/Exterminator.png")
@@ -478,7 +508,7 @@ var rogue = {
 			"skillCap": 0
 		},
 		"dagger": {
-			"experience": 0,
+			"experience": 200,
 			"level": 1,
 			"skillCap": 3
 		},
@@ -491,6 +521,11 @@ var rogue = {
 			"experience": 0,
 			"level": 0,
 			"skillCap": 1
+		},
+		"dualWield": {
+			"experience": 100,
+			"level": 0,
+			"skillCap": 3
 		}
 	},
 	"texture": load("res://Assets/Classes/Rogue.png")
@@ -553,7 +588,7 @@ var savant = {
 			"skillCap": 0
 		},
 		"mace": {
-			"experience": 0,
+			"experience": 200,
 			"level": 1,
 			"skillCap": 3
 		},
@@ -561,6 +596,11 @@ var savant = {
 			"experience": 0,
 			"level": 0,
 			"skillCap": 3
+		},
+		"dualWield": {
+			"experience": 0,
+			"level": 0,
+			"skillCap": 0
 		}
 	},
 	"texture": load("res://Assets/Classes/Savant.png")

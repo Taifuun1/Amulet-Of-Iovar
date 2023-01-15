@@ -598,6 +598,7 @@ func zapItem(_direction):
 								else:
 									Globals.gameConsole.addLog("Doors lock doesn't move...")
 							Globals.isItemIdentified(_zappedItem)
+							break
 				"wand of teleport":
 					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
@@ -745,6 +746,25 @@ func zapItem(_direction):
 							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
 							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _tile, _zappedItem.itemName)
 							Globals.isItemIdentified(_zappedItem)
+				"wand of sleep":
+					var _grid = $"/root/World".level.grid
+					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
+						var _tile = _playerPosition + _direction * i
+						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+							break
+						if _grid[_tile.x][_tile.y].critter != null:
+							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
+							if _zappedItem.alignment.matchn("blessed"):
+								_critter.statusEffects.sleep = 3
+								Globals.gameConsole.addLog("{critterName} falls into a light sleep.".format({ "critterName": _critter.critterName }))
+							elif _zappedItem.alignment.matchn("uncursed"):
+								_critter.statusEffects.sleep = 11
+								Globals.gameConsole.addLog("{critterName} falls asleep.".format({ "critterName": _critter.critterName }))
+							elif _zappedItem.alignment.matchn("cursed"):
+								_critter.statusEffects.sleep = 24
+								Globals.gameConsole.addLog("{critterName} falls into a deep sleep!".format({ "critterName": _critter.critterName }))
+							Globals.isItemIdentified(_zappedItem)
+							break
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
 			_zappedItem.value.charges -= 1

@@ -10,7 +10,7 @@ var wraiths = [
 		"alignment": "Neutral",
 		"level": 4,
 		"expDropAmount": 5,
-		"hp": 4,
+		"hp": 8,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [
@@ -66,7 +66,7 @@ var wraiths = [
 		"alignment": "Neutral",
 		"level": 8,
 		"expDropAmount": 18,
-		"hp": 12,
+		"hp": 17,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [

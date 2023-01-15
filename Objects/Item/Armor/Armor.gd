@@ -46,21 +46,6 @@ var armor = {
 			"stackable": false
 		},
 		{
-			"itemName": "Bucket helmet",
-			"unidentifiedItemName": "Bucket helmet",
-			"texture": load("res://Assets/Armor/HelmetBucketHelmet.png"),
-			"unidentifiedTexture": load("res://Assets/Armor/HelmetBucketHelmet.png"),
-			"type": "Armor",
-			"category": "Helmet",
-			"weight": 35,
-			"value": {
-				"ac": 2,
-				"resistance": null
-			},
-			"enchantable": true,
-			"stackable": false
-		},
-		{
 			"itemName": "Battered buckler",
 			"unidentifiedItemName": "Battered buckler",
 			"texture": load("res://Assets/Armor/ShieldBatteredBuckler.png"),
@@ -147,6 +132,21 @@ var armor = {
 			"weight": 77,
 			"value": {
 				"ac": 5,
+				"resistance": null
+			},
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Bucket helmet",
+			"unidentifiedItemName": "Bucket helmet",
+			"texture": load("res://Assets/Armor/HelmetBucketHelmet.png"),
+			"unidentifiedTexture": load("res://Assets/Armor/HelmetBucketHelmet.png"),
+			"type": "Armor",
+			"category": "Helmet",
+			"weight": 35,
+			"value": {
+				"ac": 2,
 				"resistance": null
 			},
 			"enchantable": true,

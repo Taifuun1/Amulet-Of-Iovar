@@ -71,6 +71,11 @@ var skills = {
 		"experience": 0,
 		"level": 0,
 		"skillCap": 0
+	},
+	"dualWield": {
+		"experience": 0,
+		"level": 0,
+		"skillCap": 0
 	}
 }
 
@@ -198,6 +203,8 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 						skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.lefthand })).category.to_lower()].experience += 1
 					if $"/root/World/UI/UITheme/Equipment".hands.righthand != null and !get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.righthand })).category.matchn("shield"):
 						skills[get_node("/root/World/Items/{id}".format({ "id": $"/root/World/UI/UITheme/Equipment".hands.righthand })).category.to_lower()].experience += 1
+					if $"/root/World/UI/UITheme/Equipment".dualWielding:
+						skills.dualWield.experience += 1
 			else:
 				Globals.gameConsole.addLog("You miss!")
 			
@@ -819,9 +826,9 @@ func checkSkillExperience():
 		elif skills[_skill].skillCap > skills[_skill].level and  skills[_skill].experience >= 500 and skills[_skill].level == 1:
 			skills[_skill].level = 2
 			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
-		elif skills[_skill].skillCap > skills[_skill].level and  skills[_skill].experience >= 1000 and skills[_skill].level == 2:
+		elif skills[_skill].skillCap > skills[_skill].level and  skills[_skill].experience >= 1200 and skills[_skill].level == 2:
 			skills[_skill].level = 3
-			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
+			Globals.gameConsole.addLog("You master the {skill}!".format({ "skill": _skill }))
 
 func getGameOverStats():
 	var _stats = {  }
@@ -829,7 +836,7 @@ func getGameOverStats():
 	_stats.points = $"/root/World/Critters/0/Inventory".getPoints()
 	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
 	_stats.inventoryItems = $"/root/World/Critters/0/Inventory".getInventoryItems()
-	_stats.gameStats = GlobalGameStats.getGameStats()
+	_stats.gameStats = GlobalGameStats.getGlobalGameStats()
 	
 	return _stats
 

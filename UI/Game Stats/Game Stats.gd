@@ -57,24 +57,22 @@ func updateStats(stats = {
 		$GameStatsContainer/DetailsContainer/RaceContainer/Race.text = str(stats.race)
 	if stats.justice != null:
 		$GameStatsContainer/DetailsContainer/JusticeContainer/Justice.text = str(stats.justice)
+	if GlobalGameStats.gameStats["Turn count"] != null:
+		$GameStatsContainer/DetailsContainer/TurnCountContainer/TurnCount.text = str(GlobalGameStats.gameStats["Turn count"])
 	if stats.dungeonLevel != null:
 		$GameStatsContainer/DetailsContainer/DungeonLevelContainer/DungeonLevel.text = str(stats.dungeonLevel)
-	if stats.level != null:
-		$GameStatsContainer/DetailsContainer/LevelContainer/Level.text = str(stats.level)
-		$GameStatsContainer/DetailsContainer/ExperienceContainer/Experience.text = str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount)
-		$GameStatsContainer/DetailsContainer/ExperienceContainer/Experience.set_tooltip("First value is your current exp, second value is next level\n" + str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount))
 	if stats.strength != null:
-		$GameStatsContainer/DetailsContainer/StrengthContainer/Strength.text = str(stats.strength)
+		$GameStatsContainer/DetailsContainer/StrengthContainer/Strength.text = str(int(stats.strength))
 	if stats.legerity != null:
-		$GameStatsContainer/DetailsContainer/LegerityContainer/Legerity.text = str(stats.legerity)
+		$GameStatsContainer/DetailsContainer/LegerityContainer/Legerity.text = str(int(stats.legerity))
 	if stats.balance != null:
-		$GameStatsContainer/DetailsContainer/BalanceContainer/Balance.text = str(stats.balance)
+		$GameStatsContainer/DetailsContainer/BalanceContainer/Balance.text = str(int(stats.balance))
 	if stats.belief != null:
-		$GameStatsContainer/DetailsContainer/BeliefContainer/Belief.text = str(stats.belief)
+		$GameStatsContainer/DetailsContainer/BeliefContainer/Belief.text = str(int(stats.belief))
 	if stats.visage != null:
-		$GameStatsContainer/DetailsContainer/VisageContainer/Visage.text = str(stats.visage)
+		$GameStatsContainer/DetailsContainer/VisageContainer/Visage.text = str(int(stats.visage))
 	if stats.wisdom != null:
-		$GameStatsContainer/DetailsContainer/WisdomContainer/Wisdom.text = str(stats.wisdom)
+		$GameStatsContainer/DetailsContainer/WisdomContainer/Wisdom.text = str(int(stats.wisdom))
 	
 	if stats.maxhp != null:
 		$GameStatsContainer/StatsContainer/HPContainer/HPAmount.max_value = stats.maxhp
@@ -108,6 +106,9 @@ func updateStats(stats = {
 		})
 		magicAttacks = stats.magicAttacks
 		$GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacks.text = str(_attackString)
+	if stats.level != null:
+		$GameStatsContainer/StatsContainer/LevelContainer/Level.text = str(stats.level)
+		$GameStatsContainer/StatsContainer/ExperienceContainer/Experience.text = str(stats.experiencePoints) + "/" + str(stats.experienceLevelGainAmount)
 	if stats.goldPieces != null:
 		$GameStatsContainer/StatsContainer/GoldPiecesContainer/GoldPieces.text = str(stats.goldPieces)
 	if stats.weight != null and stats.weightBounds != null:
