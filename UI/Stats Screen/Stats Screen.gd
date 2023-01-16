@@ -1,39 +1,22 @@
 extends Control
 
-var statsData = load("res://Objects/Miscellaneous/LifeTimeStatsData.gd").new()
-
 var statsList = load("res://UI/Stats/Stats List.tscn")
 
 
 func _ready():
-#	var dir = Directory.new()
-#	dir.remove("user://lifetimeStats.json")
-#	dir.remove("user://items.json")
-#	dir.remove("user://critters.json")
-	
 	var _lifetimeList = statsList.instance()
-	var _lifeTimeStats = loadLifeTimeStats("LifeTimeStats", statsData.lifetimeStats)
+	
+	var _lifeTimeStats = GlobalSave.saveAndloadLifeTimeStats("LifeTimeStats")
 	_lifetimeList.create("Lifetime stats", _lifeTimeStats)
 	$StatsContainer/VBoxContainer/ScrollContainer/VBoxContainer.add_child(_lifetimeList)
 	
 	var _itemList = statsList.instance()
-	_itemList.create("Item knowledge", loadLifeTimeStats("Items", statsData.items))
+	_itemList.create("Item knowledge", GlobalSave.saveAndloadLifeTimeStats("Items"))
 	$StatsContainer/VBoxContainer/ScrollContainer/VBoxContainer.add_child(_itemList)
 	
 	var _critterList = statsList.instance()
-	_critterList.create("Critter knowledge", loadLifeTimeStats("Critters", statsData.critters))
+	_critterList.create("Critter knowledge", GlobalSave.saveAndloadLifeTimeStats("Critters"))
 	$StatsContainer/VBoxContainer/ScrollContainer/VBoxContainer.add_child(_critterList)
-
-func loadLifeTimeStats(_fileName, _data):
-	var file = File.new()
-	var directory = Directory.new()
-	if not directory.dir_exists("user://LifeTimeStats"):
-		directory.make_dir("user://LifeTimeStats")
-	if not file.file_exists("user://LifeTimeStats/{fileName}.json".format({ "fileName": _fileName })):
-		file.open("user://LifeTimeStats/{fileName}.json".format({ "fileName": _fileName }), File.WRITE_READ)
-		file.store_line(to_json(_data))
-	return parse_json(file.get_as_text())
-
 
 
 

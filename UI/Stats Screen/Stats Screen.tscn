@@ -22,15 +22,20 @@ margin_bottom = 1040.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="StatsContainer/VBoxContainer"]
 margin_right = 1880.0
-margin_bottom = 800.0
-rect_min_size = Vector2( 1880, 800 )
+margin_bottom = 936.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StatsContainer/VBoxContainer/ScrollContainer"]
+margin_right = 1880.0
+margin_bottom = 936.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Back" type="Button" parent="StatsContainer/VBoxContainer"]
-margin_top = 804.0
+margin_top = 940.0
 margin_right = 1880.0
-margin_bottom = 904.0
+margin_bottom = 1040.0
 rect_min_size = Vector2( 260, 100 )
 text = "Back"
 

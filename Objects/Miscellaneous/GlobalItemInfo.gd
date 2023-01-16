@@ -489,13 +489,13 @@ var globalItemInfo = {
 	"Magic lamp": {
 		"identified": false
 	},
-	"Tome of Knowledge": {
-		"identified": false
-	},
 	"Magic marker": {
 		"identified": false
 	},
 	"Magic key": {
+		"identified": false
+	},
+	"Tome of Knowledge": {
 		"identified": false
 	},
 	"Wand of light": {

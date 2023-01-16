@@ -3,7 +3,6 @@ extends Node
 onready var critter = preload("res://Objects/Critter/Critter.tscn")
 onready var critterSpawnBehaviour = preload("res://Objects/Miscellaneous/CritterSpawnBehaviour.gd").new()
 onready var critterLevelGenerationList = preload("res://Objects/Miscellaneous/CritterLevelGenerationList.gd").new()
-onready var crittersData = preload("res://Objects/Miscellaneous/LifeTimeStatsData.gd").new().critters
 
 var ants = preload("res://Objects/Critter/Ants/Ants.gd").new()
 var aquaticLife = preload("res://Objects/Critter/Aquatic life/Aquatic life.gd").new()
@@ -30,10 +29,12 @@ var rats = preload("res://Objects/Critter/Rats/Rats.gd").new()
 var snakes = preload("res://Objects/Critter/Snakes/Snakes.gd").new()
 var wraiths = preload("res://Objects/Critter/Wraiths/Wraiths.gd").new()
 
+onready var crittersData = GlobalSave.saveAndloadLifeTimeStats("Critters")
+
 var mutex
 
 var critters = {}
-var spawnableCritters = ["Sugar ant", "Tiny kobold", "River newt", "Goblin"]
+var spawnableCritters = ["Sugar ant"]
 
 func create():
 	mutex = Mutex.new()

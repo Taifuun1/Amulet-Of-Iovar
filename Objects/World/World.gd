@@ -68,6 +68,7 @@ var inGame = false
 var currentGameState = gameState.GAME
 var keepMoving = false
 var totalLevelCount = 1
+var gameOver = false
 
 func _process(_delta):
 	if inGame:
@@ -354,7 +355,7 @@ func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	drawLevel()
 	updateTiles()
 	updateStats()
-	checkGameOver()
+	isGameOver()
 
 func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
 	for _turn in $Critters/"0".turnsUntilAction:
@@ -365,7 +366,7 @@ func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
 		drawLevel()
 		updateTiles()
 		updateStats()
-		if checkGameOver():
+		if isGameOver():
 			return false
 	return true
 
@@ -378,7 +379,7 @@ func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
 		drawLevel()
 		updateTiles()
 		updateStats()
-		if checkGameOver():
+		if isGameOver():
 			return false
 		if _isPlayerHit:
 			return false
@@ -538,13 +539,16 @@ func updateUI():
 func updateStats():
 	GlobalGameStats.gameStats["Turn count"] += 1
 
-func checkGameOver():
+func isGameOver():
 	if $Critters/"0".hp <= 0:
 		Globals.gameConsole.addLog("You die...")
 		currentGameState = $"/root/World".gameState.GAME_OVER
-		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".getGameOverStats())
+		gameOver = true
+		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".())
 		$"UI/UITheme/Game Over Stats".show()
-		return false
+		return true
+	elif gameOver:
+		return true
 
 func keepMovingLoop(_playerTile, _tileToMoveTo):
 	var _currentTile = _playerTile
@@ -1134,6 +1138,7 @@ func saveGame():
 	
 	print("waiting")
 	saveGameThread.call_deferred("wait_to_finish")
+	print("waiting2")
 	get_tree().quit()
 
 

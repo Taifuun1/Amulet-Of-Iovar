@@ -9,6 +9,7 @@ var lifetimeStats = {
 	"Items wished": 0,
 	"Species genocided": 0,
 	"Times ascended": 0,
+	"Game count": 0
 }
 
 var gameStats = {
@@ -565,6 +566,10 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
+	"Tome of Knowledge": {
+		"knowledge": false,
+		"description": "Tome full of knowledge. When read, unlocks information about an item or a critter."
+	},
 	"Wand of light": {
 		"knowledge": false,
 		"description": "Lights your surroundings for awhile."
@@ -1092,7 +1097,7 @@ var critters = {
 	},
 	"Arch-lich": {
 		"knowledge": false,
-		"description": "Arch-mage of a distant pasts turned dark. Magical repertoire includes summoning hordes of critters.",
+		"description": "Arch-mage of a distant past turned dark. Magical repertoire includes summoning hordes of critters.",
 		"killCount": 0
 	},
 	"Humongous mimic": {

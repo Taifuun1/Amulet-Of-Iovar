@@ -87,6 +87,8 @@ func _ready():
 		$Items.add_child(items)
 		$Items/Items.randomizeRandomItems()
 		
+		yield(get_tree().create_timer(0.01), "timeout")
+		
 		setUpDungeon()
 		
 		for _section in levels:

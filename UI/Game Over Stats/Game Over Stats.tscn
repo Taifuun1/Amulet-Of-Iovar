@@ -49,13 +49,21 @@ anchor_bottom = 1.0
 margin_top = 61.0
 custom_styles/panel = SubResource( 2 )
 
-[node name="Points" parent="GameOverTabs/Points" instance=ExtResource( 2 )]
+[node name="PointsContainer" type="VBoxContainer" parent="GameOverTabs/Points"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Points" parent="GameOverTabs/Points/PointsContainer" instance=ExtResource( 2 )]
+margin_right = 1540.0
+margin_bottom = 618.0
+
+[node name="SaveAndExit" type="Button" parent="GameOverTabs/Points/PointsContainer"]
+margin_top = 622.0
+margin_right = 1540.0
+margin_bottom = 659.0
+text = "Save and Exit"
 
 [node name="Console log" type="Panel" parent="GameOverTabs"]
 visible = false
@@ -105,7 +113,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = -8.0
+margin_right = -16.0
 margin_bottom = -8.0
 
 [node name="Game stats" type="Panel" parent="GameOverTabs"]
@@ -122,5 +130,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = -8.0
+margin_right = -16.0
 margin_bottom = -8.0
+
+[connection signal="pressed" from="GameOverTabs/Points/PointsContainer/SaveAndExit" to="." method="_onSaveAndExitpressed"]

@@ -387,13 +387,13 @@ rect_min_size = Vector2( 1920, 200 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreationContainer/CenterContainer"]
 margin_left = 928.0
-margin_top = 62.0
-margin_right = 991.0
-margin_bottom = 138.0
+margin_top = 61.0
+margin_right = 992.0
+margin_bottom = 139.0
 
 [node name="StartButton" type="Button" parent="CharacterCreationContainer/CenterContainer/VBoxContainer"]
-margin_right = 63.0
-margin_bottom = 36.0
+margin_right = 64.0
+margin_bottom = 37.0
 mouse_filter = 1
 size_flags_horizontal = 4
 disabled = true
@@ -401,9 +401,10 @@ action_mode = 0
 text = "Okay"
 
 [node name="BackButton" type="Button" parent="CharacterCreationContainer/CenterContainer/VBoxContainer"]
-margin_top = 40.0
-margin_right = 62.0
-margin_bottom = 76.0
+margin_left = 3.0
+margin_top = 41.0
+margin_right = 61.0
+margin_bottom = 78.0
 mouse_filter = 1
 size_flags_horizontal = 4
 action_mode = 0

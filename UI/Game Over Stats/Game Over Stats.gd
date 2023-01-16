@@ -2,9 +2,13 @@ extends PanelContainer
 
 var RichTextLabelExtended = load("res://UI/RichTextLabel Extended/RichTextLabel Extended.tscn")
 
+var stats
+
 func setValues(_title, _stats):
+	stats = _stats
+	
 	for _itemName in _stats.points.points:
-		$"GameOverTabs/Points/Points".createPointItem(_itemName, _stats.points.points[_itemName])
+		$"GameOverTabs/Points/PointsContainer/Points".createPointItem(_itemName, _stats.points.points[_itemName])
 	
 	for _log in _stats.consoleLogs.values():
 		var _logItem = RichTextLabelExtended.instance()
@@ -41,3 +45,25 @@ func setValues(_title, _stats):
 			"critters":
 				for _critter in _stats.gameStats[_statType]:
 					$"GameOverTabs/Kill count/Kill Count".createCritterKillCountItem(_critter, _stats.gameStats[_statType][_critter].killCount)
+
+
+func _onSaveAndExitpressed():
+	var _newLifeTimeStats = stats.gameStats.gameStats
+	var _lifeTimeStats = GlobalSave.saveAndloadLifeTimeStats("LifeTimeStats")
+	
+	_lifeTimeStats["Turn count"] += _newLifeTimeStats["Turn count"]
+	_lifeTimeStats["Times attacked"] += _newLifeTimeStats["Times attacked"]
+	_lifeTimeStats["Damage dealt"] += _newLifeTimeStats["Damage dealt"]
+	if _lifeTimeStats["Highest damage dealt"] < _newLifeTimeStats["Highest damage dealt"]:
+		_lifeTimeStats["Highest damage dealt"] = _newLifeTimeStats["Highest damage dealt"]
+	_lifeTimeStats["Damage taken"] += _newLifeTimeStats["Damage taken"]
+	if _lifeTimeStats["Highest damage taken"] < _newLifeTimeStats["Highest damage taken"]:
+		_lifeTimeStats["Highest damage taken"] = _newLifeTimeStats["Highest damage taken"]
+	_lifeTimeStats["Items wished"] += _newLifeTimeStats["Items wished"]
+	_lifeTimeStats["Species genocided"] += _newLifeTimeStats["Species genocided"]
+	_lifeTimeStats["Times ascended"] += _newLifeTimeStats["Times ascended"]
+	_lifeTimeStats["Game count"] += 1
+	
+	GlobalSave.saveAndloadLifeTimeStats("LifeTimeStats", _lifeTimeStats)
+	
+	get_tree().quit()

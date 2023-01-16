@@ -44,7 +44,7 @@ var rats = [
 			},
 			{
 				"types": {
-					"ring": ["common", "uncommon"]
+					"ring": ["uncommon"]
 				},
 				"chance": 10,
 				"amount": [1, 1]
@@ -96,7 +96,7 @@ var rats = [
 			},
 			{
 				"types": {
-					"ring": ["common", "uncommon"]
+					"ring": ["uncommon"]
 				},
 				"chance": 15,
 				"amount": [1, 1]

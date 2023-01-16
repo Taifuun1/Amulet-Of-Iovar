@@ -365,6 +365,7 @@ func dropItem(_playerTile, _item, _grid):
 				_playerTile == Vector2(53, 11)
 			):
 				$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
+				$"/root/World".gameOver = true
 				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats())
 				GlobalGameStats["Times ascended"] += 1
 			_item.identifyItem(false, true, false)

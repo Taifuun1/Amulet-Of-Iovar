@@ -83,6 +83,7 @@ GlobalCritterInfo="*res://Objects/Miscellaneous/GlobalCritterInfo.gd"
 StartingData="*res://Objects/Miscellaneous/StartingData.gd"
 GlobalGameStats="*res://Objects/Miscellaneous/GlobalGameStats.gd"
 GlobalGameConsoleMessages="*res://Objects/Miscellaneous/GlobalGameConsoleMessages.gd"
+GlobalSave="*res://Objects/Miscellaneous/GlobalSave.gd"
 
 [debug]
 

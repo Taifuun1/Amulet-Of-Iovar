@@ -2,10 +2,6 @@ extends Player
 
 var sacrificeGifts = load("res://Objects/Player/PlayerSacrificeGifts.gd")
 
-######################
-### Player actions ###
-######################
-
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	var _additionalChoices = false
@@ -29,8 +25,6 @@ func readItem(_id):
 						if _readItem.alignment.matchn("blessed"):
 							for _item in _items:
 								var _itemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
-								print(_itemInInventory.itemName)
-								print(GlobalItemInfo.globalItemInfo.has(_itemInInventory.identifiedItemName))
 								if (
 									(
 										GlobalItemInfo.globalItemInfo.has(_itemInInventory.identifiedItemName) and
@@ -167,7 +161,7 @@ func readItem(_id):
 				for _itemId in _equipmentNode.hands:
 					if _itemId != null:
 						var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
-						if _item.binds != null:
+						if _item != null and _item.binds != null:
 							_uncursableItems.append(_item)
 				if (
 					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
@@ -385,6 +379,21 @@ func readItem(_id):
 				else:
 					Globals.gameConsole.addLog("You already feel confused enough!")
 				Globals.isItemIdentified(_readItem)
+			# "tome of knowledge":
+			# 	var _allItems = GlobalSave.saveAndloadLifeTimeStats("Items")
+			# 	var _allCritters = GlobalSave.saveAndloadLifeTimeStats("Critters")
+			# 	var _items = []
+			# 	var _critters = []
+			# 	for _item in _allItems.size():
+			# 		if !_allItems[_item].knowledge:
+			# 			_items.append(_allItems[_item])
+			# 	for _critter in _allCritters.size():
+			# 		if !_allCritters[_critter].knowledge:
+			# 			_critters.append(_allCritters[_critter])
+			# 	if randi() % 2 == 0:
+			# 		if _items.size() != 0:
+						
+			# 		else:
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		checkAllIdentification(true)
@@ -570,7 +579,7 @@ func zapItem(_direction):
 					Globals.isItemIdentified(_zappedItem)
 				"wand of turn lock":
 					var _grid = $"/root/World".level.grid
-					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
+					for i in range(1, _zappedItem.value.distance):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							if _zappedItem.alignment.matchn("blessed"):
