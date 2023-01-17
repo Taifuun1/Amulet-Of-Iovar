@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/UI/BlankBar.png" type="Texture" id=1]
 [ext_resource path="res://UI/Game Stats/Game Stats.gd" type="Script" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://Assets/UI/IconRunes.png" type="Texture" id=16]
 [ext_resource path="res://Assets/UI/IconDip.png" type="Texture" id=17]
 [ext_resource path="res://Assets/UI/IconUse.png" type="Texture" id=18]
+[ext_resource path="res://Assets/UI/IconAttackNeutral.png" type="Texture" id=19]
+[ext_resource path="res://Assets/UI/IconAutoMine.png" type="Texture" id=20]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0235294, 0.0313726, 0.101961, 1 )
@@ -757,7 +759,7 @@ margin_right = 281.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 12 )
+texture = ExtResource( 20 )
 stretch_mode = 6
 
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" instance=ExtResource( 9 )]
@@ -769,7 +771,7 @@ margin_right = 338.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 12 )
+texture = ExtResource( 19 )
 stretch_mode = 6
 
 [node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" instance=ExtResource( 9 )]
@@ -849,7 +851,9 @@ stretch_mode = 6
 [connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onIconClicked" binds= [ "dip" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/DipIcon", "dip" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/DipIcon" ]]
-[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon", "zap" ]]
-[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon" ]]
-[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon", "zap" ]]
-[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onIconClicked" binds= [ "autoMine" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/AutoMineIcon", "autoMine" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/AutoMineIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onIconClicked" binds= [ "attackNeutral" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon", "attackNeutral" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" ]]

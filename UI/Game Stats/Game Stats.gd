@@ -217,6 +217,8 @@ func _onIconClicked(event, _icon):
 			"dip":
 				$"/root/World".openMenu("dip")
 			"autoMine":
-				pass
+				$"/root/World/Critters/0".autoMine = !$"/root/World/Critters/0".autoMine
+				Globals.gameConsole.addLog("Automine is {autoMine}".format({ "autoMine": "on" if $"/root/World/Critters/0".autoMine else "off" }))
 			"attackNeutral":
-				pass
+				$"/root/World/Critters/0".attackNeutral = !$"/root/World/Critters/0".attackNeutral
+				Globals.gameConsole.addLog("Attack neutral is {attackNeutral}".format({ "attackNeutral": "on" if $"/root/World/Critters/0".attackNeutral else "off" }))

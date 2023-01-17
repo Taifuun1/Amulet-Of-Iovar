@@ -69,15 +69,44 @@ var critterLevelGenerationList = {
 			"snakes": ["Garnered snake", "Marsh snake"]
 		}
 	},
+	"patch": {
+		"amount": [6, 11],
+		"critters": {
+			"ants": ["Leaf ant"],
+			"bats": ["Squinting bat"],
+			"canines": ["Wolf"],
+			"centaurs": ["Hill centaur"],
+			"elves": ["Elf hunter", "Elf assassin"],
+			"felines": ["Cat", "Lynx"],
+			"humans": ["Outlaw watcher"],
+			"newts": ["Highlands newt"],
+			"orcs": ["Flatlands orc"],
+			"rats": ["Big rat"],
+			"snakes": ["Garnered snake", "Marsh snake"]
+		}
+	},
+	"abandonedOutpost": {
+		"amount": [4, 8],
+		"critters": {
+			"humans": ["Outlaw watcher", "Outlaw fusiee'er"],
+			"newts": ["Highlands newt"],
+			"orcs": ["Flatlands orc"]
+		}
+	},
+	"anthill": {
+		"amount": [12, 15],
+		"critters": {
+			"ants": ["Sugar ant", "Leaf ant"],
+			"snakes": ["Garnered snake", "Marsh snake"]
+		}
+	},
 	"library": {
 		"amount": [6, 10],
 		"critters": {
 			"blobs": ["Sluerp"],
 			"bats": ["Spooky bat", "Vampire bat"],
-			"felines": ["Cat", "Lynx", "Tiger"],
+			"felines": ["Cat", "Lynx"],
 			"giants": ["Balding giant"],
-			"humans": ["Outlaw watcher", "Outlaw fusiee'er", "Outlaw merchandiee'er"],
-			"liches": ["Half-lich"],
 			"mimics": ["Mimic"],
 			"newts": ["Paper newt"],
 			"rats": ["Big rat"],
@@ -108,6 +137,8 @@ var critterLevelGenerationList = {
 			"dwarves": ["Dwarf miner", "Dwarf engineer"],
 			"felines": ["Cat", "Lynx"],
 			"giants": ["Hill giant"],
+			"humans": ["Outlaw watcher", "Outlaw fusiee'er"],
+			"liches": ["Half-lich"],
 			"mimics": ["Mimic"],
 			"newts": ["Mine newt"],
 			"orcs": ["Flatlands orc", "Mountain orc"],

@@ -197,6 +197,19 @@ var scrolls = {
 #	],
 	"rare": [
 		{
+			"itemName": "Tome of Knowledge",
+			"unidentifiedItemName": "Heavy tome",
+			"texture": load("res://Assets/Tools/TomeOfKnowledge.png"),
+			"unidentifiedTexture": load("res://Assets/Tools/TomeOfKnowledge.png"),
+			"type": "Scroll",
+			"category": null,
+			"weight": 25,
+			"value": null,
+			"points": 250,
+			"enchantable": false,
+			"stackable": true
+		},
+		{
 			"itemName": "Scroll of genocide",
 			"unidentifiedItemName": null,
 			"texture": load("res://Assets/Miscellaneous/Scroll.png"),

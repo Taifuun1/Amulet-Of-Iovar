@@ -216,19 +216,6 @@ var tools = {
 			"stackable": false
 		},
 		{
-			"itemName": "Tome of Knowledge",
-			"unidentifiedItemName": "Heavy tome",
-			"texture": load("res://Assets/Tools/TomeOfKnowledge.png"),
-			"unidentifiedTexture": load("res://Assets/Tools/TomeOfKnowledge.png"),
-			"type": "Tool",
-			"category": null,
-			"weight": 25,
-			"value": null,
-			"points": 250,
-			"enchantable": false,
-			"stackable": true
-		},
-		{
 			"itemName": "Magic marker",
 			"unidentifiedItemName": "Marker",
 			"texture": load("res://Assets/Tools/MarkerMagic.png"),

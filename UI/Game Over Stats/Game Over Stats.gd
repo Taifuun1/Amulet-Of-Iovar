@@ -66,4 +66,8 @@ func _onSaveAndExitpressed():
 	
 	GlobalSave.saveAndloadLifeTimeStats("LifeTimeStats", _lifeTimeStats)
 	
+	var saveData = $Save.loadData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	if saveData.hasSave:
+		$Save.deleteData(StartingData.selectedSave)
+	
 	get_tree().quit()

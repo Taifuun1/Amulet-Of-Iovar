@@ -589,13 +589,11 @@ func checkWhatCloakIsWorn(_cloak):
 				Globals.gameConsole.addLog("Your feel like you're all over the place.")
 		"ring of magical ambiquity":
 			if _playerNode.itemsTurnedOn.has(_cloak):
-#				_playerNode.statusEffects[""] = 0
-#				_playerNode.itemsTurnedOn.erase(_cloak)
-				Globals.gameConsole.addLog("You feel magically normal. (UN_IMPL)")
+				_playerNode.itemsTurnedOn.erase(_cloak)
+				Globals.gameConsole.addLog("You feel magically normal.")
 			else:
-#				_playerNode.statusEffects[""] = -1
-#				_playerNode.itemsTurnedOn.append(_cloak)
-				Globals.gameConsole.addLog("Your feel strangely ambivalent about magic. (UN_IMPL)")
+				_playerNode.itemsTurnedOn.append(_cloak)
+				Globals.gameConsole.addLog("Your feel strangely ambivalent about magic.")
 	_playerNode.checkAllIdentification(true)
 
 func checkWhatGauntletsAreWorn(_gauntlets):
@@ -616,7 +614,7 @@ func checkWhatGauntletsAreWorn(_gauntlets):
 			else:
 				_playerNode.stats["strength"] += 1
 				_playerNode.itemsTurnedOn.append(_gauntlets)
-				Globals.gameConsole.addLog("Your feel like you cant lift the world!")
+				Globals.gameConsole.addLog("Your feel like you can lift the world!")
 		"gauntlets of nimbleness":
 			if _playerNode.itemsTurnedOn.has(_gauntlets):
 				_playerNode.stats["legerity"] -= 1

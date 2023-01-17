@@ -228,7 +228,7 @@ var items = {
 	},
 	"Cloak of magical ambiguity": {
 		"knowledge": false,
-		"description": "Gives magical resistance. -2 magic damage taken. +1 ac"
+		"description": "Gives magical resistance. -3 spell damage taken. +1 ac"
 	},
 #	"Cloak of invisibility": {
 #		"knowledge": false,

@@ -132,6 +132,7 @@ func setUpGameObjects(_playerData = null):
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
+		$Items/Items.createItem("tome of knowledge", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "cursed" })
@@ -544,7 +545,7 @@ func isGameOver():
 		Globals.gameConsole.addLog("You die...")
 		currentGameState = $"/root/World".gameState.GAME_OVER
 		gameOver = true
-		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".())
+		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".getGameOverStats())
 		$"UI/UITheme/Game Over Stats".show()
 		return true
 	elif gameOver:
@@ -802,7 +803,12 @@ func openMenu(_menu, _playerTile = null):
 				currentGameState = gameState.EQUIPMENT
 		"read":
 			if currentGameState == gameState.GAME:
-				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["scroll"])
+				var _items = $Critters/"0"/Inventory.getItemsOfType(["scroll"])
+				var _tools = $Critters/"0"/Inventory.getItemsOfType(["tool"])
+				for _itemId in _tools:
+					if get_node("Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn("tome of knowledge"):
+						_items.append(_itemId)
+				$UI/UITheme/ItemManagement.items = _items
 				$UI/UITheme/ItemManagement.showItemManagementList("Read what?", true)
 				currentGameState = gameState.READ
 		"runes":

@@ -171,8 +171,8 @@ var dip = {
 	"sprite": load("res://Assets/UI/IconDip.png")
 }
 
-var automine = {
-	"title": "Auto-mine",
+var autoMine = {
+	"title": "Automine",
 	"sprite": load("res://Assets/UI/IconAutoMine.png")
 }
 

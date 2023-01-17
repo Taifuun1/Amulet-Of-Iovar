@@ -43,6 +43,9 @@ var carryWeightBounds = {
 
 var turnsUntilAction = 0
 
+var attackNeutral = false
+var autoMine = false
+
 var selectedItem = null
 var itemsTurnedOn = []
 
@@ -147,6 +150,11 @@ func create(_data = null):
 	
 	goldPieces = _playerData.goldPieces
 	
+	if _playerData.has("autoMine"):
+		autoMine = _playerData.autoMine
+	if _playerData.has("attackNeutral"):
+		attackNeutral = _playerData.attackNeutral
+	
 	neutralClasses = _playerData.neutralClasses
 	
 	if _playerData.has("items"):
@@ -171,7 +179,7 @@ func create(_data = null):
 func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 	if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter != null:
 		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].critter }))
-		if _critter.aI.aI.matchn("Aggressive") or _critter.aI.aI.matchn("Slow Aggressive") or _critter.aI.aI.matchn("Mimicking"):
+		if _critter.aI.aI.matchn("Aggressive") or _critter.aI.aI.matchn("Slow Aggressive") or _critter.aI.aI.matchn("Mimicking") or attackNeutral:
 			if checkIfCritterHasEffect(_critter):
 				return
 			
@@ -229,7 +237,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE or
 		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP
 	):
-		if $Inventory.checkIfItemInInventoryByName("pickaxe"):
+		if $Inventory.checkIfItemInInventoryByName("pickaxe") and autoMine:
 			if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.EMPTY:
 				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE
 			elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE:
@@ -269,6 +277,12 @@ func takeDamage(_attacks, _critterTile, _crittername):
 	if _attacks.size() != 0:
 		for _attack in _attacks:
 			var _damage = calculateDmg(_attack)
+			
+			if itemsTurnedOn.has("cloak of magical ambiquity") and _damage.dmg <= 0 and _damage.magicDmg != 0:
+				if _damage.magicDmg - 3 < 0:
+					_damage.magicDmg = 0
+				else:
+					_damage.magicDmg -= 3
 			
 			var _damageNumber = damageNumber.instance()
 			var _damageText
@@ -863,6 +877,8 @@ func getCritterSaveData():
 		maxCarryWeight = maxCarryWeight,
 		carryWeightBounds = carryWeightBounds,
 		turnsUntilAction = turnsUntilAction,
+		attackNeutral = attackNeutral,
+		autoMine = autoMine,
 		selectedItem = selectedItem,
 		itemsTurnedOn = itemsTurnedOn,
 		skills = skills,

@@ -379,21 +379,33 @@ func readItem(_id):
 				else:
 					Globals.gameConsole.addLog("You already feel confused enough!")
 				Globals.isItemIdentified(_readItem)
-			# "tome of knowledge":
-			# 	var _allItems = GlobalSave.saveAndloadLifeTimeStats("Items")
-			# 	var _allCritters = GlobalSave.saveAndloadLifeTimeStats("Critters")
-			# 	var _items = []
-			# 	var _critters = []
-			# 	for _item in _allItems.size():
-			# 		if !_allItems[_item].knowledge:
-			# 			_items.append(_allItems[_item])
-			# 	for _critter in _allCritters.size():
-			# 		if !_allCritters[_critter].knowledge:
-			# 			_critters.append(_allCritters[_critter])
-			# 	if randi() % 2 == 0:
-			# 		if _items.size() != 0:
-						
-			# 		else:
+			"tome of knowledge":
+				var _allItems = GlobalSave.saveAndloadLifeTimeStats("Items")
+				var _allCritters = GlobalSave.saveAndloadLifeTimeStats("Critters")
+				var _items = []
+				var _critters = []
+				for _item in _allItems:
+					if !_allItems[_item].knowledge:
+						_items.append(_item)
+				for _critter in _allCritters:
+					if !_allCritters[_critter].knowledge:
+						_critters.append(_critter)
+				if (_items.size() != 0 and randi() % 2 == 0) or _critters.size() == 0:
+					var _newKnowledge = _items[randi() % _items.size()]
+					for _item in _allItems:
+						if _newKnowledge.matchn(_item):
+							_allItems[_item].knowledge = true
+					GlobalSave.saveAndloadLifeTimeStats("Items", _allItems)
+					Globals.gameConsole.addLog("You gain knowledge of {itemName}.".format({ "itemName": _newKnowledge }))
+				elif _critters.size() != 0:
+					var _newKnowledge = _critters[randi() % _critters.size()]
+					for _critter in _allCritters:
+						if _newKnowledge.matchn(_critter):
+							_allCritters[_critter].knowledge = true
+					GlobalSave.saveAndloadLifeTimeStats("Critters", _allCritters)
+					Globals.gameConsole.addLog("You gain knowledge of {critterName}.".format({ "critterName": _newKnowledge }))
+				else:
+					Globals.gameConsole.addLog("You're already very knowledgeable. Wow!")
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		checkAllIdentification(true)
