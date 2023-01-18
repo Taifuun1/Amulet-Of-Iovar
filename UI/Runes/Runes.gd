@@ -58,7 +58,7 @@ func hideRunes():
 func setRunes(_id):
 	var _rune = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if checkIfMatchingRuneAndSlot(_rune.type, _rune.category):
-		runes[hoveredEquipment.to_lower()] = _rune
+		runes[hoveredEquipment.to_lower()] = _id
 		get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _rune.getTexture()
 		checkWhatRuneIsEquipped(_rune)
 		calculateMagicDamage()
@@ -98,7 +98,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	
 	for _rune in runes.keys():
 		if runeData.runeData[_rune] != null and runes[_rune] != null:
-			_runeData[_rune] = runeData.runeData[_rune][runes[_rune].value.to_lower()]
+			_runeData[_rune] = runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()]
 	
 	if runes.heario == null:
 		_runeData.heario = {
@@ -115,7 +115,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 		_runeData.heario.texture = load("res://Assets/Spells/Adjacent.png")
 	else:
 		var _direction = _tileToCastTo - _playerTile
-		if runes["luirio"].value.to_lower().matchn("point"):
+		if get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower().matchn("point"):
 			var _previousTile = _playerTile
 			var _checkedTile = _playerTile + _direction
 			for _i in range(_runeData.luirio.distance):
@@ -136,7 +136,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 					break
 				_previousTile += _direction
 				_checkedTile += _direction
-		if runes["luirio"].value.to_lower().matchn("line"):
+		if get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower().matchn("line"):
 			var _checkedTile = _playerTile + _direction
 			for _i in range(_runeData.luirio.distance):
 				if (
@@ -156,7 +156,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 				else:
 					_tiles.append([{ "tile": _checkedTile, "angle": 0 }])
 					_checkedTile += _direction
-		elif runes.luirio.value.to_lower().matchn("cone") or runes.luirio.value.to_lower().matchn("fourway"):
+		elif get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower().matchn("cone") or get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower().matchn("fourway"):
 			var _spellDirections = _runeData.luirio.spellDirections[_direction].duplicate(true)
 			for _i in range(_runeData.luirio.distance):
 				var _lineTiles = []
@@ -274,7 +274,7 @@ func checkIfMatchingRuneAndSlot(_type, _category):
 
 func takeOfRuneWhenDroppingItem(_id):
 	for _rune in runes.keys():
-		if runes[_rune] != null and runes[_rune].id == _id:
+		if runes[_rune] != null and runes[_rune] == _id:
 			runes[_rune] = null
 			get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = null
 			calculateMagicDamage()
@@ -282,7 +282,7 @@ func takeOfRuneWhenDroppingItem(_id):
 
 func isCastableRunes():
 	if runes.eario != null and runes.luirio != null:
-		if runes.luirio.value.matchn("fourway") or runes.luirio.value.matchn("line") or runes.luirio.value.matchn("cone") or runes.luirio.value.matchn("point"):
+		if get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.matchn("fourway") or get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.matchn("line") or get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.matchn("cone") or get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.matchn("point"):
 			return "direction"
 		return "directionless"
 	return "notCastable"
@@ -301,37 +301,40 @@ func calculateMagicDamage():
 		}]
 		return
 	elif runes.heario == null:
-		var _magicDamageIncrease = calculateMagicDamageIncrease(runes.eario.value)
+		var _earioNode = get_node("/root/World/Items/{id}".format({ "id": runes["eario"] }))
+		var _magicDamageIncrease = calculateMagicDamageIncrease(_earioNode.value)
 		for _d in range(1 + _magicDamageIncrease.d):
 			_magicAttacks.append({
 				"dmg": [0,0],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * 0.5 + _magicDamageIncrease.dmg), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[1] * 0.5 + _magicDamageIncrease.dmg)],
-					"element": runes.eario.value
+					"dmg": [int(spellData.spellData[_earioNode.value.to_lower()].baseDmg[0] * 0.5 + _magicDamageIncrease.dmg), int(spellData.spellData[_earioNode.value.to_lower()].baseDmg[1] * 0.5 + _magicDamageIncrease.dmg)],
+					"element": _earioNode.value
 				}
 			})
 		manaUsage = 0
 		for _rune in runes:
 			if !_rune.matchn("heario"):
-				manaUsage += runeData.runeData[_rune][runes[_rune].value.to_lower()].mp
+				manaUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
 #	"effect": runeData.heario[runes.heario].effectMultiplier
 	else:
-		var _magicDamageIncrease = calculateMagicDamageIncrease(runes.eario.value)
+		var _earioNode = get_node("/root/World/Items/{id}".format({ "id": runes["eario"] }))
+		var _hearioNode = get_node("/root/World/Items/{id}".format({ "id": runes["heario"] }))
+		var _magicDamageIncrease = calculateMagicDamageIncrease(_earioNode.value)
 		for _d in range(1 + _magicDamageIncrease.d):
 			_magicAttacks.append({
 				"dmg": [0,0],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg), int(spellData.spellData[runes.eario.value.to_lower()].baseDmg[0] * runeData.runeData.heario[runes.heario.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg)],
-					"element": runes.eario.value
+					"dmg": [int(spellData.spellData[_earioNode.value.to_lower()].baseDmg[0] * runeData.runeData.heario[_hearioNode.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg), int(spellData.spellData[_earioNode.value.to_lower()].baseDmg[0] * runeData.runeData.heario[_hearioNode.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg)],
+					"element": _earioNode.value
 				}
 			})
 		manaUsage = 0
 		for _rune in runes:
-			manaUsage += runeData.runeData[_rune][runes[_rune].value.to_lower()].mp
+			manaUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
 	if _magicAttacks.magicDmg.dmg[0] != 0 and _magicAttacks.magicDmg.dmg[1] != 0:
 		_magicAttacks.magicDmg.dmg = [_magicAttacks.magicDmg.dmg[0] + bonusMagicDmg, _magicAttacks.magicDmg.dmg[1] + bonusMagicDmg]
 	spellDamage = _magicAttacks
@@ -340,6 +343,7 @@ func calculateMagicDamage():
 func calculateMagicDamageIncrease(_type):
 	var _stats = $"/root/World/Critters/0".stats
 	var _critterClass = $"/root/World/Critters/0".critterClass
+	var _playerItemsTurnedOn = $"/root/World/Critters/0".itemsTurnedOn
 	if _type.matchn("fleir"):
 		var _additionalDamage = 0
 		
@@ -357,6 +361,18 @@ func calculateMagicDamageIncrease(_type):
 		if _critterClass.matchn("savant"):
 			_additionalDamage += 3
 		
+		if _playerItemsTurnedOn.has("toga"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("fabric gloves"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("alchemists robes"):
+			_additionalDamage += 2
+		
+		if _playerItemsTurnedOn.has("boots of magic"):
+			_additionalDamage += 1
+		
 		if _stats.visage > 18:
 			_d = 1
 		
@@ -370,6 +386,18 @@ func calculateMagicDamageIncrease(_type):
 		
 		if _critterClass.matchn("savant"):
 			_additionalDamage += 3
+		
+		if _playerItemsTurnedOn.has("toga"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("fabric gloves"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("alchemists robes"):
+			_additionalDamage += 2
+		
+		if _playerItemsTurnedOn.has("boots of magic"):
+			_additionalDamage += 1
 		
 		if _stats.visage > 27:
 			_d = 1
@@ -390,6 +418,15 @@ func calculateMagicDamageIncrease(_type):
 		if _critterClass.matchn("freedom fighter"):
 			_additionalDamage += 2
 		
+		if _playerItemsTurnedOn.has("toga"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("fabric gloves"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("boots of magic"):
+			_additionalDamage += 1
+		
 		return {
 			"dmg": _stats.wisdom / 3 + _additionalDamage,
 			"d": _d
@@ -399,6 +436,15 @@ func calculateMagicDamageIncrease(_type):
 		var _d = 0
 		
 		if _critterClass.matchn("rogue"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("toga"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("fabric gloves"):
+			_additionalDamage += 1
+		
+		if _playerItemsTurnedOn.has("boots of magic"):
 			_additionalDamage += 1
 		
 		if _stats.wisdom > 27:

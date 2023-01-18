@@ -115,6 +115,8 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 	elif _level != null:
 		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
 	
+	newItem.hide()
+	
 	mutex.unlock()
 	
 	return _id

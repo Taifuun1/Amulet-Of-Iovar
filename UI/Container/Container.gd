@@ -76,6 +76,7 @@ func _on_Container_List_Clicked(_id):
 		removeContainerItem(_id, "Inventory")
 		createContainerItem(_item, "Container")
 		$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_id)
+		$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_id)
 		if containerItemNode.identifiedItemName.matchn("bag of holding"):
 			containerItemNode.containerWeight += _item.weight - _item.weight / 3
 		elif containerItemNode.identifiedItemName.matchn("bag of weight"):

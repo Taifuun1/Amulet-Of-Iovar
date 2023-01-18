@@ -383,7 +383,7 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 		notIdentified.name = true
 		if (
 			GlobalItemInfo.globalItemInfo.has(identifiedItemName) and
-			GlobalItemInfo.globalItemInfo[identifiedItemName].identified == false
+			!GlobalItemInfo.globalItemInfo[identifiedItemName].identified
 		):
 			GlobalItemInfo.globalItemInfo[identifiedItemName].identified = true
 	if _identifyAlignment:

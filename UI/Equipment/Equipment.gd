@@ -154,6 +154,7 @@ func _process(_delta):
 					checkWhatCloakIsWorn(_item)
 				if _item.category.matchn("gauntlets"):
 					checkWhatGauntletsAreWorn(_item)
+				checkWhatIsWorn(_item)
 			elif _matchingType.matchn("accessory"):
 				if accessories[hoveredEquipment.to_lower()] != null:
 					_changed = true
@@ -180,11 +181,11 @@ func showEquipment(_items):
 	for _item in _items:
 		var _newItem = equipmentItem.instance()
 		_newItem.setValues(get_node("/root/World/Items/{item}".format({ "item": _item })))
-		$ItemsBackground/ItemContainer/ItemList.add_child(_newItem)
+		$ItemContainer/ItemList.add_child(_newItem)
 	show()
 
 func hideEquipment():
-	for _item in $ItemsBackground/ItemContainer/ItemList.get_children():
+	for _item in $ItemContainer/ItemList.get_children():
 		_item.queue_free()
 	hide()
 
@@ -220,11 +221,6 @@ func setEquipment(_id):
 			hands[hoveredEquipment.to_lower()] = _item.id
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 	elif _matchingType.matchn("accessory"):
-		if accessories[hoveredEquipment.to_lower()] != null:
-			if _item.category.matchn("ring"):
-				checkWhatRingIsWorn(_oldItem)
-			if _item.category.matchn("amulet"):
-				checkWhatAmuletIsWorn(_oldItem)
 		accessories[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		if _item.category.matchn("ring"):
@@ -232,13 +228,6 @@ func setEquipment(_id):
 		if _item.category.matchn("amulet"):
 			checkWhatAmuletIsWorn(_item)
 	elif _matchingType.matchn("armor"):
-		if equipment[hoveredEquipment.to_lower()] != null:
-			if _item.category.matchn("belt"):
-				checkWhatBeltIsWorn(_oldItem)
-			if _item.category.matchn("cloak"):
-				checkWhatCloakIsWorn(_oldItem)
-			if _item.category.matchn("gauntlets"):
-				checkWhatGauntletsAreWorn(_oldItem)
 		equipment[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		if _item.category.matchn("belt"):
@@ -247,7 +236,8 @@ func setEquipment(_id):
 			checkWhatCloakIsWorn(_item)
 		if _item.category.matchn("gauntlets"):
 			checkWhatGauntletsAreWorn(_item)
-	for _listItem in $ItemsBackground/ItemContainer/ItemList.get_children():
+		checkWhatIsWorn(_item)
+	for _listItem in $ItemContainer/ItemList.get_children():
 		if _item.itemName.matchn(_listItem.item.itemName):
 			_listItem.updateValues(_item.itemName)
 	if _item.binds != null and _item.binds.type.matchn("equipment"):
@@ -262,7 +252,7 @@ func setEquipment(_id):
 	if $"/root/World/Critters/0".attacks.size() == 0:
 		$"/root/World/Critters/0".attacks = [
 			{
-				"dmg": [int(1 + $"/root/World/Critters/0".stats.strength / 6), int(1 + $"/root/World/Critters/0".stats.strength / 6)],
+				"dmg": [int(1 + $"/root/World/Critters/0".baseStats.strength / 6), int(1 + $"/root/World/Critters/0".baseStats.strength / 6)],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -335,6 +325,7 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 				checkWhatCloakIsWorn(_item)
 			if _item.category.matchn("gauntlets"):
 				checkWhatGauntletsAreWorn(_item)
+			checkWhatIsWorn(_item)
 			return
 
 func getArmorClass():
@@ -529,6 +520,43 @@ func checkWhatRingIsWorn(_ring):
 				Globals.gameConsole.addLog("Your legs feel like jelly.")
 	_playerNode.checkAllIdentification(true)
 
+func checkWhatIsWorn(_item):
+	if (
+		GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and
+		GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified == false
+	):
+		GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified = true
+		_item.notIdentified.name = true
+		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _item.identifiedItemName, "unidentifiedItemName": _item.unidentifiedItemName }))
+	var _playerNode = $"/root/World/Critters/0"
+	match _item.identifiedItemName.to_lower():
+		"justice'eer shield":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.statusEffects["backscattering"] = 0
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("You seem so dim.")
+			else:
+				_playerNode.statusEffects["backscattering"] = -1
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("You shine brightly!")
+		"boots of magic":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("Your legs feel normal.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("Your legs feel magical.")
+		"boots of fumbling":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.statusEffects["fumbling"] = 0
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("You feel like you're in control again.")
+			else:
+				_playerNode.statusEffects["fumbling"] = -1
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("Its like your legs have a mind of their own!")
+	_playerNode.checkAllIdentification(true)
+
 func checkWhatBeltIsWorn(_belt):
 	if (
 		GlobalItemInfo.globalItemInfo.has(_belt.identifiedItemName) and
@@ -541,29 +569,29 @@ func checkWhatBeltIsWorn(_belt):
 	match _belt.identifiedItemName.to_lower():
 		"belt of plato":
 			if _playerNode.itemsTurnedOn.has(_belt):
-				_playerNode.stats["wisdom"] -= 1
+				_playerNode.baseStats["wisdom"] -= 1
 				_playerNode.itemsTurnedOn.erase(_belt)
 				Globals.gameConsole.addLog("Your feel very dumb.")
 			else:
-				_playerNode.stats["wisdom"] += 1
+				_playerNode.baseStats["wisdom"] += 1
 				_playerNode.itemsTurnedOn.append(_belt)
 				Globals.gameConsole.addLog("Your feel very wise.")
 		"belt of faith":
 			if _playerNode.itemsTurnedOn.has(_belt):
-				_playerNode.stats["belief"] -= 1
+				_playerNode.baseStats["belief"] -= 1
 				_playerNode.itemsTurnedOn.erase(_belt)
 				Globals.gameConsole.addLog("Your feel like you dont believe in anything.")
 			else:
-				_playerNode.stats["belief"] += 1
+				_playerNode.baseStats["belief"] += 1
 				_playerNode.itemsTurnedOn.append(_belt)
 				Globals.gameConsole.addLog("Your feel a rapturous faith fill you.")
 		"belt of symmetry":
 			if _playerNode.itemsTurnedOn.has(_belt):
-				_playerNode.stats["visage"] -= 1
+				_playerNode.baseStats["visage"] -= 1
 				_playerNode.itemsTurnedOn.erase(_belt)
 				Globals.gameConsole.addLog("Your feel ugly.")
 			else:
-				_playerNode.stats["visage"] += 1
+				_playerNode.baseStats["visage"] += 1
 				_playerNode.itemsTurnedOn.append(_belt)
 				Globals.gameConsole.addLog("Your feel very photogenetic.")
 	_playerNode.checkAllIdentification(true)
@@ -578,6 +606,20 @@ func checkWhatCloakIsWorn(_cloak):
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _cloak.identifiedItemName, "unidentifiedItemName": _cloak.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _cloak.identifiedItemName.to_lower():
+		"toga":
+			if _playerNode.itemsTurnedOn.has(_cloak):
+				_playerNode.itemsTurnedOn.erase(_cloak)
+				Globals.gameConsole.addLog("You feel very casual.")
+			else:
+				_playerNode.itemsTurnedOn.append(_cloak)
+				Globals.gameConsole.addLog("You feel very formal.")
+		"alchemists robes":
+			if _playerNode.itemsTurnedOn.has(_cloak):
+				_playerNode.itemsTurnedOn.erase(_cloak)
+				Globals.gameConsole.addLog("You feel a little more sane.")
+			else:
+				_playerNode.itemsTurnedOn.append(_cloak)
+				Globals.gameConsole.addLog("You feel like you could transmute anything.")
 		"cloak of displacement":
 			if _playerNode.itemsTurnedOn.has(_cloak):
 				_playerNode.statusEffects["displacement"] = 0
@@ -587,7 +629,7 @@ func checkWhatCloakIsWorn(_cloak):
 				_playerNode.statusEffects["displacement"] = -1
 				_playerNode.itemsTurnedOn.append(_cloak)
 				Globals.gameConsole.addLog("Your feel like you're all over the place.")
-		"ring of magical ambiquity":
+		"cloak of magical ambiquity":
 			if _playerNode.itemsTurnedOn.has(_cloak):
 				_playerNode.itemsTurnedOn.erase(_cloak)
 				Globals.gameConsole.addLog("You feel magically normal.")
@@ -606,31 +648,38 @@ func checkWhatGauntletsAreWorn(_gauntlets):
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _gauntlets.identifiedItemName, "unidentifiedItemName": _gauntlets.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _gauntlets.identifiedItemName.to_lower():
+		"fabric gloves":
+			if _playerNode.itemsTurnedOn.has(_gauntlets):
+				_playerNode.itemsTurnedOn.erase(_gauntlets)
+				Globals.gameConsole.addLog("Your hands feel coarse.")
+			else:
+				_playerNode.itemsTurnedOn.append(_gauntlets)
+				Globals.gameConsole.addLog("The gloves feel very soft.")
 		"gauntlets of devastation":
 			if _playerNode.itemsTurnedOn.has(_gauntlets):
-				_playerNode.stats["strength"] -= 1
+				_playerNode.baseStats["strength"] -= 1
 				_playerNode.itemsTurnedOn.erase(_gauntlets)
 				Globals.gameConsole.addLog("Your feel like a weak sausage.")
 			else:
-				_playerNode.stats["strength"] += 1
+				_playerNode.baseStats["strength"] += 1
 				_playerNode.itemsTurnedOn.append(_gauntlets)
 				Globals.gameConsole.addLog("Your feel like you can lift the world!")
 		"gauntlets of nimbleness":
 			if _playerNode.itemsTurnedOn.has(_gauntlets):
-				_playerNode.stats["legerity"] -= 1
+				_playerNode.baseStats["legerity"] -= 1
 				_playerNode.itemsTurnedOn.erase(_gauntlets)
 				Globals.gameConsole.addLog("Your feel a little clumsy.")
 			else:
-				_playerNode.stats["legerity"] += 1
+				_playerNode.baseStats["legerity"] += 1
 				_playerNode.itemsTurnedOn.append(_gauntlets)
 				Globals.gameConsole.addLog("Your feel like an elf.")
 		"gauntlets of balance":
 			if _playerNode.itemsTurnedOn.has(_gauntlets):
-				_playerNode.stats["balance"] -= 1
+				_playerNode.baseStats["balance"] -= 1
 				_playerNode.itemsTurnedOn.erase(_gauntlets)
 				Globals.gameConsole.addLog("Your feel imbalanced.")
 			else:
-				_playerNode.stats["balance"] += 1
+				_playerNode.baseStats["balance"] += 1
 				_playerNode.itemsTurnedOn.append(_gauntlets)
 				Globals.gameConsole.addLog("Your feel like a dwarf.")
 	_playerNode.checkAllIdentification(true)

@@ -7,6 +7,11 @@ var selectedItems = []
 
 var chooseOnClick = false
 
+func sortItems(a, b):
+	if get_node("/root/World/Items/{itemId}".format({ "itemId": a })).itemName < get_node("/root/World/Items/{itemId}".format({ "itemId": b })).itemName:
+		return true
+	return false
+
 func create():
 	name = "ItemManagement"
 	hide()
@@ -14,6 +19,7 @@ func create():
 func showItemManagementList(_title, _chooseOnClick = false):
 	$ItemManagementContainer/TitleContainer/Title.text = _title
 	chooseOnClick = _chooseOnClick
+	items.sort_custom(self, "sortItems")
 	for item in items:
 		var newItem = menuItem.instance()
 		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))

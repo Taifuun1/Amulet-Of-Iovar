@@ -380,7 +380,7 @@ func dropItem(_playerTile, _item, _grid):
 			):
 				$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
 				$"/root/World".gameOver = true
-				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats())
+				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats(), true)
 				GlobalGameStats["Times ascended"] += 1
 			_item.identifyItem(false, true, false)
 			if _item.alignment.matchn("blessed"):

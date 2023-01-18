@@ -529,9 +529,9 @@ func checkIfThreadsAreDone():
 		gameSetUpThread.start(self, "setUpGameObjects")
 
 func _exit_tree():
-	if gameSetUpThread != null:
+	if gameSetUpThread != null and !gameSetUpThread.is_alive():
 		print("game set up")
 		gameSetUpThread.wait_to_finish()
-	if saveGameThread != null:
+	if saveGameThread != null and !saveGameThread.is_alive():
 		print("done")
 		saveGameThread.wait_to_finish()

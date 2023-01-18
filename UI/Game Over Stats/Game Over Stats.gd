@@ -3,9 +3,11 @@ extends PanelContainer
 var RichTextLabelExtended = load("res://UI/RichTextLabel Extended/RichTextLabel Extended.tscn")
 
 var stats
+var ascended
 
-func setValues(_title, _stats):
+func setValues(_title, _stats, _ascended = false):
 	stats = _stats
+	ascended = _ascended
 	
 	for _itemName in _stats.points.points:
 		$"GameOverTabs/Points/PointsContainer/Points".createPointItem(_itemName, _stats.points.points[_itemName])
@@ -66,8 +68,12 @@ func _onSaveAndExitpressed():
 	
 	GlobalSave.saveAndloadLifeTimeStats("LifeTimeStats", _lifeTimeStats)
 	
-	var saveData = $Save.loadData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
+	var saveData = $"/root/World/Save".loadData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }))
 	if saveData.hasSave:
-		$Save.deleteData(StartingData.selectedSave)
+		$"/root/World/Save".deleteData(StartingData.selectedSave)
+	
+	stats.ascended = ascended
+	
+	$"/root/World/Save".saveData("Game{gameCount}".format({ "gameCount": _lifeTimeStats["Game count"] }), "Games", stats)
 	
 	get_tree().quit()

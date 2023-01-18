@@ -15,7 +15,7 @@ var orcs = [
 		"ac": 0,
 		"attacks": [
 			{
-				"dmg": [2,5],
+				"dmg": [2,3],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

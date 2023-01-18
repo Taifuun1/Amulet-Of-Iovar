@@ -222,7 +222,8 @@ var armor = {
 			"weight": 25,
 			"value": {
 				"ac": 1,
-				"resistance": null
+				"resistance": null,
+				"binds": "Equipment"
 			},
 			"enchantable": true,
 			"stackable": false

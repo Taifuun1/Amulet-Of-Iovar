@@ -824,6 +824,8 @@ func useItem(_id):
 			Globals.gameConsole.addLog("You need to be on an altar to use that.")
 	if _usedItem.type.matchn("tool"):
 		match _usedItem.identifiedItemName.to_lower():
+			"pickaxe":
+				Globals.gameConsole.addLog("Turn on automine from bottom right and walk towards a stone wall to use the pickaxe.")
 			"blindfold":
 				if _usedItem.value.worn:
 					_usedItem.value.worn = false
