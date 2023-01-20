@@ -23,18 +23,17 @@ func createRichTextLabelExtended(_critterName, _text):
 	var _richTextLabelExtended = load("res://UI/RichTextLabel Extended/RichTextLabel Extended.tscn").instance()
 	$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.add_child(_richTextLabelExtended)
 	_richTextLabelExtended.createRichTextLabelForGameConsole(_critterName, _text)
+	consoleLog.append("{critterName}: {_text}".format({ "critterName": _critterName, "text": _text }))
 	updateGameConsole()
 
 func updateGameConsole():
-	if $Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child_count() >= 30:
+	if $Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child_count() >= 31:
 		$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.remove_child($Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child(0))
-		consoleLog.pop_back()
+		consoleLog.pop_front()
+	
 	# Wait a frame for Godot to realize the new label
 	yield(get_tree().create_timer(.01), "timeout")
 	$Background/GameConsoleContainer/GameConsoleScrollContainer.scroll_vertical = $Background/GameConsoleContainer/GameConsoleScrollContainer.get_v_scrollbar().max_value
 
 func getGameConsoleSaveData():
-	var _consoleLogs = {}
-	for _consoleLog in consoleLog.size():
-		_consoleLogs[_consoleLog] = consoleLog[_consoleLog]
-	return _consoleLogs
+	return consoleLog

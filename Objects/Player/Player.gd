@@ -126,7 +126,10 @@ func create(_data = null):
 	stats.belief = float(_playerData.stats.belief)
 	stats.visage = float(_playerData.stats.visage)
 	stats.wisdom = float(_playerData.stats.wisdom)
-	baseStats = stats.duplicate(true)
+	if _playerData.has("baseStats"):
+		baseStats = _playerData.baseStats
+	else:
+		baseStats = stats.duplicate(true)
 	
 	hpIncrease = _playerData.hpIncrease
 	mpIncrease = _playerData.mpIncrease
@@ -144,6 +147,8 @@ func create(_data = null):
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 	
 	resistances = _playerData.resistances
+	if _playerData.has("equipmentResistances"):
+		equipmentResistances = _playerData.equipmentResistances
 	
 	calories = 1500
 	previousCalories = calories
@@ -278,7 +283,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 		for _attack in _attacks:
 			var _damage = calculateDmg(_attack)
 			
-			if itemsTurnedOn.has("cloak of magical ambiquity") and _damage.dmg <= 0 and _damage.magicDmg != 0:
+			if itemsTurnedOn.has("cloak of magical ambiquity") and _damage.dmg <= 0 and _damage.magicDmg > 0:
 				if _damage.magicDmg - 3 < 0:
 					_damage.magicDmg = 0
 				else:
@@ -299,7 +304,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			$"/root/World/Texts".add_child(_damageNumber)
 			
 			# Magic spell
-			if _damage.dmg <= 0 and _damage.magicDmg != 0:
+			if _damage.dmg <= 0 and _damage.magicDmg > 0:
 				hp -= _damage.magicDmg
 				_attacksLog.append("{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
 			# Physical attack
@@ -559,6 +564,7 @@ func processPlayerSpecificEffects():
 	###########
 	## Tools ##
 	###########
+	equipmentResistances = []
 	for _item in itemsTurnedOn:
 		match _item.identifiedItemName.to_lower():
 			"amulet of seeing":
@@ -581,6 +587,16 @@ func processPlayerSpecificEffects():
 				statusEffects["regen"] = -1
 			"ring of fumbling":
 				statusEffects["fumbling"] = -1
+			"blue dragon scale mail", "frozen mail":
+				equipmentResistances.append("frost")
+			"red dragon scale mail":
+				equipmentResistances.append("fleir")
+			"yellow dragon scale mail", "thunder mail":
+				equipmentResistances.append("thunder")
+			"green dragon scale mail":
+				equipmentResistances.append("gleeie'er")
+			"violet dragon scale mail":
+				equipmentResistances.append("toxix")
 			"candle":
 				if _item.value.charges > 0:
 					_item.value.charges -= 1
@@ -693,7 +709,7 @@ func calculateEquipmentStats():
 func addExp(_expAmount):
 	experiencePoints += _expAmount
 	while true:
-		if experiencePoints >= experienceNeededForLevelGainAmount and level < 20:
+		if experiencePoints >= experienceNeededForLevelGainAmount and level < 16:
 			gainLevel()
 		else:
 			break
@@ -874,6 +890,7 @@ func getCritterSaveData():
 		calories = calories,
 		previousCalories = previousCalories,
 		goldPieces = goldPieces,
+		equipmentResistances = equipmentResistances,
 		maxCarryWeight = maxCarryWeight,
 		carryWeightBounds = carryWeightBounds,
 		turnsUntilAction = turnsUntilAction,

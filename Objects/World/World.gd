@@ -72,7 +72,7 @@ var gameOver = false
 
 func _process(_delta):
 	if inGame:
-		if $Critters/"0".statusEffects["stun"] > 0 or $Critters/"0".statusEffects["sleep"] > 0:
+		if currentGameState != gameState.GAME_OVER and ($Critters/"0".statusEffects["stun"] > 0 or $Critters/"0".statusEffects["sleep"] > 0):
 			if $Critters/"0".statusEffects["stun"] > 0: Globals.gameConsole.addLog("You are stunned!")
 			if $Critters/"0".statusEffects["sleep"] > 0: Globals.gameConsole.addLog("You are asleep.")
 			processGameTurn()
@@ -132,7 +132,7 @@ func setUpGameObjects(_playerData = null):
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
-		$Items/Items.createItem("tome of knowledge", null, 1, true, { "alignment": "uncursed" })
+		$Items/Items.createItem("belt of plato", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "cursed" })
@@ -543,6 +543,7 @@ func updateStats():
 func isGameOver():
 	if $Critters/"0".hp <= 0:
 		Globals.gameConsole.addLog("You die...")
+		yield(get_tree().create_timer(0.01), "timeout")
 		currentGameState = $"/root/World".gameState.GAME_OVER
 		gameOver = true
 		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".getGameOverStats())

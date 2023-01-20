@@ -50,6 +50,7 @@ var stats = {
 
 var abilities
 var resistances
+var equipmentResistances = []
 
 var statusEffects = {
 	"stun": 0,
@@ -130,12 +131,10 @@ func calculateDmg(_attack, _activeArmorSets = null):
 			_magicDmg = randi() % int(_magicDmgVariation) + _magicFloorDmg
 		if _activeArmorSets != null and _activeArmorSets.has(_attack.magicDmg.element) and _activeArmorSets[_attack.magicDmg.element]:
 			_magicDmg += 3
-		if _attack.magicDmg.element != null and resistances.has(_attack.magicDmg.element.to_lower()):
+		if _attack.magicDmg.element != null and (resistances.has(_attack.magicDmg.element.to_lower()) or equipmentResistances.has(_attack.magicDmg.element.to_lower())):
 			_magicDmg /= 2
 		damage.magicDmg = _magicDmg
 	
-#	if damage.dmg < 0: damage.dmg = 0
-#	if damage.magicDmg < 0: damage.magicDmg = 0
 	return damage
 
 

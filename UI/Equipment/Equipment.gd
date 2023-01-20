@@ -148,23 +148,13 @@ func _process(_delta):
 					_changed = true
 				equipment[hoveredEquipment.to_lower()] = null
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
-				if _item.category.matchn("belt"):
-					checkWhatBeltIsWorn(_item)
-				if _item.category.matchn("cloak"):
-					checkWhatCloakIsWorn(_item)
-				if _item.category.matchn("gauntlets"):
-					checkWhatGauntletsAreWorn(_item)
 				checkWhatIsWorn(_item)
 			elif _matchingType.matchn("accessory"):
 				if accessories[hoveredEquipment.to_lower()] != null:
 					_changed = true
 				accessories[hoveredEquipment.to_lower()] = null
 				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
-				if _item.category.matchn("ring"):
-					checkWhatRingIsWorn(_item)
-				if _item.category.matchn("amulet"):
-					checkWhatAmuletIsWorn(_item)
-			
+				checkWhatIsWorn(_item)
 			if _item.category.matchn("amulet"):
 				var panelStylebox = get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).get_stylebox("panel").duplicate()
 				panelStylebox.set_border_width_all(0)
@@ -220,22 +210,14 @@ func setEquipment(_id):
 		elif hands["lefthand"] != _item.id and hands["righthand"] != _item.id:
 			hands[hoveredEquipment.to_lower()] = _item.id
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
+			checkWhatIsWorn(_item)
 	elif _matchingType.matchn("accessory"):
 		accessories[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
-		if _item.category.matchn("ring"):
-			checkWhatRingIsWorn(_item)
-		if _item.category.matchn("amulet"):
-			checkWhatAmuletIsWorn(_item)
+		checkWhatIsWorn(_item)
 	elif _matchingType.matchn("armor"):
 		equipment[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
-		if _item.category.matchn("belt"):
-			checkWhatBeltIsWorn(_item)
-		if _item.category.matchn("cloak"):
-			checkWhatCloakIsWorn(_item)
-		if _item.category.matchn("gauntlets"):
-			checkWhatGauntletsAreWorn(_item)
 		checkWhatIsWorn(_item)
 	for _listItem in $ItemContainer/ItemList.get_children():
 		if _item.itemName.matchn(_listItem.item.itemName):
@@ -252,7 +234,7 @@ func setEquipment(_id):
 	if $"/root/World/Critters/0".attacks.size() == 0:
 		$"/root/World/Critters/0".attacks = [
 			{
-				"dmg": [int(1 + $"/root/World/Critters/0".baseStats.strength / 6), int(1 + $"/root/World/Critters/0".baseStats.strength / 6)],
+				"dmg": [int(1 + $"/root/World/Critters/0".stats.strength / 6), int(1 + $"/root/World/Critters/0".stats.strength / 6)],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -310,21 +292,12 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 		if accessories[_accessory] == _id:
 			accessories[_accessory] = null
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = load(equipmentUITemplatePaths[_accessory.to_lower()])
-			if _item.category.matchn("ring"):
-				checkWhatRingIsWorn(_item)
-			if _item.category.matchn("amulet"):
-				checkWhatAmuletIsWorn(_item)
+			checkWhatIsWorn(_item)
 			return
 	for _equipment in equipment.keys():
 		if equipment[_equipment] == _id:
 			equipment[_equipment] = null
 			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = load(equipmentUITemplatePaths[_equipment.to_lower()])
-			if _item.category.matchn("belt"):
-				checkWhatBeltIsWorn(_item)
-			if _item.category.matchn("cloak"):
-				checkWhatCloakIsWorn(_item)
-			if _item.category.matchn("gauntlets"):
-				checkWhatGauntletsAreWorn(_item)
 			checkWhatIsWorn(_item)
 			return
 
@@ -395,131 +368,6 @@ func checkArmorSetPieces():
 			if _set.matchn("toxix"):
 				Globals.gameConsole.addLog("The slithery armor fizzles aggressively!")
 
-func checkWhatAmuletIsWorn(_amulet):
-	if (
-		GlobalItemInfo.globalItemInfo.has(_amulet.identifiedItemName) and
-		GlobalItemInfo.globalItemInfo[_amulet.identifiedItemName].identified == false
-	):
-		GlobalItemInfo.globalItemInfo[_amulet.identifiedItemName].identified = true
-		_amulet.notIdentified.name = true
-		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _amulet.identifiedItemName, "unidentifiedItemName": _amulet.unidentifiedItemName }))
-	var _playerNode = $"/root/World/Critters/0"
-	match _amulet.identifiedItemName.to_lower():
-		"amulet of seeing":
-			if _playerNode.itemsTurnedOn.has(_amulet):
-				_playerNode.statusEffects["seeing"] = 0
-				_playerNode.itemsTurnedOn.erase(_amulet)
-				Globals.gameConsole.addLog("It feels like you cant see at all.")
-			else:
-				_playerNode.statusEffects["seeing"] = -1
-				_playerNode.itemsTurnedOn.append(_amulet)
-				Globals.gameConsole.addLog("You can see everything!")
-		"amulet of magic power":
-			if _playerNode.itemsTurnedOn.has(_amulet):
-				$"/root/World/Critters/0".bonusMagicDmg -= 3
-				_playerNode.itemsTurnedOn.erase(_amulet)
-				$"/root/World/UI/UITheme/Runes".calculateMagicDamage()
-				Globals.gameConsole.addLog("Your magic energy subsides.")
-			else:
-				$"/root/World/UI/UITheme/Runes".bonusMagicDmg += 3
-				_playerNode.itemsTurnedOn.append(_amulet)
-				$"/root/World/UI/UITheme/Runes".calculateMagicDamage()
-				Globals.gameConsole.addLog("Your magic energy surges!")
-		"amulet of life power":
-			if _playerNode.itemsTurnedOn.has(_amulet):
-				$"/root/World/Critters/0".maxhp -= 20
-				if $"/root/World/Critters/0".hp > $"/root/World/Critters/0".maxhp:
-					$"/root/World/Critters/0".hp = $"/root/World/Critters/0".maxhp
-				_playerNode.itemsTurnedOn.erase(_amulet)
-				Globals.gameConsole.addLog("Your life energy feels weaker.")
-			else:
-				$"/root/World/Critters/0".maxhp += 20
-				_playerNode.itemsTurnedOn.append(_amulet)
-				Globals.gameConsole.addLog("Your life energy feels stronger.")
-		"amulet of backscattering":
-			if _playerNode.itemsTurnedOn.has(_amulet):
-				_playerNode.itemsTurnedOn.erase(_amulet)
-				_playerNode.statusEffects.backscattering = 0
-				Globals.gameConsole.addLog("Your feel an energy field dissipate around you.")
-			else:
-				_playerNode.itemsTurnedOn.append(_amulet)
-				_playerNode.statusEffects.backscattering = -1
-				Globals.gameConsole.addLog("Your feel an energy field around you.")
-		"amulet of strangulation":
-			if _playerNode.itemsTurnedOn.has(_amulet):
-				_playerNode.itemsTurnedOn.erase(_amulet)
-				Globals.gameConsole.addLog("You can breath agane.")
-			else:
-				_playerNode.itemsTurnedOn.append(_amulet)
-				Globals.gameConsole.addLog("The amulet strangles you!")
-		"amulet of toxix":
-			if _playerNode.itemsTurnedOn.has(_amulet):
-				_playerNode.itemsTurnedOn.erase(_amulet)
-				_playerNode.statusEffects.toxix = 0
-				Globals.gameConsole.addLog("You dont feel sick anymore.")
-			else:
-				_playerNode.itemsTurnedOn.append(_amulet)
-				_playerNode.statusEffects.toxix = -1
-				Globals.gameConsole.addLog("You feel terrible!")
-		"amulet of sleep":
-			if _playerNode.itemsTurnedOn.has(_amulet):
-				_playerNode.itemsTurnedOn.erase(_amulet)
-				_playerNode.statusEffects.sleep = 0
-				Globals.gameConsole.addLog("You dont feel sleepy anymore.")
-			else:
-				_playerNode.itemsTurnedOn.append(_amulet)
-				_playerNode.statusEffects.sleep = 10
-				Globals.gameConsole.addLog("Your eyelids feel heavy.")
-	_playerNode.checkAllIdentification(true)
-
-func checkWhatRingIsWorn(_ring):
-	if (
-		GlobalItemInfo.globalItemInfo.has(_ring.identifiedItemName) and
-		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified == false
-	):
-		GlobalItemInfo.globalItemInfo[_ring.identifiedItemName].identified = true
-		_ring.notIdentified.name = true
-		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _ring.identifiedItemName, "unidentifiedItemName": _ring.unidentifiedItemName }))
-	var _playerNode = $"/root/World/Critters/0"
-	match _ring.identifiedItemName.to_lower():
-		"ring of slow digestion":
-			if _playerNode.itemsTurnedOn.has(_ring):
-				_playerNode.statusEffects["slow digestion"] = 0
-				_playerNode.itemsTurnedOn.erase(_ring)
-				Globals.gameConsole.addLog("Your belly feels faster.")
-			else:
-				_playerNode.statusEffects["slow digestion"] = -1
-				_playerNode.itemsTurnedOn.append(_ring)
-				Globals.gameConsole.addLog("Your belly feels constant.")
-		"ring of fast digestion":
-			if _playerNode.itemsTurnedOn.has(_ring):
-				_playerNode.statusEffects["fast digestion"] = 0
-				_playerNode.itemsTurnedOn.erase(_ring)
-				Globals.gameConsole.addLog("Your belly feels normal.")
-			else:
-				_playerNode.statusEffects["fast digestion"] = -1
-				_playerNode.itemsTurnedOn.append(_ring)
-				Globals.gameConsole.addLog("Your belly feels like it has a hole.")
-		"ring of regen":
-			if _playerNode.itemsTurnedOn.has(_ring):
-				_playerNode.statusEffects["regen"] = 0
-				_playerNode.itemsTurnedOn.erase(_ring)
-				Globals.gameConsole.addLog("Your skin feels more stable.")
-			else:
-				_playerNode.statusEffects["regen"] = -1
-				_playerNode.itemsTurnedOn.append(_ring)
-				Globals.gameConsole.addLog("Your skin tingles.")
-		"ring of fumbling":
-			if _playerNode.itemsTurnedOn.has(_ring):
-				_playerNode.statusEffects["fumbling"] = 0
-				_playerNode.itemsTurnedOn.erase(_ring)
-				Globals.gameConsole.addLog("Your legs feel steady.")
-			else:
-				_playerNode.statusEffects["fumbling"] = -1
-				_playerNode.itemsTurnedOn.append(_ring)
-				Globals.gameConsole.addLog("Your legs feel like jelly.")
-	_playerNode.checkAllIdentification(true)
-
 func checkWhatIsWorn(_item):
 	if (
 		GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and
@@ -530,6 +378,142 @@ func checkWhatIsWorn(_item):
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _item.identifiedItemName, "unidentifiedItemName": _item.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
 	match _item.identifiedItemName.to_lower():
+		"amulet of seeing":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.statusEffects["seeing"] = 0
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("It feels like you cant see at all.")
+			else:
+				_playerNode.statusEffects["seeing"] = -1
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("You can see everything!")
+		"amulet of magic power":
+			if _playerNode.itemsTurnedOn.has(_item):
+				$"/root/World/Critters/0".bonusMagicDmg -= 3
+				_playerNode.itemsTurnedOn.erase(_item)
+				$"/root/World/UI/UITheme/Runes".calculateMagicDamage()
+				Globals.gameConsole.addLog("Your magic energy subsides.")
+			else:
+				$"/root/World/UI/UITheme/Runes".bonusMagicDmg += 3
+				_playerNode.itemsTurnedOn.append(_item)
+				$"/root/World/UI/UITheme/Runes".calculateMagicDamage()
+				Globals.gameConsole.addLog("Your magic energy surges!")
+		"amulet of life power":
+			if _playerNode.itemsTurnedOn.has(_item):
+				$"/root/World/Critters/0".maxhp -= 20
+				if $"/root/World/Critters/0".hp > $"/root/World/Critters/0".maxhp:
+					$"/root/World/Critters/0".hp = $"/root/World/Critters/0".maxhp
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("Your life energy feels weaker.")
+			else:
+				$"/root/World/Critters/0".maxhp += 20
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("Your life energy feels stronger.")
+		"amulet of backscattering":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				_playerNode.statusEffects.backscattering = 0
+				Globals.gameConsole.addLog("Your feel an energy field dissipate around you.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				_playerNode.statusEffects.backscattering = -1
+				Globals.gameConsole.addLog("Your feel an energy field around you.")
+		"amulet of strangulation":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("You can breath agane.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("The amulet strangles you!")
+		"amulet of toxix":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				_playerNode.statusEffects.toxix = 0
+				Globals.gameConsole.addLog("You dont feel sick anymore.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				_playerNode.statusEffects.toxix = -1
+				Globals.gameConsole.addLog("You feel terrible!")
+		"amulet of sleep":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				_playerNode.statusEffects.sleep = 0
+				Globals.gameConsole.addLog("You dont feel sleepy anymore.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				_playerNode.statusEffects.sleep = 10
+				Globals.gameConsole.addLog("Your eyelids feel heavy.")
+		"ring of slow digestion":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.statusEffects["slow digestion"] = 0
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("Your belly feels faster.")
+			else:
+				_playerNode.statusEffects["slow digestion"] = -1
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("Your belly feels constant.")
+		"ring of fast digestion":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.statusEffects["fast digestion"] = 0
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("Your belly feels normal.")
+			else:
+				_playerNode.statusEffects["fast digestion"] = -1
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("Your belly feels like it has a hole.")
+		"ring of regen":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.statusEffects["regen"] = 0
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("Your skin feels more stable.")
+			else:
+				_playerNode.statusEffects["regen"] = -1
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("Your skin tingles.")
+		"ring of fumbling":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.statusEffects["fumbling"] = 0
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("Your legs feel steady.")
+			else:
+				_playerNode.statusEffects["fumbling"] = -1
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("Your legs feel like jelly.")
+		"blue dragon scale mail":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("You feel lame.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("You feel really cool.")
+		"green dragon scale mail":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("You feel still.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("You feel windy.")
+		"red dragon scale mail":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("You feel temperate.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("You feel fiery.")
+		"yellow dragon scale mail":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("You feel cloudless.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("You feel flashy.")
+		"violet dragon scale mail":
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
+				Globals.gameConsole.addLog("You feel uncooked.")
+			else:
+				_playerNode.itemsTurnedOn.append(_item)
+				Globals.gameConsole.addLog("You feel bubbly.")
 		"justice'eer shield":
 			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.statusEffects["backscattering"] = 0
@@ -555,132 +539,96 @@ func checkWhatIsWorn(_item):
 				_playerNode.statusEffects["fumbling"] = -1
 				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Its like your legs have a mind of their own!")
-	_playerNode.checkAllIdentification(true)
-
-func checkWhatBeltIsWorn(_belt):
-	if (
-		GlobalItemInfo.globalItemInfo.has(_belt.identifiedItemName) and
-		GlobalItemInfo.globalItemInfo[_belt.identifiedItemName].identified == false
-	):
-		GlobalItemInfo.globalItemInfo[_belt.identifiedItemName].identified = true
-		_belt.notIdentified.name = true
-		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _belt.identifiedItemName, "unidentifiedItemName": _belt.unidentifiedItemName }))
-	var _playerNode = $"/root/World/Critters/0"
-	match _belt.identifiedItemName.to_lower():
 		"belt of plato":
-			if _playerNode.itemsTurnedOn.has(_belt):
+			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.baseStats["wisdom"] -= 1
-				_playerNode.itemsTurnedOn.erase(_belt)
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("Your feel very dumb.")
 			else:
 				_playerNode.baseStats["wisdom"] += 1
-				_playerNode.itemsTurnedOn.append(_belt)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel very wise.")
 		"belt of faith":
-			if _playerNode.itemsTurnedOn.has(_belt):
+			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.baseStats["belief"] -= 1
-				_playerNode.itemsTurnedOn.erase(_belt)
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("Your feel like you dont believe in anything.")
 			else:
 				_playerNode.baseStats["belief"] += 1
-				_playerNode.itemsTurnedOn.append(_belt)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel a rapturous faith fill you.")
 		"belt of symmetry":
-			if _playerNode.itemsTurnedOn.has(_belt):
+			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.baseStats["visage"] -= 1
-				_playerNode.itemsTurnedOn.erase(_belt)
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("Your feel ugly.")
 			else:
 				_playerNode.baseStats["visage"] += 1
-				_playerNode.itemsTurnedOn.append(_belt)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel very photogenetic.")
-	_playerNode.checkAllIdentification(true)
-
-func checkWhatCloakIsWorn(_cloak):
-	if (
-		GlobalItemInfo.globalItemInfo.has(_cloak.identifiedItemName) and
-		GlobalItemInfo.globalItemInfo[_cloak.identifiedItemName].identified == false
-	):
-		GlobalItemInfo.globalItemInfo[_cloak.identifiedItemName].identified = true
-		_cloak.notIdentified.name = true
-		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _cloak.identifiedItemName, "unidentifiedItemName": _cloak.unidentifiedItemName }))
-	var _playerNode = $"/root/World/Critters/0"
-	match _cloak.identifiedItemName.to_lower():
 		"toga":
-			if _playerNode.itemsTurnedOn.has(_cloak):
-				_playerNode.itemsTurnedOn.erase(_cloak)
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("You feel very casual.")
 			else:
-				_playerNode.itemsTurnedOn.append(_cloak)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("You feel very formal.")
 		"alchemists robes":
-			if _playerNode.itemsTurnedOn.has(_cloak):
-				_playerNode.itemsTurnedOn.erase(_cloak)
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("You feel a little more sane.")
 			else:
-				_playerNode.itemsTurnedOn.append(_cloak)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("You feel like you could transmute anything.")
 		"cloak of displacement":
-			if _playerNode.itemsTurnedOn.has(_cloak):
+			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.statusEffects["displacement"] = 0
-				_playerNode.itemsTurnedOn.erase(_cloak)
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("Your feel like you're in one piece again.")
 			else:
 				_playerNode.statusEffects["displacement"] = -1
-				_playerNode.itemsTurnedOn.append(_cloak)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel like you're all over the place.")
 		"cloak of magical ambiquity":
-			if _playerNode.itemsTurnedOn.has(_cloak):
-				_playerNode.itemsTurnedOn.erase(_cloak)
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("You feel magically normal.")
 			else:
-				_playerNode.itemsTurnedOn.append(_cloak)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel strangely ambivalent about magic.")
-	_playerNode.checkAllIdentification(true)
-
-func checkWhatGauntletsAreWorn(_gauntlets):
-	if (
-		GlobalItemInfo.globalItemInfo.has(_gauntlets.identifiedItemName) and
-		GlobalItemInfo.globalItemInfo[_gauntlets.identifiedItemName].identified == false
-	):
-		GlobalItemInfo.globalItemInfo[_gauntlets.identifiedItemName].identified = true
-		_gauntlets.notIdentified.name = true
-		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _gauntlets.identifiedItemName, "unidentifiedItemName": _gauntlets.unidentifiedItemName }))
-	var _playerNode = $"/root/World/Critters/0"
-	match _gauntlets.identifiedItemName.to_lower():
 		"fabric gloves":
-			if _playerNode.itemsTurnedOn.has(_gauntlets):
-				_playerNode.itemsTurnedOn.erase(_gauntlets)
+			if _playerNode.itemsTurnedOn.has(_item):
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("Your hands feel coarse.")
 			else:
-				_playerNode.itemsTurnedOn.append(_gauntlets)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("The gloves feel very soft.")
 		"gauntlets of devastation":
-			if _playerNode.itemsTurnedOn.has(_gauntlets):
+			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.baseStats["strength"] -= 1
-				_playerNode.itemsTurnedOn.erase(_gauntlets)
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("Your feel like a weak sausage.")
 			else:
 				_playerNode.baseStats["strength"] += 1
-				_playerNode.itemsTurnedOn.append(_gauntlets)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel like you can lift the world!")
 		"gauntlets of nimbleness":
-			if _playerNode.itemsTurnedOn.has(_gauntlets):
+			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.baseStats["legerity"] -= 1
-				_playerNode.itemsTurnedOn.erase(_gauntlets)
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("Your feel a little clumsy.")
 			else:
 				_playerNode.baseStats["legerity"] += 1
-				_playerNode.itemsTurnedOn.append(_gauntlets)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel like an elf.")
 		"gauntlets of balance":
-			if _playerNode.itemsTurnedOn.has(_gauntlets):
+			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.baseStats["balance"] -= 1
-				_playerNode.itemsTurnedOn.erase(_gauntlets)
+				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("Your feel imbalanced.")
 			else:
 				_playerNode.baseStats["balance"] += 1
-				_playerNode.itemsTurnedOn.append(_gauntlets)
+				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel like a dwarf.")
 	_playerNode.checkAllIdentification(true)
 

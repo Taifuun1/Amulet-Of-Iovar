@@ -397,7 +397,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 163,
 			"value": {
-				"ac": 8,
+				"ac": 7,
 				"resistance": "Frost"
 			},
 			"points": 400,
@@ -413,7 +413,7 @@ var armor = {
 			"category": "Plate",
 			"weight": 163,
 			"value": {
-				"ac": 8,
+				"ac": 7,
 				"resistance": "Thunder"
 			},
 			"points": 400,
