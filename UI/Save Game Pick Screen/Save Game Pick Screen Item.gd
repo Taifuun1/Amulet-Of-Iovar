@@ -29,10 +29,11 @@ func create(_saveSlot, _data):
 	var _classNameText
 	var _dungeonLevelNameText
 	var _pointsText
+	
 	if _saveData.hasSave:
-		_hasSaveText = "Has save"
+		$SaveContainer/NoSave.hide()
 	else:
-		_hasSaveText = "No save"
+		$SaveContainer/SaveDataContainer.hide()
 	if _saveData.className != null:
 		_classTexture = load("res://Assets/Classes/{className}.png".format({ "className": _saveData.className.capitalize().replace(" ", "") }))
 	else:
@@ -50,13 +51,12 @@ func create(_saveSlot, _data):
 	else:
 		_pointsText =  "-"
 	
-	$MarginContainer/HBoxContainer/VBoxContainer/SaveSlot.append_bbcode(_saveSlotText)
-	$MarginContainer/HBoxContainer/VBoxContainer/HasSave.append_bbcode(_hasSaveText)
-	$MarginContainer/HBoxContainer/VBoxContainer/ClassTexture.texture = _classTexture
+	$SaveContainer/SaveSlot.append_bbcode(_saveSlotText)
+	$SaveContainer/SaveDataContainer/ClassTexture.texture = _classTexture
 	
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/ClassNameText.append_bbcode(_classNameText)
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer3/DungeonLevelNameText.append_bbcode(str(_dungeonLevelNameText))
-	$MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer4/PointsText.append_bbcode(str(_pointsText))
+	$SaveContainer/SaveDataContainer/ClassContainer/ClassNameText.append_bbcode(_classNameText)
+	$SaveContainer/SaveDataContainer/DungeonLevelContainer/DungeonLevelText.append_bbcode(str(_dungeonLevelNameText))
+	$SaveContainer/SaveDataContainer/PointsContainer/PointsText.append_bbcode(str(_pointsText))
 
 func _on_Save_Button_pressed():
 	StartingData.selectedSave = saveSlot

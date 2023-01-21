@@ -19,8 +19,8 @@ var weapons = preload("res://Objects/Item/Weapons/Weapons.gd").new()
 
 var miscellaneous = preload("res://Objects/Item/Miscellaneous/Miscellaneous.gd").new()
 
-var randomItemList = preload("res://Objects/Item/RandomItemList.gd").new()
-var itemGeneration = preload("res://Objects/Item/ItemGeneration.gd").new()
+var randomItemList = preload("res://Objects/Miscellaneous/RandomItemList.gd").new()
+var itemGeneration = preload("res://Objects/Miscellaneous/ItemGeneration.gd").new()
 
 var mutex
 
@@ -108,6 +108,10 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 		else:
 			_id = newItem.createItem(getItemByName(_item), _extraData)
 	else:
+		if _item == null:
+			print(_item)
+			print(_itemPosition)
+			print(_extraData)
 		_id = newItem.createItem(_item, _extraData, _amount, _spawnNew)
 	
 	if _toInventory:

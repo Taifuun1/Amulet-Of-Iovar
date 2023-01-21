@@ -31,7 +31,7 @@ func createDungeon(_secondStair):
 			placeRandomInteractables(["altar"])
 			return
 		resetLevel()
-	push_error("Cant create dungeon")
+	push_error("Can't create dungeon")
 
 func createRooms():
 	for _roomCount in range(randi() % 2 + 5):

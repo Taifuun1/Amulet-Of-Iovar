@@ -163,12 +163,12 @@ func setUpGameObjects(_playerData = null):
 #		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
 #		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
 #		$Items/Items.createItem("dwarvish laysword", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("eario of toxix", null, 1, true)
-#		$Items/Items.createItem("eario of fleir", null, 1, true)
-#		$Items/Items.createItem("eario of frost", null, 1, true)
-#		$Items/Items.createItem("luirio of cone", null, 1, true)
-#		$Items/Items.createItem("luirio of point", null, 1, true)
-#		$Items/Items.createItem("heario of flow", null, 1, true)
+		$Items/Items.createItem("eario of toxix", null, 1, true)
+		$Items/Items.createItem("eario of fleir", null, 1, true)
+		$Items/Items.createItem("eario of frost", null, 1, true)
+		$Items/Items.createItem("luirio of cone", null, 1, true)
+		$Items/Items.createItem("luirio of point", null, 1, true)
+		$Items/Items.createItem("heario of flow", null, 1, true)
 	
 	print("UIing")
 	
@@ -284,7 +284,7 @@ func _input(_event):
 			elif Input.is_action_just_pressed("ACCEPT") and (currentGameState == gameState.PICK_UP_ITEMS or currentGameState == gameState.DROP_ITEMS):
 				processGameTurn(_playerTile)
 			elif (Input.is_action_just_pressed("BACK")):
-				if Input.is_mouse_button_pressed(2) and currentGameState == gameState.EQUIPMENT:
+				if Input.is_mouse_button_pressed(2) and (currentGameState == gameState.EQUIPMENT or currentGameState == gameState.RUNES):
 					return
 				closeMenu()
 			elif (Input.is_action_just_pressed("INVENTORY") and currentGameState == gameState.GAME):
@@ -636,7 +636,6 @@ func moveLevel(_direction):
 		var _openTiles = level.checkAdjacentTilesForOpenSpace(level.stairs[_placePlayerOnStair], false, true)
 		$Critters/Critters.spawnCritter("Iovar", _openTiles[randi() % _openTiles.size()])
 		Globals.gameConsole.addLog("Iovar appears before you!")
-		Globals.gameConsole.addLog("Iovar: \"You cant escape, cur!\"")
 	
 	drawLevel()
 	$"/root/World".show()
@@ -859,8 +858,9 @@ func castWith(_playerTile):
 			Globals.gameConsole.addLog("Your currently worn runes are not enough to cast a spell.")
 
 func interactWith(_tileToInteractWith):
-#	Globals.gameConsole.addLog("You cant interact with the {critter}".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
-	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
+	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
+		Globals.gameConsole.addLog("You can't interact with the {critter}.".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
+	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
 				Globals.gameConsole.addLog("You dig up the item from the sand.")
@@ -1139,7 +1139,7 @@ func saveGame():
 		"className": $Critters/"0".critterClass,
 		"dungeonLevelName": Globals.currentDungeonLevelName,
 		"level": Globals.currentDungeonLevel,
-		"points": 0
+		"points": $Critters/"0"/Inventory.getPoints().totalPoints
 	}
 	$Save.saveData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
 	

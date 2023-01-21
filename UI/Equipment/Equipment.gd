@@ -135,31 +135,31 @@ func _process(_delta):
 					if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
 						hands["lefthand"] = null
 						hands["righthand"] = null
-						$"EquipmentBackground/LeftHand/Sprite".texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
-						$"EquipmentBackground/RightHand/Sprite".texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
+						$"EquipmentContainer/LeftHand/Sprite".texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
+						$"EquipmentContainer/RightHand/Sprite".texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
 						_changed = true
 				else:
 					if hands[hoveredEquipment.to_lower()] != null:
 						_changed = true
 					hands[hoveredEquipment.to_lower()] = null
-					get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
+					get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
 			elif _matchingType.matchn("armor"):
 				if equipment[hoveredEquipment.to_lower()] != null:
 					_changed = true
 				equipment[hoveredEquipment.to_lower()] = null
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
+				get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
 				checkWhatIsWorn(_item)
 			elif _matchingType.matchn("accessory"):
 				if accessories[hoveredEquipment.to_lower()] != null:
 					_changed = true
 				accessories[hoveredEquipment.to_lower()] = null
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
+				get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
 				checkWhatIsWorn(_item)
 			if _item.category.matchn("amulet"):
-				var panelStylebox = get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).get_stylebox("panel").duplicate()
+				var panelStylebox = get_node("EquipmentContainer/{equipment}".format({ "equipment": hoveredEquipment })).get_stylebox("panel").duplicate()
 				panelStylebox.set_border_width_all(0)
 				panelStylebox.set_border_color(Color(1, 0, 0, 0))
-				get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
+				get_node("EquipmentContainer/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
 			
 			checkArmorSetPieces()
 			$"/root/World/Critters/0".calculateEquipmentStats()
@@ -171,11 +171,11 @@ func showEquipment(_items):
 	for _item in _items:
 		var _newItem = equipmentItem.instance()
 		_newItem.setValues(get_node("/root/World/Items/{item}".format({ "item": _item })))
-		$ItemContainer/ItemList.add_child(_newItem)
+		$ItemsContainer/ItemsContentContainer/ItemList.add_child(_newItem)
 	show()
 
 func hideEquipment():
-	for _item in $ItemContainer/ItemList.get_children():
+	for _item in $ItemsContainer/ItemsContentContainer/ItemList.get_children():
 		_item.queue_free()
 	hide()
 
@@ -200,26 +200,26 @@ func setEquipment(_id):
 		if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null:
 			hands["lefthand"] = null
 			hands["righthand"] = null
-			$"EquipmentBackground/LeftHand/Sprite".texture = load(equipmentUITemplatePaths["lefthand"])
-			$"EquipmentBackground/RightHand/Sprite".texture = load(equipmentUITemplatePaths["righthand"])
+			$"EquipmentContainer/LeftHand/Sprite".texture = load(equipmentUITemplatePaths["lefthand"])
+			$"EquipmentContainer/RightHand/Sprite".texture = load(equipmentUITemplatePaths["righthand"])
 		if _item.category.matchn("Two-hander"):
 			hands["lefthand"] = _item.id
 			hands["righthand"] = _item.id
-			$"EquipmentBackground/LeftHand/Sprite".texture = _item.getTexture()
-			$"EquipmentBackground/RightHand/Sprite".texture = _item.getTexture()
+			$"EquipmentContainer/LeftHand/Sprite".texture = _item.getTexture()
+			$"EquipmentContainer/RightHand/Sprite".texture = _item.getTexture()
 		elif hands["lefthand"] != _item.id and hands["righthand"] != _item.id:
 			hands[hoveredEquipment.to_lower()] = _item.id
-			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
+			get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 			checkWhatIsWorn(_item)
 	elif _matchingType.matchn("accessory"):
 		accessories[hoveredEquipment.to_lower()] = _item.id
-		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
+		get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		checkWhatIsWorn(_item)
 	elif _matchingType.matchn("armor"):
 		equipment[hoveredEquipment.to_lower()] = _item.id
-		get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
+		get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
 		checkWhatIsWorn(_item)
-	for _listItem in $ItemContainer/ItemList.get_children():
+	for _listItem in $ItemsContainer/ItemsContentContainer/ItemList.get_children():
 		if _item.itemName.matchn(_listItem.item.itemName):
 			_listItem.updateValues(_item.itemName)
 	if _item.binds != null and _item.binds.type.matchn("equipment"):
@@ -227,10 +227,10 @@ func setEquipment(_id):
 			"type": _item.value.binds,
 			"state": "Bound"
 		}
-#		var panelStylebox = get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).get_stylebox("panel").duplicate()
+#		var panelStylebox = get_node("EquipmentContainer/{equipment}".format({ "equipment": hoveredEquipment })).get_stylebox("panel").duplicate()
 #		panelStylebox.set_border_width_all(1)
 #		panelStylebox.set_border_color(Color(1, 0, 0))
-#		get_node("EquipmentBackground/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
+#		get_node("EquipmentContainer/{equipment}".format({ "equipment": hoveredEquipment })).add_stylebox_override("panel", panelStylebox)
 	if $"/root/World/Critters/0".attacks.size() == 0:
 		$"/root/World/Critters/0".attacks = [
 			{
@@ -270,15 +270,15 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 	if hands["lefthand"] == hands["righthand"] and hands["lefthand"] != null and hands["righthand"] != null and hands["righthand"] == _id and hands["lefthand"] == _id:
 		hands["lefthand"] = null
 		hands["righthand"] = null
-		$"EquipmentBackground/LeftHand/Sprite".texture = load(equipmentUITemplatePaths["lefthand"])
-		$"EquipmentBackground/RightHand/Sprite".texture = load(equipmentUITemplatePaths["righthand"])
+		$"EquipmentContainer/LeftHand/Sprite".texture = load(equipmentUITemplatePaths["lefthand"])
+		$"EquipmentContainer/RightHand/Sprite".texture = load(equipmentUITemplatePaths["righthand"])
 	for _hand in hands.keys():
 		if hands[_hand] == _id:
 			hands[_hand] = null
 			if _hand == "righthand":
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = load(equipmentUITemplatePaths[_hand.to_lower()])
+				get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = load(equipmentUITemplatePaths[_hand.to_lower()])
 			else:
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = load(equipmentUITemplatePaths[_hand.to_lower()])
+				get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = load(equipmentUITemplatePaths[_hand.to_lower()])
 			if (
 				hands.lefthand == null or
 				hands.righthand == null or
@@ -291,13 +291,13 @@ func checkIfEquipmentNeedsToBeUnequipped(_id):
 	for _accessory in accessories.keys():
 		if accessories[_accessory] == _id:
 			accessories[_accessory] = null
-			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = load(equipmentUITemplatePaths[_accessory.to_lower()])
+			get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = load(equipmentUITemplatePaths[_accessory.to_lower()])
 			checkWhatIsWorn(_item)
 			return
 	for _equipment in equipment.keys():
 		if equipment[_equipment] == _id:
 			equipment[_equipment] = null
-			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = load(equipmentUITemplatePaths[_equipment.to_lower()])
+			get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = load(equipmentUITemplatePaths[_equipment.to_lower()])
 			checkWhatIsWorn(_item)
 			return
 
@@ -382,7 +382,7 @@ func checkWhatIsWorn(_item):
 			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.statusEffects["seeing"] = 0
 				_playerNode.itemsTurnedOn.erase(_item)
-				Globals.gameConsole.addLog("It feels like you cant see at all.")
+				Globals.gameConsole.addLog("It feels like you can't see at all.")
 			else:
 				_playerNode.statusEffects["seeing"] = -1
 				_playerNode.itemsTurnedOn.append(_item)
@@ -429,7 +429,7 @@ func checkWhatIsWorn(_item):
 			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.itemsTurnedOn.erase(_item)
 				_playerNode.statusEffects.toxix = 0
-				Globals.gameConsole.addLog("You dont feel sick anymore.")
+				Globals.gameConsole.addLog("You don't feel sick anymore.")
 			else:
 				_playerNode.itemsTurnedOn.append(_item)
 				_playerNode.statusEffects.toxix = -1
@@ -438,7 +438,7 @@ func checkWhatIsWorn(_item):
 			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.itemsTurnedOn.erase(_item)
 				_playerNode.statusEffects.sleep = 0
-				Globals.gameConsole.addLog("You dont feel sleepy anymore.")
+				Globals.gameConsole.addLog("You don't feel sleepy anymore.")
 			else:
 				_playerNode.itemsTurnedOn.append(_item)
 				_playerNode.statusEffects.sleep = 10
@@ -552,7 +552,7 @@ func checkWhatIsWorn(_item):
 			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.baseStats["belief"] -= 1
 				_playerNode.itemsTurnedOn.erase(_item)
-				Globals.gameConsole.addLog("Your feel like you dont believe in anything.")
+				Globals.gameConsole.addLog("Your feel like you don't believe in anything.")
 			else:
 				_playerNode.baseStats["belief"] += 1
 				_playerNode.itemsTurnedOn.append(_item)
@@ -720,17 +720,17 @@ func setEquipmentTextures():
 		if hands[_hand] != null:
 			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": hands[_hand] }))
 			if _hand == "righthand":
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = _item.getTexture()
+				get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,4) + _hand[5].to_upper() + _hand.substr(6,-1) })).texture = _item.getTexture()
 			else:
-				get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = _item.getTexture()
+				get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": _hand[0].to_upper() + _hand.substr(1,3) + _hand[4].to_upper() + _hand.substr(5,-1) })).texture = _item.getTexture()
 	for _accessory in accessories.keys():
 		if accessories[_accessory] != null:
 			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": accessories[_accessory] }))
-			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = _item.getTexture()
+			get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": _accessory[0].to_upper() + _accessory.substr(1,-1) })).texture = _item.getTexture()
 	for _equipment in equipment.keys():
 		if equipment[_equipment] != null:
 			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": equipment[_equipment] }))
-			get_node("EquipmentBackground/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = _item.getTexture()
+			get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": _equipment.capitalize() })).texture = _item.getTexture()
 
 func getEquipmentSaveData():
 	return {

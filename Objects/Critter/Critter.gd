@@ -115,7 +115,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
 	
 	if statusEffects.stun > 0:
-		Globals.gameConsole.addLog("The {critter} cant move!".format({ "critter": critterName.capitalize() }))
+		Globals.gameConsole.addLog("The {critter} can't move!".format({ "critter": critterName.capitalize() }))
 		return false
 	if typeof(_path) == TYPE_BOOL or isMimicked:
 		return false
@@ -472,6 +472,11 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			if _damage.dmg <= 0 and _damage.magicDmg != 0:
 				hp -= _damage.magicDmg
 				_attackLog += "{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
+				if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
+					if _critterName.matchn("rogue"):
+						statusEffects.toxix = 5
+					else:
+						statusEffects.toxix = 3
 			# Physical attack
 			else:
 				# Onhit abilities
@@ -507,6 +512,11 @@ func takeDamage(_attacks, _critterTile, _critterName):
 				if _damage.magicDmg != 0:
 					hp -= _damage.magicDmg
 					_attackLog += " ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
+					if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
+						if _critterName.matchn("rogue"):
+							statusEffects.toxix += 5
+						else:
+							statusEffects.toxix += 3
 				
 				# Armor set effects
 				if checkIfCritterIsPlayer(_critterName):
@@ -523,7 +533,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 						statusEffects.confusion = 5
 						_attackLog += " {critterName} is confused by your flamboyant armor!".format({ "critterName":critterName })
 					if _activeArmorSets.toxix and !checkIfStatusEffectIsPermanent("toxix"):
-						statusEffects.toxix += 4
+						statusEffects.toxix += 3
 						_attackLog += " {critterName} is poisoned by your slick armor!".format({ "critterName":critterName })
 			
 			var _damageNumber = damageNumber.instance()
@@ -571,7 +581,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			statusEffects.sleep = 0
 			Globals.gameConsole.addLog("The {critterName} wakes up!".format({ "critterName": critterName }))
 	else:
-		Globals.gameConsole.addLog("Looks like you cant attack...")
+		Globals.gameConsole.addLog("Looks like you can't attack...")
 	return _didCritterDie
 
 func despawn(_critterTile = null, _createCorpse = true, _createDrops = true):

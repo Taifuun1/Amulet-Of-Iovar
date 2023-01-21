@@ -23,7 +23,7 @@ func createDungeon():
 		if areAllStairsConnected():
 			return
 		resetLevel()
-	push_error("Cant create beach")
+	push_error("Can't create beach")
 
 func createSea():
 	var _connectionPoints = []

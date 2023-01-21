@@ -1,39 +1,46 @@
 
 var dialogMenuDialogs = {
-	"Tidoh Tel'hydrad": {
-		"title": "Tidoh, The Obsessive gem enthusiast",
-		"text": """You face tidoh.
-		"Die, fiend!"
-		"""
-	},
 	"Elhybar": {
 		"title": "Elhybar, The Historian",
-		"text": """You face the keeper of the library.
-		"Die, fiend!"
+		"text": """Deep in the library, an old wizard toils at work. Keeper of records, scholarly writer and a book enthusiast. You face the keeper of the library.
+		Elhybar: "Who are you? Have you business here?
+		
+		...Your library card has expired? Perish, troglodyte!"
+		"""
+	},
+	"Tidoh Tel'hydrad": {
+		"title": "Tidoh, the obsessive gem enthusiast",
+		"text": """Something makes your back shiver. You hear a mad laugh from the darkness.
+
+		Tidoh: "This is Iovars archnemesis? Hahahah!
 		"""
 	},
 	"Shin'kor Leve'er": {
-		"title": "Shin'kor Leve'er, Bandit group leader",
-		"text": """You face the leader of the bandit camp.
-		"Die, fiend!"
+		"title": "Shin'kor Leve'er, bandit group leader",
+		"text": """After countless battles with bandits, you find yourself at the heart of the group. Finally, you see the bandit camp leader.
+		
+		Shin'kor Leve'er: "..."
 		"""
 	},
 	"Mad Banana-hunter Ogre": {
-		"title": "Mad banana hunter ogre",
-		"text": """You face the Mad banana-hunter ogre.
-		"Die, fiend!"
+		"title": "Mad banana-hunter ogre",
+		"text": """A lost soul finds you in the depths of the labyrinth. You face the Mad banana-hunter ogre.
+		
+		Mad banana-hunter ogre: "Banana?"
 		"""
 	},
 	"Elder Dragon": {
 		"title": "Elder Dragon",
-		"text": """You face the Elder Dragon.
-		"Die, fiend!"
+		"text": """A massive beast looks at you. Something larger than anything you've faced so far. The elder dragon speaks.
+		
+		Elder dragon: "Hmm? Who might you be? The one seeking Iovar? Ah, I've heard of you. At least your hubris is intact. And now, before him, you'll test your mettle against me? I'll burn you to cinders, like every other adventurer foolish enough to wander into my lair."
 		"""
 	},
 	"Iovar": {
-		"title": "Iovar, The Cultist Leader",
-		"text": """You face Iovar.
-		"Die, fiend!"
+		"title": "Iovar, The cultist leader",
+		"text": """At the bottom of the dungeon, you finally see the home of the wizard. You face Iovar, founder of the dungeon.
+		
+		Iovar: "Thee finally showeth thine face! Eluded mine grasp hath, perished mine minions hath, and plotted to steal mine amulet hath! No more will thy prolong thine antics. Face me, cur!"
 		"""
 	}
 }

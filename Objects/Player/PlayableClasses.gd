@@ -461,7 +461,7 @@ var exterminator = {
 
 var rogue = {
 	critterName = "Rogue",
-	skill = "Rogue uses a cloak and dagger from the shadows. Gets +1 to all toxix damage and +1 bonus damage from using daggers.",
+	skill = "Rogue uses a cloak and dagger from the shadows. Gets +1 to all toxix damage, +2 toxix status effect duration on toxix hit and +1 bonus damage from using daggers.",
 	quote = "I'm darker than the blackest night.",
 	race = "Human",
 	justice = "Laissez-faire",

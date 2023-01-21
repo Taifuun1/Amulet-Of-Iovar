@@ -1177,7 +1177,7 @@ var critters = {
 	},
 	"Rhino": {
 		"knowledge": false,
-		"description": "A huge rhino. Cant see very well.",
+		"description": "A huge rhino. Can't see very well.",
 		"killCount": 0
 	},
 	"Big rat": {

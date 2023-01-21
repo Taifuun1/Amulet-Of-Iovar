@@ -9,7 +9,7 @@ func _ready():
 	for _i in range(3):
 		var _saveGamePickScreenItem = saveGamePickScreenItem.instance()
 		_saveGamePickScreenItem.create(_i + 1, loadSaveData(_i + 1, saveData))
-		$VBoxContainer/PanelContainer/CenterContainer/HBoxContainer.add_child(_saveGamePickScreenItem)
+		$VBoxContainer/VBoxContainer/CenterContainer/HBoxContainer.add_child(_saveGamePickScreenItem)
 
 func loadSaveData(_saveSlot, _data):
 	var file = File.new()

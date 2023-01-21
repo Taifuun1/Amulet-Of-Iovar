@@ -14,7 +14,7 @@ var statusEffectsData = {
 	},
 	"blindness": {
 		"label": "blnd",
-		"description": "You cant see. (-1 bal and 0 visibility)",
+		"description": "You can't see. (-1 bal and 0 visibility)",
 		"color": "#ffff5a",
 		"texture": load("res://Assets/Status Effects/StatusEffectBlindness.png"),
 		"effects": {

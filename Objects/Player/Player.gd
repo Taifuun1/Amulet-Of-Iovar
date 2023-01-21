@@ -114,10 +114,22 @@ func create(_data = null):
 		level = 1
 	hp = _playerData.hp
 	mp = _playerData.mp
-	basehp = _playerData.hp
-	basemp = _playerData.mp
-	maxhp = _playerData.hp
-	maxmp = _playerData.mp
+	if _playerData.has("basehp"):
+		basehp = _playerData.basehp
+	else:
+		basehp = _playerData.hp
+	if _playerData.has("basehp"):
+		basemp = _playerData.basemp
+	else:
+		basehp = _playerData.hp
+	if _playerData.has("basehp"):
+		maxhp = _playerData.maxhp
+	else:
+		basehp = _playerData.hp
+	if _playerData.has("basehp"):
+		maxmp = _playerData.maxmp
+	else:
+		basehp = _playerData.hp
 	shields = 0
 	
 	stats.strength = float(_playerData.stats.strength)
@@ -306,7 +318,9 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			# Magic spell
 			if _damage.dmg <= 0 and _damage.magicDmg > 0:
 				hp -= _damage.magicDmg
-				_attacksLog.append("{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
+				_attacksLog.append("{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))				if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
+				if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
+					statusEffects.toxix += 3
 			# Physical attack
 			else:
 				# Physical damage
@@ -323,6 +337,8 @@ func takeDamage(_attacks, _critterTile, _crittername):
 				if _damage.magicDmg != 0:
 					hp -= _damage.magicDmg
 					_attacksLog.append(" ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
+					if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
+						statusEffects.toxix += 3
 			
 			# Damage taken game stats
 			if _damageText > GlobalGameStats.gameStats["Highest damage taken"]:

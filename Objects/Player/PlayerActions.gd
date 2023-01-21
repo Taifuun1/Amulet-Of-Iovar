@@ -899,7 +899,7 @@ func useItem(_id):
 					if _itemNode.identifiedItemName.matchn("blank scroll"):
 						_blankPaper = _itemNode
 				if _blankPaper == null:
-					Globals.gameConsole.addLog("You dont have a blank scroll.")
+					Globals.gameConsole.addLog("You don't have a blank scroll.")
 					continue
 				for _rarity in $"/root/World/Items/Items".items.scroll:
 					for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
@@ -923,7 +923,7 @@ func useItem(_id):
 					if _itemNode.identifiedItemName.matchn("blank scroll"):
 						_blankPaper = _itemNode
 				if _blankPaper == null:
-					Globals.gameConsole.addLog("You dont have a blank paper.")
+					Globals.gameConsole.addLog("You don't have a blank paper.")
 					continue
 				for _rarity in $"/root/World/Items/Items".items.scroll:
 					for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
@@ -1067,7 +1067,7 @@ func dealWithWandOfWishing(_name, _alignment):
 func dealWithMarker(_scroll, _ink):
 	if _ink.has("ink"):
 		if _ink.ink < _ink.letters:
-			Globals.gameConsole.addLog("You dont have enough ink to write that scroll.")
+			Globals.gameConsole.addLog("You don't have enough ink to write that scroll.")
 			return false
 		elif _scroll.matchn("blank scroll"):
 			Globals.gameConsole.addLog("You write a blank scroll... on the blank scroll.")

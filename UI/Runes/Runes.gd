@@ -41,11 +41,11 @@ func showRunes(_items):
 	for _item in _items:
 		var _newItem = runeItem.instance()
 		_newItem.setValues(get_node("/root/World/Items/{item}".format({ "item": _item })))
-		$RunesBackground/RunesContainer/RunesList.add_child(_newItem)
+		$ItemsContainer/ItemsContentContainer/ItemList.add_child(_newItem)
 	show()
 
 func hideRunes():
-	for _item in $RunesBackground/RunesContainer/RunesList.get_children():
+	for _item in $ItemsContainer/ItemsContentContainer/ItemList.get_children():
 		_item.queue_free()
 	hide()
 
@@ -59,7 +59,7 @@ func setRunes(_id):
 	var _rune = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if checkIfMatchingRuneAndSlot(_rune.type, _rune.category):
 		runes[hoveredEquipment.to_lower()] = _id
-		get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _rune.getTexture()
+		get_node("RuneContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _rune.getTexture()
 		checkWhatRuneIsEquipped(_rune)
 		calculateMagicDamage()
 		$"/root/World".processGameTurn()
@@ -69,7 +69,7 @@ func _process(_delta):
 		var _rune = get_node("/root/World/Items/{id}".format({ "id": runes[hoveredEquipment.to_lower()] }))
 		if _rune != null:
 			runes[hoveredEquipment.to_lower()] = null
-			get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
+			get_node("RuneContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
 			checkWhatRuneIsEquipped(_rune)
 			calculateMagicDamage()
 			$"/root/World".processGameTurn()
@@ -84,7 +84,8 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	yield(get_tree(), "idle_frame")
 	
 	if $"/root/World/Critters/0".mp - manaUsage < 0:
-		Globals.gameConsole.addLog("You dont have mp to cast that spell!")
+		$"/root/World".resetToDefaulGameState()
+		Globals.gameConsole.addLog("You don't have mp to cast that spell!")
 		return
 	
 	var _newSpell = spell.instance()
@@ -203,54 +204,6 @@ func checkWhatRuneIsEquipped(_rune):
 		GlobalItemInfo.globalItemInfo[_rune.identifiedItemName].identified = true
 		Globals.gameConsole.addLog("{unidentifiedItemName} is a {identifiedItemName}!".format({ "identifiedItemName": _rune.identifiedItemName, "unidentifiedItemName": _rune.unidentifiedItemName }))
 	var _playerNode = $"/root/World/Critters/0"
-	match _rune.identifiedItemName.to_lower():
-		_:
-			pass
-#		"ring of slow digestion":
-#			if _playerNode.itemsTurnedOn.has(_ring):
-#				_playerNode.statusEffects["slow digestion"] = 0
-#				_playerNode.itemsTurnedOn.erase(_ring)
-#				Globals.gameConsole.addLog("Your belly feels faster.")
-#			else:
-#				_playerNode.statusEffects["slow digestion"] = -1
-#				_playerNode.itemsTurnedOn.append(_ring)
-#				Globals.gameConsole.addLog("Your belly feels constant.")
-#		"ring of hunger":
-#			if _playerNode.itemsTurnedOn.has(_ring):
-#				_playerNode.statusEffects["hunger"] = 0
-#				_playerNode.itemsTurnedOn.erase(_ring)
-#				Globals.gameConsole.addLog("Your belly feels nourished.")
-#			else:
-#				_playerNode.statusEffects["hunger"] = -1
-#				_playerNode.itemsTurnedOn.append(_ring)
-#				Globals.gameConsole.addLog("Your belly feels like it has a hole.")
-#		"ring of regen":
-#			if _playerNode.itemsTurnedOn.has(_ring):
-#				_playerNode.statusEffects["regen"] = 0
-#				_playerNode.itemsTurnedOn.erase(_ring)
-#				Globals.gameConsole.addLog("Your skin more stable.")
-#			else:
-#				_playerNode.statusEffects["regen"] = -1
-#				_playerNode.itemsTurnedOn.append(_ring)
-#				Globals.gameConsole.addLog("Your skin tingles.")
-#		"ring of fumbling":
-#			if _playerNode.itemsTurnedOn.has(_ring):
-#				_playerNode.statusEffects["fumbling"] = 0
-#				_playerNode.itemsTurnedOn.erase(_ring)
-#				Globals.gameConsole.addLog("Your legs feel steady.")
-#			else:
-#				_playerNode.statusEffects["fumbling"] = -1
-#				_playerNode.itemsTurnedOn.append(_ring)
-#				Globals.gameConsole.addLog("Your legs feel like jelly.")
-#		"ring of seeing":
-#			if _playerNode.itemsTurnedOn.has(_ring):
-#				_playerNode.statusEffects["seeing"] = 0
-#				_playerNode.itemsTurnedOn.erase(_ring)
-#				Globals.gameConsole.addLog("It feels like you cant see at all.")
-#			else:
-#				_playerNode.statusEffects["seeing"] = -1
-#				_playerNode.itemsTurnedOn.append(_ring)
-#				Globals.gameConsole.addLog("You can see everything!")
 	_playerNode.checkAllIdentification(true)
 
 func checkIfMatchingRuneAndSlot(_type, _category):
@@ -276,7 +229,7 @@ func takeOfRuneWhenDroppingItem(_id):
 	for _rune in runes.keys():
 		if runes[_rune] != null and runes[_rune] == _id:
 			runes[_rune] = null
-			get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = null
+			get_node("RuneContainer/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = null
 			calculateMagicDamage()
 			return
 
@@ -335,8 +288,8 @@ func calculateMagicDamage():
 		manaUsage = 0
 		for _rune in runes:
 			manaUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
-	if _magicAttacks.magicDmg.dmg[0] != 0 and _magicAttacks.magicDmg.dmg[1] != 0:
-		_magicAttacks.magicDmg.dmg = [_magicAttacks.magicDmg.dmg[0] + bonusMagicDmg, _magicAttacks.magicDmg.dmg[1] + bonusMagicDmg]
+	if _magicAttacks[0].magicDmg.dmg[0] != 0 and _magicAttacks[0].magicDmg.dmg[1] != 0:
+		_magicAttacks[0].magicDmg.dmg = [_magicAttacks[0].magicDmg.dmg[0] + bonusMagicDmg, _magicAttacks[0].magicDmg.dmg[1] + bonusMagicDmg]
 	spellDamage = _magicAttacks
 	$"/root/World/Critters/0".updatePlayerStats()
 
@@ -472,7 +425,7 @@ func setRuneTextures():
 	for _rune in runes.keys():
 		if runes[_rune] != null:
 			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": runes[_rune] }))
-			get_node("EquippedRunesBackground/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = _item.getTexture()
+			get_node("RuneContainer/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = _item.getTexture()
 
 func getRunesSaveData():
 	return {

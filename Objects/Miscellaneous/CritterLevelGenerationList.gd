@@ -1,9 +1,8 @@
 
 var critterLevelGenerationList = {
 	"dungeon1": {
-		"amount": [3, 6],
+		"amount": [2, 4],
 		"critters": {
-			"ants": ["Sugar ant"],
 			"floatingSpheres": ["Floating eye"],
 			"kobolds": ["Tiny kobold"],
 			"newts": ["River newt"],
@@ -11,7 +10,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeon2": {
-		"amount": [4, 8],
+		"amount": [3, 7],
 		"critters": {
 			"ants": ["Sugar ant"],
 			"blobs": ["Slerp", "Sluerp"],
@@ -94,18 +93,18 @@ var critterLevelGenerationList = {
 		}
 	},
 	"anthill": {
-		"amount": [12, 15],
+		"amount": [10, 15],
 		"critters": {
 			"ants": ["Sugar ant", "Leaf ant"],
 			"snakes": ["Garnered snake", "Marsh snake"]
 		}
 	},
 	"library": {
-		"amount": [6, 10],
+		"amount": [4, 6],
 		"critters": {
 			"blobs": ["Sluerp"],
 			"bats": ["Spooky bat", "Vampire bat"],
-			"felines": ["Cat", "Lynx"],
+			"felines": ["Cat"],
 			"giants": ["Balding giant"],
 			"mimics": ["Mimic"],
 			"newts": ["Paper newt"],

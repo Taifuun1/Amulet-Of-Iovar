@@ -8,15 +8,15 @@ var equipmentTexture
 func setValues(_item):
 	id = _item.id
 	
-	$RuneItemArea/ItemContainer/Name.text = str(_item.itemName)
+	$ItemContainer/Name.text = str(_item.itemName)
 	if _item.notIdentified.alignment:
-		$RuneItemArea/ItemContainer/Alignment.text = str(_item.alignment)
+		$ItemContainer/Alignment.text = str(_item.alignment)
 	else:
-		$RuneItemArea/ItemContainer/Alignment.text = "Unknown"
+		$ItemContainer/Alignment.text = "Unknown"
 	if _item.notIdentified.enchantment:
-		$RuneItemArea/ItemContainer/Enchantment.text = str(_item.enchantment)
+		$ItemContainer/Enchantment.text = str(_item.enchantment)
 	else:
-		$RuneItemArea/ItemContainer/Enchantment.text = "Unknown"
+		$ItemContainer/Enchantment.text = "Unknown"
 	
 	equipmentTexture = _item.getTexture()
 
@@ -28,9 +28,11 @@ func _process(_delta):
 			$"/root/World/UI/UITheme/Runes".setRunes(id)
 		get_node("/root/World/UI/UITheme/Runes/DragSprite").texture = null
 		selected = false
+		get_tree().get_root().set_input_as_handled()
 
-func _on_RuneItemArea_input_event(_viewport, _event, _shape_idx):
+func _on_RuneItem_gui_input(_event):
 	if Input.is_action_pressed("LEFT_CLICK") and get_node("/root/World/UI/UITheme/Runes/DragSprite").texture == null:
 		get_node("/root/World/UI/UITheme/Runes/DragSprite").texture = equipmentTexture
 		$"/root/World/UI/UITheme/Runes/DragSprite".global_position = get_global_mouse_position()
 		selected = true
+		accept_event()

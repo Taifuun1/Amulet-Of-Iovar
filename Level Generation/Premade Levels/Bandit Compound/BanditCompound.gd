@@ -33,13 +33,4 @@ func createDungeon():
 			"upStair": Vector2(57,17)
 		}
 		placePresetItems(banditCompoundSpawns.banditCompoundSpawn2, self)
-#	for _i in range(10):
-#		createCave()
-#		connectSpawnAreas()
-#		expandSpawnAreas()
-#		fattenCorridors()
-#		placeStairs()
-#		if areAllStairsConnected():
-#			return
-#		resetLevel()
-#	push_error("Cant create premade mining outpost")
+

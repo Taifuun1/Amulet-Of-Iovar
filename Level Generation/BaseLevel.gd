@@ -96,7 +96,7 @@ func placeDoor(_room):
 			grid[_tile.x][_tile.y].tile = Globals.tiles.DOOR_CLOSED
 			_room.walls.erase(_tile)
 			return
-	push_error("Cant place doors")
+	push_error("Can't place doors")
 
 func areAllStairsConnected():
 	astarNode.clear()
