@@ -1,9 +1,9 @@
-[gd_resource type="Theme" load_steps=29 format=2]
+[gd_resource type="Theme" load_steps=28 format=2]
 
 [ext_resource path="res://Assets/Theme/dum2Ital.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/CheckboxChecked.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/CheckboxUnchecked.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Theme/raleway.medium.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/Theme/UITitleFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Assets/UI/DialogMenu.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Theme/GameConsoleFont.tres" type="DynamicFont" id=6]
 
@@ -82,14 +82,6 @@ corner_radius_bottom_left = 4
 [sub_resource type="DynamicFont" id=24]
 size = 20
 font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=21]
-size = 24
-extra_spacing_top = 8
-extra_spacing_bottom = 8
-extra_spacing_char = 1
-extra_spacing_space = 4
-font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 1 )
@@ -171,7 +163,7 @@ CheckBox/styles/hover_pressed = SubResource( 9 )
 CheckBox/styles/normal = SubResource( 10 )
 CheckBox/styles/pressed = SubResource( 11 )
 RichTextLabel/fonts/italics_font = SubResource( 24 )
-TabContainer/fonts/font = SubResource( 21 )
+TabContainer/fonts/font = ExtResource( 4 )
 TabContainer/styles/panel = SubResource( 17 )
 TabContainer/styles/tab_bg = SubResource( 22 )
 TabContainer/styles/tab_disabled = SubResource( 19 )

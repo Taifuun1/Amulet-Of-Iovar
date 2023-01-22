@@ -118,18 +118,18 @@ func create(_data = null):
 		basehp = _playerData.basehp
 	else:
 		basehp = _playerData.hp
-	if _playerData.has("basehp"):
+	if _playerData.has("basemp"):
 		basemp = _playerData.basemp
 	else:
-		basehp = _playerData.hp
-	if _playerData.has("basehp"):
+		basemp = _playerData.mp
+	if _playerData.has("maxhp"):
 		maxhp = _playerData.maxhp
 	else:
-		basehp = _playerData.hp
-	if _playerData.has("basehp"):
+		maxhp = _playerData.hp
+	if _playerData.has("maxmp"):
 		maxmp = _playerData.maxmp
 	else:
-		basehp = _playerData.hp
+		maxmp = _playerData.mp
 	shields = 0
 	
 	stats.strength = float(_playerData.stats.strength)
@@ -318,7 +318,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			# Magic spell
 			if _damage.dmg <= 0 and _damage.magicDmg > 0:
 				hp -= _damage.magicDmg
-				_attacksLog.append("{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))				if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
+				_attacksLog.append("{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
 				if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
 					statusEffects.toxix += 3
 			# Physical attack
@@ -493,6 +493,75 @@ func processPlayerSpecificEffects():
 			Globals.gameConsole.addLog("Your vision changes.")
 		playerVisibility.distance = -1
 	
+	##########
+	### UI ###
+	##########
+	
+	processPlayerUIChanges()
+	
+	###########
+	## Tools ##
+	###########
+	equipmentResistances = []
+	for _item in itemsTurnedOn:
+		match _item.identifiedItemName.to_lower():
+			"amulet of seeing":
+				statusEffects["seeing"] = -1
+			"amulet of strangulation":
+				hp -= 5
+				Globals.gameConsole.addLog("You are strangled by the amulet!")
+			"amulet of toxix":
+				statusEffects["toxix"] = -1
+			"amulet of sleep":
+				if statusEffects["sleep"] == 0 and randi() % 21 == 0:
+					statusEffects["sleep"] = randi() % 6 + 2
+			"amulet of backscattering":
+				statusEffects["backscattering"] = -1
+			"ring of fast digestion":
+				statusEffects["fast digestion"] = -1
+			"ring of slow digestion":
+				statusEffects["slow digestion"] = -1
+			"ring of regen":
+				statusEffects["regen"] = -1
+			"ring of fumbling":
+				statusEffects["fumbling"] = -1
+			"blue dragon scale mail", "frozen mail":
+				equipmentResistances.append("frost")
+			"red dragon scale mail":
+				equipmentResistances.append("fleir")
+			"yellow dragon scale mail", "thunder mail":
+				equipmentResistances.append("thunder")
+			"green dragon scale mail":
+				equipmentResistances.append("gleeie'er")
+			"violet dragon scale mail":
+				equipmentResistances.append("toxix")
+			"candle":
+				if _item.value.charges > 0:
+					_item.value.charges -= 1
+					if playerVisibility.distance != 0:
+						playerVisibility.distance = _item.value.value
+				else:
+					if playerVisibility.distance != 0:
+						playerVisibility.distance = -1
+						Globals.gameConsole.addLog("Your candle has run out of wax.")
+					_item.value.turnedOn = false
+					itemsTurnedOn.erase(_item)
+			"oil lamp":
+				if _item.value.charges > 0:
+					_item.value.charges -= 1
+					if playerVisibility.distance != 0:
+						playerVisibility.distance = _item.value.value
+				else:
+					if playerVisibility.distance != 0:
+						playerVisibility.distance = -1
+						Globals.gameConsole.addLog("Your lamp has run out of oil.")
+					_item.value.turnedOn = false
+					itemsTurnedOn.erase(_item)
+			"magic lamp":
+				if playerVisibility.distance != 0:
+					playerVisibility.distance = _item.value.value
+
+func processPlayerUIChanges():
 	# Deal with status effects in the UI
 	for _statusEffect in statusEffects.keys():
 		if (statusEffects[_statusEffect] > 0 or statusEffects[_statusEffect] == -1):
@@ -576,68 +645,6 @@ func processPlayerSpecificEffects():
 			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
 	
 	stats = _stats
-	
-	###########
-	## Tools ##
-	###########
-	equipmentResistances = []
-	for _item in itemsTurnedOn:
-		match _item.identifiedItemName.to_lower():
-			"amulet of seeing":
-				statusEffects["seeing"] = -1
-			"amulet of strangulation":
-				hp -= 5
-				Globals.gameConsole.addLog("You are strangled by the amulet!")
-			"amulet of toxix":
-				statusEffects["toxix"] = -1
-			"amulet of sleep":
-				if statusEffects["sleep"] == 0 and randi() % 21 == 0:
-					statusEffects["sleep"] = randi() % 6 + 2
-			"amulet of backscattering":
-				statusEffects["backscattering"] = -1
-			"ring of fast digestion":
-				statusEffects["fast digestion"] = -1
-			"ring of slow digestion":
-				statusEffects["slow digestion"] = -1
-			"ring of regen":
-				statusEffects["regen"] = -1
-			"ring of fumbling":
-				statusEffects["fumbling"] = -1
-			"blue dragon scale mail", "frozen mail":
-				equipmentResistances.append("frost")
-			"red dragon scale mail":
-				equipmentResistances.append("fleir")
-			"yellow dragon scale mail", "thunder mail":
-				equipmentResistances.append("thunder")
-			"green dragon scale mail":
-				equipmentResistances.append("gleeie'er")
-			"violet dragon scale mail":
-				equipmentResistances.append("toxix")
-			"candle":
-				if _item.value.charges > 0:
-					_item.value.charges -= 1
-					if playerVisibility.distance != 0:
-						playerVisibility.distance = _item.value.value
-				else:
-					if playerVisibility.distance != 0:
-						playerVisibility.distance = -1
-						Globals.gameConsole.addLog("Your candle has run out of wax.")
-					_item.value.turnedOn = false
-					itemsTurnedOn.erase(_item)
-			"oil lamp":
-				if _item.value.charges > 0:
-					_item.value.charges -= 1
-					if playerVisibility.distance != 0:
-						playerVisibility.distance = _item.value.value
-				else:
-					if playerVisibility.distance != 0:
-						playerVisibility.distance = -1
-						Globals.gameConsole.addLog("Your lamp has run out of oil.")
-					_item.value.turnedOn = false
-					itemsTurnedOn.erase(_item)
-			"magic lamp":
-				if playerVisibility.distance != 0:
-					playerVisibility.distance = _item.value.value
 
 func calculateWeightStats():
 	maxCarryWeight = {

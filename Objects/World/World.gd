@@ -6,6 +6,7 @@ onready var player = preload("res://Objects/Player/Player.tscn").instance()
 enum gameState {
 	GAME_OVER
 	OUT_OF_PLAYERS_HANDS
+	PAUSED
 	GAME
 	INVENTORY
 	PICK_UP_ITEMS
@@ -86,14 +87,16 @@ func _process(_delta):
 			_level.clearOutInputs()
 		print("Cleared!")
 		
+		$Critters/"0".inventory.updateWeight()
+		$Critters/"0".calculateWeightStats()
+		$Critters/"0".processPlayerUIChanges()
+		$Critters/"0".updatePlayerStats()
+		print("Calculated!")
+		
 		updateTiles()
 		print("Updated!")
 		drawLevel()
 		print("Drawn!")
-		
-		$Critters/"0".processPlayerSpecificEffects()
-		$Critters/"0".updatePlayerStats()
-		print("Calculated!")
 		
 		inStartScreen = false
 		inGame = true
@@ -132,7 +135,6 @@ func setUpGameObjects(_playerData = null):
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
-		$Items/Items.createItem("belt of plato", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "cursed" })
@@ -314,20 +316,18 @@ func _input(_event):
 			elif Input.is_action_just_pressed("INTERACT") and currentGameState == gameState.GAME:
 				currentGameState = gameState.INTERACT
 				Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
-			elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME:
-				$"UI/UITheme/Debug Menu".showMenu()
+#			elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME:
+#				$"UI/UITheme/Debug Menu".showMenu()
 			elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME:
 				openMenu("use")
 			elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME:
 				currentGameState = gameState.KICK
 				Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
 			elif Input.is_action_just_pressed("SAVE") and currentGameState == gameState.GAME:
-				currentGameState = gameState.OUT_OF_PLAYERS_HANDS
-				$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
-				$UI/UITheme/"Dancing Dragons".startDancingDragons()
-				yield(get_tree().create_timer(0.01), "timeout")
-#				saveGame()
-				saveGameThread.start(self, "saveGame")
+				saveGameInThread()
+			elif Input.is_action_just_pressed("PAUSE") and currentGameState == gameState.GAME:
+				currentGameState = gameState.PAUSED
+				$UI/UITheme/PauseMenu.show()
 			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
 				keepMoving = true
 			elif Input.is_action_just_pressed("GODS_WRATH") and currentGameState == gameState.GAME:
@@ -1055,6 +1055,8 @@ func closeMenu(_additionalChoices = false, _pickDirection = false):
 			$Critters/"0"/Inventory.hideInventory()
 		if currentGameState == gameState.LOOT:
 			$UI/UITheme/Container.hideContainerList()
+		if currentGameState == gameState.PAUSED:
+			$UI/UITheme/PauseMenu.hide()
 		$UI/UITheme/ListMenu.hideListMenuList()
 		resetToDefaulGameState()
 
@@ -1064,6 +1066,13 @@ func resetToDefaulGameState():
 	currentGameState = gameState.GAME
 	inGame = true
 	keepMoving = false
+
+func saveGameInThread():
+	currentGameState = gameState.OUT_OF_PLAYERS_HANDS
+	$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
+	$UI/UITheme/"Dancing Dragons".startDancingDragons()
+	yield(get_tree().create_timer(0.01), "timeout")
+	saveGameThread.start(self, "saveGame")
 
 func saveGame():
 	var dir = Directory.new()

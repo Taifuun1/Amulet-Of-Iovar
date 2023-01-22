@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Objects/World/WorldGeneration.gd" type="Script" id=1]
 [ext_resource path="res://Objects/World/World.tres" type="TileSet" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://UI/Container/Container.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Objects/Save/Save.tscn" type="PackedScene" id=16]
 [ext_resource path="res://UI/Dancing Dragons/Dancing Dragons.tscn" type="PackedScene" id=17]
+[ext_resource path="res://UI/Pause Menu/Pause Menu.tscn" type="PackedScene" id=18]
 
 [node name="World" type="TileMap"]
 tile_set = ExtResource( 2 )
@@ -61,8 +62,6 @@ visible = false
 
 [node name="Runes" parent="UI/UITheme" instance=ExtResource( 13 )]
 visible = false
-margin_right = 1730.0
-margin_bottom = 900.0
 
 [node name="ItemManagement" parent="UI/UITheme" instance=ExtResource( 5 )]
 visible = false
@@ -74,6 +73,9 @@ visible = false
 visible = false
 
 [node name="Game Over Stats" parent="UI/UITheme" instance=ExtResource( 9 )]
+visible = false
+
+[node name="PauseMenu" parent="UI/UITheme" instance=ExtResource( 18 )]
 visible = false
 
 [node name="DialogMenu" parent="UI/UITheme" instance=ExtResource( 14 )]
