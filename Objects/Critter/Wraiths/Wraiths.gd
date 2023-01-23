@@ -8,23 +8,23 @@ var wraiths = [
 		"aggroDistance": 31,
 		"texture": load("res://Assets/Critters/WraithSpectralWraith.png"),
 		"alignment": "Neutral",
-		"level": 4,
+		"level": 5,
 		"expDropAmount": 5,
-		"hp": 8,
+		"hp": 13,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [
 			{
-				"dmg": [1,1],
+				"dmg": [0,0],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
+					"dmg": [3,3],
+					"element": "Frost"
 				}
 			}
 		],
-		"hits": [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],
+		"hits": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
 		"stats": {
 			"strength": 1,
 			"legerity": 1,
@@ -65,18 +65,18 @@ var wraiths = [
 		"texture": load("res://Assets/Critters/WraithSpookyGhost.png"),
 		"alignment": "Neutral",
 		"level": 8,
-		"expDropAmount": 18,
-		"hp": 17,
+		"expDropAmount": 15,
+		"hp": 21,
 		"mp": 0,
 		"ac": 0,
 		"attacks": [
 			{
-				"dmg": [1,1],
+				"dmg": [0,0],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
+					"dmg": [5,5],
+					"element": "Frost"
 				}
 			}
 		],

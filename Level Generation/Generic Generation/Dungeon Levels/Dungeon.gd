@@ -1,15 +1,15 @@
 extends GenericLevel
 
-func createNewLevel(_secondStair = null):
+func createNewLevel(_stairData = []):
 	createGrid()
 	
-	createDungeon(_secondStair)
+	createDungeon(_stairData)
 	
 	doFinalPathfinding()
 	
 	return self
 
-func createDungeon(_secondStair):
+func createDungeon(_stairData):
 	for _i in range(10):
 		createRooms()
 		getSpawnableTiles(
@@ -17,7 +17,7 @@ func createDungeon(_secondStair):
 			["FLOOR_DUNGEON"],
 			["FLOOR_DUNGEON", "CORRIDOR_DUNGEON"]
 		)
-		placeStairs("DUNGEON", _secondStair)
+		placeStairs("DUNGEON", _stairData)
 		connectRooms()
 		if areAllStairsConnected():
 			placeContainers({

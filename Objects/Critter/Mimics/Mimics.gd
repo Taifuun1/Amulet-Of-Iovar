@@ -9,13 +9,13 @@ var mimics = [
 		"texture": load("res://Assets/Critters/MimicMimic.png"),
 		"alignment": "Neutral",
 		"level": 8,
-		"expDropAmount": 18,
+		"expDropAmount": 13,
 		"hp": 16,
 		"mp": 13,
 		"ac": 3,
 		"attacks": [
 			{
-				"dmg": [8,10],
+				"dmg": [6,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -24,7 +24,7 @@ var mimics = [
 				}
 			},
 			{
-				"dmg": [4,8],
+				"dmg": [4,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -62,13 +62,13 @@ var mimics = [
 		"texture": load("res://Assets/Critters/MimicHumongousMimic.png"),
 		"alignment": "Neutral",
 		"level": 14,
-		"expDropAmount": 68,
+		"expDropAmount": 44,
 		"hp": 46,
 		"mp": 23,
 		"ac": 7,
 		"attacks": [
 			{
-				"dmg": [13,16],
+				"dmg": [12,15],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

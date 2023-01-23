@@ -23,13 +23,13 @@ func createDungeon():
 	var _groups = get_groups()
 	if _groups[0] == "Tidoh Mines End 1":
 		stairs = {
-			"upStair": Vector2(21,12)
+			"upStair": Vector2(28,11)
 		}
 		placePresetItems(tidohMinesEndtSpawns.tidohMinesEndSpawn1, self)
 		placePresetCritters(tidohMinesEndtSpawns.tidohMinesEndSpawn1, self)
 	if _groups[0] == "Tidoh Mines End 2":
 		stairs = {
-			"upStair": Vector2(28,11)
+			"upStair": Vector2(21,12)
 		}
 		placePresetItems(tidohMinesEndtSpawns.tidohMinesEndSpawn2, self)
 		placePresetCritters(tidohMinesEndtSpawns.tidohMinesEndSpawn2, self)

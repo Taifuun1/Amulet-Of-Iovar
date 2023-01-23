@@ -23,7 +23,6 @@ func createRichTextLabelExtended(_critterName, _text):
 	var _richTextLabelExtended = load("res://UI/RichTextLabel Extended/RichTextLabel Extended.tscn").instance()
 	$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.add_child(_richTextLabelExtended)
 	_richTextLabelExtended.createRichTextLabelForGameConsole(_critterName, _text)
-	consoleLog.append("{critterName}: {_text}".format({ "critterName": _critterName, "text": _text }))
 	updateGameConsole()
 
 func updateGameConsole():

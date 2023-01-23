@@ -116,14 +116,23 @@ var levelId = 1
 var itemId = 0
 var critterId = 1
 
-func isTileFree(_tile, grid):
-	for blockingTile in blockedTiles:
+func isTileFree(_tile, _grid, _checkBlockedTiles = true):
+	if _checkBlockedTiles:
+		for blockingTile in blockedTiles:
+			if (
+				_tile.x < 0 or
+				_tile.y < 0 or
+				_tile.x >= int(gridSize.x) or
+				_tile.y >= int(gridSize.y) or
+				_grid[_tile.x][_tile.y].tile == blockingTile
+			):
+				return false
+	else:
 		if (
 			_tile.x < 0 or
 			_tile.y < 0 or
 			_tile.x >= int(gridSize.x) or
-			_tile.y >= int(gridSize.y) or
-			grid[_tile.x][_tile.y].tile == blockingTile
+			_tile.y >= int(gridSize.y)
 		):
 			return false
 	return true

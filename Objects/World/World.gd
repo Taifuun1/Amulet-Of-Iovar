@@ -34,10 +34,10 @@ var levels = {
 	"dungeon1": [],
 	"library": [],
 	"dungeon2": [],
+	"beach": [],
+	"dungeon3": [],
 	"minesOfTidoh": [],
 	"depthsOfTidoh": [],
-	"dungeon3": [],
-	"beach": [],
 	"dungeon4": [],
 	"banditWarcamp": [],
 	"storageArea": [],
@@ -58,8 +58,8 @@ var churchLevel = null
 var tile_size = get_cell_size()
 var half_tile_size = tile_size / 2
 
-var gameSetUpThread = Thread.new()
-var saveGameThread = Thread.new()
+var gameSetUpThread
+var saveGameThread
 
 var hideObjectsWhenDrawingNextFrame = true
 var checkNewCritterSpawn = 0
@@ -140,9 +140,9 @@ func setUpGameObjects(_playerData = null):
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "cursed" })
 #		$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "uncursed" })
-		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
+#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
+#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
 #		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "uncursed" })
 #		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
@@ -165,12 +165,12 @@ func setUpGameObjects(_playerData = null):
 #		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
 #		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
 #		$Items/Items.createItem("dwarvish laysword", null, 1, true, { "alignment": "uncursed" })
-		$Items/Items.createItem("eario of toxix", null, 1, true)
-		$Items/Items.createItem("eario of fleir", null, 1, true)
-		$Items/Items.createItem("eario of frost", null, 1, true)
-		$Items/Items.createItem("luirio of cone", null, 1, true)
-		$Items/Items.createItem("luirio of point", null, 1, true)
-		$Items/Items.createItem("heario of flow", null, 1, true)
+#		$Items/Items.createItem("eario of toxix", null, 1, true)
+#		$Items/Items.createItem("eario of fleir", null, 1, true)
+#		$Items/Items.createItem("eario of frost", null, 1, true)
+#		$Items/Items.createItem("luirio of cone", null, 1, true)
+#		$Items/Items.createItem("luirio of point", null, 1, true)
+#		$Items/Items.createItem("heario of flow", null, 1, true)
 	
 	print("UIing")
 	
@@ -230,12 +230,14 @@ func _input(_event):
 					if(
 						Globals.isTileFree(_tileToMoveTo, level.grid) or
 						(
+							Globals.isTileFree(_tileToMoveTo, level.grid, false) and
 							$Critters/"0".inventory.checkIfItemInInventoryByName("pickaxe") and
 							(
 								level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.EMPTY or
 								level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE or
 								level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP
-							)
+							) and
+							$Critters/"0".autoMine
 						)
 					):
 						if currentGameState == gameState.GAME:
@@ -696,7 +698,7 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 		elif levels.dungeonHalls2.back().levelId == Globals.currentDungeonLevel:
 			if _stair.matchn("secondUpStair"):
 				Globals.currentDungeonLevel = levels.dragonsPeak.front().levelId
-				return "upStair"
+				return "downStair"
 			if _stair.matchn("downStair"):
 				Globals.currentDungeonLevel = levels.dungeonHalls3.front().levelId
 				return "upStair"
@@ -900,19 +902,6 @@ func interactWith(_tileToInteractWith):
 				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(4):
 					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 					Globals.gameConsole.addLog("You unlock the door with your credit card.")
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
-			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
-				Globals.gameConsole.addLog("You dig up the item from the sand.")
-				if randi() % 3 == 0:
-					$Items/Items.createItem("message in a bottle", _tileToInteractWith)
-					Globals.gameConsole.addLog("You discover a message in a bottle!")
-				else:
-					$Items/Items.createItem($Items/Items.getRandomItem(), _tileToInteractWith)
-					Globals.gameConsole.addLog("You discover an item!")
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-				processGameTurn()
-			else:
-				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT:
 			if randi() % 5 == 0:
 				$Items/Items.createItem("carrot", _tileToInteractWith)
@@ -1072,6 +1061,7 @@ func saveGameInThread():
 	$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
 	$UI/UITheme/"Dancing Dragons".startDancingDragons()
 	yield(get_tree().create_timer(0.01), "timeout")
+	saveGameThread = Thread.new()
 	saveGameThread.start(self, "saveGame")
 
 func saveGame():

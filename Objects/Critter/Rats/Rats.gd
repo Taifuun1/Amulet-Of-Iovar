@@ -9,7 +9,7 @@ var rats = [
 		"texture": load("res://Assets/Critters/RatBigRat.png"),
 		"alignment": "Neutral",
 		"level": 3,
-		"expDropAmount": 4,
+		"expDropAmount": 3,
 		"hp": 7,
 		"mp": 0,
 		"ac": 0,
@@ -61,7 +61,7 @@ var rats = [
 		"texture": load("res://Assets/Critters/RatSewerRat.png"),
 		"alignment": "Neutral",
 		"level": 5,
-		"expDropAmount": 6,
+		"expDropAmount": 5,
 		"hp": 17,
 		"mp": 0,
 		"ac": 0,
@@ -113,7 +113,7 @@ var rats = [
 		"texture": load("res://Assets/Critters/RatCaveRat.png"),
 		"alignment": "Neutral",
 		"level": 7,
-		"expDropAmount": 10,
+		"expDropAmount": 8,
 		"hp": 22,
 		"mp": 0,
 		"ac": 0,
@@ -128,7 +128,7 @@ var rats = [
 				}
 			},
 			{
-				"dmg": [1,1],
+				"dmg": [2,2],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

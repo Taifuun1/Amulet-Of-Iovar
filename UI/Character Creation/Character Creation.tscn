@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://UI/Character Creation/Character Creation.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Theme/UITheme.tres" type="Theme" id=2]
@@ -10,11 +10,7 @@
 [ext_resource path="res://Assets/Classes/Herbalogue.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Classes/Archeologist.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Classes/Banker.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Theme/raleway.medium.ttf" type="DynamicFontData" id=11]
-
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 11 )
+[ext_resource path="res://Assets/Theme/UITitleFont.tres" type="DynamicFont" id=11]
 
 [sub_resource type="StyleBoxFlat" id=2]
 draw_center = false
@@ -80,6 +76,21 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.0431373, 0.0627451, 0.231373, 1 )
 
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0, 0, 0, 1 )
+draw_center = false
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color( 0.129412, 0.219608, 0.403922, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
 [node name="Character Creation" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -88,312 +99,974 @@ theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="CharacterCreationContainer" type="VBoxContainer" parent="."]
-margin_right = 1920.0
-margin_bottom = 1004.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
 mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 
 [node name="Title" type="Label" parent="CharacterCreationContainer"]
-margin_right = 1920.0
-margin_bottom = 58.0
-rect_min_size = Vector2( 250, 58 )
-custom_fonts/font = SubResource( 1 )
+margin_right = 1904.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 11 )
 text = "Create Character"
 align = 1
 valign = 1
 
-[node name="ClassesContainer" type="GridContainer" parent="CharacterCreationContainer"]
-margin_left = 4.0
-margin_top = 62.0
-margin_right = 1916.0
-margin_bottom = 876.0
-rect_min_size = Vector2( 0, 814 )
+[node name="ClassesContentContainer" type="HBoxContainer" parent="CharacterCreationContainer"]
+margin_top = 54.0
+margin_right = 1904.0
+margin_bottom = 860.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ClassesContainer" type="GridContainer" parent="CharacterCreationContainer/ClassesContentContainer"]
+margin_right = 950.0
+margin_bottom = 806.0
 mouse_filter = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
 columns = 4
 
-[node name="Archeologist" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_right = 475.0
-margin_bottom = 400.0
+[node name="Archeologist" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer"]
+margin_right = 235.0
+margin_bottom = 401.0
 mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="ArcheologistContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Archeologist"]
+[node name="ArcheologistContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Archeologist"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 473.0
-margin_bottom = 398.0
+margin_right = 233.0
+margin_bottom = 399.0
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
-margin_right = 471.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 471, 370 )
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
+margin_right = 231.0
+margin_bottom = 371.0
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 9 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
-margin_top = 374.0
-margin_right = 471.0
-margin_bottom = 396.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Archeologist/ArcheologistContainer"]
+margin_top = 375.0
+margin_right = 231.0
+margin_bottom = 397.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Archeologist[/center]"
 text = "Archeologist"
 fit_content_height = true
 
-[node name="Banker" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 479.0
-margin_right = 954.0
-margin_bottom = 400.0
+[node name="Banker" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer"]
+margin_left = 239.0
+margin_right = 474.0
+margin_bottom = 401.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 4 )
 
-[node name="BankerContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Banker"]
+[node name="BankerContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Banker"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 473.0
-margin_bottom = 398.0
+margin_right = 233.0
+margin_bottom = 399.0
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Banker/BankerContainer"]
-margin_right = 471.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 471, 370 )
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Banker/BankerContainer"]
+margin_right = 231.0
+margin_bottom = 371.0
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 10 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Banker/BankerContainer"]
-margin_top = 374.0
-margin_right = 471.0
-margin_bottom = 396.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Banker/BankerContainer"]
+margin_top = 375.0
+margin_right = 231.0
+margin_bottom = 397.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Banker[/center]"
 text = "Banker"
 fit_content_height = true
 
-[node name="FreedomFighter" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 958.0
-margin_right = 1433.0
-margin_bottom = 400.0
+[node name="FreedomFighter" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer"]
+margin_left = 478.0
+margin_right = 712.0
+margin_bottom = 401.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 5 )
 
-[node name="FreedomFighterContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/FreedomFighter"]
+[node name="FreedomFighterContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/FreedomFighter"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 473.0
-margin_bottom = 398.0
+margin_right = 232.0
+margin_bottom = 399.0
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/FreedomFighter/FreedomFighterContainer"]
-margin_right = 471.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 471, 370 )
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/FreedomFighter/FreedomFighterContainer"]
+margin_right = 230.0
+margin_bottom = 371.0
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 3 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/FreedomFighter/FreedomFighterContainer"]
-margin_top = 374.0
-margin_right = 471.0
-margin_bottom = 396.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/FreedomFighter/FreedomFighterContainer"]
+margin_top = 375.0
+margin_right = 230.0
+margin_bottom = 397.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Freedom Fighter[/center]"
 text = "Freedom Fighter"
 fit_content_height = true
 
-[node name="Herbalogue" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 1437.0
-margin_right = 1912.0
-margin_bottom = 400.0
+[node name="Herbalogue" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer"]
+margin_left = 716.0
+margin_right = 950.0
+margin_bottom = 401.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 6 )
 
-[node name="HerbalogueContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Herbalogue"]
+[node name="HerbalogueContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Herbalogue"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 473.0
-margin_bottom = 398.0
+margin_right = 232.0
+margin_bottom = 399.0
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Herbalogue/HerbalogueContainer"]
-margin_right = 471.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 471, 370 )
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Herbalogue/HerbalogueContainer"]
+margin_right = 230.0
+margin_bottom = 371.0
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 8 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Herbalogue/HerbalogueContainer"]
-margin_top = 374.0
-margin_right = 471.0
-margin_bottom = 396.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Herbalogue/HerbalogueContainer"]
+margin_top = 375.0
+margin_right = 230.0
+margin_bottom = 397.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Herbalogue[/center]"
 text = "Herbalogue"
 fit_content_height = true
 
-[node name="Mercenary" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_top = 404.0
-margin_right = 475.0
-margin_bottom = 804.0
+[node name="Mercenary" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer"]
+margin_top = 405.0
+margin_right = 235.0
+margin_bottom = 806.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 7 )
 
-[node name="MercenaryContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Mercenary"]
+[node name="MercenaryContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Mercenary"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 473.0
-margin_bottom = 398.0
+margin_right = 233.0
+margin_bottom = 399.0
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Mercenary/MercenaryContainer"]
-margin_right = 471.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 471, 370 )
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Mercenary/MercenaryContainer"]
+margin_right = 231.0
+margin_bottom = 371.0
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 5 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Mercenary/MercenaryContainer"]
-margin_top = 374.0
-margin_right = 471.0
-margin_bottom = 396.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Mercenary/MercenaryContainer"]
+margin_top = 375.0
+margin_right = 231.0
+margin_bottom = 397.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Mercenary[/center]"
 text = "Mercenary"
 fit_content_height = true
 
-[node name="Exterminator" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 479.0
-margin_top = 404.0
-margin_right = 954.0
-margin_bottom = 804.0
+[node name="Exterminator" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer"]
+margin_left = 239.0
+margin_top = 405.0
+margin_right = 474.0
+margin_bottom = 806.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 8 )
 
-[node name="ExterminatorContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Exterminator"]
+[node name="ExterminatorContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Exterminator"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 473.0
-margin_bottom = 398.0
+margin_right = 233.0
+margin_bottom = 399.0
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Exterminator/ExterminatorContainer"]
-margin_right = 471.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 471, 370 )
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Exterminator/ExterminatorContainer"]
+margin_right = 231.0
+margin_bottom = 371.0
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 6 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Exterminator/ExterminatorContainer"]
-margin_top = 374.0
-margin_right = 471.0
-margin_bottom = 396.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Exterminator/ExterminatorContainer"]
+margin_top = 375.0
+margin_right = 231.0
+margin_bottom = 397.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Exterminator[/center]"
 text = "Exterminator"
 fit_content_height = true
 
-[node name="Rogue" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 958.0
-margin_top = 404.0
-margin_right = 1433.0
-margin_bottom = 804.0
+[node name="Rogue" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer"]
+margin_left = 478.0
+margin_top = 405.0
+margin_right = 712.0
+margin_bottom = 806.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 9 )
 
-[node name="RogueContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Rogue"]
+[node name="RogueContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Rogue"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 473.0
-margin_bottom = 398.0
+margin_right = 232.0
+margin_bottom = 399.0
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Rogue/RogueContainer"]
-margin_right = 471.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 471, 370 )
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Rogue/RogueContainer"]
+margin_right = 230.0
+margin_bottom = 371.0
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 4 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Rogue/RogueContainer"]
-margin_top = 374.0
-margin_right = 471.0
-margin_bottom = 396.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Rogue/RogueContainer"]
+margin_top = 375.0
+margin_right = 230.0
+margin_bottom = 397.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Rogue[/center]"
 text = "Rogue"
 fit_content_height = true
 
-[node name="Savant" type="PanelContainer" parent="CharacterCreationContainer/ClassesContainer"]
-margin_left = 1437.0
-margin_top = 404.0
-margin_right = 1912.0
-margin_bottom = 804.0
+[node name="Savant" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer"]
+margin_left = 716.0
+margin_top = 405.0
+margin_right = 950.0
+margin_bottom = 806.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 10 )
 
-[node name="SavantContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContainer/Savant"]
+[node name="SavantContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Savant"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 473.0
-margin_bottom = 398.0
+margin_right = 232.0
+margin_bottom = 399.0
 mouse_filter = 2
 
-[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContainer/Savant/SavantContainer"]
-margin_right = 471.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 471, 370 )
+[node name="Sprite" type="TextureRect" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Savant/SavantContainer"]
+margin_right = 230.0
+margin_bottom = 371.0
 mouse_filter = 2
 size_flags_vertical = 3
 texture = ExtResource( 7 )
 stretch_mode = 6
 
-[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContainer/Savant/SavantContainer"]
-margin_top = 374.0
-margin_right = 471.0
-margin_bottom = 396.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Name" type="RichTextLabel" parent="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Savant/SavantContainer"]
+margin_top = 375.0
+margin_right = 230.0
+margin_bottom = 397.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[center]Savant[/center]"
 text = "Savant"
 fit_content_height = true
 
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer"]
+margin_left = 954.0
+margin_right = 1904.0
+margin_bottom = 806.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer"]
+margin_right = 950.0
+margin_bottom = 806.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+
+[node name="Label" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer"]
+margin_right = 934.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 11 )
+text = "Class stats"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer"]
+margin_top = 37.0
+margin_right = 934.0
+margin_bottom = 790.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="StatsContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_right = 934.0
+margin_bottom = 236.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BaseStatsContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer"]
+margin_right = 465.0
+margin_bottom = 236.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HpContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer"]
+margin_right = 465.0
+margin_bottom = 21.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/HpContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Hp"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/HpContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="MpContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer"]
+margin_top = 25.0
+margin_right = 465.0
+margin_bottom = 46.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/MpContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Mp"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/MpContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="StrengthContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer"]
+margin_top = 50.0
+margin_right = 465.0
+margin_bottom = 71.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/StrengthContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Strength"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/StrengthContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="LegerityContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer"]
+margin_top = 75.0
+margin_right = 465.0
+margin_bottom = 96.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/LegerityContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Legerity"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/LegerityContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="BalanceContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer"]
+margin_top = 100.0
+margin_right = 465.0
+margin_bottom = 121.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/BalanceContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Balance"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/BalanceContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="BeliefContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer"]
+margin_top = 125.0
+margin_right = 465.0
+margin_bottom = 146.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/BeliefContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Belief"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/BeliefContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="VisageContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer"]
+margin_top = 150.0
+margin_right = 465.0
+margin_bottom = 171.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/VisageContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Visage"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/VisageContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="WisdomContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer"]
+margin_top = 175.0
+margin_right = 465.0
+margin_bottom = 196.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/WisdomContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Wisdom"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/BaseStatsContainer/WisdomContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="StatsIncreaseContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer"]
+margin_left = 469.0
+margin_right = 934.0
+margin_bottom = 236.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HpContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer"]
+margin_right = 465.0
+margin_bottom = 21.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/HpContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Hp/level"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/HpContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="MpContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer"]
+margin_top = 25.0
+margin_right = 465.0
+margin_bottom = 46.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/MpContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Mp/level"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/MpContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="StrengthContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer"]
+margin_top = 50.0
+margin_right = 465.0
+margin_bottom = 71.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/StrengthContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Strength/level"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/StrengthContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="LegerityContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer"]
+margin_top = 75.0
+margin_right = 465.0
+margin_bottom = 96.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/LegerityContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Legerity/level"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/LegerityContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="BalanceContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer"]
+margin_top = 100.0
+margin_right = 465.0
+margin_bottom = 121.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/BalanceContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Balance/level"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/BalanceContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="BeliefContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer"]
+margin_top = 125.0
+margin_right = 465.0
+margin_bottom = 146.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/BeliefContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Belief/level"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/BeliefContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="VisageContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer"]
+margin_top = 150.0
+margin_right = 465.0
+margin_bottom = 171.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/VisageContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Visage/level"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/VisageContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="WisdomContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer"]
+margin_top = 175.0
+margin_right = 465.0
+margin_bottom = 196.0
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/WisdomContainer"]
+margin_right = 230.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "Wisdom/level"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/StatsContainer/StatsIncreaseContainer/WisdomContainer"]
+margin_left = 234.0
+margin_right = 465.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "-"
+
+[node name="RaceContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 236.0
+margin_right = 934.0
+margin_bottom = 276.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 12 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/RaceContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/RaceContainer/PanelContainer"]
+margin_right = 926.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/RaceContainer/PanelContainer/ClassDataContainer"]
+margin_top = 9.0
+margin_right = 461.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Race"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/RaceContainer/PanelContainer/ClassDataContainer"]
+margin_left = 465.0
+margin_top = 9.0
+margin_right = 926.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "-"
+align = 2
+
+[node name="JusticeContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 276.0
+margin_right = 934.0
+margin_bottom = 316.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 12 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/JusticeContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/JusticeContainer/PanelContainer"]
+margin_right = 926.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/JusticeContainer/PanelContainer/ClassDataContainer"]
+margin_top = 9.0
+margin_right = 461.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Justice"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/JusticeContainer/PanelContainer/ClassDataContainer"]
+margin_left = 465.0
+margin_top = 9.0
+margin_right = 926.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "-"
+align = 2
+
+[node name="SkillContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 316.0
+margin_right = 934.0
+margin_bottom = 356.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 12 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/SkillContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/SkillContainer/PanelContainer"]
+margin_right = 926.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/SkillContainer/PanelContainer/ClassDataContainer"]
+margin_top = 9.0
+margin_right = 461.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Skill"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/SkillContainer/PanelContainer/ClassDataContainer"]
+margin_left = 465.0
+margin_top = 9.0
+margin_right = 926.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "-"
+align = 2
+
+[node name="QuoteContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 356.0
+margin_right = 934.0
+margin_bottom = 396.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 12 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer"]
+margin_right = 926.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer/ClassDataContainer"]
+margin_top = 9.0
+margin_right = 461.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Quote"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer/ClassDataContainer"]
+margin_left = 465.0
+margin_top = 9.0
+margin_right = 926.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "-"
+align = 2
+
+[node name="ResistancesContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 396.0
+margin_right = 934.0
+margin_bottom = 436.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 12 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ResistancesContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ResistancesContainer/PanelContainer"]
+margin_right = 926.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ResistancesContainer/PanelContainer/ClassDataContainer"]
+margin_top = 9.0
+margin_right = 461.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Resistances"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ResistancesContainer/PanelContainer/ClassDataContainer"]
+margin_left = 465.0
+margin_top = 9.0
+margin_right = 926.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "-"
+align = 2
+
+[node name="NeutralClassesContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 436.0
+margin_right = 934.0
+margin_bottom = 476.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 12 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/NeutralClassesContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/NeutralClassesContainer/PanelContainer"]
+margin_right = 926.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/NeutralClassesContainer/PanelContainer/ClassDataContainer"]
+margin_top = 9.0
+margin_right = 461.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Neutral classes"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/NeutralClassesContainer/PanelContainer/ClassDataContainer"]
+margin_left = 465.0
+margin_top = 9.0
+margin_right = 926.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "-"
+align = 2
+
+[node name="GoldPiecesContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 476.0
+margin_right = 934.0
+margin_bottom = 516.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 12 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/GoldPiecesContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/GoldPiecesContainer/PanelContainer"]
+margin_right = 926.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/GoldPiecesContainer/PanelContainer/ClassDataContainer"]
+margin_top = 9.0
+margin_right = 461.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Gold pieces"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/GoldPiecesContainer/PanelContainer/ClassDataContainer"]
+margin_left = 465.0
+margin_top = 9.0
+margin_right = 926.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "-"
+align = 2
+
+[node name="ClassDataListsContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 516.0
+margin_right = 934.0
+margin_bottom = 753.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 14 )
+
+[node name="ClassDataListsContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer"]
+margin_right = 934.0
+margin_bottom = 237.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="ClassDataListsContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StartingItemsContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer"]
+margin_right = 465.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/StartingItemsContainer"]
+margin_right = 465.0
+margin_bottom = 21.0
+text = "Starting items"
+
+[node name="StartingItemsScroll" type="ScrollContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/StartingItemsContainer"]
+margin_top = 25.0
+margin_right = 465.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StartingItemsList" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/StartingItemsContainer/StartingItemsScroll"]
+margin_right = 465.0
+margin_bottom = 196.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SkillsContainer" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer"]
+margin_left = 469.0
+margin_right = 934.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/SkillsContainer"]
+margin_right = 465.0
+margin_bottom = 21.0
+text = "Skills"
+
+[node name="SkillsScroll" type="ScrollContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/SkillsContainer"]
+margin_top = 25.0
+margin_right = 465.0
+margin_bottom = 221.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SkillsList" type="VBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/SkillsContainer/SkillsScroll"]
+margin_right = 465.0
+margin_bottom = 196.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="CenterContainer" type="CenterContainer" parent="CharacterCreationContainer"]
-margin_top = 880.0
-margin_right = 1920.0
-margin_bottom = 1080.0
-rect_min_size = Vector2( 1920, 200 )
+margin_top = 864.0
+margin_right = 1904.0
+margin_bottom = 1064.0
+rect_min_size = Vector2( 0, 200 )
+size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreationContainer/CenterContainer"]
-margin_left = 928.0
+margin_left = 902.0
 margin_top = 61.0
-margin_right = 992.0
+margin_right = 1002.0
 margin_bottom = 139.0
 
 [node name="StartButton" type="Button" parent="CharacterCreationContainer/CenterContainer/VBoxContainer"]
-margin_right = 64.0
+margin_right = 100.0
 margin_bottom = 37.0
+rect_min_size = Vector2( 100, 0 )
 mouse_filter = 1
 size_flags_horizontal = 4
 disabled = true
@@ -401,38 +1074,38 @@ action_mode = 0
 text = "Okay"
 
 [node name="BackButton" type="Button" parent="CharacterCreationContainer/CenterContainer/VBoxContainer"]
-margin_left = 3.0
 margin_top = 41.0
-margin_right = 61.0
+margin_right = 100.0
 margin_bottom = 78.0
+rect_min_size = Vector2( 100, 0 )
 mouse_filter = 1
 size_flags_horizontal = 4
 action_mode = 0
 text = "Back"
 
-[connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/Archeologist" to="." method="_on_Classes_Pick_input" binds= [ "Archeologist" ]]
-[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Archeologist" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Archeologist" ]]
-[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Archeologist" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Archeologist" ]]
-[connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/Banker" to="." method="_on_Classes_Pick_input" binds= [ "Banker" ]]
-[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Banker" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Banker" ]]
-[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Banker" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Banker" ]]
-[connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/FreedomFighter" to="." method="_on_Classes_Pick_input" binds= [ "FreedomFighter" ]]
-[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/FreedomFighter" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "FreedomFighter" ]]
-[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/FreedomFighter" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "FreedomFighter" ]]
-[connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/Herbalogue" to="." method="_on_Classes_Pick_input" binds= [ "Herbalogue" ]]
-[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Herbalogue" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Herbalogue" ]]
-[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Herbalogue" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Herbalogue" ]]
-[connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/Mercenary" to="." method="_on_Classes_Pick_input" binds= [ "Mercenary" ]]
-[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Mercenary" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Mercenary" ]]
-[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Mercenary" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Mercenary" ]]
-[connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/Exterminator" to="." method="_on_Classes_Pick_input" binds= [ "Exterminator" ]]
-[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Exterminator" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Exterminator" ]]
-[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Exterminator" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Exterminator" ]]
-[connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/Rogue" to="." method="_on_Classes_Pick_input" binds= [ "Rogue" ]]
-[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Rogue" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Rogue" ]]
-[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Rogue" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Rogue" ]]
-[connection signal="gui_input" from="CharacterCreationContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_input" binds= [ "Savant" ]]
-[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Savant" ]]
-[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Savant" ]]
+[connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Archeologist" to="." method="_on_Classes_Pick_input" binds= [ "Archeologist" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Archeologist" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Archeologist" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Archeologist" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Archeologist" ]]
+[connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Banker" to="." method="_on_Classes_Pick_input" binds= [ "Banker" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Banker" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Banker" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Banker" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Banker" ]]
+[connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/FreedomFighter" to="." method="_on_Classes_Pick_input" binds= [ "FreedomFighter" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/FreedomFighter" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "FreedomFighter" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/FreedomFighter" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "FreedomFighter" ]]
+[connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Herbalogue" to="." method="_on_Classes_Pick_input" binds= [ "Herbalogue" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Herbalogue" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Herbalogue" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Herbalogue" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Herbalogue" ]]
+[connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Mercenary" to="." method="_on_Classes_Pick_input" binds= [ "Mercenary" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Mercenary" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Mercenary" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Mercenary" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Mercenary" ]]
+[connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Exterminator" to="." method="_on_Classes_Pick_input" binds= [ "Exterminator" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Exterminator" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Exterminator" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Exterminator" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Exterminator" ]]
+[connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Rogue" to="." method="_on_Classes_Pick_input" binds= [ "Rogue" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Rogue" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Rogue" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Rogue" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Rogue" ]]
+[connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_input" binds= [ "Savant" ]]
+[connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Savant" ]]
+[connection signal="mouse_exited" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Savant" to="." method="_on_Classes_Pick_mouse_exited" binds= [ "Savant" ]]
 [connection signal="pressed" from="CharacterCreationContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_Start_Button_pressed"]
 [connection signal="pressed" from="CharacterCreationContainer/CenterContainer/VBoxContainer/BackButton" to="." method="_on_Back_Button_pressed"]

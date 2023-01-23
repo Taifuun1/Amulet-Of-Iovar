@@ -10,7 +10,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeon2": {
-		"amount": [3, 7],
+		"amount": [3, 5],
 		"critters": {
 			"ants": ["Sugar ant"],
 			"blobs": ["Slerp", "Sluerp"],
@@ -27,7 +27,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeon3": {
-		"amount": [4, 8],
+		"amount": [4, 6],
 		"critters": {
 			"ants": ["Leaf ant"],
 			"bats": ["Squinting bat"],
@@ -48,7 +48,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeon4": {
-		"amount": [4, 8],
+		"amount": [4, 7],
 		"critters": {
 			"ants": ["Leaf ant"],
 			"bats": ["Squinting bat"],
@@ -69,7 +69,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"patch": {
-		"amount": [6, 11],
+		"amount": [4, 6],
 		"critters": {
 			"ants": ["Leaf ant"],
 			"bats": ["Squinting bat"],
@@ -85,7 +85,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"abandonedOutpost": {
-		"amount": [4, 8],
+		"amount": [4, 6],
 		"critters": {
 			"humans": ["Outlaw watcher", "Outlaw fusiee'er"],
 			"newts": ["Highlands newt"],
@@ -93,7 +93,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"anthill": {
-		"amount": [10, 15],
+		"amount": [8, 13],
 		"critters": {
 			"ants": ["Sugar ant", "Leaf ant"],
 			"snakes": ["Garnered snake", "Marsh snake"]
@@ -105,7 +105,7 @@ var critterLevelGenerationList = {
 			"blobs": ["Sluerp"],
 			"bats": ["Spooky bat", "Vampire bat"],
 			"felines": ["Cat"],
-			"giants": ["Balding giant"],
+			"giants": ["Hill giant"],
 			"mimics": ["Mimic"],
 			"newts": ["Paper newt"],
 			"rats": ["Big rat"],
@@ -119,7 +119,7 @@ var critterLevelGenerationList = {
 			"bats": ["Dark bat"],
 			"dwarves": ["Dwarf miner"],
 			"felines": ["Cat"],
-			"giants": ["Hill giant"],
+			"giants": ["Hill giant", "Balding giant"],
 			"kobolds": ["Tiny kobold"],
 			"mimics": ["Mimic"],
 			"newts": ["Mine newt"],
@@ -128,14 +128,14 @@ var critterLevelGenerationList = {
 		}
 	},
 	"depthsOfTidoh": {
-		"amount": [6, 14],
+		"amount": [5, 10],
 		"critters": {
 			"ants": ["Leaf ant"],
 			"bats": ["Dark bat"],
 			"centaurs": ["Hill centaur"],
 			"dwarves": ["Dwarf miner", "Dwarf engineer"],
 			"felines": ["Cat", "Lynx"],
-			"giants": ["Hill giant"],
+			"giants": ["Balding giant"],
 			"humans": ["Outlaw watcher", "Outlaw fusiee'er"],
 			"liches": ["Half-lich"],
 			"mimics": ["Mimic"],
@@ -146,7 +146,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"beach": {
-		"amount": [4, 6],
+		"amount": [3, 5],
 		"critters": {
 			"aquaticLife": ["Fiddler crab", "Ringed seal"],
 			"blobs": ["Slerp", "Sluerp"],
@@ -161,7 +161,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"banditWarcamp": {
-		"amount": [12, 14],
+		"amount": [8, 12],
 		"critters": {
 			"ants": ["Soldier ant"],
 			"blobs": ["Slerp"],
@@ -179,7 +179,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeonHalls1": {
-		"amount": [8, 12],
+		"amount": [6, 10],
 		"critters": {
 			"ants": ["Soldier ant"],
 			"aquaticLife": ["Eyebrow seal"],
@@ -198,7 +198,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeonHalls2": {
-		"amount": [8, 12],
+		"amount": [7, 11],
 		"critters": {
 			"ants": ["Soldier ant", "Double-pattern ant"],
 			"aquaticLife": ["Eyebrow seal"],
@@ -240,7 +240,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"labyrinth": {
-		"amount": [8, 12],
+		"amount": [6, 10],
 		"critters": {
 			"ants": ["Soldier ant"],
 			"aquaticLife": ["Eyebrow seal"],
@@ -259,13 +259,13 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dragonsPeak": {
-		"amount": [6, 14],
+		"amount": [3, 6],
 		"critters": {
 			"dragons": ["Black dragon", "Blue dragon", "Cyan dragon", "Green dragon", "Red dragon", "Silver dragon", "Violet dragon", "White dragon", "Yellow dragon"]
 		}
 	},
 	"theGreatShadows": {
-		"amount": [8, 11],
+		"amount": [8, 12],
 		"critters": {
 			"bats": ["Dark bat", "Squinting bat", "Spooky bat", "Vampire bat"],
 			"canines": ["Gearh"],
@@ -279,7 +279,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"fortress": {
-		"amount": [10, 10],
+		"amount": [8, 8],
 		"critters": {
 			"aquaticLife": ["Tonatuna"],
 			"canines": ["Gearh"],

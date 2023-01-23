@@ -21,7 +21,7 @@
 1/name = "FOG"
 1/texture = ExtResource( 3 )
 1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 0.501961 )
+1/modulate = Color( 1, 1, 1, 0.376471 )
 1/region = Rect2( 0, 0, 32, 32 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )

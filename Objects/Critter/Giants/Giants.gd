@@ -10,12 +10,12 @@ var giants = [
 		"alignment": "Neutral",
 		"level": 5,
 		"expDropAmount": 8,
-		"hp": 24,
+		"hp": 20,
 		"mp": 0,
 		"ac": 3,
 		"attacks": [
 			{
-				"dmg": [8,10],
+				"dmg": [7,9],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -63,12 +63,12 @@ var giants = [
 		"alignment": "Neutral",
 		"level": 10,
 		"expDropAmount": 15,
-		"hp": 48,
+		"hp": 42,
 		"mp": 0,
 		"ac": 4,
 		"attacks": [
 			{
-				"dmg": [13,19],
+				"dmg": [12,17],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -116,12 +116,12 @@ var giants = [
 		"alignment": "Neutral",
 		"level": 13,
 		"expDropAmount": 22,
-		"hp": 71,
+		"hp": 63,
 		"mp": 0,
 		"ac": 6,
 		"attacks": [
 			{
-				"dmg": [17,29],
+				"dmg": [16,26],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

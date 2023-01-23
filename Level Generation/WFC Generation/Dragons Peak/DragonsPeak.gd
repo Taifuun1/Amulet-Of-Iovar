@@ -1,18 +1,18 @@
 extends WaveFunctionCollapse
 
-func createNewLevel():
+func createNewLevel(_stairData = []):
 	createGrid()
 	pathFind([])
 	
 	addInputs("Dragons Peak", get_script().get_path().get_base_dir() + "/Inputs")
-	createDungeon()
+	createDungeon(_stairData)
 	removeInputs()
 	
 	doFinalPathfinding()
 	
 	return self
 
-func createDungeon():
+func createDungeon(_stairData):
 	for _i in range(10):
 		createDragonsPeak()
 		trimGenerationEdges()
@@ -25,7 +25,7 @@ func createDungeon():
 			["FLOOR_DRAGONS_PEAK"],
 			["FLOOR_DRAGONS_PEAK"]
 		)
-		placeStairs()
+		placeStairs("DUNGEON", _stairData)
 		if areAllStairsConnected():
 			placeContainers({
 				"chest": {

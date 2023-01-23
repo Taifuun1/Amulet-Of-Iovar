@@ -54,7 +54,7 @@ var kobolds = [
 		"texture": load("res://Assets/Critters/KoboldLargeKobold.png"),
 		"alignment": "Neutral",
 		"level": 6,
-		"expDropAmount": 9,
+		"expDropAmount": 6,
 		"hp": 16,
 		"mp": 0,
 		"ac": 1,

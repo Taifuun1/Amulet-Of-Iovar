@@ -19,7 +19,7 @@ func createDungeon():
 			["SAND"],
 			["SAND"]
 		)
-		placeStairs("SAND", false)
+		placeStairs("SAND")
 		if areAllStairsConnected():
 			return
 		resetLevel()

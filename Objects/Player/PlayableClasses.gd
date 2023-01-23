@@ -37,7 +37,7 @@ var archeologist = {
 		"Candle": [1, 3],
 		"Scroll of identify": [2, 5],
 		"Water potion": 2,
-		"Apple": 2,
+		"Apple": 1,
 		"Chocolate bar": 1,
 		"Bean can": 3
 	},
@@ -79,7 +79,7 @@ var archeologist = {
 
 var banker = {
 	critterName = "Banker",
-	skill = "Banker exploits the free markets for gold and valuables. Has high starting gold and gets discounts at shops.",
+	skill = "Has high starting gold and gets discounts at shops.",
 	quote = "The free market is the cornerstone of society.",
 	race = "Human",
 	justice = "Laissez-faire",
@@ -178,9 +178,8 @@ var freedomFighter = {
 	neutralClasses = ["dwarves"],
 	items = {
 		"Chipped sword": 1,
-		"Battered buckler": 1,
+		"Burning shield": 1,
 		"Leather mail": 1,
-		"Blindfold": 1,
 		"Potion of blindness": [2, 3],
 		"Potion of heal": 1,
 		"Soda bottle": 2,
@@ -380,7 +379,7 @@ var mercenary = {
 
 var exterminator = {
 	critterName = "Exterminator",
-	skill = "Exterminator has gone mad with power. Gets +2 to all fleir damage.",
+	skill = "Gets +2 to all fleir damage.",
 	quote = "He tells me to burn things.",
 	race = "Human",
 	justice = "Draconian",
@@ -461,7 +460,7 @@ var exterminator = {
 
 var rogue = {
 	critterName = "Rogue",
-	skill = "Rogue uses a cloak and dagger from the shadows. Gets +1 to all toxix damage, +2 toxix status effect duration on toxix hit and +1 bonus damage from using daggers.",
+	skill = "Gets +1 to all toxix damage, +2 toxix status effect duration on toxix hit and +1 bonus damage from using daggers.",
 	quote = "I'm darker than the blackest night.",
 	race = "Human",
 	justice = "Laissez-faire",
@@ -533,7 +532,7 @@ var rogue = {
 
 var savant = {
 	critterName = "Savant",
-	skill = "Savant is a 1400 year old wizard. Gets +3 frost and thunder spell damage.",
+	skill = "Gets +3 frost and thunder spell damage.",
 	quote = "We used to cast spells uphill both ways.",
 	race = "Human",
 	justice = "Grilling",
@@ -560,13 +559,14 @@ var savant = {
 	items = {
 		"Worn mace": 1,
 		"Boots of magic": 1,
-		"Wand of Thunder": 1,
 		"Amulet of magic power": 1,
-		"Scroll of create food": 2,
+		"Scroll of create food": 1,
 		"Scroll of remove curse": 1,
-		"Scroll of identify": [2, 3],
-		"Magic marker": 1,
+		"Scroll of identify": [1, 2],
+		"Eario of Frost": 1,
+		"Luirio of point": 1,
 		"Wand of light": 1,
+		"Wand of Thunder": 1,
 		"Orange": 1,
 		"SPAM": 1
 	},

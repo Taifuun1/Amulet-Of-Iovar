@@ -598,7 +598,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 12,
 			"lines": [
-				"Roars",
+				"[i]Roars[/i]",
 				"Raawwrr!",
 				"Grrrrr...",
 				"Hissss!",
@@ -619,7 +619,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 12,
 			"lines": [
-				"Roars",
+				"[i]Roars[/i]",
 				"RAAAaawwrrr!",
 				"GRRRrrrrrrr...",
 				"Haz-hhsssssss!"
@@ -721,8 +721,8 @@ I wither away"""
 			],
 		},
 		"despawn": [
-			"UUUUUuuUUUGggghhhhh...",
-			"UUUuuUuunnfffff..."
+			"UUUGGgghhhhh...",
+			"UUUuuunnfffff..."
 		]
 	},
 	"Guard": {
@@ -740,19 +740,21 @@ I wither away"""
 			],
 		},
 		"speech": {
-			"frequency": 12,
+			"frequency": 15,
 			"lines": [
 				"Shall we gather for whisky and cigars tonight?",
 				"Indeed, I believe so.",
 				"Nothing to report.",
 				"What?",
 				"Who's there?",
-				"Must'ave been the wind..."
+				"Must'ave been the wind...",
+				"I need a drink...",
+				"[i]Burp[/i]"
 			],
 		},
 		"despawn": [
-			"OOOoooohhhh...",
-			"UUUuuuuffff..."
+			"Ooohh...",
+			"Uuuff..."
 		]
 	},
 	"Guard captain": {
@@ -776,8 +778,8 @@ I wither away"""
 			],
 		},
 		"despawn": [
-			"OOOoooohhhh...",
-			"UUUuuuuffff..."
+			"Ooohh...",
+			"Uuuff..."
 		]
 	},
 	"Outlaw watcher": {
@@ -788,12 +790,13 @@ I wither away"""
 				"I forgot me hat...",
 				"Come e're!",
 				"Ye oaf!",
-				"I'll shank ya, mate!"
+				"I'll shank ya, mate!",
+				"You wanker!"
 			],
 		},
 		"despawn": [
-			"Uuuuughhhh...",
-			"Ooooffffghhhh..."
+			"Uuughh...",
+			"Oooffffghh..."
 		]
 	},
 	"Outlaw fusiee'er": {
@@ -801,17 +804,18 @@ I wither away"""
 		"taunt": {
 			"frequency": 21,
 			"lines": [
-				"Come 're!",
+				"Come e're!",
 				"Ye oaf!",
-				"I'll shank ya, mate!"
+				"I'll shank ya, mate!",
+				"You wanker!"
 			],
 		},
 		"spell": [
 			"Super Rock Throw!"
 		],
 		"despawn": [
-			"Uuuuughhhh...",
-			"Ooooffffghhhh..."
+			"Uuughh...",
+			"Oooffghh..."
 		]
 	},
 	"Outlaw merchandiee'er": {
@@ -821,12 +825,13 @@ I wither away"""
 			"lines": [
 				"Come 're!",
 				"Ye oaf!",
-				"I'll shank ya, mate!"
+				"I'll shank ya, mate!",
+				"You wanker!"
 			],
 		},
 		"despawn": [
-			"Uuuuughhhh...",
-			"Ooooffffghhhh..."
+			"Uuughh...",
+			"Oofffghh..."
 		]
 	},
 	"Iovars cultist acolyte": {
@@ -841,7 +846,7 @@ I wither away"""
 		},
 		"despawn": [
 			"Ooooofff...",
-			"UUuuugghhfff...",
+			"Uuuugghhfff...",
 			"For Iovar..."
 		]
 	},
@@ -856,8 +861,8 @@ I wither away"""
 			],
 		},
 		"despawn": [
-			"Ooooofff...",
-			"UUuuugghhfff...",
+			"Ooofff...",
+			"Uuughfff...",
 			"For Iovar..."
 		]
 	},
@@ -872,8 +877,8 @@ I wither away"""
 			],
 		},
 		"despawn": [
-			"Uuuuughhhh...",
-			"Ooooffffghhhh..."
+			"Uuughh...",
+			"Ooofffghh..."
 		]
 	},
 	"Half-lich": {

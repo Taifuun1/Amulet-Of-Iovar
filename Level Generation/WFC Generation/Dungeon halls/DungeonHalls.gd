@@ -1,17 +1,17 @@
 extends WaveFunctionCollapse
 
-func createNewLevel(_secondStair = null):
+func createNewLevel(_stairData = []):
 	createGrid()
 	
 	addInputs("Dungeon Halls", get_script().get_path().get_base_dir() + "/Inputs")
-	createDungeon(_secondStair)
+	createDungeon(_stairData)
 	removeInputs()
 	
 	doFinalPathfinding()
 	
 	return self
 
-func createDungeon(_secondStair):
+func createDungeon(_stairData):
 	for _i in range(10):
 		pathFind([])
 		createDungeonHalls()
@@ -25,7 +25,7 @@ func createDungeon(_secondStair):
 			["FLOOR_DUNGEON"],
 			["FLOOR_DUNGEON", "CORRIDOR_DUNGEON"]
 		)
-		placeStairs("DUNGEON", _secondStair)
+		placeStairs("DUNGEON", _stairData)
 		checkAllRoomsAreAccessible()
 		if areAllStairsConnected():
 			placeContainers({

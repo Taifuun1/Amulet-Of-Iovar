@@ -200,7 +200,7 @@ func setUpDungeon():
 		$Levels.add_child(newDungeon)
 	
 	### Library
-	for _level in range(randi() % 3 + 3):
+	for _level in range(randi() % 2 + 3):
 		var newlibrary = load(levelPaths.library).instance()
 		newlibrary.create("library", "library", "Library {level}".format({ "level": 1 + levels.library.size() }), 10000)
 		levels.library.append(newlibrary)
@@ -492,16 +492,22 @@ func getNextDungeonGenLevel():
 
 func checkIfGenerateLevelWithStair(_level):
 	if _level == levels.dungeon1.back():
-		_level.createNewLevel("downStair")
+		_level.createNewLevel(["makeSecondDownStair"])
 		return true
 	if _level == levels.dungeon3.back():
-		_level.createNewLevel("downStair")
+		_level.createNewLevel(["makeSecondDownStair"])
+		return true
+	if _level == levels.library.back():
+		_level.createNewLevel(["noDownStair"])
 		return true
 	if _level == levels.dungeonHalls1.back():
-		_level.createNewLevel("downStair")
+		_level.createNewLevel(["makeSecondDownStair"])
 		return true
 	if _level == levels.dungeonHalls2.back():
-		_level.createNewLevel("upStair")
+		_level.createNewLevel(["makeSecondUpStair"])
+		return true
+	if _level == levels.labyrinth.back():
+		_level.createNewLevel(["noDownStair"])
 		return true
 	return false
 

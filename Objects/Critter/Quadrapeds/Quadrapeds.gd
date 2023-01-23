@@ -9,7 +9,7 @@ var quadrapeds = [
 		"texture": load("res://Assets/Critters/QuadrapedRhino.png"),
 		"alignment": "Neutral",
 		"level": 11,
-		"expDropAmount": 56,
+		"expDropAmount": 32,
 		"hp": 48,
 		"mp": 8,
 		"ac": 4,
@@ -24,7 +24,7 @@ var quadrapeds = [
 				}
 			}
 		],
-		"hits": [1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0],
+		"hits": [1,0,1,0,1,0,0,0,1,1,0,1,0,1,0,0],
 		"stats": {
 			"strength": 18,
 			"legerity": 12,
@@ -68,7 +68,7 @@ var quadrapeds = [
 		"texture": load("res://Assets/Critters/QuadrapedBrontotheridae.png"),
 		"alignment": "Neutral",
 		"level": 14,
-		"expDropAmount": 88,
+		"expDropAmount": 68,
 		"hp": 70,
 		"mp": 21,
 		"ac": 7,
@@ -83,7 +83,7 @@ var quadrapeds = [
 				}
 			}
 		],
-		"hits": [1,0,0,1,0,0,1,0,0,0,1,0,1,0,0,0],
+		"hits": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0],
 		"stats": {
 			"strength": 23,
 			"legerity": 15,

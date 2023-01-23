@@ -135,6 +135,11 @@ func calculateDmg(_attack, _activeArmorSets = null):
 			_magicDmg /= 2
 		damage.magicDmg = _magicDmg
 	
+	damage = {
+		"dmg": int(damage.dmg),
+		"magicDmg": int(damage.magicDmg)
+	}
+	
 	return damage
 
 
@@ -155,10 +160,12 @@ func processCritterEffects():
 			if _status.matchn("toxix"):
 				var _toxixDmg = 1
 				hp -= _toxixDmg
+				statusEffects[_status] -= 1
 				Globals.gameConsole.addLog("{critterName} takes {dmg} toxix damage.".format({ "critterName": critterName, "dmg": _toxixDmg }))
 			elif _status.matchn("onfleir"):
 				var _fleirDmg = 2
 				hp -= _fleirDmg
+				statusEffects[_status] -= 1
 				Globals.gameConsole.addLog("{critterName} takes {dmg} fleir damage.".format({ "critterName": critterName, "dmg": _fleirDmg }))
 			elif _status.matchn("confusion") or _status.matchn("fumbling"):
 				if statusEffects[_status] != -1:

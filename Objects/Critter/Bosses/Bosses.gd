@@ -86,7 +86,7 @@ var bosses = [
 		"texture": load("res://Assets/Critters/TidohTel'hydrad.png"),
 		"alignment": "Neutral",
 		"level": 11,
-		"expDropAmount": 135,
+		"expDropAmount": 125,
 		"hp": 77,
 		"mp": 86,
 		"ac": 3,
@@ -181,10 +181,10 @@ var bosses = [
 		"texture": load("res://Assets/Critters/Shin'korLeve'er.png"),
 		"alignment": "Neutral",
 		"level": 16,
-		"expDropAmount": 1395,
+		"expDropAmount": 796,
 		"hp": 61,
 		"mp": 67,
-		"ac": 6,
+		"ac": 5,
 		"attacks": [
 			{
 				"dmg": [12,16],
@@ -256,7 +256,7 @@ var bosses = [
 		"texture": load("res://Assets/Critters/MadBanana-hunterOgre.png"),
 		"alignment": "Neutral",
 		"level": 14,
-		"expDropAmount": 443,
+		"expDropAmount": 224,
 		"hp": 87,
 		"mp": 67,
 		"ac": 6,
@@ -309,7 +309,7 @@ var bosses = [
 		"texture": load("res://Assets/Critters/ElderDragon.png"),
 		"alignment": "Neutral",
 		"level": 32,
-		"expDropAmount": 5890,
+		"expDropAmount": 1289,
 		"hp": 148,
 		"mp": 89,
 		"ac": 15,
@@ -385,7 +385,7 @@ var bosses = [
 		"expDropAmount": 2112,
 		"hp": 170,
 		"mp": 276,
-		"ac": 10,
+		"ac": 8,
 		"attacks": [
 			{
 				"dmg": [16,16],

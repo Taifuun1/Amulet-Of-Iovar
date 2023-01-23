@@ -2,19 +2,19 @@ extends WaveFunctionCollapse
 
 onready var labyrinthSpawns = preload("res://Level Generation/WFC Generation/Labyrinth/LabyrinthSpawns.gd").new()
 
-func createNewLevel(_isLast = false):
+func createNewLevel(_stairData = []):
 	createGrid()
 	pathFind([])
 	
 	addInputs("Labyrinth", get_script().get_path().get_base_dir() + "/Inputs")
-	createDungeon(_isLast)
+	createDungeon(_stairData)
 	removeInputs()
 	
 	doFinalPathfinding()
 	
 	return self
 
-func createDungeon(_isLast):
+func createDungeon(_stairData):
 	for _i in range(10):
 		var _bossRoomCenter = null
 		createLabyrinth()
@@ -22,7 +22,7 @@ func createDungeon(_isLast):
 		getGenerationGrid()
 		fillEmptyGenerationTiles("CORRIDOR_DUNGEON")
 		fillGridWithGeneratedGrid()
-		if _isLast:
+		if _stairData.has("noDownStair"):
 			_bossRoomCenter = generateBossRoom()
 			labyrinthSpawns.labyrinthSpawns[0].tiles = _bossRoomCenter
 			placePresetCritters(labyrinthSpawns.labyrinthSpawns, self)
@@ -31,7 +31,7 @@ func createDungeon(_isLast):
 			["CORRIDOR_DUNGEON"],
 			["CORRIDOR_DUNGEON"]
 		)
-		placeStairs()
+		placeStairs("DUNGEON", _stairData)
 		if areAllStairsConnected():
 			placeContainers({
 				"chest": {
@@ -39,8 +39,8 @@ func createDungeon(_isLast):
 				}
 			})
 			if _bossRoomCenter != null:
-				pathFind([Globals.blockedTiles])
-				if calculatePath(stairs.downStair, _bossRoomCenter) != 0:
+				pathFind(Globals.blockedTiles)
+				if calculatePath(stairs.upStair, _bossRoomCenter).size() != 0:
 					return
 			else:
 				return

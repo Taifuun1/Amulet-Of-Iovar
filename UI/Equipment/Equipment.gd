@@ -389,7 +389,7 @@ func checkWhatIsWorn(_item):
 				Globals.gameConsole.addLog("You can see everything!")
 		"amulet of magic power":
 			if _playerNode.itemsTurnedOn.has(_item):
-				$"/root/World/Critters/0".bonusMagicDmg -= 3
+				$"/root/World/UI/UITheme/Runes".bonusMagicDmg -= 3
 				_playerNode.itemsTurnedOn.erase(_item)
 				$"/root/World/UI/UITheme/Runes".calculateMagicDamage()
 				Globals.gameConsole.addLog("Your magic energy subsides.")

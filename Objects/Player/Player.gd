@@ -732,7 +732,7 @@ func calculateEquipmentStats():
 func addExp(_expAmount):
 	experiencePoints += _expAmount
 	while true:
-		if experiencePoints >= experienceNeededForLevelGainAmount and level < 16:
+		if experiencePoints >= experienceNeededForLevelGainAmount and level < 20:
 			gainLevel()
 		else:
 			break
@@ -758,7 +758,7 @@ func gainLevel():
 	baseStats.wisdom += wisdomIncrease
 	
 	experienceNeededForPreviousLevelGainAmount = experienceNeededForLevelGainAmount
-	var _nextLevelExpGain = int(experienceNeededForLevelGainAmount + (2 * experienceNeededForLevelGainAmount / 3))
+	var _nextLevelExpGain = int(20 * level + (experienceNeededForLevelGainAmount / 4))
 	if _nextLevelExpGain > 5280:
 		_nextLevelExpGain = 5280
 	experienceNeededForLevelGainAmount = _nextLevelExpGain

@@ -56,13 +56,15 @@ func createGrid(_tile = Globals.tiles.EMPTY, _generateNewLevel = true):
 ### Dungeon generation functions ###
 ####################################
 
-func placeStairs(_stairType = "DUNGEON", _secondStair = null):
+func placeStairs(_stairType = "DUNGEON", _stairData = []):
 	if !spawnableItemTiles.empty() or !floorTiles.empty():
-		stairs["downStair"] = placeStair("downStair", "DOWN_STAIR_", _stairType)
-		if typeof(_secondStair) == TYPE_STRING and _secondStair.matchn("downStair"):
+		if !_stairData.has("noDownStair"):
+			stairs["downStair"] = placeStair("downStair", "DOWN_STAIR_", _stairType)
+		if _stairData.has("makeSecondDownStair"):
 			stairs["secondDownStair"] = placeStair("secondDownStair", "DOWN_STAIR_", _stairType)
-		stairs["upStair"] = placeStair("secondDownStair", "UP_STAIR_", _stairType)
-		if typeof(_secondStair) == TYPE_STRING and _secondStair.matchn("upStair"):
+		if !_stairData.has("noUpStair"):
+			stairs["upStair"] = placeStair("upStair", "UP_STAIR_", _stairType)
+		if _stairData.has("makeSecondUpStair"):
 			stairs["secondUpStair"] = placeStair("secondUpStair", "UP_STAIR_", _stairType)
 		for _stair in stairs.values():
 			grid[_stair.x][_stair.y].interactable = null
@@ -102,7 +104,7 @@ func areAllStairsConnected():
 	astarNode.clear()
 	pathFind(Globals.blockedTiles)
 	
-	if stairs.values().size() == 0 or stairs["downStair"] == null or stairs["upStair"] == null:
+	if stairs.values().size() == 0 or (stairs.has("downStair") and stairs["downStair"] == null) or (stairs.has("upStair") and stairs["upStair"] == null):
 		return false
 	for startStair in stairs.values():
 		for endStair in stairs.values():

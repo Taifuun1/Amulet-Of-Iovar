@@ -20,7 +20,7 @@ func loadData(_fileName, _filePath):
 	_file.close()
 	return _data
 
-func deletaData(_save):
+func deleteData(_save):
 	var _directory = Directory.new()
 	removeRecursive("user://SaveSlot{save}".format({ "save": _save }))
 	_directory.remove("user://SaveSlot{save}".format({ "save": _save }))

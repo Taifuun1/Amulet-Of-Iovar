@@ -106,12 +106,9 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 		elif _item.matchn("chest"):
 			_id = newItem.createItem(miscellaneousItems["chest"], _extraData, 1)
 		else:
+			print(_item)
 			_id = newItem.createItem(getItemByName(_item), _extraData)
 	else:
-		if _item == null:
-			print(_item)
-			print(_itemPosition)
-			print(_extraData)
 		_id = newItem.createItem(_item, _extraData, _amount, _spawnNew)
 	
 	if _toInventory:
