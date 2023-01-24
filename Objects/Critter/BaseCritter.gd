@@ -118,7 +118,7 @@ func calculateDmg(_attack, _activeArmorSets = null):
 		if _dmgVariation == 0:
 			_baseDmg = _floorDmg
 		else:
-			_baseDmg = randi() % int(_dmgVariation) + _floorDmg
+			_baseDmg = randi() % int(_dmgVariation + 1) + _floorDmg
 		damage.dmg = (_baseDmg + _totalBonusDamage) - _armorClassAfterArmorPen
 	
 	if typeof(_attack.magicDmg.dmg) == TYPE_ARRAY:

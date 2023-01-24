@@ -107,12 +107,13 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 			_id = newItem.createItem(miscellaneousItems["chest"], _extraData, 1)
 		else:
 			print(_item)
-			_id = newItem.createItem(getItemByName(_item), _extraData)
+			_id = newItem.createItem(getItemByName(_item), _extraData, _amount)
 	else:
 		_id = newItem.createItem(_item, _extraData, _amount, _spawnNew)
 	
 	if _toInventory:
 		$"/root/World/Critters/0".addToInventory([newItem.id])
+		newItem.identifyItem(true, true, true)
 	elif _level != null:
 		_level.grid[_itemPosition.x][_itemPosition.y].items.append(newItem.id)
 	

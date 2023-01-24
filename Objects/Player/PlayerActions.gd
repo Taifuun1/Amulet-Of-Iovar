@@ -680,7 +680,7 @@ func zapItem(_direction):
 								var _newItems = []
 								var _newItemIds = []
 								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									if !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+									if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
 										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
 										_itemCount += 1
@@ -699,7 +699,7 @@ func zapItem(_direction):
 								var _newItems = []
 								var _newItemIds = []
 								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									if randi() % 2 == 0 and !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+									if randi() % 2 == 0 and (get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container")):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
 										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
 										_itemCount += 1
@@ -715,7 +715,7 @@ func zapItem(_direction):
 								var _newItems = []
 								var _newItemIds = []
 								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									if randi() % 4 == 0 and !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+									if randi() % 4 == 0 and (get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container")):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
 										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
 										_itemCount += 1

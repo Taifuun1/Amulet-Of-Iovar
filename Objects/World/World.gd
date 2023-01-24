@@ -1060,8 +1060,8 @@ func saveGameInThread():
 	currentGameState = gameState.OUT_OF_PLAYERS_HANDS
 	$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
 	$UI/UITheme/"Dancing Dragons".startDancingDragons()
-	yield(get_tree().create_timer(0.01), "timeout")
 	saveGameThread = Thread.new()
+	yield(get_tree().create_timer(0.01), "timeout")
 	saveGameThread.start(self, "saveGame")
 
 func saveGame():

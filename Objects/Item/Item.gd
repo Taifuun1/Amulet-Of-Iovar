@@ -45,7 +45,6 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	name = str(id)
 	
 	if _item.itemName.matchn("corpse") and _item.itemName.length() == 6:
-		print("creating corpse name")
 		itemName = "{critterName} {itemName}".format({ "critterName": _extraData.critterName, "itemName": "corpse"})
 		unidentifiedItemName = "{critterName} {itemName}".format({ "critterName": _extraData.critterName, "itemName": "corpse"})
 		notIdentified.name = true
@@ -100,11 +99,11 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	else:
 		if randi() % 5 == 0:
 			if randi() % 2 == 0:
-				alignment = "blessed"
+				alignment = "Blessed"
 			else:
-				alignment = "cursed"
+				alignment = "Cursed"
 		else:
-			alignment = "uncursed"
+			alignment = "Uncursed"
 	
 	if _item.has("enchantment"):
 		enchantment = _item.enchantment
@@ -220,6 +219,11 @@ func getAttacks(_stats):
 			_newMagicDamage.dmg[1] += 1
 		if _critterClass.matchn("rogue") and category.matchn("dagger"):
 			_newBonusDamage.classBonusDamage = 1
+		var _earioMagicType = $"/root/World/UI/UITheme/Runes".isOnlyEarioEquipped()
+		if typeof(_earioMagicType) != TYPE_BOOL and (_newMagicDamage == null or _newMagicDamage.element.matchn(_earioMagicType)):
+			_newMagicDamage.dmg[0] += 1
+			_newMagicDamage.dmg[1] += 1
+			_newMagicDamage.element = _earioMagicType.capitalize()
 		_attacks.append(
 			{
 				"dmg": [_newDamage[0] + _damageIncrease.dmg, _newDamage[1] + _damageIncrease.dmg],

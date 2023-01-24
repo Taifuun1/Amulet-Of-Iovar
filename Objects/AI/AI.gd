@@ -12,7 +12,7 @@ func create(_aI, _aggroDistance, _activationDistance = null):
 	activationDistance = _activationDistance
 
 func getCritterMove(_critterTile, _playerTile, _level, _hostileClasses = null):
-	if aggroTarget != null and !_level.critters.has(aggroTarget):
+	if (aggroTarget != null and !_level.critters.has(aggroTarget)) or aggroTarget == 0:
 		aggroTarget = null
 	if aggroTarget == null and _hostileClasses != null:
 		for _critterId in _level.critters:

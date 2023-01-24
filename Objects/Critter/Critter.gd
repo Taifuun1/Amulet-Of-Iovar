@@ -112,7 +112,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	_distanceFromPlayer = _level.calculatePath(_critterTile, _playerTile)
 	# Get critter move
 	if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
-		_path = aI.getCritterMove(_critterTile, _playerTile, _level)
+		if aI.aggroTarget != null:
+			_path = aI.getCritterMove(_critterTile, _level.getCritterTile(aI.aggroTarget), _level)
+		else:
+			_path = aI.getCritterMove(_critterTile, _playerTile, _level)
 	
 	if statusEffects.stun > 0:
 		Globals.gameConsole.addLog("The {critter} can't move!".format({ "critter": critterName.capitalize() }))
@@ -570,6 +573,25 @@ func takeDamage(_attacks, _critterTile, _critterName):
 				break
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
+		if (
+			(
+				_critterName.matchn("archeologist") or
+				_critterName.matchn("banker") or
+				_critterName.matchn("freedom fighter") or
+				_critterName.matchn("herbalogue") or
+				_critterName.matchn("mercenary") or
+				_critterName.matchn("exterminator") or
+				_critterName.matchn("rogue") or
+				_critterName.matchn("savant")
+			) and
+			!(
+				aI.aI.matchn("aggressive") or
+				aI.aI.matchn("slow aggressive") or
+				aI.aI.matchn("mimicking")
+			)
+		):
+			aI.aI = "Aggressive"
+			aI.aggroTarget = null
 		if aI.aI.matchn("Deactivated") and checkIfCritterIsPlayer(_critterName):
 			awakeCritter(_critterTile, $"/root/World".level.getCritterTile(0))
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
@@ -581,7 +603,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			statusEffects.sleep = 0
 			Globals.gameConsole.addLog("The {critterName} wakes up!".format({ "critterName": critterName }))
 	else:
-		Globals.gameConsole.addLog("Looks like you can't attack...")
+		Globals.gameConsole.addLog("Looks like {critterName} can't attack...".format({ "critterName": _critterName }))
 	return _didCritterDie
 
 func despawn(_critterTile = null, _createCorpse = true, _createDrops = true):

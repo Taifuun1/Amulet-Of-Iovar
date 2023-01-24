@@ -28,6 +28,7 @@ func createRichTextLabelExtended(_critterName, _text):
 func updateGameConsole():
 	if $Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child_count() >= 31:
 		$Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.remove_child($Background/GameConsoleContainer/GameConsoleScrollContainer/GameConsoleScroll.get_child(0))
+	if consoleLog.size() >= 31:
 		consoleLog.pop_front()
 	
 	# Wait a frame for Godot to realize the new label

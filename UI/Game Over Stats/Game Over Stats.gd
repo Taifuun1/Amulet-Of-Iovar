@@ -12,6 +12,7 @@ func setValues(_title, _stats, _ascended = false):
 	for _itemName in _stats.points.points:
 		$"GameOverTabs/Points/PointsContainer/Points".createPointItem(_itemName, _stats.points.points[_itemName])
 	
+	print(_stats.consoleLogs)
 	for _log in _stats.consoleLogs:
 		var _logItem = RichTextLabelExtended.instance()
 		_logItem.createRichTextLabel(_log)

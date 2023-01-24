@@ -176,7 +176,7 @@ func create(_data = null):
 	
 	if _playerData.has("items"):
 		for _item in _playerData.items.keys():
-			$"/root/World/Items/Items".createItem(_item, null, _playerData.items[_item], true)
+			var _itemId = $"/root/World/Items/Items".createItem(_item, null, _playerData.items[_item], true)
 	
 	var _texture
 	if typeof(_playerData.texture) == TYPE_STRING:
@@ -311,7 +311,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			else:
 				_damageText = _damage.dmg + _damage.magicDmg
 			if _damage.magicDmg != 0 and _attack.magicDmg.element != null:
-				_damageColor = spellData.spellData[_attack.magicDmg.element].color
+				_damageColor = spellData.spellData[_attack.magicDmg.element.to_lower()].color
 			_damageNumber.create(_critterTile, _damageText, _damageColor)
 			$"/root/World/Texts".add_child(_damageNumber)
 			
@@ -476,6 +476,7 @@ func processPlayerSpecificEffects():
 	############
 	## Weight ##
 	############
+	
 	calculateWeightStats()
 	
 	####################

@@ -84,3 +84,6 @@ func _on_Container_List_Clicked(_id):
 		else:
 			containerItemNode.containerWeight += _item.weight
 	$"/root/World/Critters/0".inventory.updateWeight()
+	$"/root/World/Critters/0".calculateWeightStats()
+	$"/root/World/Critters/0".processPlayerUIChanges()
+	$"/root/World/Critters/0".updatePlayerStats()

@@ -1,22 +1,22 @@
 var spellData = {
 	"fleir": {
-		"baseDmg": [11,12],
+		"baseDmg": [14,15],
 		"color": "#FA535C"
 	},
 	"frost": {
-		"baseDmg": [7,8],
+		"baseDmg": [11,12],
 		"color": "#25d1ff"
 	},
 	"thunder": {
-		"baseDmg": [7,9],
+		"baseDmg": [11,13],
 		"color": "#F1FB36"
 	},
 	"gleeie'er": {
-		"baseDmg": [5,6],
+		"baseDmg": [7,9],
 		"color": "#3AFFCB"
 	},
 	"toxix": {
-		"baseDmg": [2,2],
+		"baseDmg": [3,3],
 		"color": "#87DB4D"
 	},
 	"incineration": {

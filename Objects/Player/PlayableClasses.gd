@@ -5,7 +5,7 @@ var archeologist = {
 	quote = "That belongs in a museum!",
 	race = "Human",
 	justice = "Grilling",
-	hp = 14,
+	hp = 16,
 	mp = 8,
 	stats = {
 		strength = 9,
@@ -16,7 +16,7 @@ var archeologist = {
 		wisdom = 6
 	},
 	hpIncrease = 4,
-	mpIncrease = 4,
+	mpIncrease = 3,
 	strengthIncrease = 1.5,
 	legerityIncrease = 1,
 	balanceIncrease = 1,
@@ -83,7 +83,7 @@ var banker = {
 	quote = "The free market is the cornerstone of society.",
 	race = "Human",
 	justice = "Laissez-faire",
-	hp = 11,
+	hp = 12,
 	mp = 12,
 	stats = {
 		strength = 5,
@@ -93,7 +93,7 @@ var banker = {
 		visage = 7,
 		wisdom = 7
 	},
-	hpIncrease = 2,
+	hpIncrease = 3,
 	mpIncrease = 4,
 	strengthIncrease = 0.6,
 	legerityIncrease = 1,
@@ -166,7 +166,7 @@ var freedomFighter = {
 		visage = 15,
 		wisdom = 3
 	},
-	hpIncrease = 4,
+	hpIncrease = 3,
 	mpIncrease = 4,
 	strengthIncrease = 1.2,
 	legerityIncrease = 1,
@@ -253,6 +253,7 @@ var herbalogue = {
 		"Bag of holding": 1,
 		"Potion of heal": 2,
 		"Ring of Toxix resistance": 1,
+		"Eario of Gleeie'er": 1,
 		"Wand of magic sphere": 1,
 		"Wand of Fleir": 1,
 		"Wand of Frost": 1,
@@ -314,7 +315,7 @@ var mercenary = {
 		visage = 8,
 		wisdom = 6
 	},
-	hpIncrease = 7,
+	hpIncrease = 6,
 	mpIncrease = 1,
 	strengthIncrease = 2,
 	legerityIncrease = 1.2,
@@ -383,7 +384,7 @@ var exterminator = {
 	quote = "He tells me to burn things.",
 	race = "Human",
 	justice = "Draconian",
-	hp = 8,
+	hp = 12,
 	mp = 8,
 	stats = {
 		strength = 5,
@@ -393,8 +394,8 @@ var exterminator = {
 		visage = 7,
 		wisdom = 7
 	},
-	hpIncrease = 6,
-	mpIncrease = 6,
+	hpIncrease = 3,
+	mpIncrease = 7,
 	strengthIncrease = 1.5,
 	legerityIncrease = 0.8,
 	balanceIncrease = 0.7,
@@ -476,12 +477,12 @@ var rogue = {
 	},
 	hpIncrease = 3,
 	mpIncrease = 3,
-	strengthIncrease = 1,
+	strengthIncrease = 0.9,
 	legerityIncrease = 2,
 	balanceIncrease = 1.5,
 	beliefIncrease = 0.8,
 	visageIncrease = 1.5,
-	wisdomIncrease = 1,
+	wisdomIncrease = 0.9,
 	resistances = ["toxix"],
 	neutralClasses = ["bats", "wraiths"],
 	items = {
@@ -539,7 +540,7 @@ var savant = {
 	hp = 8,
 	mp = 18,
 	stats = {
-		strength = 4,
+		strength = 5,
 		legerity = 8,
 		balance = 8,
 		belief = 10,
