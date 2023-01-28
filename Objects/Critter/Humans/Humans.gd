@@ -13,6 +13,7 @@ var humans = [
 		"hp": 16,
 		"mp": 11,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [2,3],
@@ -63,6 +64,7 @@ var humans = [
 		"hp": 31,
 		"mp": 8,
 		"ac": 5,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [8,11],
@@ -117,6 +119,7 @@ var humans = [
 		"hp": 39,
 		"mp": 10,
 		"ac": 7,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [9,12],
@@ -180,6 +183,7 @@ var humans = [
 		"hp": 19,
 		"mp": 3,
 		"ac": 2,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [4,7],
@@ -234,6 +238,7 @@ var humans = [
 		"hp": 28,
 		"mp": 10,
 		"ac": 3,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [3,4],
@@ -303,6 +308,7 @@ var humans = [
 		"hp": 34,
 		"mp": 21,
 		"ac": 6,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [9,12],
@@ -357,6 +363,7 @@ var humans = [
 		"hp": 34,
 		"mp": 48,
 		"ac": 5,
+		"magicac": 5,
 		"attacks": [
 			{
 				"dmg": [3,6],
@@ -422,6 +429,7 @@ var humans = [
 		"hp": 58,
 		"mp": 67,
 		"ac": 6,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [5,6],

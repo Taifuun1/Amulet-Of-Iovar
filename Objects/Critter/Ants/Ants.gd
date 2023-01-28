@@ -13,6 +13,7 @@ var ants = [
 		"hp": 4,
 		"mp": 7,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [1,1],
@@ -52,6 +53,7 @@ var ants = [
 		"hp": 14,
 		"mp": 7,
 		"ac": 1,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [3,3],
@@ -109,6 +111,7 @@ var ants = [
 		"hp": 22,
 		"mp": 7,
 		"ac": 2,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [5,7],
@@ -166,6 +169,7 @@ var ants = [
 		"hp": 35,
 		"mp": 7,
 		"ac": 3,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [6,8],

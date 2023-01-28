@@ -13,6 +13,7 @@ var blobs = [
 		"hp": 11,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 3,
 		"attacks": [
 			{
 				"dmg": [0,2],
@@ -75,6 +76,7 @@ var blobs = [
 		"hp": 11,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 3,
 		"attacks": [
 			{
 				"dmg": [0,2],

@@ -420,10 +420,34 @@ clip_text = true
 
 [node name="Tooltip" parent="GameStatsContainer/StatsContainer/ACContainer" instance=ExtResource( 8 )]
 
-[node name="AttacksContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+[node name="MagicACContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
 margin_top = 90.0
 margin_right = 377.0
 margin_bottom = 104.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="MagicACText" type="Label" parent="GameStatsContainer/StatsContainer/MagicACContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Magic AC"
+clip_text = true
+
+[node name="MagicAC" type="Label" parent="GameStatsContainer/StatsContainer/MagicACContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/MagicACContainer" instance=ExtResource( 8 )]
+
+[node name="AttacksContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 108.0
+margin_right = 377.0
+margin_bottom = 122.0
 rect_min_size = Vector2( 377, 0 )
 mouse_filter = 2
 custom_constants/separation = 4
@@ -449,9 +473,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/StatsContainer/AttacksContainer" instance=ExtResource( 8 )]
 
 [node name="MagicAttacksContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
-margin_top = 108.0
+margin_top = 126.0
 margin_right = 377.0
-margin_bottom = 122.0
+margin_bottom = 140.0
 rect_min_size = Vector2( 377, 0 )
 mouse_filter = 2
 custom_constants/separation = 4
@@ -500,9 +524,9 @@ align = 2
 clip_text = true
 
 [node name="LevelContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
-margin_top = 126.0
+margin_top = 144.0
 margin_right = 377.0
-margin_bottom = 140.0
+margin_bottom = 158.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="LevelText" type="Label" parent="GameStatsContainer/StatsContainer/LevelContainer"]
@@ -524,9 +548,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/StatsContainer/LevelContainer" instance=ExtResource( 8 )]
 
 [node name="ExperienceContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
-margin_top = 144.0
+margin_top = 162.0
 margin_right = 377.0
-margin_bottom = 158.0
+margin_bottom = 176.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="ExperienceText" type="Label" parent="GameStatsContainer/StatsContainer/ExperienceContainer"]
@@ -548,9 +572,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/StatsContainer/ExperienceContainer" instance=ExtResource( 8 )]
 
 [node name="GoldPiecesContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
-margin_top = 162.0
+margin_top = 180.0
 margin_right = 377.0
-margin_bottom = 176.0
+margin_bottom = 194.0
 rect_min_size = Vector2( 377, 0 )
 
 [node name="GoldPiecesText" type="Label" parent="GameStatsContainer/StatsContainer/GoldPiecesContainer"]
@@ -572,9 +596,9 @@ clip_text = true
 [node name="Tooltip" parent="GameStatsContainer/StatsContainer/GoldPiecesContainer" instance=ExtResource( 8 )]
 
 [node name="WeightContainer" type="VBoxContainer" parent="GameStatsContainer/StatsContainer"]
-margin_top = 180.0
+margin_top = 198.0
 margin_right = 377.0
-margin_bottom = 218.0
+margin_bottom = 236.0
 
 [node name="WeightLabel" type="Label" parent="GameStatsContainer/StatsContainer/WeightContainer"]
 margin_right = 377.0
@@ -804,6 +828,8 @@ stretch_mode = 6
 [connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/MPContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MPContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/ACContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/ACContainer", "ac" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/ACContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/ACContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/MagicACContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/ACContainer", "ac" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/MagicACContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/ACContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/AttacksContainer/AttacksText" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/AttacksContainer", "attacksText" ]]
 [connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/AttacksContainer/AttacksText" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/AttacksContainer" ]]
 [connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/AttacksContainer/Attacks" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/AttacksContainer", "attacks" ]]

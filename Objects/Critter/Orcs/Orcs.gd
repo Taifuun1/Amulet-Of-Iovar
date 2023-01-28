@@ -13,6 +13,7 @@ var orcs = [
 		"hp": 8,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [2,3],
@@ -66,6 +67,7 @@ var orcs = [
 		"hp": 15,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [3,8],
@@ -119,6 +121,7 @@ var orcs = [
 		"hp": 26,
 		"mp": 0,
 		"ac": 3,
+		"magicac": 3,
 		"attacks": [
 			{
 				"dmg": [6,12],
@@ -172,6 +175,7 @@ var orcs = [
 		"hp": 44,
 		"mp": 0,
 		"ac": 6,
+		"magicac": 3,
 		"attacks": [
 			{
 				"dmg": [8,16],
@@ -225,6 +229,7 @@ var orcs = [
 		"hp": 72,
 		"mp": 0,
 		"ac": 9,
+		"magicac": 5,
 		"attacks": [
 			{
 				"dmg": [21,33],

@@ -36,6 +36,7 @@ func updateStats(stats = {
 	race = null,
 	justice = null,
 	ac = null,
+	magicac = null,
 	attacks = null,
 	currentHit = null,
 	hits = null,
@@ -86,6 +87,8 @@ func updateStats(stats = {
 		$GameStatsContainer/StatsContainer/MPContainer/MPAmount.value = stats.mp
 	if stats.ac != null:
 		$GameStatsContainer/StatsContainer/ACContainer/AC.text = str(stats.ac)
+	if stats.magicac != null:
+		$GameStatsContainer/StatsContainer/MagicACContainer/MagicAC.text = str(stats.magicac)
 	if stats.attacks != null:
 		var _attackString = "{damage}d{hits}+{bonusDmg}({ap})/{magicDmg}".format({
 			"damage": str(stats.attacks.attack.dmg[0]) + "-" + str(stats.attacks.attack.dmg[1]),

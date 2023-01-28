@@ -13,6 +13,7 @@ var dwarves = [
 		"hp": 17,
 		"mp": 5,
 		"ac": 2,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [4,8],
@@ -84,6 +85,7 @@ var dwarves = [
 		"hp": 24,
 		"mp": 5,
 		"ac": 2,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [6,8],
@@ -130,6 +132,7 @@ var dwarves = [
 		"hp": 33,
 		"mp": 5,
 		"ac": 4,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [8,12],
@@ -193,6 +196,7 @@ var dwarves = [
 		"hp": 62,
 		"mp": 5,
 		"ac": 10,
+		"magicac": 5,
 		"attacks": [
 			{
 				"dmg": [18,20],

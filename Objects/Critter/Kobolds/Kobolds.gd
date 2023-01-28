@@ -13,6 +13,7 @@ var kobolds = [
 		"hp": 6,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [1,2],
@@ -57,7 +58,8 @@ var kobolds = [
 		"expDropAmount": 6,
 		"hp": 16,
 		"mp": 0,
-		"ac": 1,
+		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [4,6],

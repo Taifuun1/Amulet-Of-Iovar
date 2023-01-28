@@ -430,10 +430,13 @@ func quaffItem(_id):
 					Globals.gameConsole.addLog("This doesn't taste very good. Ughhhh...")
 			"soda bottle":
 				if _quaffedItem.alignment.matchn("blessed"):
+					calories += 100
 					Globals.gameConsole.addLog("Its orange juice! Its really good!")
 				if _quaffedItem.alignment.matchn("uncursed"):
+					calories += 80
 					Globals.gameConsole.addLog("Its apple juice. Tastes nice!")
 				if _quaffedItem.alignment.matchn("cursed"):
+					calories += 50
 					Globals.gameConsole.addLog("Its radish juice. Uggghh...")
 			"potion of heal":
 				var _amountToHeal = 0
@@ -972,7 +975,7 @@ func dipItem(_id):
 				$"/root/World/Items/Items".removeItem(_id)
 				Globals.gameConsole.addLog("The {itemName} is consumed.".format({ "itemName": _dippedItem.itemName }))
 			"soda bottle":
-				Globals.gameConsole.addLog("The {itemName} is soaked with sugar.".format({ "itemName": _selectedItem.itemName }))
+				Globals.gameConsole.addLog("The {itemName} looks sugary.".format({ "itemName": _selectedItem.itemName }))
 			"potion of confusion":
 				Globals.gameConsole.addLog("The {itemName} looks visibly confused!".format({ "itemName": _selectedItem.itemName }))
 			"potion of toxix":

@@ -13,6 +13,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],
@@ -72,6 +73,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],
@@ -131,6 +133,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],
@@ -190,6 +193,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],
@@ -249,6 +253,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],
@@ -308,6 +313,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],
@@ -371,6 +377,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],
@@ -430,6 +437,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],
@@ -489,6 +497,7 @@ var dragons = [
 		"hp": 89,
 		"mp": 60,
 		"ac": 10,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [22,28],

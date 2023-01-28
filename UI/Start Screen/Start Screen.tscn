@@ -43,21 +43,21 @@ margin_top = 332.0
 margin_right = 300.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 260, 100 )
-text = "Start game"
+text = "Start game "
 
 [node name="Stats" type="Button" parent="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 margin_top = 436.0
 margin_right = 300.0
 margin_bottom = 536.0
 rect_min_size = Vector2( 260, 100 )
-text = "Stats"
+text = "Stats "
 
 [node name="Exit game" type="Button" parent="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 margin_top = 540.0
 margin_right = 300.0
 margin_bottom = 640.0
 rect_min_size = Vector2( 260, 100 )
-text = "Exit game"
+text = "Exit game "
 
 [connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Start game" to="." method="_on_Start_Button_pressed"]
 [connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Stats" to="." method="_on_Stats_Button_pressed"]

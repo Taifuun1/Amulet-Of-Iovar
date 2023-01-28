@@ -13,6 +13,7 @@ var floatingSpheres = [
 		"hp": 7,
 		"mp": 4,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [1,1],
@@ -62,6 +63,7 @@ var floatingSpheres = [
 		"hp": 13,
 		"mp": 4,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [],
 		"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 		"stats": {
@@ -101,6 +103,7 @@ var floatingSpheres = [
 		"hp": 14,
 		"mp": 5,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [],
 		"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 		"stats": {
@@ -140,6 +143,7 @@ var floatingSpheres = [
 		"hp": 17,
 		"mp": 7,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [],
 		"hits": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 		"stats": {

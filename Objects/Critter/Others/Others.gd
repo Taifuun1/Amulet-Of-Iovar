@@ -13,6 +13,7 @@ var others = [
 #			"hp": 4,
 #			"mp": 0,
 #			"ac": 0,
+#			"magicac": 0,
 #			"attacks": [
 #				{
 #					"dmg": [1,1],
@@ -57,6 +58,7 @@ var others = [
 		"hp": 6,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [2,4],

@@ -9,7 +9,9 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 20,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -26,7 +28,9 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 45,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -41,7 +45,9 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 5,
 			"value": {
-				"ac": 0,
+				"armorClass": {
+					"magic": 2
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -58,7 +64,9 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 25,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"points": 75,
@@ -74,7 +82,9 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 25,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"points": 75,
@@ -90,7 +100,9 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 25,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"points": 75,
@@ -108,7 +120,10 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 10,
 			"value": {
-				"ac": 0,
+				"armorClass": {
+					"physical": 1,
+					"magic": 1
+				},
 				"resistance": null
 			},
 			"points": 250,
@@ -124,7 +139,9 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 25,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"points": 250,
@@ -140,7 +157,9 @@ var gauntlets = {
 			"category": "Gauntlets",
 			"weight": 40,
 			"value": {
-				"ac": 3,
+				"armorClass": {
+					"physical": 3
+				},
 				"resistance": null
 			},
 			"points": 250,

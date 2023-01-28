@@ -13,6 +13,7 @@ var quadrapeds = [
 		"hp": 48,
 		"mp": 8,
 		"ac": 4,
+		"magicac": 4,
 		"attacks": [
 			{
 				"dmg": [12,13],
@@ -72,6 +73,7 @@ var quadrapeds = [
 		"hp": 70,
 		"mp": 21,
 		"ac": 7,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [16,17],

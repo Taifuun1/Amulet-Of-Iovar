@@ -10,12 +10,13 @@ var bosses = [
 		"alignment": "Neutral",
 		"level": 6,
 		"expDropAmount": 77,
-		"hp": 48,
+		"hp": 32,
 		"mp": 67,
 		"ac": 2,
+		"magicac": 3,
 		"attacks": [
 			{
-				"dmg": [4,5],
+				"dmg": [3,4],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -26,11 +27,11 @@ var bosses = [
 		],
 		"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 		"stats": {
-			"strength": 12,
-			"legerity": 10,
-			"balance": 10,
-			"belief": 18,
-			"visage": 16,
+			"strength": 8,
+			"legerity": 7,
+			"balance": 8,
+			"belief": 15,
+			"visage": 14,
 			"wisdom": 16
 		},
 		"abilities": [
@@ -40,17 +41,12 @@ var bosses = [
 				"chance": 4
 			},
 			{
-				"abilityName": "frostBite",
-				"abilityType": "rangedSpell",
-				"chance": 3
-			},
-			{
 				"abilityName": "createShield",
 				"abilityType": "selfCastSpell",
-				"chance": 1
+				"chance": 4
 			}
 		],
-		"abilityHits": [1,1,0,1],
+		"abilityHits": [0,1,0,1],
 		"resistances": [],
 		"drops": [
 			{
@@ -90,6 +86,7 @@ var bosses = [
 		"hp": 77,
 		"mp": 86,
 		"ac": 3,
+		"magicac": 7,
 		"attacks": [
 			{
 				"dmg": [3,5],
@@ -185,6 +182,7 @@ var bosses = [
 		"hp": 61,
 		"mp": 67,
 		"ac": 5,
+		"magicac": 2,
 		"attacks": [
 			{
 				"dmg": [12,16],
@@ -260,6 +258,7 @@ var bosses = [
 		"hp": 87,
 		"mp": 67,
 		"ac": 6,
+		"magicac": 6,
 		"attacks": [
 			{
 				"dmg": [20,25],
@@ -313,6 +312,7 @@ var bosses = [
 		"hp": 148,
 		"mp": 89,
 		"ac": 15,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [26,32],
@@ -383,9 +383,10 @@ var bosses = [
 		"alignment": "Neutral",
 		"level": 55,
 		"expDropAmount": 2112,
-		"hp": 170,
-		"mp": 276,
+		"hp": 150,
+		"mp": 264,
 		"ac": 8,
+		"magicac": 8,
 		"attacks": [
 			{
 				"dmg": [16,16],
@@ -397,7 +398,7 @@ var bosses = [
 				}
 			},
 			{
-				"dmg": [11,11],
+				"dmg": [5,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

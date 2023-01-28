@@ -155,6 +155,7 @@ func create(_data = null):
 	skills = _playerData.skills
 	
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
+	magicac = $"/root/World/UI/UITheme/Equipment".getMagicArmorClass()
 	currentHit = 0
 	hits = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 	
@@ -280,9 +281,9 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			if randi() % 3 == 0:
 				_level.grid[_playerTile.x][_playerTile.y].interactable = null
 				Globals.gameConsole.addLog("You free yourself from the spider web.")
-				if randi() % 8 == 0:
-					# TODO: spider spawn
-					Globals.gameConsole.addLog("Spider jumps out from the spider web! (UN_IMPL)")
+#				if randi() % 8 == 0:
+#					TODO: spider spawn
+#					Globals.gameConsole.addLog("Spider jumps out from the spider web! (UN_IMPL)")
 			else:
 				Globals.gameConsole.addLog("You are still stuck in the spider web.")
 		else:
@@ -295,11 +296,11 @@ func takeDamage(_attacks, _critterTile, _crittername):
 		for _attack in _attacks:
 			var _damage = calculateDmg(_attack)
 			
-			if itemsTurnedOn.has("cloak of magical ambiquity") and _damage.dmg <= 0 and _damage.magicDmg > 0:
-				if _damage.magicDmg - 3 < 0:
+			if itemsTurnedOn.has("cloak of magical ambiguity") and _damage.dmg <= 0 and _damage.magicDmg > 0:
+				if _damage.magicDmg - 1 < 0:
 					_damage.magicDmg = 0
 				else:
-					_damage.magicDmg -= 3
+					_damage.magicDmg -= 1
 			
 			var _damageNumber = damageNumber.instance()
 			var _damageText
@@ -696,6 +697,9 @@ func calculateEquipmentStats():
 	# Armor class
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
 	
+	# Magic armor class
+	magicac = $"/root/World/UI/UITheme/Equipment".getMagicArmorClass()
+	
 	# Attacks
 	attacks = []
 	if (
@@ -759,7 +763,7 @@ func gainLevel():
 	baseStats.wisdom += wisdomIncrease
 	
 	experienceNeededForPreviousLevelGainAmount = experienceNeededForLevelGainAmount
-	var _nextLevelExpGain = int(20 * level + (experienceNeededForLevelGainAmount / 4))
+	var _nextLevelExpGain = int(20 * level + (experienceNeededForLevelGainAmount / 2))
 	if _nextLevelExpGain > 5280:
 		_nextLevelExpGain = 5280
 	experienceNeededForLevelGainAmount = _nextLevelExpGain
@@ -782,6 +786,7 @@ func updatePlayerStats():
 		race = race,
 		justice = justice,
 		ac = ac,
+		magicac = magicac,
 		attacks = {
 			"attack": attacks[0],
 			"hits": attacks.size(),

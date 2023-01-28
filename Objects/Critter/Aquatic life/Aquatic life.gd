@@ -13,6 +13,7 @@ var aquaticLife = [
 		"hp": 18,
 		"mp": 13,
 		"ac": 2,
+		"magicac": 1,
 		"attacks": [
 			{
 				"dmg": [6,8],
@@ -74,6 +75,7 @@ var aquaticLife = [
 		"hp": 32,
 		"mp": 16,
 		"ac": 2,
+		"magicac": 1,
 		"attacks": [
 			{
 				"dmg": [7,10],
@@ -119,6 +121,7 @@ var aquaticLife = [
 		"hp": 42,
 		"mp": 18,
 		"ac": 3,
+		"magicac": 2,
 		"attacks": [
 			{
 				"dmg": [10,12],
@@ -164,6 +167,7 @@ var aquaticLife = [
 		"hp": 77,
 		"mp": 32,
 		"ac": 1,
+		"magicac": 3,
 		"attacks": [
 			{
 				"dmg": [14,16],

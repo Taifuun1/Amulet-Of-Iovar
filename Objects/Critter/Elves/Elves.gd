@@ -13,6 +13,7 @@ var elves = [
 		"hp": 16,
 		"mp": 15,
 		"ac": 1,
+		"magicac": 1,
 		"attacks": [
 			{
 				"dmg": [2,3],
@@ -76,6 +77,7 @@ var elves = [
 		"hp": 23,
 		"mp": 22,
 		"ac": 2,
+		"magicac": 2,
 		"attacks": [
 			{
 				"dmg": [5,6],
@@ -147,6 +149,7 @@ var elves = [
 		"hp": 56,
 		"mp": 37,
 		"ac": 4,
+		"magicac": 8,
 		"attacks": [
 			{
 				"dmg": [12,16],
@@ -212,9 +215,10 @@ var elves = [
 		"hp": 79,
 		"mp": 55,
 		"ac": 7,
+		"magicac": 15,
 		"attacks": [
 			{
-				"dmg": [12,14],
+				"dmg": [10,14],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -223,7 +227,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [12,14],
+				"dmg": [10,14],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -232,7 +236,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [6,14],
+				"dmg": [6,10],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

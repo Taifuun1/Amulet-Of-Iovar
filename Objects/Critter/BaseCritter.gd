@@ -19,6 +19,7 @@ var maxhp
 var maxmp
 var shields
 var ac
+var magicac
 var attacks = [{
 	"dmg": [0,0],
 	"bonusDmg": {},
@@ -103,8 +104,19 @@ func calculateDmg(_attack, _activeArmorSets = null):
 	}
 	
 	if _attack.dmg != null:
-		var _armorClassAfterArmorPen = (ac / 2) - _attack.armorPen
+		var _acReduction = 100
+		var _armorClassAfterArmorPen = ac - _attack.armorPen
 		if _armorClassAfterArmorPen < 0: _armorClassAfterArmorPen = 0
+		var _damageReductionCount = int(_armorClassAfterArmorPen / 5)
+		var _damageReductionRemainder = _armorClassAfterArmorPen - _damageReductionCount * 5
+		if _damageReductionCount == 0:
+			_acReduction = _acReduction - _damageReductionRemainder * 4
+			_acReduction = float(_acReduction) / 100
+		else:
+			for _damageReduction in _damageReductionCount:
+				_acReduction = _acReduction * 0.8
+			_acReduction = _acReduction * (float(100 - _damageReductionRemainder * 4) / 100)
+			_acReduction = float(_acReduction) / 100
 		
 		var _floorDmg = int(_attack.dmg[0])
 		var _dmgVariation = int(_attack.dmg[1] - _attack.dmg[0])
@@ -119,7 +131,7 @@ func calculateDmg(_attack, _activeArmorSets = null):
 			_baseDmg = _floorDmg
 		else:
 			_baseDmg = randi() % int(_dmgVariation + 1) + _floorDmg
-		damage.dmg = (_baseDmg + _totalBonusDamage) - _armorClassAfterArmorPen
+		damage.dmg = int((_baseDmg + _totalBonusDamage) * _acReduction)
 	
 	if typeof(_attack.magicDmg.dmg) == TYPE_ARRAY:
 		var _magicFloorDmg = int(_attack.magicDmg.dmg[0])
@@ -133,14 +145,14 @@ func calculateDmg(_attack, _activeArmorSets = null):
 			_magicDmg += 3
 		if _attack.magicDmg.element != null and (resistances.has(_attack.magicDmg.element.to_lower()) or equipmentResistances.has(_attack.magicDmg.element.to_lower())):
 			_magicDmg /= 2
-		damage.magicDmg = _magicDmg
+		damage.magicDmg = _magicDmg - int(magicac / 2)
+		if damage.magicDmg < 0:
+			damage.magicDmg = 0
 	
-	damage = {
+	return {
 		"dmg": int(damage.dmg),
 		"magicDmg": int(damage.magicDmg)
 	}
-	
-	return damage
 
 
 
@@ -230,22 +242,22 @@ func processCritterEffects():
 					hp = maxhp
 				else:
 					hp += 3
-			if (stats.legerity / 3) + (stats.strength / 3) >= 34:
-				if hp + 8 > maxhp:
-					hp = maxhp
-				else:
-					hp += 8
-			elif (stats.legerity / 3) + (stats.strength / 3) >= 22:
+			if (stats.legerity / 4) + (stats.strength / 4) >= 34:
 				if hp + 5 > maxhp:
 					hp = maxhp
 				else:
 					hp += 5
-			elif (stats.legerity / 3) + (stats.strength / 3) >= 16:
+			elif (stats.legerity / 4) + (stats.strength / 4) >= 22:
+				if hp + 4 > maxhp:
+					hp = maxhp
+				else:
+					hp += 4
+			elif (stats.legerity / 4) + (stats.strength / 4) >= 16:
 				if hp + 3 > maxhp:
 					hp = maxhp
 				else:
 					hp += 3
-			elif (stats.legerity / 3) + (stats.strength / 3) >= 10:
+			elif (stats.legerity / 4) + (stats.strength / 4) >= 10:
 				if hp + 2 > maxhp:
 					hp = maxhp
 				else:
@@ -262,10 +274,10 @@ func processCritterEffects():
 	if mpRegenTimer >= 20 - ( stats.belief / 2 ):
 		if mp < maxmp:
 			if stats.belief / 2 >= 20:
-				if mp + 8 > maxmp:
+				if mp + 7 > maxmp:
 					mp = maxmp
 				else:
-					mp += 8
+					mp += 7
 			elif stats.belief / 2 >= 15:
 				if mp + 5 > maxmp:
 					mp = maxmp
@@ -316,6 +328,7 @@ func getBaseCritterSaveData():
 		maxmp = maxmp,
 		shields = shields,
 		ac = ac,
+		magicac = magicac,
 		attacks = attacks,
 		currentHit = currentHit,
 		hits = hits,

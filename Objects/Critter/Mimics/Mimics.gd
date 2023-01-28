@@ -13,6 +13,7 @@ var mimics = [
 		"hp": 16,
 		"mp": 13,
 		"ac": 3,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [6,8],
@@ -66,6 +67,7 @@ var mimics = [
 		"hp": 46,
 		"mp": 23,
 		"ac": 7,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [12,15],

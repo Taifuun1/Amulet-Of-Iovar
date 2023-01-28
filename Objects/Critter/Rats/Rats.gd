@@ -13,6 +13,7 @@ var rats = [
 		"hp": 7,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [2,4],
@@ -62,9 +63,10 @@ var rats = [
 		"alignment": "Neutral",
 		"level": 5,
 		"expDropAmount": 5,
-		"hp": 17,
+		"hp": 16,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [4,5],
@@ -117,6 +119,7 @@ var rats = [
 		"hp": 22,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [5,6],

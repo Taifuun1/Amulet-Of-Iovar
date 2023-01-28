@@ -56,6 +56,7 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 		maxmp = int(_critter.mp)
 	shields = 0
 	ac = int(_critter.ac)
+	magicac = int(_critter.ac)
 	attacks = _critter.attacks
 	if _critter.has("currentHit"):
 		currentHit = _critter.currentHit
@@ -146,11 +147,12 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			_pickedAbility.data = critterSpellData[_pickedAbility.abilityName]
 		if _pickedAbility != null and _distanceFromPlayer.size() <= _pickedAbility.data.distance and _distanceFromPlayer.size() != 0:
 			if !_pickedAbility.abilityType.matchn("skill") and mp - _pickedAbility.data.mp < 0:
-				if randi() % 10 == 0:
+				if randi() % 8 == 0:
 					Globals.gameConsole.addLog("{critter} tries to cast a spell but nothing happens!".format({ "critter": critterName }))
 					return false
 			else:
 				checkIfAddFlavorGamelog("spell")
+				print(_pickedAbility)
 				match _pickedAbility.abilityType:
 					"rangedSpell":
 						var _tiles = []
@@ -475,7 +477,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			if _damage.dmg <= 0 and _damage.magicDmg != 0:
 				hp -= _damage.magicDmg
 				_attackLog += "{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
-				if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
+				if _attack.magicDmg.element != null and _attack.magicDmg.element.matchn("toxix") and statusEffects.toxix != -1:
 					if _critterName.matchn("rogue"):
 						statusEffects.toxix = 5
 					else:
@@ -515,7 +517,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 				if _damage.magicDmg != 0:
 					hp -= _damage.magicDmg
 					_attackLog += " ({magicDmg} {element} damage)".format({ "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
-					if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
+					if _attack.magicDmg.element != null and _attack.magicDmg.element.matchn("toxix") and statusEffects.toxix != -1:
 						if _critterName.matchn("rogue"):
 							statusEffects.toxix += 5
 						else:

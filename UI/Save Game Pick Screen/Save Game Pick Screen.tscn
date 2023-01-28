@@ -63,10 +63,10 @@ margin_right = 1880.0
 margin_bottom = 200.0
 
 [node name="Button" type="Button" parent="VBoxContainer/PanelContainer2/CenterContainer"]
-margin_left = 911.0
+margin_left = 908.0
 margin_top = 81.0
-margin_right = 969.0
+margin_right = 972.0
 margin_bottom = 118.0
-text = "Back"
+text = "Back "
 
 [connection signal="pressed" from="VBoxContainer/PanelContainer2/CenterContainer/Button" to="." method="_on_Button_pressed"]

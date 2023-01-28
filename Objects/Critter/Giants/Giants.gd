@@ -10,9 +10,10 @@ var giants = [
 		"alignment": "Neutral",
 		"level": 5,
 		"expDropAmount": 8,
-		"hp": 20,
+		"hp": 19,
 		"mp": 0,
-		"ac": 3,
+		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [7,9],
@@ -65,7 +66,8 @@ var giants = [
 		"expDropAmount": 15,
 		"hp": 42,
 		"mp": 0,
-		"ac": 4,
+		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [12,17],
@@ -118,7 +120,8 @@ var giants = [
 		"expDropAmount": 22,
 		"hp": 63,
 		"mp": 0,
-		"ac": 6,
+		"ac": 2,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [16,26],
@@ -180,7 +183,8 @@ var giants = [
 		"expDropAmount": 324,
 		"hp": 88,
 		"mp": 0,
-		"ac": 8,
+		"ac": 4,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [23,41],

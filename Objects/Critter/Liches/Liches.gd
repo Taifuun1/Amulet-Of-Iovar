@@ -12,7 +12,7 @@ var liches = [
 		"expDropAmount": 28,
 		"hp": 32,
 		"mp": 68,
-		"ac": 0,
+		"ac": 5,
 		"attacks": [
 			{
 				"dmg": [3,4],
@@ -96,6 +96,7 @@ var liches = [
 		"hp": 52,
 		"mp": 84,
 		"ac": 0,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [3,4],
@@ -169,6 +170,7 @@ var liches = [
 		"hp": 70,
 		"mp": 99,
 		"ac": 0,
+		"magicac": 15,
 		"attacks": [
 			{
 				"dmg": [3,4],
@@ -242,6 +244,7 @@ var liches = [
 		"hp": 89,
 		"mp": 204,
 		"ac": 0,
+		"magicac": 20,
 		"attacks": [  ],
 		"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 		"stats": {

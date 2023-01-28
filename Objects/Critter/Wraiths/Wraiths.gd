@@ -13,6 +13,7 @@ var wraiths = [
 		"hp": 13,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [0,0],
@@ -69,6 +70,7 @@ var wraiths = [
 		"hp": 21,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 10,
 		"attacks": [
 			{
 				"dmg": [0,0],

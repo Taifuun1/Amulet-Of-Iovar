@@ -13,6 +13,7 @@ var canines = [
 		"hp": 13,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [3,5],
@@ -61,6 +62,7 @@ var canines = [
 		"hp": 19,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [6,9],
@@ -109,6 +111,7 @@ var canines = [
 		"hp": 37,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [7,9],

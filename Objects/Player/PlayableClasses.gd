@@ -15,7 +15,7 @@ var archeologist = {
 		visage = 7,
 		wisdom = 6
 	},
-	hpIncrease = 4,
+	hpIncrease = 3,
 	mpIncrease = 3,
 	strengthIncrease = 1.5,
 	legerityIncrease = 1,
@@ -93,7 +93,7 @@ var banker = {
 		visage = 7,
 		wisdom = 7
 	},
-	hpIncrease = 3,
+	hpIncrease = 1,
 	mpIncrease = 4,
 	strengthIncrease = 0.6,
 	legerityIncrease = 1,
@@ -102,7 +102,7 @@ var banker = {
 	visageIncrease = 1.2,
 	wisdomIncrease = 1,
 	resistances = [  ],
-	neutralClasses = ["snakes"],
+	neutralClasses = [],
 	items = {
 		"Orc dagger": 1,
 		"Adorned helmet": 1,
@@ -152,7 +152,7 @@ var banker = {
 
 var freedomFighter = {
 	critterName = "Freedom fighter",
-	skill = "Get +2 to all Gleeie'er damage.",
+	skill = "+2 to all Gleeie'er damage.",
 	quote = "Overthrow the burgoisee!",
 	race = "Dwarf",
 	justice = "Draconian",
@@ -166,7 +166,7 @@ var freedomFighter = {
 		visage = 15,
 		wisdom = 3
 	},
-	hpIncrease = 3,
+	hpIncrease = 1,
 	mpIncrease = 4,
 	strengthIncrease = 1.2,
 	legerityIncrease = 1,
@@ -224,10 +224,10 @@ var freedomFighter = {
 
 var herbalogue = {
 	critterName = "Herbalogue",
-	skill = "Gets a third more calories from eating.",
+	skill = "Comestibles give a third more calories.",
 	quote = "I need to wash my hands. Wheres the cleansing powder?",
 	race = "Human",
-	justice = "Grilling",
+	justice = "Draconian",
 	hp = 12,
 	mp = 14,
 	stats = {
@@ -238,7 +238,7 @@ var herbalogue = {
 		visage = 5,
 		wisdom = 10
 	},
-	hpIncrease = 3,
+	hpIncrease = 2,
 	mpIncrease = 6,
 	strengthIncrease = 0.8,
 	legerityIncrease = 1,
@@ -301,8 +301,8 @@ var herbalogue = {
 
 var mercenary = {
 	critterName = "Mercenary",
-	skill = "Gets +1 to all physical damage.",
-	quote = "Theres three important things in life: Combat, Coin, and Women.",
+	skill = "+1 to all physical damage.",
+	quote = "There are three important things in life: Combat, Coin, and Women.",
 	race = "Elf",
 	justice = "Grilling",
 	hp = 20,
@@ -315,7 +315,7 @@ var mercenary = {
 		visage = 8,
 		wisdom = 6
 	},
-	hpIncrease = 6,
+	hpIncrease = 4,
 	mpIncrease = 1,
 	strengthIncrease = 2,
 	legerityIncrease = 1.2,
@@ -380,7 +380,7 @@ var mercenary = {
 
 var exterminator = {
 	critterName = "Exterminator",
-	skill = "Gets +2 to all fleir damage.",
+	skill = "+2 to all fleir damage.",
 	quote = "He tells me to burn things.",
 	race = "Human",
 	justice = "Draconian",
@@ -394,7 +394,7 @@ var exterminator = {
 		visage = 7,
 		wisdom = 7
 	},
-	hpIncrease = 3,
+	hpIncrease = 2,
 	mpIncrease = 7,
 	strengthIncrease = 1.5,
 	legerityIncrease = 0.8,
@@ -402,7 +402,7 @@ var exterminator = {
 	beliefIncrease = 1.5,
 	visageIncrease = 1,
 	wisdomIncrease = 1,
-	resistances = ["fleir"],
+	resistances = ["frost", "fleir", "thunder"],
 	neutralClasses = [],
 	items = {
 		"Chipped sword": 1,
@@ -461,7 +461,7 @@ var exterminator = {
 
 var rogue = {
 	critterName = "Rogue",
-	skill = "Gets +1 to all toxix damage, +2 toxix status effect duration on toxix hit and +1 bonus damage from using daggers.",
+	skill = "+1 to all toxix damage, +2 toxix status effect duration on toxix hit and +1 bonus damage from using daggers.",
 	quote = "I'm darker than the blackest night.",
 	race = "Human",
 	justice = "Laissez-faire",
@@ -475,7 +475,7 @@ var rogue = {
 		visage = 10,
 		wisdom = 5
 	},
-	hpIncrease = 3,
+	hpIncrease = 1,
 	mpIncrease = 3,
 	strengthIncrease = 0.9,
 	legerityIncrease = 2,
@@ -547,7 +547,7 @@ var savant = {
 		visage = 4,
 		wisdom = 13
 	},
-	hpIncrease = 2,
+	hpIncrease = 1,
 	mpIncrease = 8,
 	strengthIncrease = 0.5,
 	legerityIncrease = 1,

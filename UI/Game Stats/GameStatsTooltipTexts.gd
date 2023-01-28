@@ -76,7 +76,12 @@ var mp = {
 
 var ac = {
 	"title": "Armor class",
-	"description": "Your armor class blocks one point of damage for every other point."
+	"description": "Your armor class blocks 4% damage for every point, reducing every 5 points."
+}
+
+var magicac = {
+	"title": "Magic armor class",
+	"description": "Your magic armor class blocks 4% damage for every point, reducing every 5 points."
 }
 
 var attacksText = {

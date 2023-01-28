@@ -13,6 +13,7 @@ var centaurs = [
 		"hp": 25,
 		"mp": 13,
 		"ac": 1,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [5,8],
@@ -73,6 +74,7 @@ var centaurs = [
 		"hp": 74,
 		"mp": 36,
 		"ac": 5,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [15,17],

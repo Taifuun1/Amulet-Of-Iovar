@@ -9,7 +9,7 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 0,
+				"armorClass": {},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -26,7 +26,9 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 83,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2,
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -42,7 +44,9 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 25,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1,
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -56,9 +60,12 @@ var cloak = {
 			"unidentifiedTexture": load("res://Assets/Cloaks/CloakDwarven.png"),
 			"type": "Armor",
 			"category": "Cloak",
-			"weight": 35,
+			"weight": 50,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 2,
+					"magic": 2,
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -74,7 +81,9 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 20,
 			"value": {
-				"ac": 0,
+				"armorClass": {
+					"magic": 2
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -91,7 +100,9 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1
+				},
 				"resistance": null
 			},
 			"points": 25,
@@ -107,7 +118,10 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1,
+					"magic": 2,
+				},
 				"resistance": null
 			},
 			"points": 25,
@@ -155,7 +169,10 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 3,
+				"armorClass": {
+					"physical": 2,
+					"magic": 1,
+				},
 				"resistance": null
 			},
 			"points": 250,
@@ -171,7 +188,9 @@ var cloak = {
 			"category": "Cloak",
 			"weight": 35,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"points": 250,

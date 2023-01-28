@@ -8,14 +8,15 @@ var felines = [
 		"aggroDistance": -1,
 		"texture": load("res://Assets/Critters/FelineCat.png"),
 		"alignment": "Neutral",
-		"level": 5,
+		"level": 3,
 		"expDropAmount": 4,
-		"hp": 13,
+		"hp": 10,
 		"mp": 5,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [5,6],
+				"dmg": [4,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -53,6 +54,7 @@ var felines = [
 		"hp": 25,
 		"mp": 5,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [3,4],
@@ -102,6 +104,7 @@ var felines = [
 		"hp": 36,
 		"mp": 5,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [5,8],

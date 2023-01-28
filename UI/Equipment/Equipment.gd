@@ -305,28 +305,36 @@ func getArmorClass():
 	var _ac = 0
 	if equipment["helmet"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["helmet"] }))
-		_ac += (_item.value.ac + _item.enchantment)
+		if _item.value.armorClass.has("physical"):
+			_ac += _item.value.armorClass.physical + _item.enchantment
 	if equipment["cloak"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["cloak"] }))
-		_ac += (_item.value.ac + _item.enchantment)
+		if _item.value.armorClass.has("physical"):
+			_ac += _item.value.armorClass.physical + _item.enchantment
 	if equipment["plate"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["plate"] }))
-		_ac += (_item.value.ac + _item.enchantment)
+		if _item.value.armorClass.has("physical"):
+			_ac += _item.value.armorClass.physical + _item.enchantment
 	if equipment["gauntlets"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["gauntlets"] }))
-		_ac += (_item.value.ac + _item.enchantment)
+		if _item.value.armorClass.has("physical"):
+			_ac += _item.value.armorClass.physical + _item.enchantment
 	if equipment["greaves"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["greaves"] }))
-		_ac += (_item.value.ac + _item.enchantment)
+		if _item.value.armorClass.has("physical"):
+			_ac += _item.value.armorClass.physical + _item.enchantment
 	if equipment["boots"] != null:
 		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["boots"] }))
-		_ac += (_item.value.ac + _item.enchantment)
+		if _item.value.armorClass.has("physical"):
+			_ac += _item.value.armorClass.physical + _item.enchantment
 	if hands["lefthand"] != null and get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] })).category.matchn("shield"):
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] }))
-		_ac += (_item.value.ac + _item.enchantment)
+		if _item.value.armorClass.has("physical"):
+			_ac += _item.value.armorClass.physical + _item.enchantment
 	if hands["righthand"] != null and get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] })).category.matchn("shield"):
 		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] }))
-		_ac += (_item.value.ac + _item.enchantment)
+		if _item.value.armorClass.has("physical"):
+			_ac += _item.value.armorClass.physical + _item.enchantment
 	if accessories["ring1"] != null and get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).category.matchn("ring"):
 		if get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).identifiedItemName.matchn("ring of protection"):
 			_ac += get_node("/root/World/Items/{id}".format({ "id": accessories["ring1"] })).value
@@ -334,6 +342,42 @@ func getArmorClass():
 		if get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).identifiedItemName.matchn("ring of protection"):
 			_ac += get_node("/root/World/Items/{id}".format({ "id": accessories["ring2"] })).value
 	return _ac
+
+func getMagicArmorClass():
+	var _magicac = 0
+	if equipment["helmet"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["helmet"] }))
+		if _item.value.armorClass.has("magic"):
+			_magicac += _item.value.armorClass.magic + _item.enchantment
+	if equipment["cloak"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["cloak"] }))
+		if _item.value.armorClass.has("magic"):
+			_magicac += _item.value.armorClass.magic + _item.enchantment
+	if equipment["plate"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["plate"] }))
+		if _item.value.armorClass.has("magic"):
+			_magicac += _item.value.armorClass.magic + _item.enchantment
+	if equipment["gauntlets"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["gauntlets"] }))
+		if _item.value.armorClass.has("magic"):
+			_magicac += _item.value.armorClass.magic + _item.enchantment
+	if equipment["greaves"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["greaves"] }))
+		if _item.value.armorClass.has("magic"):
+			_magicac += _item.value.armorClass.magic + _item.enchantment
+	if equipment["boots"] != null:
+		var _item = get_node("/root/World/Items/{id}".format({ "id": equipment["boots"] }))
+		if _item.value.armorClass.has("magic"):
+			_magicac += _item.value.armorClass.magic + _item.enchantment
+	if hands["lefthand"] != null and get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] })).category.matchn("shield"):
+		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["lefthand"] }))
+		if _item.value.armorClass.has("magic"):
+			_magicac += _item.value.armorClass.magic + _item.enchantment
+	if hands["righthand"] != null and get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] })).category.matchn("shield"):
+		var _item = get_node("/root/World/Items/{id}".format({ "id": hands["righthand"] }))
+		if _item.value.armorClass.has("magic"):
+			_magicac += _item.value.armorClass.magic + _item.enchantment
+	return _magicac
 
 func checkArmorSetPieces():
 	for _set in armorSets:
@@ -589,7 +633,7 @@ func checkWhatIsWorn(_item):
 				_playerNode.statusEffects["displacement"] = -1
 				_playerNode.itemsTurnedOn.append(_item)
 				Globals.gameConsole.addLog("Your feel like you're all over the place.")
-		"cloak of magical ambiquity":
+		"cloak of magical ambiguity":
 			if _playerNode.itemsTurnedOn.has(_item):
 				_playerNode.itemsTurnedOn.erase(_item)
 				Globals.gameConsole.addLog("You feel magically normal.")

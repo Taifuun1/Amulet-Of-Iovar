@@ -9,7 +9,9 @@ var armor = {
 			"category": "Plate",
 			"weight": 45,
 			"value": {
-				"ac": 3,
+				"armorClass": {
+					"physical": 3
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -24,7 +26,9 @@ var armor = {
 			"category": "Plate",
 			"weight": 30,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -39,7 +43,9 @@ var armor = {
 			"category": "Helmet",
 			"weight": 15,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -54,7 +60,9 @@ var armor = {
 			"category": "Shield",
 			"weight": 32,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -69,7 +77,9 @@ var armor = {
 			"category": "Greaves",
 			"weight": 34,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -84,7 +94,9 @@ var armor = {
 			"category": "Boots",
 			"weight": 25,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -101,7 +113,9 @@ var armor = {
 			"category": "Plate",
 			"weight": 88,
 			"value": {
-				"ac": 4,
+				"armorClass": {
+					"physical": 4
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -116,7 +130,9 @@ var armor = {
 			"category": "Plate",
 			"weight": 112,
 			"value": {
-				"ac": 5,
+				"armorClass": {
+					"physical": 5
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -124,14 +140,17 @@ var armor = {
 		},
 		{
 			"itemName": "Dwarvish coat",
-			"unidentifiedItemName": "Dwarvish coat",
+			"unidentifiedItemName": "Blue metal coat",
 			"texture": load("res://Assets/Armor/PlateDwarvishCoat.png"),
 			"unidentifiedTexture": load("res://Assets/Armor/PlateDwarvishCoat.png"),
 			"type": "Armor",
 			"category": "Plate",
 			"weight": 77,
 			"value": {
-				"ac": 5,
+				"armorClass": {
+					"physical": 5,
+					"magic": 1
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -146,7 +165,9 @@ var armor = {
 			"category": "Helmet",
 			"weight": 35,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -161,7 +182,9 @@ var armor = {
 			"category": "Shield",
 			"weight": 76,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -176,7 +199,9 @@ var armor = {
 			"category": "Greaves",
 			"weight": 70,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -191,7 +216,9 @@ var armor = {
 			"category": "Boots",
 			"weight": 47,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -206,7 +233,10 @@ var armor = {
 			"category": "Boots",
 			"weight": 25,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1,
+					"magic": 3
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -221,7 +251,9 @@ var armor = {
 			"category": "Boots",
 			"weight": 25,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1
+				},
 				"resistance": null,
 				"binds": "Equipment"
 			},
@@ -239,7 +271,9 @@ var armor = {
 			"category": "Plate",
 			"weight": 187,
 			"value": {
-				"ac": 7,
+				"armorClass": {
+					"physical": 7
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -254,7 +288,9 @@ var armor = {
 			"category": "Helmet",
 			"weight": 78,
 			"value": {
-				"ac": 3,
+				"armorClass": {
+					"physical": 3
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -269,7 +305,10 @@ var armor = {
 			"category": "Helmet",
 			"weight": 84,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2,
+					"magic": 1
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -284,7 +323,10 @@ var armor = {
 			"category": "Greaves",
 			"weight": 51,
 			"value": {
-				"ac": 3,
+				"armorClass": {
+					"physical": 3,
+					"magic": 1
+				},
 				"resistance": null
 			},
 			"enchantable": true,
@@ -301,7 +343,10 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 8,
+				"armorClass": {
+					"physical": 8,
+					"magic": 2
+				},
 				"resistance": "Frost"
 			},
 			"points": 500,
@@ -317,7 +362,10 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 8,
+				"armorClass": {
+					"physical": 8,
+					"magic": 2
+				},
 				"resistance": "Gleeie'er"
 			},
 			"points": 500,
@@ -333,7 +381,10 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 8,
+				"armorClass": {
+					"physical": 8,
+					"magic": 2
+				},
 				"resistance": "Flier"
 			},
 			"points": 500,
@@ -349,7 +400,10 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 8,
+				"armorClass": {
+					"physical": 8,
+					"magic": 2
+				},
 				"resistance": "Thunder"
 			},
 			"points": 500,
@@ -365,7 +419,10 @@ var armor = {
 			"category": "Plate",
 			"weight": 151,
 			"value": {
-				"ac": 8,
+				"armorClass": {
+					"physical": 8,
+					"magic": 2
+				},
 				"resistance": "Toxix"
 			},
 			"points": 500,
@@ -381,7 +438,9 @@ var armor = {
 			"category": "Plate",
 			"weight": 250,
 			"value": {
-				"ac": 10,
+				"armorClass": {
+					"physical": 10
+				},
 				"resistance": null
 			},
 			"points": 750,
@@ -397,7 +456,10 @@ var armor = {
 			"category": "Plate",
 			"weight": 163,
 			"value": {
-				"ac": 7,
+				"armorClass": {
+					"physical": 7,
+					"magic": 1
+				},
 				"resistance": "Frost"
 			},
 			"points": 400,
@@ -413,7 +475,10 @@ var armor = {
 			"category": "Plate",
 			"weight": 163,
 			"value": {
-				"ac": 7,
+				"armorClass": {
+					"physical": 7,
+					"magic": 1
+				},
 				"resistance": "Thunder"
 			},
 			"points": 400,
@@ -429,7 +494,9 @@ var armor = {
 			"category": "Helmet",
 			"weight": 66,
 			"value": {
-				"ac": 4,
+				"armorClass": {
+					"physical": 4
+				},
 				"resistance": null
 			},
 			"points": 350,
@@ -445,7 +512,10 @@ var armor = {
 			"category": "Helmet",
 			"weight": 54,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2,
+					"magic": 2
+				},
 				"resistance": null
 			},
 			"points": 350,
@@ -461,7 +531,12 @@ var armor = {
 #			"category": "Helmet",
 #			"weight": 58,
 #			"value": {
-#				"ac": 4,
+#				"armorClass": [
+#					{
+#						"ac": 4,
+#						"type": "physical",
+#					}
+#				],
 #				"resistance": null
 #			},
 #			"points": 350,
@@ -477,7 +552,10 @@ var armor = {
 			"category": "Shield",
 			"weight": 73,
 			"value": {
-				"ac": 3,
+				"armorClass": {
+					"physical": 3,
+					"magic": 1
+				},
 				"resistance": null
 			},
 			"points": 400,
@@ -494,7 +572,16 @@ var armor = {
 #			"category": "Shield",
 #			"weight": 75,
 #			"value": {
-#				"ac": 7,
+#				"armorClass": [
+#					{
+#						"ac": 7,
+#						"type": "physical",
+#					},
+#					{
+#						"ac": 1,
+#						"type": "magic",
+#					}
+#				],
 #				"resistance": "Flier"
 #			},
 #			"points": 400,
@@ -511,7 +598,9 @@ var armor = {
 			"category": "Shield",
 			"weight": 210,
 			"value": {
-				"ac": 6,
+				"armorClass": {
+					"physical": 6
+				},
 				"resistance": null
 			},
 			"points": 750,
@@ -527,7 +616,9 @@ var armor = {
 			"category": "Shield",
 			"weight": 85,
 			"value": {
-				"ac": 3,
+				"armorClass": {
+					"physical": 3
+				},
 				"resistance": null
 			},
 			"points": 400,
@@ -543,7 +634,9 @@ var armor = {
 			"category": "Greaves",
 			"weight": 59,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"points": 300,
@@ -559,7 +652,9 @@ var armor = {
 			"category": "Greaves",
 			"weight": 59,
 			"value": {
-				"ac": 2,
+				"armorClass": {
+					"physical": 2
+				},
 				"resistance": null
 			},
 			"points": 300,
@@ -575,7 +670,9 @@ var armor = {
 			"category": "Boots",
 			"weight": 38,
 			"value": {
-				"ac": 3,
+				"armorClass": {
+					"physical": 3
+				},
 				"resistance": null
 			},
 			"points": 250,
@@ -591,8 +688,11 @@ var armor = {
 			"category": "Boots",
 			"weight": 25,
 			"value": {
-				"ac": 1,
-				"resistance": null
+				"armorClass": {
+					"physical": 1,
+					"magic": 2
+				},
+				"resistance": "Thunder"
 			},
 			"points": 250,
 			"enchantable": true,
@@ -607,7 +707,9 @@ var armor = {
 			"category": "Boots",
 			"weight": 25,
 			"value": {
-				"ac": 1,
+				"armorClass": {
+					"physical": 1
+				},
 				"resistance": null
 			},
 			"points": 250,

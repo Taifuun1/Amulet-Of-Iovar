@@ -13,6 +13,7 @@ var snakes = [
 		"hp": 9,
 		"mp": 1,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [1,4],
@@ -71,6 +72,7 @@ var snakes = [
 		"hp": 23,
 		"mp": 15,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [2,7],
@@ -134,6 +136,7 @@ var snakes = [
 		"hp": 38,
 		"mp": 31,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [3,13],

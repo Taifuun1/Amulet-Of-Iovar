@@ -51,7 +51,7 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	elif (
 		_item.itemName.matchn("box") or
 		_item.itemName.matchn("chest") or
-		_item.type.to_lower().matchn("comestible") or
+		_item.type.matchn("comestible") or
 		(
 			GlobalItemInfo.globalItemInfo.has(_item.itemName) and
 			GlobalItemInfo.globalItemInfo[_item.itemName].identified
@@ -90,7 +90,10 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	value = _item.value
 	if _item.has("points"):
 		points = _item.points
-	amount = int(_amount)
+	if typeof(_amount) == TYPE_ARRAY:
+		amount = randi() % (_amount[1] - _amount[0]) + _amount[0]
+	else:
+		amount = int(_amount)
 	
 	if _item.has("alignment"):
 		alignment = _item.alignment

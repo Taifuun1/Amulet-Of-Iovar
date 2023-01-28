@@ -38,4 +38,4 @@ func removeRecursive(_path):
 			_file_name = _directory.get_next()
 		_directory.remove(_path)
 	else:
-		print("Error removing " + _path)
+		push_error("Error removing " + _path)

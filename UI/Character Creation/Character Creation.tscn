@@ -845,44 +845,10 @@ size_flags_horizontal = 3
 text = "-"
 align = 2
 
-[node name="QuoteContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+[node name="ResistancesContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
 margin_top = 356.0
 margin_right = 934.0
 margin_bottom = 396.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/panel = SubResource( 12 )
-
-[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -8.0
-custom_styles/panel = SubResource( 13 )
-
-[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer"]
-margin_right = 926.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
-
-[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer/ClassDataContainer"]
-margin_top = 9.0
-margin_right = 461.0
-margin_bottom = 30.0
-size_flags_horizontal = 3
-text = "Quote"
-
-[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer/ClassDataContainer"]
-margin_left = 465.0
-margin_top = 9.0
-margin_right = 926.0
-margin_bottom = 30.0
-size_flags_horizontal = 3
-text = "-"
-align = 2
-
-[node name="ResistancesContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
-margin_top = 396.0
-margin_right = 934.0
-margin_bottom = 436.0
 rect_min_size = Vector2( 0, 40 )
 custom_styles/panel = SubResource( 12 )
 
@@ -914,9 +880,9 @@ text = "-"
 align = 2
 
 [node name="NeutralClassesContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
-margin_top = 436.0
+margin_top = 396.0
 margin_right = 934.0
-margin_bottom = 476.0
+margin_bottom = 436.0
 rect_min_size = Vector2( 0, 40 )
 custom_styles/panel = SubResource( 12 )
 
@@ -936,7 +902,7 @@ margin_top = 9.0
 margin_right = 461.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
-text = "Neutral classes"
+text = "Neutral critters"
 
 [node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/NeutralClassesContainer/PanelContainer/ClassDataContainer"]
 margin_left = 465.0
@@ -948,9 +914,9 @@ text = "-"
 align = 2
 
 [node name="GoldPiecesContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
-margin_top = 476.0
+margin_top = 436.0
 margin_right = 934.0
-margin_bottom = 516.0
+margin_bottom = 476.0
 rect_min_size = Vector2( 0, 40 )
 custom_styles/panel = SubResource( 12 )
 
@@ -973,6 +939,40 @@ size_flags_horizontal = 3
 text = "Gold pieces"
 
 [node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/GoldPiecesContainer/PanelContainer/ClassDataContainer"]
+margin_left = 465.0
+margin_top = 9.0
+margin_right = 926.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "-"
+align = 2
+
+[node name="QuoteContainer" type="Panel" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer"]
+margin_top = 476.0
+margin_right = 934.0
+margin_bottom = 516.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 12 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ClassDataContainer" type="HBoxContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer"]
+margin_right = 926.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Data" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer/ClassDataContainer"]
+margin_top = 9.0
+margin_right = 461.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Quote"
+
+[node name="DataText" type="Label" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/QuoteContainer/PanelContainer/ClassDataContainer"]
 margin_left = 465.0
 margin_top = 9.0
 margin_right = 926.0
@@ -1011,6 +1011,7 @@ size_flags_vertical = 3
 margin_right = 465.0
 margin_bottom = 21.0
 text = "Starting items"
+uppercase = true
 
 [node name="StartingItemsScroll" type="ScrollContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/StartingItemsContainer"]
 margin_top = 25.0
@@ -1036,6 +1037,7 @@ size_flags_vertical = 3
 margin_right = 465.0
 margin_bottom = 21.0
 text = "Skills"
+uppercase = true
 
 [node name="SkillsScroll" type="ScrollContainer" parent="CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/SkillsContainer"]
 margin_top = 25.0
@@ -1071,7 +1073,7 @@ mouse_filter = 1
 size_flags_horizontal = 4
 disabled = true
 action_mode = 0
-text = "Okay"
+text = "Okay "
 
 [node name="BackButton" type="Button" parent="CharacterCreationContainer/CenterContainer/VBoxContainer"]
 margin_top = 41.0
@@ -1081,7 +1083,7 @@ rect_min_size = Vector2( 100, 0 )
 mouse_filter = 1
 size_flags_horizontal = 4
 action_mode = 0
-text = "Back"
+text = "Back "
 
 [connection signal="gui_input" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Archeologist" to="." method="_on_Classes_Pick_input" binds= [ "Archeologist" ]]
 [connection signal="mouse_entered" from="CharacterCreationContainer/ClassesContentContainer/ClassesContainer/Archeologist" to="." method="_on_Classes_Pick_mouse_entered" binds= [ "Archeologist" ]]

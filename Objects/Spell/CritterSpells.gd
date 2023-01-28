@@ -196,7 +196,7 @@ var fleirpoint = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [2, 18],
+				"dmg": [2, 13],
 				"element": "fleir"
 			}
 		}
@@ -213,7 +213,7 @@ var fleirnado = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [8, 15],
+				"dmg": [8, 18],
 				"element": "fleir"
 			}
 		}
@@ -270,7 +270,7 @@ var frostpoint = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [6, 8],
+				"dmg": [5, 7],
 				"element": "frost"
 			}
 		}
@@ -468,7 +468,7 @@ var dragonBreath = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [12,23],
+				"dmg": [10,21],
 				"element": "incineration"
 			}
 		}
@@ -485,7 +485,7 @@ var elderDragonBreath = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [22,48],
+				"dmg": [12,35],
 				"element": "incineration"
 			}
 		}
@@ -502,11 +502,11 @@ var voidBlast = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [64,148],
+				"dmg": [22,32],
 				"element": "void"
 			}
 		}
 	],
-	"distance": 6,
-	"mp": 34
+	"distance": 5,
+	"mp": 86
 }

@@ -13,6 +13,7 @@ var bats = [
 		"hp": 10,
 		"mp": 2,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [2,4],
@@ -58,6 +59,7 @@ var bats = [
 		"hp": 14,
 		"mp": 4,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [2,4],
@@ -112,6 +114,7 @@ var bats = [
 		"hp": 22,
 		"mp": 2,
 		"ac": 2,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [4,5],
@@ -166,6 +169,7 @@ var bats = [
 		"hp": 18,
 		"mp": 2,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [3,4],

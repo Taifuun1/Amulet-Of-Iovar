@@ -13,6 +13,7 @@ var newts = [
 		"hp": 5,
 		"mp": 0,
 		"ac": 0,
+		"magicac": 0,
 		"attacks": [
 			{
 				"dmg": [2,3],
@@ -60,14 +61,15 @@ var newts = [
 		"aggroDistance": 10,
 		"texture": load("res://Assets/Critters/NewtPaperNewt.png"),
 		"alignment": "Neutral",
-		"level": 5,
+		"level": 4,
 		"expDropAmount": 4,
-		"hp": 15,
+		"hp": 13,
 		"mp": 0,
 		"ac": 1,
+		"magicac": 5,
 		"attacks": [
 			{
-				"dmg": [4,5],
+				"dmg": [3,4],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -112,14 +114,15 @@ var newts = [
 		"aggroDistance": 6,
 		"texture": load("res://Assets/Critters/NewtMineNewt.png"),
 		"alignment": "Neutral",
-		"level": 8,
+		"level": 7,
 		"expDropAmount": 11,
-		"hp": 22,
+		"hp": 20,
 		"mp": 0,
-		"ac": 4,
+		"ac": 3,
+		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [6,8],
+				"dmg": [5,7],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -169,6 +172,7 @@ var newts = [
 		"hp": 32,
 		"mp": 0,
 		"ac": 2,
+		"magicac": 2,
 		"attacks": [
 			{
 				"dmg": [8,11],
@@ -221,6 +225,7 @@ var newts = [
 		"hp": 54,
 		"mp": 0,
 		"ac": 5,
+		"magicac": 5,
 		"attacks": [
 			{
 				"dmg": [13,16],
