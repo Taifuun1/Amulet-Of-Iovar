@@ -53,32 +53,32 @@ var skills = {
 	"sword": {
 		"experience": 0,
 		"level": 0,
-		"skillCap": 0
+		"skillcap": 0
 	},
 	"two-hander": {
 		"experience": 0,
 		"level": 0,
-		"skillCap": 0
+		"skillcap": 0
 	},
 	"dagger": {
 		"experience": 0,
 		"level": 0,
-		"skillCap": 0
+		"skillcap": 0
 	},
 	"mace": {
 		"experience": 0,
 		"level": 0,
-		"skillCap": 0
+		"skillcap": 0
 	},
 	"flail": {
 		"experience": 0,
 		"level": 0,
-		"skillCap": 0
+		"skillcap": 0
 	},
 	"dualWield": {
 		"experience": 0,
 		"level": 0,
-		"skillCap": 0
+		"skillcap": 0
 	}
 }
 
@@ -880,13 +880,13 @@ func checkIfCritterHasEffect(_critter):
 
 func checkSkillExperience():
 	for _skill in skills:
-		if skills[_skill].skillCap > skills[_skill].level and skills[_skill].experience >= 200 and skills[_skill].level == 0:
+		if skills[_skill].skillcap > skills[_skill].level and skills[_skill].experience >= 200 and skills[_skill].level == 0:
 			skills[_skill].level = 1
 			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
-		elif skills[_skill].skillCap > skills[_skill].level and  skills[_skill].experience >= 500 and skills[_skill].level == 1:
+		elif skills[_skill].skillcap > skills[_skill].level and  skills[_skill].experience >= 500 and skills[_skill].level == 1:
 			skills[_skill].level = 2
 			Globals.gameConsole.addLog("You gain a level in {skill}!".format({ "skill": _skill }))
-		elif skills[_skill].skillCap > skills[_skill].level and  skills[_skill].experience >= 1200 and skills[_skill].level == 2:
+		elif skills[_skill].skillcap > skills[_skill].level and  skills[_skill].experience >= 1200 and skills[_skill].level == 2:
 			skills[_skill].level = 3
 			Globals.gameConsole.addLog("You master the {skill}!".format({ "skill": _skill }))
 

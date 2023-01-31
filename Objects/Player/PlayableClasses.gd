@@ -46,32 +46,32 @@ var archeologist = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 1
 		},
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"flail": {
 			"experience": 200,
 			"level": 1,
-			"skillCap": 3
+			"skillcap": 3
 		},
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 1
 		}
 	},
 	"texture": load("res://Assets/Classes/Archeologist.png")
@@ -119,32 +119,32 @@ var banker = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 3
+			"skillcap": 3
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		},
 		"dagger": {
 			"experience": 0,
 			"level": 1,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		}
 	},
 	"texture": load("res://Assets/Classes/Banker.png")
@@ -191,32 +191,32 @@ var freedomFighter = {
 		"sword": {
 			"experience": 200,
 			"level": 1,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 3
+			"skillcap": 3
 		},
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		}
 	},
 	"texture": load("res://Assets/Classes/FreedomFighter.png")
@@ -268,32 +268,32 @@ var herbalogue = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		}
 	},
 	"texture": load("res://Assets/Classes/Herbalogue.png")
@@ -347,32 +347,32 @@ var mercenary = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 3
+			"skillcap": 3
 		},
 		"two-hander": {
 			"experience": 200,
 			"level": 1,
-			"skillCap": 3
+			"skillcap": 3
 		},
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 3
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		}
 	},
 	"texture": load("res://Assets/Classes/Mercenary.png")
@@ -428,32 +428,32 @@ var exterminator = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 3
+			"skillcap": 3
 		},
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 1
 		},
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		}
 	},
 	"texture": load("res://Assets/Classes/Exterminator.png")
@@ -500,32 +500,32 @@ var rogue = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 2
+			"skillcap": 2
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		},
 		"dagger": {
 			"experience": 200,
 			"level": 1,
-			"skillCap": 3
+			"skillcap": 3
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 0
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 1
+			"skillcap": 0
 		},
 		"dualWield": {
 			"experience": 100,
 			"level": 0,
-			"skillCap": 3
+			"skillcap": 3
 		}
 	},
 	"texture": load("res://Assets/Classes/Rogue.png")
@@ -576,32 +576,32 @@ var savant = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		},
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		},
 		"mace": {
 			"experience": 200,
 			"level": 1,
-			"skillCap": 3
+			"skillcap": 3
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 3
+			"skillcap": 1
 		},
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillCap": 0
+			"skillcap": 0
 		}
 	},
 	"texture": load("res://Assets/Classes/Savant.png")

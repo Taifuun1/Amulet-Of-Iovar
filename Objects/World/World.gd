@@ -721,15 +721,18 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 		elif levels.library.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon1.back().levelId
 			return "secondDownStair"
-		elif levels.dungeon3.front().levelId == Globals.currentDungeonLevel:
+		elif levels.beach.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon2.back().levelId
 			return "downStair"
-		elif levels.dungeon4.front().levelId == Globals.currentDungeonLevel:
-			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
+		elif levels.dungeon3.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.beach.back().levelId
 			return "downStair"
 		elif levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
 			return "secondDownStair"
+		elif levels.dungeon4.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeon3.back().levelId
+			return "downStair"
 		elif levels.banditWarcamp.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon4.back().levelId
 			return "downStair"

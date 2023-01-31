@@ -59,17 +59,17 @@ func _on_Classes_Pick_input(_event, _className):
 		
 		for _node in $CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/StartingItemsContainer/StartingItemsScroll/StartingItemsList.get_children():
 			_node.queue_free()
+		for _node in $CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/SkillsContainer/SkillsScroll/SkillsList.get_children():
+			_node.queue_free()
 		for _item in _classData.items:
 			var _listItem = load("res://UI/Character Creation/Starting Item.tscn").instance()
-#			_listItem.size_flags_horizontal = SIZE_EXPAND_FILL
 			_listItem.setValues(_item, _classData.items[_item])
 			$CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/StartingItemsContainer/StartingItemsScroll/StartingItemsList.add_child(_listItem)
 		
-#		for _item in _classData.skills:
-#			var _listItem = Label.new()
-##			_listItem.size_flags_horizontal = SIZE_EXPAND_FILL
-#			_listItem.text = _item
-#			$CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/StartingItemsContainer/StartingItemsScroll/StartingItemsList.add_child(_listItem)
+		for _skill in _classData.skills:
+			var _listItem = load("res://UI/Character Creation/Skill.tscn").instance()
+			_listItem.setValues(_skill, _classData.skills[_skill].level, _classData.skills[_skill].skillcap)
+			$CharacterCreationContainer/ClassesContentContainer/VBoxContainer/Panel/VBoxContainer/VBoxContainer/ClassDataListsContainer/ClassDataListsContainer/ClassDataListsContainer/SkillsContainer/SkillsScroll/SkillsList.add_child(_listItem)
 
 func _on_Classes_Pick_mouse_entered(_className):
 	if StartingData.selectedClass != null and _className.matchn(StartingData.selectedClass):

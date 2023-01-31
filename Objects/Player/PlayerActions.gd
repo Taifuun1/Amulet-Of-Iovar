@@ -687,6 +687,8 @@ func zapItem(_direction):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
 										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
 										_itemCount += 1
+									if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+										_newItemIds.append(_itemId)
 								for _itemId in _newItems:
 									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
 									_newItemIds.append(Globals.itemId - 1)
@@ -706,6 +708,8 @@ func zapItem(_direction):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
 										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
 										_itemCount += 1
+									if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+										_newItemIds.append(_itemId)
 								for _itemId in _newItems:
 									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
 									_newItemIds.append(Globals.itemId - 1)
@@ -722,6 +726,8 @@ func zapItem(_direction):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
 										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
 										_itemCount += 1
+									if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+										_newItemIds.append(_itemId)
 								for _itemId in _newItems:
 									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
 									_newItemIds.append(Globals.itemId - 1)
