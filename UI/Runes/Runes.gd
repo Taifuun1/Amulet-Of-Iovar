@@ -301,7 +301,7 @@ func calculateMagicDamage():
 func calculateMagicDamageIncrease(_type):
 	var _stats = $"/root/World/Critters/0".stats
 	var _critterClass = $"/root/World/Critters/0".critterClass
-	var _playerItemsTurnedOn = $"/root/World/Critters/0".itemsTurnedOn
+	var _player = $"/root/World/Critters/0"
 	if _type.matchn("fleir"):
 		var _additionalDamage = 0
 		
@@ -319,16 +319,16 @@ func calculateMagicDamageIncrease(_type):
 		if _critterClass.matchn("savant"):
 			_additionalDamage += 3
 		
-		if _playerItemsTurnedOn.has("toga"):
+		if _player.checkIfItemsTurnedOnHasItem("toga"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("fabric gloves"):
+		if _player.checkIfItemsTurnedOnHasItem("fabric gloves"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("alchemists robes"):
+		if _player.checkIfItemsTurnedOnHasItem("alchemists robes"):
 			_additionalDamage += 2
 		
-		if _playerItemsTurnedOn.has("boots of magic"):
+		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
 		if _stats.visage > 18:
@@ -345,16 +345,16 @@ func calculateMagicDamageIncrease(_type):
 		if _critterClass.matchn("savant"):
 			_additionalDamage += 3
 		
-		if _playerItemsTurnedOn.has("toga"):
+		if _player.checkIfItemsTurnedOnHasItem("toga"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("fabric gloves"):
+		if _player.checkIfItemsTurnedOnHasItem("fabric gloves"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("alchemists robes"):
+		if _player.checkIfItemsTurnedOnHasItem("alchemists robes"):
 			_additionalDamage += 2
 		
-		if _playerItemsTurnedOn.has("boots of magic"):
+		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
 		if _stats.visage > 27:
@@ -376,13 +376,13 @@ func calculateMagicDamageIncrease(_type):
 		if _critterClass.matchn("freedom fighter"):
 			_additionalDamage += 2
 		
-		if _playerItemsTurnedOn.has("toga"):
+		if _player.checkIfItemsTurnedOnHasItem("toga"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("fabric gloves"):
+		if _player.checkIfItemsTurnedOnHasItem("fabric gloves"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("boots of magic"):
+		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
 		return {
@@ -396,13 +396,13 @@ func calculateMagicDamageIncrease(_type):
 		if _critterClass.matchn("rogue"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("toga"):
+		if _player.checkIfItemsTurnedOnHasItem("toga"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("fabric gloves"):
+		if _player.checkIfItemsTurnedOnHasItem("fabric gloves"):
 			_additionalDamage += 1
 		
-		if _playerItemsTurnedOn.has("boots of magic"):
+		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
 		if _stats.wisdom > 27:

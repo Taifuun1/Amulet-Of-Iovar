@@ -839,52 +839,52 @@ func useItem(_id):
 				if _usedItem.value.worn:
 					_usedItem.value.worn = false
 					statusEffects["blindness"] = 0
-					itemsTurnedOn.erase(_usedItem)
+					itemsTurnedOn.erase(_usedItem.id)
 					Globals.gameConsole.addLog("You take off the blindfold.")
 				else:
 					_usedItem.value.worn = true
 					statusEffects["blindness"] = -1
-					itemsTurnedOn.append(_usedItem)
+					itemsTurnedOn.append(_usedItem.id)
 					Globals.gameConsole.addLog("You wear the blindfold.")
 			"candle":
-				if !checkIfLightSourceIsTurnedOn() or itemsTurnedOn.has(_usedItem):
+				if !checkIfLightSourceIsTurnedOn() or itemsTurnedOn.has(_usedItem.id):
 					if _usedItem.value.charges > 0:
 						if _usedItem.value.turnedOn:
 							_usedItem.value.turnedOn = false
-							itemsTurnedOn.erase(_usedItem)
+							itemsTurnedOn.erase(_usedItem.id)
 							Globals.gameConsole.addLog("You turn off the {itemName}.".format({ "itemName": _usedItem.itemName }))
 						else:
 							_usedItem.value.turnedOn = true
-							itemsTurnedOn.append(_usedItem)
+							itemsTurnedOn.append(_usedItem.id)
 							Globals.gameConsole.addLog("You turn on the {itemName}.".format({ "itemName": _usedItem.itemName }))
 					else:
 						Globals.gameConsole.addLog("Your candle is spent.")
 				else:
 					Globals.gameConsole.addLog("You already have a lightsource on.")
 			"oil lamp":
-				if !checkIfLightSourceIsTurnedOn() or itemsTurnedOn.has(_usedItem):
+				if !checkIfLightSourceIsTurnedOn() or itemsTurnedOn.has(_usedItem.id):
 					if _usedItem.value.charges > 0:
 						if _usedItem.value.turnedOn:
 							_usedItem.value.turnedOn = false
-							itemsTurnedOn.erase(_usedItem)
+							itemsTurnedOn.erase(_usedItem.id)
 							Globals.gameConsole.addLog("You turn off the {itemName}.".format({ "itemName": _usedItem.itemName }))
 						else:
 							_usedItem.value.turnedOn = true
-							itemsTurnedOn.append(_usedItem)
+							itemsTurnedOn.append(_usedItem.id)
 							Globals.gameConsole.addLog("You turn on the {itemName}.".format({ "itemName": _usedItem.itemName }))
 					else:
 						Globals.gameConsole.addLog("Your lamp is spent.")
 				else:
 					Globals.gameConsole.addLog("You already have a lightsource on.")
 			"magic lamp":
-				if !checkIfLightSourceIsTurnedOn() or itemsTurnedOn.has(_usedItem):
+				if !checkIfLightSourceIsTurnedOn() or itemsTurnedOn.has(_usedItem.id):
 					if _usedItem.value.turnedOn:
 						_usedItem.value.turnedOn = false
-						itemsTurnedOn.erase(_usedItem)
+						itemsTurnedOn.erase(_usedItem.id)
 						Globals.gameConsole.addLog("You turn off the {itemName}.".format({ "itemName": _usedItem.itemName }))
 					else:
 						_usedItem.value.turnedOn = true
-						itemsTurnedOn.append(_usedItem)
+						itemsTurnedOn.append(_usedItem.id)
 						Globals.gameConsole.addLog("You turn on the {itemName}.".format({ "itemName": _usedItem.itemName }))
 				else:
 					Globals.gameConsole.addLog("You already have a lightsource on.")

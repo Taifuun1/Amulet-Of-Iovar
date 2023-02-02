@@ -112,6 +112,13 @@ func create(_data = null):
 		level = _playerData.level
 	else:
 		level = 1
+	if _playerData.has("experiencePoints"):
+		experiencePoints = _playerData.experiencePoints
+	if _playerData.has("experienceNeededForPreviousLevelGainAmount"):
+		experienceNeededForPreviousLevelGainAmount = _playerData.experienceNeededForPreviousLevelGainAmount
+	if _playerData.has("experienceNeededForLevelGainAmount"):
+		experienceNeededForLevelGainAmount = _playerData.experienceNeededForLevelGainAmount
+	
 	hp = _playerData.hp
 	mp = _playerData.mp
 	if _playerData.has("basehp"):
@@ -152,6 +159,11 @@ func create(_data = null):
 	visageIncrease = _playerData.visageIncrease
 	wisdomIncrease = _playerData.wisdomIncrease
 	
+	if _playerData.has("playerVisibility"):
+		playerVisibility = _playerData.playerVisibility
+	if _playerData.has("itemsTurnedOn"):
+		itemsTurnedOn = _playerData.itemsTurnedOn
+	
 	skills = _playerData.skills
 	
 	ac = $"/root/World/UI/UITheme/Equipment".getArmorClass()
@@ -163,7 +175,10 @@ func create(_data = null):
 	if _playerData.has("equipmentResistances"):
 		equipmentResistances = _playerData.equipmentResistances
 	
-	calories = 1500
+	if _playerData.has("calories"):
+		calories = _playerData.calories
+	else:
+		calories = 1500
 	previousCalories = calories
 	
 	goldPieces = _playerData.goldPieces
@@ -296,7 +311,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 		for _attack in _attacks:
 			var _damage = calculateDmg(_attack)
 			
-			if itemsTurnedOn.has("cloak of magical ambiguity") and _damage.dmg <= 0 and _damage.magicDmg > 0:
+			if checkIfItemsTurnedOnHasItem("cloak of magical ambiguity") and _damage.dmg <= 0 and _damage.magicDmg > 0:
 				if _damage.magicDmg - 1 < 0:
 					_damage.magicDmg = 0
 				else:
@@ -495,17 +510,12 @@ func processPlayerSpecificEffects():
 			Globals.gameConsole.addLog("Your vision changes.")
 		playerVisibility.distance = -1
 	
-	##########
-	### UI ###
-	##########
-	
-	processPlayerUIChanges()
-	
 	###########
 	## Tools ##
 	###########
 	equipmentResistances = []
-	for _item in itemsTurnedOn:
+	for _itemId in itemsTurnedOn:
+		var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 		match _item.identifiedItemName.to_lower():
 			"amulet of seeing":
 				statusEffects["seeing"] = -1
@@ -547,7 +557,7 @@ func processPlayerSpecificEffects():
 						playerVisibility.distance = -1
 						Globals.gameConsole.addLog("Your candle has run out of wax.")
 					_item.value.turnedOn = false
-					itemsTurnedOn.erase(_item)
+					itemsTurnedOn.erase(_itemId)
 			"oil lamp":
 				if _item.value.charges > 0:
 					_item.value.charges -= 1
@@ -558,7 +568,7 @@ func processPlayerSpecificEffects():
 						playerVisibility.distance = -1
 						Globals.gameConsole.addLog("Your lamp has run out of oil.")
 					_item.value.turnedOn = false
-					itemsTurnedOn.erase(_item)
+					itemsTurnedOn.erase(_itemId)
 			"magic lamp":
 				if playerVisibility.distance != 0:
 					playerVisibility.distance = _item.value.value
@@ -859,7 +869,8 @@ func checkAllIdentification(_items = false, _critters = false):
 		$"/root/World/Critters/Critters".checkAllCrittersIdentification()
 
 func checkIfLightSourceIsTurnedOn():
-	for _item in itemsTurnedOn:
+	for _itemId in itemsTurnedOn:
+		var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 		if (
 			_item.identifiedItemName.to_lower() == "candle" or
 			_item.identifiedItemName.to_lower() == "oil lamp" or
@@ -889,6 +900,12 @@ func checkSkillExperience():
 		elif skills[_skill].skillcap > skills[_skill].level and  skills[_skill].experience >= 1200 and skills[_skill].level == 2:
 			skills[_skill].level = 3
 			Globals.gameConsole.addLog("You master the {skill}!".format({ "skill": _skill }))
+
+func checkIfItemsTurnedOnHasItem(_itemName):
+	for _itemId in itemsTurnedOn:
+		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn(_itemName):
+			return true
+	return false
 
 func getGameOverStats():
 	var _stats = {  }

@@ -468,6 +468,7 @@ func drawLevel():
 	
 	drawFOV()
 	drawCrittersAndItems()
+	$Critters/"0".processPlayerUIChanges()
 
 func drawFOV():
 	# FOV
@@ -543,15 +544,15 @@ func updateStats():
 	GlobalGameStats.gameStats["Turn count"] += 1
 
 func isGameOver():
-	if $Critters/"0".hp <= 0:
+	if gameOver:
+		return true
+	elif $Critters/"0".hp <= 0:
 		Globals.gameConsole.addLog("You die...")
-		yield(get_tree().create_timer(0.01), "timeout")
-		currentGameState = $"/root/World".gameState.GAME_OVER
+		currentGameState = gameState.GAME_OVER
 		gameOver = true
 		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".getGameOverStats())
 		$"UI/UITheme/Game Over Stats".show()
-		return true
-	elif gameOver:
+		yield(get_tree().create_timer(0.01), "timeout")
 		return true
 
 func keepMovingLoop(_playerTile, _tileToMoveTo):
@@ -910,10 +911,10 @@ func interactWith(_tileToInteractWith):
 				$Items/Items.createItem("carrot", _tileToInteractWith)
 				Globals.gameConsole.addLog("You pick a carrot from the plant.")
 				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-			elif randi() % 5 == 0:
-				$Items/Items.createItem("beans", _tileToInteractWith)
-				Globals.gameConsole.addLog("You pick beans from the plant.")
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+#			elif randi() % 5 == 0:
+#				$Items/Items.createItem("beans", _tileToInteractWith)
+#				Globals.gameConsole.addLog("You pick beans from the plant.")
+#				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 			elif randi() % 16 == 0:
 				$Items/Items.createItem("tomato", _tileToInteractWith)
 				Globals.gameConsole.addLog("You pick a tomato from the plant.")
@@ -932,11 +933,11 @@ func interactWith(_tileToInteractWith):
 			Globals.gameConsole.addLog("You pick a tomato from the plant.")
 			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 			processGameTurn()
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_BEAN:
-			$Items/Items.createItem("beans", _tileToInteractWith)
-			Globals.gameConsole.addLog("You pick beans from the plant.")
-			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-			processGameTurn()
+#		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_BEAN:
+#			$Items/Items.createItem("beans", _tileToInteractWith)
+#			Globals.gameConsole.addLog("You pick beans from the plant.")
+#			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+#			processGameTurn()
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_ORANGE:
 			$Items/Items.createItem("orange", _tileToInteractWith)
 			Globals.gameConsole.addLog("You pick an orange from the plant.")

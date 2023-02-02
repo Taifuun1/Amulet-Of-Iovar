@@ -42,7 +42,7 @@ var canines = [
 				"types": {
 					"comestible": ["uncommon"]
 				},
-				"chance": 50,
+				"chance": 25,
 				"amount": [1, 2],
 			}
 		],
@@ -91,7 +91,7 @@ var canines = [
 				"types": {
 					"comestible": ["uncommon"]
 				},
-				"chance": 50,
+				"chance": 25,
 				"amount": [1, 2],
 			}
 		],
@@ -149,7 +149,7 @@ var canines = [
 				"types": {
 					"comestible": ["uncommon", "rare"]
 				},
-				"chance": 50,
+				"chance": 25,
 				"amount": [1, 2],
 			}
 		],
