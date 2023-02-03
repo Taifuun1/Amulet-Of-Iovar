@@ -344,7 +344,6 @@ func _input(_event):
 						}
 					}
 				], _playerTile, "God")
-		updateUI()
 
 func processGameTurn(_playerTile = null, _tileToMoveTo = null):
 	if _playerTile != null:
@@ -468,7 +467,8 @@ func drawLevel():
 	
 	drawFOV()
 	drawCrittersAndItems()
-	$Critters/"0".processPlayerUIChanges()
+
+	updateUI()
 
 func drawFOV():
 	# FOV
@@ -538,6 +538,9 @@ func drawCrittersAndItems():
 				get_node("Items/{id}".format({ "id": level.grid[x][y].items.back() })).show()
 
 func updateUI():
+	$Critters/"0".inventory.updateWeight()
+	$Critters/"0".calculateWeightStats()
+	$Critters/"0".processPlayerUIChanges()
 	$"Critters/0".updatePlayerStats()
 
 func updateStats():
@@ -844,7 +847,7 @@ func openMenu(_menu, _playerTile = null):
 		"use":
 			if currentGameState == gameState.GAME:
 				var _items
-				_items = $Critters/"0"/Inventory.getItemsOfType(["tool"], null, ["corpse"])
+				_items = $Critters/"0"/Inventory.getItemsOfType(["potion", "tool"], null, ["corpse"])
 				for _itemId in _items:
 					if get_node("Items/{itemId}".format({ "itemId": _itemId })).category != null and get_node("Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
 						_items.erase(_itemId)
@@ -943,6 +946,18 @@ func interactWith(_tileToInteractWith):
 			Globals.gameConsole.addLog("You pick an orange from the plant.")
 			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 			processGameTurn()
+		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.FOUNTAIN:
+			var _emptyBottleInInventory = $Critters/"0".getNonStackableItemInInventory("empty bottle")
+			if typeof(_emptyBottleInInventory) != TYPE_BOOL:
+				$Items/Items.createItem("water bottle", _tileToInteractWith)
+				if _emptyBottleInInventory.amount > 1:
+					_emptyBottleInInventory.amount -= 1
+				else:
+					$"/root/World/Items/Items".removeItem(_emptyBottleInInventory.id)
+				Globals.gameConsole.addLog("You fill the bottle with water.")
+				processGameTurn()
+			else:
+				Globals.gameConsole.addLog("You don't have any empty bottles.")
 	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_CLOSED:
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == null:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):

@@ -177,7 +177,8 @@ func _onMouseEnteredStat(_nodePath, _stat):
 			"bonusDmg": magicAttacks.bonusDmg,
 			"ap": magicAttacks.attack.armorPen,
 			"magicDmg": str(magicAttacks.attack.magicDmg.dmg[0]) + "-" + str(magicAttacks.attack.magicDmg.dmg[1]),
-			"magicElement": _magicElement
+			"magicElement": _magicElement,
+			"mp": str($"/root/World/UI/UITheme/Runes".mpUsage)
 		})
 	elif _stat.matchn("weight"):
 		_tooltipDescription = _tooltipDescription.format({ "weight": weight })

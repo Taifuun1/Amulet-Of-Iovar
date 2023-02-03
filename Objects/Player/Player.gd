@@ -159,6 +159,9 @@ func create(_data = null):
 	visageIncrease = _playerData.visageIncrease
 	wisdomIncrease = _playerData.wisdomIncrease
 	
+	if _playerData.has("statusEffects"):
+		statusEffects = _playerData.statusEffects
+	
 	if _playerData.has("playerVisibility"):
 		playerVisibility = _playerData.playerVisibility
 	if _playerData.has("itemsTurnedOn"):
@@ -405,7 +408,6 @@ func dropItem(_playerTile, _item, _grid):
 	else:
 		_grid[_playerTile.x][_playerTile.y].items.append(_item.id)
 		$Inventory.removeFromInventory(_item)
-		get_node("/root/World/Items/{id}".format({ "id": _item.id })).show()
 		$"/root/World/UI/UITheme/Equipment".takeOfEquipmentWhenDroppingItem(_item.id)
 		$"/root/World/UI/UITheme/Runes".takeOfRuneWhenDroppingItem(_item.id)
 		_dropLog.append("You drop {item}.".format({ "item": _item.itemName }))
@@ -509,6 +511,12 @@ func processPlayerSpecificEffects():
 		if playerVisibility.distance > 0:
 			Globals.gameConsole.addLog("Your vision changes.")
 		playerVisibility.distance = -1
+	
+	##########
+	### UI ###
+	##########
+
+	processPlayerUIChanges()
 	
 	###########
 	## Tools ##
@@ -773,7 +781,7 @@ func gainLevel():
 	baseStats.wisdom += wisdomIncrease
 	
 	experienceNeededForPreviousLevelGainAmount = experienceNeededForLevelGainAmount
-	var _nextLevelExpGain = int(20 * level + (experienceNeededForLevelGainAmount / 2))
+	var _nextLevelExpGain = int(experienceNeededForLevelGainAmount + (20 * level + (experienceNeededForLevelGainAmount / 4)))
 	if _nextLevelExpGain > 5280:
 		_nextLevelExpGain = 5280
 	experienceNeededForLevelGainAmount = _nextLevelExpGain
@@ -914,6 +922,7 @@ func getGameOverStats():
 	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
 	_stats.inventoryItems = $"/root/World/Critters/0/Inventory".getInventoryItems()
 	_stats.gameStats = GlobalGameStats.getGlobalGameStats()
+	_stats.gameStats.Points = _stats.points
 	
 	return _stats
 

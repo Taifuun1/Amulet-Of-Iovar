@@ -33,14 +33,6 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 	weight = _critter.weight
 #	justice = _critter.justice
 	
-	stats.strength = float(_critter.stats.strength)
-	stats.legerity = float(_critter.stats.legerity)
-	stats.balance = float(_critter.stats.balance)
-	stats.belief = float(_critter.stats.belief)
-	stats.visage = float(_critter.stats.visage)
-	stats.wisdom = float(_critter.stats.wisdom)
-	baseStats = stats.duplicate(true)
-	
 	level = _critter.level
 	hp = int(_critter.hp)
 	mp = int(_critter.mp)
@@ -54,6 +46,18 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 		maxmp = int(_critter.maxmp)
 	else:
 		maxmp = int(_critter.mp)
+	
+	stats.strength = float(_critter.stats.strength)
+	stats.legerity = float(_critter.stats.legerity)
+	stats.balance = float(_critter.stats.balance)
+	stats.belief = float(_critter.stats.belief)
+	stats.visage = float(_critter.stats.visage)
+	stats.wisdom = float(_critter.stats.wisdom)
+	if _critter.has("baseStats"):
+		baseStats = _critter.baseStats
+	else:
+		baseStats = stats.duplicate(true)
+	
 	shields = 0
 	ac = int(_critter.ac)
 	magicac = int(_critter.ac)
@@ -71,6 +75,9 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 	elif _critter.abilityHits.size() != 0:
 		currentCritterAbilityHit = randi() % _critter.abilityHits.size()
 	resistances = _critter.resistances
+	
+	if _critter.has("statusEffects"):
+		statusEffects = _critter.statusEffects
 	
 	$CritterSprite.texture = _critter.texture
 	
@@ -570,6 +577,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 				despawn(_critterTile)
 				_didCritterDie = expDropAmount
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))
+				checkIfAddFlavorGamelog("despawn")
 				if checkIfCritterIsPlayer(_critterName):
 					GlobalGameStats.critters[critterName].killCount += 1
 				break
@@ -617,8 +625,6 @@ func despawn(_critterTile = null, _createCorpse = true, _createDrops = true):
 		_gridPosition = _level.getCritterTile(id)
 	else:
 		_gridPosition = _critterTile
-	
-	checkIfAddFlavorGamelog("despawn")
 	
 	if _createCorpse:
 		$"/root/World/Items/Items".createItem("corpse", _gridPosition, 1, false, { "weight": weight, "critterName": critterName })

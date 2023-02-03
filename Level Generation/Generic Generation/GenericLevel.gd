@@ -187,7 +187,6 @@ func addCorridorTiles():
 			if (
 				grid[point.x][point.y].tile == Globals.tiles.WALL_DUNGEON or
 				grid[point.x][point.y].tile == Globals.tiles.FLOOR_DUNGEON or
-				grid[point.x][point.y].tile == Globals.tiles.GRASS or
 				grid[point.x][point.y].tile == Globals.tiles.UP_STAIR_DUNGEON or
 				grid[point.x][point.y].tile == Globals.tiles.DOWN_STAIR_DUNGEON
 			):

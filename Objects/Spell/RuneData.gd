@@ -6,15 +6,15 @@ var runeData = {
 		},
 		"frost": {
 			"color": "#25d1ff",
-			"mp": 4
+			"mp": 5
 		},
 		"thunder": {
 			"color": "#F1FB36",
-			"mp": 3
+			"mp": 4
 		},
 		"gleeie'er": {
 			"color": "#3AFFCB",
-			"mp": 1
+			"mp": 2
 		},
 		"toxix": {
 			"color": "#87DB4D",
@@ -24,11 +24,11 @@ var runeData = {
 	"luirio": {
 		"point": {
 			"distance": 99,
-			"mp": 1
+			"mp": 3
 		},
 		"line": {
 			"distance": 15,
-			"mp": 3,
+			"mp": 5,
 			"spellDirections": {
 				Vector2(0,-1): {
 					"angle": 0
@@ -58,7 +58,7 @@ var runeData = {
 		},
 		"cone": {
 			"distance": 4,
-			"mp": 7,
+			"mp": 9,
 			"spellDirections": {
 				Vector2(0,-1): [
 					{
@@ -176,7 +176,7 @@ var runeData = {
 		},
 		"adjacent": {
 			"distance": 0,
-			"mp": 4,
+			"mp": 6,
 			"spellDirections": [
 				{
 					"angle": 90,
@@ -214,7 +214,7 @@ var runeData = {
 		},
 		"fourway": {
 			"distance": 7,
-			"mp": 8,
+			"mp": 10,
 			"spellDirections": {
 				Vector2(0,-1): [
 					{
@@ -368,19 +368,19 @@ var runeData = {
 			"dmgMultiplier": 1,
 			"effectMultiplier": 2,
 			"texture": load("res://Assets/Spells/True.png"),
-			"mp": 10
+			"mp": 11
 		},
 		"bolt": {
 			"dmgMultiplier": 0.75,
 			"effectMultiplier": 1,
 			"texture": load("res://Assets/Spells/Bolt.png"),
-			"mp": 5
+			"mp": 7
 		},
 		"fragment": {
 			"dmgMultiplier": 2,
 			"effectMultiplier": 0.5,
 			"texture": load("res://Assets/Spells/Fragment.png"),
-			"mp": 12
+			"mp": 13
 		},
 		"flow": {
 			"dmgMultiplier": 1,
@@ -393,7 +393,7 @@ var runeData = {
 			"effectMultiplier": 0.5,
 			"tick": 10,
 			"texture": load("res://Assets/Spells/Gas.png"),
-			"mp": 2
+			"mp": 3
 		}
 	}
 }

@@ -106,6 +106,7 @@ enum interactables {
 	SPIDER_WEB
 	GEMS
 	DIGGABLE
+	FOUNTAIN
 }
 
 var currentDungeonLevel = 1

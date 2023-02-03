@@ -194,6 +194,15 @@ func checkIfItemInInventoryByName(_itemName):
 			return true
 	return false
 
+func getNonStackableItemInInventory(_itemName, _alignment = null):
+	for _itemId in inventory:
+		var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+		if _alignment == null and _item.identifiedItemName.matchn(_itemName):
+			return _item
+		elif _item.identifiedItemName.matchn(_itemName) and _item.alignment.matchn(_alignment):
+			return _item
+	return false
+
 func checkIfStackableItemInInventory(_item, _operation):
 	for _itemId in inventory:
 		var _inventoryItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -203,9 +212,9 @@ func checkIfStackableItemInInventory(_item, _operation):
 			elif _operation.match("add"):
 				_inventoryItem.amount += _item.amount
 			elif _operation.match("substract"):
-				if _inventoryItem.amount == 1:
-					return false
-				_inventoryItem.amount -= _item.amount
+#				if _inventoryItem.amount == 1:
+				return false
+#				_inventoryItem.amount -= _item.amount
 			updateWeight()
 			return true
 	return false

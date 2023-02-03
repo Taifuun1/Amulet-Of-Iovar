@@ -540,7 +540,7 @@ var savant = {
 	hp = 8,
 	mp = 18,
 	stats = {
-		strength = 5,
+		strength = 4,
 		legerity = 8,
 		balance = 8,
 		belief = 10,
@@ -560,7 +560,6 @@ var savant = {
 	items = {
 		"Worn mace": 1,
 		"Boots of magic": 1,
-		"Amulet of magic power": 1,
 		"Scroll of create food": 1,
 		"Scroll of remove curse": 1,
 		"Scroll of identify": [1, 2],

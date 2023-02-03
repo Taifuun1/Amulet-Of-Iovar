@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://UI/Game Over Stats/Game Over Stats.gd" type="Script" id=1]
 [ext_resource path="res://UI/Game Over Stats/Points.tscn" type="PackedScene" id=2]
@@ -7,11 +7,18 @@
 [ext_resource path="res://UI/Game Over Stats/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Game Over Stats/Kill Count.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Game Over Stats/Game Stats.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Theme/UITitleFont.tres" type="DynamicFont" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 0 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 1 )
+draw_center = false
+border_width_bottom = 2
+border_color = Color( 0.152941, 0.266667, 0.541176, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -49,49 +56,78 @@ anchor_bottom = 1.0
 margin_top = 49.0
 custom_styles/panel = SubResource( 2 )
 
+[node name="GameOverText" type="Label" parent="GameOverTabs/Points"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -551.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 8 )
+custom_styles/normal = SubResource( 7 )
+align = 1
+valign = 1
+
 [node name="PointsContainer" type="VBoxContainer" parent="GameOverTabs/Points"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 128.0
+margin_right = -8.0
+margin_bottom = -8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Points" parent="GameOverTabs/Points/PointsContainer" instance=ExtResource( 2 )]
-margin_right = 1540.0
-margin_bottom = 630.0
+margin_right = 1524.0
+margin_bottom = 494.0
 
 [node name="SaveStatsAndExit" type="Button" parent="GameOverTabs/Points/PointsContainer"]
-margin_top = 634.0
-margin_right = 1540.0
-margin_bottom = 671.0
+margin_top = 498.0
+margin_right = 1524.0
+margin_bottom = 535.0
 text = "Save stats and exit"
 
 [node name="Console log" type="Panel" parent="GameOverTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 61.0
+margin_top = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="Console Log" parent="GameOverTabs/Console log" instance=ExtResource( 4 )]
+[node name="ConsoleLogContainer" type="VBoxContainer" parent="GameOverTabs/Console log"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Console Log" parent="GameOverTabs/Console log/ConsoleLogContainer" instance=ExtResource( 4 )]
+margin_right = 1524.0
+margin_bottom = 614.0
+
+[node name="SaveStatsAndExit" type="Button" parent="GameOverTabs/Console log/ConsoleLogContainer"]
+margin_top = 618.0
+margin_right = 1524.0
+margin_bottom = 655.0
+text = "Save stats and exit"
 
 [node name="Inventory" type="Panel" parent="GameOverTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 61.0
+margin_top = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 4 )
 
-[node name="Inventory" parent="GameOverTabs/Inventory" instance=ExtResource( 5 )]
+[node name="InventoryContainer" type="VBoxContainer" parent="GameOverTabs/Inventory"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -99,38 +135,72 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -8.0
 
+[node name="Inventory" parent="GameOverTabs/Inventory/InventoryContainer" instance=ExtResource( 5 )]
+margin_right = 1524.0
+margin_bottom = 614.0
+
+[node name="SaveStatsAndExit" type="Button" parent="GameOverTabs/Inventory/InventoryContainer"]
+margin_top = 618.0
+margin_right = 1524.0
+margin_bottom = 655.0
+text = "Save stats and exit"
+
 [node name="Kill count" type="Panel" parent="GameOverTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 61.0
+margin_top = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 5 )
 
-[node name="Kill Count" parent="GameOverTabs/Kill count" instance=ExtResource( 6 )]
+[node name="KillCountContainer" type="VBoxContainer" parent="GameOverTabs/Kill count"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = -16.0
+margin_right = -8.0
 margin_bottom = -8.0
+
+[node name="Kill Count" parent="GameOverTabs/Kill count/KillCountContainer" instance=ExtResource( 6 )]
+margin_right = 1524.0
+margin_bottom = 655.0
+
+[node name="SaveStatsAndExit" type="Button" parent="GameOverTabs/Kill count/KillCountContainer"]
+margin_top = 618.0
+margin_right = 1524.0
+margin_bottom = 655.0
+text = "Save stats and exit"
 
 [node name="Game stats" type="Panel" parent="GameOverTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 61.0
+margin_top = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 6 )
 
-[node name="Game Stats" parent="GameOverTabs/Game stats" instance=ExtResource( 7 )]
+[node name="GameStatsContainer" type="VBoxContainer" parent="GameOverTabs/Game stats"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = -16.0
+margin_right = -8.0
 margin_bottom = -8.0
 
+[node name="Game Stats" parent="GameOverTabs/Game stats/GameStatsContainer" instance=ExtResource( 7 )]
+margin_right = 1524.0
+margin_bottom = 655.0
+
+[node name="SaveStatsAndExit" type="Button" parent="GameOverTabs/Game stats/GameStatsContainer"]
+margin_top = 618.0
+margin_right = 1524.0
+margin_bottom = 655.0
+text = "Save stats and exit"
+
 [connection signal="pressed" from="GameOverTabs/Points/PointsContainer/SaveStatsAndExit" to="." method="_onSaveAndExitpressed"]
+[connection signal="pressed" from="GameOverTabs/Console log/ConsoleLogContainer/SaveStatsAndExit" to="." method="_onSaveAndExitpressed"]
+[connection signal="pressed" from="GameOverTabs/Inventory/InventoryContainer/SaveStatsAndExit" to="." method="_onSaveAndExitpressed"]
+[connection signal="pressed" from="GameOverTabs/Kill count/KillCountContainer/SaveStatsAndExit" to="." method="_onSaveAndExitpressed"]
+[connection signal="pressed" from="GameOverTabs/Game stats/GameStatsContainer/SaveStatsAndExit" to="." method="_onSaveAndExitpressed"]

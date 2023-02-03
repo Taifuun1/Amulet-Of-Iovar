@@ -6,22 +6,23 @@ var stats
 var ascended
 
 func setValues(_title, _stats, _ascended = false):
+	$GameOverTabs/Points/GameOverText.text = _title
+	
 	stats = _stats
 	ascended = _ascended
 	
 	for _itemName in _stats.points.points:
 		$"GameOverTabs/Points/PointsContainer/Points".createPointItem(_itemName, _stats.points.points[_itemName])
 	
-	print(_stats.consoleLogs)
 	for _log in _stats.consoleLogs:
 		var _logItem = RichTextLabelExtended.instance()
 		_logItem.createRichTextLabel(_log)
-		$"GameOverTabs/Console log/Console Log/Console Log List".add_child(_logItem)
+		$"GameOverTabs/Console log/ConsoleLogContainer/Console Log/Console Log List".add_child(_logItem)
 	
 	var _inventoryItemsContainersCount = 0
 	for _item in _stats.inventoryItems:
 		var _inventoryItem = RichTextLabelExtended.instance()
-		$"GameOverTabs/Inventory/Inventory/Inventory List".add_child(_inventoryItem)
+		$"GameOverTabs/Inventory/InventoryContainer/Inventory/Inventory List".add_child(_inventoryItem)
 		_inventoryItem.createRichTextLabel(_item, _stats.inventoryItems[_item].item.rarity)
 		if _stats.inventoryItems[_item].has("items"):
 			for _containerItem in _stats.inventoryItems[_item].items:
@@ -32,9 +33,9 @@ func setValues(_title, _stats, _ascended = false):
 				_containerNode.name = "ContainerContainer%s" % _inventoryItemsContainersCount
 				_paddingNode.set_custom_minimum_size(Vector2(36,0))
 				
-				$"GameOverTabs/Inventory/Inventory/Inventory List".add_child(_containerNode)
-				get_node("GameOverTabs/Inventory/Inventory/Inventory List/ContainerContainer%s" % _inventoryItemsContainersCount).add_child(_paddingNode)
-				get_node("GameOverTabs/Inventory/Inventory/Inventory List/ContainerContainer%s" % _inventoryItemsContainersCount).add_child(_containerItemNode)
+				$"GameOverTabs/Inventory/InventoryContainer/Inventory/Inventory List".add_child(_containerNode)
+				get_node("GameOverTabs/Inventory/InventoryContainer/Inventory/Inventory List/ContainerContainer%s" % _inventoryItemsContainersCount).add_child(_paddingNode)
+				get_node("GameOverTabs/Inventory/InventoryContainer/Inventory/Inventory List/ContainerContainer%s" % _inventoryItemsContainersCount).add_child(_containerItemNode)
 				
 				_containerItemNode.createRichTextLabel(_containerItem, _stats.inventoryItems[_item].items[_containerItem].rarity)
 				
@@ -44,10 +45,10 @@ func setValues(_title, _stats, _ascended = false):
 		match _statType:
 			"gameStats":
 				for _stat in _stats.gameStats[_statType]:
-					$"GameOverTabs/Game stats/Game Stats".createGameStatsItem(_stat, _stats.gameStats[_statType][_stat])
+					$"GameOverTabs/Game stats/GameStatsContainer/Game Stats".createGameStatsItem(_stat, _stats.gameStats[_statType][_stat])
 			"critters":
 				for _critter in _stats.gameStats[_statType]:
-					$"GameOverTabs/Kill count/Kill Count".createCritterKillCountItem(_critter, _stats.gameStats[_statType][_critter].killCount)
+					$"GameOverTabs/Kill count/KillCountContainer/Kill Count".createCritterKillCountItem(_critter, _stats.gameStats[_statType][_critter].killCount)
 
 
 func _onSaveAndExitpressed():

@@ -831,6 +831,14 @@ func useItem(_id):
 				Globals.gameConsole.addLog("The gods seem unresponsive for now.")
 		else:
 			Globals.gameConsole.addLog("You need to be on an altar to use that.")
+	if _usedItem.type.matchn("potion"):
+		if _usedItem.amount > 1:
+			_usedItem.amount -= 1
+		else:
+			$"/root/World/Items/Items".removeItem(_usedItem.id)
+		Globals.gameConsole.addLog("You empty the {potionName} on the floor.".format({ "potionName": _usedItem.itemName }))
+		$"/root/World".closeMenu(_additionalChoices)
+		return
 	if _usedItem.type.matchn("tool"):
 		match _usedItem.identifiedItemName.to_lower():
 			"pickaxe":
@@ -964,6 +972,7 @@ func dipItem(_id):
 			"water potion":
 				if _dippedItem.alignment.matchn("blessed"):
 					_selectedItem.alignment = "blessed"
+					$"/root/World/Items/Items".removeItem(_id)
 					Globals.gameConsole.addLog("The {itemName} glows with a white light!".format({ "itemName": _selectedItem.itemName }))
 				elif _dippedItem.alignment.matchn("uncursed"):
 					if _selectedItem.type.matchn("scroll"):
@@ -977,8 +986,8 @@ func dipItem(_id):
 						Globals.gameConsole.addLog("The {itemName} gets wet.".format({ "itemName": _selectedItem.itemName }))
 				elif _dippedItem.alignment.matchn("cursed"):
 					_selectedItem.alignment = "cursed"
+					$"/root/World/Items/Items".removeItem(_id)
 					Globals.gameConsole.addLog("The {itemName} glows with a black light!".format({ "itemName": _selectedItem.itemName }))
-				$"/root/World/Items/Items".removeItem(_id)
 				Globals.gameConsole.addLog("The {itemName} is consumed.".format({ "itemName": _dippedItem.itemName }))
 			"soda bottle":
 				Globals.gameConsole.addLog("The {itemName} looks sugary.".format({ "itemName": _selectedItem.itemName }))

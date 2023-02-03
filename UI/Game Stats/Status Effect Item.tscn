@@ -9,7 +9,7 @@ bg_color = Color( 0.0745098, 0.101961, 0.32549, 1 )
 [node name="StatusEffectItem" type="Panel"]
 margin_right = 40.0
 margin_bottom = 40.0
-rect_min_size = Vector2( 115, 50 )
+rect_min_size = Vector2( 110, 50 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 
@@ -24,7 +24,7 @@ mouse_filter = 2
 
 [node name="StatusEffectText" type="RichTextLabel" parent="StatusEffectContainer"]
 margin_top = 13.0
-margin_right = 103.0
+margin_right = 98.0
 margin_bottom = 28.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -33,8 +33,8 @@ bbcode_enabled = true
 fit_content_height = true
 
 [node name="StatusEffectIcon" type="TextureRect" parent="StatusEffectContainer"]
-margin_left = 107.0
-margin_right = 107.0
+margin_left = 102.0
+margin_right = 102.0
 margin_bottom = 42.0
 mouse_filter = 2
 size_flags_vertical = 3

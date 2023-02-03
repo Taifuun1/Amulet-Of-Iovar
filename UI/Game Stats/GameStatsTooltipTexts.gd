@@ -111,6 +111,7 @@ Hits: {hits}
 Bonus Dmg: {bonusDmg}
 Armor Pen.: {ap}
 Magic damage: {magicDmg} {magicElement}
+Mp: {mp}
 """
 }
 

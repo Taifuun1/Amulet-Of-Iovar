@@ -176,7 +176,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 18,
 			"lines": [
-				"[i]Moves skitterishly[/i]"
+				"[i]chp-chp-chp[/i]"
 			],
 		}
 	},
@@ -184,24 +184,24 @@ I wither away"""
 		"taunt": {
 			"frequency": 5,
 			"lines": [
-				"CHP-CHP-CHP"
+				"[i]CHP-CHP-CHP[/i]"
 			],
 		},
 		"speech": {
 			"frequency": 15,
 			"lines": [
-				"Chp-chp-chp"
+				"[i]Chp-chp-chp[/i]"
 			],
 		},
 		"despawn": [
-			"CLAK-CLAK"
+			"[i]CLAK-CLAK[/i]"
 		]
 	},
 	"Sugar ant": {
 		"speech": {
 			"frequency": 10,
 			"lines": [
-				"Chp-chp-chp"
+				"[i]Chp-chp-chp[/i]"
 			],
 		}
 	},
@@ -209,8 +209,8 @@ I wither away"""
 		"speech": {
 			"frequency": 3,
 			"lines": [
-				"Click",
-				"Clack"
+				"[i]Click[/i]",
+				"[i]Clack[/i]"
 			],
 		},
 		"despawn": [
@@ -1011,13 +1011,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"SSSsssss!",
+				"SSSssss!",
 				"Sss.",
 				"Sss-szh!"
 			],
 		},
 		"despawn": [
-			"Sssszszszs..."
+			"Ssszzz..."
 		]
 	},
 	"Highlands newt": {
@@ -1031,13 +1031,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"SSSsssss!",
+				"SSSssss!",
 				"Sss.",
 				"Sss-szh!"
 			],
 		},
 		"despawn": [
-			"Sssszszszs..."
+			"Ssszzz..."
 		]
 	},
 	"Mine newt": {
@@ -1051,13 +1051,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"SSSsssss!",
+				"SSSssss!",
 				"Sss.",
 				"Sss-szh!"
 			],
 		},
 		"despawn": [
-			"Sssszszszs..."
+			"Ssszzz..."
 		]
 	},
 	"Paper newt": {
@@ -1071,13 +1071,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"SSSsssss!",
+				"SSSssss!",
 				"Sss.",
 				"Sss-szh!"
 			],
 		},
 		"despawn": [
-			"Sssszszszs..."
+			"Ssszzz..."
 		]
 	},
 	"River newt": {
@@ -1091,13 +1091,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"SSSsssss!",
+				"SSSssss!",
 				"Sss.",
 				"Sss-szh!"
 			],
 		},
 		"despawn": [
-			"Sssszszszs..."
+			"Ssszzz..."
 		]
 	},
 	"Dungeon orc": {
@@ -1144,13 +1144,12 @@ I wither away"""
 		"taunt": {
 			"frequency": 6,
 			"lines": [
-				"EeeeEE!",
-				"REEEeeee!",
-				"REEEEE!"
+				"REEee!",
+				"REEEE!"
 			],
 		},
 		"despawn": [
-			"Reeeeeee..."
+			"Reeeee..."
 		]
 	},
 	"Mountain orc": {

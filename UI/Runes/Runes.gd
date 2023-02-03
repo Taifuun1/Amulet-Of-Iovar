@@ -6,6 +6,12 @@ var spell = load("res://Objects/Spell/Spell.tscn")
 var runeData = load("res://Objects/Spell/RuneData.gd").new()
 var spellData = load("res://Objects/Spell/SpellData.gd").new()
 
+const runesUITemplatePaths = {
+	"eario": "res://Assets/UI/RuneEario.png",
+	"luirio": "res://Assets/UI/RuneLuirio.png",
+	"heario": "res://Assets/UI/RuneHeario.png"
+}
+
 var runes = {
 	"eario": null,
 	"luirio": null,
@@ -22,7 +28,7 @@ var spellDamage = [{
 	}
 }]
 
-var manaUsage = 0
+var mpUsage = 0
 var bonusMagicDmg = 0
 
 var hoveredEquipment = null
@@ -69,7 +75,7 @@ func _process(_delta):
 		var _rune = get_node("/root/World/Items/{id}".format({ "id": runes[hoveredEquipment.to_lower()] }))
 		if _rune != null:
 			runes[hoveredEquipment.to_lower()] = null
-			get_node("RuneContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = null
+			get_node("RuneContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(runesUITemplatePaths[hoveredEquipment.to_lower()])
 			checkWhatRuneIsEquipped(_rune)
 			calculateMagicDamage()
 			$"/root/World".processGameTurn()
@@ -83,7 +89,7 @@ func _process(_delta):
 func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	yield(get_tree(), "idle_frame")
 	
-	if $"/root/World/Critters/0".mp - manaUsage < 0:
+	if $"/root/World/Critters/0".mp - mpUsage < 0:
 		$"/root/World".resetToDefaulGameState()
 		Globals.gameConsole.addLog("You don't have mp to cast that spell!")
 		return
@@ -188,7 +194,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 	
-	$"/root/World/Critters/0".mp -= manaUsage
+	$"/root/World/Critters/0".mp -= mpUsage
 
 
 
@@ -229,7 +235,7 @@ func takeOfRuneWhenDroppingItem(_id):
 	for _rune in runes.keys():
 		if runes[_rune] != null and runes[_rune] == _id:
 			runes[_rune] = null
-			get_node("RuneContainer/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = null
+			get_node("RuneContainer/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = load(runesUITemplatePaths[hoveredEquipment.to_lower()])
 			calculateMagicDamage()
 			return
 
@@ -271,10 +277,10 @@ func calculateMagicDamage():
 					"element": _earioNode.value
 				}
 			})
-		manaUsage = 0
+		mpUsage = 0
 		for _rune in runes:
 			if !_rune.matchn("heario"):
-				manaUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
+				mpUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
 #	"effect": runeData.heario[runes.heario].effectMultiplier
 	else:
 		var _earioNode = get_node("/root/World/Items/{id}".format({ "id": runes["eario"] }))
@@ -290,9 +296,9 @@ func calculateMagicDamage():
 					"element": _earioNode.value
 				}
 			})
-		manaUsage = 0
+		mpUsage = 0
 		for _rune in runes:
-			manaUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
+			mpUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
 	if _magicAttacks[0].magicDmg.dmg[0] != 0 and _magicAttacks[0].magicDmg.dmg[1] != 0:
 		_magicAttacks[0].magicDmg.dmg = [_magicAttacks[0].magicDmg.dmg[0] + bonusMagicDmg, _magicAttacks[0].magicDmg.dmg[1] + bonusMagicDmg]
 	spellDamage = _magicAttacks
@@ -422,7 +428,7 @@ func calculateMagicDamageIncrease(_type):
 func loadRunesData(_data):
 	runes = _data.runes
 	spellDamage = _data.spellDamage
-	manaUsage = int(_data.manaUsage)
+	mpUsage = int(_data.mpUsage)
 	
 	setRuneTextures()
 
@@ -436,7 +442,7 @@ func getRunesSaveData():
 	return {
 		runes = runes,
 		spellDamage = spellDamage,
-		manaUsage = manaUsage
+		mpUsage = mpUsage
 	}
 
 
