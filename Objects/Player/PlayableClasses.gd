@@ -90,7 +90,7 @@ var banker = {
 		legerity = 5,
 		balance = 6,
 		belief = 7,
-		visage = 7,
+		visage = 9,
 		wisdom = 7
 	},
 	hpIncrease = 1,
@@ -180,9 +180,8 @@ var freedomFighter = {
 		"Chipped sword": 1,
 		"Burning shield": 1,
 		"Leather mail": 1,
-		"Potion of blindness": [2, 3],
-		"Potion of heal": 1,
-		"Soda bottle": 2,
+		"Potion of Toxix": [2, 3],
+		"Soda bottle": [2, 3],
 		"Orange": 1,
 		"SPAM": 1
 	},

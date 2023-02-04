@@ -10,3 +10,5 @@ func create(_title, _items):
 		var newItem = statsItem.instance()
 		newItem.create(_item, _items[_item])
 		$StatsList.add_child(newItem)
+		if _item == _items.keys()[_items.size() - 1]:
+			newItem.get_node("ItemContainer/Panel").hide()

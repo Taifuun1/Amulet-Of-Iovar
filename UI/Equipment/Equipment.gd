@@ -102,14 +102,6 @@ func _process(_delta):
 		):
 			if hands[hoveredEquipment.to_lower()] != null:
 				_item = get_node("/root/World/Items/{id}".format({ "id": hands[hoveredEquipment.to_lower()] }))
-			if (
-				hands.lefthand == null or
-				hands.righthand == null or
-				hands.lefthand == hands.righthand or
-				get_node("/root/World/Items/{itemId}".format({ "itemId": hands.lefthand })).category.matchn("shield") or
-				get_node("/root/World/Items/{itemId}".format({ "itemId": hands.righthand })).category.matchn("shield")
-			):
-				dualWielding = false
 		elif (
 				hoveredEquipment.matchn("ring1") or
 				hoveredEquipment.matchn("ring2") or
@@ -148,6 +140,14 @@ func _process(_delta):
 						_changed = true
 					hands[hoveredEquipment.to_lower()] = null
 					get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(equipmentUITemplatePaths[hoveredEquipment.to_lower()])
+				if (
+					hands.lefthand == null or
+					hands.righthand == null or
+					hands.lefthand == hands.righthand or
+					get_node("/root/World/Items/{itemId}".format({ "itemId": hands.lefthand })).category.matchn("shield") or
+					get_node("/root/World/Items/{itemId}".format({ "itemId": hands.righthand })).category.matchn("shield")
+				):
+					dualWielding = false
 			elif _matchingType.matchn("armor"):
 				if equipment[hoveredEquipment.to_lower()] != null:
 					_changed = true

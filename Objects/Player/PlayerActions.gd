@@ -532,6 +532,29 @@ func quaffItem(_id):
 						Globals.gameConsole.addLog("The world spins!")
 				else:
 					Globals.gameConsole.addLog("You already feel confused enough!")
+			"potion of paralysis":
+				if _quaffedItem.alignment.matchn("blessed"):
+					statusEffects.stun = 2
+					Globals.gameConsole.addLog("You feel a jolt go down your spine!")
+				elif _quaffedItem.alignment.matchn("uncursed"):
+					statusEffects.stun = 4
+					Globals.gameConsole.addLog("You're stunned!")
+				elif _quaffedItem.alignment.matchn("cursed"):
+					statusEffects.stun = 8
+					Globals.gameConsole.addLog("You're completely stunned!")
+			"potion of blindness":
+				if !checkIfStatusEffectIsPermanent("blindness"):
+					if _quaffedItem.alignment.matchn("blessed"):
+						statusEffects.blindness = 4
+						Globals.gameConsole.addLog("You can't see!")
+					elif _quaffedItem.alignment.matchn("uncursed"):
+						statusEffects.blindness = 8
+						Globals.gameConsole.addLog("You're blind!")
+					elif _quaffedItem.alignment.matchn("cursed"):
+						statusEffects.blindness = 27
+						Globals.gameConsole.addLog("It's all dark!")
+				else:
+					Globals.gameConsole.addLog("You already feel blind enough!")
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
 		Globals.isItemIdentified(_quaffedItem)

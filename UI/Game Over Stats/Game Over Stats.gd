@@ -56,10 +56,16 @@ func _onSaveAndExitpressed():
 	var _lifeTimeStats = GlobalSave.saveAndloadLifeTimeStats("LifeTimeStats")
 	
 	_lifeTimeStats["Turn count"] += _newLifeTimeStats["Turn count"]
-	_lifeTimeStats["Times attacked"] += _newLifeTimeStats["Times attacked"]
-	_lifeTimeStats["Damage dealt"] += _newLifeTimeStats["Damage dealt"]
-	if _lifeTimeStats["Highest damage dealt"] < _newLifeTimeStats["Highest damage dealt"]:
-		_lifeTimeStats["Highest damage dealt"] = _newLifeTimeStats["Highest damage dealt"]
+	if _lifeTimeStats["Highest physical damage dealt"] < _newLifeTimeStats["Highest physical damage dealt"]:
+		_lifeTimeStats["Highest physical damage dealt"] += _newLifeTimeStats["Highest physical damage dealt"]
+	if _lifeTimeStats["Highest physical damage with magic dealt"] < _newLifeTimeStats["Highest physical damage with magic dealt"]:
+		_lifeTimeStats["Highest physical damage with magic dealt"] += _newLifeTimeStats["Highest physical damage with magic dealt"]
+	_lifeTimeStats["Times attacked in melee"] += _newLifeTimeStats["Times attacked in melee"]
+	_lifeTimeStats["Damage dealt in melee"] += _newLifeTimeStats["Damage dealt in melee"]
+	if _lifeTimeStats["Highest spell damage dealt"] < _newLifeTimeStats["Highest spell damage dealt"]:
+		_lifeTimeStats["Highest spell damage dealt"] += _newLifeTimeStats["Highest spell damage dealt"]
+	_lifeTimeStats["Times attacked with spells"] += _newLifeTimeStats["Times attacked with spells"]
+	_lifeTimeStats["Damage dealt with spells"] += _newLifeTimeStats["Damage dealt with spells"]
 	_lifeTimeStats["Damage taken"] += _newLifeTimeStats["Damage taken"]
 	if _lifeTimeStats["Highest damage taken"] < _newLifeTimeStats["Highest damage taken"]:
 		_lifeTimeStats["Highest damage taken"] = _newLifeTimeStats["Highest damage taken"]

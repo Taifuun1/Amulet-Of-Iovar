@@ -6,19 +6,6 @@ var attacks
 var magicAttacks
 var weight
 
-#func _ready():
-#	addStatusEffect("blindness")
-#	addStatusEffect("fumbling")
-#	addStatusEffect("hungry")
-#	addStatusEffect("malnourished")
-#	addStatusEffect("famished")
-#	addStatusEffect("overEncumbured")
-#	addStatusEffect("burdened")
-#	addStatusEffect("flattened")
-#	addStatusEffect("confusion")
-#	addStatusEffect("displacement")
-
-
 
 #################################
 ### Update player stats in UI ###

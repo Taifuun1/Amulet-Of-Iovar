@@ -28,7 +28,7 @@ func createDungeon(_stairData):
 					"amount": randi() % 2
 				}
 			})
-			placeRandomInteractables(["altar"])
+			placeRandomInteractables(["altar", "fountain"])
 			return
 		resetLevel()
 	push_error("Can't create dungeon")

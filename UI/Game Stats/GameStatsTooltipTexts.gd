@@ -61,7 +61,7 @@ var wisdom = {
 
 var visage = {
 	"title": "Visage",
-	"description": "Visage determines your gleeie'er and toxix damage. Higher visage also lowers shop prices and invisibility turn count."
+	"description": "Visage determines your gleeie'er damage and toxix hit count. Higher visage also lowers shop prices and invisibility turn count."
 }
 
 var hp = {

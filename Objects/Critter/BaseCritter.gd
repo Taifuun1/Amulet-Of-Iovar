@@ -168,7 +168,7 @@ func processCritterEffects():
 					statusEffects.backscattering = -1
 	
 	for _status in statusEffects.keys():
-		if statusEffects[_status] > 0 or statusEffects[_status] == -1:
+		if checkIfStatusEffectIsInEffect(_status):
 			if _status.matchn("toxix"):
 				var _toxixDmg = 1
 				hp -= _toxixDmg
@@ -229,7 +229,7 @@ func processCritterEffects():
 #						statusEffects[_status] -= 2
 #				else:
 #					statusEffects[_status] -= 1
-			else:
+			if statusEffects[_status] != -1:
 				statusEffects[_status] -= 1
 	
 	var hpRegenStat = (stats.legerity / 3) + (stats.strength / 3)

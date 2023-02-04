@@ -14,9 +14,13 @@ func getGlobalGameStats():
 
 var gameStats = {
 	"Turn count": 0,
-	"Times attacked": 0,
-	"Damage dealt": 0,
-	"Highest damage dealt": 0,
+	"Highest physical damage dealt": 0,
+	"Highest physical damage with magic dealt": 0,
+	"Times attacked in melee": 0,
+	"Damage dealt in melee": 0,
+	"Highest spell damage dealt": 0,
+	"Times attacked with spells": 0,
+	"Damage dealt with spells": 0,
 	"Damage taken": 0,
 	"Highest damage taken": 0,
 	"Items wished": 0,

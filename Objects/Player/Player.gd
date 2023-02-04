@@ -459,34 +459,35 @@ func processPlayerSpecificEffects():
 	
 	statusStates.hunger.previous = statusStates.hunger.current
 	
+	if calories > 800:
+		statusStates.hunger.current = 0
+	elif calories > 200 and calories <= 800:
+		statusStates.hunger.current = 1
+	elif calories > 0 and calories <= 200:
+		statusStates.hunger.current = 2
+	elif calories <= 0:
+		statusStates.hunger.current = 3
+		
 	# Check if player becomes less hungry
 	if previousCalories < 800 and calories >= 800:
-		statusStates.hunger.current = 0
 		Globals.gameConsole.addLog("You are no longer hungry.")
 	elif previousCalories < 400 and calories >= 400 and calories < 800:
-		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You only feel hungry.")
 	elif previousCalories < 200 and calories >= 200 and calories < 400:
-		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You are still very hungry.")
 	elif previousCalories < 0 and calories >= 0:
-		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You are still starving!")
 	
 	# Check if player becomes more hungry
 	if previousCalories >= 800 and calories < 800 and calories >= 400:
-		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You are beginning to feel hungry.")
 	elif previousCalories >= 400 and calories < 400 and calories >= 200:
-		statusStates.hunger.current = 1
 		Globals.gameConsole.addLog("You feel very hungry.")
 	elif previousCalories >= 200 and calories < 200 and calories > 0:
-		statusStates.hunger.current = 2
 		Globals.gameConsole.addLog("You are starving!")
 	elif calories <= 0:
 		hp -= 2
 		if previousCalories > 0:
-			statusStates.hunger.current = 3
 			Globals.gameConsole.addLog("You are famished!")
 	
 	previousCalories = calories
@@ -584,7 +585,7 @@ func processPlayerSpecificEffects():
 func processPlayerUIChanges():
 	# Deal with status effects in the UI
 	for _statusEffect in statusEffects.keys():
-		if (statusEffects[_statusEffect] > 0 or statusEffects[_statusEffect] == -1):
+		if checkIfStatusEffectIsInEffect(_statusEffect):
 			if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".addStatusEffect(_statusEffect)
 				var _damageNumber = damageNumber.instance()

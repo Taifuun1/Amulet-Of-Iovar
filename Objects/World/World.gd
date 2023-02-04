@@ -868,7 +868,15 @@ func castWith(_playerTile):
 
 func interactWith(_tileToInteractWith):
 	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
-		Globals.gameConsole.addLog("You can't interact with the {critter}.".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
+		match level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter.to_lower():
+			"wolf":
+				Globals.gameConsole.addLog("You try to pet the wolf. It tries to bite you. Bad doggy!.")
+			"wolf":
+				Globals.gameConsole.addLog("You try to pet the Warg. It growls at you. Scary!")
+			"gearh":
+				Globals.gameConsole.addLog("You try to pet the gearh. It tries to eat you. Aaah!")
+			_:
+				Globals.gameConsole.addLog("You can't interact with the {critter}.".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
 	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
@@ -955,6 +963,9 @@ func interactWith(_tileToInteractWith):
 				else:
 					$"/root/World/Items/Items".removeItem(_emptyBottleInInventory.id)
 				Globals.gameConsole.addLog("You fill the bottle with water.")
+				if randi() % 8 == 0:
+					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+					Globals.gameConsole.addLog("The fountain dries up!")
 				processGameTurn()
 			else:
 				Globals.gameConsole.addLog("You don't have any empty bottles.")

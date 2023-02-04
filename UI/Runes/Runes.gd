@@ -411,11 +411,11 @@ func calculateMagicDamageIncrease(_type):
 		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
-		if _stats.wisdom > 27:
+		if _stats.wisdom > 30:
 			_d += 4
-		elif _stats.wisdom > 21:
+		elif _stats.wisdom > 23:
 			_d += 3
-		elif _stats.wisdom > 17:
+		elif _stats.wisdom > 18:
 			_d += 2
 		elif _stats.wisdom > 15:
 			_d += 1

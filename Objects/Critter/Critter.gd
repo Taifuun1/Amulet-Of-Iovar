@@ -489,6 +489,13 @@ func takeDamage(_attacks, _critterTile, _critterName):
 						statusEffects.toxix = 5
 					else:
 						statusEffects.toxix = 3
+				
+				# Spell damage dealt game stats
+				if checkIfCritterIsPlayer(_critterName):
+					if _damage.dmg > GlobalGameStats.gameStats["Highest spell damage dealt"]:
+						GlobalGameStats.gameStats["Highest spell damage dealt"] = _damage.magicDmg
+					GlobalGameStats.gameStats["Times attacked with spells"] += 1
+					GlobalGameStats.gameStats["Damage dealt with spells"] += _damage.dmg + _damage.magicDmg
 			# Physical attack
 			else:
 				# Onhit abilities
@@ -547,6 +554,15 @@ func takeDamage(_attacks, _critterTile, _critterName):
 					if _activeArmorSets.toxix and !checkIfStatusEffectIsPermanent("toxix"):
 						statusEffects.toxix += 3
 						_attackLog += " {critterName} is poisoned by your slick armor!".format({ "critterName":critterName })
+				
+				# Physical damage dealt game stats
+				if checkIfCritterIsPlayer(_critterName):
+					if _damage.dmg > GlobalGameStats.gameStats["Highest physical damage dealt"]:
+						GlobalGameStats.gameStats["Highest physical damage dealt"] = _damage.dmg
+					if _damage.dmg + _damage.magicDmg > GlobalGameStats.gameStats["Highest physical damage with magic dealt"]:
+						GlobalGameStats.gameStats["Highest physical damage with magic dealt"] = _damage.dmg + _damage.magicDmg
+					GlobalGameStats.gameStats["Times attacked in melee"] += 1
+					GlobalGameStats.gameStats["Damage dealt in melee"] += _damage.dmg + _damage.magicDmg
 			
 			var _damageNumber = damageNumber.instance()
 			var _damageText
@@ -565,13 +581,6 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			$"/root/World/Texts".add_child(_damageNumber)
 			
 			_attacksLog.append(_attackLog)
-			
-			# Damage dealt game stats
-			if checkIfCritterIsPlayer(_critterName):
-				if _damageText > GlobalGameStats.gameStats["Highest damage dealt"]:
-					GlobalGameStats.gameStats["Highest damage dealt"] = _damageText
-				GlobalGameStats.gameStats["Times attacked"] += 1
-				GlobalGameStats.gameStats["Damage dealt"] += _damageText
 			
 			if hp <= 0:
 				despawn(_critterTile)

@@ -39,11 +39,18 @@ rect_min_size = Vector2( 300, 640 )
 alignment = 2
 
 [node name="Start game" type="Button" parent="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 228.0
+margin_right = 300.0
+margin_bottom = 328.0
+rect_min_size = Vector2( 260, 100 )
+text = "Start game "
+
+[node name="Games" type="Button" parent="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 margin_top = 332.0
 margin_right = 300.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 260, 100 )
-text = "Start game "
+text = "Games "
 
 [node name="Stats" type="Button" parent="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
 margin_top = 436.0
@@ -60,5 +67,6 @@ rect_min_size = Vector2( 260, 100 )
 text = "Exit game "
 
 [connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Start game" to="." method="_on_Start_Button_pressed"]
+[connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Games" to="." method="_on_Games_Button_pressed"]
 [connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Stats" to="." method="_on_Stats_Button_pressed"]
 [connection signal="pressed" from="StartContainer/VBoxContainer2/HBoxContainer/VBoxContainer/Exit game" to="." method="_on_Exit_Button_pressed"]
