@@ -306,6 +306,9 @@ var globalItemInfo = {
 	"Sapphire": {
 		"identified": false
 	},
+	"Empty potion bottle": {
+		"identified": false
+	},
 	"Water potion": {
 		"identified": false
 	},

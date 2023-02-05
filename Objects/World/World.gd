@@ -955,7 +955,7 @@ func interactWith(_tileToInteractWith):
 			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 			processGameTurn()
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.FOUNTAIN:
-			var _emptyBottleInInventory = $Critters/"0".getNonStackableItemInInventory("empty bottle")
+			var _emptyBottleInInventory = $Critters/"0".getNonStackableItemInInventory("empty potion bottle")
 			if typeof(_emptyBottleInInventory) != TYPE_BOOL:
 				$Items/Items.createItem("water bottle", _tileToInteractWith)
 				if _emptyBottleInInventory.amount > 1:

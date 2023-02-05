@@ -312,7 +312,7 @@ var items = {
 	},
 	"Chilly boots": {
 		"knowledge": false,
-		"description": ""
+		"description": "Boots frozen right through. Third of the Frost armor set. +7 ac"
 	},
 	"Cool Mikeys": {
 		"knowledge": false,
@@ -321,6 +321,10 @@ var items = {
 	"Venom riders": {
 		"knowledge": false,
 		"description": "Toxix-soaked slick shoes. Half of the Toxix armor set."
+	},
+	"Empty potion bottle": {
+		"knowledge": false,
+		"description": "An empty potion bottle. You can fill it with water."
 	},
 	"Water potion": {
 		"knowledge": false,

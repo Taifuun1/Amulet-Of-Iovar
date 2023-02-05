@@ -1,6 +1,18 @@
 var potions = {
 	"common": [
 		{
+			"itemName": "Empty potion bottle",
+			"unidentifiedItemName": "Empty potion bottle",
+			"texture": load("res://Assets/Potions/PotionEmpty.png"),
+			"unidentifiedTexture": load("res://Assets/Potions/PotionEmpty.png"),
+			"type": "Potion",
+			"category": null,
+			"weight": 5,
+			"value": null,
+			"enchantable": false,
+			"stackable": true
+		},
+		{
 			"itemName": "Water potion",
 			"unidentifiedItemName": "Clear potion",
 			"texture": load("res://Assets/Potions/PotionRoundTransparent.png"),

@@ -16,16 +16,15 @@ func getCritterMove(_critterTile, _playerTile, _level, _hostileClasses = null):
 		aggroTarget = null
 	if aggroTarget == null and _hostileClasses != null:
 		for _critterId in _level.critters:
-			var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterId }))
+			var _otherCritter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterId }))
 			var _otherCritterTile = _level.getCritterTile(_critterId)
-			for _hostileClass in _hostileClasses:
-				if (
-					_critter.critterClass.matchn(_hostileClass) and
-					_level.calculatePathFindingPath(_critterTile, _otherCritterTile).size() < 8 and
-					_level.calculatePathFindingPath(_critterTile, _otherCritterTile).size() != 0
-				):
-					aggroTarget = _critterId
-					return _level.calculatePathFindingPath(_critterTile, _otherCritterTile)
+			if (
+				_hostileClasses.has(_otherCritter.critterClass) and
+				_level.calculatePathFindingPath(_critterTile, _otherCritterTile).size() < aggroDistance and
+				_level.calculatePathFindingPath(_critterTile, _otherCritterTile).size() != 0
+			):
+				aggroTarget = _critterId
+				return _level.calculatePathFindingPath(_critterTile, _otherCritterTile)
 		aggroTarget = null
 	elif aggroTarget != null:
 		return _level.calculatePathFindingPath(_critterTile, _level.getCritterTile(get_node("/root/World/Critters/{critterId}".format({ "critterId": aggroTarget })).id))

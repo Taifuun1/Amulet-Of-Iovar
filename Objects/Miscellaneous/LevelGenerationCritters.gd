@@ -3,10 +3,12 @@ var critterLevelGenerationList = {
 	"dungeon1": {
 		"amount": [2, 4],
 		"critters": {
-			"floatingSpheres": ["Floating eye"],
-			"kobolds": ["Tiny kobold"],
-			"newts": ["River newt"],
-			"orcs": ["Goblin"]
+#			"floatingSpheres": ["Floating eye"],
+#			"kobolds": ["Tiny kobold"],
+#			"newts": ["River newt"],
+#			"orcs": ["Goblin"]
+			"dwarves": ["Dwarf engineer"],
+			"elves": ["Elf hunter"],
 		}
 	},
 	"dungeon2": {
