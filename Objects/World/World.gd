@@ -87,12 +87,6 @@ func _process(_delta):
 			_level.clearOutInputs()
 		print("Cleared!")
 		
-		$Critters/"0".inventory.updateWeight()
-		$Critters/"0".calculateWeightStats()
-		$Critters/"0".processPlayerUIChanges()
-		$Critters/"0".updatePlayerStats()
-		print("Calculated!")
-		
 		updateTiles()
 		print("Updated!")
 		drawLevel()
@@ -539,6 +533,7 @@ func drawCrittersAndItems():
 
 func updateUI():
 	$Critters/"0".inventory.updateWeight()
+	$Critters/"0".calculateHungerStats()
 	$Critters/"0".calculateWeightStats()
 	$Critters/"0".processPlayerUIChanges()
 	$"Critters/0".updatePlayerStats()

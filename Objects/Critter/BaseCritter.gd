@@ -215,7 +215,7 @@ func processCritterEffects():
 						else:
 							statusEffects[_status] -= 2
 					else:
-						statusEffects[_status] -= 11
+						statusEffects[_status] -= 1
 #			elif _status.matchn("invisibility"):
 #				if stats.visage > 32:
 #					if statusEffects[_status] - 3 < 0:
