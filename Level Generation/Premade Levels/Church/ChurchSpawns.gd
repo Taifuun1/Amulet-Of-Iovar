@@ -38,7 +38,7 @@ var churchSpawn = [
 				"Dwarf smith",
 				"Elf assassin",
 				"One-eyed ogre",
-				"Outlaw Merchandiee'er",
+				"Outlaw merchandiee'er",
 				"Half-lich"
 			]
 		},
@@ -56,7 +56,7 @@ var churchSpawn = [
 				"Dwarf smith",
 				"Elf assassin",
 				"One-eyed ogre",
-				"Outlaw Merchandiee'er",
+				"Outlaw merchandiee'er",
 				"Half-lich"
 			]
 		},

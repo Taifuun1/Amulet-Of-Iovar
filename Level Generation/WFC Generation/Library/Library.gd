@@ -60,10 +60,16 @@ func createLibrary():
 		resetGeneration()
 
 func generateBossRoom():
-	var _randomTile = Vector2(randi() % int(Globals.gridSize.x), randi() % int(Globals.gridSize.y))
+	var _randomTile = Vector2(randi() % int(Globals.gridSize.x) + 1, randi() % int(Globals.gridSize.y) - 1)
 	for x in range(_randomTile.x - 4, _randomTile.x + 5):
 		for y in range(_randomTile.y - 4, _randomTile.y + 5):
-			if isOutSideTileMap(Vector2(x,y)):
+			if (
+				isOutSideTileMap(Vector2(x,y)) or
+				isOutSideTileMap(Vector2(x - 1, y)) or
+				isOutSideTileMap(Vector2(x + 1, y)) or
+				isOutSideTileMap(Vector2(x, y - 1)) or
+				isOutSideTileMap(Vector2(x, y + 1))
+			):
 				continue
 			if (
 				x == _randomTile.x - 4 or

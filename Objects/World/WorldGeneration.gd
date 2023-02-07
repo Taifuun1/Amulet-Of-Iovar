@@ -100,6 +100,9 @@ func _ready():
 		
 		$FOV.createFOVLevels(totalLevelCount)
 		
+		var date = Time.get_date_dict_from_system(true)
+		GlobalGameStats.gameStats["Game started at"] = "%s/%s/%s" % [date.day, date.month, date.year]
+		
 		generateDungeon()
 
 func loadGame():

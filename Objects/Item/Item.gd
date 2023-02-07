@@ -34,11 +34,6 @@ var binds = null
 var stackable
 
 func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
-	if _item == null:
-		print(_item)
-		print(_extraData)
-		print(_amount)
-		print(_spawnNew)
 	if _spawnNew:
 		id = Globals.itemId
 		Globals.itemId += 1

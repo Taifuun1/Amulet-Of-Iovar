@@ -28,6 +28,10 @@ func _ready():
 	colors.weapon = "#84002a"
 	
 	colors.flavorMessage = "#ef379a"
+	
+	colors.green = "2dd400"
+	colors.red = "#cf0000"
+	
 
 func createRichTextLabel(_text, _color = null, _textAlignment = null):
 	var _bbcode = str(_text)

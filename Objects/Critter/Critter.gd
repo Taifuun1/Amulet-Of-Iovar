@@ -158,10 +158,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					Globals.gameConsole.addLog("{critter} tries to cast a spell but nothing happens!".format({ "critter": critterName }))
 					return false
 			else:
-				checkIfAddFlavorGamelog("spell")
 				print(_pickedAbility)
 				match _pickedAbility.abilityType:
 					"rangedSpell":
+						checkIfAddFlavorGamelog("spell")
 						var _tiles = []
 						var _directions = [
 							Vector2(-1, -1),
@@ -275,6 +275,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 									mp -= _pickedAbility.data.mp
 								return false
 							"sharpenSword":
+								checkIfAddFlavorGamelog("spell")
 								for _attack in attacks:
 									if !_attack.bonusDmg.has("bonusDmg"):
 										_attack.bonusDmg.bonusDmg = 1
@@ -290,6 +291,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 							"displaceSelf":
 								return false
 					"spell":
+						checkIfAddFlavorGamelog("spell")	
 						match _pickedAbility.abilityName:
 							"fireMiasma":
 								var _tiles = []

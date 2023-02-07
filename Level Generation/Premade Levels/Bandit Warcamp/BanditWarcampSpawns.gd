@@ -175,7 +175,7 @@ var banditWarcampSpawn2 = [
 		"tiles": Vector2(31,12),
 		"critters": {
 			"names": [
-				"Outlaw Merchandiee'er"
+				"Outlaw merchandiee'er"
 			]
 		},
 		"chance": 100
@@ -311,7 +311,7 @@ var banditWarcampSpawn2 = [
 		"items": {
 			"types": null,
 			"names": [
-				"Cloak of Displacement",
+				"Cloak of displacement",
 				"Cloak of magical ambiguity"
 			]
 		},

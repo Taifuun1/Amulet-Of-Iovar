@@ -170,7 +170,7 @@ var banditCompoundSpawn1 = [
 			"names": [
 				"Fabric gloves",
 				"Boots of magic",
-				"Roman robe",
+				"Toga",
 			]
 		},
 		"chance": 75

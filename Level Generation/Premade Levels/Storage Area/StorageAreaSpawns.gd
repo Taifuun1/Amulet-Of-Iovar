@@ -136,11 +136,10 @@ var storageAreaSpawn2 = [
 				"Amulet of life power",
 				"Adorned sword",
 				"Dwarvish laysword",
-				"Titan Slayer",
-				"Dragonslayer"
+				"Titan Slayer"
 			]
 		},
-		"chance": 100
+		"chance": 50
 	},
 	{
 		"tiles": Vector2(24,16),

@@ -5,6 +5,9 @@ func loadGlobalGameStatsData(_data):
 	critters = _data.critters
 
 func getGlobalGameStats():
+	
+	var date = Time.get_date_dict_from_system(true)
+	gameStats["Game ended at"] = "%s/%s/%s" % [date.day, date.month, date.year]
 	var _gameStats = {
 		"gameStats": gameStats,
 		"critters": critters,
@@ -27,6 +30,8 @@ var gameStats = {
 	"Species genocided": 0,
 	"Times ascended": 0,
 	"Points": 0,
+	"Game started at": null,
+	"Game ended at": null
 }
 
 var critters = {

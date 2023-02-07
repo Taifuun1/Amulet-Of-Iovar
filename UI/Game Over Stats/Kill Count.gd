@@ -16,6 +16,6 @@ func createCritterKillCountItem(_critterName, _amount):
 	get_node("Kill Count List/CritterKillCountContainer%s" % [_critterKillCountItemCount]).add_child(_amountLabel)
 	
 	_critterLabel.createRichTextLabel(_critterName)
-	_amountLabel.createRichTextLabel(_amount, null, "right")
+	_amountLabel.createRichTextLabel(str(_amount) + " ", null, "right")
 	
 	_critterKillCountItemCount += 1

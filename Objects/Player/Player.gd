@@ -918,7 +918,9 @@ func getGameOverStats():
 	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
 	_stats.inventoryItems = $"/root/World/Critters/0/Inventory".getInventoryItems()
 	_stats.gameStats = GlobalGameStats.getGlobalGameStats()
-	_stats.gameStats.Points = _stats.points
+	_stats.playerStats = {
+		"playerClass": critterClass
+	}
 	
 	return _stats
 

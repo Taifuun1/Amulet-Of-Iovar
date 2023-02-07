@@ -153,7 +153,7 @@ var globalItemInfo = {
 	"Dwarven cloak": {
 		"identified": false,
 	},
-	"Roman robe": {
+	"Toga": {
 		"identified": false,
 	},
 	"Cloak of displacement": {
