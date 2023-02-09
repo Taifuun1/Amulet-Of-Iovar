@@ -28,22 +28,17 @@ custom_styles/panel = SubResource( 2 )
 [node name="GamesListScroll" type="ScrollContainer" parent="GamesScreenListContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.0
-margin_top = 1.0
-margin_bottom = -4.0
+margin_top = 4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = SubResource( 3 )
 
 [node name="GamesList" type="VBoxContainer" parent="GamesScreenListContainer/GamesListScroll"]
-margin_right = 399.0
-margin_bottom = 1075.0
+margin_right = 400.0
+margin_bottom = 1076.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 0
 
 [node name="Games Data" parent="." instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 404.0
-margin_right = 1920.0
-margin_bottom = 1080.0

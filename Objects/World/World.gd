@@ -24,6 +24,8 @@ enum gameState {
 	CAST
 	USE
 	KICK
+	THROW
+	THROW_DIRECTION
 	DIP_ITEM
 	DIP
 }
@@ -200,7 +202,8 @@ func _input(_event):
 					currentGameState == gameState.INTERACT or
 					currentGameState == gameState.KICK or
 					currentGameState == gameState.CAST or
-					currentGameState == gameState.ZAP_DIRECTION
+					currentGameState == gameState.ZAP_DIRECTION or
+					currentGameState == gameState.THROW_DIRECTION
 				)
 			):
 					var _tileToMoveTo
@@ -254,6 +257,9 @@ func _input(_event):
 							$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
 							resetToDefaulGameState()
 							processGameTurn()
+						elif currentGameState == gameState.THROW_DIRECTION:
+							$"Critters/0".throwItem(_tileToMoveTo - _playerTile)
+							resetToDefaulGameState()
 			elif (
 				Input.is_action_just_pressed("WAIT") and
 				currentGameState == gameState.GAME
@@ -319,6 +325,8 @@ func _input(_event):
 			elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME:
 				currentGameState = gameState.KICK
 				Globals.gameConsole.addLog("Kick at what? (Pick a direction with numpad)")
+			elif Input.is_action_just_pressed("THROW") and currentGameState == gameState.GAME:
+				openMenu("throw")
 			elif Input.is_action_just_pressed("SAVE") and currentGameState == gameState.GAME:
 				saveGameInThread()
 			elif Input.is_action_just_pressed("PAUSE") and currentGameState == gameState.GAME:
@@ -784,12 +792,12 @@ func openMenu(_menu, _playerTile = null):
 				$"/root/World".processGameTurn()
 			elif level.grid[_playerTile.x][_playerTile.y].items.size() != 0 and currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = level.grid[_playerTile.x][_playerTile.y].items
-				$UI/UITheme/ItemManagement.showItemManagementList("Pick up what?")
+				$UI/UITheme/ItemManagement.showItemManagementList("Pick up what?", false)
 				currentGameState = gameState.PICK_UP_ITEMS
 		"drop":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.inventory
-				$UI/UITheme/ItemManagement.showItemManagementList("Drop what?")
+				$UI/UITheme/ItemManagement.showItemManagementList("Drop what?", false)
 				currentGameState = gameState.DROP_ITEMS
 		"loot":
 			if currentGameState == gameState.GAME:
@@ -799,7 +807,7 @@ func openMenu(_menu, _playerTile = null):
 					if get_node("Items/{itemId}".format({ "itemId": _itemId })).category != null and get_node("Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
 						_items.append(_itemId)
 				$UI/UITheme/ItemManagement.items = _items
-				$UI/UITheme/ItemManagement.showItemManagementList("Loot what?", true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Loot what?")
 				currentGameState = gameState.PICK_LOOTABLE
 		"equipment":
 			if currentGameState == gameState.GAME:
@@ -813,7 +821,7 @@ func openMenu(_menu, _playerTile = null):
 					if get_node("Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn("tome of knowledge"):
 						_items.append(_itemId)
 				$UI/UITheme/ItemManagement.items = _items
-				$UI/UITheme/ItemManagement.showItemManagementList("Read what?", true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Read what?")
 				currentGameState = gameState.READ
 		"runes":
 			if currentGameState == gameState.GAME:
@@ -822,22 +830,27 @@ func openMenu(_menu, _playerTile = null):
 		"quaff":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["potion"])
-				$UI/UITheme/ItemManagement.showItemManagementList("Quaff what?", true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Quaff what?")
 				currentGameState = gameState.QUAFF
 		"consume":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["comestible"])
-				$UI/UITheme/ItemManagement.showItemManagementList("Consume what?", true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Consume what?")
 				currentGameState = gameState.CONSUME
 		"zap":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["wand"])
-				$UI/UITheme/ItemManagement.showItemManagementList("Zap what?", true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Zap what?")
 				currentGameState = gameState.ZAP
+		"throw":
+			if currentGameState == gameState.GAME:
+				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["potion"])
+				$UI/UITheme/ItemManagement.showItemManagementList("Throw what?")
+				currentGameState = gameState.THROW
 		"dip":
 			if currentGameState == gameState.GAME:
 				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["amulet", "armor", "belt", "cloak", "gauntlets", "comestible", "gem", "ring", "rune", "scroll", "tool", "wand", "weapon"])
-				$UI/UITheme/ItemManagement.showItemManagementList("Dip what?", true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Dip what?")
 				currentGameState = gameState.DIP_ITEM
 		"use":
 			if currentGameState == gameState.GAME:
@@ -847,7 +860,7 @@ func openMenu(_menu, _playerTile = null):
 					if get_node("Items/{itemId}".format({ "itemId": _itemId })).category != null and get_node("Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
 						_items.erase(_itemId)
 				$UI/UITheme/ItemManagement.items = _items
-				$UI/UITheme/ItemManagement.showItemManagementList("Use what?", true)
+				$UI/UITheme/ItemManagement.showItemManagementList("Use what?")
 				currentGameState = gameState.USE
 
 func castWith(_playerTile):
@@ -1047,7 +1060,12 @@ func closeMenu(_additionalChoices = false, _pickDirection = false):
 			currentGameState = gameState.ZAP_DIRECTION
 			Globals.gameConsole.addLog("Zap at what? (Pick a direction with numpad)")
 			return
-		resetToDefaulGameState()
+	if currentGameState == gameState.THROW:
+		$UI/UITheme/ItemManagement.hideItemManagementList()
+		if _pickDirection:
+			currentGameState = gameState.THROW_DIRECTION
+			Globals.gameConsole.addLog("Throw at what? (Pick a direction with numpad)")
+			return
 	if !_additionalChoices and !_pickDirection:
 		if (
 			currentGameState == gameState.PICK_UP_ITEMS or
@@ -1072,7 +1090,7 @@ func closeMenu(_additionalChoices = false, _pickDirection = false):
 		if currentGameState == gameState.PAUSED:
 			$UI/UITheme/PauseMenu.hide()
 		$UI/UITheme/ListMenu.hideListMenuList()
-		resetToDefaulGameState()
+	resetToDefaulGameState()
 
 func resetToDefaulGameState():
 	$"Critters/0".selectedItem = null

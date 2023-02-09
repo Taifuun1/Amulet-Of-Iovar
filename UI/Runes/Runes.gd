@@ -248,7 +248,7 @@ func isCastableRunes():
 
 func isOnlyEarioEquipped():
 	if runes.eario != null and runes.luirio == null and runes.heario == null:
-		return get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower()
+		return get_node("/root/World/Items/{id}".format({ "id": runes.eario })).value.to_lower()
 	return false
 
 func calculateMagicDamage():

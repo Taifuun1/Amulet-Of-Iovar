@@ -361,14 +361,14 @@ var items = {
 		"knowledge": false,
 		"description": ""
 	},
-	"Potion of up stat": {
-		"knowledge": false,
-		"description": ""
-	},
-	"Potion of down stat": {
-		"knowledge": false,
-		"description": ""
-	},
+#	"Potion of up stat": {
+#		"knowledge": false,
+#		"description": ""
+#	},
+#	"Potion of down stat": {
+#		"knowledge": false,
+#		"description": ""
+#	},
 	"Ring of Fleir resistance": {
 		"knowledge": false,
 		"description": "Gives Fleir resistance when worn."

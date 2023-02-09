@@ -55,7 +55,7 @@ var elves = [
 			{
 				"names": [
 					"Elvish flail",
-					"Elvish cloak"
+					# "Elvish cloak"
 				],
 				"chance": 10,
 				"amount": [1, 1]
@@ -125,13 +125,13 @@ var elves = [
 				"chance": 25,
 				"amount": [50, 60]
 			},
-			{
-				"names": [
-					"Elvish cloak"
-				],
-				"chance": 10,
-				"amount": [1, 1]
-			}
+#			{
+#				"names": [
+#					"Elvish cloak"
+#				],
+#				"chance": 10,
+#				"amount": [1, 1]
+#			}
 		],
 		"hostileClasses": ["Dwarves", "Goblins", "Orcs"]
 	},
@@ -193,7 +193,7 @@ var elves = [
 					"Elvish sword",
 					"Elvish mace",
 					"Elvish flail",
-					"Elvish cloak"
+#					"Elvish cloak"
 				],
 				"chance": 10,
 				"amount": [1, 1]

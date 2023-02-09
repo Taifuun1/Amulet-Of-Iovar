@@ -97,7 +97,7 @@ var statusEffectsData = {
 	"slow digestion": {
 		"label": "sld",
 		"description": "You feel like youre saving energy. (Lose a hunger point less every turn)",
-		"color": "#c4047b",
+		"color": "#a0e571",
 		"texture": load("res://Assets/Status Effects/StatusEffectSlowDigestion.png")
 	},
 	"regen": {

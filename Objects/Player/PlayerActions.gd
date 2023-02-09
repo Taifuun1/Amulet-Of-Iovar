@@ -431,7 +431,7 @@ func quaffItem(_id):
 			"soda bottle":
 				if _quaffedItem.alignment.matchn("blessed"):
 					calories += 100
-					Globals.gameConsole.addLog("Its orange juice! Its really good!")
+					Globals.gameConsole.addLog("Its orange juice! Damn thats good!")
 				if _quaffedItem.alignment.matchn("uncursed"):
 					calories += 80
 					Globals.gameConsole.addLog("Its apple juice. Tastes nice!")
@@ -484,7 +484,7 @@ func quaffItem(_id):
 					Globals.gameConsole.addLog("The {potion} tastes bitter. Urgh!".format({ "potion": _quaffedItem.itemName }))
 				if _quaffedItem.alignment.matchn("cursed"):
 					statusEffects.toxix = 16
-					hp -= 4
+					hp -= 8
 					Globals.gameConsole.addLog("The {potion} burns your mouth. Uhhhh...".format({ "potion": _quaffedItem.itemName }))
 					maxhp -= 1
 					hp -= 1
@@ -791,13 +791,13 @@ func zapItem(_direction):
 						Globals.isItemIdentified(_zappedItem)
 				"wand of magic sphere", "wand of fleir", "wand of frost", "wand of thunder":
 					var _grid = $"/root/World".level.grid
-					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
+					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment.to_lower()]):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
 						if _grid[_tile.x][_tile.y].critter != null:
 							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
-							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _tile, _zappedItem.itemName)
+							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.alignment.to_lower()], _tile, _zappedItem.itemName)
 							Globals.isItemIdentified(_zappedItem)
 				"wand of sleep":
 					var _grid = $"/root/World".level.grid
@@ -825,6 +825,161 @@ func zapItem(_direction):
 		else:
 			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
 	$"/root/World".closeMenu(_additionalChoices)
+
+func throwItem(_direction):
+	var _playerPosition = $"/root/World".level.getCritterTile(0)
+	var _thrownItem = get_node("/root/World/Items/{id}".format({ "id": selectedItem }))
+	selectedItem = null
+	if _thrownItem.type.matchn("potion"):
+		Globals.gameConsole.addLog("You throw the {itemName}.".format({ "itemName": _thrownItem.itemName }))
+		var _grid = $"/root/World".level.grid
+		var _critter = null
+		var _tile
+		var _tiles = []
+		for i in range(1, 6):
+			var _checkedTile = _playerPosition + _direction * i
+			if !Globals.isTileFree(_checkedTile, _grid) or _grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.DOOR_CLOSED:
+				break
+			_tiles.append(_checkedTile)
+			if _grid[_checkedTile.x][_checkedTile.y].critter != null:
+				_critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_checkedTile.x][_checkedTile.y].critter }))
+				_tile = _checkedTile
+		if _critter != null:
+			Globals.gameConsole.addLog("The {itemName} crashes on {critterName}!".format({ "itemName": _thrownItem.itemName, "critterName": _critter.critterName }))
+			match _thrownItem.identifiedItemName.to_lower():
+				"potion of confusion":
+					if statusEffects.confusion != -1:
+						if _thrownItem.alignment.matchn("blessed"):
+							_critter.statusEffects.confusion += 4
+							Globals.gameConsole.addLog("The {critterName} seems slightly disoriented.".format({ "critterName": _critter.critterName }))
+						elif _thrownItem.alignment.matchn("uncursed"):
+							_critter.statusEffects.confusion += 10
+							Globals.gameConsole.addLog("The {critterName} seems confused.".format({ "critterName": _critter.critterName }))
+						elif _thrownItem.alignment.matchn("cursed"):
+							_critter.statusEffects.confusion += 22
+							Globals.gameConsole.addLog("The {critterName} seems very confused!".format({ "critterName": _critter.critterName }))
+						Globals.isItemIdentified(_thrownItem)
+				"potion of toxix":
+					if _thrownItem.alignment.matchn("blessed"):
+						_critter.statusEffects.toxix = 2
+						Globals.gameConsole.addLog("The {potion} burns the {critterName}!".format({ "potion": _thrownItem.itemName, "critterName": _critter.critterName }))
+					elif _thrownItem.alignment.matchn("uncursed"):
+						_critter.statusEffects.toxix = 8
+						_critter.takeDamage(
+							[
+								{
+									"dmg": [0,0],
+									"bonusDmg": {},
+									"armorPen": 0,
+									"magicDmg": {
+										"dmg": [4,4],
+										"element": "Toxix"
+									}
+								}
+							],
+							_tile,
+							_critter.critterName
+						)
+						Globals.gameConsole.addLog("The {potion} burns the {critterName}!".format({ "potion": _thrownItem.itemName, "critterName": _critter.critterName }))
+					elif _thrownItem.alignment.matchn("cursed"):
+						_critter.statusEffects.toxix = 16
+						_critter.takeDamage(
+							{
+								"dmg": [0,0],
+								"bonusDmg": {},
+								"armorPen": 0,
+								"magicDmg": {
+									"dmg": [8,8],
+									"element": "Toxix"
+								}
+							},
+							_tile,
+							_critter.critterName
+						)
+						Globals.gameConsole.addLog("The {potion} burns the {critterName} badly!".format({ "potion": _thrownItem.itemName, "critterName": _critter.critterName }))
+					Globals.isItemIdentified(_thrownItem)
+				"potion of heal":
+					var _amountToHeal = 0
+					if _thrownItem.alignment.matchn("blessed"):
+						_amountToHeal = 6 + (_critter.level * 4)
+						Globals.gameConsole.addLog("The {critterName} looks alot better!".format({ "critterName": _critter.critterName }))
+					if _thrownItem.alignment.matchn("uncursed"):
+						_amountToHeal = 4 + (_critter.level * 3)
+						Globals.gameConsole.addLog("The {critterName} looks more healthy.".format({ "critterName": _critter.critterName }))
+					if _thrownItem.alignment.matchn("cursed"):
+						_amountToHeal = 2 + (_critter.level * 2)
+						Globals.gameConsole.addLog("The {critterName} looks better.".format({ "critterName": _critter.critterName }))
+					if _critter.hp + _amountToHeal >= _critter.maxhp:
+						if _thrownItem.alignment.matchn("blessed"):
+							_critter.maxhp = _critter.maxhp + 1
+							Globals.gameConsole.addLog("The {critterName} feel a little more vigorous.".format({ "critterName": _critter.critterName }))
+						_critter.hp = _critter.maxhp
+					else:
+						_critter.hp += _amountToHeal
+					Globals.isItemIdentified(_thrownItem)
+				"potion of healaga":
+					var _amountToHeal = 0
+					if _thrownItem.alignment.matchn("blessed"):
+						_amountToHeal = 14 + (_critter.level * 8)
+						Globals.gameConsole.addLog("The {critterName} looks way better!".format({ "critterName": _critter.critterName }))
+					if _thrownItem.alignment.matchn("uncursed"):
+						_amountToHeal = 9 + (_critter.level * 6)
+						Globals.gameConsole.addLog("The {critterName} looks healthy.".format({ "critterName": _critter.critterName }))
+					if _thrownItem.alignment.matchn("cursed"):
+						_amountToHeal = 4 + (_critter.level * 4)
+						Globals.gameConsole.addLog("The {critterName} looks better.".format({ "critterName": _critter.critterName }))
+					if _critter.hp + _amountToHeal >= _critter.maxhp:
+						if _thrownItem.alignment.matchn("blessed"):
+							_critter.maxhp = _critter.maxhp + 2
+							Globals.gameConsole.addLog("The {critterName} feel a little more vigorous.".format({ "critterName": _critter.critterName }))
+						_critter.hp = _critter.maxhp
+					else:
+						_critter.hp += _amountToHeal
+					Globals.isItemIdentified(_thrownItem)
+				"potion of sleep":
+					if _thrownItem.alignment.matchn("blessed"):
+						_critter.statusEffects.sleep = 3
+					if _thrownItem.alignment.matchn("uncursed"):
+						_critter.statusEffects.sleep = 7
+					if _thrownItem.alignment.matchn("cursed"):
+						_critter.statusEffects.sleep = 13
+					Globals.gameConsole.addLog("The {critterName} falls asleep.".format({ "crittetName": _critter.critterName }))
+					Globals.isItemIdentified(_thrownItem)
+				"potion of blindness":
+					if !checkIfStatusEffectIsPermanent("blindness"):
+						if _thrownItem.alignment.matchn("blessed"):
+							_critter.statusEffects.blindness = 4
+						elif _thrownItem.alignment.matchn("uncursed"):
+							_critter.statusEffects.blindness = 8
+						elif _thrownItem.alignment.matchn("cursed"):
+							_critter.statusEffects.blindness = 27
+						Globals.gameConsole.addLog("The {critterName} is blind!".format({ "critterName": _critter.critterName }))
+						Globals.isItemIdentified(_thrownItem)
+				"potion of paralysis":
+					if _thrownItem.alignment.matchn("blessed"):
+						_critter.statusEffects.stun = 2
+					elif _thrownItem.alignment.matchn("uncursed"):
+						_critter.statusEffects.stun = 4
+					elif _thrownItem.alignment.matchn("cursed"):
+						_critter.statusEffects.stun = 8
+					Globals.gameConsole.addLog("The {critterName} is stunned!".format({ "critterName": _critter.critterName }))
+					Globals.isItemIdentified(_thrownItem)
+		else:
+			Globals.gameConsole.addLog("The {itemName} breaks!".format({ "itemName": _thrownItem.itemName }))
+		if _thrownItem.amount > 1:
+			_thrownItem.amount -= 1
+		else:
+			$"/root/World/Items/Items".removeItem(_thrownItem.id)
+		
+		var _newThrow = load("res://Objects/Throw/Throw.tscn").instance()
+		print(_tiles)
+		print(_thrownItem.itemTexture)
+		_newThrow.create(_tiles, _thrownItem.itemTexture)
+		$"/root/World/Animations".add_child(_newThrow)
+		# warning-ignore:return_value_discarded
+		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
+		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
+	$"/root/World".closeMenu()
 
 func useItem(_id):
 	var _usedItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -988,7 +1143,7 @@ func dipItem(_id):
 	if !_dippedItem.type.matchn("potion"):
 		$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
 		$"/root/World/UI/UITheme/ItemManagement".items = $"/root/World/Critters/0/Inventory".getItemsOfType(["potion"])
-		$"/root/World/UI/UITheme/ItemManagement".showItemManagementList("Dip into what?", true)
+		$"/root/World/UI/UITheme/ItemManagement".showItemManagementList("Dip into what?")
 		$"/root/World".currentGameState = $"/root/World".gameState.DIP
 	elif _dippedItem.type.matchn("potion"):
 		match _dippedItem.identifiedItemName.to_lower():

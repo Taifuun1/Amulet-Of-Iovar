@@ -220,7 +220,7 @@ func getAttacks(_stats):
 		if _critterClass.matchn("rogue") and category.matchn("dagger"):
 			_newBonusDamage.classBonusDamage = 1
 		var _earioMagicType = $"/root/World/UI/UITheme/Runes".isOnlyEarioEquipped()
-		if typeof(_earioMagicType) != TYPE_BOOL and (_newMagicDamage == null or _newMagicDamage.element.matchn(_earioMagicType)):
+		if typeof(_earioMagicType) != TYPE_BOOL and (_newMagicDamage.element == null or _newMagicDamage.element.matchn(_earioMagicType)):
 			_newMagicDamage.dmg[0] += 1
 			_newMagicDamage.dmg[1] += 1
 			_newMagicDamage.element = _earioMagicType.capitalize()

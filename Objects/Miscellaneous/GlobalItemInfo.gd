@@ -348,12 +348,12 @@ var globalItemInfo = {
 	"Potion of gain level": {
 		"identified": false
 	},
-	"Potion of up stat": {
-		"identified": false
-	},
-	"Potion of down stat": {
-		"identified": false
-	},
+#	"Potion of up stat": {
+#		"identified": false
+#	},
+#	"Potion of down stat": {
+#		"identified": false
+#	},
 	"Ring of Fleir resistance": {
 		"identified": false
 	},

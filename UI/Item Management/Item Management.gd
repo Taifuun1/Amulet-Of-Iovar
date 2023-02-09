@@ -16,7 +16,7 @@ func create():
 	name = "ItemManagement"
 	hide()
 
-func showItemManagementList(_title, _chooseOnClick = false):
+func showItemManagementList(_title, _chooseOnClick = true):
 	$ItemManagementContainer/TitleContainer/Title.text = _title
 	chooseOnClick = _chooseOnClick
 	items.sort_custom(self, "sortItems")
@@ -63,6 +63,10 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 				$"/root/World".closeMenu()
 				$"/root/World".processGameTurn()
 				return
+			$"/root/World".closeMenu(false, true)
+			return
+		if $"/root/World".currentGameState == $"/root/World".gameState.THROW:
+			$"/root/World/Critters/0".selectedItem = _id
 			$"/root/World".closeMenu(false, true)
 			return
 		if $"/root/World".currentGameState == $"/root/World".gameState.DIP_ITEM:

@@ -308,7 +308,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 			checkIfThereIsSomethingOnTheGroundHere(_tileToMoveTo, _level)
 
-func takeDamage(_attacks, _critterTile, _crittername):
+func takeDamage(_attacks, _critterTile, _critterName):
 	var _attacksLog = []
 	if _attacks.size() != 0:
 		for _attack in _attacks:
@@ -337,7 +337,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 			# Magic spell
 			if _damage.dmg <= 0 and _damage.magicDmg > 0:
 				hp -= _damage.magicDmg
-				_attacksLog.append("{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
+				_attacksLog.append("{critterName} gets hit for {magicDmg} {element} damage!".format({ "critterName": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element }))
 				if _attack.magicDmg.element.to_lower().matchn("toxix") and statusEffects.toxix != -1:
 					statusEffects.toxix += 3
 			# Physical attack
@@ -345,12 +345,12 @@ func takeDamage(_attacks, _critterTile, _crittername):
 				# Physical damage
 				if _damage.dmg < 1 and _damage.dmg >= -2:
 					hp -= 1
-					_attacksLog.append("{crittername} hits you for 1 damage.".format({ "crittername": _crittername }))
+					_attacksLog.append("{critterName} hits you for 1 damage.".format({ "critterName": _critterName }))
 				elif _damage.dmg < -2:
-					_attacksLog.append("{crittername}s attack bounces off!".format({ "crittername": _crittername }))
+					_attacksLog.append("{critterName}s attack bounces off!".format({ "critterName": _critterName }))
 				else:
 					hp -= _damage.dmg
-					_attacksLog.append("{crittername} hits you for {dmg} damage.".format({ "crittername": _crittername, "dmg": _damage.dmg + _damage.magicDmg }))
+					_attacksLog.append("{critterName} hits you for {dmg} damage.".format({ "critterName": _critterName, "dmg": _damage.dmg + _damage.magicDmg }))
 				
 				# Magic damage
 				if _damage.magicDmg != 0:
@@ -366,7 +366,7 @@ func takeDamage(_attacks, _critterTile, _crittername):
 		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 		Globals.gameConsole.addLog(_attacksLogString)
 	else:
-		Globals.gameConsole.addLog("{critter} looks unsure!".format({ "critter": _crittername }))
+		Globals.gameConsole.addLog("{critterName} looks unsure!".format({ "critterName": _critterName }))
 
 func pickUpItems(_playerTile, _items, _grid):
 	var itemsLog = []

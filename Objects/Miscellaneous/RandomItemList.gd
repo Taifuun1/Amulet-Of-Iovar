@@ -71,8 +71,8 @@ var randomItemList = {
 			"hunger",
 			"healaga",
 			"gain level",
-			"up stat",
-			"down stat"
+#			"up stat",
+#			"down stat"
 		],
 		"appearance": [
 			"Round black",

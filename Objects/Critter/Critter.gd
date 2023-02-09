@@ -381,17 +381,12 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		
 		# Blindness check
 		if statusEffects.blindness > 0:
-			if randi() % 2 == 0:
-				var _randomOpenTiles = level.checkAdjacentTilesForOpenSpace(_critterTile)
-				_randomOpenTiles.shuffle()
-				_moveCritterTo = _randomOpenTiles[0]
-			else:
-				aI.getNeutralCritterMove()
+			_moveCritterTo = _level.checkAdjacentTilesForOpenSpace(_critterTile)[0]
 			Globals.gameConsole.addLog("{critterName} blindly stumbles!".format({ "critterName": critterName }))
 		
 		# Confused check
 		if statusEffects["confusion"] > 0 and randi() % 3 == 0:
-			var _randomOpenTiles = level.checkAdjacentTilesForOpenSpace(_critterTile)
+			var _randomOpenTiles = _level.checkAdjacentTilesForOpenSpace(_critterTile)
 			_randomOpenTiles.shuffle()
 			_moveCritterTo = _randomOpenTiles[0]
 		

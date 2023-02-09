@@ -19,7 +19,7 @@ var potions = {
 			"unidentifiedTexture": load("res://Assets/Potions/PotionRoundTransparent.png"),
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -31,7 +31,7 @@ var potions = {
 			"unidentifiedTexture": load("res://Assets/Potions/PotionRoundOrange.png"),
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -43,7 +43,7 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -55,7 +55,7 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -69,7 +69,7 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -81,7 +81,7 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -93,7 +93,7 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -105,7 +105,7 @@ var potions = {
 #			"unidentifiedTexture": null,
 #			"type": "Potion",
 #			"category": null,
-#			"weight": 15,
+#			"weight": 12,
 #			"value": null,
 #			"enchantable": true,
 #			"stackable": false
@@ -128,7 +128,7 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -140,7 +140,7 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -154,7 +154,7 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
@@ -166,34 +166,34 @@ var potions = {
 			"unidentifiedTexture": null,
 			"type": "Potion",
 			"category": null,
-			"weight": 15,
+			"weight": 12,
 			"value": null,
 			"enchantable": false,
 			"stackable": true
 		},
-		{
-			"itemName": "Potion of up stat",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Potion",
-			"category": null,
-			"weight": 15,
-			"value": null,
-			"enchantable": false,
-			"stackable": true
-		},
-		{
-			"itemName": "Potion of down stat",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Potion",
-			"category": null,
-			"weight": 15,
-			"value": null,
-			"enchantable": false,
-			"stackable": true
-		},
+#		{
+#			"itemName": "Potion of up stat",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unidentifiedTexture": null,
+#			"type": "Potion",
+#			"category": null,
+#			"weight": 12,
+#			"value": null,
+#			"enchantable": false,
+#			"stackable": true
+#		},
+#		{
+#			"itemName": "Potion of down stat",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unidentifiedTexture": null,
+#			"type": "Potion",
+#			"category": null,
+#			"weight": 12,
+#			"value": null,
+#			"enchantable": false,
+#			"stackable": true
+#		}
 	]
 }
