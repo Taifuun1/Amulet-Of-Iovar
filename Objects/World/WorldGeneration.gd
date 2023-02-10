@@ -3,6 +3,11 @@ extends WorldManagement
 onready var critters = preload("res://Objects/Critter/Critters.tscn").instance()
 onready var items = preload("res://Objects/Item/Items.tscn").instance()
 
+func sortLevels(_levelA, _levelB):
+	if _levelA.levelId < _levelB.levelId:
+		return true
+	return false
+
 #####################################
 ### Dungeon generation node paths ###
 #####################################
@@ -138,11 +143,17 @@ func loadGame():
 				_level.loadLevel(_levelData)
 				if _levelData.levelId == 1:
 					levels.firstLevel = _level
+				elif _levelData.dungeonLevelName.matchn("church"):
+					churchLevel = _level
 				else:
 					levels[_levelData.dungeonSection].append(_level)
 			fileName = dir.get_next()
 	else:
 		push_error("An error occurred when trying to access the path.")
+	
+	for _section in levels:
+		if typeof(levels[_section]) == TYPE_ARRAY:
+			levels[_section].sort_custom(self, "sortLevels")
 	
 	level = get_node("Levels/{currentLevelId}".format({ "currentLevelId": Globals.currentDungeonLevel }))
 	
@@ -210,7 +221,7 @@ func setUpDungeon():
 		$Levels.add_child(newlibrary)
 	
 	### Dungeon 2
-	var _dungeon2Count = randi() % 3 + 4
+	var _dungeon2Count = randi() % 3 + 3
 	for _level in _dungeon2Count:
 		var newDungeon
 		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon2Count - 1:
@@ -231,6 +242,47 @@ func setUpDungeon():
 			newDungeon = load(levelPaths.dungeon).instance()
 			newDungeon.create("dungeon2", "dungeon2", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() }), 10000)
 		levels.dungeon2.append(newDungeon)
+		$Levels.add_child(newDungeon)
+	
+	### Beach
+	var newBeach = load(levelPaths.beach).instance()
+	newBeach.create("beach", "beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
+	levels.beach.append(newBeach)
+	$Levels.add_child(newBeach)
+	
+	var newVacationResort = load(levelPaths.vacationResort).instance()
+	newVacationResort.create("beach", "beach", "Vacation resort", 10000)
+	levels.beach.append(newVacationResort)
+	$Levels.add_child(newVacationResort)
+	
+	for _level in range(randi() % 2 + 1):
+		var newBeach2 = load(levelPaths.beach).instance()
+		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
+		levels.beach.append(newBeach2)
+		$Levels.add_child(newBeach2)
+	
+	### Dungeon 3
+	var _dungeon3Count = randi() % 3 + 3
+	for _level in _dungeon3Count:
+		var newDungeon
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon3Count - 1:
+			if randi() % 3 == 0:
+				_patchLevels += 1
+				newDungeon = load(levelPaths.patch).instance()
+				newDungeon.create("patch", "dungeon3", "Patch {level}".format({ "level": _patchLevels }), 10000)
+			elif randi() % 3 == 0:
+				_abandonedOutpostLevels += 1
+				newDungeon = load(levelPaths.abandonedOutpost).instance()
+				newDungeon.create("abandonedOutpost", "dungeon3", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
+			else:
+				_anthillLevels += 1
+				newDungeon = load(levelPaths.anthill).instance()
+				newDungeon.create("anthill", "dungeon3", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			_firstSectionRandomLevels -= 1
+		else:
+			newDungeon = load(levelPaths.dungeon).instance()
+			newDungeon.create("dungeon3", "dungeon3", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() }), 10000)
+		levels.dungeon3.append(newDungeon)
 		$Levels.add_child(newDungeon)
 
 	### Mines of Tidoh
@@ -263,47 +315,6 @@ func setUpDungeon():
 	newMinesEnd.create("depthsOfTidoh", "depthsOfTidoh", "Mines end", 1)
 	levels.depthsOfTidoh.append(newMinesEnd)
 	$Levels.add_child(newMinesEnd)
-	
-	### Dungeon 3
-	var _dungeon3Count = randi() % 3 + 4
-	for _level in _dungeon3Count:
-		var newDungeon
-		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon3Count - 1:
-			if randi() % 3 == 0:
-				_patchLevels += 1
-				newDungeon = load(levelPaths.patch).instance()
-				newDungeon.create("patch", "dungeon3", "Patch {level}".format({ "level": _patchLevels }), 10000)
-			elif randi() % 3 == 0:
-				_abandonedOutpostLevels += 1
-				newDungeon = load(levelPaths.abandonedOutpost).instance()
-				newDungeon.create("abandonedOutpost", "dungeon3", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
-			else:
-				_anthillLevels += 1
-				newDungeon = load(levelPaths.anthill).instance()
-				newDungeon.create("anthill", "dungeon3", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
-			_firstSectionRandomLevels -= 1
-		else:
-			newDungeon = load(levelPaths.dungeon).instance()
-			newDungeon.create("dungeon3", "dungeon3", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() }), 10000)
-		levels.dungeon3.append(newDungeon)
-		$Levels.add_child(newDungeon)
-	
-	### Beach
-	var newBeach = load(levelPaths.beach).instance()
-	newBeach.create("beach", "beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
-	levels.beach.append(newBeach)
-	$Levels.add_child(newBeach)
-	
-	var newVacationResort = load(levelPaths.vacationResort).instance()
-	newVacationResort.create("beach", "beach", "Vacation resort", 10000)
-	levels.beach.append(newVacationResort)
-	$Levels.add_child(newVacationResort)
-	
-	for _level in range(randi() % 2 + 1):
-		var newBeach2 = load(levelPaths.beach).instance()
-		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
-		levels.beach.append(newBeach2)
-		$Levels.add_child(newBeach2)
 	
 	### Dungeon 4
 	for _level in range(3):
@@ -454,6 +465,7 @@ func setUpDungeon():
 ####################################
 
 func generateDungeon():
+	churchLevel.createNewLevel()
 	threadDungeon1 = Thread.new()
 	threadDungeon1.start(self, "createDungeon", threadDungeon1)
 	threadDungeon2 = Thread.new()
@@ -482,13 +494,13 @@ func createDungeon(_thread):
 	_thread.call_deferred("wait_to_finish")
 
 func getNextDungeonGenLevel():
-	for section in levels:
-		if typeof(levels[section]) != TYPE_ARRAY:
-			if levels[section].levelId == dungeonGenLevel:
+	for _section in levels:
+		if typeof(levels[_section]) != TYPE_ARRAY:
+			if levels[_section].levelId == dungeonGenLevel:
 				dungeonGenLevel += 1
-				return levels[section]
+				return levels[_section]
 		else:
-			for _level in levels[section]:
+			for _level in levels[_section]:
 				if _level.levelId == dungeonGenLevel:
 					dungeonGenLevel += 1
 					return _level
@@ -542,5 +554,5 @@ func _exit_tree():
 		print("game set up")
 		gameSetUpThread.wait_to_finish()
 	if saveGameThread != null and !saveGameThread.is_alive():
-		print("done")
+		print("game saved")
 		saveGameThread.wait_to_finish()

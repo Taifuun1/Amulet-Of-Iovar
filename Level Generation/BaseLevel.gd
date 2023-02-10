@@ -143,7 +143,7 @@ func placeRandomInteractables(_interactables):
 						if grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable == null:
 							grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable = Globals.interactables.ALTAR
 			"fountain":
-				if randi() % 5 == 0:
+				if randi() % 7 == 0:
 					for _i in range(randi() % 3 + 1):
 						var _randomSpawnableTile = spawnableItemTiles[randi() % spawnableItemTiles.size()]
 						if grid[_randomSpawnableTile.x][_randomSpawnableTile.y].interactable == null:

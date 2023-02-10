@@ -10,13 +10,13 @@ var canines = [
 		"alignment": "Neutral",
 		"level": 4,
 		"expDropAmount": 2,
-		"hp": 13,
+		"hp": 9,
 		"mp": 0,
 		"ac": 0,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [3,5],
+				"dmg": [2,4],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

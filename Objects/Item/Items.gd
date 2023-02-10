@@ -119,6 +119,8 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 	
 	newItem.hide()
 	
+	$"/root/World".hideObjectsWhenDrawingNextFrame = true
+	
 	mutex.unlock()
 	
 	return _id

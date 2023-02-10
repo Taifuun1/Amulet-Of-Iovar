@@ -580,10 +580,10 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			_attacksLog.append(_attackLog)
 			
 			if hp <= 0:
+				checkIfAddFlavorGamelog("despawn")
 				despawn(_critterTile)
 				_didCritterDie = expDropAmount
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))
-				checkIfAddFlavorGamelog("despawn")
 				if checkIfCritterIsPlayer(_critterName):
 					GlobalGameStats.critters[critterName].killCount += 1
 				break

@@ -152,7 +152,12 @@ func placeDoors(_doors):
 			if isTileADoor2(_position):
 				continue
 			else:
-				grid[_position.x][_position.y].tile = Globals.tiles.DOOR_CLOSED
+				if randi() % 5 == 0:
+					grid[_position.x][_position.y].tile = Globals.tiles.DOOR_OPEN
+				else:
+					grid[_position.x][_position.y].tile = Globals.tiles.DOOR_CLOSED
+					if randi() % 6 == 0:
+						grid[_position.x][_position.y].interactable = Globals.interactables.LOCKED
 				rooms.back().doors.append(_position)
 				break
 

@@ -22,8 +22,7 @@ var miscellaneous = {
 		"value": null,
 		"points": 1000,
 		"enchantable": false,
-		"stackable": false,
-		"rarity": "amuletOfIovar"
+		"stackable": false
 	},
 	"corpse": {
 		"itemName": "Corpse",
@@ -35,8 +34,7 @@ var miscellaneous = {
 		"weight": 100,
 		"value": null,
 		"enchantable": false,
-		"stackable": false,
-		"rarity": "common"
+		"stackable": false
 	},
 	"box": {
 		"itemName": "Box",
@@ -48,8 +46,7 @@ var miscellaneous = {
 		"weight": 75,
 		"value": null,
 		"enchantable": false,
-		"stackable": false,
-		"rarity": "common"
+		"stackable": false
 	},
 	"chest": {
 		"itemName": "Chest",
@@ -61,7 +58,6 @@ var miscellaneous = {
 		"weight": 250,
 		"value": null,
 		"enchantable": false,
-		"stackable": false,
-		"rarity": "common"
+		"stackable": false
 	}
 }

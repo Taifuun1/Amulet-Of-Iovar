@@ -264,7 +264,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			return false
 	elif _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.DOOR_CLOSED:
 		if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.LOCKED:
-			Globals.gameConsole.addLog("The door won't budge!")
+			Globals.gameConsole.addLog("The door is locked.")
 		else:
 			_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.DOOR_OPEN
 			_level.addPointToEnemyPathding(_tileToMoveTo)
@@ -369,13 +369,14 @@ func takeDamage(_attacks, _critterTile, _critterName):
 		Globals.gameConsole.addLog("{critterName} looks unsure!".format({ "critterName": _critterName }))
 
 func pickUpItems(_playerTile, _items, _grid):
-	var itemsLog = []
+	var _itemsLog = []
 	if _items.size() != 0:
 		for _item in _items:
 			pickUpItem(_playerTile, _item, _grid)
-			itemsLog.append("You pickup {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
-	var itemsLogString = PoolStringArray(itemsLog).join(" ")
-	Globals.gameConsole.addLog(itemsLogString)
+			_itemsLog.append("You pickup {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
+	var _itemsLogString = PoolStringArray(_itemsLog).join(" ")
+	if !_itemsLogString.empty():
+		Globals.gameConsole.addLog(_itemsLogString)
 
 func pickUpItem(_playerTile, _itemId, _grid):
 	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
@@ -397,7 +398,8 @@ func dropItems(_playerTile, _items, _grid):
 			var _item = get_node("/root/World/Items/{id}".format({ "id": _id }))
 			_itemsLog.append(dropItem(_playerTile, _item, _grid))
 	var _itemsLogString = PoolStringArray(_itemsLog).join(" ")
-	Globals.gameConsole.addLog(_itemsLogString)
+	if !_itemsLogString.empty():
+		Globals.gameConsole.addLog(_itemsLogString)
 	$"/root/World".hideObjectsWhenDrawingNextFrame = true
 	$"/root/World".drawLevel()
 

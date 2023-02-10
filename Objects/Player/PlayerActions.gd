@@ -158,7 +158,7 @@ func readItem(_id):
 			"scroll of remove curse":
 				var _equipmentNode = $"/root/World/UI/UITheme/Equipment"
 				var _uncursableItems = []
-				for _itemId in _equipmentNode.hands:
+				for _itemId in _equipmentNode.hands.values():
 					if _itemId != null:
 						var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 						if _item != null and _item.binds != null:
@@ -167,7 +167,7 @@ func readItem(_id):
 					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
 					_uncursableItems.empty()
 				):
-					for _itemId in _equipmentNode.accessories:
+					for _itemId in _equipmentNode.accessories.values():
 						if _itemId != null:
 							var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 							if _item.binds != null:
@@ -176,7 +176,7 @@ func readItem(_id):
 					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
 					_uncursableItems.empty()
 				):
-					for _itemId in _equipmentNode.equipment:
+					for _itemId in _equipmentNode.equipment.values():
 						if _itemId != null:
 							var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 							if _item.binds != null:
@@ -689,10 +689,10 @@ func zapItem(_direction):
 					if _zappedItem.alignment.matchn("blessed"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("uncursed"):
-						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, _zappedItem.itemName)
+						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment.to_lower()], _playerPosition, _zappedItem.itemName)
 						Globals.gameConsole.addLog("{itemName} hits you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.alignment.matchn("cursed"):
-						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment], _playerPosition, _zappedItem.itemName)
+						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment.to_lower()], _playerPosition, _zappedItem.itemName)
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
 					Globals.isItemIdentified(_zappedItem)
 				"wand of item polymorph":
@@ -768,7 +768,7 @@ func zapItem(_direction):
 				"wand of digging":
 					var _level = $"/root/World".level
 					var _isTileMined = false
-					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment]):
+					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment.to_lower()]):
 						var _tile = _playerPosition + _direction * i
 						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.EMPTY or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE:
 							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
@@ -972,8 +972,6 @@ func throwItem(_direction):
 			$"/root/World/Items/Items".removeItem(_thrownItem.id)
 		
 		var _newThrow = load("res://Objects/Throw/Throw.tscn").instance()
-		print(_tiles)
-		print(_thrownItem.itemTexture)
 		_newThrow.create(_tiles, _thrownItem.itemTexture)
 		$"/root/World/Animations".add_child(_newThrow)
 		# warning-ignore:return_value_discarded
@@ -989,7 +987,7 @@ func useItem(_id):
 		if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].interactable == Globals.interactables.ALTAR:
 			$"/root/World/Items/Items".removeItem(_usedItem)
 			Globals.gameConsole.addLog("You offer the {itemName} to the gods.".format({ "itemName": _usedItem.itemName }))
-			if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items != null:
+			if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items != null and $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size() != 0:
 				var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
 				if randi() % 2 == 0:
 					_alignedItem.alignment = "Blessed"
@@ -1010,10 +1008,15 @@ func useItem(_id):
 		else:
 			Globals.gameConsole.addLog("You need to be on an altar to use that.")
 	if _usedItem.type.matchn("potion"):
+		if _usedItem.itemName.matchn("empty potion bottle"):
+			Globals.gameConsole.addLog("You empty the {potionName} on the floor. Smart!".format({ "potionName": _usedItem.itemName }))
+			$"/root/World".closeMenu(_additionalChoices)
+			return
 		if _usedItem.amount > 1:
 			_usedItem.amount -= 1
 		else:
 			$"/root/World/Items/Items".removeItem(_usedItem.id)
+		$"/root/World/Items/Items".createItem("empty potion bottle", null, 1, true)
 		Globals.gameConsole.addLog("You empty the {potionName} on the floor.".format({ "potionName": _usedItem.itemName }))
 		$"/root/World".closeMenu(_additionalChoices)
 		return
@@ -1084,6 +1087,8 @@ func useItem(_id):
 					$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 					get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 				Globals.gameConsole.addLog("You pull a {itemName} out of the bottle.".format({ "itemName": _newItem.itemName }))
+			"ink bottle":
+				Globals.gameConsole.addLog("Use a marker with ink and empty scroll in inventory to write scrolls.")
 			"marker":
 				var _scrolls = []
 				var _letters = {}

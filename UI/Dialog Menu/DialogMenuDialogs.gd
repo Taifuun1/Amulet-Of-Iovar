@@ -18,7 +18,7 @@ var dialogMenuDialogs = {
 	},
 	"Shin'kor Leve'er": {
 		"title": "Shin'kor Leve'er, bandit group leader",
-		"text": """After countless battles with bandits, you find yourself at the heart of the group. Finally, you see the bandit camp leader.
+		"text": """After countless slain bandits, you find yourself at the heart of the operation. Finally, you see the bandit camp leader.
 	
 	Shin'kor Leve'er: "..."
 """

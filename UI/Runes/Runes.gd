@@ -188,7 +188,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 					break
 				_tiles.append(_lineTiles)
 	
-	_newSpell.create(_tiles, _runeData)
+	_newSpell.create(_tiles, _runeData, true)
 	$"/root/World/Animations".add_child(_newSpell)
 	# warning-ignore:return_value_discarded
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
@@ -235,7 +235,7 @@ func takeOfRuneWhenDroppingItem(_id):
 	for _rune in runes.keys():
 		if runes[_rune] != null and runes[_rune] == _id:
 			runes[_rune] = null
-			get_node("RuneContainer/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = load(runesUITemplatePaths[hoveredEquipment.to_lower()])
+			get_node("RuneContainer/{slot}/Sprite".format({ "slot": _rune.capitalize() })).texture = load(runesUITemplatePaths[_rune.to_lower()])
 			calculateMagicDamage()
 			return
 
@@ -263,6 +263,7 @@ func calculateMagicDamage():
 				"element": null
 			}
 		}]
+		mpUsage = 0
 		return
 	elif runes.heario == null:
 		var _earioNode = get_node("/root/World/Items/{id}".format({ "id": runes["eario"] }))

@@ -271,7 +271,6 @@ func _input(_event):
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.UP_STAIR_DUNGEON or
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.UP_STAIR_SAND
 				) and
-				Globals.currentDungeonLevel > 1 and
 				currentGameState == gameState.GAME
 			):
 				moveLevel(-1)
@@ -281,11 +280,11 @@ func _input(_event):
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_DUNGEON or
 					level.grid[_playerTile.x][_playerTile.y].tile == Globals.tiles.DOWN_STAIR_SAND
 				) and
-				Globals.currentDungeonLevel < Globals.generatedLevels and
 				currentGameState == gameState.GAME
 			):
 				moveLevel(1)
 			elif Input.is_action_just_pressed("ACCEPT") and (currentGameState == gameState.PICK_UP_ITEMS or currentGameState == gameState.DROP_ITEMS):
+				hideObjectsWhenDrawingNextFrame = true
 				processGameTurn(_playerTile)
 			elif (Input.is_action_just_pressed("BACK")):
 				if Input.is_mouse_button_pressed(2) and (currentGameState == gameState.EQUIPMENT or currentGameState == gameState.RUNES):
@@ -718,6 +717,9 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 		elif levels.fortress.back().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.iovarsLair.front().levelId
 			return "upStair"
+		elif churchLevel.levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.firstLevel.levelId
+			return "upStair"
 		else:
 			Globals.currentDungeonLevel += _direction
 			return "upStair"
@@ -769,6 +771,9 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 			return "downStair"
 		elif levels.iovarsLair.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.fortress.back().levelId
+			return "downStair"
+		elif levels.firstLevel.levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = churchLevel.levelId
 			return "downStair"
 		else:
 			Globals.currentDungeonLevel += _direction
@@ -876,7 +881,7 @@ func castWith(_playerTile):
 
 func interactWith(_tileToInteractWith):
 	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
-		match level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter.to_lower():
+		match get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter })).critterName.to_lower():
 			"wolf":
 				Globals.gameConsole.addLog("You try to pet the wolf. It tries to bite you. Bad doggy!.")
 			"wolf":
@@ -884,7 +889,7 @@ func interactWith(_tileToInteractWith):
 			"gearh":
 				Globals.gameConsole.addLog("You try to pet the gearh. It tries to eat you. Aaah!")
 			_:
-				Globals.gameConsole.addLog("You can't interact with the {critter}.".format({ "critter": $"Critters/{critterid}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }).critterName }))
+				Globals.gameConsole.addLog("You can't interact with the {critterName}.".format({ "critterName": get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter })).critterName }))
 	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
@@ -963,15 +968,15 @@ func interactWith(_tileToInteractWith):
 			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 			processGameTurn()
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.FOUNTAIN:
-			var _emptyBottleInInventory = $Critters/"0".getNonStackableItemInInventory("empty potion bottle")
+			var _emptyBottleInInventory = $Critters/"0"/Inventory.getNonStackableItemInInventory("empty potion bottle")
 			if typeof(_emptyBottleInInventory) != TYPE_BOOL:
-				$Items/Items.createItem("water bottle", _tileToInteractWith)
+				$Items/Items.createItem("water potion", _tileToInteractWith)
 				if _emptyBottleInInventory.amount > 1:
 					_emptyBottleInInventory.amount -= 1
 				else:
 					$"/root/World/Items/Items".removeItem(_emptyBottleInInventory.id)
 				Globals.gameConsole.addLog("You fill the bottle with water.")
-				if randi() % 8 == 0:
+				if randi() % 5 == 0:
 					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 					Globals.gameConsole.addLog("The fountain dries up!")
 				processGameTurn()
@@ -1026,9 +1031,10 @@ func kickAt(_tileToKickAt):
 			$Critter/"0".critterName
 		)
 	elif level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
-		if randi () % 20 == 0:
+		if randi () % 8 == 0:
 			level.grid[_tileToKickAt.x][_tileToKickAt.y].tile = Globals.tiles.DOOR_OPEN
 			level.grid[_tileToKickAt.x][_tileToKickAt.y].interactable = null
+			level.addPointToEnemyPathding(_tileToKickAt)
 			Globals.gameConsole.addLog("CRASH!")
 		else:
 			Globals.gameConsole.addLog("WHAM!")
@@ -1152,6 +1158,8 @@ func saveGame():
 			for _level in _levelSection:
 				var _levelData = _level.getLevelSaveData()
 				$Save.saveData(_levelData.levelId, "SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _levelData)
+	var _levelData = churchLevel.getLevelSaveData()
+	$Save.saveData(_levelData.levelId, "SaveSlot{selectedSave}/levels".format({ "selectedSave": StartingData.selectedSave }), _levelData)
 	
 	var _fovData = $FOV.getFOVSaveData()
 	$Save.saveData("FOVData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _fovData)

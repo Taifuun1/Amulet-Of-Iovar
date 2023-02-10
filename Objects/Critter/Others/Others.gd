@@ -85,7 +85,7 @@ var others = [
 		"drops": [
 			{
 				"names": "Egg",
-				"chance": 90,
+				"chance": 40,
 				"amount": [1, 5],
 				"tries": 2
 			},

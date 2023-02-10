@@ -84,8 +84,8 @@ var dualWielding = false
 
 var hoveredEquipment = null
 
-func sortItems(a, b):
-	if get_node("/root/World/Items/{itemId}".format({ "itemId": a })).itemName < get_node("/root/World/Items/{itemId}".format({ "itemId": b })).itemName:
+func sortEquipment(_equipmentIdA, _equipmentIdB):
+	if get_node("/root/World/Items/{itemId}".format({ "itemId": _equipmentIdA })).itemName < get_node("/root/World/Items/{itemId}".format({ "itemId": _equipmentIdB })).itemName:
 		return true
 	return false
 
@@ -173,7 +173,7 @@ func _process(_delta):
 				$"/root/World".processGameTurn()
 
 func showEquipment(_items):
-	_items.sort_custom(self, "sortItems")
+	_items.sort_custom(self, "sortEquipment")
 	for _item in _items:
 		var _newItem = equipmentItem.instance()
 		_newItem.setValues(get_node("/root/World/Items/{item}".format({ "item": _item })))
@@ -220,11 +220,16 @@ func setEquipment(_id):
 				checkWhatIsWorn(_oldItem)
 			checkWhatIsWorn(_item)
 	elif _matchingType.matchn("accessory"):
-		accessories[hoveredEquipment.to_lower()] = _item.id
-		get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
-		if _oldItem != null:
-			checkWhatIsWorn(_oldItem)
-		checkWhatIsWorn(_item)
+		var _alreadyEquipped = false
+		for _accessory in accessories:
+			if accessories[_accessory] != null and accessories[_accessory] == _item.id:
+				_alreadyEquipped = true
+		if !_alreadyEquipped:
+			accessories[hoveredEquipment.to_lower()] = _item.id
+			get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
+			if _oldItem != null:
+				checkWhatIsWorn(_oldItem)
+			checkWhatIsWorn(_item)
 	elif _matchingType.matchn("armor"):
 		equipment[hoveredEquipment.to_lower()] = _item.id
 		get_node("EquipmentContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _item.getTexture()
@@ -456,13 +461,13 @@ func checkWhatIsWorn(_item):
 				Globals.gameConsole.addLog("Your magic energy surges!")
 		"amulet of life power":
 			if _playerNode.itemsTurnedOn.has(_item.id):
-				$"/root/World/Critters/0".maxhp -= 20
+				$"/root/World/Critters/0".maxhp -= 12
 				if $"/root/World/Critters/0".hp > $"/root/World/Critters/0".maxhp:
 					$"/root/World/Critters/0".hp = $"/root/World/Critters/0".maxhp
 				_playerNode.itemsTurnedOn.erase(_item.id)
 				Globals.gameConsole.addLog("Your life energy feels weaker.")
 			else:
-				$"/root/World/Critters/0".maxhp += 20
+				$"/root/World/Critters/0".maxhp += 12
 				_playerNode.itemsTurnedOn.append(_item.id)
 				Globals.gameConsole.addLog("Your life energy feels stronger.")
 		"amulet of backscattering":

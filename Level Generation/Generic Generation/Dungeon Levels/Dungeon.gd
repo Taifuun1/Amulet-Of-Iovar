@@ -22,9 +22,6 @@ func createDungeon(_stairData):
 		if areAllStairsConnected():
 			placeContainers({
 				"box": {
-					"amount": randi() % 3
-				},
-				"chest": {
 					"amount": randi() % 2
 				}
 			})

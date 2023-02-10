@@ -92,7 +92,7 @@ var comestibles = {
 			"type": "Comestible",
 			"category": null,
 			"weight": 2,
-			"value": 75,
+			"value": 35,
 			"enchantable": false,
 			"stackable": true,
 			"rarity": "Common",

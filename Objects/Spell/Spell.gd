@@ -11,10 +11,14 @@ var tiles
 var spellTexture
 var color
 
-func create(_tiles, _runeData):
+var isPlayer
+
+func create(_tiles, _runeData, _isPlayer = false):
 	tiles = _tiles
 	spellTexture = _runeData.heario.texture
 	color = _runeData.eario.color
+	
+	isPlayer = _isPlayer
 
 func animateCycle():
 	var _cycleTiles = tiles.pop_front()
@@ -35,7 +39,11 @@ func animateTile(_position, _angle):
 func checkIfCritterIsHit(_tile):
 	var _hitCritter = $"/root/World".level.grid[_tile.x][_tile.y].critter
 	if _hitCritter != null:
-		var _didCritterDespawn = get_node("/root/World/Critters/{critter}".format({ "critter": _hitCritter })).takeDamage($"/root/World/UI/UITheme/Runes".spellDamage, _tile, "")
+		var _didCritterDespawn
+		if isPlayer:
+			get_node("/root/World/Critters/{critter}".format({ "critter": _hitCritter })).takeDamage($"/root/World/UI/UITheme/Runes".spellDamage, _tile, $"/root/World/Critters/0".critterName)
+		else:
+			get_node("/root/World/Critters/{critter}".format({ "critter": _hitCritter })).takeDamage($"/root/World/UI/UITheme/Runes".spellDamage, _tile, "")
 		if _didCritterDespawn != null:
 			$"/root/World/Critters/0".addExp(_didCritterDespawn)
 

@@ -1,7 +1,7 @@
 extends Panel
 
-func _on_Continue_gui_input(_event, _eventType):
-	if Input.is_action_pressed("LEFT_CLICK"):
+func _on_Continue_gui_input(event, _eventType):
+	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		match _eventType.to_lower():
 			"continue":
 				$"/root/World".resetToDefaulGameState()

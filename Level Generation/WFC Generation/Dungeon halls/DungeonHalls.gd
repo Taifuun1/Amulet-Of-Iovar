@@ -36,6 +36,7 @@ func createDungeon(_stairData):
 					"amount": randi() % 3 + 1
 				}
 			})
+			placeRandomInteractables(["altar", "fountain"])
 			return
 		resetLevel()
 		resetGeneration()

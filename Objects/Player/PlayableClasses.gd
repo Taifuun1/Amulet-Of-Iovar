@@ -328,6 +328,7 @@ var mercenary = {
 		"Dull two-hander": 1,
 		"Bucket helmet": 1,
 		"Scale ring mail": 1,
+		"Leather belt": 1,
 		"Scale ring mail chausses": 1,
 		"Studded boots": 1,
 		"Potion of heal": [2, 4],
@@ -536,7 +537,7 @@ var savant = {
 	quote = "We used to cast spells uphill both ways.",
 	race = "Human",
 	justice = "Grilling",
-	hp = 8,
+	hp = 9,
 	mp = 18,
 	stats = {
 		strength = 4,

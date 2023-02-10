@@ -1,7 +1,7 @@
 
 var itemGeneration = {
 	"dungeon1": {
-		"amount": 6,
+		"amount": 4,
 		"type": {
 			"amulet": 25,
 			"armor": 50,
@@ -23,7 +23,7 @@ var itemGeneration = {
 		}
 	},
 	"minesOfTidoh": {
-		"amount": 10,
+		"amount": 8,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
@@ -67,7 +67,7 @@ var itemGeneration = {
 		}
 	},
 	"dungeon2": {
-		"amount": 6,
+		"amount": 4,
 		"type": {
 			"amulet": 25,
 			"armor": 50,
@@ -89,7 +89,7 @@ var itemGeneration = {
 		}
 	},
 	"beach": {
-		"amount": 5,
+		"amount": 1,
 		"type": {
 			"amulet": 200,
 			"armor": 0,
@@ -111,7 +111,7 @@ var itemGeneration = {
 		}
 	},
 	"dungeon3": {
-		"amount": 8,
+		"amount": 4,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
@@ -133,7 +133,7 @@ var itemGeneration = {
 		}
 	},
 	"library": {
-		"amount": 24,
+		"amount": 12,
 		"type": {
 			"amulet": 100,
 			"armor": 0,
@@ -155,7 +155,7 @@ var itemGeneration = {
 		}
 	},
 	"dungeon4": {
-		"amount": 8,
+		"amount": 4,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
@@ -177,7 +177,7 @@ var itemGeneration = {
 		}
 	},
 	"banditWarcamp": {
-		"amount": 20,
+		"amount": 12,
 		"type": {
 			"amulet": 0,
 			"armor": 200,
@@ -199,7 +199,7 @@ var itemGeneration = {
 		}
 	},
 	"dungeonHalls1": {
-		"amount": 6,
+		"amount": 5,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
@@ -243,7 +243,7 @@ var itemGeneration = {
 		}
 	},
 	"dungeonHalls2": {
-		"amount": 6,
+		"amount": 5,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
@@ -268,9 +268,9 @@ var itemGeneration = {
 		"amount": 20,
 		"type": {
 			"amulet": 50,
-			"armor": 500,
+			"armor": 400,
 			"comestible": 0,
-			"gem": 250,
+			"gem": 350,
 			"potion": 0,
 			"ring": 50,
 			"rune": 0,
@@ -287,7 +287,7 @@ var itemGeneration = {
 		}
 	},
 	"dungeonHalls3": {
-		"amount": 6,
+		"amount": 5,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
@@ -309,7 +309,7 @@ var itemGeneration = {
 		}
 	},
 	"theGreatShadows": {
-		"amount": 12,
+		"amount": 3,
 		"type": {
 			"amulet": 25,
 			"armor": 100,
@@ -331,7 +331,7 @@ var itemGeneration = {
 		}
 	},
 	"fortress": {
-		"amount": 18,
+		"amount": 12,
 		"type": {
 			"amulet": 0,
 			"armor": 200,
