@@ -334,7 +334,7 @@ I wither away"""
 	},
 	"Gryonem centaur": {
 		"taunt": {
-			"freguency": 12,
+			"frequency": 12,
 			"lines": [
 				"Thy constitution is weak, wimp!",
 				"Thy mind is simple, fool!",
@@ -521,7 +521,7 @@ I wither away"""
 			],
 		},
 		"spell": {
-			"freguency": 8,
+			"frequency": 8,
 			"lines": [
 				"Sharpshooter Bolt!"
 			],
@@ -561,7 +561,7 @@ I wither away"""
 			],
 		},
 		"spell": {
-			"freguency": 8,
+			"frequency": 8,
 			"lines": [
 				"Sharpshooter Bolt!"
 			],

@@ -153,12 +153,12 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 				"worn": false
 			}
 		elif _item.value.has("ink"):
-			if typeof(_item.value.ink) != TYPE_INT:
-				value = _item.value
-			else:
+			if typeof(_item.value.ink) == TYPE_ARRAY:
 				value = {
-					"ink": randi() % _item.value.ink[1] + _item.value.ink[0]
+					"ink": randi() % int(_item.value.ink[1]) + _item.value.ink[0]
 				}
+			else:
+				value = _item.value
 		elif _item.value.has("binds"):
 			binds = {
 				"type": _item.value.binds,
@@ -256,12 +256,12 @@ func calculateWeaponAttackIncrease(_stats):
 		
 		_dmg = int(_stats.balance / 7 + _additionalDamage)
 		
-		if _dualWielding and _playerSkills["dualWield"].level < 1:
-			_dmg -= 2
-		elif _dualWielding and _playerSkills["dualWield"].level < 2:
-			_dmg -= 1
+		if _dualWielding and _playerSkills["dualWield"].level < 2:
+			_dmg -= 4
+		elif _dualWielding and _playerSkills["dualWield"].level < 3:
+			_dmg -= 3
 		elif _dualWielding and _playerSkills["dualWield"].level == 3:
-			_dmg += 1
+			_dmg -= 2
 		
 		return {
 			"dmg": _dmg,
@@ -311,11 +311,11 @@ func calculateWeaponAttackIncrease(_stats):
 		_dmg = int(_stats.legerity / 8 + _additionalDamage)
 		
 		if _dualWielding and _playerSkills["dualWield"].level < 1:
-			_dmg -= 2
+			_dmg -= 3
 		elif _dualWielding and _playerSkills["dualWield"].level < 2:
+			_dmg -= 2
+		elif _dualWielding and _playerSkills["dualWield"].level < 3:
 			_dmg -= 1
-		elif _dualWielding and _playerSkills["dualWield"].level == 3:
-			_dmg += 1
 		
 		return {
 			"dmg": _dmg,
@@ -337,10 +337,12 @@ func calculateWeaponAttackIncrease(_stats):
 		
 		_dmg = int((_stats.strength / 8) + (_stats.balance / 8) + _additionalDamage)
 		
-		if _dualWielding and _playerSkills["dualWield"].level < 1:
-			_dmg -= 2
-		elif _dualWielding and _playerSkills["dualWield"].level < 2:
-			_dmg -= 1
+		if _dualWielding and _playerSkills["dualWield"].level < 2:
+			_dmg -= 5
+		elif _dualWielding and _playerSkills["dualWield"].level < 3:
+			_dmg -= 4
+		elif _dualWielding and _playerSkills["dualWield"].level == 3:
+			_dmg -= 3
 		
 		return {
 			"dmg": _dmg,
@@ -371,11 +373,11 @@ func calculateWeaponAttackIncrease(_stats):
 		
 		_dmg = int(_stats.legerity / 15 + _additionalDamage)
 		
-		if _dualWielding and _playerSkills["dualWield"].level == 0:
+		if _dualWielding and _playerSkills["dualWield"].level < 2:
 			_dmg -= 3
-		elif _dualWielding and _playerSkills["dualWield"].level == 1:
+		elif _dualWielding and _playerSkills["dualWield"].level < 3:
 			_dmg -= 2
-		elif _dualWielding and _playerSkills["dualWield"].level == 2:
+		elif _dualWielding and _playerSkills["dualWield"].level == 3:
 			_dmg -= 1
 		
 		return {

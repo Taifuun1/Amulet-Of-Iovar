@@ -111,14 +111,15 @@ func getItemsOfType(_types, _category = null, _miscellaneousTypes = null):
 	for _type in _types:
 		for _itemId in inventory:
 			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
-			print(_item.itemName)
 			if _item.type.matchn(_type):
 				_items.append(_itemId)
-			elif _miscellaneousTypes != null:
-				for _miscellaneousType in _miscellaneousTypes:
-					if _item.type.matchn(_miscellaneousType):
-						print("aaded misc", _item.type)
-						_items.append(_itemId)
+	if _miscellaneousTypes != null:
+		for _itemId in inventory:
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+			for _miscellaneousType in _miscellaneousTypes:
+				if _item.type.matchn(_miscellaneousType):
+					print("aaded misc", _item.type)
+					_items.append(_itemId)
 	if _category:
 		for _itemId in _items.duplicate(true):
 			if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn(_category):

@@ -48,15 +48,15 @@ custom_constants/separation = 20
 
 [node name="ClassTexture" type="TextureRect" parent="SaveContainer/SaveDataContainer"]
 margin_right = 380.0
-margin_bottom = 290.0
+margin_bottom = 332.0
 grow_vertical = 0
 size_flags_vertical = 3
 stretch_mode = 6
 
 [node name="ClassContainer" type="HBoxContainer" parent="SaveContainer/SaveDataContainer"]
-margin_top = 310.0
+margin_top = 352.0
 margin_right = 380.0
-margin_bottom = 332.0
+margin_bottom = 374.0
 size_flags_horizontal = 3
 
 [node name="ClassName" type="RichTextLabel" parent="SaveContainer/SaveDataContainer/ClassContainer"]
@@ -79,9 +79,9 @@ size_flags_vertical = 3
 fit_content_height = true
 
 [node name="DungeonLevelContainer" type="HBoxContainer" parent="SaveContainer/SaveDataContainer"]
-margin_top = 352.0
+margin_top = 394.0
 margin_right = 380.0
-margin_bottom = 374.0
+margin_bottom = 416.0
 size_flags_horizontal = 3
 
 [node name="DungeonLevel" type="RichTextLabel" parent="SaveContainer/SaveDataContainer/DungeonLevelContainer"]
@@ -104,6 +104,7 @@ size_flags_vertical = 3
 fit_content_height = true
 
 [node name="PointsContainer" type="HBoxContainer" parent="SaveContainer/SaveDataContainer"]
+visible = false
 margin_top = 394.0
 margin_right = 380.0
 margin_bottom = 416.0

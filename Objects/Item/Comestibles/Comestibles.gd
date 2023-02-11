@@ -157,6 +157,22 @@ var comestibles = {
 			"identified": false
 		},
 		{
+			"itemName": "SPAM",
+			"unidentifiedItemName": "SPAM",
+			"texture": load("res://Assets/Comestibles/ComestibleSPAM.png"),
+			"unidentifiedTexture": load("res://Assets/Comestibles/ComestibleSPAM.png"),
+			"type": "Comestible",
+			"category": null,
+			"weight": 25,
+			"value": 2500,
+			"enchantable": false,
+			"stackable": true,
+			"rarity": "Common",
+			"identified": false
+		}
+	],
+	"rare": [
+		{
 			"itemName": "CC ration",
 			"unidentifiedItemName": "CC ration",
 			"texture": load("res://Assets/Comestibles/ComestibleCCRation.png"),
@@ -179,20 +195,6 @@ var comestibles = {
 			"category": null,
 			"weight": 40,
 			"value": 3000,
-			"enchantable": false,
-			"stackable": true,
-			"rarity": "Common",
-			"identified": false
-		},
-		{
-			"itemName": "SPAM",
-			"unidentifiedItemName": "SPAM",
-			"texture": load("res://Assets/Comestibles/ComestibleSPAM.png"),
-			"unidentifiedTexture": load("res://Assets/Comestibles/ComestibleSPAM.png"),
-			"type": "Comestible",
-			"category": null,
-			"weight": 25,
-			"value": 2500,
 			"enchantable": false,
 			"stackable": true,
 			"rarity": "Common",

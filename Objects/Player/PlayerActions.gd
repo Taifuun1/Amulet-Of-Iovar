@@ -1,6 +1,6 @@
 extends Player
 
-var sacrificeGifts = load("res://Objects/Player/PlayerSacrificeGifts.gd")
+var sacrificeGifts = load("res://Objects/Player/PlayerSacrificeGifts.gd").new()
 
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -998,15 +998,16 @@ func useItem(_id):
 			if randi() % 8 == 0:
 				var _gift
 				if randi() % 2 == 0:
-					_gift = sacrificeGifts[justice].armor[randi() % sacrificeGifts[justice].armor.size()]
+					_gift = sacrificeGifts[justice.to_lower()].armor[randi() % sacrificeGifts[justice.to_lower()].armor.size()]
 				else:
-					_gift = sacrificeGifts[justice].weapons[randi() % sacrificeGifts[justice].weapons.size()]
+					_gift = sacrificeGifts[justice.to_lower()].weapons[randi() % sacrificeGifts[justice.to_lower()].weapons.size()]
 				$"/root/World/Items/Items".createItem(_gift, _playerPosition, 1, false, { "alignment": "Uncursed" })
 				Globals.gameConsole.addLog("An item appears on the ground!")
 			else:
 				Globals.gameConsole.addLog("The gods seem unresponsive for now.")
 		else:
 			Globals.gameConsole.addLog("You need to be on an altar to use that.")
+		$"/root/World".closeMenu(_additionalChoices)
 	if _usedItem.type.matchn("potion"):
 		if _usedItem.itemName.matchn("empty potion bottle"):
 			Globals.gameConsole.addLog("You empty the {potionName} on the floor. Smart!".format({ "potionName": _usedItem.itemName }))
@@ -1154,24 +1155,39 @@ func dipItem(_id):
 		match _dippedItem.identifiedItemName.to_lower():
 			"water potion":
 				if _dippedItem.alignment.matchn("blessed"):
-					_selectedItem.alignment = "blessed"
-					$"/root/World/Items/Items".removeItem(_id)
+					$"/root/World/Items/Items".createItem(_selectedItem.identifiedItemName, Vector2(0, 0), 1, true, { "alignment": "Blessed" })
+					if _selectedItem.amount > 1:
+						_selectedItem.amount -= 1
+					else:
+						$"/root/World/Items/Items".removeItem(_selectedItem.id)
+					if _dippedItem.amount > 1:
+						_dippedItem.amount -= 1
+					else:
+						$"/root/World/Items/Items".removeItem(_dippedItem)
 					Globals.gameConsole.addLog("The {itemName} glows with a white light!".format({ "itemName": _selectedItem.itemName }))
+					Globals.gameConsole.addLog("The {itemName} is consumed.".format({ "itemName": _dippedItem.itemName }))
 				elif _dippedItem.alignment.matchn("uncursed"):
 					if _selectedItem.type.matchn("scroll"):
-						$"/root/World/Items/Items".createItem("blank scroll", null, _selectedItem.amount, true)
-						if selectedItem.amount > 1:
-							selectedItem.amount -= 1
+						$"/root/World/Items/Items".createItem("blank scroll", null, 1, true, { "alignment": _selectedItem.alignment })
+						if _selectedItem.amount > 1:
+							_selectedItem.amount -= 1
 						else:
-							$"/root/World/Items/Items".removeItem(selectedItem)
+							$"/root/World/Items/Items".removeItem(_selectedItem.id)
 						Globals.gameConsole.addLog("Ink fades from the {itemName}.".format({ "itemName": _selectedItem.itemName }))
 					else:
 						Globals.gameConsole.addLog("The {itemName} gets wet.".format({ "itemName": _selectedItem.itemName }))
 				elif _dippedItem.alignment.matchn("cursed"):
-					_selectedItem.alignment = "cursed"
-					$"/root/World/Items/Items".removeItem(_id)
+					$"/root/World/Items/Items".createItem(_selectedItem.identifiedItemName, Vector2(0, 0), 1, true, { "alignment": "Cursed" })
+					if _selectedItem.amount > 1:
+						_selectedItem.amount -= 1
+					else:
+						$"/root/World/Items/Items".removeItem(_selectedItem)
+					if _dippedItem.amount > 1:
+						_dippedItem.amount -= 1
+					else:
+						$"/root/World/Items/Items".removeItem(_dippedItem)
 					Globals.gameConsole.addLog("The {itemName} glows with a black light!".format({ "itemName": _selectedItem.itemName }))
-				Globals.gameConsole.addLog("The {itemName} is consumed.".format({ "itemName": _dippedItem.itemName }))
+					Globals.gameConsole.addLog("The {itemName} is consumed.".format({ "itemName": _dippedItem.itemName }))
 			"soda bottle":
 				Globals.gameConsole.addLog("The {itemName} looks sugary.".format({ "itemName": _selectedItem.itemName }))
 			"potion of confusion":
@@ -1271,8 +1287,7 @@ func dealWithMarker(_scroll, _ink):
 			Globals.gameConsole.addLog("You don't have enough ink to write that scroll.")
 			return false
 		elif _scroll.matchn("blank scroll"):
-			Globals.gameConsole.addLog("You write a blank scroll... on the blank scroll.")
-			$"/root/World/Items/Items".createItem(_scroll, null, 1, true)
+			Globals.gameConsole.addLog("You write a blank scroll... on the blank scroll. Wow!")
 		else:
 			for _item in $"/root/World/Critters/0".inventory.inventory:
 				var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
@@ -1287,10 +1302,10 @@ func dealWithMarker(_scroll, _ink):
 						else:
 							_ink.letters -= _itemNode.value.ink
 							_itemNode.value.ink = 0
-			$"/root/World/Items/Items".createItem(_scroll, null, 1, true)
+			$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "aligment": _scroll.alignment })
 			Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
 	else:
-		$"/root/World/Items/Items".createItem(_scroll, null, 1, true)
+		$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "aligment": _scroll.alignment })
 		Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
 	if get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount > 1:
 		get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount -= 1

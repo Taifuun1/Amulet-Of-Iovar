@@ -315,7 +315,7 @@ var items = {
 	},
 	"Soda bottle": {
 		"knowledge": false,
-		"description": "Juice. Tasty."
+		"description": "Juicer-enjoyers favourite."
 	},
 	"Potion of confusion": {
 		"knowledge": false,
@@ -323,7 +323,7 @@ var items = {
 	},
 	"Potion of Toxix": {
 		"knowledge": false,
-		"description": "Gives Toxix status effect."
+		"description": "Deals Toxix damage and gives Toxix status effect."
 	},
 	"Potion of heal": {
 		"knowledge": false,
@@ -347,7 +347,7 @@ var items = {
 #	},
 	"Potion of paralysis": {
 		"knowledge": false,
-		"description": "Stuns when quaffed."
+		"description": "Stuns when quaffed or thrown."
 	},
 	"Potion of hunger": {
 		"knowledge": false,
@@ -443,7 +443,7 @@ var items = {
 	},
 	"Blank scroll": {
 		"knowledge": false,
-		"description": "A blank scroll. You can write scrolls with a marker and ink."
+		"description": "A blank scroll. You can write scrolls on it with a marker and ink."
 	},
 	"Scroll of identify": {
 		"knowledge": false,
@@ -531,11 +531,11 @@ var items = {
 	},
 	"Marker": {
 		"knowledge": false,
-		"description": "Write scrolls on empty paper with marker and ink."
+		"description": "Write scrolls on empty scrolls with marker and ink."
 	},
 	"Ink bottle": {
 		"knowledge": false,
-		"description": "Write scrolls on empty paper with marker and ink."
+		"description": "Write scrolls on empty scrolls with marker and ink."
 	},
 	"Key": {
 		"knowledge": false,
@@ -555,7 +555,7 @@ var items = {
 	},
 	"Magic marker": {
 		"knowledge": false,
-		"description": ""
+		"description": "Magical marker. Never runs out of ink."
 	},
 	"Magic key": {
 		"knowledge": false,

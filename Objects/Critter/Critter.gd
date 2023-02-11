@@ -116,6 +116,11 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	var _path = []
 	var _distanceFromPlayer = []
 	
+	if typeof(_critterTile) == TYPE_BOOL:
+		push_error("Null crittertile")
+		push_error(_level.dungeonLevelName)
+		return
+	
 	# Get critter distance from player
 	_distanceFromPlayer = _level.calculatePath(_critterTile, _playerTile)
 	# Get critter move
