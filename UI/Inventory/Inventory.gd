@@ -197,19 +197,19 @@ func checkIfItemInInventoryByName(_itemName):
 			return true
 	return false
 
-func getNonStackableItemInInventory(_itemName, _alignment = null):
+func getNonStackableItemInInventory(_itemName, _piety = null):
 	for _itemId in inventory:
 		var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
-		if _alignment == null and _item.identifiedItemName.matchn(_itemName):
+		if _piety == null and _item.identifiedItemName.matchn(_itemName):
 			return _item
-		elif _item.identifiedItemName.matchn(_itemName) and _item.alignment.matchn(_alignment):
+		elif _item.identifiedItemName.matchn(_itemName) and _item.piety.matchn(_piety):
 			return _item
 	return false
 
 func checkIfStackableItemInInventory(_item, _operation):
 	for _itemId in inventory:
 		var _inventoryItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
-		if _inventoryItem.itemName.matchn(_item.itemName) and _inventoryItem.alignment.matchn(_item.alignment) and _inventoryItem.notIdentified.name == _item.notIdentified.name and _inventoryItem.notIdentified.alignment == _item.notIdentified.alignment:
+		if _inventoryItem.itemName.matchn(_item.itemName) and _inventoryItem.piety.matchn(_item.piety) and _inventoryItem.notIdentified.name == _item.notIdentified.name and _inventoryItem.notIdentified.piety == _item.notIdentified.piety:
 			if !_inventoryItem.stackable:
 				return false
 			elif _operation.match("add"):

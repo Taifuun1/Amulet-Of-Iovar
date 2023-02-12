@@ -21,8 +21,8 @@ func readItem(_id):
 					Globals.gameConsole.addLog("Nothing happens...")
 				else:
 					var _identifiableItemsInInventory = false
-					if !_readItem.alignment.matchn("cursed"):
-						if _readItem.alignment.matchn("blessed"):
+					if !_readItem.piety.matchn("blasphemous"):
+						if _readItem.piety.matchn("reverent"):
 							for _item in _items:
 								var _itemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
 								if (
@@ -31,7 +31,7 @@ func readItem(_id):
 										GlobalItemInfo.globalItemInfo[_itemInInventory.identifiedItemName].identified == false
 									) or
 									_itemInInventory.notIdentified.name == false or
-									_itemInInventory.notIdentified.alignment == false or
+									_itemInInventory.notIdentified.piety == false or
 									_itemInInventory.notIdentified.enchantment == false
 								):
 									_identifiableItemsInInventory = true
@@ -50,7 +50,7 @@ func readItem(_id):
 										GlobalItemInfo.globalItemInfo[_randomItemInInventory.identifiedItemName].identified == false
 									) or
 									_randomItemInInventory.notIdentified.name == false or
-									_randomItemInInventory.notIdentified.alignment == false or
+									_randomItemInInventory.notIdentified.piety == false or
 									_randomItemInInventory.notIdentified.enchantment == false
 								):
 									_randomItemInInventory.identifyItem(true, true, true)
@@ -61,11 +61,11 @@ func readItem(_id):
 								_items.erase(_item)
 					if !_identifiableItemsInInventory:
 						_items = $"/root/World/Critters/0/Inventory".inventory.duplicate(true)
-						if _readItem.alignment.matchn("blessed"):
+						if _readItem.piety.matchn("reverent"):
 							for _item in _items:
 								var _itemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
 								if (
-									_itemInInventory.notIdentified.alignment == false or
+									_itemInInventory.notIdentified.piety == false or
 									_itemInInventory.notIdentified.enchantment == false
 								):
 									_itemInInventory.identifyItem(true, true, true)
@@ -79,7 +79,7 @@ func readItem(_id):
 								var _item = _items[randi() % _items.size()]
 								var _randomItemInInventory = get_node("/root/World/Items/{id}".format({ "id": _item }))
 								if (
-									_randomItemInInventory.notIdentified.alignment == false or
+									_randomItemInInventory.notIdentified.piety == false or
 									_randomItemInInventory.notIdentified.enchantment == false
 								):
 									_randomItemInInventory.identifyItem(false, true, true)
@@ -89,7 +89,7 @@ func readItem(_id):
 								_items.erase(_item)
 			"scroll of create food":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
-				if _readItem.alignment.matchn("blessed"):
+				if _readItem.piety.matchn("reverent"):
 					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition)
 					if !_tiles.empty():
 						for _tile in _tiles:
@@ -106,7 +106,7 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("A bucketload of items appears around you!")
-				elif _readItem.alignment.matchn("uncursed"):
+				elif _readItem.piety.matchn("formal"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
 					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
@@ -114,7 +114,7 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
-				elif _readItem.alignment.matchn("cursed"):
+				elif _readItem.piety.matchn("blasphemous"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					newItem.createItem($"/root/World/Items/Items".getItemByName("orange"))
 					$"/root/World/Items".add_child(newItem, true)
@@ -123,7 +123,7 @@ func readItem(_id):
 				Globals.isItemIdentified(_readItem)
 			"scroll of create potion":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
-				if _readItem.alignment.matchn("blessed"):
+				if _readItem.piety.matchn("reverent"):
 					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition)
 					if !_tiles.empty():
 						for _tile in _tiles:
@@ -140,7 +140,7 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("A bucketload of items appears around you!")
-				elif _readItem.alignment.matchn("uncursed"):
+				elif _readItem.piety.matchn("formal"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
 					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
@@ -148,7 +148,7 @@ func readItem(_id):
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
-				elif _readItem.alignment.matchn("cursed"):
+				elif _readItem.piety.matchn("blasphemous"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
 					newItem.createItem($"/root/World/Items/Items".getItemByName("potion of toxix"))
 					$"/root/World/Items".add_child(newItem, true)
@@ -164,7 +164,7 @@ func readItem(_id):
 						if _item != null and _item.binds != null:
 							_uncursableItems.append(_item)
 				if (
-					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
+					(!_uncursableItems.empty() and _readItem.piety.matchn("reverent")) or
 					_uncursableItems.empty()
 				):
 					for _itemId in _equipmentNode.accessories.values():
@@ -173,7 +173,7 @@ func readItem(_id):
 							if _item.binds != null:
 								_uncursableItems.append(_item)
 				if (
-					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
+					(!_uncursableItems.empty() and _readItem.piety.matchn("reverent")) or
 					_uncursableItems.empty()
 				):
 					for _itemId in _equipmentNode.equipment.values():
@@ -182,7 +182,7 @@ func readItem(_id):
 							if _item.binds != null:
 								_uncursableItems.append(_item)
 				if (
-					(!_uncursableItems.empty() and _readItem.alignment.matchn("blessed")) or
+					(!_uncursableItems.empty() and _readItem.piety.matchn("reverent")) or
 					_uncursableItems.empty()
 				):
 					for _itemId in $Inventory.inventory:
@@ -192,7 +192,7 @@ func readItem(_id):
 								_uncursableItems.append(_item)
 				if !_uncursableItems.empty():
 					for _item in _uncursableItems:
-						if _readItem.alignment.matchn("cursed"):
+						if _readItem.piety.matchn("blasphemous"):
 							_item.binds.state = "Bound"
 							Globals.gameConsole.addLog("The {itemName} glows with a violet light.".format({ "itemName": _item.itemName }))
 							continue
@@ -208,7 +208,7 @@ func readItem(_id):
 					if _itemId != null:
 						_areHandsEmpty = false
 				if !_areHandsEmpty:
-					if _readItem.alignment.matchn("blessed"):
+					if _readItem.piety.matchn("reverent"):
 						for _itemId in _equipmentNode.hands.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -217,7 +217,7 @@ func readItem(_id):
 									Globals.gameConsole.addLog("The {itemName} glows with a light green light.".format({ "itemName": _item.itemName }))
 								else:
 									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
-					elif _readItem.alignment.matchn("uncursed"):
+					elif _readItem.piety.matchn("formal"):
 						for _itemId in _equipmentNode.hands.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -227,7 +227,7 @@ func readItem(_id):
 								else:
 									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
 								break
-					elif _readItem.alignment.matchn("cursed"):
+					elif _readItem.piety.matchn("blasphemous"):
 						for _itemId in _equipmentNode.hands.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -246,7 +246,7 @@ func readItem(_id):
 					if _itemId != null:
 						_areEquipmentEmpty = false
 				if !_areEquipmentEmpty:
-					if _readItem.alignment.matchn("blessed"):
+					if _readItem.piety.matchn("reverent"):
 						for _itemId in _equipmentNode.equipment.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -255,7 +255,7 @@ func readItem(_id):
 									Globals.gameConsole.addLog("The {itemName} glows with a light green light.".format({ "itemName": _item.itemName }))
 								else:
 									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
-					elif _readItem.alignment.matchn("uncursed"):
+					elif _readItem.piety.matchn("formal"):
 						for _itemId in _equipmentNode.equipment.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -265,7 +265,7 @@ func readItem(_id):
 								else:
 									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
 								break
-					elif _readItem.alignment.matchn("cursed"):
+					elif _readItem.piety.matchn("blasphemous"):
 						for _itemId in _equipmentNode.equipment.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -284,7 +284,7 @@ func readItem(_id):
 					if _itemId != null:
 						_areEquipmentEmpty = false
 				if !_areEquipmentEmpty:
-					if _readItem.alignment.matchn("blessed"):
+					if _readItem.piety.matchn("reverent"):
 						for _itemId in _equipmentNode.equipment.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -305,7 +305,7 @@ func readItem(_id):
 					Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of summon critter":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
-				if _readItem.alignment.matchn("blessed"):
+				if _readItem.piety.matchn("reverent"):
 					var _neutralClass = neutralClasses[randi() % neutralClasses.size()]
 					var _critter = $"/root/World/Critters/Critters".critters[_neutralClass][randi() % $"/root/World/Critters/Critters".critters[_neutralClass].size()]
 					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
@@ -315,7 +315,7 @@ func readItem(_id):
 						Globals.isItemIdentified(_readItem)
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
-				elif _readItem.alignment.matchn("uncursed"):
+				elif _readItem.piety.matchn("formal"):
 					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
 					if !_tiles.empty():
 						for _tile in _tiles:
@@ -323,7 +323,7 @@ func readItem(_id):
 						Globals.isItemIdentified(_readItem)
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
-				elif _readItem.alignment.matchn("cursed"):
+				elif _readItem.piety.matchn("blasphemous"):
 					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, false, true)
 					if !_tiles.empty():
 						for _tile in _tiles:
@@ -334,14 +334,14 @@ func readItem(_id):
 						Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of genocide":
 				var _aliveCritters = []
-				if _readItem.alignment.matchn("blessed"):
+				if _readItem.piety.matchn("reverent"):
 					for _critterRace in $"/root/World/Critters/Critters".critters.keys():
 						if !_critterRace.matchn("bosses"):
 							for _critterName in $"/root/World/Critters/Critters".critters[_critterRace]:
 								if GlobalCritterInfo.globalCritterInfo[_critterName.critterName].population != 0:
 									_aliveCritters.append(_critterRace)
 									break
-				elif _readItem.alignment.matchn("uncursed") or _readItem.alignment.matchn("cursed"):
+				elif _readItem.piety.matchn("formal") or _readItem.piety.matchn("blasphemous"):
 					for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
 						if (
 							GlobalCritterInfo.globalCritterInfo[_critterName].population != 0 and
@@ -360,20 +360,50 @@ func readItem(_id):
 				_additionalChoices = true
 				Globals.isItemIdentified(_readItem)
 			"scroll of teleport":
-				if dealWithTeleport(0, _readItem.alignment):
+				if dealWithTeleport(0, _readItem.piety):
 					Globals.gameConsole.addLog("Whoosh! You reappear somewhere!")
 					Globals.isItemIdentified(_readItem)
 				else:
 					Globals.gameConsole.addLog("Nothing happens...")
+			"scroll of reverent scripture":
+				var _playerPosition = $"/root/World".level.getCritterTile(0)
+				if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items != null and $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size() != 0:
+					if _readItem.piety.matchn("reverent"):
+						var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
+						_alignedItem.piety = "Reverent"
+						Globals.gameConsole.addLog("{itemName} glows white.".format({ "itemName": _alignedItem.itemName }))
+					elif _readItem.piety.matchn("formal"):
+						var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
+						_alignedItem.piety = "Reverent"
+						Globals.gameConsole.addLog("{itemName} glows white.".format({ "itemName": _alignedItem.itemName }))
+					elif _readItem.piety.matchn("blasphemous"):
+						var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
+						_alignedItem.piety = "Blasphemous"
+						Globals.gameConsole.addLog("{itemName} glows black.".format({ "itemName": _alignedItem.itemName }))
+			"scroll of blasphemous scripture":
+				var _playerPosition = $"/root/World".level.getCritterTile(0)
+				if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items != null and $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size() != 0:
+					if _readItem.piety.matchn("reverent"):
+						var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
+						_alignedItem.piety = "Blasphemous"
+						Globals.gameConsole.addLog("{itemName} glows black.".format({ "itemName": _alignedItem.itemName }))
+					elif _readItem.piety.matchn("formal"):
+						var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
+						_alignedItem.piety = "Blasphemous"
+						Globals.gameConsole.addLog("{itemName} glows black.".format({ "itemName": _alignedItem.itemName }))
+					elif _readItem.piety.matchn("blasphemous"):
+						var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
+						_alignedItem.piety = "Reverent"
+						Globals.gameConsole.addLog("{itemName} glows white.".format({ "itemName": _alignedItem.itemName }))
 			"scroll of confusion":
 				if statusEffects.confusion != -1:
-					if _readItem.alignment.matchn("blessed"):
+					if _readItem.piety.matchn("reverent"):
 						statusEffects.confusion += 4
 						Globals.gameConsole.addLog("You feel slightly disoriented.")
-					elif _readItem.alignment.matchn("uncursed"):
+					elif _readItem.piety.matchn("formal"):
 						statusEffects.confusion += 10
 						Globals.gameConsole.addLog("You feel confused.")
-					elif _readItem.alignment.matchn("cursed"):
+					elif _readItem.piety.matchn("blasphemous"):
 						statusEffects.confusion += 22
 						Globals.gameConsole.addLog("The world spins!")
 				else:
@@ -422,35 +452,35 @@ func quaffItem(_id):
 		Globals.gameConsole.addLog("You quaff a {itemName}.".format({ "itemName": _quaffedItem.itemName }))
 		match _quaffedItem.identifiedItemName.to_lower():
 			"water potion":
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					Globals.gameConsole.addLog("This tastes fantastic!")
-				if _quaffedItem.alignment.matchn("uncursed"):
+				if _quaffedItem.piety.matchn("formal"):
 					Globals.gameConsole.addLog("This tastes like water.")
-				if _quaffedItem.alignment.matchn("cursed"):
+				if _quaffedItem.piety.matchn("blasphemous"):
 					Globals.gameConsole.addLog("This doesn't taste very good. Ughhhh...")
 			"soda bottle":
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					calories += 100
 					Globals.gameConsole.addLog("Its orange juice! Damn thats good!")
-				if _quaffedItem.alignment.matchn("uncursed"):
+				if _quaffedItem.piety.matchn("formal"):
 					calories += 80
 					Globals.gameConsole.addLog("Its apple juice. Tastes nice!")
-				if _quaffedItem.alignment.matchn("cursed"):
+				if _quaffedItem.piety.matchn("blasphemous"):
 					calories += 50
 					Globals.gameConsole.addLog("Its radish juice. Uggghh...")
 			"potion of heal":
 				var _amountToHeal = 0
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					_amountToHeal = 6 + (level * 4)
 					Globals.gameConsole.addLog("The {potion} heals you. That felt good!".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.alignment.matchn("uncursed"):
+				if _quaffedItem.piety.matchn("formal"):
 					_amountToHeal = 4 + (level * 3)
 					Globals.gameConsole.addLog("The {potion} heals you.".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.alignment.matchn("cursed"):
+				if _quaffedItem.piety.matchn("blasphemous"):
 					_amountToHeal = 2 + (level * 2)
 					Globals.gameConsole.addLog("The {potion} heals you. That felt a little off.".format({ "potion": _quaffedItem.itemName }))
 				if hp + _amountToHeal >= maxhp:
-					if _quaffedItem.alignment.matchn("blessed"):
+					if _quaffedItem.piety.matchn("reverent"):
 						maxhp = maxhp + 1
 						Globals.gameConsole.addLog("You feel a little more vigorous.")
 					hp = maxhp
@@ -458,31 +488,31 @@ func quaffItem(_id):
 					hp += _amountToHeal
 			"potion of healaga":
 				var _amountToHeal = 0
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					_amountToHeal = 14 + (level * 8)
 					Globals.gameConsole.addLog("The {potion} heals you alot. That felt good!".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.alignment.matchn("uncursed"):
+				if _quaffedItem.piety.matchn("formal"):
 					_amountToHeal = 9 + (level * 6)
 					Globals.gameConsole.addLog("The {potion} heals you alot.".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.alignment.matchn("cursed"):
+				if _quaffedItem.piety.matchn("blasphemous"):
 					_amountToHeal = 4 + (level * 4)
 					Globals.gameConsole.addLog("The {potion} heals you alot. That felt a little off.".format({ "potion": _quaffedItem.itemName }))
 				if hp + _amountToHeal >= maxhp:
-					if _quaffedItem.alignment.matchn("blessed"):
+					if _quaffedItem.piety.matchn("reverent"):
 						maxhp = maxhp + 2
 						Globals.gameConsole.addLog("You feel a little more vigorous.")
 					hp = maxhp
 				else:
 					hp += _amountToHeal
 			"potion of toxix":
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					statusEffects.toxix = 2
 					Globals.gameConsole.addLog("The {potion} tastes slightly acidic. Bleagh!".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.alignment.matchn("uncursed"):
+				if _quaffedItem.piety.matchn("formal"):
 					statusEffects.toxix = 8
 					hp -= 4
 					Globals.gameConsole.addLog("The {potion} tastes bitter. Urgh!".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.alignment.matchn("cursed"):
+				if _quaffedItem.piety.matchn("blasphemous"):
 					statusEffects.toxix = 16
 					hp -= 8
 					Globals.gameConsole.addLog("The {potion} burns your mouth. Uhhhh...".format({ "potion": _quaffedItem.itemName }))
@@ -490,67 +520,67 @@ func quaffItem(_id):
 					hp -= 1
 					Globals.gameConsole.addLog("You feel a little less healthy.")
 			"potion of sleep":
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					statusEffects.sleep = 3
 					Globals.gameConsole.addLog("The {potion} gives you sweet dreams.".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.alignment.matchn("uncursed"):
+				if _quaffedItem.piety.matchn("formal"):
 					statusEffects.sleep = 7
 					Globals.gameConsole.addLog("The {potion} puts you asleep.".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.alignment.matchn("cursed"):
+				if _quaffedItem.piety.matchn("blasphemous"):
 					statusEffects.sleep = 13
 					Globals.gameConsole.addLog("The {potion} knocks you out.".format({ "potion": _quaffedItem.itemName }))
 			"potion of gain level":
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					addExp(experienceNeededForLevelGainAmount)
 					Globals.gameConsole.addLog("You gain a level! You feel like you gained extra experience.")
-				if _quaffedItem.alignment.matchn("uncursed"):
+				if _quaffedItem.piety.matchn("formal"):
 					addExp(experienceNeededForLevelGainAmount - experiencePoints)
 					Globals.gameConsole.addLog("You gain a level!")
-				if _quaffedItem.alignment.matchn("cursed"):
+				if _quaffedItem.piety.matchn("blasphemous"):
 					addExp(experienceNeededForPreviousLevelGainAmount - experiencePoints)
 					Globals.gameConsole.addLog("You somehow feel less experienced.")
 			"potion of hunger":
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					calories += 300
 					Globals.gameConsole.addLog("You feel nourished.")
-				if _quaffedItem.alignment.matchn("uncursed"):
+				if _quaffedItem.piety.matchn("formal"):
 					calories += -450
 					Globals.gameConsole.addLog("You feel malnourished.")
-				if _quaffedItem.alignment.matchn("cursed"):
+				if _quaffedItem.piety.matchn("blasphemous"):
 					calories += -1000
 					Globals.gameConsole.addLog("You feel like you lost half your weight!")
 			"potion of confusion":
 				if statusEffects.confusion != -1:
-					if _quaffedItem.alignment.matchn("blessed"):
+					if _quaffedItem.piety.matchn("reverent"):
 						statusEffects.confusion = 4
 						Globals.gameConsole.addLog("You feel slightly disoriented.")
-					elif _quaffedItem.alignment.matchn("uncursed"):
+					elif _quaffedItem.piety.matchn("formal"):
 						statusEffects.confusion += 10
 						Globals.gameConsole.addLog("You feel confused.")
-					elif _quaffedItem.alignment.matchn("cursed"):
+					elif _quaffedItem.piety.matchn("blasphemous"):
 						statusEffects.confusion += 22
 						Globals.gameConsole.addLog("The world spins!")
 				else:
 					Globals.gameConsole.addLog("You already feel confused enough!")
 			"potion of paralysis":
-				if _quaffedItem.alignment.matchn("blessed"):
+				if _quaffedItem.piety.matchn("reverent"):
 					statusEffects.stun = 2
 					Globals.gameConsole.addLog("You feel a jolt go down your spine!")
-				elif _quaffedItem.alignment.matchn("uncursed"):
+				elif _quaffedItem.piety.matchn("formal"):
 					statusEffects.stun = 4
 					Globals.gameConsole.addLog("You're stunned!")
-				elif _quaffedItem.alignment.matchn("cursed"):
+				elif _quaffedItem.piety.matchn("blasphemous"):
 					statusEffects.stun = 8
 					Globals.gameConsole.addLog("You're completely stunned!")
 			"potion of blindness":
 				if !checkIfStatusEffectIsPermanent("blindness"):
-					if _quaffedItem.alignment.matchn("blessed"):
+					if _quaffedItem.piety.matchn("reverent"):
 						statusEffects.blindness = 4
 						Globals.gameConsole.addLog("You can't see!")
-					elif _quaffedItem.alignment.matchn("uncursed"):
+					elif _quaffedItem.piety.matchn("formal"):
 						statusEffects.blindness = 8
 						Globals.gameConsole.addLog("You're blind!")
-					elif _quaffedItem.alignment.matchn("cursed"):
+					elif _quaffedItem.piety.matchn("blasphemous"):
 						statusEffects.blindness = 27
 						Globals.gameConsole.addLog("It's all dark!")
 				else:
@@ -595,19 +625,19 @@ func zapItem(_direction):
 		if _zappedItem.value.charges > 0:
 			match _zappedItem.identifiedItemName.to_lower():
 				"wand of light":
-					if _zappedItem.alignment.matchn("blessed"):
+					if _zappedItem.piety.matchn("reverent"):
 						playerVisibility = {
 							"distance": 10,
 							"duration": 80
 						}
 						Globals.gameConsole.addLog("The light illuminates your surroundings brightly!")
-					elif _zappedItem.alignment.matchn("uncursed"):
+					elif _zappedItem.piety.matchn("formal"):
 						playerVisibility = {
 							"distance": 7,
 							"duration": 35
 						}
 						Globals.gameConsole.addLog("The light illuminates your surroundings.")
-					elif _zappedItem.alignment.matchn("cursed"):
+					elif _zappedItem.piety.matchn("blasphemous"):
 						playerVisibility = {
 							"distance": 4,
 							"duration": 10
@@ -620,13 +650,13 @@ func zapItem(_direction):
 					for i in range(1, _zappedItem.value.distance):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
-							if _zappedItem.alignment.matchn("blessed"):
+							if _zappedItem.piety.matchn("reverent"):
 								if _grid[_tile.x][_tile.y].interactable == null:
 									_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
 								else:
 									_grid[_tile.x][_tile.y].interactable = null
 								Globals.gameConsole.addLog("The doors lock turns!")
-							elif _zappedItem.alignment.matchn("uncursed"):
+							elif _zappedItem.piety.matchn("formal"):
 								if randi() % 4 == 0:
 									if _grid[_tile.x][_tile.y].interactable == null:
 										_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
@@ -635,7 +665,7 @@ func zapItem(_direction):
 									Globals.gameConsole.addLog("The doors lock turns!")
 								else:
 									Globals.gameConsole.addLog("Doors lock doesn't move.")
-							elif _zappedItem.alignment.matchn("cursed"):
+							elif _zappedItem.piety.matchn("blasphemous"):
 								if randi() % 8 == 0:
 									if _grid[_tile.x][_tile.y].interactable == null:
 										_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
@@ -652,15 +682,15 @@ func zapItem(_direction):
 						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
 							break
 						if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter != null:
-							if _zappedItem.alignment.matchn("cursed"):
+							if _zappedItem.piety.matchn("blasphemous"):
 								Globals.gameConsole.addLog("The {critterName} vibrates... But nothing happens.".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter })).critterName }))
 								break
-							dealWithTeleport(_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter, _zappedItem.alignment, _zappedItem.type)
+							dealWithTeleport(_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter, _zappedItem.piety, _zappedItem.type)
 							Globals.gameConsole.addLog("The {critterName} disappears!".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter })).critterName }))
 							Globals.isItemIdentified(_zappedItem)
 							break
 				"wand of summon critter":
-					if _zappedItem.alignment.matchn("blessed"):
+					if _zappedItem.piety.matchn("reverent"):
 						var _neutralClass = neutralClasses[randi() % neutralClasses.size()]
 						var _critter = $"/root/World/Critters/Critters".critters[_neutralClass][randi() % $"/root/World/Critters/Critters".critters[_neutralClass].size()]
 						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
@@ -669,14 +699,14 @@ func zapItem(_direction):
 								Globals.gameConsole.addLog("A {critterName} appears beside you. It seems friendly.".format({ "critterName": $"/root/World/Critters/Critters".spawnCritter(_critter, _tile) }))
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
-					elif _zappedItem.alignment.matchn("uncursed"):
+					elif _zappedItem.piety.matchn("formal"):
 						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
 						if !_tiles.empty():
 							for _tile in _tiles:
 								Globals.gameConsole.addLog("A {critterName} appears beside you!".format({ "critterName": $"/root/World/Critters/Critters".spawnRandomCritter(_tile) }))
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
-					elif _zappedItem.alignment.matchn("cursed"):
+					elif _zappedItem.piety.matchn("blasphemous"):
 						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, false, true)
 						if !_tiles.empty():
 							for _tile in _tiles:
@@ -686,13 +716,13 @@ func zapItem(_direction):
 							Globals.gameConsole.addLog("Nothing happens...")
 					Globals.isItemIdentified(_zappedItem)
 				"wand of backwards magic sphere":
-					if _zappedItem.alignment.matchn("blessed"):
+					if _zappedItem.piety.matchn("reverent"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
-					elif _zappedItem.alignment.matchn("uncursed"):
-						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment.to_lower()], _playerPosition, _zappedItem.itemName)
+					elif _zappedItem.piety.matchn("formal"):
+						takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _playerPosition, _zappedItem.itemName)
 						Globals.gameConsole.addLog("{itemName} hits you!".format({ "itemName": _zappedItem.itemName }))
-					elif _zappedItem.alignment.matchn("cursed"):
-						takeDamage(_zappedItem.value.dmg[_zappedItem.alignment.to_lower()], _playerPosition, _zappedItem.itemName)
+					elif _zappedItem.piety.matchn("blasphemous"):
+						takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _playerPosition, _zappedItem.itemName)
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
 					Globals.isItemIdentified(_zappedItem)
 				"wand of item polymorph":
@@ -701,7 +731,7 @@ func zapItem(_direction):
 						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
 							break
 						var _itemCount = 0
-						if _zappedItem.alignment.matchn("blessed"):
+						if _zappedItem.piety.matchn("reverent"):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
@@ -722,7 +752,7 @@ func zapItem(_direction):
 									continue
 								Globals.gameConsole.addLog("Items on the ground vibrate.")
 								Globals.isItemIdentified(_zappedItem)
-						elif _zappedItem.alignment.matchn("uncursed"):
+						elif _zappedItem.piety.matchn("formal"):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
@@ -740,7 +770,7 @@ func zapItem(_direction):
 								if _itemCount > 0:
 									Globals.gameConsole.addLog("Some items on the ground vibrate.")
 									Globals.isItemIdentified(_zappedItem)
-						elif _zappedItem.alignment.matchn("cursed"):
+						elif _zappedItem.piety.matchn("blasphemous"):
 							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
@@ -768,7 +798,7 @@ func zapItem(_direction):
 				"wand of digging":
 					var _level = $"/root/World".level
 					var _isTileMined = false
-					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment.to_lower()]):
+					for i in range(1, _zappedItem.value.distance[_zappedItem.piety.to_lower()]):
 						var _tile = _playerPosition + _direction * i
 						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.EMPTY or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE:
 							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
@@ -791,13 +821,13 @@ func zapItem(_direction):
 						Globals.isItemIdentified(_zappedItem)
 				"wand of magic sphere", "wand of fleir", "wand of frost", "wand of thunder":
 					var _grid = $"/root/World".level.grid
-					for i in range(1, _zappedItem.value.distance[_zappedItem.alignment.to_lower()]):
+					for i in range(1, _zappedItem.value.distance[_zappedItem.piety.to_lower()]):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
 						if _grid[_tile.x][_tile.y].critter != null:
 							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
-							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.alignment.to_lower()], _tile, _zappedItem.itemName)
+							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _tile, _zappedItem.itemName)
 							Globals.isItemIdentified(_zappedItem)
 				"wand of sleep":
 					var _grid = $"/root/World".level.grid
@@ -807,13 +837,13 @@ func zapItem(_direction):
 							break
 						if _grid[_tile.x][_tile.y].critter != null:
 							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
-							if _zappedItem.alignment.matchn("blessed"):
+							if _zappedItem.piety.matchn("reverent"):
 								_critter.statusEffects.sleep = 3
 								Globals.gameConsole.addLog("{critterName} falls into a light sleep.".format({ "critterName": _critter.critterName }))
-							elif _zappedItem.alignment.matchn("uncursed"):
+							elif _zappedItem.piety.matchn("formal"):
 								_critter.statusEffects.sleep = 11
 								Globals.gameConsole.addLog("{critterName} falls asleep.".format({ "critterName": _critter.critterName }))
-							elif _zappedItem.alignment.matchn("cursed"):
+							elif _zappedItem.piety.matchn("blasphemous"):
 								_critter.statusEffects.sleep = 24
 								Globals.gameConsole.addLog("{critterName} falls into a deep sleep!".format({ "critterName": _critter.critterName }))
 							Globals.isItemIdentified(_zappedItem)
@@ -849,21 +879,21 @@ func throwItem(_direction):
 			match _thrownItem.identifiedItemName.to_lower():
 				"potion of confusion":
 					if statusEffects.confusion != -1:
-						if _thrownItem.alignment.matchn("blessed"):
+						if _thrownItem.piety.matchn("reverent"):
 							_critter.statusEffects.confusion += 4
 							Globals.gameConsole.addLog("The {critterName} seems slightly disoriented.".format({ "critterName": _critter.critterName }))
-						elif _thrownItem.alignment.matchn("uncursed"):
+						elif _thrownItem.piety.matchn("formal"):
 							_critter.statusEffects.confusion += 10
 							Globals.gameConsole.addLog("The {critterName} seems confused.".format({ "critterName": _critter.critterName }))
-						elif _thrownItem.alignment.matchn("cursed"):
+						elif _thrownItem.piety.matchn("blasphemous"):
 							_critter.statusEffects.confusion += 22
 							Globals.gameConsole.addLog("The {critterName} seems very confused!".format({ "critterName": _critter.critterName }))
 						Globals.isItemIdentified(_thrownItem)
 				"potion of toxix":
-					if _thrownItem.alignment.matchn("blessed"):
+					if _thrownItem.piety.matchn("reverent"):
 						_critter.statusEffects.toxix = 2
 						Globals.gameConsole.addLog("The {potion} burns the {critterName}!".format({ "potion": _thrownItem.itemName, "critterName": _critter.critterName }))
-					elif _thrownItem.alignment.matchn("uncursed"):
+					elif _thrownItem.piety.matchn("formal"):
 						_critter.statusEffects.toxix = 8
 						_critter.takeDamage(
 							[
@@ -881,7 +911,7 @@ func throwItem(_direction):
 							_critter.critterName
 						)
 						Globals.gameConsole.addLog("The {potion} burns the {critterName}!".format({ "potion": _thrownItem.itemName, "critterName": _critter.critterName }))
-					elif _thrownItem.alignment.matchn("cursed"):
+					elif _thrownItem.piety.matchn("blasphemous"):
 						_critter.statusEffects.toxix = 16
 						_critter.takeDamage(
 							{
@@ -900,17 +930,17 @@ func throwItem(_direction):
 					Globals.isItemIdentified(_thrownItem)
 				"potion of heal":
 					var _amountToHeal = 0
-					if _thrownItem.alignment.matchn("blessed"):
+					if _thrownItem.piety.matchn("reverent"):
 						_amountToHeal = 6 + (_critter.level * 4)
 						Globals.gameConsole.addLog("The {critterName} looks alot better!".format({ "critterName": _critter.critterName }))
-					if _thrownItem.alignment.matchn("uncursed"):
+					if _thrownItem.piety.matchn("formal"):
 						_amountToHeal = 4 + (_critter.level * 3)
 						Globals.gameConsole.addLog("The {critterName} looks more healthy.".format({ "critterName": _critter.critterName }))
-					if _thrownItem.alignment.matchn("cursed"):
+					if _thrownItem.piety.matchn("blasphemous"):
 						_amountToHeal = 2 + (_critter.level * 2)
 						Globals.gameConsole.addLog("The {critterName} looks better.".format({ "critterName": _critter.critterName }))
 					if _critter.hp + _amountToHeal >= _critter.maxhp:
-						if _thrownItem.alignment.matchn("blessed"):
+						if _thrownItem.piety.matchn("reverent"):
 							_critter.maxhp = _critter.maxhp + 1
 							Globals.gameConsole.addLog("The {critterName} feel a little more vigorous.".format({ "critterName": _critter.critterName }))
 						_critter.hp = _critter.maxhp
@@ -919,17 +949,17 @@ func throwItem(_direction):
 					Globals.isItemIdentified(_thrownItem)
 				"potion of healaga":
 					var _amountToHeal = 0
-					if _thrownItem.alignment.matchn("blessed"):
+					if _thrownItem.piety.matchn("reverent"):
 						_amountToHeal = 14 + (_critter.level * 8)
 						Globals.gameConsole.addLog("The {critterName} looks way better!".format({ "critterName": _critter.critterName }))
-					if _thrownItem.alignment.matchn("uncursed"):
+					if _thrownItem.piety.matchn("formal"):
 						_amountToHeal = 9 + (_critter.level * 6)
 						Globals.gameConsole.addLog("The {critterName} looks healthy.".format({ "critterName": _critter.critterName }))
-					if _thrownItem.alignment.matchn("cursed"):
+					if _thrownItem.piety.matchn("blasphemous"):
 						_amountToHeal = 4 + (_critter.level * 4)
 						Globals.gameConsole.addLog("The {critterName} looks better.".format({ "critterName": _critter.critterName }))
 					if _critter.hp + _amountToHeal >= _critter.maxhp:
-						if _thrownItem.alignment.matchn("blessed"):
+						if _thrownItem.piety.matchn("reverent"):
 							_critter.maxhp = _critter.maxhp + 2
 							Globals.gameConsole.addLog("The {critterName} feel a little more vigorous.".format({ "critterName": _critter.critterName }))
 						_critter.hp = _critter.maxhp
@@ -937,30 +967,30 @@ func throwItem(_direction):
 						_critter.hp += _amountToHeal
 					Globals.isItemIdentified(_thrownItem)
 				"potion of sleep":
-					if _thrownItem.alignment.matchn("blessed"):
+					if _thrownItem.piety.matchn("reverent"):
 						_critter.statusEffects.sleep = 3
-					if _thrownItem.alignment.matchn("uncursed"):
+					if _thrownItem.piety.matchn("formal"):
 						_critter.statusEffects.sleep = 7
-					if _thrownItem.alignment.matchn("cursed"):
+					if _thrownItem.piety.matchn("blasphemous"):
 						_critter.statusEffects.sleep = 13
 					Globals.gameConsole.addLog("The {critterName} falls asleep.".format({ "crittetName": _critter.critterName }))
 					Globals.isItemIdentified(_thrownItem)
 				"potion of blindness":
 					if !checkIfStatusEffectIsPermanent("blindness"):
-						if _thrownItem.alignment.matchn("blessed"):
+						if _thrownItem.piety.matchn("reverent"):
 							_critter.statusEffects.blindness = 4
-						elif _thrownItem.alignment.matchn("uncursed"):
+						elif _thrownItem.piety.matchn("formal"):
 							_critter.statusEffects.blindness = 8
-						elif _thrownItem.alignment.matchn("cursed"):
+						elif _thrownItem.piety.matchn("blasphemous"):
 							_critter.statusEffects.blindness = 27
 						Globals.gameConsole.addLog("The {critterName} is blind!".format({ "critterName": _critter.critterName }))
 						Globals.isItemIdentified(_thrownItem)
 				"potion of paralysis":
-					if _thrownItem.alignment.matchn("blessed"):
+					if _thrownItem.piety.matchn("reverent"):
 						_critter.statusEffects.stun = 2
-					elif _thrownItem.alignment.matchn("uncursed"):
+					elif _thrownItem.piety.matchn("formal"):
 						_critter.statusEffects.stun = 4
-					elif _thrownItem.alignment.matchn("cursed"):
+					elif _thrownItem.piety.matchn("blasphemous"):
 						_critter.statusEffects.stun = 8
 					Globals.gameConsole.addLog("The {critterName} is stunned!".format({ "critterName": _critter.critterName }))
 					Globals.isItemIdentified(_thrownItem)
@@ -987,21 +1017,13 @@ func useItem(_id):
 		if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].interactable == Globals.interactables.ALTAR:
 			$"/root/World/Items/Items".removeItem(_usedItem)
 			Globals.gameConsole.addLog("You offer the {itemName} to the gods.".format({ "itemName": _usedItem.itemName }))
-			if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items != null and $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size() != 0:
-				var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
-				if randi() % 2 == 0:
-					_alignedItem.alignment = "Blessed"
-					Globals.gameConsole.addLog("{itemName} glows white.".format({ "itemName": _alignedItem.itemName }))
-				else:
-					_alignedItem.alignment = "Cursed"
-					Globals.gameConsole.addLog("{itemName} glows black.".format({ "itemName": _alignedItem.itemName }))
 			if randi() % 8 == 0:
 				var _gift
 				if randi() % 2 == 0:
 					_gift = sacrificeGifts[justice.to_lower()].armor[randi() % sacrificeGifts[justice.to_lower()].armor.size()]
 				else:
 					_gift = sacrificeGifts[justice.to_lower()].weapons[randi() % sacrificeGifts[justice.to_lower()].weapons.size()]
-				$"/root/World/Items/Items".createItem(_gift, _playerPosition, 1, false, { "alignment": "Uncursed" })
+				$"/root/World/Items/Items".createItem(_gift, _playerPosition, 1, false, { "piety": "Formal" })
 				Globals.gameConsole.addLog("An item appears on the ground!")
 			else:
 				Globals.gameConsole.addLog("The gods seem unresponsive for now.")
@@ -1154,8 +1176,8 @@ func dipItem(_id):
 	elif _dippedItem.type.matchn("potion"):
 		match _dippedItem.identifiedItemName.to_lower():
 			"water potion":
-				if _dippedItem.alignment.matchn("blessed"):
-					$"/root/World/Items/Items".createItem(_selectedItem.identifiedItemName, Vector2(0, 0), 1, true, { "alignment": "Blessed" })
+				if _dippedItem.piety.matchn("reverent"):
+					$"/root/World/Items/Items".createItem(_selectedItem.identifiedItemName, Vector2(0, 0), 1, true, { "piety": "Reverent" })
 					if _selectedItem.amount > 1:
 						_selectedItem.amount -= 1
 					else:
@@ -1166,9 +1188,9 @@ func dipItem(_id):
 						$"/root/World/Items/Items".removeItem(_dippedItem)
 					Globals.gameConsole.addLog("The {itemName} glows with a white light!".format({ "itemName": _selectedItem.itemName }))
 					Globals.gameConsole.addLog("The {itemName} is consumed.".format({ "itemName": _dippedItem.itemName }))
-				elif _dippedItem.alignment.matchn("uncursed"):
+				elif _dippedItem.piety.matchn("formal"):
 					if _selectedItem.type.matchn("scroll"):
-						$"/root/World/Items/Items".createItem("blank scroll", null, 1, true, { "alignment": _selectedItem.alignment })
+						$"/root/World/Items/Items".createItem("blank scroll", null, 1, true, { "piety": _selectedItem.piety })
 						if _selectedItem.amount > 1:
 							_selectedItem.amount -= 1
 						else:
@@ -1176,8 +1198,8 @@ func dipItem(_id):
 						Globals.gameConsole.addLog("Ink fades from the {itemName}.".format({ "itemName": _selectedItem.itemName }))
 					else:
 						Globals.gameConsole.addLog("The {itemName} gets wet.".format({ "itemName": _selectedItem.itemName }))
-				elif _dippedItem.alignment.matchn("cursed"):
-					$"/root/World/Items/Items".createItem(_selectedItem.identifiedItemName, Vector2(0, 0), 1, true, { "alignment": "Cursed" })
+				elif _dippedItem.piety.matchn("blasphemous"):
+					$"/root/World/Items/Items".createItem(_selectedItem.identifiedItemName, Vector2(0, 0), 1, true, { "piety": "Blasphemous" })
 					if _selectedItem.amount > 1:
 						_selectedItem.amount -= 1
 					else:
@@ -1209,10 +1231,10 @@ func dipItem(_id):
 ### Helper functions ###
 ########################
 
-func dealWithTeleport(_critterId, _alignment, _itemType = "scroll"):
+func dealWithTeleport(_critterId, _piety, _itemType = "scroll"):
 	var _world = $"/root/World"
 	var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterId }))
-	if _alignment.matchn("uncursed") or _alignment.matchn("blessed") or _itemType.matchn("wand"):
+	if _piety.matchn("formal") or _piety.matchn("reverent") or _itemType.matchn("wand"):
 		var _playerPosition = _world.level.getCritterTile(_critter.id)
 		var _level = _world.level
 		var _openTiles = _level.openTiles.duplicate(true)
@@ -1223,7 +1245,7 @@ func dealWithTeleport(_critterId, _alignment, _itemType = "scroll"):
 				return true
 			else:
 				_openTiles.erase(_randomTile)
-	elif _alignment.matchn("cursed"):
+	elif _piety.matchn("blasphemous"):
 		var _randomDungeonPart = _world.levels.keys()[randi() % _world.levels.keys().size()]
 		var _randomLevel
 		if _randomDungeonPart.matchn("firstlevel"):
@@ -1240,8 +1262,8 @@ func dealWithTeleport(_critterId, _alignment, _itemType = "scroll"):
 				_openTiles.erase(_randomTile)
 	return false
 
-func dealWithScrollOfGenocide(_name, _alignment):
-	if _alignment.matchn("blessed"):
+func dealWithScrollOfGenocide(_name, _piety):
+	if _piety.matchn("reverent"):
 		for _genocidableCritter in $"/root/World/Critters/Critters".critters[_name]:
 			for _critter in $"/root/World/Critters".get_children():
 				if _critter.name.matchn("Critters"):
@@ -1251,7 +1273,7 @@ func dealWithScrollOfGenocide(_name, _alignment):
 			GlobalCritterInfo.globalCritterInfo[_genocidableCritter.critterName].population = 0
 			Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _genocidableCritter.critterName.capitalize() }))
 			GlobalGameStats.gameStats["Species genocided"] += 1
-	elif _alignment.matchn("uncursed"):
+	elif _piety.matchn("formal"):
 		for _critter in $"/root/World/Critters".get_children():
 			if _critter.name.matchn("Critters"):
 				continue
@@ -1260,7 +1282,7 @@ func dealWithScrollOfGenocide(_name, _alignment):
 		GlobalCritterInfo.globalCritterInfo[_name].population = 0
 		Globals.gameConsole.addLog("{critter} has been wiped out.".format({ "critter": _name.capitalize() }))
 		GlobalGameStats.gameStats["Species genocided"] += 1
-	elif _alignment.matchn("cursed"):
+	elif _piety.matchn("blasphemous"):
 		var _level = $"/root/World".level
 		for _populationCount in range(GlobalCritterInfo.globalCritterInfo[_name].population):
 			if !$"/root/World/Critters/Critters".spawnCritter(_name):
@@ -1268,11 +1290,11 @@ func dealWithScrollOfGenocide(_name, _alignment):
 		Globals.gameConsole.addLog("RUMMMMMBLE!!!")
 	$"/root/World".closeMenu()
 
-func dealWithWandOfWishing(_name, _alignment):
-	if _alignment.matchn("blessed"):
+func dealWithWandOfWishing(_name, _piety):
+	if _piety.matchn("reverent"):
 		$"/root/World/Items/Items".createItem(_name, null, 1, true)
 		Globals.gameConsole.addLog("An item appears in your inventory.")
-	elif _alignment.matchn("cursed"):
+	elif _piety.matchn("blasphemous"):
 		$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), $"/root/World".level.getCritterTile(0))
 		Globals.gameConsole.addLog("An item appears at your feet... It doesn't seem to be what you wished for.")
 	else:
@@ -1302,10 +1324,10 @@ func dealWithMarker(_scroll, _ink):
 						else:
 							_ink.letters -= _itemNode.value.ink
 							_itemNode.value.ink = 0
-			$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "aligment": _scroll.alignment })
+			$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "aligment": _scroll.piety })
 			Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
 	else:
-		$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "aligment": _scroll.alignment })
+		$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "aligment": _scroll.piety })
 		Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
 	if get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount > 1:
 		get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount -= 1

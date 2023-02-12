@@ -286,10 +286,10 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			Globals.gameConsole.addLog("You mine the cave wall.")
 			if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:
 				if critterClass.matchn("archeologist") and randi() % 2:
-					$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, randi() % 4 + 1, false, { "alignment": "Uncursed" })
+					$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, randi() % 4 + 1, false, { "piety": "Formal" })
 					Globals.gameConsole.addLog("You find several gems in the wall!")
 				else:
-					$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "alignment": "Uncursed" })
+					$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "piety": "Formal" })
 					Globals.gameConsole.addLog("You find a gem in the wall.")
 				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable = null
 	else:
@@ -424,9 +424,9 @@ func dropItem(_playerTile, _item, _grid):
 				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats(), true)
 				GlobalGameStats["Times ascended"] += 1
 			_item.identifyItem(false, true, false)
-			if _item.alignment.matchn("blessed"):
+			if _item.piety.matchn("reverent"):
 				_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
-			elif _item.alignment.matchn("cursed"):
+			elif _item.piety.matchn("blasphemous"):
 				_dropLog.append("The {item} flashes with a black light.".format({ "item": _item.itemName }))
 	var _dropLogString = PoolStringArray(_dropLog).join(" ")
 	return _dropLogString
@@ -867,6 +867,9 @@ func checkIfThereIsSomethingOnTheGroundHere(_tile, _level):
 	
 	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.SPIDER_WEB:
 		Globals.gameConsole.addLog("You're stuck in the spider web!")
+	
+	if _level.grid[_tile.x][_tile.y].interactable == Globals.interactables.FOUNTAIN:
+		Globals.gameConsole.addLog("There's a fountain here.")
 
 func checkAllIdentification(_items = false, _critters = false):
 	if _items:
@@ -920,6 +923,7 @@ func getGameOverStats():
 	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
 	_stats.inventoryItems = $"/root/World/Critters/0/Inventory".getInventoryItems()
 	_stats.gameStats = GlobalGameStats.getGlobalGameStats()
+	_stats.gameStats.points = _stats.points
 	_stats.playerStats = {
 		"playerClass": critterClass
 	}

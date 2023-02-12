@@ -353,10 +353,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
 									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
 								if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:
-#									if critterClass.matchn("archeologist") and randi() % 2:
-#										$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, randi() % 4 + 1, false, { "alignment": "Uncursed" })
-#										Globals.gameConsole.addLog("You find several gems in the wall!")
-									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "alignment": "Uncursed" })
+									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "piety": "Formal" })
 									Globals.gameConsole.addLog("The {critterName} finds a gem in the wall.".format({ "critterName": critterName }))
 									_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable = null
 							if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE_DEEP:
@@ -367,10 +364,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
 									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
 								if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:
-#									if critterClass.matchn("archeologist") and randi() % 2:
-#										$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, randi() % 4 + 1, false, { "alignment": "Uncursed" })
-#										Globals.gameConsole.addLog("You find several gems in the wall!")
-									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "alignment": "Uncursed" })
+									$"/root/World/Items/Items".createItem($"/root/World/Items/Items".items.gem.rare[randi() % $"/root/World/Items/Items".items.gem.rare.size()], _tileToMoveTo, 1, false, { "piety": "Formal" })
 									Globals.gameConsole.addLog("The {critterName} finds a gem in the wall.".format({ "critterName": critterName }))
 									_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable = null
 						"mimic":
@@ -494,7 +488,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 				
 				# Spell damage dealt game stats
 				if checkIfCritterIsPlayer(_critterName):
-					if _damage.dmg > GlobalGameStats.gameStats["Highest spell damage dealt"]:
+					if _damage.magicDmg > GlobalGameStats.gameStats["Highest spell damage dealt"]:
 						GlobalGameStats.gameStats["Highest spell damage dealt"] = _damage.magicDmg
 					GlobalGameStats.gameStats["Times attacked with spells"] += 1
 					GlobalGameStats.gameStats["Damage dealt with spells"] += _damage.dmg + _damage.magicDmg

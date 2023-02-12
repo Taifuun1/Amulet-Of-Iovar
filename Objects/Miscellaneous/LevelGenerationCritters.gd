@@ -18,7 +18,7 @@ var critterLevelGenerationList = {
 			"elves": ["Elf hunter"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere"],
 			"felines": ["Cat"],
-			"humans": ["Outlaw watcher"],
+			"outlaws": ["Outlaw watcher"],
 			"kobolds": ["Tiny kobold", "Large kobold"],
 			"newts": ["River newt"],
 			"orcs": ["Goblin", "Flatlands orc"],
@@ -37,7 +37,7 @@ var critterLevelGenerationList = {
 			"elves": ["Elf hunter"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere", "Thunderous floating sphere"],
 			"felines": ["Cat", "Lynx"],
-			"humans": ["Outlaw watcher"],
+			"outlaws": ["Outlaw watcher"],
 			"kobolds": ["Tiny kobold", "Large kobold"],
 			"mimics": ["Mimic"],
 			"newts": ["Highlands newt"],
@@ -59,7 +59,7 @@ var critterLevelGenerationList = {
 			"elves": ["Elf hunter", "Elf assassin"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere", "Thunderous floating sphere"],
 			"felines": ["Cat", "Lynx"],
-			"humans": ["Outlaw watcher", "Outlaw fusiee'er"],
+			"outlaws": ["Outlaw watcher", "Outlaw fusiee'er"],
 			"kobolds": ["Tiny kobold", "Large kobold"],
 			"mimics": ["Mimic"],
 			"newts": ["Highlands newt"],
@@ -77,7 +77,7 @@ var critterLevelGenerationList = {
 			"centaurs": ["Hill centaur"],
 			"elves": ["Elf hunter", "Elf assassin"],
 			"felines": ["Cat", "Lynx"],
-			"humans": ["Outlaw watcher"],
+			"outlaws": ["Outlaw watcher"],
 			"newts": ["Highlands newt"],
 			"orcs": ["Flatlands orc"],
 			"rats": ["Big rat"],
@@ -87,7 +87,7 @@ var critterLevelGenerationList = {
 	"abandonedOutpost": {
 		"amount": [4, 6],
 		"critters": {
-			"humans": ["Outlaw watcher", "Outlaw fusiee'er"],
+			"outlaws": ["Outlaw watcher", "Outlaw fusiee'er"],
 			"newts": ["Highlands newt"],
 			"orcs": ["Flatlands orc"]
 		}
@@ -127,6 +127,13 @@ var critterLevelGenerationList = {
 			"snakes": ["Garnered snake"]
 		}
 	},
+	"miningOutpost": {
+		"amount": [7, 12],
+		"critters": {
+			"dwarves": ["Dwarf miner", "Dwarf engineer", "Dwarf smith"],
+			"humans": ["Guard", "Guard captain"]
+		}
+	},
 	"depthsOfTidoh": {
 		"amount": [5, 10],
 		"critters": {
@@ -136,7 +143,7 @@ var critterLevelGenerationList = {
 			"dwarves": ["Dwarf miner", "Dwarf engineer"],
 			"felines": ["Cat", "Lynx"],
 			"giants": ["Balding giant"],
-			"humans": ["Outlaw watcher", "Outlaw fusiee'er"],
+			"outlaws": ["Outlaw watcher", "Outlaw fusiee'er"],
 			"liches": ["Half-lich"],
 			"mimics": ["Mimic"],
 			"newts": ["Mine newt"],
@@ -169,7 +176,7 @@ var critterLevelGenerationList = {
 			"centaurs": ["Hill centaur"],
 			"dwarves": ["Dwarf smith"],
 			"giants": ["Balding giant"],
-			"humans": ["Outlaw watcher", "Outlaw fusiee'er", "Outlaw merchandiee'er"],
+			"outlaws": ["Outlaw watcher", "Outlaw fusiee'er", "Outlaw merchandiee'er"],
 			"kobolds": ["Large kobold"],
 			"liches": ["Half-lich"],
 			"mimics": ["Mimic"],
@@ -189,7 +196,7 @@ var critterLevelGenerationList = {
 			"felines": ["Tiger"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere", "Thunderous floating sphere"],
 			"giants": ["Parched giant"],
-			"humans": ["Outlaw fusiee'er", "Outlaw merchandiee'er"],
+			"outlaws": ["Outlaw fusiee'er", "Outlaw merchandiee'er"],
 			"liches": ["Lich"],
 			"mimics": ["Humongous mimic"],
 			"orcs": ["Dungeon orc"],
@@ -210,7 +217,7 @@ var critterLevelGenerationList = {
 			"felines": ["Tiger"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere", "Thunderous floating sphere"],
 			"giants": ["Parched giant"],
-			"humans": ["Outlaw fusiee'er", "Outlaw merchandiee'er", "Iovars cultist acolyte"],
+			"outlaws": ["Outlaw fusiee'er", "Outlaw merchandiee'er", "Iovars cultist acolyte"],
 			"liches": ["Lich", "Grand lich"],
 			"mimics": ["Humongous mimic"],
 			"newts": ["Arctic newt"],
@@ -230,7 +237,7 @@ var critterLevelGenerationList = {
 			"dwarves": ["Dwarven contirer"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere", "Thunderous floating sphere"],
 			"giants": ["One-eyed ogre"],
-			"humans": ["Outlaw fusiee'er", "Outlaw merchandiee'er", "Iovars cultist acolyte"],
+			"outlaws": ["Outlaw fusiee'er", "Outlaw merchandiee'er", "Iovars cultist acolyte"],
 			"liches": ["Grand lich"],
 			"mimics": ["Humongous mimic"],
 			"newts": ["Arctic newt"],
@@ -250,7 +257,7 @@ var critterLevelGenerationList = {
 			"felines": ["Tiger"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere", "Thunderous floating sphere"],
 			"giants": ["Parched giant"],
-			"humans": ["Outlaw fusiee'er", "Outlaw merchandiee'er", "Iovars cultist acolyte"],
+			"outlaws": ["Outlaw fusiee'er", "Outlaw merchandiee'er", "Iovars cultist acolyte"],
 			"liches": ["Lich"],
 			"mimics": ["Humongous mimic"],
 			"orcs": ["Dungeon orc"],
@@ -272,7 +279,7 @@ var critterLevelGenerationList = {
 			"centaurs": ["Gryonem centaur"],
 			"felines": ["Cat", "Lynx", "Tiger"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere", "Thunderous floating sphere"],
-			"humans": ["Iovars cultist acolyte", "Iovars cultist"],
+			"iovarsCultists": ["Iovars cultist acolyte", "Iovars cultist"],
 			"liches": ["Grand lich", "Arch-lich"],
 			"orcs": ["Yrak-i"],
 			"wraiths": ["Spectral wraith", "Spooky ghost"]
@@ -287,7 +294,7 @@ var critterLevelGenerationList = {
 			"dragons": ["Black dragon", "Blue dragon", "Cyan dragon", "Green dragon", "Red dragon", "Silver dragon", "Violet dragon", "White dragon", "Yellow dragon"],
 			"dwarves": ["Dwarven contirer"],
 			"giants": ["One-eyed ogre"],
-			"humans": ["Iovars cultist acolyte", "Iovars cultist"],
+			"iovarsCultists": ["Iovars cultist acolyte", "Iovars cultist"],
 			"liches": ["Arch-lich"],
 			"orcs": ["Yrak-i"],
 			"quadrapeds": ["Brontotheridae"]

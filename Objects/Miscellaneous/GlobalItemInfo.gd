@@ -441,6 +441,12 @@ var globalItemInfo = {
 	"Scroll of teleport": {
 		"identified": false
 	},
+	"Scroll of reverent scripture": {
+		"identified": false
+	},
+	"Scroll of blasphemous scripture": {
+		"identified": false
+	},
 	"Scroll of genocide": {
 		"identified": false
 	},

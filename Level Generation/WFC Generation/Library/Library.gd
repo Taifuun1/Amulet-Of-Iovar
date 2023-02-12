@@ -40,7 +40,7 @@ func createDungeon(_stairData):
 					"amount": randi() % 2
 				},
 				"chest": {
-					"amount": randi() % 6
+					"amount": randi() % 2
 				}
 			})
 			if _bossRoomCenter != null:

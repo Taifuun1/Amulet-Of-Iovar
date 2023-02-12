@@ -34,7 +34,7 @@ size_flags_horizontal = 3
 text = "-"
 valign = 1
 
-[node name="Alignment" type="Label" parent="ItemContainer"]
+[node name="Piety" type="Label" parent="ItemContainer"]
 margin_left = 9.0
 margin_top = 14.0
 margin_right = 14.0

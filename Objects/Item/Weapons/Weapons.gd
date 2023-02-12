@@ -116,7 +116,7 @@ var weapons = {
 			"category": "Dagger",
 			"weight": 25,
 			"value": {
-				"dmg": [2,4],
+				"dmg": [2,3],
 				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 1
@@ -139,7 +139,7 @@ var weapons = {
 			"category": "Flail",
 			"weight": 45,
 			"value": {
-				"dmg": [2,4],
+				"dmg": [2,2],
 				"d": 3,
 				"bonusDmg": {},
 				"armorPen": 0,
@@ -160,7 +160,7 @@ var weapons = {
 			"category": "Mace",
 			"weight": 30,
 			"value": {
-				"dmg": [5,6],
+				"dmg": [4,6],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 2,
@@ -179,7 +179,7 @@ var weapons = {
 			"unidentifiedTexture": load("res://Assets/Weapons/MaceDwarvishMace.png"),
 			"type": "Weapon",
 			"category": "Mace",
-			"weight": 45,
+			"weight": 50,
 			"value": {
 				"dmg": [5,6],
 				"d": 1,
@@ -202,10 +202,10 @@ var weapons = {
 			"category": "Sword",
 			"weight": 45,
 			"value": {
-				"dmg": [5,8],
+				"dmg": [4,5],
 				"d": 1,
 				"bonusDmg": {
-					"baseWeapon": 2
+					"baseWeapon": 1
 				},
 				"armorPen": 0,
 				"magicDmg": {
@@ -223,9 +223,9 @@ var weapons = {
 			"unidentifiedTexture": load("res://Assets/Weapons/SwordOrcSword.png"),
 			"type": "Weapon",
 			"category": "Sword",
-			"weight": 55,
+			"weight": 50,
 			"value": {
-				"dmg": [5,7],
+				"dmg": [3,4],
 				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 1
@@ -248,11 +248,9 @@ var weapons = {
 			"category": "Sword",
 			"weight": 25,
 			"value": {
-				"dmg": [5,7],
+				"dmg": [3,4],
 				"d": 1,
-				"bonusDmg": {
-					"baseWeapon": 1
-				},
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
 					"dmg": [1,1],
@@ -271,12 +269,10 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 75,
 			"value": {
-				"dmg": [4,9],
+				"dmg": [6,9],
 				"d": 1,
-				"bonusDmg": {
-					"baseWeapon": 2
-				},
-				"armorPen": 0,
+				"bonusDmg": {},
+				"armorPen": 1,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -296,14 +292,12 @@ var weapons = {
 			"category": "Dagger",
 			"weight": 20,
 			"value": {
-				"dmg": [2,5],
+				"dmg": [1,2],
 				"d": 2,
-				"bonusDmg": {
-					"baseWeapon": 1
-				},
+				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [2,2],
+					"dmg": [1,2],
 					"element": "Thunder"
 				}
 			},
@@ -319,7 +313,7 @@ var weapons = {
 			"category": "Dagger",
 			"weight": 5,
 			"value": {
-				"dmg": [5,5],
+				"dmg": [3,3],
 				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 1
@@ -342,7 +336,7 @@ var weapons = {
 			"category": "Flail",
 			"weight": 35,
 			"value": {
-				"dmg": [2,3],
+				"dmg": [2,2],
 				"d": 3,
 				"bonusDmg": {},
 				"armorPen": 0,
@@ -363,7 +357,7 @@ var weapons = {
 			"category": "Mace",
 			"weight": 50,
 			"value": {
-				"dmg": [7,10],
+				"dmg": [6,9],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 3,
@@ -384,12 +378,12 @@ var weapons = {
 			"category": "Sword",
 			"weight": 50,
 			"value": {
-				"dmg": [7,10],
+				"dmg": [5,6],
 				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 1
 				},
-				"armorPen": 1,
+				"armorPen": 0,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -408,10 +402,10 @@ var weapons = {
 			"category": "Sword",
 			"weight": 35,
 			"value": {
-				"dmg": [8,14],
+				"dmg": [6,7],
 				"d": 1,
 				"bonusDmg": {},
-				"armorPen": 0,
+				"armorPen": 1,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -429,12 +423,12 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 40,
 			"value": {
-				"dmg": [6,13],
+				"dmg": [7,12],
 				"d": 1,
 				"bonusDmg": {
-					"baseWeapon": 3
+					"baseWeapon": 1
 				},
-				"armorPen": 0,
+				"armorPen": 2,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -454,12 +448,12 @@ var weapons = {
 			"category": "Dagger",
 			"weight": 20,
 			"value": {
-				"dmg": [5,7],
+				"dmg": [2,3],
 				"d": 2,
 				"bonusDmg": {},
-				"armorPen": 1,
+				"armorPen": 2,
 				"magicDmg": {
-					"dmg": [5,6],
+					"dmg": [3,4],
 					"element": "Toxix"
 				}
 			},
@@ -476,12 +470,12 @@ var weapons = {
 			"category": "Dagger",
 			"weight": 20,
 			"value": {
-				"dmg": [5,7],
+				"dmg": [3,3],
 				"d": 2,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [3,3],
+					"dmg": [3,4],
 					"element": "Thunder"
 				}
 			},
@@ -498,12 +492,12 @@ var weapons = {
 			"category": "Flail",
 			"weight": 60,
 			"value": {
-				"dmg": [5,7],
+				"dmg": [2,3],
 				"d": 4,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [5, 7],
+					"dmg": [3, 4],
 					"element": "Gleeie'er"
 				}
 			},
@@ -520,12 +514,12 @@ var weapons = {
 			"category": "Flail",
 			"weight": 60,
 			"value": {
-				"dmg": [3,6],
+				"dmg": [2,5],
 				"d": 4,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [2,4],
+					"dmg": [1,3],
 					"element": "Toxix"
 				}
 			},
@@ -542,12 +536,12 @@ var weapons = {
 			"category": "Flail",
 			"weight": 60,
 			"value": {
-				"dmg": [4,6],
+				"dmg": [2,3],
 				"d": 4,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [1,4],
+					"dmg": [2,4],
 					"element": "Frost"
 				}
 			},
@@ -564,7 +558,7 @@ var weapons = {
 			"category": "Mace",
 			"weight": 75,
 			"value": {
-				"dmg": [9,12],
+				"dmg": [10,13],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 6,
@@ -586,12 +580,12 @@ var weapons = {
 			"category": "Mace",
 			"weight": 75,
 			"value": {
-				"dmg": [6,9],
+				"dmg": [5,6],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 5,
 				"magicDmg": {
-					"dmg": [8,12],
+					"dmg": [4,8],
 					"element": "Fleir"
 				}
 			},
@@ -613,7 +607,7 @@ var weapons = {
 				"bonusDmg": {
 					"giants": 6
 				},
-				"armorPen": 5,
+				"armorPen": 4,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -632,12 +626,12 @@ var weapons = {
 			"category": "Sword",
 			"weight": 50,
 			"value": {
-				"dmg": [6,9],
+				"dmg": [5,6],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [6,8],
+					"dmg": [3,8],
 					"element": "Fleir"
 				}
 			},
@@ -654,12 +648,12 @@ var weapons = {
 			"category": "Sword",
 			"weight": 50,
 			"value": {
-				"dmg": [6,9],
+				"dmg": [5,6],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [6,8],
+					"dmg": [4,6],
 					"element": "Frost"
 				}
 			},
@@ -676,12 +670,12 @@ var weapons = {
 			"category": "Sword",
 			"weight": 50,
 			"value": {
-				"dmg": [6,9],
+				"dmg": [4,6],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [6,8],
+					"dmg": [4,7],
 					"element": "Thunder"
 				}
 			},
@@ -698,12 +692,14 @@ var weapons = {
 			"category": "Sword",
 			"weight": 50,
 			"value": {
-				"dmg": [5,8],
+				"dmg": [5,6],
 				"d": 1,
-				"bonusDmg": {},
+				"bonusDmg": {
+					"baseWeapon": 1
+				},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [5,7],
+					"dmg": [3,4],
 					"element": "Gleeie'er"
 				}
 			},
@@ -720,9 +716,11 @@ var weapons = {
 			"category": "Sword",
 			"weight": 75,
 			"value": {
-				"dmg": [15,20],
+				"dmg": [8,14],
 				"d": 1,
-				"bonusDmg": {},
+				"bonusDmg": {
+					"baseWeapon": 2
+				},
 				"armorPen": 3,
 				"magicDmg": {
 					"dmg": [0,0],
@@ -742,12 +740,12 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 202,
 			"value": {
-				"dmg": [18,27],
+				"dmg": [17,25],
 				"d": 1,
 				"bonusDmg": {
 					"dragons": 6
 				},
-				"armorPen": 5,
+				"armorPen": 3,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -766,7 +764,7 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 15,
 			"value": {
-				"dmg": [6,9],
+				"dmg": [3,7],
 				"d": 2,
 				"bonusDmg": {},
 				"armorPen": 0,

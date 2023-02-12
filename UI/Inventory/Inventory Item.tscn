@@ -17,7 +17,7 @@ margin_right = 0.0
 margin_bottom = 15.0
 mouse_filter = 2
 
-[node name="Alignment" parent="." instance=ExtResource( 2 )]
+[node name="Piety" parent="." instance=ExtResource( 2 )]
 margin_left = 4.0
 margin_right = 4.0
 margin_bottom = 15.0

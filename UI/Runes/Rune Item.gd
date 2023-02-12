@@ -9,14 +9,14 @@ func setValues(_item):
 	id = _item.id
 	
 	$ItemContainer/Name.text = str(_item.itemName)
-	if _item.notIdentified.alignment:
-		$ItemContainer/Alignment.text = str(_item.alignment)
+	if _item.notIdentified.piety:
+		$ItemContainer/Piety.text = str(_item.piety)
 	else:
-		$ItemContainer/Alignment.text = "Unknown"
+		$ItemContainer/Piety.text = "?"
 	if _item.notIdentified.enchantment:
 		$ItemContainer/Enchantment.text = str(_item.enchantment)
 	else:
-		$ItemContainer/Enchantment.text = "Unknown"
+		$ItemContainer/Enchantment.text = "?"
 	
 	equipmentTexture = _item.getTexture()
 

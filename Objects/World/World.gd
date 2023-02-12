@@ -131,36 +131,36 @@ func setUpGameObjects(_playerData = null):
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
-#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "alignment": "cursed" })
-#		$Items/Items.createItem("Dragonslayer", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "alignment": "cursed" })
-#		$Items/Items.createItem("burning shield", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("burning gauntlets", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("burning mail chausses", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("bag of holding", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("bag of weight", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("leather bag", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("water potion", null, 1, true, { "alignment": "blessed" })
-#		$Items/Items.createItem("water potion", null, 1, true, { "alignment": "cursed" })
-#		$Items/Items.createItem("Eario of Thunder", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("Luirio of adjacent", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("Heario of true", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("oil lamp", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("key", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("wand of summon critter", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "uncursed" })
-#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
-#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "alignment": "cursed" })
-#		$Items/Items.createItem("dwarvish laysword", null, 1, true, { "alignment": "uncursed" })
+#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "reverent" })
+#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
+#		$Items/Items.createItem("Dragonslayer", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
+#		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
+#		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
+#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "piety": "reverent" })
+#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "piety": "blasphemous" })
+#		$Items/Items.createItem("burning shield", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("burning gauntlets", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("burning mail chausses", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("bag of holding", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("bag of weight", null, 1, true, { "piety": "reverent" })
+#		$Items/Items.createItem("leather bag", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("water potion", null, 1, true, { "piety": "reverent" })
+#		$Items/Items.createItem("water potion", null, 1, true, { "piety": "blasphemous" })
+#		$Items/Items.createItem("Eario of Thunder", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("Luirio of adjacent", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("Heario of true", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("oil lamp", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("key", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("wand of summon critter", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "piety": "blasphemous" })
+#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "piety": "blasphemous" })
+#		$Items/Items.createItem("dwarvish laysword", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("eario of toxix", null, 1, true)
 #		$Items/Items.createItem("eario of fleir", null, 1, true)
 #		$Items/Items.createItem("eario of frost", null, 1, true)
@@ -862,7 +862,16 @@ func openMenu(_menu, _playerTile = null):
 				var _items
 				_items = $Critters/"0"/Inventory.getItemsOfType(["potion", "tool"], null, ["corpse"])
 				for _itemId in _items:
-					if get_node("Items/{itemId}".format({ "itemId": _itemId })).category != null and get_node("Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+					if (
+						(
+							get_node("Items/{itemId}".format({ "itemId": _itemId })).category != null and
+							get_node("Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container")
+						) or
+						get_node("Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn("credit card") or
+						get_node("Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn("lockpick") or
+						get_node("Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn("key") or
+						get_node("Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn("magic key")
+					):
 						_items.erase(_itemId)
 				$UI/UITheme/ItemManagement.items = _items
 				$UI/UITheme/ItemManagement.showItemManagementList("Use what?")
@@ -881,15 +890,8 @@ func castWith(_playerTile):
 
 func interactWith(_tileToInteractWith):
 	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
-		match get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter })).critterName.to_lower():
-			"wolf":
-				Globals.gameConsole.addLog("You try to pet the wolf. It tries to bite you. Bad doggy!.")
-			"wolf":
-				Globals.gameConsole.addLog("You try to pet the Warg. It growls at you. Scary!")
-			"gearh":
-				Globals.gameConsole.addLog("You try to pet the gearh. It tries to eat you. Aaah!")
-			_:
-				Globals.gameConsole.addLog("You can't interact with the {critterName}.".format({ "critterName": get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter })).critterName }))
+		var _critter = get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }))
+		GlobalGameConsoleMessages.getInteractionFlavorMessage(_critter.critterName, _critter.aI.aI)
 	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
 			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):

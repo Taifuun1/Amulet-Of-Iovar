@@ -12,6 +12,101 @@ func getRandomMessageByType(_critterName, _messageType):
 	else:
 		return globalGameConsoleMessages[_critterName][_messageType][randi() % globalGameConsoleMessages[_critterName][_messageType].size()]
 
+func getInteractionFlavorMessage(_critterName, _critterAI):
+	if _critterAI.matchn("aggressive") or _critterAI.matchn("slow aggressive") or _critterAI.matchn("skulking"):
+		match _critterName.to_lower():
+			"fiddler crab":
+				Globals.gameConsole.addLog("The fiddler crab tries to pincer you.")
+			"ringed seal", "eyebrow seal":
+				Globals.gameConsole.addLog("The seal doesn't accept your pats.")
+			"wolf":
+				Globals.gameConsole.addLog("You try to pet the wolf. It tries to bite you. Bad doggy!.")
+			"wolf":
+				Globals.gameConsole.addLog("You try to pet the Warg. It growls at you. Scary!")
+			"gearh":
+				Globals.gameConsole.addLog("You try to pet the gearh. It tries to eat you. Aaah!")
+			"elhybar":
+				Globals.gameConsole.addLog("Keep your trogdolyte hands to yourself!", _critterName)
+			"tidoh tel'hydrad":
+				Globals.gameConsole.addLog("Beatiful goblin hands you have! Hahaha!", _critterName)
+			"shin'kor leve'er":
+				Globals.gameConsole.addLog("...", _critterName)
+			"elder Dragon":
+				Globals.gameConsole.addLog("Your headpats mean nothing, peon.", _critterName)
+			"iovar":
+				Globals.gameConsole.addLog("Keep thy hands off me, cur!", _critterName)
+			"gryonem centaur":
+				Globals.gameConsole.addLog("Thy shalt not converse in war, weakling.", _critterName)
+			"dwarf miner", "dwarf engineer", "dwarf smith", "dwarf contirer":
+				Globals.gameConsole.addLog("Got any gems?", _critterName)
+			"elf hunter", "elf assassin", "elf noble":
+				Globals.gameConsole.addLog("Good day.", _critterName)
+			"elf king":
+				Globals.gameConsole.addLog("Your feet disgrace these halls.", _critterName)
+			"cat":
+				Globals.gameConsole.addLog("You try to pet the cat. It tries to scratch you. Ow!")
+			"lynx":
+				Globals.gameConsole.addLog("You try to pet the lynx. It tries to scratch you. Ow!")
+			"tiger":
+				Globals.gameConsole.addLog("You try to pet the tiger. It tries to eat you. Aaah!")
+			"shopkeeper":
+				Globals.gameConsole.addLog("Aaah!", _critterName)
+			"guard", "guard captain":
+				Globals.gameConsole.addLog("Stop! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit.", _critterName)
+			"outlaw watcher", "outlaw fusiee'er", "outlaw merchandiee'er":
+				Globals.gameConsole.addLog("I'll get ya!", _critterName)
+			"iovars cultist acolyte", "iovars cultist":
+				Globals.gameConsole.addLog("Die, interloper!", _critterName)
+			"half-lich":
+				Globals.gameConsole.addLog("[i]Rattles bones aggressively[/i]", _critterName)
+			"lich", "grand lich", "arch-lich":
+				Globals.gameConsole.addLog("You can't escape to death.", _critterName)
+			_:
+				Globals.gameConsole.addLog("You can't interact with the {critterName}.".format({ "critterName": _critterName }))
+	else:
+		match _critterName.to_lower():
+			"fiddler crab":
+				Globals.gameConsole.addLog("The fiddler crab is unimpressed by your pats.")
+			"ringed seal", "eyebrow seal":
+				Globals.gameConsole.addLog("The seal accepts your pats.")
+			"wolf":
+				Globals.gameConsole.addLog("You pet the wolf. It woofs exitedly. Good doggy!.")
+			"wolf":
+				Globals.gameConsole.addLog("You pet the Warg. It stares at you. Scary!")
+			"gearh":
+				Globals.gameConsole.addLog("You pet the gearh. It looks like it wants to eat you. Aaah!")
+			"gryonem centaur":
+				Globals.gameConsole.addLog("A true warrior is always vigilant.")
+			"dwarf miner", "dwarf engineer", "dwarf smith", "dwarf contirer":
+				Globals.gameConsole.addLog("Got any gems?")
+			"elf hunter", "elf assassin", "elf noble":
+				Globals.gameConsole.addLog("Good day.")
+			"elf king":
+				Globals.gameConsole.addLog("Your feet disgrace these halls.")
+			"cat":
+				Globals.gameConsole.addLog("You pet the cat.")
+				Globals.gameConsole.addLog("[i]Purr[/i]", _critterName)
+			"lynx":
+				Globals.gameConsole.addLog("You pet the lynx.")
+				Globals.gameConsole.addLog("[i]Purr[/i]", _critterName)
+			"tiger":
+				Globals.gameConsole.addLog("You pet the tiger.")
+				Globals.gameConsole.addLog("[i]Purr[/i]", _critterName)
+			"shopkeeper":
+				Globals.gameConsole.addLog("Only the best wares here.")
+			"guard", "guard captain":
+				Globals.gameConsole.addLog("G'day.", _critterName)
+			"outlaw watcher", "outlaw fusiee'er", "outlaw merchandiee'er":
+				Globals.gameConsole.addLog("Mmph.", _critterName)
+			"iovars cultist acolyte", "iovars cultist":
+				Globals.gameConsole.addLog("Hello, friend.", _critterName)
+			"half-lich":
+				Globals.gameConsole.addLog("[i]Rattles bones conversely[/i]", _critterName)
+			"lich", "grand lich", "arch-lich":
+				Globals.gameConsole.addLog("Hello, young one.", _critterName)
+			_:
+				Globals.gameConsole.addLog("You can't interact with the {critterName}.".format({ "critterName": _critterName }))
+
 var globalGameConsoleMessages = {
 	"Iovar": {
 		"spawn": [

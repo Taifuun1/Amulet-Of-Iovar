@@ -297,7 +297,7 @@ func setUpDungeon():
 		newMiningOutpost = load(levelPaths.tidohMiningOutpost1).instance()
 	else:
 		newMiningOutpost = load(levelPaths.tidohMiningOutpost2).instance()
-	newMiningOutpost.create("minesOfTidoh", "minesOfTidoh", "Tidoh mining outpost", 5)
+	newMiningOutpost.create("miningOutpost", "minesOfTidoh", "Tidoh mining outpost", 5)
 	levels.minesOfTidoh.append(newMiningOutpost)
 	$Levels.add_child(newMiningOutpost)
 

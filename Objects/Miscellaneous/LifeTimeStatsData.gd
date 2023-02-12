@@ -311,7 +311,7 @@ var items = {
 	},
 	"Water potion": {
 		"knowledge": false,
-		"description": "Water. Dip scroll into uncursed water potion to get a blank scroll. Bless or curse items by dipping into respective variants of water potion."
+		"description": "Water. Dip scroll into formal water potion to get a blank scroll. Bless or curse items by dipping into respective variants of water potion."
 	},
 	"Soda bottle": {
 		"knowledge": false,
@@ -351,7 +351,7 @@ var items = {
 	},
 	"Potion of hunger": {
 		"knowledge": false,
-		"description": "Makes you more hungry. Blessed potion gives nourishment."
+		"description": "Makes you more hungry. Reverent potion gives nourishment."
 	},
 	"Potion of Healaga": {
 		"knowledge": false,
@@ -447,7 +447,7 @@ var items = {
 	},
 	"Scroll of identify": {
 		"knowledge": false,
-		"description": "Identifies an item in your inventory. Blessed scroll identifies all items."
+		"description": "Identifies an item in your inventory. Reverent scroll identifies all items."
 	},
 	"Scroll of create food": {
 		"knowledge": false,
@@ -471,23 +471,31 @@ var items = {
 	},
 	"Scroll of destroy armor": {
 		"knowledge": false,
-		"description": "Destroys a piece of worn armor. Blessed scroll disenchants an item."
+		"description": "Destroys a piece of worn armor. Reverent scroll disenchants an item."
 	},
 	"Scroll of summon critter": {
 		"knowledge": false,
-		"description": "Summons critters to you. Blessed scroll summons neutral critters."
+		"description": "Summons critters to you. Reverent scroll summons neutral critters."
 	},
 	"Scroll of create potion": {
 		"knowledge": false,
-		"description": "Creates potions. Blessed scroll creates more."
+		"description": "Creates potions. Reverent scroll creates more."
 	},
 	"Scroll of teleport": {
 		"knowledge": false,
-		"description": "Scroll that teleports you. Cursed scroll teleports between levels."
+		"description": "Scroll that teleports you. Blasphemous scroll teleports between levels."
+	},
+	"Scroll of reverent scripture": {
+		"knowledge": false,
+		"description": "Reveres items when read on altar with items. Blasphemous scripture blaphemises an item."
+	},
+	"Scroll of blasphemous scripture": {
+		"knowledge": false,
+		"description": "Blasphemises items read on altar with items. Blasphemous scripture reveres an item."
 	},
 	"Scroll of genocide": {
 		"knowledge": false,
-		"description": "Genocides a type of monster. Blessed scroll genocides a whole race of critters. Cursed scroll summons all the critters to you."
+		"description": "Genocides a type of monster. Reverent scroll genocides a whole race of critters. Blasphemous scroll summons all the critters to you."
 	},
 	"Leather bag": {
 		"knowledge": false,
@@ -571,7 +579,7 @@ var items = {
 	},
 	"Wand of turn lock": {
 		"knowledge": false,
-		"description": "Point it at a door to turn the lock. Doesn't always work, unless its blessed."
+		"description": "Point it at a door to turn the lock. Doesn't always work, unless its reverent."
 	},
 	"Wand of digging": {
 		"knowledge": false,
@@ -611,7 +619,7 @@ var items = {
 	},
 	"Wand of summon critter": {
 		"knowledge": false,
-		"description": "Summons critters to you. Blessed wand summons neutral critters."
+		"description": "Summons critters to you. Reverent wand summons neutral critters."
 	},
 	"Wand of wishing": {
 		"knowledge": false,

@@ -7,7 +7,7 @@ var floatingSpheres = [
 		"aI": "Slow aggressive",
 		"aggroDistance": 3,
 		"texture": load("res://Assets/Critters/FloatingSphereFloatingEye.png"),
-		"alignment": "Slow Aggressive",
+		"piety": "Slow Aggressive",
 		"level": 3,
 		"expDropAmount": 7,
 		"hp": 7,

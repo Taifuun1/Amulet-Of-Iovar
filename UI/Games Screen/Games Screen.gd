@@ -2,6 +2,11 @@ extends Control
 
 var selectedGame = null
 
+func sortFileNames(_fileNameA, _fileNameB):
+	if _fileNameA < _fileNameB:
+		return true
+	return false
+
 func _ready():
 	var _fileNames = []
 	var directory = Directory.new()
@@ -15,7 +20,11 @@ func _ready():
 	else:
 		push_error("An error occurred when trying to access the path.")
 	
+	print(_fileNames)
+	_fileNames.sort_custom(self, "sortFileNames")
+	print(_fileNames)
 	_fileNames.invert()
+	print(_fileNames)
 	var file = File.new()
 	for _fileName in _fileNames:
 		file.open("user://Games/{fileName}".format({ "fileName": _fileName }), File.READ)

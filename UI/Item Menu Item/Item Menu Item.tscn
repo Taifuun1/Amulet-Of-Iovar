@@ -21,7 +21,7 @@ margin_left = 28.0
 margin_right = 28.0
 mouse_filter = 2
 
-[node name="Alignment" parent="." instance=ExtResource( 1 )]
+[node name="Piety" parent="." instance=ExtResource( 1 )]
 margin_left = 32.0
 margin_right = 32.0
 mouse_filter = 2

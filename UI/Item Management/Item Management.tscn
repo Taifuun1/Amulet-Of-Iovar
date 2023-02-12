@@ -52,13 +52,13 @@ size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "-"
 
-[node name="Alignment" type="Label" parent="ItemManagementContainer/TitleContainer"]
+[node name="Piety" type="Label" parent="ItemManagementContainer/TitleContainer"]
 margin_left = 380.0
 margin_right = 756.0
 margin_bottom = 33.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
-text = "Alignment"
+text = "Piety"
 
 [node name="Enchantment" type="Label" parent="ItemManagementContainer/TitleContainer"]
 margin_left = 760.0

@@ -4,7 +4,7 @@ var id
 var itemName
 var unidentifiedItemName
 var type
-var alignment
+var piety
 var enchantment
 var stackable
 
@@ -22,13 +22,13 @@ func setValues(_item):
 		$Name.createRichTextLabel(_item.itemName, _item.rarity)
 	else:
 		$Name.createRichTextLabel(_item.itemName)
-	if _item.notIdentified.alignment:
-		$Alignment.createRichTextLabel(_item.alignment)
+	if _item.notIdentified.piety:
+		$Piety.createRichTextLabel(_item.piety)
 	else:
-		$Alignment.createRichTextLabel("Unknown")
+		$Piety.createRichTextLabel("?")
 	if _item.notIdentified.enchantment:
 		$Enchantment.createRichTextLabel(str(_item.enchantment))
 	else:
-		$Enchantment.createRichTextLabel("Unknown")
+		$Enchantment.createRichTextLabel("?")
 	if _item.amount:
 		$Amount.createRichTextLabel(str(_item.amount))

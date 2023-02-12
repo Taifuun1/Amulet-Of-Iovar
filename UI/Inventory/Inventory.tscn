@@ -72,13 +72,13 @@ size_flags_vertical = 5
 text = "Name"
 valign = 1
 
-[node name="Alignment" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
+[node name="Piety" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
 margin_left = 380.0
 margin_right = 756.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "Alignment"
+text = "Piety"
 valign = 1
 
 [node name="Enchantment" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]

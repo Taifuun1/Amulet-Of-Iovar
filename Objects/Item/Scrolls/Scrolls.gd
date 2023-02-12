@@ -171,30 +171,6 @@ var scrolls = {
 			"stackable": true
 		}
 	],
-#	"rare": [
-#		{
-#			"itemName": "Scroll of holy scripture",
-#			"unidentifiedItemName": null,
-#			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
-#			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
-#			"type": "Scroll",
-#			"category": null,
-#			"value": null,
-#			"enchantable": true,
-#			"stackable": false
-#		},
-#		{
-#			"itemName": "Scroll of unholy scripture",
-#			"unidentifiedItemName": null,
-#			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
-#			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
-#			"type": "Scroll",
-#			"category": null,
-#			"value": null,
-#			"enchantable": true,
-#			"stackable": false
-#		}
-#	],
 	"rare": [
 		{
 			"itemName": "Tome of Knowledge",
@@ -208,6 +184,32 @@ var scrolls = {
 			"points": 250,
 			"enchantable": false,
 			"stackable": true
+		},
+		{
+			"itemName": "Scroll of reverent scripture",
+			"unidentifiedItemName": null,
+			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"type": "Scroll",
+			"category": null,
+			"weight": 5,
+			"value": null,
+			"points": 25,
+			"enchantable": true,
+			"stackable": false
+		},
+		{
+			"itemName": "Scroll of blasphemous scripture",
+			"unidentifiedItemName": null,
+			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"type": "Scroll",
+			"category": null,
+			"weight": 5,
+			"value": null,
+			"points": 25,
+			"enchantable": true,
+			"stackable": false
 		},
 		{
 			"itemName": "Scroll of genocide",

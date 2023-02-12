@@ -40,9 +40,9 @@ var wands = {
 			"value": {
 				"charges": [2, 16],
 				"distance": {
-					"blessed": 7,
-					"uncursed": 4,
-					"cursed": 2
+					"reverent": 7,
+					"formal": 4,
+					"blasphemous": 2
 				}
 			},
 			"enchantable": false,
@@ -61,12 +61,12 @@ var wands = {
 			"value": {
 				"charges": [4, 8],
 				"distance": {
-					"blessed": 7,
-					"uncursed": 5,
-					"cursed": 3
+					"reverent": 7,
+					"formal": 5,
+					"blasphemous": 3
 				},
 				"dmg": {
-					"blessed": [
+					"reverent": [
 						{
 							"dmg": [6,12],
 							"bonusDmg": {},
@@ -77,7 +77,7 @@ var wands = {
 							}
 						}
 					],
-					"uncursed": [
+					"formal": [
 						{
 							"dmg": [5,10],
 							"bonusDmg": {},
@@ -88,7 +88,7 @@ var wands = {
 							}
 						}
 					],
-					"cursed": [
+					"blasphemous": [
 						{
 							"dmg": [4,8],
 							"bonusDmg": {},
@@ -115,12 +115,12 @@ var wands = {
 			"value": {
 				"charges": [5, 10],
 				"distance": {
-					"blessed": 8,
-					"uncursed": 6,
-					"cursed": 4
+					"reverent": 8,
+					"formal": 6,
+					"blasphemous": 4
 				},
 				"dmg": {
-					"blessed": [
+					"reverent": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -131,7 +131,7 @@ var wands = {
 							}
 						}
 					],
-					"uncursed": [
+					"formal": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -142,7 +142,7 @@ var wands = {
 							}
 						}
 					],
-					"cursed": [
+					"blasphemous": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -169,12 +169,12 @@ var wands = {
 			"value": {
 				"charges": [6, 10],
 				"distance": {
-					"blessed": 7,
-					"uncursed": 5,
-					"cursed": 3
+					"reverent": 7,
+					"formal": 5,
+					"blasphemous": 3
 				},
 				"dmg": {
-					"blessed": [
+					"reverent": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -185,7 +185,7 @@ var wands = {
 							}
 						}
 					],
-					"uncursed": [
+					"formal": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -196,7 +196,7 @@ var wands = {
 							}
 						}
 					],
-					"cursed": [
+					"blasphemous": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -223,12 +223,12 @@ var wands = {
 			"value": {
 				"charges": [3, 7],
 				"distance": {
-					"blessed": 10,
-					"uncursed": 7,
-					"cursed": 5
+					"reverent": 10,
+					"formal": 7,
+					"blasphemous": 5
 				},
 				"dmg": {
-					"blessed": [
+					"reverent": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -239,7 +239,7 @@ var wands = {
 							}
 						}
 					],
-					"uncursed": [
+					"formal": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -250,7 +250,7 @@ var wands = {
 							}
 						}
 					],
-					"cursed": [
+					"blasphemous": [
 						{
 							"dmg": [0,0],
 							"bonusDmg": {},
@@ -292,7 +292,7 @@ var wands = {
 			"value": {
 				"charges": [4, 8],
 				"dmg": {
-					"uncursed": [
+					"formal": [
 						{
 							"dmg": [8,12],
 							"bonusDmg": {},
@@ -303,7 +303,7 @@ var wands = {
 							}
 						}
 					],
-					"cursed": [
+					"blasphemous": [
 						{
 							"dmg": [18,22],
 							"bonusDmg": {},

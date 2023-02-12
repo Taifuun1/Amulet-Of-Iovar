@@ -13,7 +13,7 @@ var value
 var points = null
 var amount = 1
 
-var alignment
+var piety
 var enchantment = null
 
 var identifiedItemName
@@ -22,7 +22,7 @@ var itemTexture
 var unidenfiedItemTexture
 var notIdentified = {
 	"name": false,
-	"alignment": false,
+	"piety": false,
 	"enchantment": false
 }
 
@@ -92,18 +92,18 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	else:
 		amount = int(_amount)
 	
-	if _item.has("alignment"):
-		alignment = _item.alignment
-	elif _extraData.has("alignment"):
-		alignment = _extraData.alignment
+	if _item.has("piety"):
+		piety = _item.piety
+	elif _extraData.has("piety"):
+		piety = _extraData.piety
 	else:
 		if randi() % 5 == 0:
 			if randi() % 2 == 0:
-				alignment = "Blessed"
+				piety = "Reverent"
 			else:
-				alignment = "Cursed"
+				piety = "Blasphemous"
 		else:
-			alignment = "Uncursed"
+			piety = "Formal"
 	
 	if _item.has("enchantment"):
 		enchantment = _item.enchantment
@@ -246,12 +246,12 @@ func calculateWeaponAttackIncrease(_stats):
 		if _critterClass.matchn("mercenary"):
 			_additionalDamage += 1
 		
-		if _playerSkills.sword.level >= 3:
-			_additionalDamage += 4
+		if _playerSkills.sword.level == 3:
+			_additionalDamage += 3
 			_d += 1
-		elif _playerSkills.sword.level >= 2:
+		elif _playerSkills.sword.level == 2:
 			_additionalDamage += 2
-		elif _playerSkills.sword.level >= 1:
+		elif _playerSkills.sword.level == 1:
 			_additionalDamage += 1
 		
 		_dmg = int(_stats.balance / 7 + _additionalDamage)
@@ -274,12 +274,12 @@ func calculateWeaponAttackIncrease(_stats):
 		if _critterClass.matchn("mercenary"):
 			_additionalDamage += 1
 		
-		if _playerSkills["two-hander"].level >= 3:
-			_additionalDamage += 7
-		elif _playerSkills["two-hander"].level >= 2:
-			_additionalDamage += 3
-		elif _playerSkills["two-hander"].level >= 1:
-			_additionalDamage += 1
+		if _playerSkills["two-hander"].level == 3:
+			_additionalDamage += 5
+		elif _playerSkills["two-hander"].level == 2:
+			_additionalDamage += 2
+		elif _playerSkills["two-hander"].level == 0:
+			_additionalDamage -= 2
 		
 		_dmg = int(_stats.strength / 10 + _additionalDamage)
 		
@@ -295,13 +295,13 @@ func calculateWeaponAttackIncrease(_stats):
 		if _critterClass.matchn("mercenary"):
 			_additionalDamage += 1
 		
-		if _playerSkills.dagger.level >= 3:
-			_additionalDamage += 2
-		elif _playerSkills.dagger.level >= 2:
+		if _playerSkills.dagger.level == 3:
 			_additionalDamage += 1
 			_d += 1
-		elif _playerSkills.dagger.level >= 1:
+		elif _playerSkills.dagger.level == 2:
 			_additionalDamage += 1
+		elif _playerSkills.dagger.level == 0:
+			_additionalDamage -= 1
 		
 		if _stats.legerity > 29:
 			_d += 2
@@ -328,12 +328,14 @@ func calculateWeaponAttackIncrease(_stats):
 		if _critterClass.matchn("mercenary"):
 			_additionalDamage += 1
 		
-		if _playerSkills.mace.level >= 3:
+		if _playerSkills.mace.level == 3:
 			_additionalDamage += 6
-		elif _playerSkills.mace.level >= 2:
+		elif _playerSkills.mace.level == 2:
 			_additionalDamage += 3
-		elif _playerSkills.mace.level >= 1:
+		elif _playerSkills.mace.level == 1:
 			_additionalDamage += 1
+		elif _playerSkills.mace.level == 0:
+			_additionalDamage -= 1
 		
 		_dmg = int((_stats.strength / 8) + (_stats.balance / 8) + _additionalDamage)
 		
@@ -356,13 +358,12 @@ func calculateWeaponAttackIncrease(_stats):
 		if _critterClass.matchn("mercenary"):
 			_additionalDamage += 1
 		
-		if _playerSkills.flail.level >= 3:
-			_d += 3
-		elif _playerSkills.flail.level >= 2:
-			_additionalDamage += 1
+		if _playerSkills.flail.level == 3:
 			_d += 2
-		elif _playerSkills.flail.level >= 1:
+		elif _playerSkills.flail.level == 2:
 			_d += 1
+		elif _playerSkills.flail.level == 0:
+			_d -= 1
 		
 		if _stats.legerity > 31:
 			_d += 3
@@ -399,7 +400,7 @@ func checkItemIdentification():
 		itemName = identifiedItemName
 		$ItemSprite.texture = itemTexture
 
-func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
+func identifyItem(_identifyName, _identifyPiety, _identifyEnchantment):
 	if _identifyName:
 		itemName = identifiedItemName
 		$ItemSprite.texture = itemTexture
@@ -409,8 +410,8 @@ func identifyItem(_identifyName, _identifyAlignment, _identifyEnchantment):
 			!GlobalItemInfo.globalItemInfo[identifiedItemName].identified
 		):
 			GlobalItemInfo.globalItemInfo[identifiedItemName].identified = true
-	if _identifyAlignment:
-		notIdentified.alignment = true
+	if _identifyPiety:
+		notIdentified.piety = true
 	if _identifyEnchantment:
 		notIdentified.enchantment = true
 
@@ -419,8 +420,11 @@ func addContainer(_extraData = {  }, _containerContents = []):
 	containerWeight = weight
 	
 	if _extraData.has("randomSpawn") and _extraData.randomSpawn == true:
-		for _index in randi() % 3 + 1:
-			container.append($"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), Vector2(0,0), 1, false, {  }, null))
+		if randi() % 9 == 0:
+			for _index in randi() % 3 + 1:
+				container.append($"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(true), Vector2(0,0), 1, false, {  }, null))
+		elif randi() % 2 == 0:
+			container.append($"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(true), Vector2(0,0), 1, false, {  }, null))
 		if randi() % 3 == 0:
 			container.append($"/root/World/Items/Items".createItem("goldPieces", Vector2(0,0), randi() % 57 + 1, false, {  }, null))
 	elif _extraData.has("specificSpawn"):
@@ -437,7 +441,7 @@ func getItemSaveData():
 		value = value,
 		points = points,
 		amount = amount,
-		alignment = alignment,
+		piety = piety,
 		enchantment = enchantment,
 		identifiedItemName = identifiedItemName,
 		unidentifiedItemName = unidentifiedItemName,

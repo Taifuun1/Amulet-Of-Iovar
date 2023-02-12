@@ -83,7 +83,7 @@ var banker = {
 	quote = "The free market is the cornerstone of society.",
 	race = "Human",
 	justice = "Laissez-faire",
-	hp = 12,
+	hp = 9,
 	mp = 12,
 	stats = {
 		strength = 5,
@@ -101,11 +101,10 @@ var banker = {
 	beliefIncrease = 1.2,
 	visageIncrease = 1.2,
 	wisdomIncrease = 1,
-	resistances = [  ],
-	neutralClasses = [],
+	resistances = [],
+	neutralClasses = ["humans"],
 	items = {
-		"Orc dagger": 1,
-		"Adorned helmet": 1,
+		"Dwarvish laysword": 1,
 		"Credit card": 1,
 		"Official mail": [4, 10],
 		"Ring of Frost resistance": 1,
@@ -128,7 +127,7 @@ var banker = {
 		},
 		"dagger": {
 			"experience": 0,
-			"level": 1,
+			"level": 0,
 			"skillcap": 2
 		},
 		"mace": {
@@ -144,7 +143,7 @@ var banker = {
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 1
 		}
 	},
 	"texture": load("res://Assets/Classes/Banker.png")
@@ -323,7 +322,7 @@ var mercenary = {
 	visageIncrease = 1,
 	wisdomIncrease = 1,
 	resistances = ["frost"],
-	neutralClasses = ["humans"],
+	neutralClasses = ["outlaws"],
 	items = {
 		"Dull two-hander": 1,
 		"Bucket helmet": 1,
@@ -565,7 +564,6 @@ var savant = {
 		"Scroll of identify": [1, 2],
 		"Eario of Frost": 1,
 		"Luirio of point": 1,
-		"Wand of light": 1,
 		"Wand of Thunder": 1,
 		"Orange": 1,
 		"SPAM": 1
