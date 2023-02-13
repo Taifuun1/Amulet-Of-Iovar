@@ -10,7 +10,7 @@ var orcs = [
 		"piety": "Neutral",
 		"level": 3,
 		"expDropAmount": 3,
-		"hp": 8,
+		"hp": 9,
 		"mp": 0,
 		"ac": 0,
 		"magicac": 0,

@@ -81,6 +81,7 @@ func _onSaveAndExitpressed():
 		$"/root/World/Save".deleteData(StartingData.selectedSave)
 	
 	stats.ascended = ascended
+	stats.gameNumber = _lifeTimeStats["Game count"]
 	
 	$"/root/World/Save".saveData("Game{gameCount}".format({ "gameCount": _lifeTimeStats["Game count"] }), "Games", stats)
 	

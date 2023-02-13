@@ -1,6 +1,15 @@
 
 var banditCompoundSpawn1 = [
 	{
+		"tiles": Vector2(46,7),
+		"critters": {
+			"races": null,
+			"names": "Shin'kor Leve'er"
+		},
+		"chance": 100,
+		"isDeactivated": 7
+	},
+	{
 		"tiles": PoolVector2Array([
 			Vector2(18,2),
 			Vector2(21,4),
@@ -190,6 +199,15 @@ var banditCompoundSpawn1 = [
 ]
 
 var banditCompoundSpawn2 = [
+	{
+		"tiles": Vector2(7,7),
+		"critters": {
+			"races": null,
+			"names": "Shin'kor Leve'er"
+		},
+		"chance": 100,
+		"isDeactivated": 9
+	},
 	{
 		"tiles": PoolVector2Array([
 			Vector2(41,1),

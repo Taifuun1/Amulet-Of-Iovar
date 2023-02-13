@@ -118,7 +118,6 @@ func getItemsOfType(_types, _category = null, _miscellaneousTypes = null):
 			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 			for _miscellaneousType in _miscellaneousTypes:
 				if _item.type.matchn(_miscellaneousType):
-					print("aaded misc", _item.type)
 					_items.append(_itemId)
 	if _category:
 		for _itemId in _items.duplicate(true):

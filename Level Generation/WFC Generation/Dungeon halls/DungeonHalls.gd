@@ -28,6 +28,7 @@ func createDungeon(_stairData):
 		placeStairs("DUNGEON", _stairData)
 		checkAllRoomsAreAccessible()
 		if areAllStairsConnected():
+			changeDoorStates()
 			placeContainers({
 				"chest": {
 					"amount": randi() % 3 + 1
@@ -109,3 +110,12 @@ func checkAllRoomsAreAccessible():
 #			updateTilemapToGrid()
 			pathFind([Globals.tiles.WALL_DUNGEON])
 			pathFindWeightedPath([], [{ "tile": "WALL_DUNGEON", "weighting": 15 }])
+
+func changeDoorStates():
+	for x in grid.size():
+		for y in grid[x].size():
+			if grid[x][y].tile == Globals.tiles.DOOR_CLOSED:
+				if randi() % 10 == 0:
+					grid[x][y].tile = Globals.tiles.DOOR_OPEN
+				elif randi() % 5 == 0:
+					grid[x][y].interactable = Globals.interactables.LOCKED

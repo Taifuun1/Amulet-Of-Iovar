@@ -195,7 +195,7 @@ func create(_data = null):
 	
 	if _playerData.has("items"):
 		for _item in _playerData.items.keys():
-			var _itemId = $"/root/World/Items/Items".createItem(_item, null, _playerData.items[_item], true)
+			var _itemId = $"/root/World/Items/Items".createItem(_item, null, _playerData.items[_item], true, { "piety": "formal" })
 	
 	var _texture
 	if typeof(_playerData.texture) == TYPE_STRING:
@@ -377,6 +377,7 @@ func pickUpItems(_playerTile, _items, _grid):
 	var _itemsLogString = PoolStringArray(_itemsLog).join(" ")
 	if !_itemsLogString.empty():
 		Globals.gameConsole.addLog(_itemsLogString)
+	$"/root/World".hideObjectsWhenDrawingNextFrame = true
 
 func pickUpItem(_playerTile, _itemId, _grid):
 	for _itemOnGround in range(_grid[_playerTile.x][_playerTile.y].items.size()):
@@ -401,7 +402,6 @@ func dropItems(_playerTile, _items, _grid):
 	if !_itemsLogString.empty():
 		Globals.gameConsole.addLog(_itemsLogString)
 	$"/root/World".hideObjectsWhenDrawingNextFrame = true
-	$"/root/World".drawLevel()
 
 func dropItem(_playerTile, _item, _grid):
 	var _dropLog = []

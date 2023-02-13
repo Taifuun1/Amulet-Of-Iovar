@@ -46,8 +46,6 @@ var levels = {
 	"dungeonHalls1": [],
 	"labyrinth": [],
 	"dungeonHalls2": [],
-#	"arena": [],
-#	"dungeonhalls3": [],
 	"dragonsPeak": [],
 	"dungeonHalls3": [],
 	"theGreatShadows": [],
@@ -131,7 +129,7 @@ func setUpGameObjects(_playerData = null):
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
-#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "reverent" })
+#		$Items/Items.createItem("wand of backwards magic sphere", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
 #		$Items/Items.createItem("Dragonslayer", null, 1, true, { "piety": "formal" })
@@ -245,8 +243,10 @@ func _input(_event):
 								_tileToMoveTo = _randomOpenTiles[0]
 							if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null:
 								keepMovingLoop(_playerTile, _tileToMoveTo)
+								return
 							else:
 								processGameTurn(_playerTile, _tileToMoveTo)
+								return
 						elif currentGameState == gameState.INTERACT:
 							interactWith(_tileToMoveTo)
 						elif currentGameState == gameState.KICK:
@@ -430,7 +430,7 @@ func processEnemyActions():
 	return _isPlayerHit
 
 func processCrittersSpawnStatus():
-	if checkNewCritterSpawn >= 50:
+	if checkNewCritterSpawn >= 25:
 		$Critters/Critters.checkSpawnableCrittersLevel()
 		$Critters/Critters.checkNewCritterSpawn(level, level.getCritterTile(0))
 		checkNewCritterSpawn = 0
@@ -932,6 +932,8 @@ func interactWith(_tileToInteractWith):
 				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(4):
 					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 					Globals.gameConsole.addLog("You unlock the door with your credit card.")
+			else:
+				Globals.gameConsole.addLog("You don't have anything to open the door with. Maybe try kicking it?")
 		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT:
 			if randi() % 5 == 0:
 				$Items/Items.createItem("carrot", _tileToInteractWith)
@@ -1016,21 +1018,23 @@ func interactWith(_tileToInteractWith):
 
 func kickAt(_tileToKickAt):
 	if level.grid[_tileToKickAt.x][_tileToKickAt.y].critter != null:
-		Globals.gameConsole.addLog("You kick the {critterName}!".format({ "critterName": "Critters/{critterId}".format({ "critterId": level.grid[_tileToKickAt.x][_tileToKickAt.y].critter }) }))
+		Globals.gameConsole.addLog("You kick the {critterName}!".format({ "critterName": get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToKickAt.x][_tileToKickAt.y].critter })).critterName }))
 		var _randomDmg = randi() % 3 + 1
-		var _strengthDmgIncrease = int($Critter/"0".stats.strength / 5)
+		var _strengthDmgIncrease = int($Critters/"0".stats.strength / 5)
 		get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToKickAt.x][_tileToKickAt.y].critter })).takeDamage(
-			{
-				"dmg": [_randomDmg, _randomDmg + _strengthDmgIncrease],
-				"bonusDmg": {},
-				"armorPen": 0,
-				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
+			[
+				{
+					"dmg": [_randomDmg, _randomDmg + _strengthDmgIncrease],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": [0,0],
+						"element": null
+					}
 				}
-			},
+			],
 			_tileToKickAt,
-			$Critter/"0".critterName
+			$Critters/"0".critterName
 		)
 	elif level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
 		if randi () % 8 == 0:

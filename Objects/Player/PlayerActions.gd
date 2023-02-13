@@ -1,6 +1,6 @@
 extends Player
 
-var sacrificeGifts = load("res://Objects/Player/PlayerSacrificeGifts.gd").new()
+var sacrificeGifts = load("res://Objects/Miscellaneous/SacrificeGifts.gd").new()
 
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -439,6 +439,7 @@ func readItem(_id):
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		checkAllIdentification(true)
+		$"/root/World".hideObjectsWhenDrawingNextFrame = true
 		if !_readItem.identifiedItemName.to_lower().matchn("blank scroll"):
 			if _readItem.amount > 1:
 				_readItem.amount -= 1
@@ -650,23 +651,14 @@ func zapItem(_direction):
 					for i in range(1, _zappedItem.value.distance):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
-							if _zappedItem.piety.matchn("reverent"):
+							if _zappedItem.piety.matchn("reverent") or _zappedItem.piety.matchn("formal"):
 								if _grid[_tile.x][_tile.y].interactable == null:
 									_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
 								else:
 									_grid[_tile.x][_tile.y].interactable = null
 								Globals.gameConsole.addLog("The doors lock turns!")
-							elif _zappedItem.piety.matchn("formal"):
-								if randi() % 4 == 0:
-									if _grid[_tile.x][_tile.y].interactable == null:
-										_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
-									else:
-										_grid[_tile.x][_tile.y].interactable = null
-									Globals.gameConsole.addLog("The doors lock turns!")
-								else:
-									Globals.gameConsole.addLog("Doors lock doesn't move.")
 							elif _zappedItem.piety.matchn("blasphemous"):
-								if randi() % 8 == 0:
+								if randi() % 4 == 0:
 									if _grid[_tile.x][_tile.y].interactable == null:
 										_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED
 									else:
@@ -788,6 +780,7 @@ func zapItem(_direction):
 							if _itemCount > 0:
 								Globals.gameConsole.addLog("A few items on the ground vibrate.")
 								Globals.isItemIdentified(_zappedItem)
+					$"/root/World".hideObjectsWhenDrawingNextFrame = true
 				"wand of wishing":
 					Globals.isItemIdentified(_zappedItem)
 					var _itemTypes = []
@@ -874,6 +867,7 @@ func throwItem(_direction):
 			if _grid[_checkedTile.x][_checkedTile.y].critter != null:
 				_critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_checkedTile.x][_checkedTile.y].critter }))
 				_tile = _checkedTile
+				break
 		if _critter != null:
 			Globals.gameConsole.addLog("The {itemName} crashes on {critterName}!".format({ "itemName": _thrownItem.itemName, "critterName": _critter.critterName }))
 			match _thrownItem.identifiedItemName.to_lower():
@@ -1017,7 +1011,7 @@ func useItem(_id):
 		if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].interactable == Globals.interactables.ALTAR:
 			$"/root/World/Items/Items".removeItem(_usedItem)
 			Globals.gameConsole.addLog("You offer the {itemName} to the gods.".format({ "itemName": _usedItem.itemName }))
-			if randi() % 8 == 0:
+			if randi() % 12 == 0:
 				var _gift
 				if randi() % 2 == 0:
 					_gift = sacrificeGifts[justice.to_lower()].armor[randi() % sacrificeGifts[justice.to_lower()].armor.size()]

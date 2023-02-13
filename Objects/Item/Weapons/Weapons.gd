@@ -94,7 +94,7 @@ var weapons = {
 			"weight": 35,
 			"value": {
 				"dmg": [1,1],
-				"d": 3,
+				"d": 4,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -140,7 +140,7 @@ var weapons = {
 			"weight": 45,
 			"value": {
 				"dmg": [2,2],
-				"d": 3,
+				"d": 4,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -337,7 +337,7 @@ var weapons = {
 			"weight": 35,
 			"value": {
 				"dmg": [2,2],
-				"d": 3,
+				"d": 4,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -493,7 +493,7 @@ var weapons = {
 			"weight": 60,
 			"value": {
 				"dmg": [2,3],
-				"d": 4,
+				"d": 5,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -514,8 +514,8 @@ var weapons = {
 			"category": "Flail",
 			"weight": 60,
 			"value": {
-				"dmg": [2,5],
-				"d": 4,
+				"dmg": [6,8],
+				"d": 2,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -536,12 +536,12 @@ var weapons = {
 			"category": "Flail",
 			"weight": 60,
 			"value": {
-				"dmg": [2,3],
-				"d": 4,
+				"dmg": [1,2],
+				"d": 8,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [2,4],
+					"dmg": [2,3],
 					"element": "Frost"
 				}
 			},

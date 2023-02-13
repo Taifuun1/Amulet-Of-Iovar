@@ -10,13 +10,13 @@ var outlaws = [
 		"piety": "Neutral",
 		"level": 6,
 		"expDropAmount": 5,
-		"hp": 19,
+		"hp": 13,
 		"mp": 3,
 		"ac": 2,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [4,7],
+				"dmg": [3,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

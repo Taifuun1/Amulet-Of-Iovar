@@ -225,18 +225,9 @@ func setUpDungeon():
 	for _level in _dungeon2Count:
 		var newDungeon
 		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon2Count - 1:
-			if randi() % 3 == 0:
-				_patchLevels += 1
-				newDungeon = load(levelPaths.patch).instance()
-				newDungeon.create("patch", "dungeon2", "Patch {level}".format({ "level": _patchLevels }), 10000)
-			elif randi() % 3 == 0:
-				_abandonedOutpostLevels += 1
-				newDungeon = load(levelPaths.abandonedOutpost).instance()
-				newDungeon.create("abandonedOutpost", "dungeon2", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
-			else:
-				_anthillLevels += 1
-				newDungeon = load(levelPaths.anthill).instance()
-				newDungeon.create("anthill", "dungeon2", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			_patchLevels += 1
+			newDungeon = load(levelPaths.patch).instance()
+			newDungeon.create("patch", "dungeon2", "Patch {level}".format({ "level": _patchLevels }), 10000)
 			_firstSectionRandomLevels -= 1
 		else:
 			newDungeon = load(levelPaths.dungeon).instance()
@@ -266,14 +257,10 @@ func setUpDungeon():
 	for _level in _dungeon3Count:
 		var newDungeon
 		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon3Count - 1:
-			if randi() % 3 == 0:
+			if randi() % 2 == 0:
 				_patchLevels += 1
 				newDungeon = load(levelPaths.patch).instance()
 				newDungeon.create("patch", "dungeon3", "Patch {level}".format({ "level": _patchLevels }), 10000)
-			elif randi() % 3 == 0:
-				_abandonedOutpostLevels += 1
-				newDungeon = load(levelPaths.abandonedOutpost).instance()
-				newDungeon.create("abandonedOutpost", "dungeon3", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
 			else:
 				_anthillLevels += 1
 				newDungeon = load(levelPaths.anthill).instance()
@@ -340,35 +327,30 @@ func setUpDungeon():
 		$Levels.add_child(newDungeon)
 	
 	### Bandit warcamp
-	for _level in range(2):
+	for _level in range(5):
 		var newBanditWarcamp = load(levelPaths.banditWarcamp).instance()
 		newBanditWarcamp.create("banditWarcamp", "banditWarcamp", "Bandit warcamp {level}".format({ "level": 1 + levels.banditWarcamp.size() }), 10000)
 		levels.banditWarcamp.append(newBanditWarcamp)
 		$Levels.add_child(newBanditWarcamp)
 	
-	var newBanditWarcampLevel
 	if randi() % 2 == 0:
-		newBanditWarcampLevel = load(levelPaths.banditWarcamp1).instance()
+		var newBanditWarcampLevel
+		if randi() % 2 == 0:
+			newBanditWarcampLevel = load(levelPaths.banditWarcamp1).instance()
+		else:
+			newBanditWarcampLevel = load(levelPaths.banditWarcamp2).instance()
+		newBanditWarcampLevel.create("banditWarcamp", "banditWarcamp", "Bandit warcamp", 10000)
+		levels.banditWarcamp.append(newBanditWarcampLevel)
+		$Levels.add_child(newBanditWarcampLevel)
 	else:
-		newBanditWarcampLevel = load(levelPaths.banditWarcamp2).instance()
-	newBanditWarcampLevel.create("banditWarcamp", "banditWarcamp", "Bandit warcamp", 10000)
-	levels.banditWarcamp.append(newBanditWarcampLevel)
-	$Levels.add_child(newBanditWarcampLevel)
-	
-	for _level in range(2):
-		var newBanditWarcamp = load(levelPaths.banditWarcamp).instance()
-		newBanditWarcamp.create("banditWarcamp", "banditWarcamp", "Bandit warcamp {level}".format({ "level": 1 + levels.banditWarcamp.size() }), 10000)
-		levels.banditWarcamp.append(newBanditWarcamp)
-		$Levels.add_child(newBanditWarcamp)
-	
-	var newCompound
-	if randi() % 2 == 0:
-		newCompound = load(levelPaths.banditCompound1).instance()
-	else:
-		newCompound = load(levelPaths.banditCompound2).instance()
-	newCompound.create("banditWarcamp", "banditWarcamp", "Bandit compound", 10000)
-	levels.banditWarcamp.append(newCompound)
-	$Levels.add_child(newCompound)
+		var newBanditCompound
+		if randi() % 2 == 0:
+			newBanditCompound = load(levelPaths.banditCompound1).instance()
+		else:
+			newBanditCompound = load(levelPaths.banditCompound2).instance()
+		newBanditCompound.create("banditWarcamp", "banditWarcamp", "Bandit compound", 10000)
+		levels.banditWarcamp.append(newBanditCompound)
+		$Levels.add_child(newBanditCompound)
 	
 	### Storage area
 	var newStorageArea

@@ -122,7 +122,7 @@ var newts = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [5,7],
+				"dmg": [5,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -175,7 +175,7 @@ var newts = [
 		"magicac": 2,
 		"attacks": [
 			{
-				"dmg": [8,11],
+				"dmg": [8,10],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -222,13 +222,13 @@ var newts = [
 		"piety": "Neutral",
 		"level": 15,
 		"expDropAmount": 75,
-		"hp": 54,
+		"hp": 51,
 		"mp": 0,
 		"ac": 5,
 		"magicac": 5,
 		"attacks": [
 			{
-				"dmg": [13,16],
+				"dmg": [12,14],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -237,7 +237,7 @@ var newts = [
 				}
 			},
 			{
-				"dmg": [5,6],
+				"dmg": [3,4],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

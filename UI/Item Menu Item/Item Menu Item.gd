@@ -17,11 +17,11 @@ func setValues(_item, _menuItemType, _hideChecked = false):
 	menuItemType = _menuItemType
 	
 	if _hideChecked:
-		$Check.hide()
+		$CheckAndNameContainer/Check.hide()
 	if _item.notIdentified.name or (GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified == true):
-		$Name.createRichTextLabel(_item.itemName, _item.rarity)
+		$CheckAndNameContainer/Name.createRichTextLabel(_item.itemName, _item.rarity)
 	else:
-		$Name.createRichTextLabel(_item.itemName)
+		$CheckAndNameContainer/Name.createRichTextLabel(_item.itemName)
 	if _item.notIdentified.piety:
 		$Piety.createRichTextLabel(_item.piety)
 	else:

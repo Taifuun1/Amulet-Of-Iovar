@@ -6,7 +6,8 @@ var critterLevelGenerationList = {
 			"floatingSpheres": ["Floating eye"],
 			"kobolds": ["Tiny kobold"],
 			"newts": ["River newt"],
-			"orcs": ["Goblin"]
+			"orcs": ["Goblin"],
+			"rats": ["Big rat"]
 		}
 	},
 	"dungeon2": {
@@ -18,11 +19,10 @@ var critterLevelGenerationList = {
 			"elves": ["Elf hunter"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere"],
 			"felines": ["Cat"],
-			"outlaws": ["Outlaw watcher"],
-			"kobolds": ["Tiny kobold", "Large kobold"],
+			"kobolds": ["Tiny kobold"],
 			"newts": ["River newt"],
 			"orcs": ["Goblin", "Flatlands orc"],
-			"rats": ["Big rat"],
+			"rats": ["Big rat", "Sewer rat"],
 			"snakes": ["Garnered snake"]
 		}
 	},
@@ -35,14 +35,13 @@ var critterLevelGenerationList = {
 			"canines": ["Wolf"],
 			"centaurs": ["Hill centaur"],
 			"elves": ["Elf hunter"],
-			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere", "Thunderous floating sphere"],
+			"floatingSpheres": ["Floating eye", "Unstable floating sphere", "Freezing floating sphere"],
 			"felines": ["Cat", "Lynx"],
 			"outlaws": ["Outlaw watcher"],
 			"kobolds": ["Tiny kobold", "Large kobold"],
 			"mimics": ["Mimic"],
-			"newts": ["Highlands newt"],
 			"orcs": ["Flatlands orc"],
-			"rats": ["Sewer rat"],
+			"rats": ["Sewer rat", "Cave rat"],
 			"snakes": ["Garnered snake", "Marsh snake"],
 			"wraiths": ["Spectral wraith"]
 		}
@@ -85,7 +84,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"abandonedOutpost": {
-		"amount": [4, 6],
+		"amount": [4, 4],
 		"critters": {
 			"outlaws": ["Outlaw watcher", "Outlaw fusiee'er"],
 			"newts": ["Highlands newt"],
@@ -124,6 +123,7 @@ var critterLevelGenerationList = {
 			"mimics": ["Mimic"],
 			"newts": ["Mine newt"],
 			"orcs": ["Goblin", "Flatlands orc"],
+			"rats": ["Sewer rat"],
 			"snakes": ["Garnered snake"]
 		}
 	},
@@ -153,17 +153,17 @@ var critterLevelGenerationList = {
 		}
 	},
 	"beach": {
-		"amount": [3, 5],
+		"amount": [2, 4],
 		"critters": {
 			"aquaticLife": ["Fiddler crab", "Ringed seal"],
 			"blobs": ["Slerp", "Sluerp"],
-			"canines": ["Warg"],
+			"canines": ["Wolf"],
 			"centaurs": ["Hill centaur"],
-			"elves": ["Elf assassin"],
+			"elves": ["Elf hunter"],
 			"felines": ["Cat"],
 			"giants": ["Hill giant"],
 			"mimics": ["Mimic"],
-			"newts": ["River newt", "Highlands newt"],
+			"newts": ["River newt"],
 			"snakes": ["Marsh snake"]
 		}
 	},

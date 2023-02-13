@@ -95,7 +95,7 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	if _item.has("piety"):
 		piety = _item.piety
 	elif _extraData.has("piety"):
-		piety = _extraData.piety
+		piety = _extraData.piety.capitalize()
 	else:
 		if randi() % 5 == 0:
 			if randi() % 2 == 0:
@@ -143,6 +143,11 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 				value = {
 					"charges": charges,
 					"distance": _item.value.distance
+				}
+			elif _item.value.has("dmg"):
+				value = {
+					"charges": charges,
+					"dmg": _item.value.dmg
 				}
 			else:
 				value = {

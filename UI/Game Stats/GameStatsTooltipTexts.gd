@@ -54,14 +54,14 @@ var belief = {
 	"description": "Belief determines your fleir damage. Higher belief also improves MP regen and lowers blindness turn count."
 }
 
-var wisdom = {
-	"title": "Wisdom",
-	"description": "Wisdom determines your frost and thunder damage. Higher Wisdom also gives higher maximum MP."
-}
-
 var visage = {
 	"title": "Visage",
 	"description": "Visage determines your gleeie'er damage and toxix hit count. Higher visage also lowers shop prices and invisibility turn count."
+}
+
+var wisdom = {
+	"title": "Wisdom",
+	"description": "Wisdom determines your frost and thunder damage. Higher Wisdom also gives higher maximum MP."
 }
 
 var hp = {

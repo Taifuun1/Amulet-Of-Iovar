@@ -63,7 +63,7 @@ var rats = [
 		"piety": "Neutral",
 		"level": 5,
 		"expDropAmount": 5,
-		"hp": 16,
+		"hp": 14,
 		"mp": 0,
 		"ac": 0,
 		"magicac": 0,
@@ -116,13 +116,13 @@ var rats = [
 		"piety": "Neutral",
 		"level": 7,
 		"expDropAmount": 8,
-		"hp": 22,
+		"hp": 18,
 		"mp": 0,
 		"ac": 0,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [5,6],
+				"dmg": [4,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

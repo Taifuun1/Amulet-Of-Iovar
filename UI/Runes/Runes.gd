@@ -338,11 +338,11 @@ func calculateMagicDamageIncrease(_type):
 		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
-		if _stats.visage > 18:
+		if _stats.wisdom > 18:
 			_d = 1
 		
 		return {
-			"dmg": _stats.visage / 3 + _additionalDamage,
+			"dmg": _stats.wisdom / 3 + _additionalDamage,
 			"d": _d
 		}
 	if _type.matchn("thunder"):
@@ -364,11 +364,11 @@ func calculateMagicDamageIncrease(_type):
 		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
-		if _stats.visage > 27:
+		if _stats.wisdom > 27:
 			_d = 1
 		
 		return {
-			"dmg": _stats.visage / 3 + _additionalDamage,
+			"dmg": _stats.wisdom / 3 + _additionalDamage,
 			"d": _d
 		}
 	if _type.matchn("gleeie'er"):
@@ -393,7 +393,7 @@ func calculateMagicDamageIncrease(_type):
 			_additionalDamage += 1
 		
 		return {
-			"dmg": _stats.wisdom / 3 + _additionalDamage,
+			"dmg": _stats.visage / 3 + _additionalDamage,
 			"d": _d
 		}
 	if _type.matchn("toxix"):
@@ -412,17 +412,17 @@ func calculateMagicDamageIncrease(_type):
 		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
-		if _stats.wisdom > 30:
+		if _stats.visage > 30:
 			_d += 4
-		elif _stats.wisdom > 23:
+		elif _stats.visage > 23:
 			_d += 3
-		elif _stats.wisdom > 18:
+		elif _stats.visage > 18:
 			_d += 2
-		elif _stats.wisdom > 15:
+		elif _stats.visage > 15:
 			_d += 1
 		
 		return {
-			"dmg": _stats.wisdom / 4 + _additionalDamage,
+			"dmg": _additionalDamage,
 			"d": _d
 		}
 

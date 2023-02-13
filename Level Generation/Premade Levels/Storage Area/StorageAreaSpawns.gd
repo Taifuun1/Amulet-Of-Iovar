@@ -1,6 +1,17 @@
 
 var storageAreaSpawn1 = [
 	{
+		"tiles": Vector2(25, 16),
+		"items": {
+			"types": null,
+			"names": [
+				"Wand of wishing"
+			],
+			"randomByRarity": true
+		},
+		"chance": 100
+	},
+	{
 		"tiles": PoolVector2Array([
 			Vector2(21,4),
 			Vector2(23,6),
@@ -74,11 +85,22 @@ var storageAreaSpawn1 = [
 				"Stormbringer",
 			]
 		},
-		"chance": 50
+		"chance": 10
 	}
 ]
 
 var storageAreaSpawn2 = [
+	{
+		"tiles": Vector2(23, 1),
+		"items": {
+			"types": null,
+			"names": [
+				"Wand of wishing"
+			],
+			"randomByRarity": true
+		},
+		"chance": 100
+	},
 	{
 		"tiles": PoolVector2Array([
 			Vector2(34,6),

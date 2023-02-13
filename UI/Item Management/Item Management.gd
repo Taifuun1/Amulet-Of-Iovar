@@ -92,8 +92,8 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 		if selectedItems[_item] == clickedItem.id:
 			selectedItems.remove(_item)
 			isRemoved = true
-			clickedItem.get_node("Check").pressed = false
+			clickedItem.get_node("CheckAndNameContainer/Check").pressed = false
 			break
 	if !isRemoved:
 		selectedItems.append(_id)
-		clickedItem.get_node("Check").pressed = true
+		clickedItem.get_node("CheckAndNameContainer/Check").pressed = true

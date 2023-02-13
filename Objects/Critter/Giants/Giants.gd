@@ -10,13 +10,13 @@ var giants = [
 		"piety": "Neutral",
 		"level": 5,
 		"expDropAmount": 8,
-		"hp": 19,
+		"hp": 18,
 		"mp": 0,
 		"ac": 0,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [7,9],
+				"dmg": [5,7],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -25,7 +25,7 @@ var giants = [
 				}
 			}
 		],
-		"hits": [0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1],
+		"hits": [0,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0],
 		"stats": {
 			"strength": 16,
 			"legerity": 5,

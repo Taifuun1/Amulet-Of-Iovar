@@ -69,7 +69,7 @@ var snakes = [
 		"piety": "Neutral",
 		"level": 7,
 		"expDropAmount": 7,
-		"hp": 23,
+		"hp": 21,
 		"mp": 15,
 		"ac": 0,
 		"magicac": 0,

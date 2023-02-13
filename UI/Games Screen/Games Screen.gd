@@ -2,34 +2,33 @@ extends Control
 
 var selectedGame = null
 
-func sortFileNames(_fileNameA, _fileNameB):
-	if _fileNameA < _fileNameB:
+func sortFileNames(_fileA, _fileB):
+	if int(_fileA.gameNumber) < int(_fileB.gameNumber):
 		return true
 	return false
 
 func _ready():
-	var _fileNames = []
+	var _files = []
 	var directory = Directory.new()
+	var file = File.new()
 	if directory.open("user://Games") == OK:
 		directory.list_dir_begin()
 		var fileName = directory.get_next()
 		while fileName != "":
 			if !directory.current_is_dir():
-				_fileNames.append(fileName)
+				file.open("user://Games/{fileName}".format({ "fileName": fileName }), File.READ)
+				var _fileData = parse_json(file.get_as_text())
+				_fileData.gameName = fileName.split(".")[0]
+				_files.append(_fileData)
+				file.close()
 			fileName = directory.get_next()
 	else:
 		push_error("An error occurred when trying to access the path.")
 	
-	print(_fileNames)
-	_fileNames.sort_custom(self, "sortFileNames")
-	print(_fileNames)
-	_fileNames.invert()
-	print(_fileNames)
-	var file = File.new()
-	for _fileName in _fileNames:
-		file.open("user://Games/{fileName}".format({ "fileName": _fileName }), File.READ)
-		addGame(_fileName.split(".")[0], parse_json(file.get_as_text()))
-		file.close()
+	_files.sort_custom(self, "sortFileNames")
+	_files.invert()
+	for _fileData in _files:
+		addGame(_fileData.gameName, _fileData)
 
 func addGame(_gameName, _gameData):
 	var _gameScreenListItem = load("res://UI/Games Screen/Games List Item.tscn").instance()

@@ -294,7 +294,7 @@ var wands = {
 				"dmg": {
 					"formal": [
 						{
-							"dmg": [8,12],
+							"dmg": [6,10],
 							"bonusDmg": {},
 							"armorPen": 0,
 							"magicDmg": {
@@ -305,7 +305,7 @@ var wands = {
 					],
 					"blasphemous": [
 						{
-							"dmg": [18,22],
+							"dmg": [14,18],
 							"bonusDmg": {},
 							"armorPen": 0,
 							"magicDmg": {

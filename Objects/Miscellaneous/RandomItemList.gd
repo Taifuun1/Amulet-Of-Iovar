@@ -145,11 +145,14 @@ var randomItemList = {
 			"create potion",
 			"teleport",
 			"genocide",
+			"reverent scripture",
+			"blasphemous scripture",
 			"confusion"
 		],
 		"appearance": [
 			"Dwarven scriptures",
 			"Elven scriptures",
+			"Orc scribbles",
 			"Mail to Thomas",
 			"Mail to Erica",
 			"lorem ipsum",
@@ -157,7 +160,11 @@ var randomItemList = {
 			"OPGOTH LEIRUE",
 			"AARGTH PLERBQ",
 			"kings groceries",
+			"guards groceries",
+			"tax form",
 			"create gold",
+			"create diamonds",
+			"summon cat girl",
 			"summon void monster",
 			"the lusty centaur maid"
 		]

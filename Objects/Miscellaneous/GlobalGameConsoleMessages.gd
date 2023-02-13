@@ -13,7 +13,7 @@ func getRandomMessageByType(_critterName, _messageType):
 		return globalGameConsoleMessages[_critterName][_messageType][randi() % globalGameConsoleMessages[_critterName][_messageType].size()]
 
 func getInteractionFlavorMessage(_critterName, _critterAI):
-	if _critterAI.matchn("aggressive") or _critterAI.matchn("slow aggressive") or _critterAI.matchn("skulking"):
+	if _critterAI.matchn("aggressive") or _critterAI.matchn("slow aggressive") or _critterAI.matchn("mimicking"):
 		match _critterName.to_lower():
 			"fiddler crab":
 				Globals.gameConsole.addLog("The fiddler crab tries to pincer you.")

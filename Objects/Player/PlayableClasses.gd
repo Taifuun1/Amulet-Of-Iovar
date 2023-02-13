@@ -56,7 +56,7 @@ var archeologist = {
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 1
+			"skillcap": 0
 		},
 		"mace": {
 			"experience": 0,
@@ -128,7 +128,7 @@ var banker = {
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 1
 		},
 		"mace": {
 			"experience": 0,
@@ -143,7 +143,7 @@ var banker = {
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 1
+			"skillcap": 2
 		}
 	},
 	"texture": load("res://Assets/Classes/Banker.png")
@@ -162,22 +162,21 @@ var freedomFighter = {
 		legerity = 5,
 		balance = 5,
 		belief = 6,
-		visage = 15,
+		visage = 11,
 		wisdom = 3
 	},
 	hpIncrease = 1,
 	mpIncrease = 4,
-	strengthIncrease = 1.2,
+	strengthIncrease = 1,
 	legerityIncrease = 1,
 	balanceIncrease = 1,
-	beliefIncrease = 1.5,
-	visageIncrease = 2.5,
+	beliefIncrease = 1.3,
+	visageIncrease = 2,
 	wisdomIncrease = 0,
 	resistances = ["fleir"],
 	neutralClasses = ["dwarves"],
 	items = {
 		"Chipped sword": 1,
-		"Burning shield": 1,
 		"Leather mail": 1,
 		"Potion of Toxix": [2, 3],
 		"Soda bottle": [2, 3],
@@ -266,27 +265,27 @@ var herbalogue = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 1
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 0
 		},
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 0
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 3
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 3
 		},
 		"dualWield": {
 			"experience": 0,
@@ -356,22 +355,22 @@ var mercenary = {
 		"dagger": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 1
 		},
 		"mace": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 3
+			"skillcap": 1
 		},
 		"flail": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 3
 		},
 		"dualWield": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 1
+			"skillcap": 3
 		}
 	},
 	"texture": load("res://Assets/Classes/Mercenary.png")
@@ -383,7 +382,7 @@ var exterminator = {
 	quote = "He tells me to burn things.",
 	race = "Human",
 	justice = "Draconian",
-	hp = 12,
+	hp = 9,
 	mp = 8,
 	stats = {
 		strength = 5,
@@ -405,6 +404,7 @@ var exterminator = {
 	neutralClasses = [],
 	items = {
 		"Chipped sword": 1,
+		"Burning shield": 1,
 		"Toga": 1,
 		"Boots of fumbling": 1,
 		"Scroll of confusion": 1,
@@ -427,12 +427,12 @@ var exterminator = {
 		"sword": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 2
+			"skillcap": 3
 		},
 		"two-hander": {
 			"experience": 0,
 			"level": 0,
-			"skillcap": 3
+			"skillcap": 2
 		},
 		"dagger": {
 			"experience": 0,
@@ -478,7 +478,7 @@ var rogue = {
 	mpIncrease = 3,
 	strengthIncrease = 0.9,
 	legerityIncrease = 2,
-	balanceIncrease = 1.5,
+	balanceIncrease = 1.3,
 	beliefIncrease = 0.8,
 	visageIncrease = 1.5,
 	wisdomIncrease = 0.9,
