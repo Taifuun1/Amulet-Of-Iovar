@@ -4,9 +4,9 @@ class_name Player
 onready var inventory = preload("res://UI/Inventory/Inventory.tscn").instance()
 
 var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
-var spellData = load("res://Objects/Spell/SpellData.gd").new()
-var statusEffectsData = load("res://Objects/Miscellaneous/StatusEffectsData.gd").new()
-var critterSpellData = load("res://Objects/Spell/CritterSpells.gd").new()
+var spellData = load("res://Objects/Data/SpellsData.gd").new()
+var statusEffectsData = load("res://Objects/Data/StatusEffectsData.gd").new()
+var critterSpellData = load("res://Objects/Data/CritterSpellsData.gd").new()
 
 var playerVisibility = {
 	"distance": -1,
@@ -45,6 +45,8 @@ var turnsUntilAction = 0
 
 var attackNeutral = false
 var autoMine = false
+
+var armorSetStunCount = 1
 
 var selectedItem = null
 var itemsTurnedOn = []
@@ -222,6 +224,10 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			# On enemy hit
 			if hits[currentHit] == 1:
 				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo, critterName)
+				if armorSetStunCount == 4:
+					armorSetStunCount = 1
+				else:
+					armorSetStunCount += 1
 				if _didCritterDespawn != null:
 					addExp(_didCritterDespawn)
 				
@@ -300,7 +306,6 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 				_level.grid[_playerTile.x][_playerTile.y].interactable = null
 				Globals.gameConsole.addLog("You free yourself from the spider web.")
 #				if randi() % 8 == 0:
-#					TODO: spider spawn
 #					Globals.gameConsole.addLog("Spider jumps out from the spider web! (UN_IMPL)")
 			else:
 				Globals.gameConsole.addLog("You are still stuck in the spider web.")
@@ -419,10 +424,13 @@ func dropItem(_playerTile, _item, _grid):
 				$"/root/World".level.dungeonLevelName.matchn("church") and
 				_playerTile == Vector2(53, 11)
 			):
+				$"/root/World".closeMenu()
 				$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
 				$"/root/World".gameOver = true
+				GlobalGameStats.gameStats["Times ascended"] += 1
 				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats(), true)
-				GlobalGameStats["Times ascended"] += 1
+				$"/root/World/UI/UITheme/Game Over Stats".show()
+				yield(get_tree().create_timer(0.01), "timeout")
 			_item.identifyItem(false, true, false)
 			if _item.piety.matchn("reverent"):
 				_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
@@ -780,8 +788,6 @@ func gainLevel():
 	
 	experienceNeededForPreviousLevelGainAmount = experienceNeededForLevelGainAmount
 	var _nextLevelExpGain = int(experienceNeededForLevelGainAmount + (20 * level + (experienceNeededForLevelGainAmount / 4)))
-	if _nextLevelExpGain > 5280:
-		_nextLevelExpGain = 5280
 	experienceNeededForLevelGainAmount = _nextLevelExpGain
 	
 	Globals.gameConsole.addLog("You advance to level {level}!".format({ "level": level }))
@@ -923,7 +929,7 @@ func getGameOverStats():
 	_stats.consoleLogs = $"/root/World/UI/UITheme/GameConsole".getGameConsoleSaveData()
 	_stats.inventoryItems = $"/root/World/Critters/0/Inventory".getInventoryItems()
 	_stats.gameStats = GlobalGameStats.getGlobalGameStats()
-	_stats.gameStats.points = _stats.points
+	_stats.gameStats.gameStats["Points"] = _stats.points.totalPoints
 	_stats.playerStats = {
 		"playerClass": critterClass
 	}

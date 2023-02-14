@@ -99,7 +99,7 @@ var liches = [
 		"magicac": 10,
 		"attacks": [
 			{
-				"dmg": [3,4],
+				"dmg": [2,3],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -173,7 +173,7 @@ var liches = [
 		"magicac": 15,
 		"attacks": [
 			{
-				"dmg": [3,4],
+				"dmg": [1,1],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -245,7 +245,7 @@ var liches = [
 		"mp": 204,
 		"ac": 0,
 		"magicac": 20,
-		"attacks": [  ],
+		"attacks": [],
 		"hits": [1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0],
 		"stats": {
 			"strength": 1,

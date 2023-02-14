@@ -1,6 +1,6 @@
 extends MarginContainer
 
-var saveData = load("res://Objects/Miscellaneous/SaveData.gd").new().saveData
+var saveData = load("res://Objects/Data/SaveData.gd").new().saveData
 
 var saveGamePickScreenItem = load("res://UI/Save Game Pick Screen/Save Game Pick Screen Item.tscn")
 

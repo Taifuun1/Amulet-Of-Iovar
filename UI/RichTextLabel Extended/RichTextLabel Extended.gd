@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var spellData = load("res://Objects/Spell/SpellData.gd").new()
+var spellData = load("res://Objects/Data/SpellsData.gd").new()
 
 var colors = {  }
 
@@ -29,7 +29,7 @@ func _ready():
 	
 	colors.flavorMessage = "#ef379a"
 	
-	colors.green = "2dd400"
+	colors.green = "#2dd400"
 	colors.red = "#cf0000"
 	
 

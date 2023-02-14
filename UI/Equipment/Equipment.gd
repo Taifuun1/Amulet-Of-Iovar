@@ -773,6 +773,7 @@ func loadEquipmentData(_data):
 	hands = _data.hands
 	equipment = _data.equipment
 	accessories = _data.accessories
+	armorSets = _data.armorSets
 	
 	setEquipmentTextures()
 
@@ -797,7 +798,8 @@ func getEquipmentSaveData():
 	return {
 		hands = hands,
 		equipment = equipment,
-		accessories = accessories
+		accessories = accessories,
+		armorSets = armorSets
 	}
 
 

@@ -76,7 +76,7 @@ var quadrapeds = [
 		"magicac": 10,
 		"attacks": [
 			{
-				"dmg": [16,17],
+				"dmg": [21,23],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -85,7 +85,7 @@ var quadrapeds = [
 				}
 			}
 		],
-		"hits": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0],
+		"hits": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
 		"stats": {
 			"strength": 23,
 			"legerity": 15,

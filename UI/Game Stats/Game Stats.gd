@@ -1,6 +1,6 @@
 extends Control
 
-var tooltipTexts = load("res://UI/Game Stats/GameStatsTooltipTexts.gd").new()
+var tooltipTexts = load("res://Objects/Text/GameStatsTooltipTexts.gd").new()
 
 var attacks
 var magicAttacks

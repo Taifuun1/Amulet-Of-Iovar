@@ -5,7 +5,6 @@ func loadGlobalGameStatsData(_data):
 	critters = _data.critters
 
 func getGlobalGameStats():
-	
 	var date = Time.get_date_dict_from_system(true)
 	gameStats["Game ended at"] = "%s/%s/%s" % [date.day, date.month, date.year]
 	var _gameStats = {

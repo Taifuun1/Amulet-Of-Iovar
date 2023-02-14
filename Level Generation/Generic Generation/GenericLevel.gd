@@ -122,7 +122,7 @@ func isTileLegible(_position, _legibleTiles):
 			return true
 	return false
 
-func placeDoors(_doors):
+func placeDoors(_doors, _placeholderVariable = false):
 	var _room = rooms.back()
 	var _position
 	for _door in range(randi() % (_doors[1] - _doors[0] + 1) + _doors[0]):

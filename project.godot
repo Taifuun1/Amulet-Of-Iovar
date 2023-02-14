@@ -77,13 +77,13 @@ config/icon="res://Assets/Amulets/AmuletOfIovar.png"
 
 [autoload]
 
-Globals="*res://Objects/Miscellaneous/Globals.gd"
-GlobalItemInfo="*res://Objects/Miscellaneous/GlobalItemInfo.gd"
-GlobalCritterInfo="*res://Objects/Miscellaneous/GlobalCritterInfo.gd"
-StartingData="*res://Objects/Miscellaneous/StartingData.gd"
-GlobalGameStats="*res://Objects/Miscellaneous/GlobalGameStats.gd"
-GlobalGameConsoleMessages="*res://Objects/Miscellaneous/GlobalGameConsoleMessages.gd"
-GlobalSave="*res://Objects/Miscellaneous/GlobalSave.gd"
+Globals="*res://Objects/Global/Globals.gd"
+GlobalItemInfo="*res://Objects/Global/GlobalItemInfo.gd"
+GlobalCritterInfo="*res://Objects/Global/GlobalCritterInfo.gd"
+StartingData="*res://Objects/Data/StartingData.gd"
+GlobalGameStats="*res://Objects/Global/GlobalGameStats.gd"
+GlobalGameConsoleMessages="*res://Objects/Global/GlobalGameConsoleMessages.gd"
+GlobalSave="*res://Objects/Global/GlobalSave.gd"
 
 [debug]
 

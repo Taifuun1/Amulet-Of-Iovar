@@ -1,6 +1,6 @@
 extends Node
 
-var statsData = load("res://Objects/Miscellaneous/LifeTimeStatsData.gd").new()
+var statsData = load("res://Objects/Text/LifeTimeStats.gd").new()
 
 func _ready():
 	var file = File.new()

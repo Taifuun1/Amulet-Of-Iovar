@@ -16,7 +16,7 @@ var aquaticLife = [
 		"magicac": 1,
 		"attacks": [
 			{
-				"dmg": [6,8],
+				"dmg": [5,7],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -124,7 +124,7 @@ var aquaticLife = [
 		"magicac": 2,
 		"attacks": [
 			{
-				"dmg": [10,12],
+				"dmg": [11,13],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -170,7 +170,7 @@ var aquaticLife = [
 		"magicac": 3,
 		"attacks": [
 			{
-				"dmg": [14,16],
+				"dmg": [16,18],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -179,7 +179,7 @@ var aquaticLife = [
 				}
 			},
 			{
-				"dmg": [14,16],
+				"dmg": [16,18],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

@@ -2,8 +2,8 @@ extends BaseCritter
 
 var spell = load("res://Objects/Spell/CritterSpell.tscn")
 
-var spellData = load("res://Objects/Spell/SpellData.gd").new().spellData
-var critterSpellData = load("res://Objects/Spell/CritterSpells.gd").new()
+var spellData = load("res://Objects/Data/SpellsData.gd").new().spellData
+var critterSpellData = load("res://Objects/Data/CritterSpellsData.gd").new()
 
 var levelId
 var aI
@@ -157,7 +157,11 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		if _abilities.size() != 0:
 			_pickedAbility = _abilities[randi() % _abilities.size()]
 			_pickedAbility.data = critterSpellData[_pickedAbility.abilityName]
-		if _pickedAbility != null and _distanceFromPlayer.size() <= _pickedAbility.data.distance and _distanceFromPlayer.size() != 0:
+		if (
+			_pickedAbility != null and
+			_distanceFromPlayer.size() <= _pickedAbility.data.distance and
+			_distanceFromPlayer.size() != 0
+		):
 			if !_pickedAbility.abilityType.matchn("skill") and mp - _pickedAbility.data.mp < 0:
 				if randi() % 8 == 0:
 					Globals.gameConsole.addLog("{critter} tries to cast a spell but nothing happens!".format({ "critter": critterName }))
@@ -226,7 +230,22 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 									"dragonBreath", "fleirBreath", "frostBreath", "thunderBreath", "gleeieerBreath", "toxixBreath", "elderDragonBreath":
 										if _level.grid[_tile.x][_tile.y].critter != null:
 											_critters.append(_level.grid[_tile.x][_tile.y].critter)
-							if _critters.has(0) or (aI.aggroTarget != null and _critters.has(aI.aggroTarget)) or statusEffects.blindness > 0 or statusEffects.blindness == -1:
+							if (
+								(
+									_critters.has(0) and
+									(
+										aI.aI.matchn("aggressive") or
+										aI.aI.matchn("slow aggressive") or
+										aI.aI.matchn("mimicking")
+									)
+								) or
+								(
+									aI.aggroTarget != null and
+									_critters.has(aI.aggroTarget)
+								) or
+								statusEffects.blindness > 0 or
+								statusEffects.blindness == -1
+							):
 								break
 							else:
 								_critters.clear()
@@ -477,7 +496,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			var _isPhysicalHit = true
 			
 			# Magic spell
-			if _damage.dmg <= 0 and _damage.magicDmg != 0:
+			if _damage.dmg <= 0 and _damage.magicDmg > 0:
 				hp -= _damage.magicDmg
 				_attackLog += "{critter} gets hit for {magicDmg} {element} damage!".format({ "critter": critterName, "magicDmg": _damage.magicDmg, "element": _attack.magicDmg.element })
 				if _attack.magicDmg.element != null and _attack.magicDmg.element.matchn("toxix") and statusEffects.toxix != -1:
@@ -536,14 +555,16 @@ func takeDamage(_attacks, _critterTile, _critterName):
 				# Armor set effects
 				if checkIfCritterIsPlayer(_critterName):
 					if _activeArmorSets.frost and !checkIfStatusEffectIsInEffect("stun"):
-						statusEffects.stun = 2
-						_attackLog += " {critterName} is chilled by your frozen armor!".format({ "critterName":critterName })
+						if $"/root/World/Critters/0".armorSetStunCount == 1:
+							statusEffects.stun = 2
+							_attackLog += " {critterName} is chilled by your frozen armor!".format({ "critterName":critterName })
 					if _activeArmorSets.fleir and !checkIfStatusEffectIsPermanent("onFleir"):
 						statusEffects.onFleir += 2
 						_attackLog += " {critterName} is on fleir from your burning armor!".format({ "critterName":critterName })
 					if _activeArmorSets.thunder and !checkIfStatusEffectIsInEffect("stun"):
-						statusEffects.stun = 1
-						_attackLog += " Bolt of lighting from your armor stuns the {critterName}!".format({ "critterName":critterName })
+						if int($"/root/World/Critters/0".armorSetStunCount / 2) == 0:
+							statusEffects.stun = 1
+							_attackLog += " Bolt of lighting from your armor stuns the {critterName}!".format({ "critterName":critterName })
 					if _activeArmorSets["gleeie'er"] and !checkIfStatusEffectIsInEffect("confusion"):
 						statusEffects.confusion = 5
 						_attackLog += " {critterName} is confused by your flamboyant armor!".format({ "critterName":critterName })

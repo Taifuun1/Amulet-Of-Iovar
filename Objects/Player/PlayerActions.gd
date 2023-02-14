@@ -1,6 +1,6 @@
 extends Player
 
-var sacrificeGifts = load("res://Objects/Miscellaneous/SacrificeGifts.gd").new()
+var sacrificeGifts = load("res://Objects/Data/SacrificeGifts.gd").new()
 
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
@@ -1117,7 +1117,6 @@ func useItem(_id):
 						_blankPaper = _itemNode
 				if _blankPaper == null:
 					Globals.gameConsole.addLog("You don't have a blank scroll.")
-					continue
 				for _rarity in $"/root/World/Items/Items".items.scroll:
 					for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
 						if (
@@ -1140,8 +1139,7 @@ func useItem(_id):
 					if _itemNode.identifiedItemName.matchn("blank scroll"):
 						_blankPaper = _itemNode
 				if _blankPaper == null:
-					Globals.gameConsole.addLog("You don't have a blank paper.")
-					continue
+					Globals.gameConsole.addLog("You don't have a blank scroll.")
 				for _rarity in $"/root/World/Items/Items".items.scroll:
 					for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
 						if (
@@ -1318,10 +1316,10 @@ func dealWithMarker(_scroll, _ink):
 						else:
 							_ink.letters -= _itemNode.value.ink
 							_itemNode.value.ink = 0
-			$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "aligment": _scroll.piety })
+			$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "piety": get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).piety })
 			Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
 	else:
-		$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "aligment": _scroll.piety })
+		$"/root/World/Items/Items".createItem(_scroll, null, 1, true, { "piety": get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).piety })
 		Globals.gameConsole.addLog("You write {scroll} on a piece of blank paper.".format({ "scroll": _scroll }))
 	if get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount > 1:
 		get_node("/root/World/Items/{itemId}".format({ "itemId": _ink.blankPaper })).amount -= 1

@@ -3,8 +3,8 @@ extends Control
 var runeItem = load("res://UI/Runes/Rune Item.tscn")
 var spell = load("res://Objects/Spell/Spell.tscn")
 
-var runeData = load("res://Objects/Spell/RuneData.gd").new()
-var spellData = load("res://Objects/Spell/SpellData.gd").new()
+var runeData = load("res://Objects/Data/RuneData.gd").new()
+var spellData = load("res://Objects/Data/SpellsData.gd").new()
 
 const runesUITemplatePaths = {
 	"eario": "res://Assets/UI/RuneEario.png",

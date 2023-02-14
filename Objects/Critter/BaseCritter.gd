@@ -229,7 +229,9 @@ func processCritterEffects():
 #						statusEffects[_status] -= 2
 #				else:
 #					statusEffects[_status] -= 1
-			if statusEffects[_status] != -1:
+			if statusEffects[_status] < -1:
+				statusEffects[_status] = 0
+			if statusEffects[_status] > 0:
 				statusEffects[_status] -= 1
 	
 	var hpRegenStat = (stats.legerity / 3) + (stats.strength / 3)

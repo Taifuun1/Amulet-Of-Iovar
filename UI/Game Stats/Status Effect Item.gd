@@ -1,6 +1,6 @@
 extends Control
 
-var statusEffectsData = load("res://Objects/Miscellaneous/StatusEffectsData.gd").new()
+var statusEffectsData = load("res://Objects/Data/StatusEffectsData.gd").new()
 
 func create(_statusEffect):
 	name = str(_statusEffect)

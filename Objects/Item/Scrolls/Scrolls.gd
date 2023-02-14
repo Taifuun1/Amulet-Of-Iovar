@@ -195,8 +195,8 @@ var scrolls = {
 			"weight": 5,
 			"value": null,
 			"points": 25,
-			"enchantable": true,
-			"stackable": false
+			"enchantable": false,
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of blasphemous scripture",
@@ -208,8 +208,8 @@ var scrolls = {
 			"weight": 5,
 			"value": null,
 			"points": 25,
-			"enchantable": true,
-			"stackable": false
+			"enchantable": false,
+			"stackable": true
 		},
 		{
 			"itemName": "Scroll of genocide",

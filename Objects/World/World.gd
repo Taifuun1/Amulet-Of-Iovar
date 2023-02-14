@@ -182,7 +182,12 @@ func setUpGameObjects(_playerData = null):
 
 func _input(_event):
 	if !inStartScreen:
-		if inGame and currentGameState != gameState.OUT_OF_PLAYERS_HANDS:
+		if (
+			inGame and
+			currentGameState != gameState.OUT_OF_PLAYERS_HANDS and
+			$Critters/"0".statusEffects["stun"] == 0 and
+			$Critters/"0".statusEffects["sleep"] == 0
+		):
 			var _playerTile = level.getCritterTile(0)
 			if (
 				(
@@ -573,6 +578,7 @@ func keepMovingLoop(_playerTile, _tileToMoveTo):
 				_nextTile.y < level.grid[0].size()
 			) and
 			Globals.isTileFree(_nextTile, level.grid) and
+			level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.DOOR_CLOSED and
 			(
 				level.grid[_currentTile.x][_currentTile.y - 1].critter == null or
 				_currentTile.y - 1 < 0
@@ -640,7 +646,7 @@ func moveLevel(_direction):
 	Globals.currentDungeonLevelName = level.dungeonLevelName
 	level.grid[level.stairs[_placePlayerOnStair].x][level.stairs[_placePlayerOnStair].y].critter = 0
 	
-	if $Critters/"0".inventory.checkIfItemInInventoryByName("Amulet of Iovar") and randi() % 14 == 0:
+	if $Critters/"0".inventory.checkIfItemInInventoryByName("Amulet of Iovar") and randi() % 8 == 0:
 		var _openTiles = level.checkAdjacentTilesForOpenSpace(level.stairs[_placePlayerOnStair], false, true)
 		$Critters/Critters.spawnCritter("Iovar", _openTiles[randi() % _openTiles.size()])
 		Globals.gameConsole.addLog("Iovar appears before you!")
@@ -854,7 +860,7 @@ func openMenu(_menu, _playerTile = null):
 				currentGameState = gameState.THROW
 		"dip":
 			if currentGameState == gameState.GAME:
-				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["amulet", "armor", "belt", "cloak", "gauntlets", "comestible", "gem", "ring", "rune", "scroll", "tool", "wand", "weapon"])
+				$UI/UITheme/ItemManagement.items = $Critters/"0"/Inventory.getItemsOfType(["scroll", "wand"])
 				$UI/UITheme/ItemManagement.showItemManagementList("Dip what?")
 				currentGameState = gameState.DIP_ITEM
 		"use":

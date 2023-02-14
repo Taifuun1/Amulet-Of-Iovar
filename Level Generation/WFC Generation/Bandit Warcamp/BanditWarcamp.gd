@@ -29,6 +29,7 @@ func createDungeon():
 				"wall": "WALL_STONE_BRICK"
 			}
 		])
+		removeSmallRooms()
 		getSpawnableTiles(
 			["GRASS", "FLOOR_STONE_BRICK", "FLOOR_WOOD_BRICK"],
 			["FLOOR_STONE_BRICK", "FLOOR_WOOD_BRICK"],
@@ -58,3 +59,21 @@ func createBanditWarcamp():
 		if generateMap(randi() % 5 + 3) and getUsedCells() > 1750:
 			return
 		resetGeneration()
+
+func removeSmallRooms():
+	var _newRooms = []
+	for _room in rooms:
+		if _room.floors.size() < 4:
+			for _floor in _room.floors:
+				if randi() % 12 == 0:
+					grid[_floor.x][_floor.y].tile = Globals.tiles.GRASS_TREE
+				else:
+					grid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
+			for _floor in _room.walls:
+				if randi() % 12 == 0:
+					grid[_floor.x][_floor.y].tile = Globals.tiles.GRASS_TREE
+				else:
+					grid[_floor.x][_floor.y].tile = Globals.tiles.GRASS
+		else:
+			_newRooms.append(_room)
+	rooms = _newRooms

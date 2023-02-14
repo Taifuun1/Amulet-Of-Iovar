@@ -363,21 +363,21 @@ func setUpDungeon():
 	$Levels.add_child(newStorageArea)
 	
 	### Dungeon halls 1
-	for _level in range(randi() % 4 + 3):
+	for _level in range(randi() % 3 + 2):
 		var newDungeonHallways = load(levelPaths.dungeonHallways).instance()
 		newDungeonHallways.create("dungeonHalls1", "dungeonHalls1", "Dungeon halls {level}".format({ "level": 1 + levels.dungeonHalls1.size() }), 10000)
 		levels.dungeonHalls1.append(newDungeonHallways)
 		$Levels.add_child(newDungeonHallways)
 	
 	### Dungeon halls 2
-	for _level in range(randi() % 4 + 3):
+	for _level in range(randi() % 3 + 2):
 		var newDungeonHallways = load(levelPaths.dungeonHallways).instance()
 		newDungeonHallways.create("dungeonHalls2", "dungeonHalls2", "Dungeon halls {level}".format({ "level": 1 + levels.dungeonHalls1.size() + levels.dungeonHalls2.size() }), 10000)
 		levels.dungeonHalls2.append(newDungeonHallways)
 		$Levels.add_child(newDungeonHallways)
 	
 	### Dungeon halls 3
-	for _level in range(randi() % 4 + 3):
+	for _level in range(randi() % 3 + 2):
 		var newDungeonHallways = load(levelPaths.dungeonHallways).instance()
 		newDungeonHallways.create("dungeonHalls3", "dungeonHalls3", "Dungeon halls {level}".format({ "level": 1 + levels.dungeonHalls1.size() + levels.dungeonHalls2.size() + levels.dungeonHalls3.size() }), 10000)
 		levels.dungeonHalls3.append(newDungeonHallways)
@@ -409,7 +409,7 @@ func setUpDungeon():
 	### The Great Shadows
 	for _level in range(3):
 		var newGreatShadows = load(levelPaths.theGreatShadows).instance()
-		newGreatShadows.create("theGreatShadows", "theGreatShadows", "The Great Shadows {level}".format({ "level": 1 + levels.theGreatShadows.size() }), 10000)
+		newGreatShadows.create("theGreatShadows", "theGreatShadows", "The Great Shadows {level}".format({ "level": 1 + levels.theGreatShadows.size() }), 2)
 		levels.theGreatShadows.append(newGreatShadows)
 		$Levels.add_child(newGreatShadows)
 	

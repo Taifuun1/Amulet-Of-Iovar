@@ -37,7 +37,7 @@ func removeFromInventory(_item):
 func showInventory():
 	for _itemId in inventory:
 		var _newItem = inventoryItem.instance()
-		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).type.matchn("corpse"):
+		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).type.matchn("corpse") or get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn("amulet of iovar"):
 			get_node("InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/{itemType}Container".format({ "itemType": "Miscellaneous" })).add_child(_newItem)
 		else:
 			get_node("InventoryBackground/InventoryContainer/InventoryListContainer/InventoryListContent/{itemType}Container".format({ "itemType": get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).type })).add_child(_newItem)

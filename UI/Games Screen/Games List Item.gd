@@ -13,9 +13,9 @@ func create(_gameName, _gameData):
 	
 	$GameListItemContainer/PlayerClass.texture = _playerClassTexture
 	if _gameData.ascended:
-		$GameListItemContainer/Ascended.createRichTextLabel("	Ascended	", "green")
+		$GameListItemContainer/Ascended.createRichTextLabel("	Ascended", "green")
 	else:
-		$GameListItemContainer/Ascended.createRichTextLabel("	Dead	", "red")
+		$GameListItemContainer/Ascended.createRichTextLabel("	Dead", "red")
 	$GameListItemContainer/PlayerDataContainer/DateStarted.text = str("Game started: ", _gameData.gameStats.gameStats["Game started at"])
 	$GameListItemContainer/PlayerDataContainer/DateEnded.text = str("Game ended: ", _gameData.gameStats.gameStats["Game ended at"])
 

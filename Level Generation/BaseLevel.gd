@@ -84,14 +84,37 @@ func placeStair(_stairName, _stairTile, _stairType):
 				spawnableCritterTiles.erase(_stair)
 			return _stair
 
-func placeDoors(_doors):
+func placeDoors(_doors, _checkIfNoDoorsInCorner = false):
 	for _room in rooms:
 		for _door in range(randi() % (_doors.max - _doors.min + 1) + _doors.min):
-			placeDoor(_room)
+			placeDoor(_room, _checkIfNoDoorsInCorner)
 
-func placeDoor(_room):
+func placeDoor(_room, _checkIfNoDoorsInCorner):
 	for _i in range(20):
-		var _tile = _room.walls[randi() % _room.walls.size()]
+		var _tile
+		if _checkIfNoDoorsInCorner:
+			_tile = _room.walls[randi() % _room.walls.size()]
+			var _up = _tile + Vector2(0, -1)
+			var _down = _tile + Vector2(0, 1)
+			var _left = _tile + Vector2(-1, 0)
+			var _right = _tile + Vector2(1, 0)
+			if (
+				(
+					grid[_up.x][_up.y].tile != Globals.tiles.GRASS_TREE and
+					grid[_up.x][_up.y].tile != Globals.tiles.GRASS and
+					grid[_down.x][_down.y].tile != Globals.tiles.GRASS_TREE and
+					grid[_down.x][_down.y].tile != Globals.tiles.GRASS
+				) or
+				(
+					grid[_left.x][_left.y].tile != Globals.tiles.GRASS_TREE and
+					grid[_left.x][_left.y].tile != Globals.tiles.GRASS and
+					grid[_right.x][_right.y].tile != Globals.tiles.GRASS_TREE and
+					grid[_right.x][_right.y].tile != Globals.tiles.GRASS
+				)
+			):
+				continue
+		else:
+			_tile = _room.walls[randi() % _room.walls.size()]
 		if isTileADoor(_tile):
 			continue
 		else:
@@ -246,7 +269,6 @@ func getAndCleanUpRooms(_tileTypes):
 			for _tileType in _tileTypes:
 				if grid[_floorTile.x][_floorTile.y].tile == Globals.tiles[_tileType.floor]:
 					for _adjacentTile in checkAdjacentTilesForTile(_floorTile, [_tileType.floor, _tileType.wall], false):
-#						if !isTileAlreadyInARoom(_adjacentTile):
 						grid[_adjacentTile.x][_adjacentTile.y].tile = Globals.tiles[_tileType.wall]
 	
 	# Get walls
@@ -255,7 +277,6 @@ func getAndCleanUpRooms(_tileTypes):
 		for _floorTile in _room.floors:
 			for _tileType in _tileTypes:
 				for _adjacentTile in checkAdjacentTilesForTile(_floorTile, [_tileType.wall]):
-#					if !isTileAlreadyInARoom(_adjacentTile):
 					_walls.append(_adjacentTile)
 		_room.walls = _walls
 

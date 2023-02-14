@@ -1,6 +1,6 @@
 extends Control
 
-onready var dialogMenuDialogs = preload("res://UI/Dialog Menu/DialogMenuDialogs.gd").new()
+onready var dialogMenuDialogs = preload("res://Objects/Text/DialogMenuDialogs.gd").new()
 
 func create():
 	name = "DialogMenu"

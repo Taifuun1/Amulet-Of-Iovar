@@ -383,7 +383,7 @@ var bosses = [
 		"piety": "Neutral",
 		"level": 55,
 		"expDropAmount": 2112,
-		"hp": 150,
+		"hp": 142,
 		"mp": 264,
 		"ac": 8,
 		"magicac": 8,
@@ -448,7 +448,7 @@ var bosses = [
 			},
 			{
 				"types": {
-					"scroll": ["uncommon", "rare", "legendary"],
+					"scroll": ["uncommon", "rare"],
 					"tool": ["rare"]
 				},
 				"chance": 100,

@@ -253,7 +253,6 @@ func calculateWeaponAttackIncrease(_stats):
 		
 		if _playerSkills.sword.level == 3:
 			_additionalDamage += 3
-			_d += 1
 		elif _playerSkills.sword.level == 2:
 			_additionalDamage += 2
 		elif _playerSkills.sword.level == 1:
