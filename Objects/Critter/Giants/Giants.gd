@@ -41,7 +41,7 @@ var giants = [
 			{
 				"names": "goldPieces",
 				"chance": 10,
-				"amount": [50, 100]
+				"amount": [5, 10]
 			},
 			{
 				"types": {
@@ -95,7 +95,7 @@ var giants = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [100, 150]
+				"amount": [5, 10]
 			},
 			{
 				"types": {
@@ -124,7 +124,7 @@ var giants = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [16,26],
+				"dmg": [16,22],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -158,7 +158,7 @@ var giants = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [100, 200]
+				"amount": [5, 10]
 			},
 			{
 				"types": {
@@ -212,7 +212,7 @@ var giants = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [250, 500]
+				"amount": [15, 35]
 			},
 			{
 				"types": {

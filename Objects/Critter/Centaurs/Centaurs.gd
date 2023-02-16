@@ -41,7 +41,7 @@ var centaurs = [
 			{
 				"names": "goldPieces",
 				"chance": 100,
-				"amount": [25, 150]
+				"amount": [10, 35]
 			},
 			{
 				"types": {
@@ -111,7 +111,7 @@ var centaurs = [
 			{
 				"names": "goldPieces",
 				"chance": 100,
-				"amount": [250, 350]
+				"amount": [50, 90]
 			},
 			{
 				"types": {

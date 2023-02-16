@@ -1,6 +1,6 @@
 extends Player
 
-var sacrificeGifts = load("res://Objects/Data/SacrificeGifts.gd").new()
+var sacrificeGifts = load("res://Objects/Data/SacrificeGiftsData.gd").new()
 
 func readItem(_id):
 	var _readItem = get_node("/root/World/Items/{id}".format({ "id": _id }))

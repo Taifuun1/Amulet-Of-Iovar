@@ -50,7 +50,7 @@ var elves = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [10, 30]
+				"amount": [5, 15]
 			},
 			{
 				"names": [
@@ -123,7 +123,7 @@ var elves = [
 			{
 				"names": "goldPieces",
 				"chance": 25,
-				"amount": [50, 60]
+				"amount": [20, 40]
 			},
 #			{
 #				"names": [
@@ -186,7 +186,7 @@ var elves = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [250, 500]
+				"amount": [100, 250]
 			},
 			{
 				"names": [

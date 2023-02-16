@@ -44,11 +44,6 @@ var blobs = [
 		"resistances": ["fleir", "frost", "toxix"],
 		"drops": [
 			{
-				"names": "goldPieces",
-				"chance": 25,
-				"amount": [5, 10]
-			},
-			{
 				"types": {
 					"amulet": ["uncommon", "rare", "legendary"],
 					"armor": ["common", "uncommon", "rare", "legendary"],
@@ -106,11 +101,6 @@ var blobs = [
 		"abilityHits": [1],
 		"resistances": ["fleir", "frost", "toxix"],
 		"drops": [
-			{
-				"names": "goldPieces",
-				"chance": 25,
-				"amount": [5, 10]
-			},
 			{
 				"types": {
 					"amulet": ["uncommon", "rare", "legendary"],

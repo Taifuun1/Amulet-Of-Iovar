@@ -41,7 +41,7 @@ var rats = [
 			{
 				"names": "goldPieces",
 				"chance": 90,
-				"amount": [25, 35]
+				"amount": [1, 5]
 			},
 			{
 				"types": {
@@ -94,7 +94,7 @@ var rats = [
 			{
 				"names": "goldPieces",
 				"chance": 90,
-				"amount": [30, 45]
+				"amount": [3, 7]
 			},
 			{
 				"types": {
@@ -156,7 +156,7 @@ var rats = [
 			{
 				"names": "goldPieces",
 				"chance": 90,
-				"amount": [45, 60]
+				"amount": [5, 8]
 			},
 			{
 				"types": {

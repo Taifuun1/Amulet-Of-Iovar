@@ -78,19 +78,15 @@ func _process(_delta):
 			if $Critters/"0".statusEffects["sleep"] > 0: Globals.gameConsole.addLog("You are asleep.")
 			processGameTurn()
 	if generationDone:
-		print("Ready!")
 		generationDone = false
 		
 		yield(get_tree().create_timer(0.01), "timeout")
 		
 		for _level in $Levels.get_children():
 			_level.clearOutInputs()
-		print("Cleared!")
 		
 		updateTiles()
-		print("Updated!")
 		drawLevel()
-		print("Drawn!")
 		
 		inStartScreen = false
 		inGame = true
@@ -103,70 +99,24 @@ func setUpGameObjects(_playerData = null):
 	Globals.gameConsole = $"/root/World/UI/UITheme/GameConsole"
 	Globals.gameStats = $"/root/World/UI/UITheme/GameStats"
 	
-	print("Playering")
-	print(level)
-	print(_playerData)
-	print(player)
-	
 	$Critters.add_child(player, true)
-	yield(get_tree().create_timer(0.01), "timeout")
-	print($Critters.get_children())
 	player.create(_playerData)
-	print("Created")
 	if _playerData == null:
 		level.placeCritterOnTypeOfTile(Globals.tiles.UP_STAIR_DUNGEON, 0)
-	print("Calcumalating")
 	player.calculateEquipmentStats()
-	print("Calculated")
 	
 	$Critters/Critters.setNeutralClasses()
 	
 	if _playerData == null:
 		for _level in $Levels.get_children():
-			print(_level)
 			$Items/Items.generateItemsForLevel(_level)
 		
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
-#		$Items/Items.createItem("wand of backwards magic sphere", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
 #		$Items/Items.createItem("Dragonslayer", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
-#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "piety": "reverent" })
-#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("scroll of genocide", null, 1, true, { "piety": "blasphemous" })
-#		$Items/Items.createItem("burning shield", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("burning gauntlets", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("burning mail chausses", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("bag of holding", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("bag of weight", null, 1, true, { "piety": "reverent" })
-#		$Items/Items.createItem("leather bag", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("water potion", null, 1, true, { "piety": "reverent" })
-#		$Items/Items.createItem("water potion", null, 1, true, { "piety": "blasphemous" })
-#		$Items/Items.createItem("Eario of Thunder", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("Luirio of adjacent", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("Heario of true", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("oil lamp", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("key", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("wand of summon critter", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "piety": "blasphemous" })
-#		$Items/Items.createItem("scroll of teleport", null, 1, true, { "piety": "blasphemous" })
-#		$Items/Items.createItem("dwarvish laysword", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("eario of toxix", null, 1, true)
-#		$Items/Items.createItem("eario of fleir", null, 1, true)
-#		$Items/Items.createItem("eario of frost", null, 1, true)
-#		$Items/Items.createItem("luirio of cone", null, 1, true)
-#		$Items/Items.createItem("luirio of point", null, 1, true)
-#		$Items/Items.createItem("heario of flow", null, 1, true)
-	
-	print("UIing")
 	
 	for _node in $UI/UITheme.get_children():
 		if _node.name == "GameConsole":
@@ -174,8 +124,6 @@ func setUpGameObjects(_playerData = null):
 		if _node.name == "GameStats":
 			_node.show()
 	$FOV.show()
-	
-	print("Ending")
 	
 	Globals.mutex.unlock()
 	generationDone = true
@@ -437,7 +385,7 @@ func processEnemyActions():
 func processCrittersSpawnStatus():
 	if checkNewCritterSpawn >= 25:
 		$Critters/Critters.checkSpawnableCrittersLevel()
-		$Critters/Critters.checkNewCritterSpawn(level, level.getCritterTile(0))
+		$Critters/Critters.checkNewCritterSpawn(level)
 		checkNewCritterSpawn = 0
 	else:
 		checkNewCritterSpawn += 1

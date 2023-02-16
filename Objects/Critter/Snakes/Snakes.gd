@@ -46,8 +46,8 @@ var snakes = [
 		"drops": [
 			{
 				"names": "goldPieces",
-				"chance": 40,
-				"amount": [10, 15]
+				"chance": 10,
+				"amount": [1, 5]
 			},
 			{
 				"types": {
@@ -110,8 +110,8 @@ var snakes = [
 		"drops": [
 			{
 				"names": "goldPieces",
-				"chance": 40,
-				"amount": [15, 25]
+				"chance": 10,
+				"amount": [3, 7]
 			},
 			{
 				"types": {
@@ -174,8 +174,8 @@ var snakes = [
 		"drops": [
 			{
 				"names": "goldPieces",
-				"chance": 40,
-				"amount": [25, 35]
+				"chance": 10,
+				"amount": [10, 15]
 			},
 			{
 				"types": {

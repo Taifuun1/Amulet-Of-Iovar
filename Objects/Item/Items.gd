@@ -19,7 +19,7 @@ var weapons = preload("res://Objects/Item/Weapons/Weapons.gd").new()
 
 var miscellaneous = preload("res://Objects/Item/Miscellaneous/Miscellaneous.gd").new()
 
-var randomItemList = preload("res://Objects/Data/RandomItemList.gd").new()
+var randomItemList = preload("res://Objects/Data/RandomizedItemsData.gd").new()
 var itemGeneration = preload("res://Objects/Data/LevelGenerationItems.gd").new()
 
 var mutex

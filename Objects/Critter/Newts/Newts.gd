@@ -41,7 +41,7 @@ var newts = [
 			{
 				"names": "goldPieces",
 				"chance": 25,
-				"amount": [10, 25]
+				"amount": [1, 5]
 			},
 			{
 				"types": {
@@ -94,7 +94,7 @@ var newts = [
 			{
 				"names": "goldPieces",
 				"chance": 25,
-				"amount": [25, 50]
+				"amount": [5, 10]
 			},
 			{
 				"types": {
@@ -147,7 +147,7 @@ var newts = [
 			{
 				"names": "goldPieces",
 				"chance": 25,
-				"amount": [10, 40]
+				"amount": [5, 25]
 			},
 			{
 				"types": {
@@ -200,7 +200,7 @@ var newts = [
 			{
 				"names": "goldPieces",
 				"chance": 25,
-				"amount": [25, 50]
+				"amount": [10, 20]
 			},
 			{
 				"types": {
@@ -262,7 +262,7 @@ var newts = [
 			{
 				"names": "goldPieces",
 				"chance": 25,
-				"amount": [50, 75]
+				"amount": [10, 20]
 			},
 			{
 				"types": {

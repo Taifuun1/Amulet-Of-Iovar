@@ -41,7 +41,7 @@ var kobolds = [
 			{
 				"names": "goldPieces",
 				"chance": 10,
-				"amount": [5, 10]
+				"amount": [1, 2]
 			}
 		]
 	},
@@ -87,7 +87,7 @@ var kobolds = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [10, 15]
+				"amount": [4, 5]
 			}
 		]
 	}

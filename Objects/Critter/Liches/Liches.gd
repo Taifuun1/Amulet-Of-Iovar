@@ -61,7 +61,7 @@ var liches = [
 			{
 				"names": "goldPieces",
 				"chance": 10,
-				"amount": [50, 500]
+				"amount": [5, 25]
 			},
 			{
 				"types": {
@@ -135,7 +135,7 @@ var liches = [
 			{
 				"names": "goldPieces",
 				"chance": 10,
-				"amount": [50, 500]
+				"amount": [50, 100]
 			},
 			{
 				"types": {
@@ -209,7 +209,7 @@ var liches = [
 			{
 				"names": "goldPieces",
 				"chance": 10,
-				"amount": [50, 500]
+				"amount": [100, 150]
 			},
 			{
 				"types": {
@@ -273,7 +273,7 @@ var liches = [
 			{
 				"names": "goldPieces",
 				"chance": 10,
-				"amount": [50, 500]
+				"amount": [150, 250]
 			},
 			{
 				"types": {

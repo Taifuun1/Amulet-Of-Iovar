@@ -41,7 +41,7 @@ var humans = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [500, 1000]
+				"amount": [250, 500]
 			},
 			{
 				"names": "Key",
@@ -92,7 +92,7 @@ var humans = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [25, 50]
+				"amount": [2, 8]
 			},
 			{
 				"types": {
@@ -156,7 +156,7 @@ var humans = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [50, 75]
+				"amount": [5, 12]
 			},
 			{
 				"types": {

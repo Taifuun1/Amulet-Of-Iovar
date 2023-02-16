@@ -45,11 +45,6 @@ var quadrapeds = [
 		"resistances": ["fleir", "thunder"],
 		"drops": [
 			{
-				"names": "goldPieces",
-				"chance": 50,
-				"amount": [75, 150]
-			},
-			{
 				"types": {
 					"armor": ["uncommon"],
 					"weapon": ["uncommon"]
@@ -104,11 +99,6 @@ var quadrapeds = [
 		"abilityHits": [1,0,0,0],
 		"resistances": ["fleir", "thunder"],
 		"drops": [
-			{
-				"names": "goldPieces",
-				"chance": 50,
-				"amount": [100, 200]
-			},
 			{
 				"types": {
 					"armor": ["uncommon"],

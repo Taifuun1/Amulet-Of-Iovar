@@ -6,7 +6,7 @@ onready var inventory = preload("res://UI/Inventory/Inventory.tscn").instance()
 var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
 var spellData = load("res://Objects/Data/SpellsData.gd").new()
 var statusEffectsData = load("res://Objects/Data/StatusEffectsData.gd").new()
-var critterSpellData = load("res://Objects/Data/CritterSpellsData.gd").new()
+var critterSpellData = load("res://Objects/Data/SpellsCritterSpellsData.gd").new()
 
 var playerVisibility = {
 	"distance": -1,

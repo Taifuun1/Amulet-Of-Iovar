@@ -52,7 +52,7 @@ var bosses = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [500, 1000]
+				"amount": [100, 150]
 			},
 			{
 				"types": {
@@ -144,7 +144,7 @@ var bosses = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [50, 150]
+				"amount": [5, 15]
 			},
 			{
 				"types": {
@@ -220,7 +220,7 @@ var bosses = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [50, 150]
+				"amount": [250, 500]
 			},
 			{
 				"types": {
@@ -281,7 +281,7 @@ var bosses = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [250, 500]
+				"amount": [250, 750]
 			},
 			{
 				"types": {
@@ -350,7 +350,7 @@ var bosses = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [10000, 21030]
+				"amount": [10000, 28990]
 			},
 			{
 				"types": {
@@ -439,7 +439,7 @@ var bosses = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [5000, 6140]
+				"amount": [1256, 5617]
 			},
 			{
 				"types": {

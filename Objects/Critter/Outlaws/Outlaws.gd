@@ -41,7 +41,7 @@ var outlaws = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [10, 15]
+				"amount": [6, 12]
 			},
 			{
 				"types": {
@@ -111,7 +111,7 @@ var outlaws = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [20, 30]
+				"amount": [10, 18]
 			},
 			{
 				"types": {
@@ -166,7 +166,7 @@ var outlaws = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [25, 35]
+				"amount": [15, 20]
 			},
 			{
 				"types": {

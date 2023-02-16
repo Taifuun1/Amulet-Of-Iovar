@@ -46,7 +46,7 @@ var dwarves = [
 			{
 				"names": "goldPieces",
 				"chance": 75,
-				"amount": [25, 50]
+				"amount": [15, 25]
 			},
 			{
 				"names": [
@@ -113,7 +113,7 @@ var dwarves = [
 			{
 				"names": "goldPieces",
 				"chance": 75,
-				"amount": [50, 75]
+				"amount": [15, 25]
 			}
 		],
 		"hostileClasses": ["Elves", "Goblins", "Orcs"]
@@ -160,7 +160,7 @@ var dwarves = [
 			{
 				"names": "goldPieces",
 				"chance": 75,
-				"amount": [50, 75]
+				"amount": [25, 45]
 			},
 			{
 				"names": [
@@ -224,7 +224,7 @@ var dwarves = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [250, 350]
+				"amount": [200, 250]
 			},
 			{
 				"names": [

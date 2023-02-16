@@ -41,7 +41,7 @@ var orcs = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [25, 50]
+				"amount": [2, 5]
 			},
 			{
 				"types": {
@@ -95,7 +95,7 @@ var orcs = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [25, 50]
+				"amount": [5, 8]
 			},
 			{
 				"types": {
@@ -149,7 +149,7 @@ var orcs = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [50, 80]
+				"amount": [10, 12]
 			},
 			{
 				"types": {
@@ -203,7 +203,7 @@ var orcs = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [80, 120]
+				"amount": [20, 25]
 			},
 			{
 				"types": {
@@ -266,7 +266,7 @@ var orcs = [
 			{
 				"names": "goldPieces",
 				"chance": 50,
-				"amount": [100, 160]
+				"amount": [25, 50]
 			},
 			{
 				"types": {
