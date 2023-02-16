@@ -93,11 +93,23 @@ var globalCritterInfo = {
 		"crittersInPlay": 0
 	},
 	"Slerp": {
-		"population": 16,
+		"population": 22,
 		"crittersInPlay": 0
 	},
 	"Sluerp": {
-		"population": 16,
+		"population": 22,
+		"crittersInPlay": 0
+	},
+	"Fleir breb": {
+		"population": 33,
+		"crittersInPlay": 0
+	},
+	"Toxix breb": {
+		"population": 33,
+		"crittersInPlay": 0
+	},
+	"Thunder breb": {
+		"population": 33,
 		"crittersInPlay": 0
 	},
 	"Gearh": {

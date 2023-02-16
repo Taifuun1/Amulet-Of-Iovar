@@ -378,7 +378,7 @@ var mercenary = {
 
 var exterminator = {
 	critterName = "Exterminator",
-	skill = "+2 to all fleir damage.",
+	skill = "+2 to all Fleir damage and +2 Fleir status effect duration on Fleir hit.",
 	quote = "He tells me to burn things.",
 	race = "Human",
 	justice = "Draconian",
@@ -460,7 +460,7 @@ var exterminator = {
 
 var rogue = {
 	critterName = "Rogue",
-	skill = "+1 to all toxix damage, +2 toxix status effect duration on toxix hit and +1 bonus damage from using daggers.",
+	skill = "+1 to all Toxix damage, +2 Toxix status effect duration on Toxix hit and +1 bonus damage from using daggers.",
 	quote = "I'm darker than the blackest night.",
 	race = "Human",
 	justice = "Laissez-faire",
@@ -532,7 +532,7 @@ var rogue = {
 
 var savant = {
 	critterName = "Savant",
-	skill = "Gets +3 frost and thunder spell damage.",
+	skill = "Gets +3 Frost and Thunder spell damage.",
 	quote = "We used to cast spells uphill both ways.",
 	race = "Human",
 	justice = "Grilling",

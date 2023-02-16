@@ -386,11 +386,74 @@ I wither away"""
 			"[i]Splat![/i]"
 		]
 	},
+	"Fleir breb": {
+		"speech": {
+			"frequency": 10,
+			"lines": [
+				"[i]Brop[/i]",
+				"[i]Brup[/i]",
+				"[i]Brep[/i]"
+			],
+		},
+		"taunt": {
+			"frequency": 7,
+			"lines": [
+				"[i]Brop[/i]",
+				"[i]Brup[/i]",
+				"[i]Brep[/i]"
+			],
+		},
+		"despawn": [
+			"[i]Crak![/i]"
+		]
+	},
+	"Toxix breb": {
+		"speech": {
+			"frequency": 10,
+			"lines": [
+				"[i]Brop[/i]",
+				"[i]Brup[/i]",
+				"[i]Brep[/i]"
+			],
+		},
+		"taunt": {
+			"frequency": 7,
+			"lines": [
+				"[i]Brop[/i]",
+				"[i]Brup[/i]",
+				"[i]Brep[/i]"
+			],
+		},
+		"despawn": [
+			"[i]Crak![/i]"
+		]
+	},
+	"Thunder breb": {
+		"speech": {
+			"frequency": 10,
+			"lines": [
+				"[i]Brop[/i]",
+				"[i]Brup[/i]",
+				"[i]Brep[/i]"
+			],
+		},
+		"taunt": {
+			"frequency": 7,
+			"lines": [
+				"[i]Brop[/i]",
+				"[i]Brup[/i]",
+				"[i]Brep[/i]"
+			],
+		},
+		"despawn": [
+			"[i]Crak![/i]"
+		]
+	},
 	"Gearh": {
 		"taunt": {
 			"frequency": 4,
 			"lines": [
-				"[i]Roars[/i]",
+				"[i]Roar[/i]",
 				"RAAAAARRRRRR!",
 				"GGRRRRRRRRR!!!"
 			],

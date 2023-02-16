@@ -56,6 +56,18 @@ var critterSpawnBehaviour = {
 		"amount": [1, 1],
 		"distance": 0
 	},
+	"Fleir breb": {
+		"amount": [1, 1],
+		"distance": 0
+	},
+	"Toxix breb": {
+		"amount": [1, 1],
+		"distance": 0
+	},
+	"Thunder breb": {
+		"amount": [1, 1],
+		"distance": 0
+	},
 	"Wolf": {
 		"amount": [2, 5],
 		"distance": 4

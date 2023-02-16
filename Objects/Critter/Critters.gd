@@ -9,6 +9,7 @@ var aquaticLife = preload("res://Objects/Critter/Aquatic life/Aquatic life.gd").
 var bats = preload("res://Objects/Critter/Bats/Bats.gd").new()
 var blobs = preload("res://Objects/Critter/Blobs/Blobs.gd").new()
 var bosses = preload("res://Objects/Critter/Bosses/Bosses.gd").new()
+var brebs = preload("res://Objects/Critter/Brebs/Brebs.gd").new()
 var canines = preload("res://Objects/Critter/Canines/Canines.gd").new()
 var centaurs = preload("res://Objects/Critter/Centaurs/Centaurs.gd").new()
 var dragons = preload("res://Objects/Critter/Dragons/Dragons.gd").new()
@@ -46,6 +47,7 @@ func create():
 	critters["bats"] = bats.bats
 	critters["blobs"] = blobs.blobs
 	critters["bosses"] = bosses.bosses
+	critters["brebs"] = brebs.brebs
 	critters["canines"] = canines.canines
 	critters["centaurs"] = centaurs.centaurs
 	critters["dragons"] = dragons.dragons
@@ -170,19 +172,11 @@ func returnRandomCritter(_critterGeneration = null):
 	if _critterGeneration != null:
 		var _generatedSpecies = _critterGeneration.critters[_critterGeneration.critters.keys()[randi() % _critterGeneration.critters.keys().size()]]
 		var _generatedCritter = _generatedSpecies[randi() % _generatedSpecies.size()]
-
 		if GlobalCritterInfo.globalCritterInfo.has(_generatedCritter) and GlobalCritterInfo.globalCritterInfo[_generatedCritter].population != 0:
 			return _generatedCritter
 		else:
 			return null
-	else:
-		var _generatedSpecies = _critterGeneration.critters[_critterGeneration.critters.keys()[randi() % _critterGeneration.critters.keys().size()]]
-		var _generatedCritter = _generatedSpecies[randi() % _generatedSpecies.size()]
-		
-		if GlobalCritterInfo.globalCritterInfo.has(_generatedCritter) and GlobalCritterInfo.globalCritterInfo[_generatedCritter].population != 0:
-			return _generatedCritter
-		else:
-			return null
+	push_error("No critter gen")
 
 func spawnRandomCritter(_position, _spawnLiches = true):
 	var _level = $"/root/World".level

@@ -2,8 +2,8 @@ var miscellaneous = {
 	"goldPieces": {
 		"itemName": "Gold pieces",
 		"unidentifiedItemName": "Gold pieces",
-		"texture": load("res://Assets/Miscellaneous/GoldPieces.png"),
-		"unidentifiedTexture": load("res://Assets/Miscellaneous/GoldPieces.png"),
+		"texture": load("res://Assets/Miscellaneous/GoldPiecesMedium.png"),
+		"unidentifiedTexture": load("res://Assets/Miscellaneous/GoldPiecesMedium.png"),
 		"type": "GoldPiece",
 		"category": null,
 		"weight": 0,

@@ -1,7 +1,7 @@
 
 var critterLevelGenerationList = {
 	"dungeon1": {
-		"amount": [2, 4],
+		"amount": [12, 14],
 		"critters": {
 			"floatingSpheres": ["Floating eye"],
 			"kobolds": ["Tiny kobold"],
@@ -15,6 +15,7 @@ var critterLevelGenerationList = {
 		"critters": {
 			"ants": ["Sugar ant"],
 			"blobs": ["Slerp", "Sluerp"],
+			"brebs": ["Fleir breb"],
 			"canines": ["Wolf"],
 			"elves": ["Elf hunter"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere"],
@@ -32,6 +33,7 @@ var critterLevelGenerationList = {
 			"ants": ["Leaf ant"],
 			"bats": ["Squinting bat"],
 			"blobs": ["Slerp", "Sluerp"],
+			"brebs": ["Fleir breb", "Toxix breb"],
 			"canines": ["Wolf"],
 			"centaurs": ["Hill centaur"],
 			"elves": ["Elf hunter"],
@@ -52,6 +54,7 @@ var critterLevelGenerationList = {
 			"ants": ["Leaf ant"],
 			"bats": ["Squinting bat"],
 			"blobs": ["Slerp", "Sluerp"],
+			"brebs": ["Toxix breb"],
 			"canines": ["Wolf", "Warg"],
 			"centaurs": ["Hill centaur"],
 			"dwarves": ["Dwarf engineer"],
@@ -191,6 +194,7 @@ var critterLevelGenerationList = {
 			"ants": ["Soldier ant"],
 			"aquaticLife": ["Eyebrow seal"],
 			"blobs": ["Slerp", "Sluerp"],
+			"brebs": ["Fleir breb", "Toxix breb", "Thunder breb"],
 			"canines": ["Gearh"],
 			"dwarves": ["Dwarf smith"],
 			"felines": ["Tiger"],
@@ -210,6 +214,7 @@ var critterLevelGenerationList = {
 			"ants": ["Soldier ant", "Double-pattern ant"],
 			"aquaticLife": ["Eyebrow seal"],
 			"blobs": ["Slerp", "Sluerp"],
+			"brebs": ["Fleir breb", "Toxix breb", "Thunder breb"],
 			"centaurs": ["Gryonem centaur"],
 			"canines": ["Gearh"],
 			"dragons": ["Black dragon", "Blue dragon", "Cyan dragon", "Green dragon", "Red dragon", "Silver dragon", "Violet dragon", "White dragon", "Yellow dragon"],
@@ -232,6 +237,7 @@ var critterLevelGenerationList = {
 			"ants": ["Double-pattern ant"],
 			"aquaticLife": ["Tonatuna"],
 			"blobs": ["Slerp", "Sluerp"],
+			"brebs": ["Fleir breb", "Toxix breb", "Thunder breb"],
 			"centaurs": ["Gryonem centaur"],
 			"dragons": ["Black dragon", "Blue dragon", "Cyan dragon", "Green dragon", "Red dragon", "Silver dragon", "Violet dragon", "White dragon", "Yellow dragon"],
 			"dwarves": ["Dwarven contirer"],
@@ -289,6 +295,7 @@ var critterLevelGenerationList = {
 		"amount": [8, 8],
 		"critters": {
 			"aquaticLife": ["Tonatuna"],
+			"brebs": ["Thunder breb"],
 			"canines": ["Gearh"],
 			"centaurs": ["Gryonem centaur"],
 			"dragons": ["Black dragon", "Blue dragon", "Cyan dragon", "Green dragon", "Red dragon", "Silver dragon", "Violet dragon", "White dragon", "Yellow dragon"],

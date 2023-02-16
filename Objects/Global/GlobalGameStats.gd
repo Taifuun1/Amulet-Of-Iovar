@@ -94,6 +94,15 @@ var critters = {
 	"Sluerp": {
 		"killCount": 0
 	},
+	"Fleir breb": {
+		"killCount": 0
+	},
+	"Toxix breb": {
+		"killCount": 0
+	},
+	"Thunder breb": {
+		"killCount": 0
+	},
 	"Gearh": {
 		"killCount": 0
 	},

@@ -175,9 +175,9 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 	stackable = _item.stackable
 	
 	if _item.itemName.matchn("goldPieces"):
-		if _item.amount < 48:
+		if _item.amount < 16:
 			$ItemSprite.texture = load("res://Assets/Miscellaneous/GoldPiecesLow.png")
-		elif _item.amount < 320:
+		elif _item.amount < 64:
 			$ItemSprite.texture = _item.texture
 		else:
 			$ItemSprite.texture = load("res://Assets/Miscellaneous/GoldPiecesHigh.png")

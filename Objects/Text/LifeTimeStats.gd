@@ -868,6 +868,21 @@ var critters = {
 		"description": "A blob of acid. Deals back damage when hit.",
 		"killCount": 0
 	},
+	"Fleir breb": {
+		"knowledge": false,
+		"description": "Little Fleir-filled rock. Emits fiery fumes.",
+		"killCount": 0
+	},
+	"Toxix breb": {
+		"knowledge": false,
+		"description": "Little Toxix-filled rock. Emits toxic fumes.",
+		"killCount": 0
+	},
+	"Thunder breb": {
+		"knowledge": false,
+		"description": "Little Thunder-filled rock. Emits thunderous fumes.",
+		"killCount": 0
+	},
 	"Gearh": {
 		"knowledge": false,
 		"description": "Powerful, hairy, hunchbacked creature.",

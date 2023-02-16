@@ -317,28 +317,37 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					"spell":
 						checkIfAddFlavorGamelog("spell")	
 						match _pickedAbility.abilityName:
-							"fireMiasma":
+							"fleirMiasma", "toxixMiasma", "thunderMiasma":
 								var _tiles = []
 								var _legibleTiles = []
 								for x in range(_critterTile.x - _pickedAbility.data.distance, _critterTile.x + _pickedAbility.data.distance + 1):
 									for y in range(_critterTile.y - _pickedAbility.data.distance, _critterTile.y + _pickedAbility.data.distance + 1):
-										if !_level.isOutSideTileMap(Vector2(x,y)) and Globals.isTileFree(Vector2(x,y), _level.grid):
+										if (
+											!_level.isOutSideTileMap(Vector2(x,y)) and
+											Globals.isTileFree(Vector2(x,y), _level.grid) and
+											_level.grid[x][y].tile != Globals.tiles.DOOR_CLOSED and
+											!_level.grid[x][y].effects.has(_pickedAbility.data.name)
+										):
 											_legibleTiles.append(Vector2(x,y))
-								if _legibleTiles.size() > 5:
-									for _i in 5:
+								if _legibleTiles.size() > _pickedAbility.data.tiles:
+									for _i in _pickedAbility.data.tiles:
 										_tiles.append(_legibleTiles.pop_at(randi() % _legibleTiles.size()))
 								else:
 									_tiles = _legibleTiles
+								
 								var _effect = load("res://UI/Effect/Effect.tscn")
 								for _tile in _tiles:
 									var _miasmaNode = _effect.instance()
-									_miasmaNode.create(load("res://Assets/Spells/Gas.png"), [_pickedAbility.data.attacks[0].magicDmg.element], _tile, 0, _pickedAbility.duration)
-									_miasmaNode.setTurnDuration(_pickedAbility.duration)
+									_miasmaNode.create(load("res://Assets/Spells/Gas.png"), spellData[_pickedAbility.data.attacks[0].magicDmg.element].color, _tile, _pickedAbility.data.name, _level.levelId, _pickedAbility.data.duration, _pickedAbility.data.attacks)
 									$"/root/World/Effects".add_child(_miasmaNode)
-									_level.grid[_tile.x][_tile.y].effects.append("fire miasma")
-								if !_pickedAbility.abilityType.matchn("skill"):
-									mp -= _pickedAbility.data.mp
-								Globals.gameConsole.addLog("Fire appears around {critterName} casts!".format({ "critterName": critterName.capitalize() }))
+									_level.grid[_tile.x][_tile.y].effects.append(_pickedAbility.data.name)
+								mp -= _pickedAbility.data.mp
+								if _pickedAbility.data.name.matchn("fleir miasma"):
+									Globals.gameConsole.addLog("{critterName} spews Fleir miasma!".format({ "critterName": critterName.capitalize() }))
+								elif _pickedAbility.data.name.matchn("toxix miasma"):
+									Globals.gameConsole.addLog("{critterName} spews Toxix miasma!".format({ "critterName": critterName.capitalize() }))
+								elif _pickedAbility.data.name.matchn("thunder miasma"):
+									Globals.gameConsole.addLog("{critterName} spews Thunder miasma!".format({ "critterName": critterName.capitalize() }))
 								return false
 							"summonCritter", "summonCritters":
 								var _tiles = []
@@ -352,8 +361,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 									_tiles = _legibleTiles
 								for _tile in _tiles:
 									$"/root/World/Critters/Critters".spawnRandomCritter(_tile, false)
-								if !_pickedAbility.abilityType.matchn("skill"):
-									mp -= _pickedAbility.data.mp
+								mp -= _pickedAbility.data.mp
 								Globals.gameConsole.addLog("{critter} summons critters!".format({ "critter": critterName.capitalize() }))
 								return false
 	
@@ -504,6 +512,11 @@ func takeDamage(_attacks, _critterTile, _critterName):
 						statusEffects.toxix = 5
 					else:
 						statusEffects.toxix = 3
+				if _attack.magicDmg.element != null and _attack.magicDmg.element.matchn("fleir") and statusEffects.onFleir != -1:
+					if _critterName.matchn("exterminator"):
+						statusEffects.onFleir = 5
+					else:
+						statusEffects.onFleir = 3
 				
 				# Spell damage dealt game stats
 				if checkIfCritterIsPlayer(_critterName):
@@ -551,6 +564,11 @@ func takeDamage(_attacks, _critterTile, _critterName):
 							statusEffects.toxix += 5
 						else:
 							statusEffects.toxix += 3
+					if _attack.magicDmg.element != null and _attack.magicDmg.element.matchn("fleir") and statusEffects.onFleir != -1:
+						if _critterName.matchn("exterminator"):
+							statusEffects.onFleir = 5
+						else:
+							statusEffects.onFleir = 3
 				
 				# Armor set effects
 				if checkIfCritterIsPlayer(_critterName):

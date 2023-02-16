@@ -120,7 +120,7 @@ var bosses = [
 			{
 				"abilityName": "rockThrow",
 				"abilityType": "rangedSpell",
-				"chance": 2
+				"chance": 3
 			},
 			{
 				"abilityName": "frostBite",
@@ -131,11 +131,6 @@ var bosses = [
 				"abilityName": "thundersplit",
 				"abilityType": "rangedSpell",
 				"chance": 2
-			},
-			{
-				"abilityName": "fleirMiasma",
-				"abilityType": "spell",
-				"chance": 1
 			},
 			{
 				"abilityName": "createShield",

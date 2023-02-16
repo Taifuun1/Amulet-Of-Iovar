@@ -448,7 +448,8 @@ func processPlayerEffects():
 
 func processEffects():
 	for _effect in $Effects.get_children():
-		_effect.tickTurn()
+		if _effect.levelId == level.levelId:
+			_effect.tickTurn(level)
 
 func updateTiles():
 	for x in (level.grid.size()):

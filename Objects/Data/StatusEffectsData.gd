@@ -126,7 +126,7 @@ var statusEffectsData = {
 	},
 	"toxix": {
 		"label": "tox",
-		"description": "You are poisoned. (You take 1 damage every turn for a duration.)",
+		"description": "You are poisoned. (You take 1 damage every turn for a duration and -3 wis.)",
 		"color": "#6abe30",
 		"texture": load("res://Assets/Status Effects/StatusEffectToxix.png"),
 		"effects": {
@@ -134,10 +134,10 @@ var statusEffectsData = {
 		}
 	},
 	"onFleir": {
-		"label": "tox",
-		"description": "You are poisoned. (-3 wis, You take 2 damage every turn for a duration.)",
-		"color": "#6abe30",
-		"texture": load("res://Assets/Status Effects/StatusEffectToxix.png"),
+		"label": "fle",
+		"description": "You are on fleir. (You take 3 damage every turn for a duration and -3 vis.)",
+		"color": "#e7363f",
+		"texture": load("res://Assets/Status Effects/StatusEffectOnFleir.png"),
 		"effects": {
 			"visage": -3,
 		}
