@@ -288,7 +288,6 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 				_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
 			_level.addPointToEnemyPathding(_tileToMoveTo)
 			_level.addPointToPathPathding(_tileToMoveTo)
-			_level.addPointToWeightedPathding(_tileToMoveTo)
 			Globals.gameConsole.addLog("You mine the cave wall.")
 			if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:
 				if critterClass.matchn("archeologist") and randi() % 2:

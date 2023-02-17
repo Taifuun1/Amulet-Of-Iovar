@@ -1,7 +1,7 @@
 
 var critterLevelGenerationList = {
 	"dungeon1": {
-		"amount": [12, 14],
+		"amount": [2, 4],
 		"critters": {
 			"floatingSpheres": ["Floating eye"],
 			"kobolds": ["Tiny kobold"],

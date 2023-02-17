@@ -39,7 +39,7 @@ func createDungeon():
 		placeDoors({
 			"min": 1,
 			"max": 1
-		})
+		}, true)
 		if areAllStairsConnected():
 			placeContainers({
 				"box": {

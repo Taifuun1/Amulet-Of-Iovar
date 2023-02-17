@@ -27,10 +27,12 @@ func createDungeon():
 			"upStair": Vector2(13,21)
 		}
 		placePresetItems(banditCompoundSpawns.banditCompoundSpawn1, self)
+		placePresetCritters(banditCompoundSpawns.banditCompoundSpawn1, self)
 	if _groups[0] == "Bandit Compound 2":
 		stairs = {
 			"downStair": Vector2(1,8),
 			"upStair": Vector2(57,17)
 		}
 		placePresetItems(banditCompoundSpawns.banditCompoundSpawn2, self)
+		placePresetCritters(banditCompoundSpawns.banditCompoundSpawn2, self)
 

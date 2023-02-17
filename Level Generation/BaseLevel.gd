@@ -99,19 +99,31 @@ func placeDoor(_room, _checkIfNoDoorsInCorner):
 			var _left = _tile + Vector2(-1, 0)
 			var _right = _tile + Vector2(1, 0)
 			if (
+				!isOutSideTileMap(_up) and
+				!isOutSideTileMap(_down) and
+				!isOutSideTileMap(_left) and
+				!isOutSideTileMap(_right) and
 				(
-					grid[_up.x][_up.y].tile != Globals.tiles.GRASS_TREE and
-					grid[_up.x][_up.y].tile != Globals.tiles.GRASS and
-					grid[_down.x][_down.y].tile != Globals.tiles.GRASS_TREE and
-					grid[_down.x][_down.y].tile != Globals.tiles.GRASS
-				) or
-				(
-					grid[_left.x][_left.y].tile != Globals.tiles.GRASS_TREE and
-					grid[_left.x][_left.y].tile != Globals.tiles.GRASS and
-					grid[_right.x][_right.y].tile != Globals.tiles.GRASS_TREE and
-					grid[_right.x][_right.y].tile != Globals.tiles.GRASS
+					(
+						grid[_up.x][_up.y].tile == Globals.tiles.WALL_STONE_BRICK and
+						grid[_down.x][_down.y].tile == Globals.tiles.WALL_STONE_BRICK
+					) or
+					(
+						grid[_left.x][_left.y].tile == Globals.tiles.WALL_STONE_BRICK and
+						grid[_right.x][_right.y].tile == Globals.tiles.WALL_STONE_BRICK
+					) or
+					(
+						grid[_up.x][_up.y].tile == Globals.tiles.WALL_WOOD_PLANK and
+						grid[_down.x][_down.y].tile == Globals.tiles.WALL_WOOD_PLANK
+					) or
+					(
+						grid[_left.x][_left.y].tile == Globals.tiles.WALL_WOOD_PLANK and
+						grid[_right.x][_right.y].tile == Globals.tiles.WALL_WOOD_PLANK
+					)
 				)
 			):
+				pass
+			else:
 				continue
 		else:
 			_tile = _room.walls[randi() % _room.walls.size()]
@@ -569,30 +581,6 @@ func connectAllWeightedCells(points):
 				continue
 			weightedAstarNode.connect_points(pointIndex, pointRelativeIndex, true)
 
-func addPointToWeightedPathding(point):
-	var _pointId = id(point)
-	if weightedAstarNode.has_point(_pointId):
-		weightedAstarNode.set_point_disabled(_pointId, false)
-	else:
-		weightedAstarNode.add_point(_pointId, point, 1.0)
-		var pointsRelative = PoolVector2Array([
-			Vector2(point.x, point.y - 1),
-			Vector2(point.x + 1, point.y - 1),
-			Vector2(point.x + 1, point.y),
-			Vector2(point.x + 1, point.y + 1),
-			Vector2(point.x, point.y + 1),
-			Vector2(point.x - 1, point.y + 1),
-			Vector2(point.x - 1, point.y),
-			Vector2(point.x - 1, point.y - 1)
-		])
-		for pointRelative in pointsRelative:
-			var pointRelativeIndex = id(pointRelative)
-			if isOutSideTileMap(pointRelative):
-				continue
-			if not weightedAstarNode.has_point(pointRelativeIndex):
-				continue
-			weightedAstarNode.connect_points(_pointId, pointRelativeIndex, true)
-
 
 
 ###############################
@@ -630,6 +618,8 @@ func placeCritterOnTypeOfTile(_tile, _critter):
 				return
 
 func doFinalPathfinding(_blockedTiles = Globals.blockedTiles):
+	astarNode.clear()
+	pathFindingAstarNode.clear()
 	pathFind(_blockedTiles)
 	enemyPathfinding(grid)
 

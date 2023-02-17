@@ -107,6 +107,8 @@ func setUpGameObjects(_playerData = null):
 	
 	$Critters/Critters.setNeutralClasses()
 	
+	yield(get_tree().create_timer(0.01), "timeout")
+	
 	if _playerData == null:
 		for _level in $Levels.get_children():
 			$Items/Items.generateItemsForLevel(_level)
@@ -270,8 +272,8 @@ func _input(_event):
 			elif Input.is_action_just_pressed("INTERACT") and currentGameState == gameState.GAME:
 				currentGameState = gameState.INTERACT
 				Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
-#			elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME:
-#				$"UI/UITheme/Debug Menu".showMenu()
+			elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME:
+				$"UI/UITheme/Debug Menu".showMenu()
 			elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME:
 				openMenu("use")
 			elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME:
@@ -1125,9 +1127,6 @@ func saveGame():
 	var _fovData = $FOV.getFOVSaveData()
 	$Save.saveData("FOVData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _fovData)
 	
-#	var _gameConsoleData = $UI/UITheme/GameConsole.getGameConsoleSaveData()
-#	$Save.saveGameFile("gameConsoleSave", "gameConsole", "{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _gameConsoleData)
-	
 	var _globalsData = Globals.getGlobalsSaveData()
 	$Save.saveData("GlobalsData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _globalsData)
 	
@@ -1154,9 +1153,7 @@ func saveGame():
 	}
 	$Save.saveData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
 	
-	print("waiting")
 	saveGameThread.call_deferred("wait_to_finish")
-	print("waiting2")
 	get_tree().quit()
 
 

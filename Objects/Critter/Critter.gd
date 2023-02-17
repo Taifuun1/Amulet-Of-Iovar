@@ -167,7 +167,6 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					Globals.gameConsole.addLog("{critter} tries to cast a spell but nothing happens!".format({ "critter": critterName }))
 					return false
 			else:
-				print(_pickedAbility)
 				match _pickedAbility.abilityType:
 					"rangedSpell":
 						checkIfAddFlavorGamelog("spell")
@@ -376,7 +375,6 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE
 								_level.addPointToEnemyPathding(_tileToMoveTo)
 								_level.addPointToPathPathding(_tileToMoveTo)
-								_level.addPointToWeightedPathding(_tileToMoveTo)
 								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
 									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
 								if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:
@@ -387,7 +385,6 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
 								_level.addPointToEnemyPathding(_tileToMoveTo)
 								_level.addPointToPathPathding(_tileToMoveTo)
-								_level.addPointToWeightedPathding(_tileToMoveTo)
 								if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() < 12:
 									Globals.gameConsole.addLog("The {critterName} mines the cave wall.".format({ "critterName": critterName }))
 								if _level.grid[_tileToMoveTo.x][_tileToMoveTo.y].interactable == Globals.interactables.GEMS:

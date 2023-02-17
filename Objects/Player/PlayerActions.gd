@@ -797,13 +797,11 @@ func zapItem(_direction):
 							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
 							_level.addPointToEnemyPathding(_tile)
 							_level.addPointToPathPathding(_tile)
-							_level.addPointToWeightedPathding(_tile)
 							_isTileMined = true
 						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE_DEEP:
 							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
 							_level.addPointToEnemyPathding(_tile)
 							_level.addPointToPathPathding(_tile)
-							_level.addPointToWeightedPathding(_tile)
 							_isTileMined = true
 						if !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break

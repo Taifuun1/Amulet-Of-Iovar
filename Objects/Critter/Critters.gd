@@ -146,11 +146,15 @@ func spawnCritter(_critter, _position = null, _isDeactivated = null, _spawnNew =
 	mutex.unlock()
 	return false
 
-func spawnCritters(_critterName, _position, _level = $"/root/World".level):
+func spawnCritters(_critterName, _position, _level = $"/root/World".level, _checkSpawnDistanceFromPlayer = true):
 	var _spawnTiles = getCritterSpawns(critterSpawnBehaviour.critterSpawnBehaviour[_critterName], _level, _position)
-	for _spawnTile in _spawnTiles:
-		var _critterSpawnDistance = _level.calculatePath(_spawnTile, $"/root/World".level.getCritterTile(0)).size()
-		if _spawnTile != null and _critterSpawnDistance > 16:
+	if _checkSpawnDistanceFromPlayer:
+		var _critterSpawnDistance = _level.calculatePath(_position, _level.getCritterTile(0)).size()
+		if _position != null and _critterSpawnDistance > 16:
+			for _spawnTile in _spawnTiles:
+				spawnCritter(_critterName, _spawnTile, null, true, _level)
+	else:
+		for _spawnTile in _spawnTiles:
 			spawnCritter(_critterName, _spawnTile, null, true, _level)
 
 func generateCrittersForLevel(_level):
@@ -168,7 +172,10 @@ func generateCrittersForLevel(_level):
 		
 		for _critter in _critters:
 			if _critter != null:
-				spawnCritters(_critter, null, _level)
+				if _level.dungeonLevelName.matchn("Dungeon 1"):
+					spawnCritters(_critter, _level.spawnableCritterTiles[randi() % _level.spawnableCritterTiles.size()], _level)
+				else:
+					spawnCritters(_critter, _level.spawnableCritterTiles[randi() % _level.spawnableCritterTiles.size()], _level, false)
 
 func returnRandomCritter(_critterGeneration = null):
 	if _critterGeneration != null:

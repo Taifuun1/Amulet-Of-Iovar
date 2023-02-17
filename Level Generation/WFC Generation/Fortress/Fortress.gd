@@ -84,6 +84,32 @@ func addSomeDoors():
 		else:
 			_doors = 3
 		for _index in range(_doors):
-			var _tile = _room.walls[randi() % _room.walls.size()]
+			placeDoorFortress(_room)
+
+func placeDoorFortress(_room):
+	for _i in range(20):
+		var _tile = _room.walls[randi() % _room.walls.size()]
+		var _up = _tile + Vector2(0, -1)
+		var _down = _tile + Vector2(0, 1)
+		var _left = _tile + Vector2(-1, 0)
+		var _right = _tile + Vector2(1, 0)
+		if (
+			!isOutSideTileMap(_up) and
+			!isOutSideTileMap(_down) and
+			!isOutSideTileMap(_left) and
+			!isOutSideTileMap(_right) and
+			(
+				(
+					grid[_up.x][_up.y].tile == Globals.tiles.WALL_STONE_BRICK and
+					grid[_down.x][_down.y].tile == Globals.tiles.WALL_STONE_BRICK
+				) or
+				(
+					grid[_left.x][_left.y].tile == Globals.tiles.WALL_STONE_BRICK and
+					grid[_right.x][_right.y].tile == Globals.tiles.WALL_STONE_BRICK
+				)
+			)
+		):
 			grid[_tile.x][_tile.y].tile = Globals.tiles.DOOR_CLOSED
 			_room.walls.erase(_tile)
+			return
+	push_error("Can't place fortress door")
