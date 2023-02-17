@@ -387,24 +387,24 @@ var globalItemInfo = {
 	"Ring of fumbling": {
 		"identified": false
 	},
-	"Ring of Strength": {
-		"identified": false
-	},
-	"Ring of Legerity": {
-		"identified": false
-	},
-	"Ring of Balance": {
-		"identified": false
-	},
-	"Ring of Wisdom": {
-		"identified": false
-	},
-	"Ring of Belief": {
-		"identified": false
-	},
-	"Ring of Visage": {
-		"identified": false
-	},
+#	"Ring of Strength": {
+#		"identified": false
+#	},
+#	"Ring of Legerity": {
+#		"identified": false
+#	},
+#	"Ring of Balance": {
+#		"identified": false
+#	},
+#	"Ring of Wisdom": {
+#		"identified": false
+#	},
+#	"Ring of Belief": {
+#		"identified": false
+#	},
+#	"Ring of Visage": {
+#		"identified": false
+#	},
 	"Official mail": {
 		"identified": false
 	},

@@ -124,6 +124,23 @@ var rings = {
 #			"identified": false
 #		},
 		{
+			"itemName": "Ring of fumbling",
+			"unidentifiedItemName": null,
+			"texture": null,
+			"unidentifiedTexture": null,
+			"type": "Accessory",
+			"category": "Ring",
+			"weight": 5,
+			"value": {
+				"binds": "Equipment"
+			},
+			"points": 15,
+			"enchantable": false,
+			"stackable": true
+		}
+	],
+	"rare": [
+		{
 			"itemName": "Ring of slow digestion",
 			"unidentifiedItemName": null,
 			"texture": null,
@@ -150,101 +167,84 @@ var rings = {
 			"points": 15,
 			"enchantable": false,
 			"stackable": true
-		},
-		{
-			"itemName": "Ring of fumbling",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 5,
-			"value": {
-				"binds": "Equipment"
-			},
-			"points": 15,
-			"enchantable": false,
-			"stackable": true
 		}
-	],
-	"rare": [
-		{
-			"itemName": "Ring of Strength",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 5,
-			"value": null,
-			"points": 35,
-			"enchantable": false,
-			"stackable": true
-		},
-		{
-			"itemName": "Ring of Legerity",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 5,
-			"value": null,
-			"points": 35,
-			"enchantable": false,
-			"stackable": true
-		},
-		{
-			"itemName": "Ring of Balance",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 5,
-			"value": null,
-			"points": 35,
-			"enchantable": false,
-			"stackable": true
-		},
-		{
-			"itemName": "Ring of Wisdom",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 5,
-			"value": null,
-			"points": 35,
-			"enchantable": false,
-			"stackable": true
-		},
-		{
-			"itemName": "Ring of Belief",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 5,
-			"value": null,
-			"points": 35,
-			"enchantable": false,
-			"stackable": true
-		},
-		{
-			"itemName": "Ring of Visage",
-			"unidentifiedItemName": null,
-			"texture": null,
-			"unidentifiedTexture": null,
-			"type": "Accessory",
-			"category": "Ring",
-			"weight": 5,
-			"value": null,
-			"points": 35,
-			"enchantable": false,
-			"stackable": true
-		}
+#		{
+#			"itemName": "Ring of Strength",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unidentifiedTexture": null,
+#			"type": "Accessory",
+#			"category": "Ring",
+#			"weight": 5,
+#			"value": null,
+#			"points": 35,
+#			"enchantable": false,
+#			"stackable": true
+#		},
+#		{
+#			"itemName": "Ring of Legerity",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unidentifiedTexture": null,
+#			"type": "Accessory",
+#			"category": "Ring",
+#			"weight": 5,
+#			"value": null,
+#			"points": 35,
+#			"enchantable": false,
+#			"stackable": true
+#		},
+#		{
+#			"itemName": "Ring of Balance",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unidentifiedTexture": null,
+#			"type": "Accessory",
+#			"category": "Ring",
+#			"weight": 5,
+#			"value": null,
+#			"points": 35,
+#			"enchantable": false,
+#			"stackable": true
+#		},
+#		{
+#			"itemName": "Ring of Wisdom",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unidentifiedTexture": null,
+#			"type": "Accessory",
+#			"category": "Ring",
+#			"weight": 5,
+#			"value": null,
+#			"points": 35,
+#			"enchantable": false,
+#			"stackable": true
+#		},
+#		{
+#			"itemName": "Ring of Belief",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unidentifiedTexture": null,
+#			"type": "Accessory",
+#			"category": "Ring",
+#			"weight": 5,
+#			"value": null,
+#			"points": 35,
+#			"enchantable": false,
+#			"stackable": true
+#		},
+#		{
+#			"itemName": "Ring of Visage",
+#			"unidentifiedItemName": null,
+#			"texture": null,
+#			"unidentifiedTexture": null,
+#			"type": "Accessory",
+#			"category": "Ring",
+#			"weight": 5,
+#			"value": null,
+#			"points": 35,
+#			"enchantable": false,
+#			"stackable": true
+#		}
 	]
 }

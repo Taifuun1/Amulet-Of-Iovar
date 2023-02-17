@@ -117,7 +117,7 @@ func setUpGameObjects(_playerData = null):
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
-#		$Items/Items.createItem("Dragonslayer", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Ring of fumbling", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
 	
 	for _node in $UI/UITheme.get_children():

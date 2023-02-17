@@ -31,6 +31,17 @@ var previousCalories
 
 var goldPieces
 
+var statusStates = {
+	"hunger": {
+		"current": 0,
+		"previous": 0
+	},
+	"weight": {
+		"current": 0,
+		"previous": 0
+	}
+}
+
 var maxCarryWeight = {
 	"overEncumbured": 0,
 	"burdened": 1,
@@ -489,15 +500,58 @@ func processPlayerSpecificEffects():
 			Globals.gameConsole.addLog("Your vision changes.")
 		playerVisibility.distance = -1
 	
-	##########
-	### UI ###
-	##########
+	###################
+	## Status states ##
+	###################
+	
+	print(baseStats)
+	if statusStates.hunger.current == 1 and statusStates.hunger.previous == 0:
+		baseStats.strength -= 1
+	elif statusStates.hunger.current == 2 and statusStates.hunger.previous == 0:
+		baseStats.strength -= 1
+		baseStats.balance -= 1
+	elif statusStates.hunger.current == 3 and statusStates.hunger.previous == 0:
+		baseStats.strength -= 2
+		baseStats.legerity -= 1
+		baseStats.balance -= 1
+	elif statusStates.hunger.current == 0 and statusStates.hunger.previous == 1:
+		baseStats.strength += 1
+	elif statusStates.hunger.current == 2 and statusStates.hunger.previous == 1:
+		baseStats.balance -= 1
+	elif statusStates.hunger.current == 3 and statusStates.hunger.previous == 1:
+		baseStats.strength -= 1
+		baseStats.legerity -= 1
+		baseStats.balance -= 1
+	elif statusStates.hunger.current == 0 and statusStates.hunger.previous == 2:
+		baseStats.strength += 1
+		baseStats.balance += 1
+	elif statusStates.hunger.current == 1 and statusStates.hunger.previous == 2:
+		baseStats.balance += 1
+	elif statusStates.hunger.current == 3 and statusStates.hunger.previous == 2:
+		baseStats.strength -= 1
+		baseStats.legerity -= 1
+	elif statusStates.hunger.current == 0 and statusStates.hunger.previous == 3:
+		baseStats.strength += 2
+		baseStats.legerity += 1
+		baseStats.balance += 1
+	elif statusStates.hunger.current == 1 and statusStates.hunger.previous == 3:
+		baseStats.strength += 1
+		baseStats.legerity += 1
+		baseStats.balance += 1
+	elif statusStates.hunger.current == 2 and statusStates.hunger.previous == 3:
+		baseStats.strength += 1
+		baseStats.legerity += 1
+	print(baseStats)
+	
+	########
+	## UI ##
+	########
 
 	processPlayerUIChanges()
 	
-	###########
-	## Tools ##
-	###########
+	################
+	## Worn items ##
+	################
 	equipmentResistances = []
 	for _itemId in itemsTurnedOn:
 		var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -959,6 +1013,7 @@ func getCritterSaveData():
 		previousCalories = previousCalories,
 		goldPieces = goldPieces,
 		equipmentResistances = equipmentResistances,
+		statusStates = statusStates,
 		maxCarryWeight = maxCarryWeight,
 		carryWeightBounds = carryWeightBounds,
 		turnsUntilAction = turnsUntilAction,

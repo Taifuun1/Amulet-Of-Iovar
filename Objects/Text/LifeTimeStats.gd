@@ -413,30 +413,30 @@ var items = {
 		"knowledge": false,
 		"description": "Gives fumbling status effect when worn. Binds on equip."
 	},
-	"Ring of Strength": {
-		"knowledge": false,
-		"description": "Ring that boosts your strength."
-	},
-	"Ring of Legerity": {
-		"knowledge": false,
-		"description": "Ring that boosts your belief."
-	},
-	"Ring of Balance": {
-		"knowledge": false,
-		"description": "Ring that boosts your belief."
-	},
-	"Ring of Wisdom": {
-		"knowledge": false,
-		"description": "Ring that boosts your belief."
-	},
-	"Ring of Belief": {
-		"knowledge": false,
-		"description": "Ring that boosts your belief."
-	},
-	"Ring of Visage": {
-		"knowledge": false,
-		"description": "Ring that boosts your belief."
-	},
+#	"Ring of Strength": {
+#		"knowledge": false,
+#		"description": "Ring that boosts your strength."
+#	},
+#	"Ring of Legerity": {
+#		"knowledge": false,
+#		"description": "Ring that boosts your belief."
+#	},
+#	"Ring of Balance": {
+#		"knowledge": false,
+#		"description": "Ring that boosts your belief."
+#	},
+#	"Ring of Wisdom": {
+#		"knowledge": false,
+#		"description": "Ring that boosts your belief."
+#	},
+#	"Ring of Belief": {
+#		"knowledge": false,
+#		"description": "Ring that boosts your belief."
+#	},
+#	"Ring of Visage": {
+#		"knowledge": false,
+#		"description": "Ring that boosts your belief."
+#	},
 	"Official mail": {
 		"knowledge": false,
 		"description": "Official mail. Doesn't do anything."

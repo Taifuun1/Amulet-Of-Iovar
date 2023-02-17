@@ -567,7 +567,7 @@ func checkWhatIsWorn(_item):
 				Globals.gameConsole.addLog("You feel cloudless.")
 			else:
 				_playerNode.itemsTurnedOn.append(_item.id)
-				Globals.gameConsole.addLog("You feel flashy.")
+				Globals.gameConsole.addLog("You feel stormy.")
 		"violet dragon scale mail":
 			if _playerNode.itemsTurnedOn.has(_item.id):
 				_playerNode.itemsTurnedOn.erase(_item.id)

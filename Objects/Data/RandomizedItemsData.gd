@@ -94,12 +94,12 @@ var randomItemList = {
 	},
 	"ring": {
 		"type": [
-			"Strength",
-			"Legerity",
-			"Balance",
-			"Belief",
-			"Visage",
-			"Wisdom",
+#			"Strength",
+#			"Legerity",
+#			"Balance",
+#			"Belief",
+#			"Visage",
+#			"Wisdom",
 			"Fleir resistance",
 			"Frost resistance",
 			"Thunder resistance",

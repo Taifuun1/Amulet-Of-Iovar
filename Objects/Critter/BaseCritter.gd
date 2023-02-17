@@ -69,16 +69,6 @@ var statusEffects = {
 	"displacement": 0,
 	"onFleir": 0
 }
-var statusStates = {
-	"hunger": {
-		"current": 0,
-		"previous": 0
-	},
-	"weight": {
-		"current": 0,
-		"previous": 0
-	}
-}
 
 var hpRegenTimer = 0
 var mpRegenTimer = 0
@@ -339,7 +329,6 @@ func getBaseCritterSaveData():
 		abilities = abilities,
 		resistances = resistances,
 		statusEffects = statusEffects,
-		statusStates = statusStates,
 		hpRegenTimer = hpRegenTimer,
 		mpRegenTimer = mpRegenTimer
 	}
