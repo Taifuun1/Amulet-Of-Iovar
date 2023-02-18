@@ -70,8 +70,9 @@ _global_script_class_icons={
 
 config/name="Amulet of Iovar"
 config/description="Nethack-inspired roguelike"
-run/main_scene="res://UI/Start Screen/Start Screen.tscn"
+run/main_scene="res://UI/Splash Screen/SplashScreen.tscn"
 config/use_custom_user_dir=true
+boot_splash/show_image=false
 boot_splash/bg_color=Color( 0.0235294, 0.0313726, 0.101961, 1 )
 config/icon="res://Assets/Amulets/AmuletOfIovar.png"
 
