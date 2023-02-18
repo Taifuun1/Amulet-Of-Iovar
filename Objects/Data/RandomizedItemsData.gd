@@ -106,7 +106,6 @@ var randomItemList = {
 			"Gleeie'er resistance",
 			"Toxix resistance",
 			"protection",
-			"seeing",
 			"hunger",
 			"slow digestion",
 			"regen",

@@ -41,7 +41,7 @@ var dialogMenuDialogs = {
 		"title": "Iovar, The cultist leader",
 		"text": """At the bottom of the dungeon, you finally see the home of the wizard. You face Iovar, founder of the dungeon.
 	
-	Iovar: "Thee finally showeth thine face! Eluded mine grasp hath, perished mine minions hath, and plotted to steal mine amulet hath! No more will thy prolong thine antics. Face me, cur!"
+	Iovar: "Thee finally showeth thine face! Eluded mine grasp hath, perished mine minions hath, and plotted to steal mine amulet hath! No longer will thy prolong thine antics. Face me, cur!"
 """
 	}
 }

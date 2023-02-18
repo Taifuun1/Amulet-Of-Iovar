@@ -78,20 +78,6 @@ var rings = {
 			"enchantable": false,
 			"stackable": true
 		},
-#		{
-#			"itemName": "Ring of seeing",
-#			"unidentifiedItemName": null,
-#			"texture": null,
-#			"unidentifiedTexture": null,
-#			"type": "Accessory",
-#			"category": "Ring",
-#			"weight": 5,
-#			"value": null,
-#			"enchantable": true,
-#			"stackable": false,
-#			"rarity": "Uncommon",
-#			"identified": false
-#		},
 		{
 			"itemName": "Ring of hunger",
 			"unidentifiedItemName": null,

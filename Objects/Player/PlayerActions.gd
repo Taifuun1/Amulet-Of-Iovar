@@ -116,7 +116,7 @@ func readItem(_id):
 					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
 				elif _readItem.piety.matchn("blasphemous"):
 					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					newItem.createItem($"/root/World/Items/Items".getItemByName("orange"))
+					newItem.createItem($"/root/World/Items/Items".getItemByName("cherries"))
 					$"/root/World/Items".add_child(newItem, true)
 					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
 					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
@@ -247,6 +247,7 @@ func readItem(_id):
 						_areEquipmentEmpty = false
 				if !_areEquipmentEmpty:
 					if _readItem.piety.matchn("reverent"):
+						var _enchantCount = 0
 						for _itemId in _equipmentNode.equipment.values():
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
@@ -255,6 +256,9 @@ func readItem(_id):
 									Globals.gameConsole.addLog("The {itemName} glows with a light green light.".format({ "itemName": _item.itemName }))
 								else:
 									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
+								_enchantCount += 1
+								if _enchantCount == 2:
+									break
 					elif _readItem.piety.matchn("formal"):
 						for _itemId in _equipmentNode.equipment.values():
 							if _itemId != null:

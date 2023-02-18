@@ -174,8 +174,8 @@ var armor = {
 			"stackable": false
 		},
 		{
-			"itemName": "Large orc shield",
-			"unidentifiedItemName": "Large orc shield",
+			"itemName": "Large orcish shield",
+			"unidentifiedItemName": "Large dark shield",
 			"texture": load("res://Assets/Armor/ShieldLargeOrcShield.png"),
 			"unidentifiedTexture": load("res://Assets/Armor/ShieldLargeOrcShield.png"),
 			"type": "Armor",

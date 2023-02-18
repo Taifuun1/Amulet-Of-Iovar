@@ -177,7 +177,7 @@ var globalItemInfo = {
 	"Battered buckler": {
 		"identified": false,
 	},
-	"Large orc shield": {
+	"Large orcish shield": {
 		"identified": false,
 	},
 	"Justice'eer shield": {
@@ -505,7 +505,7 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Tome of Knowledge": {
-		"identified": false
+		"identified": true
 	},
 	"Wand of light": {
 		"identified": false

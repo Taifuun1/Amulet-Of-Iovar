@@ -39,8 +39,10 @@ func getInteractionFlavorMessage(_critterName, _critterAI):
 				Globals.gameConsole.addLog("Thy shalt not converse in war, weakling.", _critterName)
 			"dwarf miner", "dwarf engineer", "dwarf smith", "dwarf contirer":
 				Globals.gameConsole.addLog("Got any gems?", _critterName)
-			"elf hunter", "elf assassin", "elf noble":
+			"elf hunter", "elf noble":
 				Globals.gameConsole.addLog("Good day.", _critterName)
+			"elf assassin":
+				Globals.gameConsole.addLog("...")
 			"elf king":
 				Globals.gameConsole.addLog("Your feet disgrace these halls.", _critterName)
 			"cat":
@@ -54,7 +56,7 @@ func getInteractionFlavorMessage(_critterName, _critterAI):
 			"guard", "guard captain":
 				Globals.gameConsole.addLog("Stop! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit.", _critterName)
 			"outlaw watcher", "outlaw fusiee'er", "outlaw merchandiee'er":
-				Globals.gameConsole.addLog("I'll get ya!", _critterName)
+				Globals.gameConsole.addLog("I'll shank ya!", _critterName)
 			"iovars cultist acolyte", "iovars cultist":
 				Globals.gameConsole.addLog("Die, interloper!", _critterName)
 			"half-lich":
@@ -79,27 +81,32 @@ func getInteractionFlavorMessage(_critterName, _critterAI):
 				Globals.gameConsole.addLog("A true warrior is always vigilant.")
 			"dwarf miner", "dwarf engineer", "dwarf smith", "dwarf contirer":
 				Globals.gameConsole.addLog("Got any gems?")
-			"elf hunter", "elf assassin", "elf noble":
+			"elf hunter", "elf noble":
 				Globals.gameConsole.addLog("Good day.")
+			"elf assassin":
+				Globals.gameConsole.addLog("...")
 			"elf king":
 				Globals.gameConsole.addLog("Your feet disgrace these halls.")
 			"cat":
 				Globals.gameConsole.addLog("You pet the cat.")
-				Globals.gameConsole.addLog("[i]Purr[/i]", _critterName)
+				Globals.gameConsole.addLog("[i]Purrr...[/i]", _critterName)
 			"lynx":
 				Globals.gameConsole.addLog("You pet the lynx.")
-				Globals.gameConsole.addLog("[i]Purr[/i]", _critterName)
+				Globals.gameConsole.addLog("[i]Purrr...[/i]", _critterName)
 			"tiger":
 				Globals.gameConsole.addLog("You pet the tiger.")
-				Globals.gameConsole.addLog("[i]Purr[/i]", _critterName)
+				Globals.gameConsole.addLog("[i]Purrr...[/i]", _critterName)
 			"shopkeeper":
 				Globals.gameConsole.addLog("Only the best wares here.")
 			"guard", "guard captain":
-				Globals.gameConsole.addLog("G'day.", _critterName)
+				Globals.gameConsole.addLog("Good day, sir.", _critterName)
 			"outlaw watcher", "outlaw fusiee'er", "outlaw merchandiee'er":
-				Globals.gameConsole.addLog("Mmph.", _critterName)
+				if randi() % 2 == 0:
+					Globals.gameConsole.addLog("G'day, mate.", _critterName)
+				else:
+					Globals.gameConsole.addLog("Mmph.", _critterName)
 			"iovars cultist acolyte", "iovars cultist":
-				Globals.gameConsole.addLog("Hello, friend.", _critterName)
+				Globals.gameConsole.addLog("Hello, friend of Iovar.", _critterName)
 			"half-lich":
 				Globals.gameConsole.addLog("[i]Rattles bones conversely[/i]", _critterName)
 			"lich", "grand lich", "arch-lich":
@@ -120,7 +127,7 @@ var globalGameConsoleMessages = {
 			"frequency": 3,
 			"lines": [
 				"Cur!",
-				"Perish, ye cur!",
+				"Perish, cur!",
 				"Hell awaits thee!",
 				"Hell awaits ye!",
 				"Hell awaits ye, thug!",

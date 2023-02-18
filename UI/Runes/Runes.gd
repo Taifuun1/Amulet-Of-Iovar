@@ -338,6 +338,9 @@ func calculateMagicDamageIncrease(_type):
 		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
+		if _player.checkIfItemsTurnedOnHasItem("cool mikeys"):
+			_additionalDamage += 2
+		
 		if _stats.wisdom > 18:
 			_d = 1
 		
@@ -363,6 +366,9 @@ func calculateMagicDamageIncrease(_type):
 		
 		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
+		
+		if _player.checkIfItemsTurnedOnHasItem("cool mikeys"):
+			_additionalDamage += 2
 		
 		if _stats.wisdom > 27:
 			_d = 1
@@ -392,6 +398,9 @@ func calculateMagicDamageIncrease(_type):
 		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
 		
+		if _player.checkIfItemsTurnedOnHasItem("cool mikeys"):
+			_additionalDamage += 2
+		
 		return {
 			"dmg": _stats.visage / 3 + _additionalDamage,
 			"d": _d
@@ -411,6 +420,9 @@ func calculateMagicDamageIncrease(_type):
 		
 		if _player.checkIfItemsTurnedOnHasItem("boots of magic"):
 			_additionalDamage += 1
+		
+		if _player.checkIfItemsTurnedOnHasItem("cool mikeys"):
+			_additionalDamage += 2
 		
 		if _stats.visage > 30:
 			_d += 4
