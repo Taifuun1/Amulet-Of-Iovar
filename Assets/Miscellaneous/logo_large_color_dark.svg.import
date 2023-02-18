@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/logo_large_color_light.svg-84f586e2e6aebc4d1a35a65614a42927.stex"
+path="res://.import/logo_large_color_dark.svg-d010a8c84c5f04351aa93c620f37e575.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Miscellaneous/logo_large_color_light.svg"
-dest_files=[ "res://.import/logo_large_color_light.svg-84f586e2e6aebc4d1a35a65614a42927.stex" ]
+source_file="res://Assets/Miscellaneous/logo_large_color_dark.svg"
+dest_files=[ "res://.import/logo_large_color_dark.svg-d010a8c84c5f04351aa93c620f37e575.stex" ]
 
 [params]
 
