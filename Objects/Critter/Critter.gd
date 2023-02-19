@@ -13,7 +13,7 @@ var drops
 var abilityHits
 var currentCritterAbilityHit = null
 var activationDistance = null
-var hostileClasses = []
+var hostileRaces = []
 var etherealnessHit = false
 var isMimicked = false
 
@@ -84,8 +84,8 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 	expDropAmount = int(_critter.expDropAmount)
 	drops = _critter.drops
 	
-	if _critter.has("hostileClasses"):
-		hostileClasses = _critter.hostileClasses
+	if _critter.has("hostileRaces"):
+		hostileRaces = _critter.hostileRaces
 	
 	$Tooltip/TooltipContainer.updateTooltip(critterName, _tooltip.description, _critter.texture)
 
@@ -120,19 +120,17 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		push_error("Null crittertile")
 		push_error(_level.dungeonLevelName)
 		return
-	
-	# Get critter distance from player
-	_distanceFromPlayer = _level.calculatePath(_critterTile, _playerTile)
-	# Get critter move
-	if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
-		if aI.aggroTarget != null:
-			_path = aI.getCritterMove(_critterTile, _level.getCritterTile(aI.aggroTarget), _level)
-		else:
-			_path = aI.getCritterMove(_critterTile, _playerTile, _level)
-	
 	if statusEffects.stun > 0:
 		Globals.gameConsole.addLog("The {critter} can't move!".format({ "critter": critterName.capitalize() }))
 		return false
+	
+	# Get critter distance from player
+	_distanceFromPlayer = _level.calculatePath(_critterTile, _playerTile)
+	
+	# Get critter move
+	if _critterTile != null and typeof(_critterTile) != TYPE_BOOL:
+		_path = aI.getCritterMove(_critterTile, _playerTile, _distanceFromPlayer.size(), hostileRaces, _level)
+	
 	if typeof(_path) == TYPE_BOOL or isMimicked:
 		return false
 	
@@ -415,7 +413,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		
 		# Hitting check
 		if aI.aggroTarget != null and _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == aI.aggroTarget:
-			$"/root/World/Critters/{critterId}".takeDamage(attacks, _moveCritterTo, critterName)
+			get_node("/root/World/Critters/{critterId}".format({ "critterId": aI.aggroTarget })).takeDamage(attacks, _moveCritterTo, critterName)
 			return false
 		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 			if currentHit == 15:

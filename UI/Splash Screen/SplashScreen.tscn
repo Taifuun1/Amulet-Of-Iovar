@@ -25,7 +25,7 @@ margin_bottom = 747.0
 texture = ExtResource( 2 )
 
 [node name="SplashScreenTimeout" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 2.0
 one_shot = true
 autostart = true
 

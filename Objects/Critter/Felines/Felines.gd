@@ -1,7 +1,7 @@
 var felines = [
 	{
 		"critterName": "Cat",
-		"race": "Felines",
+		"race": "Feline",
 		"class": "Animal",
 		"weight": 150,
 		"aI": "Aggressive",
@@ -38,11 +38,11 @@ var felines = [
 		"abilityHits": [],
 		"resistances": [],
 		"drops": [],
-		"hostileClasses": ["Canines"]
+		"hostileRaces": ["Canine"]
 	},
 	{
 		"critterName": "Lynx",
-		"race": "Felines",
+		"race": "Feline",
 		"class": "Animal",
 		"weight": 150,
 		"aI": "Aggressive",
@@ -88,11 +88,11 @@ var felines = [
 		"abilityHits": [],
 		"resistances": [],
 		"drops": [],
-		"hostileClasses": ["Canines"]
+		"hostileRaces": ["Canine"]
 	},
 	{
 		"critterName": "Tiger",
-		"race": "Felines",
+		"race": "Feline",
 		"class": "Animal",
 		"weight": 150,
 		"aI": "Aggressive",
@@ -138,6 +138,6 @@ var felines = [
 		"abilityHits": [],
 		"resistances": [],
 		"drops": [],
-		"hostileClasses": ["Canines"]
+		"hostileRaces": ["Canine"]
 	}
 ]

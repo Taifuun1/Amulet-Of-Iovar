@@ -1,7 +1,7 @@
 var bats = [
 	{
 		"critterName": "Dark bat",
-		"race": "Bats",
+		"race": "Bat",
 		"class": "Animal",
 		"weight": 50,
 		"aI": "Aggressive",
@@ -47,7 +47,7 @@ var bats = [
 	},
 	{
 		"critterName": "Squinting bat",
-		"race": "Bats",
+		"race": "Bat",
 		"class": "Animal",
 		"weight": 50,
 		"aI": "Aggressive",
@@ -102,7 +102,7 @@ var bats = [
 	},
 	{
 		"critterName": "Spooky bat",
-		"race": "Bats",
+		"race": "Bat",
 		"class": "Animal",
 		"weight": 50,
 		"aI": "Aggressive",
@@ -157,7 +157,7 @@ var bats = [
 	},
 	{
 		"critterName": "Vampire bat",
-		"race": "Bats",
+		"race": "Bat",
 		"class": "Animal",
 		"weight": 50,
 		"aI": "Aggressive",

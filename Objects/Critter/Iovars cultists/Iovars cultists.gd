@@ -63,7 +63,7 @@ var iovarsCultists = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Wraiths"]
+		"hostileRaces": ["Wraith"]
 	},
 	{
 		"critterName": "Iovars cultist",
@@ -129,6 +129,6 @@ var iovarsCultists = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Wraiths"]
+		"hostileRaces": ["Wraith"]
 	}
 ]

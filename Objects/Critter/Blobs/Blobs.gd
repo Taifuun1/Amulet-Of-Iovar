@@ -1,7 +1,7 @@
 var blobs = [
 	{
 		"critterName": "Slerp",
-		"race": "Blobs",
+		"race": "Blob",
 		"class": "Natural hazard",
 		"weight": 50,
 		"aI": "Aggressive",
@@ -59,7 +59,7 @@ var blobs = [
 	},
 	{
 		"critterName": "Sluerp",
-		"race": "Blobs",
+		"race": "Blob",
 		"class": "Natural hazard",
 		"weight": 50,
 		"aI": "Aggressive",

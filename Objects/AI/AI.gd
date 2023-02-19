@@ -11,23 +11,52 @@ func create(_aI, _aggroDistance, _activationDistance = null):
 	aggroDistance = _aggroDistance
 	activationDistance = _activationDistance
 
-func getCritterMove(_critterTile, _playerTile, _level, _hostileClasses = null):
+func checkAggroTarget(_critterTile, _distanceFromPlayer, _hostileRaces, _level):
+	var _closestHostileCritter = {
+		"id": null,
+		"distance": null
+	}
+	for _critterId in _level.critters:
+		if _hostileRaces.has(get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterId })).race):
+			var _otherCritterTile = _level.getCritterTile(_critterId)
+			_level.addPointToPathPathding(_otherCritterTile)
+			var _distanceFromOtherCritter = _level.calculatePath(_critterTile, _otherCritterTile).size()
+			_level.addPointToPathPathding(_otherCritterTile)
+			if (
+				(
+					_distanceFromOtherCritter < _distanceFromPlayer and
+					_closestHostileCritter.distance == null and
+					_distanceFromOtherCritter < aggroDistance and
+					_distanceFromOtherCritter != 0
+				) or
+				(
+					_distanceFromOtherCritter < _distanceFromPlayer and
+					_closestHostileCritter.distance != null and
+					_distanceFromOtherCritter < _closestHostileCritter.distance and
+					_distanceFromOtherCritter < aggroDistance and
+					_distanceFromOtherCritter != 0
+				)
+			):
+				_closestHostileCritter = {
+					"id": _critterId,
+					"distance": _distanceFromOtherCritter
+				}
+	if _closestHostileCritter.id != null:
+		aggroTarget = _closestHostileCritter.id
+	else:
+		aggroTarget = null
+
+func getCritterMove(_critterTile, _playerTile, _distanceFromPlayer, _hostileRaces, _level):
 	if (aggroTarget != null and !_level.critters.has(aggroTarget)) or aggroTarget == 0:
 		aggroTarget = null
-	if aggroTarget == null and _hostileClasses != null:
-		for _critterId in _level.critters:
-			var _otherCritter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critterId }))
-			var _otherCritterTile = _level.getCritterTile(_critterId)
-			if (
-				_hostileClasses.has(_otherCritter.critterClass) and
-				_level.calculatePathFindingPath(_critterTile, _otherCritterTile).size() < aggroDistance and
-				_level.calculatePathFindingPath(_critterTile, _otherCritterTile).size() != 0
-			):
-				aggroTarget = _critterId
-				return _level.calculatePathFindingPath(_critterTile, _otherCritterTile)
-		aggroTarget = null
-	elif aggroTarget != null:
-		return _level.calculatePathFindingPath(_critterTile, _level.getCritterTile(get_node("/root/World/Critters/{critterId}".format({ "critterId": aggroTarget })).id))
+	if aggroTarget == null and !_hostileRaces.empty():
+		checkAggroTarget(_critterTile, _distanceFromPlayer, _hostileRaces, _level)
+	if aggroTarget != null:
+		var _otherCritterTile = _level.getCritterTile(aggroTarget)
+		_level.addPointToEnemyPathding(_otherCritterTile)
+		var _path = _level.calculatePathFindingPath(_critterTile, _otherCritterTile)
+		_level.addPointToEnemyPathding(_otherCritterTile)
+		return _path
 	if aI.matchn("Aggressive"):
 		return getAggressiveCritterMove(_critterTile, _playerTile, _level)
 	elif aI.matchn("Slow Aggressive"):

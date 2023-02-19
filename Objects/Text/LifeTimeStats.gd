@@ -751,7 +751,7 @@ var items = {
 	},
 	"Elvish flail": {
 		"knowledge": false,
-		"description": "Elven flail. Pretty light."
+		"description": "Elven flail. Lightweight."
 	},
 	"Crustel flail": {
 		"knowledge": false,

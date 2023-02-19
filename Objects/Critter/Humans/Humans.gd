@@ -103,7 +103,7 @@ var humans = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Goblins", "Orcs", "Rats", "Snakes", "Wraiths"]
+		"hostileRaces": ["Goblin", "Orc", "Rat", "Snake", "Wraith"]
 	},
 	{
 		"critterName": "Guard captain",
@@ -167,6 +167,6 @@ var humans = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Goblins", "Orcs", "Rats", "Snakes", "Wraiths"]
+		"hostileRaces": ["Goblin", "Orc", "Rat", "Snake", "Wraith"]
 	}
 ]

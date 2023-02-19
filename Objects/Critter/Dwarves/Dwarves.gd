@@ -69,7 +69,7 @@ var dwarves = [
 				"amount": [1, 3]
 			}
 		],
-		"hostileClasses": ["Elves", "Goblins", "Orcs"]
+		"hostileRaces": ["Elf", "Goblin", "Orc"]
 	},
 	{
 		"critterName": "Dwarf engineer",
@@ -116,7 +116,7 @@ var dwarves = [
 				"amount": [15, 25]
 			}
 		],
-		"hostileClasses": ["Elves", "Goblins", "Orcs"]
+		"hostileRaces": ["Elf", "Goblin", "Orc"]
 	},
 	{
 		"critterName": "Dwarf smith",
@@ -180,7 +180,7 @@ var dwarves = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Elves", "Goblins", "Orcs"]
+		"hostileRaces": ["Elf", "Goblin", "Orc"]
 	},
 	{
 		"critterName": "Dwarven contirer",
@@ -251,6 +251,6 @@ var dwarves = [
 				"amount": [1, 3]
 			}
 		],
-		"hostileClasses": ["Elves", "Goblins", "Orcs"]
+		"hostileRaces": ["Elf", "Goblin", "Orc"]
 	}
 ]

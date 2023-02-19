@@ -356,6 +356,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo):
 			Input.is_action_pressed("MOVE_UP_LEFT")
 		) and
 		(
+			_tileToMoveTo != null and
 			_tileToMoveTo.y >= 0 and
 			_tileToMoveTo.y < level.grid[0].size() and
 			_tileToMoveTo.x >= 0 and

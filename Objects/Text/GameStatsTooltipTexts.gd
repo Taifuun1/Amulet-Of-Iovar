@@ -6,7 +6,7 @@ var className = {
 
 var race = {
 	"title": "Race",
-	"description": "Your race determines your starting resistances."
+	"description": "Your race determines how you look."
 }
 
 var justice = {

@@ -61,7 +61,7 @@ var elves = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Dwarves", "Goblins", "Orcs"]
+		"hostileRaces": ["Dwarf", "Goblin", "Orc"]
 	},
 	{
 		"critterName": "Elf assassin",
@@ -133,7 +133,7 @@ var elves = [
 #				"amount": [1, 1]
 #			}
 		],
-		"hostileClasses": ["Dwarves", "Goblins", "Orcs"]
+		"hostileRaces": ["Dwarf", "Goblin", "Orc"]
 	},
 	{
 		"critterName": "Elf noble",
@@ -199,7 +199,7 @@ var elves = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Dwarves", "Goblins", "Orcs"]
+		"hostileRaces": ["Dwarf", "Goblin", "Orc"]
 	},
 	{
 		"critterName": "Elf king",
@@ -283,6 +283,6 @@ var elves = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Dwarves", "Goblins", "Orcs"]
+		"hostileRaces": ["Dwarf", "Goblin", "Orc"]
 	}
 ]

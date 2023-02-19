@@ -52,7 +52,7 @@ var outlaws = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Rats", "Snakes", "Wraiths"]
+		"hostileRaces": ["Rat", "Snake", "Wraith"]
 	},
 	{
 		"critterName": "Outlaw fusiee'er",
@@ -122,7 +122,7 @@ var outlaws = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Rats", "Snakes", "Wraiths"]
+		"hostileRaces": ["Rat", "Snake", "Wraith"]
 	},
 	{
 		"critterName": "Outlaw merchandiee'er",
@@ -177,6 +177,6 @@ var outlaws = [
 				"amount": [1, 1]
 			}
 		],
-		"hostileClasses": ["Rats", "Snakes", "Wraiths"]
+		"hostileRaces": ["Rat", "Snake", "Wraith"]
 	}
 ]

@@ -46,11 +46,11 @@ var canines = [
 				"amount": [1, 2],
 			}
 		],
-		"hostileClasses": ["Felines"]
+		"hostileRaces": ["Feline"]
 	},
 	{
 		"critterName": "Warg",
-		"race": "Canines",
+		"race": "Canine",
 		"class": "Animal",
 		"weight": 50,
 		"aI": "Aggressive",
@@ -95,11 +95,11 @@ var canines = [
 				"amount": [1, 2],
 			}
 		],
-		"hostileClasses": ["Felines"]
+		"hostileRaces": ["Feline"]
 	},
 	{
 		"critterName": "Gearh",
-		"race": "Canines",
+		"race": "Canine",
 		"class": "Animal",
 		"weight": 50,
 		"aI": "Aggressive",
@@ -153,6 +153,6 @@ var canines = [
 				"amount": [1, 2],
 			}
 		],
-		"hostileClasses": ["Felines"]
+		"hostileRaces": ["Feline"]
 	}
 ]
