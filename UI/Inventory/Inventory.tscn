@@ -2,9 +2,10 @@
 
 [ext_resource path="res://UI/Inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://UI/RichTextLabel Extended/RichTextLabel Extended.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Theme/FantaisieArtistique.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Assets/Theme/UITheme.tres" type="Theme" id=4]
-[ext_resource path="res://Assets/Theme/UITitleFont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/Themes/FantaisieArtistique.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Themes/UITheme.tres" type="Theme" id=4]
+[ext_resource path="res://Assets/Themes/UITitleFont.tres" type="DynamicFont" id=5]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 1 )

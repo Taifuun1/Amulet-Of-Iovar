@@ -234,6 +234,9 @@ var globalItemInfo = {
 	"Green glass": {
 		"identified": false
 	},
+	"Grey glass": {
+		"identified": false
+	},
 	"Pink glass": {
 		"identified": false
 	},
@@ -280,6 +283,9 @@ var globalItemInfo = {
 		"identified": false
 	},
 	"Blue Topaz": {
+		"identified": false
+	},
+	"Bright star": {
 		"identified": false
 	},
 	"Citrine": {

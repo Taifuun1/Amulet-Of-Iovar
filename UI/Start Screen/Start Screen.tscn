@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://UI/Start Screen/Start Screen.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Theme/UITheme.tres" type="Theme" id=14]
+[ext_resource path="res://Assets/Themes/UITheme.tres" type="Theme" id=14]
+
 
 [node name="StartScreen" type="Control"]
 anchor_right = 1.0

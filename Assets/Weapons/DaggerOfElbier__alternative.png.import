@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DaggerOfElbier2.png-955745f3ab2c611433cee45afa264a18.stex"
+path="res://.import/DaggerOfElbier__alternative.png-9163c2f133a8e044dbe564ec5f9bb94a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Weapons/DaggerOfElbier2.png"
-dest_files=[ "res://.import/DaggerOfElbier2.png-955745f3ab2c611433cee45afa264a18.stex" ]
+source_file="res://Assets/Weapons/DaggerOfElbier__alternative.png"
+dest_files=[ "res://.import/DaggerOfElbier__alternative.png-9163c2f133a8e044dbe564ec5f9bb94a.stex" ]
 
 [params]
 

@@ -2,12 +2,13 @@
 
 [ext_resource path="res://UI/Game Over Stats/Game Over Stats.gd" type="Script" id=1]
 [ext_resource path="res://UI/Game Over Stats/Points.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Theme/UITheme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Themes/UITheme.tres" type="Theme" id=3]
 [ext_resource path="res://UI/Game Over Stats/Console Log.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/Game Over Stats/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Game Over Stats/Kill Count.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Game Over Stats/Game Stats.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Theme/UITitleFont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Assets/Themes/UITitleFont.tres" type="DynamicFont" id=8]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 0 )

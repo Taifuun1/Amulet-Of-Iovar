@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/Tooltip/Tooltip.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Theme/UITheme.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Themes/UITheme.tres" type="Theme" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.121569, 0.223529, 0.458824, 1 )

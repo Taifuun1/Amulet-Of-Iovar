@@ -1,10 +1,11 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://UI/Runes/Runes.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Theme/UITitleFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/Themes/UITitleFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/UI/RuneHeario.png" type="Texture" id=3]
 [ext_resource path="res://Assets/UI/RuneEario.png" type="Texture" id=4]
 [ext_resource path="res://Assets/UI/RuneLuirio.png" type="Texture" id=5]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 1 )

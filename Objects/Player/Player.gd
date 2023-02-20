@@ -508,6 +508,8 @@ func processPlayerSpecificEffects():
 	## Status states ##
 	###################
 	
+	print("")
+	print(statusStates)
 	print(baseStats)
 	if statusStates.hunger.current == 1 and statusStates.hunger.previous == 0:
 		baseStats.strength -= 1
@@ -687,19 +689,19 @@ func processPlayerUIChanges():
 					$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_previousWeightStateType)
 	
 	# Deal with status effect and status state stat changes
-	var _stats = baseStats.duplicate(true)
-	for _statusEffect in statusEffects.keys():
-		if statusEffects[_statusEffect] > 0 and statusEffectsData.statusEffectsData[_statusEffect].has("effects"):
-			for _stat in statusEffectsData.statusEffectsData[_statusEffect].effects:
-				_stats[_stat] += statusEffectsData.statusEffectsData[_statusEffect].effects[_stat]
-	if _currentWeightStateType != null and statusEffectsData.statusEffectsData[_currentWeightStateType].has("effects"):
-		for _stat in statusEffectsData.statusEffectsData[_currentWeightStateType].effects:
-			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
-	if _currentWeightStateType != null and statusEffectsData.statusEffectsData[_currentWeightStateType].has("effects"):
-		for _stat in statusEffectsData.statusEffectsData[_currentWeightStateType].effects:
-			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
-	
-	stats = _stats
+#	var _stats = baseStats.duplicate(true)
+#	for _statusEffect in statusEffects.keys():
+#		if statusEffects[_statusEffect] > 0 and statusEffectsData.statusEffectsData[_statusEffect].has("effects"):
+#			for _stat in statusEffectsData.statusEffectsData[_statusEffect].effects:
+#				_stats[_stat] += statusEffectsData.statusEffectsData[_statusEffect].effects[_stat]
+#	if _currentWeightStateType != null and statusEffectsData.statusEffectsData[_currentWeightStateType].has("effects"):
+#		for _stat in statusEffectsData.statusEffectsData[_currentWeightStateType].effects:
+#			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
+#	if _currentWeightStateType != null and statusEffectsData.statusEffectsData[_currentWeightStateType].has("effects"):
+#		for _stat in statusEffectsData.statusEffectsData[_currentWeightStateType].effects:
+#			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
+#
+#	stats = _stats
 
 func calculateHungerStats():
 	if calories >= 800:

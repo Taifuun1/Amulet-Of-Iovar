@@ -55,7 +55,9 @@ var randomItemList = {
 		"appearance": [
 			"Blue",
 			"Green",
-			"Red"
+			"Pink",
+			"Red",
+			"Yellow"
 		]
 	},
 	"potion": {
@@ -157,7 +159,7 @@ var randomItemList = {
 			"lorem ipsum",
 			"GQRTUQH LPQARG",
 			"OPGOTH LEIRUE",
-			"AARGTH PLERBQ",
+			"AATRQGTHT PLERBQ",
 			"kings groceries",
 			"guards groceries",
 			"tax form",

@@ -2,7 +2,8 @@
 
 [ext_resource path="res://UI/Games Screen/Games Screen.gd" type="Script" id=1]
 [ext_resource path="res://UI/Games Screen/Games Data.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Theme/UITheme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Themes/UITheme.tres" type="Theme" id=3]
+
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
