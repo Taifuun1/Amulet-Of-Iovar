@@ -390,9 +390,13 @@ func takeDamage(_attacks, _critterTile, _critterName):
 func pickUpItems(_playerTile, _items, _grid):
 	var _itemsLog = []
 	if _items.size() != 0:
-		for _item in _items:
-			pickUpItem(_playerTile, _item, _grid)
-			_itemsLog.append("You pickup {item}.".format({ "item": get_node("/root/World/Items/{id}".format({ "id": _item })).itemName }))
+		for _itemId in _items:
+			pickUpItem(_playerTile, _itemId, _grid)
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+			if _item.amount > 1:
+				_itemsLog.append("You pickup {amount} {itemName}.".format({ "amount": _item.amount, "itemName": _item.itemName }))
+			else:
+				_itemsLog.append("You pickup {itemName}.".format({ "itemName": _item.itemName }))
 	var _itemsLogString = PoolStringArray(_itemsLog).join(" ")
 	if !_itemsLogString.empty():
 		Globals.gameConsole.addLog(_itemsLogString)

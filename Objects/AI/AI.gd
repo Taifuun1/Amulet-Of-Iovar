@@ -47,8 +47,11 @@ func checkAggroTarget(_critterTile, _distanceFromPlayer, _hostileRaces, _level):
 		aggroTarget = null
 
 func getCritterMove(_critterTile, _playerTile, _distanceFromPlayer, _hostileRaces, _level):
-	if (aggroTarget != null and !_level.critters.has(aggroTarget)) or aggroTarget == 0:
-		aggroTarget = null
+	if aggroTarget != null or aggroTarget == 0:
+		_level.addPointToPathPathding(_critterTile)
+		if !_level.critters.has(aggroTarget) or _level.calculatePath(_critterTile, _critterTile).size() == 0:
+			aggroTarget = null
+		_level.addPointToPathPathding(_critterTile)
 	if aggroTarget == null and !_hostileRaces.empty():
 		checkAggroTarget(_critterTile, _distanceFromPlayer, _hostileRaces, _level)
 	if aggroTarget != null:

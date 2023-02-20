@@ -10,13 +10,13 @@ var dwarves = [
 		"piety": "Neutral",
 		"level": 6,
 		"expDropAmount": 5,
-		"hp": 17,
+		"hp": 16,
 		"mp": 5,
 		"ac": 2,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [4,8],
+				"dmg": [3,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

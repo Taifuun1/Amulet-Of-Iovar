@@ -10,10 +10,10 @@ var elves = [
 		"piety": "Neutral",
 		"level": 5,
 		"expDropAmount": 4,
-		"hp": 15,
+		"hp": 13,
 		"mp": 15,
-		"ac": 1,
-		"magicac": 1,
+		"ac": 0,
+		"magicac": 3,
 		"attacks": [
 			{
 				"dmg": [2,3],

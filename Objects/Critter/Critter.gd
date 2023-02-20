@@ -620,8 +620,17 @@ func takeDamage(_attacks, _critterTile, _critterName):
 				if checkIfCritterIsPlayer(_critterName):
 					GlobalGameStats.critters[critterName].killCount += 1
 				break
-		var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
-		Globals.gameConsole.addLog(_attacksLogString)
+		if (
+			$"/root/World".level.getCritterTile(0) and
+			$"/root/World".level.getCritterTile(id) and
+			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
+			(
+				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 5 or
+				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
+			)
+		):
+			var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
+			Globals.gameConsole.addLog(_attacksLogString)
 		if (
 			(
 				_critterName.matchn("archeologist") or
@@ -647,10 +656,28 @@ func takeDamage(_attacks, _critterTile, _critterName):
 		if isMimicked:
 			isMimicked = false
 			$CritterSprite.texture = $"/root/World/Critters/Critters".getCritterByName(critterName).texture
-			Globals.gameConsole.addLog("The item is a mimic!")
+			if (
+				$"/root/World".level.getCritterTile(0) and
+				$"/root/World".level.getCritterTile(id) and
+				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
+				(
+					$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 5 or
+					$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
+				)
+			):
+				Globals.gameConsole.addLog("The item is a mimic!")
 		if statusEffects.sleep > 0:
 			statusEffects.sleep = 0
-			Globals.gameConsole.addLog("The {critterName} wakes up!".format({ "critterName": critterName }))
+			if (
+				$"/root/World".level.getCritterTile(0) and
+				$"/root/World".level.getCritterTile(id) and
+				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
+				(
+					$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 5 or
+					$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
+				)
+			):
+				Globals.gameConsole.addLog("The {critterName} wakes up!".format({ "critterName": critterName }))
 	else:
 		Globals.gameConsole.addLog("Looks like {critterName} can't attack...".format({ "critterName": _critterName }))
 	return _didCritterDie
@@ -710,7 +737,7 @@ func checkIfAddFlavorGamelog(_logType, _critterName = critterName):
 		$"/root/World".level.getCritterTile(id) and
 		$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
 		(
-			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 4 or
+			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 5 or
 			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
 		)
 	):
