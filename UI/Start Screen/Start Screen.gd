@@ -18,3 +18,6 @@ func _on_Stats_Button_pressed():
 
 func _on_Exit_Button_pressed():
 	get_tree().quit()
+
+func _on_ReportBug_pressed():
+	return OS.shell_open("https://github.com/Taifuun1/Amulet-Of-Iovar/issues")

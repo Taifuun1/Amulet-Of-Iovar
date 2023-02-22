@@ -1,6 +1,6 @@
 extends Control
 
-var statsItem = load("res://UI/Stats/Stats Item.tscn")
+var statsItem = load("res://UI/Stats Screen/Stats Item.tscn")
 
 func create(_title, _items):
 	name = "%sList" % _title
