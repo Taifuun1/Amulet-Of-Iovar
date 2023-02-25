@@ -70,7 +70,7 @@ var orcs = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [3,8],
+				"dmg": [2,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -124,7 +124,7 @@ var orcs = [
 		"magicac": 3,
 		"attacks": [
 			{
-				"dmg": [6,12],
+				"dmg": [5,10],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -178,7 +178,7 @@ var orcs = [
 		"magicac": 3,
 		"attacks": [
 			{
-				"dmg": [8,16],
+				"dmg": [8,14],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -232,7 +232,7 @@ var orcs = [
 		"magicac": 5,
 		"attacks": [
 			{
-				"dmg": [21,33],
+				"dmg": [19,31],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -241,7 +241,7 @@ var orcs = [
 				}
 			},
 			{
-				"dmg": [2,14],
+				"dmg": [2,10],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

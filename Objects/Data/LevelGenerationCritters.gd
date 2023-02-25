@@ -49,7 +49,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeon4": {
-		"amount": [4, 7],
+		"amount": [4, 6],
 		"critters": {
 			"ants": ["Leaf ant"],
 			"bats": ["Squinting bat"],
@@ -192,7 +192,6 @@ var critterLevelGenerationList = {
 		"amount": [6, 10],
 		"critters": {
 			"ants": ["Soldier ant"],
-			"aquaticLife": ["Eyebrow seal"],
 			"blobs": ["Slerp", "Sluerp"],
 			"brebs": ["Fleir breb", "Toxix breb", "Thunder breb"],
 			"canines": ["Gearh"],
@@ -212,7 +211,6 @@ var critterLevelGenerationList = {
 		"amount": [7, 11],
 		"critters": {
 			"ants": ["Soldier ant", "Double-pattern ant"],
-			"aquaticLife": ["Eyebrow seal"],
 			"blobs": ["Slerp", "Sluerp"],
 			"brebs": ["Fleir breb", "Toxix breb", "Thunder breb"],
 			"centaurs": ["Gryonem centaur"],

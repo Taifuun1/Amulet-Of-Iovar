@@ -117,7 +117,7 @@ func setUpGameObjects(_playerData = null):
 			$Critters/Critters.generateCrittersForLevel(_level)
 		
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
-		$Items/Items.createItem("Ring of fumbling", null, 1, true, { "piety": "formal" })
+#		$Items/Items.createItem("Ring of fumbling", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
 	
 	for _node in $UI/UITheme.get_children():
@@ -135,6 +135,7 @@ func _input(_event):
 		if (
 			inGame and
 			currentGameState != gameState.OUT_OF_PLAYERS_HANDS and
+			!gameOver and
 			$Critters/"0".statusEffects["stun"] == 0 and
 			$Critters/"0".statusEffects["sleep"] == 0
 		):
@@ -513,6 +514,7 @@ func isGameOver():
 		currentGameState = gameState.GAME_OVER
 		gameOver = true
 		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".getGameOverStats())
+		$"UI/UITheme/Game Over Stats".saveGameData()
 		$"UI/UITheme/Game Over Stats".show()
 		yield(get_tree().create_timer(0.01), "timeout")
 		return true

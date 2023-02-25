@@ -50,8 +50,7 @@ func setValues(_title, _stats, _ascended = false):
 				for _critter in _stats.gameStats[_statType]:
 					$"GameOverTabs/Kill count/KillCountContainer/Kill Count".createCritterKillCountItem(_critter, _stats.gameStats[_statType][_critter].killCount)
 
-
-func _onSaveAndExitpressed():
+func saveGameData():
 	var _newLifeTimeStats = stats.gameStats.gameStats
 	var _lifeTimeStats = GlobalSave.saveAndloadLifeTimeStats("LifeTimeStats")
 	
@@ -84,5 +83,7 @@ func _onSaveAndExitpressed():
 	stats.gameNumber = _lifeTimeStats["Game count"]
 	
 	$"/root/World/Save".saveData("Game{gameCount}".format({ "gameCount": _lifeTimeStats["Game count"] }), "Games", stats)
-	
+
+
+func _onExitpressed():
 	get_tree().quit()

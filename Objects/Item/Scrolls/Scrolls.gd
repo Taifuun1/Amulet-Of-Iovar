@@ -1,20 +1,6 @@
 var scrolls = {
 	"common": [
 		{
-			"itemName": "Official mail",
-			"unidentifiedItemName": "Stamped scroll",
-			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
-			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
-			"type": "Scroll",
-			"category": null,
-			"weight": 5,
-			"value": {
-				"letters": 18
-			},
-			"enchantable": false,
-			"stackable": true
-		},
-		{
 			"itemName": "Blank scroll",
 			"unidentifiedItemName": "Blank scroll",
 			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
@@ -29,6 +15,20 @@ var scrolls = {
 			"stackable": true
 		},
 		{
+			"itemName": "Official mail",
+			"unidentifiedItemName": "Stamped scroll",
+			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"type": "Scroll",
+			"category": null,
+			"weight": 5,
+			"value": {
+				"letters": 18
+			},
+			"enchantable": false,
+			"stackable": true
+		},
+		{
 			"itemName": "Scroll of identify",
 			"unidentifiedItemName": null,
 			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
@@ -38,20 +38,6 @@ var scrolls = {
 			"weight": 5,
 			"value": {
 				"letters": 6
-			},
-			"enchantable": false,
-			"stackable": true
-		},
-		{
-			"itemName": "Scroll of create food",
-			"unidentifiedItemName": null,
-			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
-			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
-			"type": "Scroll",
-			"category": null,
-			"weight": 5,
-			"value": {
-				"letters": 4
 			},
 			"enchantable": false,
 			"stackable": true
@@ -72,6 +58,20 @@ var scrolls = {
 		}
 	],
 	"uncommon": [
+		{
+			"itemName": "Scroll of teleport",
+			"unidentifiedItemName": null,
+			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"type": "Scroll",
+			"category": null,
+			"weight": 5,
+			"value": {
+				"letters": 6
+			},
+			"enchantable": false,
+			"stackable": true
+		},
 		{
 			"itemName": "Scroll of remove curse",
 			"unidentifiedItemName": null,
@@ -143,6 +143,20 @@ var scrolls = {
 			"stackable": true
 		},
 		{
+			"itemName": "Scroll of create food",
+			"unidentifiedItemName": null,
+			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
+			"type": "Scroll",
+			"category": null,
+			"weight": 5,
+			"value": {
+				"letters": 4
+			},
+			"enchantable": false,
+			"stackable": true
+		},
+		{
 			"itemName": "Scroll of create potion",
 			"unidentifiedItemName": null,
 			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
@@ -152,20 +166,6 @@ var scrolls = {
 			"weight": 5,
 			"value": {
 				"letters": 8
-			},
-			"enchantable": false,
-			"stackable": true
-		},
-		{
-			"itemName": "Scroll of teleport",
-			"unidentifiedItemName": null,
-			"texture": load("res://Assets/Miscellaneous/Scroll.png"),
-			"unidentifiedTexture": load("res://Assets/Miscellaneous/Scroll.png"),
-			"type": "Scroll",
-			"category": null,
-			"weight": 5,
-			"value": {
-				"letters": 6
 			},
 			"enchantable": false,
 			"stackable": true

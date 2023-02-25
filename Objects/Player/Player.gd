@@ -447,6 +447,7 @@ func dropItem(_playerTile, _item, _grid):
 				$"/root/World".gameOver = true
 				GlobalGameStats.gameStats["Times ascended"] += 1
 				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats(), true)
+				$"/root/World/UI/UITheme/Game Over Stats".saveGameData()
 				$"/root/World/UI/UITheme/Game Over Stats".show()
 				yield(get_tree().create_timer(0.01), "timeout")
 			_item.identifyItem(false, true, false)
@@ -479,6 +480,8 @@ func processPlayerSpecificEffects():
 	############
 	previousCalories = calories
 	
+	if calories < -50:
+		calories = -50
 	if calories > -50:
 		if checkIfStatusEffectIsInEffect("fast digestion"):
 			calories -= 3

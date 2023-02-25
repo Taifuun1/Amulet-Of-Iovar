@@ -377,7 +377,7 @@ var thunderMiasma = {
 			"armorPen": 0,
 			"magicDmg": {
 				"dmg": [7, 7],
-				"element": "Thunder"
+				"element": "thunder"
 			}
 		}
 	],

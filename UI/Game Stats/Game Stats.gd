@@ -184,6 +184,8 @@ func _onIconClicked(event, _icon):
 		event is InputEventMouseButton and
 		event.pressed and
 		event.button_index == BUTTON_LEFT and
+		!$"/root/World".currentGameState == $"/root/World".gameState.GAME_OVER and
+		!$"/root/World".gameOver and
 		$"/root/World".inGame
 	):
 		match _icon:

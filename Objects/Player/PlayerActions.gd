@@ -87,74 +87,28 @@ func readItem(_id):
 									Globals.isItemIdentified(_readItem)
 									break
 								_items.erase(_item)
-			"scroll of create food":
-				var _playerPosition = $"/root/World".level.getCritterTile(0)
-				if _readItem.piety.matchn("reverent"):
-					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition)
-					if !_tiles.empty():
-						for _tile in _tiles:
-							var newItem = load("res://Objects/Item/Item.tscn").instance()
-							var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
-							var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
-							newItem.createItem(_item)
-							$"/root/World/Items".add_child(newItem, true)
-							$"/root/World".level.grid[_tile.x][_tile.y].items.append(newItem.id)
-					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
-					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
-					newItem.createItem(_item)
-					$"/root/World/Items".add_child(newItem, true)
-					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("A bucketload of items appears around you!")
-				elif _readItem.piety.matchn("formal"):
-					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
-					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
-					newItem.createItem(_item)
-					$"/root/World/Items".add_child(newItem, true)
-					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
-				elif _readItem.piety.matchn("blasphemous"):
-					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					newItem.createItem($"/root/World/Items/Items".getItemByName("cherries"))
-					$"/root/World/Items".add_child(newItem, true)
-					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+			"scroll of confusion":
+				if statusEffects.confusion != -1:
+					if _readItem.piety.matchn("reverent"):
+						statusEffects.confusion += 4
+						Globals.gameConsole.addLog("You feel slightly disoriented.")
+					elif _readItem.piety.matchn("formal"):
+						statusEffects.confusion += 10
+						Globals.gameConsole.addLog("You feel confused.")
+					elif _readItem.piety.matchn("blasphemous"):
+						statusEffects.confusion += 22
+						Globals.gameConsole.addLog("The world spins!")
+				else:
+					Globals.gameConsole.addLog("You already feel confused enough!")
 				Globals.isItemIdentified(_readItem)
-			"scroll of create potion":
-				var _playerPosition = $"/root/World".level.getCritterTile(0)
-				if _readItem.piety.matchn("reverent"):
-					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition)
-					if !_tiles.empty():
-						for _tile in _tiles:
-							var newItem = load("res://Objects/Item/Item.tscn").instance()
-							var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
-							var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
-							newItem.createItem(_item)
-							$"/root/World/Items".add_child(newItem, true)
-							$"/root/World".level.grid[_tile.x][_tile.y].items.append(newItem.id)
-					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
-					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
-					newItem.createItem(_item)
-					$"/root/World/Items".add_child(newItem, true)
-					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("A bucketload of items appears around you!")
-				elif _readItem.piety.matchn("formal"):
-					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
-					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
-					newItem.createItem(_item)
-					$"/root/World/Items".add_child(newItem, true)
-					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
-				elif _readItem.piety.matchn("blasphemous"):
-					var newItem = load("res://Objects/Item/Item.tscn").instance()
-					newItem.createItem($"/root/World/Items/Items".getItemByName("potion of toxix"))
-					$"/root/World/Items".add_child(newItem, true)
-					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
-					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
-				Globals.isItemIdentified(_readItem)
+			"scroll of teleport":
+				if dealWithTeleport(0, _readItem.piety):
+					Globals.gameConsole.addLog("Whoosh! You reappear somewhere!")
+					if _readItem.piety.matchn("blasphemous"):
+						Globals.gameConsole.addLog("It looks pretty different here...")
+					Globals.isItemIdentified(_readItem)
+				else:
+					Globals.gameConsole.addLog("Nothing happens...")
 			"scroll of remove curse":
 				var _equipmentNode = $"/root/World/UI/UITheme/Equipment"
 				var _uncursableItems = []
@@ -336,39 +290,101 @@ func readItem(_id):
 						Globals.isItemIdentified(_readItem)
 					else:
 						Globals.gameConsole.addLog("Nothing happens...")
-			"scroll of genocide":
-				var _aliveCritters = []
+			"scroll of create food":
+				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if _readItem.piety.matchn("reverent"):
-					for _critterRace in $"/root/World/Critters/Critters".critters.keys():
-						if !_critterRace.matchn("bosses"):
-							for _critterName in $"/root/World/Critters/Critters".critters[_critterRace]:
-								if GlobalCritterInfo.globalCritterInfo[_critterName.critterName].population != 0:
-									_aliveCritters.append(_critterRace)
-									break
-				elif _readItem.piety.matchn("formal") or _readItem.piety.matchn("blasphemous"):
-					for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
-						if (
-							GlobalCritterInfo.globalCritterInfo[_critterName].population != 0 and
-							!(
-								_critterName.matchn("Iovar") or
-								_critterName.matchn("Elder Dragon") or
-								_critterName.matchn("Mad Banana-hunter Ogre") or
-								_critterName.matchn("Shin'kor Leve'er") or
-								_critterName.matchn("Elhybar") or
-								_critterName.matchn("Tidoh Tel'hydrad")
-							)
-						):
-							_aliveCritters.append(_critterName)
-				$"/root/World".closeMenu()
-				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters, _readItem)
-				_additionalChoices = true
+					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition)
+					if !_tiles.empty():
+						for _tile in _tiles:
+							var newItem = load("res://Objects/Item/Item.tscn").instance()
+							var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
+							var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
+							newItem.createItem(_item)
+							$"/root/World/Items".add_child(newItem, true)
+							$"/root/World".level.grid[_tile.x][_tile.y].items.append(newItem.id)
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
+					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("A bucketload of items appears around you!")
+				elif _readItem.piety.matchn("formal"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["comestible"].keys()[randi() % $"/root/World/Items/Items".items["comestible"].keys().size()]
+					var _item = $"/root/World/Items/Items".items["comestible"][_rarity][randi() % $"/root/World/Items/Items".items["comestible"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				elif _readItem.piety.matchn("blasphemous"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					newItem.createItem($"/root/World/Items/Items".getItemByName("cherries"))
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
 				Globals.isItemIdentified(_readItem)
-			"scroll of teleport":
-				if dealWithTeleport(0, _readItem.piety):
-					Globals.gameConsole.addLog("Whoosh! You reappear somewhere!")
-					Globals.isItemIdentified(_readItem)
+			"scroll of create potion":
+				var _playerPosition = $"/root/World".level.getCritterTile(0)
+				if _readItem.piety.matchn("reverent"):
+					var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition)
+					if !_tiles.empty():
+						for _tile in _tiles:
+							var newItem = load("res://Objects/Item/Item.tscn").instance()
+							var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
+							var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
+							newItem.createItem(_item)
+							$"/root/World/Items".add_child(newItem, true)
+							$"/root/World".level.grid[_tile.x][_tile.y].items.append(newItem.id)
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
+					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("A bucketload of items appears around you!")
+				elif _readItem.piety.matchn("formal"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					var _rarity = $"/root/World/Items/Items".items["potion"].keys()[randi() % $"/root/World/Items/Items".items["potion"].keys().size()]
+					var _item = $"/root/World/Items/Items".items["potion"][_rarity][randi() % $"/root/World/Items/Items".items["potion"][_rarity].size()]
+					newItem.createItem(_item)
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				elif _readItem.piety.matchn("blasphemous"):
+					var newItem = load("res://Objects/Item/Item.tscn").instance()
+					newItem.createItem($"/root/World/Items/Items".getItemByName("potion of toxix"))
+					$"/root/World/Items".add_child(newItem, true)
+					$"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.append(newItem.id)
+					Globals.gameConsole.addLog("{itemName} appears at your feet.".format({ "itemName": newItem.itemName }))
+				Globals.isItemIdentified(_readItem)
+			"tome of knowledge":
+				var _allItems = GlobalSave.saveAndloadLifeTimeStats("Items")
+				var _allCritters = GlobalSave.saveAndloadLifeTimeStats("Critters")
+				var _items = []
+				var _critters = []
+				for _item in _allItems:
+					if !_allItems[_item].knowledge:
+						_items.append(_item)
+				for _critter in _allCritters:
+					if !_allCritters[_critter].knowledge:
+						_critters.append(_critter)
+				if (_items.size() != 0 and randi() % 2 == 0) or (_items.size() != 0 and _critters.size() == 0):
+					var _newKnowledge = _items[randi() % _items.size()]
+					for _item in _allItems:
+						if _newKnowledge.matchn(_item):
+							_allItems[_item].knowledge = true
+					GlobalSave.saveAndloadLifeTimeStats("Items", _allItems)
+					Globals.gameConsole.addLog("You gain knowledge of {itemName}.".format({ "itemName": _newKnowledge }))
+				elif _critters.size() != 0:
+					var _newKnowledge = _critters[randi() % _critters.size()]
+					for _critter in _allCritters:
+						if _newKnowledge.matchn(_critter):
+							_allCritters[_critter].knowledge = true
+					GlobalSave.saveAndloadLifeTimeStats("Critters", _allCritters)
+					Globals.gameConsole.addLog("You gain knowledge of {critterName}.".format({ "critterName": _newKnowledge }))
 				else:
-					Globals.gameConsole.addLog("Nothing happens...")
+					Globals.gameConsole.addLog("You're already very knowledgeable. Wow!")
 			"scroll of reverent scripture":
 				var _playerPosition = $"/root/World".level.getCritterTile(0)
 				if $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items != null and $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size() != 0:
@@ -399,47 +415,33 @@ func readItem(_id):
 						var _alignedItem = get_node("/root/World/Items/{id}".format({ "id": $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items[randi() % $"/root/World".level.grid[_playerPosition.x][_playerPosition.y].items.size()] }))
 						_alignedItem.piety = "Reverent"
 						Globals.gameConsole.addLog("{itemName} glows white.".format({ "itemName": _alignedItem.itemName }))
-			"scroll of confusion":
-				if statusEffects.confusion != -1:
-					if _readItem.piety.matchn("reverent"):
-						statusEffects.confusion += 4
-						Globals.gameConsole.addLog("You feel slightly disoriented.")
-					elif _readItem.piety.matchn("formal"):
-						statusEffects.confusion += 10
-						Globals.gameConsole.addLog("You feel confused.")
-					elif _readItem.piety.matchn("blasphemous"):
-						statusEffects.confusion += 22
-						Globals.gameConsole.addLog("The world spins!")
-				else:
-					Globals.gameConsole.addLog("You already feel confused enough!")
+			"scroll of genocide":
+				var _aliveCritters = []
+				if _readItem.piety.matchn("reverent"):
+					for _critterRace in $"/root/World/Critters/Critters".critters.keys():
+						if !_critterRace.matchn("bosses"):
+							for _critterName in $"/root/World/Critters/Critters".critters[_critterRace]:
+								if GlobalCritterInfo.globalCritterInfo[_critterName.critterName].population != 0:
+									_aliveCritters.append(_critterRace)
+									break
+				elif _readItem.piety.matchn("formal") or _readItem.piety.matchn("blasphemous"):
+					for _critterName in GlobalCritterInfo.globalCritterInfo.keys():
+						if (
+							GlobalCritterInfo.globalCritterInfo[_critterName].population != 0 and
+							!(
+								_critterName.matchn("Iovar") or
+								_critterName.matchn("Elder Dragon") or
+								_critterName.matchn("Mad Banana-hunter Ogre") or
+								_critterName.matchn("Shin'kor Leve'er") or
+								_critterName.matchn("Elhybar") or
+								_critterName.matchn("Tidoh Tel'hydrad")
+							)
+						):
+							_aliveCritters.append(_critterName)
+				$"/root/World".closeMenu()
+				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Genocide what?", _aliveCritters, _readItem)
+				_additionalChoices = true
 				Globals.isItemIdentified(_readItem)
-			"tome of knowledge":
-				var _allItems = GlobalSave.saveAndloadLifeTimeStats("Items")
-				var _allCritters = GlobalSave.saveAndloadLifeTimeStats("Critters")
-				var _items = []
-				var _critters = []
-				for _item in _allItems:
-					if !_allItems[_item].knowledge:
-						_items.append(_item)
-				for _critter in _allCritters:
-					if !_allCritters[_critter].knowledge:
-						_critters.append(_critter)
-				if (_items.size() != 0 and randi() % 2 == 0) or _critters.size() == 0:
-					var _newKnowledge = _items[randi() % _items.size()]
-					for _item in _allItems:
-						if _newKnowledge.matchn(_item):
-							_allItems[_item].knowledge = true
-					GlobalSave.saveAndloadLifeTimeStats("Items", _allItems)
-					Globals.gameConsole.addLog("You gain knowledge of {itemName}.".format({ "itemName": _newKnowledge }))
-				elif _critters.size() != 0:
-					var _newKnowledge = _critters[randi() % _critters.size()]
-					for _critter in _allCritters:
-						if _newKnowledge.matchn(_critter):
-							_allCritters[_critter].knowledge = true
-					GlobalSave.saveAndloadLifeTimeStats("Critters", _allCritters)
-					Globals.gameConsole.addLog("You gain knowledge of {critterName}.".format({ "critterName": _newKnowledge }))
-				else:
-					Globals.gameConsole.addLog("You're already very knowledgeable. Wow!")
 			_:
 				Globals.gameConsole.addLog("Thats not a scroll...")
 		checkAllIdentification(true)
@@ -491,6 +493,34 @@ func quaffItem(_id):
 					hp = maxhp
 				else:
 					hp += _amountToHeal
+			"potion of confusion":
+				if statusEffects.confusion != -1:
+					if _quaffedItem.piety.matchn("reverent"):
+						statusEffects.confusion = 4
+						Globals.gameConsole.addLog("You feel slightly disoriented.")
+					elif _quaffedItem.piety.matchn("formal"):
+						statusEffects.confusion += 10
+						Globals.gameConsole.addLog("You feel confused.")
+					elif _quaffedItem.piety.matchn("blasphemous"):
+						statusEffects.confusion += 22
+						Globals.gameConsole.addLog("The world spins!")
+				else:
+					Globals.gameConsole.addLog("You already feel confused enough!")
+			"potion of toxix":
+				if _quaffedItem.piety.matchn("reverent"):
+					statusEffects.toxix = 2
+					Globals.gameConsole.addLog("The {potion} tastes slightly acidic. Bleagh!".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.piety.matchn("formal"):
+					statusEffects.toxix = 8
+					hp -= 4
+					Globals.gameConsole.addLog("The {potion} tastes bitter. Urgh!".format({ "potion": _quaffedItem.itemName }))
+				if _quaffedItem.piety.matchn("blasphemous"):
+					statusEffects.toxix = 16
+					hp -= 8
+					Globals.gameConsole.addLog("The {potion} burns your mouth. Uhhhh...".format({ "potion": _quaffedItem.itemName }))
+					maxhp -= 1
+					hp -= 1
+					Globals.gameConsole.addLog("You feel a little less sturdy.")
 			"potion of healaga":
 				var _amountToHeal = 0
 				if _quaffedItem.piety.matchn("reverent"):
@@ -509,21 +539,6 @@ func quaffItem(_id):
 					hp = maxhp
 				else:
 					hp += _amountToHeal
-			"potion of toxix":
-				if _quaffedItem.piety.matchn("reverent"):
-					statusEffects.toxix = 2
-					Globals.gameConsole.addLog("The {potion} tastes slightly acidic. Bleagh!".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.piety.matchn("formal"):
-					statusEffects.toxix = 8
-					hp -= 4
-					Globals.gameConsole.addLog("The {potion} tastes bitter. Urgh!".format({ "potion": _quaffedItem.itemName }))
-				if _quaffedItem.piety.matchn("blasphemous"):
-					statusEffects.toxix = 16
-					hp -= 8
-					Globals.gameConsole.addLog("The {potion} burns your mouth. Uhhhh...".format({ "potion": _quaffedItem.itemName }))
-					maxhp -= 1
-					hp -= 1
-					Globals.gameConsole.addLog("You feel a little less healthy.")
 			"potion of sleep":
 				if _quaffedItem.piety.matchn("reverent"):
 					statusEffects.sleep = 3
@@ -534,16 +549,6 @@ func quaffItem(_id):
 				if _quaffedItem.piety.matchn("blasphemous"):
 					statusEffects.sleep = 13
 					Globals.gameConsole.addLog("The {potion} knocks you out.".format({ "potion": _quaffedItem.itemName }))
-			"potion of gain level":
-				if _quaffedItem.piety.matchn("reverent"):
-					addExp(experienceNeededForLevelGainAmount)
-					Globals.gameConsole.addLog("You gain a level! You feel like you gained extra experience.")
-				if _quaffedItem.piety.matchn("formal"):
-					addExp(experienceNeededForLevelGainAmount - experiencePoints)
-					Globals.gameConsole.addLog("You gain a level!")
-				if _quaffedItem.piety.matchn("blasphemous"):
-					addExp(experienceNeededForPreviousLevelGainAmount - experiencePoints)
-					Globals.gameConsole.addLog("You somehow feel less experienced.")
 			"potion of hunger":
 				if _quaffedItem.piety.matchn("reverent"):
 					calories += 300
@@ -554,29 +559,6 @@ func quaffItem(_id):
 				if _quaffedItem.piety.matchn("blasphemous"):
 					calories += -1000
 					Globals.gameConsole.addLog("You feel like you lost half your weight!")
-			"potion of confusion":
-				if statusEffects.confusion != -1:
-					if _quaffedItem.piety.matchn("reverent"):
-						statusEffects.confusion = 4
-						Globals.gameConsole.addLog("You feel slightly disoriented.")
-					elif _quaffedItem.piety.matchn("formal"):
-						statusEffects.confusion += 10
-						Globals.gameConsole.addLog("You feel confused.")
-					elif _quaffedItem.piety.matchn("blasphemous"):
-						statusEffects.confusion += 22
-						Globals.gameConsole.addLog("The world spins!")
-				else:
-					Globals.gameConsole.addLog("You already feel confused enough!")
-			"potion of paralysis":
-				if _quaffedItem.piety.matchn("reverent"):
-					statusEffects.stun = 2
-					Globals.gameConsole.addLog("You feel a jolt go down your spine!")
-				elif _quaffedItem.piety.matchn("formal"):
-					statusEffects.stun = 4
-					Globals.gameConsole.addLog("You're stunned!")
-				elif _quaffedItem.piety.matchn("blasphemous"):
-					statusEffects.stun = 8
-					Globals.gameConsole.addLog("You're completely stunned!")
 			"potion of blindness":
 				if !checkIfStatusEffectIsPermanent("blindness"):
 					if _quaffedItem.piety.matchn("reverent"):
@@ -590,6 +572,26 @@ func quaffItem(_id):
 						Globals.gameConsole.addLog("It's all dark!")
 				else:
 					Globals.gameConsole.addLog("You already feel blind enough!")
+			"potion of paralysis":
+				if _quaffedItem.piety.matchn("reverent"):
+					statusEffects.stun = 2
+					Globals.gameConsole.addLog("You feel a jolt go down your spine!")
+				elif _quaffedItem.piety.matchn("formal"):
+					statusEffects.stun = 4
+					Globals.gameConsole.addLog("You're stunned!")
+				elif _quaffedItem.piety.matchn("blasphemous"):
+					statusEffects.stun = 8
+					Globals.gameConsole.addLog("You're completely stunned!")
+			"potion of gain level":
+				if _quaffedItem.piety.matchn("reverent"):
+					addExp(experienceNeededForLevelGainAmount)
+					Globals.gameConsole.addLog("You gain a level! You feel like you gained extra experience.")
+				if _quaffedItem.piety.matchn("formal"):
+					addExp(experienceNeededForLevelGainAmount - experiencePoints)
+					Globals.gameConsole.addLog("You gain a level!")
+				if _quaffedItem.piety.matchn("blasphemous"):
+					addExp(experienceNeededForPreviousLevelGainAmount - experiencePoints)
+					Globals.gameConsole.addLog("You feel a little more stupid.")
 			_:
 				Globals.gameConsole.addLog("Thats not a potion...")
 		Globals.isItemIdentified(_quaffedItem)
@@ -603,7 +605,7 @@ func quaffItem(_id):
 func consumeItem(_id):
 	var _eatenItem = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if _eatenItem.type.matchn("comestible"):
-		if calories > 4500:
+		if calories > 4250:
 			calories += _eatenItem.value / 3
 		else:
 			if critterClass.matchn("herbalogue"):
@@ -615,8 +617,27 @@ func consumeItem(_id):
 			_eatenItem.amount -= 1
 		else:
 			$"/root/World/Items/Items".removeItem(_id)
-		Globals.gameConsole.addLog("You eat {comestible}.".format({ "comestible": _eatenItem.itemName }))
-		if calories > 4500:
+		match _eatenItem.itemName.to_lower():
+			"apple", "egg", "orange":
+				Globals.gameConsole.addLog("You eat an {comestible}.".format({ "comestible": _eatenItem.itemName.to_lower() }))
+			"brownie", "carrot", "tomato", "chocolate bar", "cookie":
+				Globals.gameConsole.addLog("You eat a {comestible}.".format({ "comestible": _eatenItem.itemName.to_lower() }))
+			"potatoes", "cherries":
+				Globals.gameConsole.addLog("You eat the {comestible}.".format({ "comestible": _eatenItem.itemName.to_lower() }))
+			"rfg ration":
+				Globals.gameConsole.addLog("You eat the {comestible}.".format({ "comestible": _eatenItem.itemName }))
+			"cc ration":
+				Globals.gameConsole.addLog("You eat the chocolate cookie ration.")
+			"bean can":
+				Globals.gameConsole.addLog("You open up the {comestible} and eat the beans.".format({ "comestible": _eatenItem.itemName.to_lower() }))
+			"spam":
+				Globals.gameConsole.addLog("You open up the {comestible} and eat the SPAM.".format({ "comestible": _eatenItem.itemName.to_lower() }))
+		match _eatenItem.itemName.to_lower():
+			"brownie":
+				Globals.gameConsole.addLog("Wow, that's delicious!")
+			"cookie":
+				Globals.gameConsole.addLog("Just like grandma used to make.")
+		if calories > 4250:
 			Globals.gameConsole.addLog("You feel full.")
 	$"/root/World".closeMenu()
 
@@ -672,6 +693,28 @@ func zapItem(_direction):
 									Globals.gameConsole.addLog("Doors lock doesn't move...")
 							Globals.isItemIdentified(_zappedItem)
 							break
+				"wand of digging":
+					var _level = $"/root/World".level
+					var _isTileMined = false
+					for i in range(1, _zappedItem.value.distance[_zappedItem.piety.to_lower()]):
+						var _tile = _playerPosition + _direction * i
+						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.EMPTY or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE:
+							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
+							_level.addPointToEnemyPathding(_tile)
+							_level.addPointToPathPathding(_tile)
+							_isTileMined = true
+						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE_DEEP:
+							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
+							_level.addPointToEnemyPathding(_tile)
+							_level.addPointToPathPathding(_tile)
+							_isTileMined = true
+						if !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+							break
+					if _isTileMined:
+						$"/root/World".updateTiles()
+						$"/root/World".drawLevel()
+						Globals.gameConsole.addLog("The {itemName} bores through the wall!".format({ "itemName": _zappedItem.itemName }))
+						Globals.isItemIdentified(_zappedItem)
 				"wand of teleport":
 					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance):
@@ -711,6 +754,35 @@ func zapItem(_direction):
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
 					Globals.isItemIdentified(_zappedItem)
+				"wand of sleep":
+					var _grid = $"/root/World".level.grid
+					for i in range(1, _zappedItem.value.distance):
+						var _tile = _playerPosition + _direction * i
+						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+							break
+						if _grid[_tile.x][_tile.y].critter != null:
+							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
+							if _zappedItem.piety.matchn("reverent"):
+								_critter.statusEffects.sleep = 3
+								Globals.gameConsole.addLog("{critterName} falls into a light sleep.".format({ "critterName": _critter.critterName }))
+							elif _zappedItem.piety.matchn("formal"):
+								_critter.statusEffects.sleep = 11
+								Globals.gameConsole.addLog("{critterName} falls asleep.".format({ "critterName": _critter.critterName }))
+							elif _zappedItem.piety.matchn("blasphemous"):
+								_critter.statusEffects.sleep = 24
+								Globals.gameConsole.addLog("{critterName} falls into a deep sleep!".format({ "critterName": _critter.critterName }))
+							Globals.isItemIdentified(_zappedItem)
+							break
+				"wand of magic sphere", "wand of fleir", "wand of frost", "wand of thunder":
+					var _grid = $"/root/World".level.grid
+					for i in range(1, _zappedItem.value.distance[_zappedItem.piety.to_lower()]):
+						var _tile = _playerPosition + _direction * i
+						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+							break
+						if _grid[_tile.x][_tile.y].critter != null:
+							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
+							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _tile, _zappedItem.itemName, true)
+							Globals.isItemIdentified(_zappedItem)
 				"wand of backwards magic sphere":
 					if _zappedItem.piety.matchn("reverent"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
@@ -792,57 +864,6 @@ func zapItem(_direction):
 						_itemTypes.append(_type)
 					$"/root/World/UI/UITheme/ListMenu".showListMenuList("Wish for what item type?", _itemTypes, _zappedItem, true)
 					_additionalChoices = true
-				"wand of digging":
-					var _level = $"/root/World".level
-					var _isTileMined = false
-					for i in range(1, _zappedItem.value.distance[_zappedItem.piety.to_lower()]):
-						var _tile = _playerPosition + _direction * i
-						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.EMPTY or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE:
-							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
-							_level.addPointToEnemyPathding(_tile)
-							_level.addPointToPathPathding(_tile)
-							_isTileMined = true
-						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE_DEEP:
-							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
-							_level.addPointToEnemyPathding(_tile)
-							_level.addPointToPathPathding(_tile)
-							_isTileMined = true
-						if !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
-							break
-					if _isTileMined:
-						$"/root/World".updateTiles()
-						$"/root/World".drawLevel()
-						Globals.gameConsole.addLog("The {itemName} bores through the wall!".format({ "itemName": _zappedItem.itemName }))
-						Globals.isItemIdentified(_zappedItem)
-				"wand of magic sphere", "wand of fleir", "wand of frost", "wand of thunder":
-					var _grid = $"/root/World".level.grid
-					for i in range(1, _zappedItem.value.distance[_zappedItem.piety.to_lower()]):
-						var _tile = _playerPosition + _direction * i
-						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
-							break
-						if _grid[_tile.x][_tile.y].critter != null:
-							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
-							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _tile, _zappedItem.itemName)
-							Globals.isItemIdentified(_zappedItem)
-				"wand of sleep":
-					var _grid = $"/root/World".level.grid
-					for i in range(1, _zappedItem.value.distance):
-						var _tile = _playerPosition + _direction * i
-						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
-							break
-						if _grid[_tile.x][_tile.y].critter != null:
-							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
-							if _zappedItem.piety.matchn("reverent"):
-								_critter.statusEffects.sleep = 3
-								Globals.gameConsole.addLog("{critterName} falls into a light sleep.".format({ "critterName": _critter.critterName }))
-							elif _zappedItem.piety.matchn("formal"):
-								_critter.statusEffects.sleep = 11
-								Globals.gameConsole.addLog("{critterName} falls asleep.".format({ "critterName": _critter.critterName }))
-							elif _zappedItem.piety.matchn("blasphemous"):
-								_critter.statusEffects.sleep = 24
-								Globals.gameConsole.addLog("{critterName} falls into a deep sleep!".format({ "critterName": _critter.critterName }))
-							Globals.isItemIdentified(_zappedItem)
-							break
 				_:
 					Globals.gameConsole.addLog("Thats not a wand...")
 			_zappedItem.value.charges -= 1
@@ -1041,8 +1062,6 @@ func useItem(_id):
 		return
 	if _usedItem.type.matchn("tool"):
 		match _usedItem.identifiedItemName.to_lower():
-			"pickaxe":
-				Globals.gameConsole.addLog("Turn on automine from bottom right and walk towards a stone wall to use the pickaxe.")
 			"blindfold":
 				if _usedItem.value.worn:
 					_usedItem.value.worn = false
@@ -1106,8 +1125,10 @@ func useItem(_id):
 					$"/root/World/Critters/0/Inventory".inventory.erase(_id)
 					get_node("/root/World/Items/{id}".format({ "id": _id })).queue_free()
 				Globals.gameConsole.addLog("You pull a {itemName} out of the bottle.".format({ "itemName": _newItem.itemName }))
+			"pickaxe":
+				Globals.gameConsole.addLog("Turn on automine from bottom right and walk towards a stone wall to use the pickaxe.")
 			"ink bottle":
-				Globals.gameConsole.addLog("Use a marker with ink and empty scroll in inventory to write scrolls.")
+				Globals.gameConsole.addLog("Use a marker with ink and an empty scroll in inventory to write scrolls.")
 			"marker":
 				var _scrolls = []
 				var _letters = {}
@@ -1168,6 +1189,7 @@ func dipItem(_id):
 		$"/root/World/UI/UITheme/ItemManagement".showItemManagementList("Dip into what?")
 		$"/root/World".currentGameState = $"/root/World".gameState.DIP
 	elif _dippedItem.type.matchn("potion"):
+		Globals.gameConsole.addLog("You dip the {itemName} into the potion.".format({ "itemName": _selectedItem.itemName }))
 		match _dippedItem.identifiedItemName.to_lower():
 			"water potion":
 				if _dippedItem.piety.matchn("reverent"):
@@ -1213,7 +1235,7 @@ func dipItem(_id):
 #			"potion of invisibility":
 #				Globals.gameConsole.addLog("The {itemName} looks transparent.".format({ "itemName": _selectedItem.itemName }))
 			_:
-				Globals.gameConsole.addLog("You soak the {itemName} into the potion. Nothing happens.".format({ "itemName": _selectedItem.itemName }))
+				Globals.gameConsole.addLog("Nothing happens.")
 		selectedItem = null
 		checkAllIdentification(true)
 		$"/root/World".closeMenu()
@@ -1232,6 +1254,7 @@ func dealWithTeleport(_critterId, _piety, _itemType = "scroll"):
 		var _playerPosition = _world.level.getCritterTile(_critter.id)
 		var _level = _world.level
 		var _openTiles = _level.openTiles.duplicate(true)
+		_openTiles.shuffle()
 		for _openTile in _openTiles:
 			var _randomTile = _openTiles[randi() % _openTiles.size()]
 			if _level.isTileFreeOfCritters(_randomTile):
@@ -1247,6 +1270,7 @@ func dealWithTeleport(_critterId, _piety, _itemType = "scroll"):
 		else:
 			_randomLevel = _world.levels[_randomDungeonPart][randi() % _world.levels[_randomDungeonPart].size()]
 		var _openTiles = _randomLevel.openTiles.duplicate(true)
+		_openTiles.shuffle()
 		for _openTile in _openTiles:
 			var _randomTile = _openTiles[randi() % _openTiles.size()]
 			if _randomLevel.isTileFreeOfCritters(_randomTile):
@@ -1288,12 +1312,12 @@ func dealWithWandOfWishing(_name, _piety):
 	if _piety.matchn("reverent"):
 		$"/root/World/Items/Items".createItem(_name, null, 1, true)
 		Globals.gameConsole.addLog("An item appears in your inventory.")
+	elif _piety.matchn("formal"):
+		$"/root/World/Items/Items".createItem(_name, $"/root/World".level.getCritterTile(0))
+		Globals.gameConsole.addLog("An item appears at your feet.")
 	elif _piety.matchn("blasphemous"):
 		$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), $"/root/World".level.getCritterTile(0))
 		Globals.gameConsole.addLog("An item appears at your feet... It doesn't seem to be what you wished for.")
-	else:
-		$"/root/World/Items/Items".createItem(_name, $"/root/World".level.getCritterTile(0))
-		Globals.gameConsole.addLog("An item appears at your feet.")
 	GlobalGameStats.gameStats["Items wished"] += 1
 	$"/root/World".closeMenu()
 

@@ -95,23 +95,6 @@ func createAi(_aI = "aggressive", _aggroDistance = -1, _activationDistance = nul
 	add_child(_critterAi)
 	aI = $aI
 
-func isCritterAwakened(_critterTile, _playerTile, _level):
-	if aI.activationDistance != null:
-		if _level.calculatePath(_critterTile, _playerTile).size() <= aI.activationDistance:
-			awakeCritter(_critterTile, _playerTile)
-			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
-
-func awakeCritter(_critterTile, _playerTile):
-	aI.aI = "Aggressive"
-	aI.activationDistance = null
-	checkIfAddFlavorGamelog("activated")
-	for _critterId in $"/root/World".level.critters:
-		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _critterId }))
-		if _critter.aI.aI.matchn("Deactivated"):
-			_critter.aI.aI = "Aggressive"
-			_critter.aI.activationDistance = null
-			checkIfAddFlavorGamelog("activated", _critter.critterName)
-
 func processCritterAction(_critterTile, _playerTile, _critter, _level):
 	var _path = []
 	var _distanceFromPlayer = []
@@ -162,12 +145,11 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		):
 			if !_pickedAbility.abilityType.matchn("skill") and mp - _pickedAbility.data.mp < 0:
 				if randi() % 8 == 0:
-					Globals.gameConsole.addLog("{critter} tries to cast a spell but nothing happens!".format({ "critter": critterName }))
+					Globals.gameConsole.addLog("Magical energy appears around {critter}s hands!".format({ "critter": critterName }))
 					return false
 			else:
 				match _pickedAbility.abilityType:
 					"rangedSpell":
-						checkIfAddFlavorGamelog("spell")
 						var _tiles = []
 						var _directions = [
 							Vector2(-1, -1),
@@ -193,7 +175,21 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 								match _pickedAbility.abilityName:
 									"rockThrow", "crackerThrow", "fleirpoint", "fleirnado", "frostpoint", "frostBite", "thunderPoint", "thundersplit", "voidBlast":
-										if _level.grid[_tile.x][_tile.y].critter == 0 or (aI.aggroTarget != null and _level.grid[_tile.x][_tile.y].critter == aI.aggroTarget):
+										if (
+											(
+												_level.grid[_tile.x][_tile.y].critter == 0 and
+												(
+													aI.aI.matchn("aggressive") or
+													aI.aI.matchn("slow aggressive") or
+													aI.aI.matchn("mimicking")
+												)
+											) or
+											(
+												aI.aggroTarget != null and
+												_level.grid[_tile.x][_tile.y].critter == aI.aggroTarget
+											)
+										):
+											checkIfAddFlavorGamelog("spell")
 											yield(get_tree(), "idle_frame")
 											var _newSpell = spell.instance()
 											var _color = "#000"
@@ -249,6 +245,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 						
 						if _critters.size() == 0:
 							return false
+						checkIfAddFlavorGamelog("spell")
 						if statusEffects.blindness > 0:
 							Globals.gameConsole.addLog("{critterName} casts {spell} in a random direction!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 						else:
@@ -480,7 +477,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		else:
 			return false
 
-func takeDamage(_attacks, _critterTile, _critterName):
+func takeDamage(_attacks, _critterTile, _critterName, _playerHitCheck = false):
 	var _didCritterDie = null
 	var _attacksLog = []
 	if _attacks.size() != 0:
@@ -633,24 +630,27 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			Globals.gameConsole.addLog(_attacksLogString)
 		if (
 			(
-				_critterName.matchn("archeologist") or
-				_critterName.matchn("banker") or
-				_critterName.matchn("freedom fighter") or
-				_critterName.matchn("herbalogue") or
-				_critterName.matchn("mercenary") or
-				_critterName.matchn("exterminator") or
-				_critterName.matchn("rogue") or
-				_critterName.matchn("savant")
-			) and
-			!(
-				aI.aI.matchn("aggressive") or
-				aI.aI.matchn("slow aggressive") or
-				aI.aI.matchn("mimicking")
-			)
+				(
+					_critterName.matchn("archeologist") or
+					_critterName.matchn("banker") or
+					_critterName.matchn("freedom fighter") or
+					_critterName.matchn("herbalogue") or
+					_critterName.matchn("mercenary") or
+					_critterName.matchn("exterminator") or
+					_critterName.matchn("rogue") or
+					_critterName.matchn("savant")
+				) and
+				!(
+					aI.aI.matchn("aggressive") or
+					aI.aI.matchn("slow aggressive") or
+					aI.aI.matchn("mimicking")
+				)
+			) or
+			_playerHitCheck
 		):
 			aI.aI = "Aggressive"
 			aI.aggroTarget = null
-		if aI.aI.matchn("Deactivated") and checkIfCritterIsPlayer(_critterName):
+		if aI.aI.matchn("Deactivated") and (checkIfCritterIsPlayer(_critterName) or _playerHitCheck):
 			awakeCritter(_critterTile, $"/root/World".level.getCritterTile(0))
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
 		if isMimicked:
@@ -758,6 +758,23 @@ func checkIfCritterIsPlayer(_critterName):
 	):
 		return true
 	return false
+
+func isCritterAwakened(_critterTile, _playerTile, _level):
+	if aI.activationDistance != null:
+		if _level.calculatePath(_critterTile, _playerTile).size() <= aI.activationDistance:
+			awakeCritter(_critterTile, _playerTile)
+			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
+
+func awakeCritter(_critterTile, _playerTile):
+	aI.aI = "Aggressive"
+	aI.activationDistance = null
+	checkIfAddFlavorGamelog("activated")
+	for _critterId in $"/root/World".level.critters:
+		var _critter = get_node("/root/World/Critters/{critter}".format({ "critter": _critterId }))
+		if _critter.aI.aI.matchn("Deactivated"):
+			_critter.aI.aI = "Aggressive"
+			_critter.aI.activationDistance = null
+			checkIfAddFlavorGamelog("activated", _critter.critterName)
 
 func checkCritterIdentification(_data):
 	if _data.knowledge:
