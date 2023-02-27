@@ -118,6 +118,10 @@ func setUpGameObjects(_playerData = null):
 		
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
 #		$Items/Items.createItem("Ring of fumbling", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Wand of magic sphere", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Wand of Fleir", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Wand of Frost", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Wand of Thunder", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
 	
 	for _node in $UI/UITheme.get_children():
@@ -211,11 +215,8 @@ func _input(_event):
 							castAt(_playerTile, _tileToMoveTo)
 						elif currentGameState == gameState.ZAP_DIRECTION:
 							$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
-							resetToDefaulGameState()
-							processGameTurn()
 						elif currentGameState == gameState.THROW_DIRECTION:
 							$"Critters/0".throwItem(_tileToMoveTo - _playerTile)
-							resetToDefaulGameState()
 			elif (
 				Input.is_action_just_pressed("WAIT") and
 				currentGameState == gameState.GAME
@@ -376,7 +377,9 @@ func processEnemyActions():
 			var _critterTile = level.getCritterTile(_enemy)
 			var _critter = get_node("Critters/{id}".format({ "id": _enemy }))
 			_critter.isCritterAwakened(_critterTile, _playerTile, level)
-			if _critter.statusEffects.sleep > 0:
+			if _critter.statusEffects.sleep == 1:
+				Globals.gameConsole.addLog("The {critterName} wakes up!".format({ "critterName": _critter.critterName }))
+			elif _critter.statusEffects.sleep > 0:
 				Globals.gameConsole.addLog("The {critterName} is fast asleep.".format({ "critterName": _critter.critterName }))
 			elif _critter.processCritterAction(_critterTile, _playerTile, _enemy, level):
 				_isPlayerHit = true
@@ -507,17 +510,20 @@ func updateStats():
 	GlobalGameStats.gameStats["Turn count"] += 1
 
 func isGameOver():
+	print(gameOver)
+	print($Critters/"0".hp)
 	if gameOver:
 		return true
 	elif $Critters/"0".hp <= 0:
 		Globals.gameConsole.addLog("You die...")
 		currentGameState = gameState.GAME_OVER
-		gameOver = true
 		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".getGameOverStats())
 		$"UI/UITheme/Game Over Stats".saveGameData()
 		$"UI/UITheme/Game Over Stats".show()
+		gameOver = true
 		yield(get_tree().create_timer(0.01), "timeout")
 		return true
+	return false
 
 func keepMovingLoop(_playerTile, _tileToMoveTo):
 	var _currentTile = _playerTile

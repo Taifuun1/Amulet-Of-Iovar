@@ -235,23 +235,6 @@ func setUpDungeon():
 		levels.dungeon2.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
-	### Beach
-	var newBeach = load(levelPaths.beach).instance()
-	newBeach.create("beach", "beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
-	levels.beach.append(newBeach)
-	$Levels.add_child(newBeach)
-	
-	var newVacationResort = load(levelPaths.vacationResort).instance()
-	newVacationResort.create("beach", "beach", "Vacation resort", 10000)
-	levels.beach.append(newVacationResort)
-	$Levels.add_child(newVacationResort)
-	
-	for _level in range(randi() % 2 + 1):
-		var newBeach2 = load(levelPaths.beach).instance()
-		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
-		levels.beach.append(newBeach2)
-		$Levels.add_child(newBeach2)
-	
 	### Dungeon 3
 	var _dungeon3Count = randi() % 3 + 3
 	for _level in _dungeon3Count:
@@ -271,37 +254,6 @@ func setUpDungeon():
 			newDungeon.create("dungeon3", "dungeon3", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() }), 10000)
 		levels.dungeon3.append(newDungeon)
 		$Levels.add_child(newDungeon)
-
-	### Mines of Tidoh
-	for _level in range(randi() % 2 + 2):
-		var newCave = load(levelPaths.minesOfTidoh).instance()
-		newCave.create("minesOfTidoh", "minesOfTidoh", "Mines of tidoh {level}".format({ "level": 1 + levels.minesOfTidoh.size() }), 2)
-		levels.minesOfTidoh.append(newCave)
-		$Levels.add_child(newCave)
-
-	var newMiningOutpost
-	if randi() % 2 == 0:
-		newMiningOutpost = load(levelPaths.tidohMiningOutpost1).instance()
-	else:
-		newMiningOutpost = load(levelPaths.tidohMiningOutpost2).instance()
-	newMiningOutpost.create("miningOutpost", "minesOfTidoh", "Tidoh mining outpost", 5)
-	levels.minesOfTidoh.append(newMiningOutpost)
-	$Levels.add_child(newMiningOutpost)
-
-	for _level in range(randi() % 2 + 2):
-		var newCave = load(levelPaths.depthsOfTidoh).instance()
-		newCave.create("depthsOfTidoh", "depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": 1 + levels.depthsOfTidoh.size() }), 1)
-		levels.depthsOfTidoh.append(newCave)
-		$Levels.add_child(newCave)
-
-	var newMinesEnd
-	if randi() % 2 == 0:
-		newMinesEnd = load(levelPaths.tidohMinesEnd1).instance()
-	else:
-		newMinesEnd = load(levelPaths.tidohMinesEnd2).instance()
-	newMinesEnd.create("depthsOfTidoh", "depthsOfTidoh", "Mines end", 1)
-	levels.depthsOfTidoh.append(newMinesEnd)
-	$Levels.add_child(newMinesEnd)
 	
 	### Dungeon 4
 	for _level in range(3):
@@ -325,6 +277,54 @@ func setUpDungeon():
 			newDungeon.create("dungeon4", "dungeon4", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() }), 10000)
 		levels.dungeon4.append(newDungeon)
 		$Levels.add_child(newDungeon)
+	
+	### Beach
+	var newBeach = load(levelPaths.beach).instance()
+	newBeach.create("beach", "beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
+	levels.beach.append(newBeach)
+	$Levels.add_child(newBeach)
+	
+	var newVacationResort = load(levelPaths.vacationResort).instance()
+	newVacationResort.create("beach", "beach", "Vacation resort", 10000)
+	levels.beach.append(newVacationResort)
+	$Levels.add_child(newVacationResort)
+	
+	for _level in range(randi() % 2 + 1):
+		var newBeach2 = load(levelPaths.beach).instance()
+		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
+		levels.beach.append(newBeach2)
+		$Levels.add_child(newBeach2)
+	
+	### Mines of Tidoh
+	for _level in range(randi() % 2 + 2):
+		var newCave = load(levelPaths.minesOfTidoh).instance()
+		newCave.create("minesOfTidoh", "minesOfTidoh", "Mines of tidoh {level}".format({ "level": 1 + levels.minesOfTidoh.size() }), 2)
+		levels.minesOfTidoh.append(newCave)
+		$Levels.add_child(newCave)
+	
+	var newMiningOutpost
+	if randi() % 2 == 0:
+		newMiningOutpost = load(levelPaths.tidohMiningOutpost1).instance()
+	else:
+		newMiningOutpost = load(levelPaths.tidohMiningOutpost2).instance()
+	newMiningOutpost.create("miningOutpost", "minesOfTidoh", "Tidoh mining outpost", 5)
+	levels.minesOfTidoh.append(newMiningOutpost)
+	$Levels.add_child(newMiningOutpost)
+	
+	for _level in range(randi() % 2 + 2):
+		var newCave = load(levelPaths.depthsOfTidoh).instance()
+		newCave.create("depthsOfTidoh", "depthsOfTidoh", "Depths of Tidoh {level}".format({ "level": 1 + levels.depthsOfTidoh.size() }), 1)
+		levels.depthsOfTidoh.append(newCave)
+		$Levels.add_child(newCave)
+	
+	var newMinesEnd
+	if randi() % 2 == 0:
+		newMinesEnd = load(levelPaths.tidohMinesEnd1).instance()
+	else:
+		newMinesEnd = load(levelPaths.tidohMinesEnd2).instance()
+	newMinesEnd.create("depthsOfTidoh", "depthsOfTidoh", "Mines end", 1)
+	levels.depthsOfTidoh.append(newMinesEnd)
+	$Levels.add_child(newMinesEnd)
 	
 	### Bandit warcamp
 	for _level in range(5):

@@ -631,7 +631,7 @@ func consumeItem(_id):
 			"bean can":
 				Globals.gameConsole.addLog("You open up the {comestible} and eat the beans.".format({ "comestible": _eatenItem.itemName.to_lower() }))
 			"spam":
-				Globals.gameConsole.addLog("You open up the {comestible} and eat the SPAM.".format({ "comestible": _eatenItem.itemName.to_lower() }))
+				Globals.gameConsole.addLog("You open up the {comestible} can and eat the {comestible}.".format({ "comestible": _eatenItem.itemName }))
 		match _eatenItem.itemName.to_lower():
 			"brownie":
 				Globals.gameConsole.addLog("Wow, that's delicious!")
@@ -774,15 +774,30 @@ func zapItem(_direction):
 							Globals.isItemIdentified(_zappedItem)
 							break
 				"wand of magic sphere", "wand of fleir", "wand of frost", "wand of thunder":
+					var spellData = load("res://Objects/Data/SpellsData.gd").new().spellData
 					var _grid = $"/root/World".level.grid
+					var _tiles = []
 					for i in range(1, _zappedItem.value.distance[_zappedItem.piety.to_lower()]):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
+						_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 						if _grid[_tile.x][_tile.y].critter != null:
 							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
-							_critter.takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _tile, _zappedItem.itemName, true)
+							
 							Globals.isItemIdentified(_zappedItem)
+					var _newProjectile = load("res://Objects/Projectiles/WandProjectile.tscn").instance()
+					var _color
+					if _zappedItem.identifiedItemName.matchn("wand of magic sphere"):
+						_color = "#FFFFFF"
+					else:
+						_color = load("res://Objects/Data/RuneData.gd").new().runeData.eario[_zappedItem.value.dmg[_zappedItem.piety.to_lower()][0].magicDmg.element.to_lower()].color
+					_newProjectile.create(_tiles, load("res://Assets/Spells/Bolt.png"), _color, _zappedItem.value.dmg[_zappedItem.piety.to_lower()], true)
+					$"/root/World/Animations".add_child(_newProjectile)
+					# warning-ignore:return_value_discarded
+					$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
+					$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
+					return
 				"wand of backwards magic sphere":
 					if _zappedItem.piety.matchn("reverent"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
@@ -871,6 +886,7 @@ func zapItem(_direction):
 		else:
 			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
 	$"/root/World".closeMenu(_additionalChoices)
+	$"/root/World".processGameTurn()
 
 func throwItem(_direction):
 	var _playerPosition = $"/root/World".level.getCritterTile(0)
@@ -1018,7 +1034,7 @@ func throwItem(_direction):
 		else:
 			$"/root/World/Items/Items".removeItem(_thrownItem.id)
 		
-		var _newThrow = load("res://Objects/Throw/Throw.tscn").instance()
+		var _newThrow = load("res://Objects/Projectiles/Throw.tscn").instance()
 		_newThrow.create(_tiles, _thrownItem.itemTexture)
 		$"/root/World/Animations".add_child(_newThrow)
 		# warning-ignore:return_value_discarded

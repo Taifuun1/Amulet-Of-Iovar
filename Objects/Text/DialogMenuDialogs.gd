@@ -2,7 +2,7 @@
 var dialogMenuDialogs = {
 	"Elhybar": {
 		"title": "Elhybar, The Historian",
-		"text": """Deep in the library, an old wizard toils at work. Keeper of records, scholarly writer and a book enthusiast. You face the keeper of the library.
+		"text": """Deep in the library, an old wizard toils at work. He's a keeper of records, scholarly writer and a book enthusiast. You face the keeper of the library.
 	
 	Elhybar: "Who are you? Have you business here?
 	

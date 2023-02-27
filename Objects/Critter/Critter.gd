@@ -1,6 +1,6 @@
 extends BaseCritter
 
-var spell = load("res://Objects/Spell/CritterSpell.tscn")
+var spell = load("res://Objects/Projectiles/CritterSpell.tscn")
 
 var spellData = load("res://Objects/Data/SpellsData.gd").new().spellData
 var critterSpellData = load("res://Objects/Data/SpellsCritterSpellsData.gd").new()
@@ -610,7 +610,6 @@ func takeDamage(_attacks, _critterTile, _critterName, _playerHitCheck = false):
 			_attacksLog.append(_attackLog)
 			
 			if hp <= 0:
-				checkIfAddFlavorGamelog("despawn")
 				despawn(_critterTile)
 				_didCritterDie = expDropAmount
 				_attacksLog.append("The {critter} dies!".format({ "critter": critterName }))
@@ -618,16 +617,21 @@ func takeDamage(_attacks, _critterTile, _critterName, _playerHitCheck = false):
 					GlobalGameStats.critters[critterName].killCount += 1
 				break
 		if (
-			$"/root/World".level.getCritterTile(0) and
-			$"/root/World".level.getCritterTile(id) and
-			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
+			_didCritterDie or
 			(
-				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 5 or
-				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
+				$"/root/World".level.getCritterTile(0) and
+				$"/root/World".level.getCritterTile(id) and
+				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
+				(
+					$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 5 or
+					$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
+				)
 			)
 		):
 			var _attacksLogString = PoolStringArray(_attacksLog).join(" ")
 			Globals.gameConsole.addLog(_attacksLogString)
+		if hp <= 0:
+			checkIfAddFlavorGamelog("despawn", critterName, true)
 		if (
 			(
 				(
@@ -731,14 +735,17 @@ func addCritterBackToPopulation(_critterTile, _level):
 	GlobalCritterInfo.addCritterBackToPopulation(critterName)
 	call_deferred("queue_free")
 
-func checkIfAddFlavorGamelog(_logType, _critterName = critterName):
+func checkIfAddFlavorGamelog(_logType, _critterName = critterName, _addLog = false):
 	if (
-		$"/root/World".level.getCritterTile(0) and
-		$"/root/World".level.getCritterTile(id) and
-		$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
+		_addLog or
 		(
-			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 5 or
-			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
+			$"/root/World".level.getCritterTile(0) and
+			$"/root/World".level.getCritterTile(id) and
+			$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() != 0 and
+			(
+				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= 5 or
+				$"/root/World".level.calculatePathFindingPath($"/root/World".level.getCritterTile(id), $"/root/World".level.getCritterTile(0)).size() <= aI.aggroDistance
+			)
 		)
 	):
 		var _flavorMessage = GlobalGameConsoleMessages.getRandomMessageByType(_critterName, _logType)
