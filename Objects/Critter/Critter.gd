@@ -1,6 +1,6 @@
 extends BaseCritter
 
-var spell = load("res://Objects/Projectiles/CritterSpell.tscn")
+var spell = load("res://Objects/Projectile/CritterSpell.tscn")
 
 var spellData = load("res://Objects/Data/SpellsData.gd").new().spellData
 var critterSpellData = load("res://Objects/Data/SpellsCritterSpellsData.gd").new()

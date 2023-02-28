@@ -1,7 +1,7 @@
 extends Control
 
 var runeItem = load("res://UI/Runes/Rune Item.tscn")
-var spell = load("res://Objects/Projectiles/Spell.tscn")
+var spell = load("res://Objects/Projectile/Spell.tscn")
 
 var runeData = load("res://Objects/Data/RuneData.gd").new()
 var spellData = load("res://Objects/Data/SpellsData.gd").new()

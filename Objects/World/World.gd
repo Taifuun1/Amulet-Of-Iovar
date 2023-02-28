@@ -118,10 +118,6 @@ func setUpGameObjects(_playerData = null):
 		
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
 #		$Items/Items.createItem("Ring of fumbling", null, 1, true, { "piety": "formal" })
-		$Items/Items.createItem("Wand of magic sphere", null, 1, true, { "piety": "formal" })
-		$Items/Items.createItem("Wand of Fleir", null, 1, true, { "piety": "formal" })
-		$Items/Items.createItem("Wand of Frost", null, 1, true, { "piety": "formal" })
-		$Items/Items.createItem("Wand of Thunder", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
 	
 	for _node in $UI/UITheme.get_children():
@@ -182,7 +178,9 @@ func _input(_event):
 					elif Input.is_action_just_pressed("MOVE_UP_LEFT"):
 						_tileToMoveTo = Vector2(_playerTile.x - 1, _playerTile.y - 1)
 					
-					if(
+					if currentGameState == gameState.ZAP_DIRECTION:
+						$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
+					elif(
 						Globals.isTileFree(_tileToMoveTo, level.grid) or
 						(
 							Globals.isTileFree(_tileToMoveTo, level.grid, false) and
@@ -213,8 +211,6 @@ func _input(_event):
 							kickAt(_tileToMoveTo)
 						elif currentGameState == gameState.CAST:
 							castAt(_playerTile, _tileToMoveTo)
-						elif currentGameState == gameState.ZAP_DIRECTION:
-							$"Critters/0".zapItem(_tileToMoveTo - _playerTile)
 						elif currentGameState == gameState.THROW_DIRECTION:
 							$"Critters/0".throwItem(_tileToMoveTo - _playerTile)
 			elif (

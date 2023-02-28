@@ -642,7 +642,13 @@ func consumeItem(_id):
 	$"/root/World".closeMenu()
 
 func zapItem(_direction):
+	var _grid = $"/root/World".level.grid
 	var _playerPosition = $"/root/World".level.getCritterTile(0)
+	var _projectile = load("res://Objects/Projectile/Projectile.tscn").instance()
+	var spellData = load("res://Objects/Data/SpellsData.gd").new().spellData
+	var _tiles = []
+	var _projectileData = { "texture": load("res://Assets/Spells/Bolt.png"), "color": "#FFFFFF" }
+	var _checkIfCritterHit = false
 	var _zappedItem = get_node("/root/World/Items/{id}".format({ "id": selectedItem }))
 	selectedItem = null
 	var _additionalChoices = false
@@ -671,8 +677,10 @@ func zapItem(_direction):
 						Globals.gameConsole.addLog("The light illuminates your surroundings dimly.")
 					$"/root/World".drawLevel()
 					Globals.isItemIdentified(_zappedItem)
+					$"/root/World".closeMenu(_additionalChoices)
+					$"/root/World".processGameTurn()
+					return
 				"wand of turn lock":
-					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
@@ -693,6 +701,7 @@ func zapItem(_direction):
 									Globals.gameConsole.addLog("Doors lock doesn't move...")
 							Globals.isItemIdentified(_zappedItem)
 							break
+						_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 				"wand of digging":
 					var _level = $"/root/World".level
 					var _isTileMined = false
@@ -710,56 +719,62 @@ func zapItem(_direction):
 							_isTileMined = true
 						if !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
+						_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 					if _isTileMined:
 						$"/root/World".updateTiles()
 						$"/root/World".drawLevel()
 						Globals.gameConsole.addLog("The {itemName} bores through the wall!".format({ "itemName": _zappedItem.itemName }))
 						Globals.isItemIdentified(_zappedItem)
 				"wand of teleport":
-					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance):
-						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
+						var _tile = _playerPosition + _direction * i
+						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
-						if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter != null:
+						_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
+						if _grid[_tile.x][_tile.y].critter != null:
+							var _critterName = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter })).critterName
 							if _zappedItem.piety.matchn("blasphemous"):
-								Globals.gameConsole.addLog("The {critterName} vibrates... But nothing happens.".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter })).critterName }))
+								Globals.gameConsole.addLog("The {critterName} vibrates... But nothing happens.".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter })).critterName }))
 								break
-							dealWithTeleport(_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter, _zappedItem.piety, _zappedItem.type)
-							Globals.gameConsole.addLog("The {critterName} disappears!".format({ "critterName": get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].critter })).critterName }))
+							dealWithTeleport(_grid[_tile.x][_tile.y].critter, _zappedItem.piety, _zappedItem.type)
+							Globals.gameConsole.addLog("The {critterName} disappears!".format({ "critterName": _critterName }))
 							Globals.isItemIdentified(_zappedItem)
 							break
 				"wand of summon critter":
 					if _zappedItem.piety.matchn("reverent"):
 						var _neutralClass = neutralClasses[randi() % neutralClasses.size()]
 						var _critter = $"/root/World/Critters/Critters".critters[_neutralClass][randi() % $"/root/World/Critters/Critters".critters[_neutralClass].size()]
-						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
-						if !_tiles.empty():
-							for _tile in _tiles:
+						var _adjacentTiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
+						if !_adjacentTiles.empty():
+							for _tile in _adjacentTiles:
 								Globals.gameConsole.addLog("A {critterName} appears beside you. It seems friendly.".format({ "critterName": $"/root/World/Critters/Critters".spawnCritter(_critter, _tile) }))
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
 					elif _zappedItem.piety.matchn("formal"):
-						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
-						if !_tiles.empty():
-							for _tile in _tiles:
+						var _adjacentTiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, true, true)
+						if !_adjacentTiles.empty():
+							for _tile in _adjacentTiles:
 								Globals.gameConsole.addLog("A {critterName} appears beside you!".format({ "critterName": $"/root/World/Critters/Critters".spawnRandomCritter(_tile) }))
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
 					elif _zappedItem.piety.matchn("blasphemous"):
-						var _tiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, false, true)
-						if !_tiles.empty():
-							for _tile in _tiles:
+						var _adjacentTiles = $"/root/World".level.checkAdjacentTilesForOpenSpace(_playerPosition, false, true)
+						if !_adjacentTiles.empty():
+							for _tile in _adjacentTiles:
 								$"/root/World/Critters/Critters".spawnRandomCritter(_tile)
 							Globals.gameConsole.addLog("A bucketload of critters appear around you!")
 						else:
 							Globals.gameConsole.addLog("Nothing happens...")
 					Globals.isItemIdentified(_zappedItem)
+					$"/root/World".closeMenu(_additionalChoices)
+					$"/root/World".processGameTurn()
+					return
 				"wand of sleep":
-					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
+						_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 						if _grid[_tile.x][_tile.y].critter != null:
 							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
 							if _zappedItem.piety.matchn("reverent"):
@@ -774,30 +789,15 @@ func zapItem(_direction):
 							Globals.isItemIdentified(_zappedItem)
 							break
 				"wand of magic sphere", "wand of fleir", "wand of frost", "wand of thunder":
-					var spellData = load("res://Objects/Data/SpellsData.gd").new().spellData
-					var _grid = $"/root/World".level.grid
-					var _tiles = []
 					for i in range(1, _zappedItem.value.distance[_zappedItem.piety.to_lower()]):
 						var _tile = _playerPosition + _direction * i
 						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
 						_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 						if _grid[_tile.x][_tile.y].critter != null:
-							var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_tile.x][_tile.y].critter }))
-							
-							Globals.isItemIdentified(_zappedItem)
-					var _newProjectile = load("res://Objects/Projectiles/WandProjectile.tscn").instance()
-					var _color
-					if _zappedItem.identifiedItemName.matchn("wand of magic sphere"):
-						_color = "#FFFFFF"
-					else:
-						_color = load("res://Objects/Data/RuneData.gd").new().runeData.eario[_zappedItem.value.dmg[_zappedItem.piety.to_lower()][0].magicDmg.element.to_lower()].color
-					_newProjectile.create(_tiles, load("res://Assets/Spells/Bolt.png"), _color, _zappedItem.value.dmg[_zappedItem.piety.to_lower()], true)
-					$"/root/World/Animations".add_child(_newProjectile)
-					# warning-ignore:return_value_discarded
-					$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
-					$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
-					return
+							_checkIfCritterHit = true
+					if !_zappedItem.identifiedItemName.matchn("wand of magic sphere"):
+						_projectileData.color = load("res://Objects/Data/RuneData.gd").new().runeData.eario[_zappedItem.value.dmg[_zappedItem.piety.to_lower()][0].magicDmg.element.to_lower()].color
 				"wand of backwards magic sphere":
 					if _zappedItem.piety.matchn("reverent"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
@@ -808,27 +808,32 @@ func zapItem(_direction):
 						takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _playerPosition, _zappedItem.itemName)
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
 					Globals.isItemIdentified(_zappedItem)
+					$"/root/World".closeMenu(_additionalChoices)
+					$"/root/World".processGameTurn()
+					return
 				"wand of item polymorph":
-					var _grid = $"/root/World".level.grid
 					for i in range(1, _zappedItem.value.distance):
-						if !Globals.isTileFree(_playerPosition + _direction * i, _grid) or _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].tile == Globals.tiles.DOOR_CLOSED:
+						var _tile = _playerPosition + _direction * i
+						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
+						_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 						var _itemCount = 0
 						if _zappedItem.piety.matchn("reverent"):
-							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
+							if _grid[_tile.x][_tile.y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
-								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+								for _itemId in _grid[_tile.x][_tile.y].items.duplicate(true):
+									var _category = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category
+									if _category == null or !_category.matchn("container"):
 										_newItems.append($"/root/World/Items/Items".getRandomItem())
-										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
+										$"/root/World/Items/Items".removeItem(_itemId, _tile)
 										_itemCount += 1
-									if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+									if _category != null and _category.matchn("container"):
 										_newItemIds.append(_itemId)
 								for _itemId in _newItems:
-									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
+									$"/root/World/Items/Items".createItem(_itemId, _tile)
 									_newItemIds.append(Globals.itemId - 1)
-								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
+								_grid[_tile.x][_tile.y].items = _newItemIds
 								if _itemCount == 1:
 									Globals.gameConsole.addLog("Item on the ground vibrates.")
 									Globals.isItemIdentified(_zappedItem)
@@ -836,38 +841,42 @@ func zapItem(_direction):
 								Globals.gameConsole.addLog("Items on the ground vibrate.")
 								Globals.isItemIdentified(_zappedItem)
 						elif _zappedItem.piety.matchn("formal"):
-							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
+							if _grid[_tile.x][_tile.y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
-								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									if randi() % 2 == 0 and (get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container")):
-										_newItems.append($"/root/World/Items/Items".getRandomItem())
-										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
-										_itemCount += 1
-									if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+								for _itemId in _grid[_tile.x][_tile.y].items.duplicate(true):
+									var _category = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category
+									if randi() % 2 == 0:
+										if(_category == null or !_category.matchn("container")):
+											_newItems.append($"/root/World/Items/Items".getRandomItem())
+											$"/root/World/Items/Items".removeItem(_itemId, _tile)
+											_itemCount += 1
+									if _category != null and _category.matchn("container"):
 										_newItemIds.append(_itemId)
 								for _itemId in _newItems:
-									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
+									$"/root/World/Items/Items".createItem(_itemId, _tile)
 									_newItemIds.append(Globals.itemId - 1)
-								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
+								_grid[_tile.x][_tile.y].items = _newItemIds
 								if _itemCount > 0:
 									Globals.gameConsole.addLog("Some items on the ground vibrate.")
 									Globals.isItemIdentified(_zappedItem)
 						elif _zappedItem.piety.matchn("blasphemous"):
-							if _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.size() != 0:
+							if _grid[_tile.x][_tile.y].items.size() != 0:
 								var _newItems = []
 								var _newItemIds = []
-								for _itemId in _grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items.duplicate(true):
-									if randi() % 4 == 0 and (get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category == null or !get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container")):
-										_newItems.append($"/root/World/Items/Items".getRandomItem())
-										$"/root/World/Items/Items".removeItem(_itemId, _playerPosition + _direction * i)
-										_itemCount += 1
-									if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category.matchn("container"):
+								for _itemId in _grid[_tile.x][_tile.y].items.duplicate(true):
+									var _category = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).category
+									if randi() % 4 == 0:
+										if _category == null or !_category.matchn("container"):
+											_newItems.append($"/root/World/Items/Items".getRandomItem())
+											$"/root/World/Items/Items".removeItem(_itemId, _tile)
+											_itemCount += 1
+									if _category != null and _category.matchn("container"):
 										_newItemIds.append(_itemId)
 								for _itemId in _newItems:
-									$"/root/World/Items/Items".createItem(_itemId, _playerPosition + _direction * i)
+									$"/root/World/Items/Items".createItem(_itemId, _tile)
 									_newItemIds.append(Globals.itemId - 1)
-								_grid[(_playerPosition + _direction * i).x][(_playerPosition + _direction * i).y].items = _newItemIds
+								_grid[_tile.x][_tile.y].items = _newItemIds
 							if _itemCount > 0:
 								Globals.gameConsole.addLog("A few items on the ground vibrate.")
 								Globals.isItemIdentified(_zappedItem)
@@ -885,8 +894,23 @@ func zapItem(_direction):
 			checkAllIdentification(true)
 		else:
 			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
+	if _checkIfCritterHit:
+		Globals.isItemIdentified(_zappedItem)
 	$"/root/World".closeMenu(_additionalChoices)
-	$"/root/World".processGameTurn()
+	if (
+		_zappedItem.identifiedItemName.matchn("wand of magic sphere") or
+		_zappedItem.identifiedItemName.matchn("wand of fleir") or
+		_zappedItem.identifiedItemName.matchn("wand of frost") or
+		_zappedItem.identifiedItemName.matchn("wand of thunder")
+	):
+		if !_zappedItem.identifiedItemName.matchn("wand of magic sphere"):
+			_projectileData.color = load("res://Objects/Data/RuneData.gd").new().runeData.eario[_zappedItem.value.dmg[_zappedItem.piety.to_lower()][0].magicDmg.element.to_lower()].color
+		_projectileData.damage = _zappedItem.value.dmg[_zappedItem.piety.to_lower()]
+	_projectile.create(_tiles, _projectileData, _checkIfCritterHit, true)
+	$"/root/World/Animations".add_child(_projectile)
+	# warning-ignore:return_value_discarded
+	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
+	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 
 func throwItem(_direction):
 	var _playerPosition = $"/root/World".level.getCritterTile(0)
