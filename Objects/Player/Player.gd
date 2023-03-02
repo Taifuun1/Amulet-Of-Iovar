@@ -4,9 +4,9 @@ class_name Player
 onready var inventory = preload("res://UI/Inventory/Inventory.tscn").instance()
 
 var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
-var spellData = load("res://Objects/Data/SpellsData.gd").new()
+var spellData = load("res://Objects/Data/SpellData.gd").new()
 var statusEffectsData = load("res://Objects/Data/StatusEffectsData.gd").new()
-var critterSpellData = load("res://Objects/Data/SpellsCritterSpellsData.gd").new()
+var critterSpellData = load("res://Objects/Data/SpellCritterSpellsData.gd").new()
 
 var playerVisibility = {
 	"distance": -1,
@@ -338,10 +338,10 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			var _damageNumber = damageNumber.instance()
 			var _damageText
 			var _damageColor = "#000"
-			if _damage.dmg < 1 and _damage.dmg >= -2:
+			if _damage.dmg <= 0 and _damage.magicDmg > 0:
+				_damageText = _damage.magicDmg
+			elif _damage.dmg < 1:
 				_damageText = 1 + _damage.magicDmg
-			elif _damage.dmg < -2:
-				_damageText = 0
 			else:
 				_damageText = _damage.dmg + _damage.magicDmg
 			if _damage.magicDmg != 0 and _attack.magicDmg.element != null:

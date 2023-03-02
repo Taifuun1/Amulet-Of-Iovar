@@ -1,10 +1,11 @@
 extends Control
 
 var runeItem = load("res://UI/Runes/Rune Item.tscn")
-var spell = load("res://Objects/Projectile/Spell.tscn")
+var projectile = load("res://Objects/Projectile/Projectile.tscn")
 
-var runeData = load("res://Objects/Data/RuneData.gd").new()
-var spellData = load("res://Objects/Data/SpellsData.gd").new()
+var runeData = load("res://Objects/Data/RuneData.gd").new().runeData
+var spellData = load("res://Objects/Data/SpellData.gd").new().spellData
+var miasmaData = load("res://Objects/Data/SpellMiasmaData.gd").new()
 
 const runesUITemplatePaths = {
 	"eario": "res://Assets/UI/RuneEario.png",
@@ -31,7 +32,12 @@ var spellDamage = [{
 var mpUsage = 0
 var bonusMagicDmg = 0
 
-var hoveredEquipment = null
+var hoveredRune = null
+
+func sortRunes(_equipmentIdA, _equipmentIdB):
+	if get_node("/root/World/Items/{itemId}".format({ "itemId": _equipmentIdA })).itemName < get_node("/root/World/Items/{itemId}".format({ "itemId": _equipmentIdB })).itemName:
+		return true
+	return false
 
 func create():
 	name = "Runes"
@@ -44,6 +50,7 @@ func create():
 ###########################
 
 func showRunes(_items):
+	_items.sort_custom(self, "sortRunes")
 	for _item in _items:
 		var _newItem = runeItem.instance()
 		_newItem.setValues(get_node("/root/World/Items/{item}".format({ "item": _item })))
@@ -64,18 +71,18 @@ func hideRunes():
 func setRunes(_id):
 	var _rune = get_node("/root/World/Items/{id}".format({ "id": _id }))
 	if checkIfMatchingRuneAndSlot(_rune.type, _rune.category):
-		runes[hoveredEquipment.to_lower()] = _id
-		get_node("RuneContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = _rune.getTexture()
+		runes[hoveredRune.to_lower()] = _id
+		get_node("RuneContainer/{slot}/Sprite".format({ "slot": hoveredRune })).texture = _rune.getTexture()
 		checkWhatRuneIsEquipped(_rune)
 		calculateMagicDamage()
 		$"/root/World".processGameTurn()
 
 func _process(_delta):
-	if Input.is_action_just_released("RIGHT_CLICK") and hoveredEquipment != null:
-		var _rune = get_node("/root/World/Items/{id}".format({ "id": runes[hoveredEquipment.to_lower()] }))
+	if Input.is_action_just_released("RIGHT_CLICK") and hoveredRune != null:
+		var _rune = get_node("/root/World/Items/{id}".format({ "id": runes[hoveredRune.to_lower()] }))
 		if _rune != null:
-			runes[hoveredEquipment.to_lower()] = null
-			get_node("RuneContainer/{slot}/Sprite".format({ "slot": hoveredEquipment })).texture = load(runesUITemplatePaths[hoveredEquipment.to_lower()])
+			runes[hoveredRune.to_lower()] = null
+			get_node("RuneContainer/{slot}/Sprite".format({ "slot": hoveredRune })).texture = load(runesUITemplatePaths[hoveredRune.to_lower()])
 			checkWhatRuneIsEquipped(_rune)
 			calculateMagicDamage()
 			$"/root/World".processGameTurn()
@@ -94,38 +101,33 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 		Globals.gameConsole.addLog("You don't have mp to cast that spell!")
 		return
 	
-	var _newSpell = spell.instance()
+	var _projectile = projectile.instance()
 	
-	var _runeData = {
-		"eario": null,
-		"luirio": null,
-		"heario": null
+	var _eario = get_node("/root/World/Items/{itemId}".format({ "itemId": runes.eario })).value.to_lower()
+	var _luirio = get_node("/root/World/Items/{itemId}".format({ "itemId": runes.luirio })).value.to_lower()
+	var _heario = null
+	if runes.heario != null:
+		_heario = get_node("/root/World/Items/{itemId}".format({ "itemId": runes.heario })).value.to_lower()
+	var _projectileData = {
+		"color": spellData[_eario].color,
+		"damage": spellDamage
 	}
 	var _tiles = []
 	
-	for _rune in runes.keys():
-		if runeData.runeData[_rune] != null and runes[_rune] != null:
-			_runeData[_rune] = runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()]
-	
-	if runes.heario == null:
-		_runeData.heario = {
-			"dmgMultiplier": 0.5,
-			"effectMultiplier": 0.5,
-			"texture": load("res://Assets/Spells/NoHeario.png")
-		}
-	
 	if _tileToCastTo == null:
+		_projectileData.texture = load("res://Assets/Spells/Adjacent.png")
 		var _adjacentTiles = []
-		for _data in _runeData.luirio.spellDirections:
+		for _data in runeData.luirio.adjacent.spellDirections:
 			_adjacentTiles.append({ "tile": _playerTile + _data.direction, "angle": _data.angle })
+			if _eario.matchn("toxix") or (_heario != null and _heario.matchn("gas")):
+				createMiasma(_playerTile + _data.direction, _eario)
 		_tiles.append(_adjacentTiles)
-		_runeData.heario.texture = load("res://Assets/Spells/Adjacent.png")
 	else:
 		var _direction = _tileToCastTo - _playerTile
-		if get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower().matchn("point"):
+		if _luirio.matchn("point"):
 			var _previousTile = _playerTile
 			var _checkedTile = _playerTile + _direction
-			for _i in range(_runeData.luirio.distance):
+			for _i in range(runeData.luirio[_luirio].distance):
 				if (
 					!Globals.isTileFree(_checkedTile, grid) or
 					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.DOOR_CLOSED or
@@ -137,15 +139,19 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 					)
 				):
 					_tiles.append([{ "tile": _previousTile, "angle": 0 }])
+					if _eario.matchn("toxix") or (_heario != null and _heario.matchn("gas")):
+						createMiasma(_previousTile, _eario)
 					break
-				elif grid[_checkedTile.x][_checkedTile.y].critter != 0 and grid[_checkedTile.x][_checkedTile.y].critter != null:# and !get_node("/root/World/Critters/{critter}".format({ "critter": grid[_checkedTile.x][_checkedTile.y].critter })).aI.aI.matchn("neutral"):
+				elif grid[_checkedTile.x][_checkedTile.y].critter != null and grid[_checkedTile.x][_checkedTile.y].critter != 0:
 					_tiles.append([{ "tile": _checkedTile, "angle": 0 }])
+					if _eario.matchn("toxix") or (_heario != null and _heario.matchn("gas")):
+						createMiasma(_checkedTile, _eario)
 					break
 				_previousTile += _direction
 				_checkedTile += _direction
-		if get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower().matchn("line"):
+		if _luirio.matchn("line"):
 			var _checkedTile = _playerTile + _direction
-			for _i in range(_runeData.luirio.distance):
+			for _i in range(runeData.luirio[_luirio].distance):
 				if (
 					!Globals.isTileFree(_checkedTile, grid) or
 					grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.DOOR_CLOSED or
@@ -157,19 +163,20 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 					)
 				):
 					break
-				elif grid[_checkedTile.x][_checkedTile.y].critter != null:# and !get_node("/root/World/Critters/{critter}".format({ "critter": grid[_checkedTile.x][_checkedTile.y].critter })).aI.aI.matchn("neutral"):
-					_tiles.append([{ "tile": _checkedTile, "angle": _runeData.luirio.spellDirections[_direction].angle }])
+				_tiles.append([{ "tile": _checkedTile, "angle": runeData.luirio[_luirio].spellDirections[_direction].angle }])
+				if _eario.matchn("toxix") or (_heario != null and _heario.matchn("gas")):
+					createMiasma(_checkedTile, _eario)
+				if grid[_checkedTile.x][_checkedTile.y].critter != null:
 					break
 				else:
-					_tiles.append([{ "tile": _checkedTile, "angle": 0 }])
 					_checkedTile += _direction
-		elif get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower().matchn("cone") or get_node("/root/World/Items/{id}".format({ "id": runes["luirio"] })).value.to_lower().matchn("fourway"):
-			var _spellDirections = _runeData.luirio.spellDirections[_direction].duplicate(true)
-			for _i in range(_runeData.luirio.distance):
+		elif _luirio.matchn("cone") or _luirio.matchn("fourway"):
+			var _spellDirections = runeData.luirio[_luirio].spellDirections[_direction].duplicate(true)
+			for _i in range(runeData.luirio[_luirio].distance):
 				var _lineTiles = []
-				for _index in _spellDirections.size():
-					if typeof(_spellDirections[_index].direction) != TYPE_BOOL:
-						var _checkedTile = _playerTile + _spellDirections[_index].direction
+				for _spellDirectionIndex in _spellDirections.size():
+					if typeof(_spellDirections[_spellDirectionIndex].direction) != TYPE_BOOL:
+						var _checkedTile = _playerTile + _spellDirections[_spellDirectionIndex].direction
 						if (
 							!Globals.isTileFree(_checkedTile, grid) or
 							grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.DOOR_CLOSED or
@@ -180,21 +187,34 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 								_checkedTile.y > Globals.gridSize.y - 1
 							)
 						):
-							_spellDirections[_index].direction = false
+							_spellDirections[_spellDirectionIndex].direction = false
 						else:
-							_lineTiles.append({ "tile": _checkedTile, "angle": _spellDirections[_index].angle })
-							_spellDirections[_index].direction += _runeData.luirio.spellDirections[_direction][_index].direction
+							_lineTiles.append({ "tile": _checkedTile, "angle": _spellDirections[_spellDirectionIndex].angle })
+							if _eario.matchn("toxix") or (_heario != null and _heario.matchn("gas")):
+								createMiasma(_checkedTile, _eario)
+							_spellDirections[_spellDirectionIndex].direction += runeData.luirio[_luirio].spellDirections[_direction][_spellDirectionIndex].direction
 				if _lineTiles.empty():
 					break
 				_tiles.append(_lineTiles)
+	if runes.heario == null:
+		_projectileData.texture = load("res://Assets/Spells/NoHeario.png")
+	else:
+		_projectileData.texture = runeData.heario[get_node("/root/World/Items/{itemId}".format({ "itemId": runes.heario })).value.to_lower()].texture
 	
-	_newSpell.create(_tiles, _runeData, true)
-	$"/root/World/Animations".add_child(_newSpell)
+	_projectile.create(_tiles, _projectileData, true)
+	$"/root/World/Animations".add_child(_projectile)
 	# warning-ignore:return_value_discarded
-	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
+	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_onPlayerAnimationDone")
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 	
 	$"/root/World/Critters/0".mp -= mpUsage
+
+func createMiasma(_tile, _eario):
+	var _miasmaNode = load("res://UI/Effect/Effect.tscn").instance()
+	var _miasmaData = miasmaData["{eario}Miasma".format({ "eario": _eario }).replace("'", "")]
+	_miasmaNode.create(load("res://Assets/Spells/Gas.png"), spellData[_eario].color, _tile, _miasmaData.name, $"/root/World".level.levelId, _miasmaData.duration, _miasmaData.attacks)
+	$"/root/World/Effects".add_child(_miasmaNode)
+	$"/root/World".level.grid[_tile.x][_tile.y].effects.append(_miasmaData.name)
 
 
 
@@ -216,17 +236,17 @@ func checkIfMatchingRuneAndSlot(_type, _category):
 	if _type.matchn("rune"):
 		if (
 			_category.matchn("eario") and
-			hoveredEquipment.matchn("eario")
+			hoveredRune.matchn("eario")
 		):
 			return true
 		if (
 			_category.matchn("luirio") and
-			hoveredEquipment.matchn("luirio")
+			hoveredRune.matchn("luirio")
 		):
 			return true
 		if (
 			_category.matchn("heario") and
-			hoveredEquipment.matchn("heario")
+			hoveredRune.matchn("heario")
 		):
 			return true
 	return false
@@ -274,14 +294,14 @@ func calculateMagicDamage():
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [int(spellData.spellData[_earioNode.value.to_lower()].baseDmg[0] * 0.5 + _magicDamageIncrease.dmg), int(spellData.spellData[_earioNode.value.to_lower()].baseDmg[1] * 0.5 + _magicDamageIncrease.dmg)],
+					"dmg": [int(spellData[_earioNode.value.to_lower()].baseDmg[0] * 0.5 + _magicDamageIncrease.dmg), int(spellData[_earioNode.value.to_lower()].baseDmg[1] * 0.5 + _magicDamageIncrease.dmg)],
 					"element": _earioNode.value
 				}
 			})
 		mpUsage = 0
 		for _rune in runes:
 			if !_rune.matchn("heario"):
-				mpUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
+				mpUsage += runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
 #	"effect": runeData.heario[runes.heario].effectMultiplier
 	else:
 		var _earioNode = get_node("/root/World/Items/{id}".format({ "id": runes["eario"] }))
@@ -293,13 +313,13 @@ func calculateMagicDamage():
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [int(spellData.spellData[_earioNode.value.to_lower()].baseDmg[0] * runeData.runeData.heario[_hearioNode.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg), int(spellData.spellData[_earioNode.value.to_lower()].baseDmg[0] * runeData.runeData.heario[_hearioNode.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg)],
+					"dmg": [int(spellData[_earioNode.value.to_lower()].baseDmg[0] * runeData.heario[_hearioNode.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg), int(spellData[_earioNode.value.to_lower()].baseDmg[0] * runeData.heario[_hearioNode.value.to_lower()].dmgMultiplier + _magicDamageIncrease.dmg)],
 					"element": _earioNode.value
 				}
 			})
 		mpUsage = 0
 		for _rune in runes:
-			mpUsage += runeData.runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
+			mpUsage += runeData[_rune][get_node("/root/World/Items/{id}".format({ "id": runes[_rune] })).value.to_lower()].mp
 	if _magicAttacks[0].magicDmg.dmg[0] != 0 and _magicAttacks[0].magicDmg.dmg[1] != 0:
 		_magicAttacks[0].magicDmg.dmg = [_magicAttacks[0].magicDmg.dmg[0] + bonusMagicDmg, _magicAttacks[0].magicDmg.dmg[1] + bonusMagicDmg]
 	spellDamage = _magicAttacks
@@ -465,7 +485,7 @@ func getRunesSaveData():
 ########################
 
 func _on_mouse_entered_rune_slot(_equipmentSlot):
-	hoveredEquipment = _equipmentSlot
+	hoveredRune = _equipmentSlot
 
 func _on_mouse_exited_rune_slot():
-	hoveredEquipment = null
+	hoveredRune = null

@@ -645,7 +645,7 @@ func zapItem(_direction):
 	var _grid = $"/root/World".level.grid
 	var _playerPosition = $"/root/World".level.getCritterTile(0)
 	var _projectile = load("res://Objects/Projectile/Projectile.tscn").instance()
-	var spellData = load("res://Objects/Data/SpellsData.gd").new().spellData
+	var spellData = load("res://Objects/Data/SpellData.gd").new().spellData
 	var _tiles = []
 	var _projectileData = { "texture": load("res://Assets/Spells/Bolt.png"), "color": "#FFFFFF" }
 	var _checkIfCritterHit = false
@@ -906,10 +906,10 @@ func zapItem(_direction):
 		if !_zappedItem.identifiedItemName.matchn("wand of magic sphere"):
 			_projectileData.color = load("res://Objects/Data/RuneData.gd").new().runeData.eario[_zappedItem.value.dmg[_zappedItem.piety.to_lower()][0].magicDmg.element.to_lower()].color
 		_projectileData.damage = _zappedItem.value.dmg[_zappedItem.piety.to_lower()]
-	_projectile.create(_tiles, _projectileData, _checkIfCritterHit, true)
+	_projectile.create(_tiles, _projectileData, _checkIfCritterHit)
 	$"/root/World/Animations".add_child(_projectile)
 	# warning-ignore:return_value_discarded
-	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
+	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_onPlayerAnimationDone")
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 
 func throwItem(_direction):
@@ -1058,11 +1058,11 @@ func throwItem(_direction):
 		else:
 			$"/root/World/Items/Items".removeItem(_thrownItem.id)
 		
-		var _newThrow = load("res://Objects/Projectiles/Throw.tscn").instance()
-		_newThrow.create(_tiles, _thrownItem.itemTexture)
-		$"/root/World/Animations".add_child(_newThrow)
+		var _projectile = load("res://Objects/Projectile/Projectile.tscn").instance()
+		_projectile.create(_tiles, { "texture": _thrownItem.itemTexture })
+		$"/root/World/Animations".add_child(_projectile)
 		# warning-ignore:return_value_discarded
-		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_on_Player_Animation_done")
+		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_onPlayerAnimationDone")
 		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 	$"/root/World".closeMenu()
 

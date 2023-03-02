@@ -46,7 +46,8 @@ func _on_List_Menu_Item_Clicked(_name, _changeMenuItems):
 			var _items = []
 			for _rarity in $"/root/World/Items/Items".items[_name]:
 				for _item in $"/root/World/Items/Items".items[_name][_rarity]:
-					_items.append(_item.itemName)
+					if !_item.itemName.matchn("wand of wishing"):
+						_items.append(_item.itemName)
 			showListMenuList("Wish for what item?", _items)
 			return
 #	if $"/root/World".currentGameState == $"/root/World".gameState.READ:

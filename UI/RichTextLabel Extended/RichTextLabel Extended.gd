@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var spellData = load("res://Objects/Data/SpellsData.gd").new()
+var spellData = load("res://Objects/Data/SpellData.gd").new()
 
 var colors = {  }
 

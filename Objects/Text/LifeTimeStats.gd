@@ -627,7 +627,7 @@ var items = {
 	},
 	"Chipped sword": {
 		"knowledge": false,
-		"description": "An old, chipped sword."
+		"description": "An old, chipped sword. I think it was my grandpas."
 	},
 	"Elvish sword": {
 		"knowledge": false,
@@ -663,7 +663,7 @@ var items = {
 	},
 	"Stormbringer": {
 		"knowledge": false,
-		"description": "Sword that carries a storm around it. Deals Gleeie'er damage."
+		"description": "Sword that carries a storm around it."
 	},
 	"Vorpal sword": {
 		"knowledge": false,
@@ -671,7 +671,7 @@ var items = {
 	},
 	"Dull two-hander": {
 		"knowledge": false,
-		"description": "A dull two-hander."
+		"description": "A dull two-hander. This is sharp enough to cut cheese, maybe."
 	},
 	"Mithril two-hander": {
 		"knowledge": false,
@@ -683,7 +683,7 @@ var items = {
 	},
 	"Brittleleaf": {
 		"knowledge": false,
-		"description": "A brittle branch with leaves."
+		"description": "A brittle branch with some leaves."
 	},
 	"Icesplitter": {
 		"knowledge": false,
@@ -691,7 +691,7 @@ var items = {
 	},
 	"Cut dagger": {
 		"knowledge": false,
-		"description": "Broken dagger."
+		"description": "Broken dagger. You can still poke people with it."
 	},
 	"Orc dagger": {
 		"knowledge": false,
@@ -711,11 +711,11 @@ var items = {
 	},
 	"Dagger of Elbier": {
 		"knowledge": false,
-		"description": "The Hero Elbiers dagger. Summon Thunder on hit."
+		"description": "The Hero Elbiers dagger. Summons Thunder on hit."
 	},
 	"Worn mace": {
 		"knowledge": false,
-		"description": "An old mace."
+		"description": "An old mace. It still works."
 	},
 	"Elvish mace": {
 		"knowledge": false,
@@ -743,7 +743,7 @@ var items = {
 	},
 	"Rigid flail": {
 		"knowledge": false,
-		"description": "Rusty flail."
+		"description": "Rusty flail ready to fall apart."
 	},
 	"Sharp flail": {
 		"knowledge": false,
@@ -755,7 +755,7 @@ var items = {
 	},
 	"Crustel flail": {
 		"knowledge": false,
-		"description": "You can hear winds blow around the spikes. Deals Gleeie'er damage."
+		"description": "You can hear winds blow around the spikes."
 	},
 	"Loperiels Destiny": {
 		"knowledge": false,
@@ -775,7 +775,7 @@ var critters = {
 	},
 	"Elder Dragon": {
 		"knowledge": false,
-		"description": "An elderly dragon. Exceedingly powerful. Likes to hoard valuables.",
+		"description": "An elderly dragon living in retirement. Exceedingly powerful. Likes to hoard valuables.",
 		"killCount": 0
 	},
 	"Mad Banana-hunter Ogre": {
@@ -790,7 +790,7 @@ var critters = {
 	},
 	"Elhybar": {
 		"knowledge": false,
-		"description": "Book enthusiast. Scroll lover. Library vacator.",
+		"description": "Book enthusiast. Scroll-lover. Library vacator.",
 		"killCount": 0
 	},
 	"Tidoh Tel'hydrad": {
@@ -1050,12 +1050,12 @@ var critters = {
 	},
 	"Guard": {
 		"knowledge": false,
-		"description": "A city guard.",
+		"description": "A town guard.",
 		"killCount": 0
 	},
 	"Guard captain": {
 		"knowledge": false,
-		"description": "Captain of the guard.",
+		"description": "Captain of the town guard.",
 		"killCount": 0
 	},
 	"Outlaw watcher": {
@@ -1120,12 +1120,12 @@ var critters = {
 	},
 	"Humongous mimic": {
 		"knowledge": false,
-		"description": "It's a sword. Ah, its alive!",
+		"description": "Oh, it's a sword. Ah, its alive!",
 		"killCount": 0
 	},
 	"Mimic": {
 		"knowledge": false,
-		"description": "It's an apple. Ah, its alive!",
+		"description": "Oh, it's an apple. Ah, its alive!",
 		"killCount": 0
 	},
 	"Arctic newt": {
@@ -1140,12 +1140,12 @@ var critters = {
 	},
 	"Mine newt": {
 		"knowledge": false,
-		"description": "Newt that lives of of minerals.",
+		"description": "Newt that lives in mines and feeds of of minerals.",
 		"killCount": 0
 	},
 	"Paper newt": {
 		"knowledge": false,
-		"description": "Lizard that feeds on paper and bamboo. Scourge of librarians and archivists alike",
+		"description": "Lizard that feeds on paper and bamboo. Scourge of librarians and archivists alike.",
 		"killCount": 0
 	},
 	"River newt": {
@@ -1225,12 +1225,12 @@ var critters = {
 	},
 	"Sawtooth-pattern snake": {
 		"knowledge": false,
-		"description": "The deadliest of snakes. Has a poisonous bite.",
+		"description": "Deadliest of snakes. Has a poisonous bite.",
 		"killCount": 0
 	},
 	"Spectral wraith": {
 		"knowledge": false,
-		"description": "A spectral wraith from the grave. Etherealness-ability allows the spectral wraith to dodge every other physical attack.",
+		"description": "A spectral wraith risen from the grave. Etherealness-ability allows the spectral wraith to dodge every other physical attack.",
 		"killCount": 0
 	},
 	"Spooky ghost": {

@@ -3,7 +3,7 @@ extends Node2D
 onready var SpellShaderMaterial = preload("res://Assets/Spells/SpellShaderMaterial.tres")
 onready var SpellShader = preload("res://Assets/Spells/SpellShader.shader")
 
-onready var projectile = preload("res://UI/Projectile Sprite/Projectile Sprite.tscn")
+onready var projectileSprite = preload("res://UI/Projectile Sprite/Projectile Sprite.tscn")
 
 signal playerAnimationDone
 
@@ -15,7 +15,9 @@ var damage
 var isPlayer
 var checkIfCritterHit
 
-func create(_tiles, _projectileData, _checkIfCritterHit = false, _isPlayer = false):
+var lastSprite = null
+
+func create(_tiles, _projectileData, _checkIfCritterHit = false, _isPlayer = true):
 	tiles = _tiles
 	
 	if _projectileData.has("texture"):
@@ -32,22 +34,31 @@ func animateCycle():
 	var _cycleTiles = tiles.pop_front()
 	if _cycleTiles == null:
 		if isPlayer:
-			print("emitting")
 			emit_signal("playerAnimationDone")
 		else:
 			emit_signal("critterAnimationDone")
 		queue_free()
 		return
 	for _tile in _cycleTiles:
-		animateTile(_tile.tile, _tile.angle)
+		if typeof(_tile) == TYPE_VECTOR2:
+			animateTile(_tile.tile)
+		else:
+			animateTile(_tile.tile, _tile.angle)
 		if checkIfCritterHit:
 			checkIfCritterIsHit(_tile.tile)
 	$Timer.start()
 
-func animateTile(_position, _angle):
-	var _projectile = projectile.instance()
-	_projectile.create(texture, _position, color, _angle)
-	add_child(_projectile)
+func animateTile(_position, _angle = null):
+	var _projectileSprite = projectileSprite.instance()
+	if _angle == null:
+		if lastSprite != null:
+			lastSprite.queue_free()
+		_projectileSprite.create(texture, _position)
+		add_child(_projectileSprite)
+		lastSprite = _projectileSprite
+		return
+	_projectileSprite.create(texture, _position, color, _angle)
+	add_child(_projectileSprite)
 
 func checkIfCritterIsHit(_tile):
 	var _hitCritter = $"/root/World".level.grid[_tile.x][_tile.y].critter

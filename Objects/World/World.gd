@@ -119,6 +119,21 @@ func setUpGameObjects(_playerData = null):
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
 #		$Items/Items.createItem("Ring of fumbling", null, 1, true, { "piety": "formal" })
 #		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
+		$Items/Items.createItem("Eario of Fleir", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Eario of Frost", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Eario of Thunder", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Eario of Gleeie'er", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("Eario of Toxix", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("luirio of line", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("luirio of cone", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("luirio of adjacent", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("luirio of point", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("luirio of fourway", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("heario of gas", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("heario of true", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("heario of bolt", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("heario of fragment", null, 1, true, { "piety": "formal" })
+		$Items/Items.createItem("heario of flow", null, 1, true, { "piety": "formal" })
 	
 	for _node in $UI/UITheme.get_children():
 		if _node.name == "GameConsole":
@@ -1167,7 +1182,7 @@ func saveGame():
 ### Signal and debuggind functions ###
 ######################################
 
-func _on_Player_Animation_done():
+func _onPlayerAnimationDone():
 	processGameTurn()
 	resetToDefaulGameState()
 

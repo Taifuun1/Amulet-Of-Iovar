@@ -24,7 +24,7 @@ func _process(_delta):
 	if selected:
 		$"/root/World/UI/UITheme/Runes/DragSprite".global_position = lerp($"/root/World/UI/UITheme/Runes/DragSprite".global_position, get_global_mouse_position(), _delta * 25)
 	if selected and Input.is_action_just_released("LEFT_CLICK"):
-		if $"/root/World/UI/UITheme/Runes".hoveredEquipment != null:
+		if $"/root/World/UI/UITheme/Runes".hoveredRune != null:
 			$"/root/World/UI/UITheme/Runes".setRunes(id)
 		get_node("/root/World/UI/UITheme/Runes/DragSprite").texture = null
 		selected = false

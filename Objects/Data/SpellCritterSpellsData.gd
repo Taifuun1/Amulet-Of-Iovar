@@ -222,25 +222,6 @@ var fleirnado = {
 	"mp": 14
 }
 
-var fleirMiasma = {
-	"name": "Fleir miasma",
-	"attacks": [
-		{
-			"dmg": [0,0],
-			"bonusDmg": {},
-			"armorPen": 0,
-			"magicDmg": {
-				"dmg": [3, 3],
-				"element": "fleir"
-			}
-		}
-	],
-	"distance": 5,
-	"tiles": 5,
-	"duration": 8,
-	"mp": 2
-}
-
 var fleirBreath = {
 	"name": "Fleir breath",
 	"attacks": [
@@ -368,25 +349,6 @@ var thundersplit = {
 	"mp": 15
 }
 
-var thunderMiasma = {
-	"name": "Thunder miasma",
-	"attacks": [
-		{
-			"dmg": [0,0],
-			"bonusDmg": {},
-			"armorPen": 0,
-			"magicDmg": {
-				"dmg": [7, 7],
-				"element": "thunder"
-			}
-		}
-	],
-	"distance": 6,
-	"tiles": 6,
-	"duration": 5,
-	"mp": 7
-}
-
 var thunderBreath = {
 	"name": "Thunder breath",
 	"attacks": [
@@ -423,25 +385,6 @@ var poisonBite = {
 	],
 	"distance": 7,
 	"mp": 5
-}
-
-var toxixMiasma = {
-	"name": "Toxix miasma",
-	"attacks": [
-		{
-			"dmg": [0,0],
-			"bonusDmg": {},
-			"armorPen": 0,
-			"magicDmg": {
-				"dmg": [2, 2],
-				"element": "toxix"
-			}
-		}
-	],
-	"distance": 8,
-	"tiles": 10,
-	"duration": 14,
-	"mp": 4
 }
 
 var toxixBreath = {
