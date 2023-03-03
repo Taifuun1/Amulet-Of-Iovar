@@ -178,7 +178,6 @@ func _onMouseEnteredStat(_nodePath, _stat):
 func _onMouseExitedStat(_nodePath):
 	get_node("GameStatsContainer/{nodePath}/Tooltip/TooltipContainer".format({ "nodePath": _nodePath })).hideTooltip()
 
-
 func _onIconClicked(event, _icon):
 	if (
 		event is InputEventMouseButton and

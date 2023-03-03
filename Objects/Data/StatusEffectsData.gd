@@ -108,25 +108,25 @@ var statusEffectsData = {
 	},
 	"displacement": {
 		"label": "dlc",
-		"description": "You feel ambigious. (Enemy attacks have a 25% chance of missing.)",
+		"description": "You feel ambigious. (Enemy attacks have a 25% chance of missing)",
 		"color": "#e800f0",
 		"texture": load("res://Assets/Status Effects/StatusEffectDisplacement.png")
 	},
 	"seeing": {
 		"label": "see",
-		"description": "You can see magically. (You can see enemies through walls.)",
+		"description": "You can see magically. (You can see enemies through walls)",
 		"color": "#ffbb1c",
 		"texture": load("res://Assets/Status Effects/StatusEffectSeeing.png")
 	},
 	"backscattering": {
 		"label": "bsc",
-		"description": "You reflect some magic attacks. (You take no damage from rock throw and dragon breath.)",
+		"description": "You reflect some magic attacks. (Take no damage from rock throw and dragon breath)",
 		"color": "#7bcaea",
 		"texture": load("res://Assets/Status Effects/StatusEffectBackscattering.png")
 	},
 	"toxix": {
 		"label": "tox",
-		"description": "You are poisoned. (You take 1 damage every turn for a duration and -3 wis.)",
+		"description": "You are poisoned. (Take 1 damage every turn for a duration and -3 wis)",
 		"color": "#6abe30",
 		"texture": load("res://Assets/Status Effects/StatusEffectToxix.png"),
 		"effects": {
@@ -135,7 +135,7 @@ var statusEffectsData = {
 	},
 	"onFleir": {
 		"label": "fle",
-		"description": "You are on fleir. (You take 3 damage every turn for a duration and -3 vis.)",
+		"description": "You are on fleir. (Take 3 damage every turn for a duration and -3 vis)",
 		"color": "#e7363f",
 		"texture": load("res://Assets/Status Effects/StatusEffectOnFleir.png"),
 		"effects": {

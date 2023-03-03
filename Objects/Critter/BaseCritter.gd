@@ -266,25 +266,25 @@ func processCritterEffects():
 	if mpRegenTimer >= 20 - ( stats.belief / 2 ):
 		if mp < maxmp:
 			if stats.belief / 2 >= 20:
+				if mp + 10 > maxmp:
+					mp = maxmp
+				else:
+					mp += 10
+			elif stats.belief / 2 >= 15:
 				if mp + 7 > maxmp:
 					mp = maxmp
 				else:
 					mp += 7
-			elif stats.belief / 2 >= 15:
+			elif stats.belief / 2 >= 10:
 				if mp + 5 > maxmp:
 					mp = maxmp
 				else:
 					mp += 5
-			elif stats.belief / 2 >= 10:
+			elif stats.belief / 2 >= 5:
 				if mp + 3 > maxmp:
 					mp = maxmp
 				else:
 					mp += 3
-			elif stats.belief / 2 >= 5:
-				if mp + 2 > maxmp:
-					mp = maxmp
-				else:
-					mp += 2
 			else:
 				if mp + 1 > maxmp:
 					mp = maxmp

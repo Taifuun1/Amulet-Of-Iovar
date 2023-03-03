@@ -4,9 +4,8 @@ class_name Player
 onready var inventory = preload("res://UI/Inventory/Inventory.tscn").instance()
 
 var playerClasses = load("res://Objects/Player/PlayableClasses.gd").new()
-var spellData = load("res://Objects/Data/SpellData.gd").new()
-var statusEffectsData = load("res://Objects/Data/StatusEffectsData.gd").new()
-var critterSpellData = load("res://Objects/Data/SpellCritterSpellsData.gd").new()
+var spellData = load("res://Objects/Data/SpellData.gd").new().spellData
+var statusEffectsData = load("res://Objects/Data/StatusEffectsData.gd").new().statusEffectsData
 
 var playerVisibility = {
 	"distance": -1,
@@ -33,12 +32,14 @@ var goldPieces
 
 var statusStates = {
 	"hunger": {
-		"current": 0,
-		"previous": 0
+		"state": 0,
+		"current": "",
+		"previous": ""
 	},
 	"weight": {
-		"current": 0,
-		"previous": 0
+		"state": 0,
+		"current": "",
+		"previous": ""
 	}
 }
 
@@ -248,7 +249,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 					for _ability in _critter.abilities:
 						if _ability.abilityName.matchn("toxixSplash"):
 							_onHitAbility = _ability
-							_onHitAbility.data = critterSpellData[_onHitAbility.abilityName]
+							_onHitAbility.data = load("res://Objects/Data/SpellCritterSpellsData.gd").new()[_onHitAbility.abilityName]
 							takeDamage(_onHitAbility.data.attacks, _playerTile, _critter.critterName)
 							break
 				
@@ -345,7 +346,7 @@ func takeDamage(_attacks, _critterTile, _critterName):
 			else:
 				_damageText = _damage.dmg + _damage.magicDmg
 			if _damage.magicDmg != 0 and _attack.magicDmg.element != null:
-				_damageColor = spellData.spellData[_attack.magicDmg.element.to_lower()].color
+				_damageColor = spellData[_attack.magicDmg.element.to_lower()].color
 			_damageNumber.create(_critterTile, _damageText, _damageColor)
 			$"/root/World/Texts".add_child(_damageNumber)
 			
@@ -475,9 +476,15 @@ func addToInventory(_items):
 ####################################
 
 func processPlayerSpecificEffects():
+	#####################
+	## Copy base stats ##
+	#####################
+	stats = baseStats.duplicate(true)
+	
 	############
 	## Hunger ##
 	############
+	
 	previousCalories = calories
 	
 	if calories < -50:
@@ -513,50 +520,18 @@ func processPlayerSpecificEffects():
 	
 	print("")
 	print(statusStates)
-	print(baseStats)
-	if statusStates.hunger.current == 1 and statusStates.hunger.previous == 0:
-		baseStats.strength -= 1
-	elif statusStates.hunger.current == 2 and statusStates.hunger.previous == 0:
-		baseStats.strength -= 1
-		baseStats.balance -= 1
-	elif statusStates.hunger.current == 3 and statusStates.hunger.previous == 0:
-		baseStats.strength -= 2
-		baseStats.legerity -= 1
-		baseStats.balance -= 1
-	elif statusStates.hunger.current == 0 and statusStates.hunger.previous == 1:
-		baseStats.strength += 1
-	elif statusStates.hunger.current == 2 and statusStates.hunger.previous == 1:
-		baseStats.balance -= 1
-	elif statusStates.hunger.current == 3 and statusStates.hunger.previous == 1:
-		baseStats.strength -= 1
-		baseStats.legerity -= 1
-		baseStats.balance -= 1
-	elif statusStates.hunger.current == 0 and statusStates.hunger.previous == 2:
-		baseStats.strength += 1
-		baseStats.balance += 1
-	elif statusStates.hunger.current == 1 and statusStates.hunger.previous == 2:
-		baseStats.balance += 1
-	elif statusStates.hunger.current == 3 and statusStates.hunger.previous == 2:
-		baseStats.strength -= 1
-		baseStats.legerity -= 1
-	elif statusStates.hunger.current == 0 and statusStates.hunger.previous == 3:
-		baseStats.strength += 2
-		baseStats.legerity += 1
-		baseStats.balance += 1
-	elif statusStates.hunger.current == 1 and statusStates.hunger.previous == 3:
-		baseStats.strength += 1
-		baseStats.legerity += 1
-		baseStats.balance += 1
-	elif statusStates.hunger.current == 2 and statusStates.hunger.previous == 3:
-		baseStats.strength += 1
-		baseStats.legerity += 1
-	print(baseStats)
+	
+	calculateStatusEffectsAndStatusStates()
+	
+	print(statusStates)
 	
 	########
 	## UI ##
 	########
 
 	processPlayerUIChanges()
+	
+	print(statusStates)
 	
 	################
 	## Worn items ##
@@ -620,102 +595,58 @@ func processPlayerSpecificEffects():
 			"magic lamp":
 				if playerVisibility.distance != 0:
 					playerVisibility.distance = _item.value.value
+			"belt of plato":
+				stats.wisdom += 1
+			"belt of faith":
+				stats.belief += 1
+			"belt of symmetry":
+				stats.visage += 1
+			"gauntlets of devastation":
+				stats.strength += 1
+			"gauntlets of nimbleness":
+				stats.legerity += 1
+			"gauntlets of balance":
+				stats.balance += 1
 
 func processPlayerUIChanges():
+	# Deal with status states in UI
+	for _statusState in statusStates:
+		if checkIfStatusStateIsInEffect(_statusState):
+			if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(statusStates[_statusState].current):
+				$"/root/World/UI/UITheme/GameStats".addStatusEffect(statusStates[_statusState].current)
+				var _damageNumber = damageNumber.instance()
+				_damageNumber.create($"/root/World".level.getCritterTile(0), statusStates[_statusState].current.capitalize(), statusEffectsData[statusStates[_statusState].current].color)
+				$"/root/World/Texts".add_child(_damageNumber)
+		if !statusStates[_statusState].current.matchn(statusStates[_statusState].previous):
+			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(statusStates[_statusState].previous):
+				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(statusStates[_statusState].previous)
+	
 	# Deal with status effects in the UI
 	for _statusEffect in statusEffects.keys():
 		if checkIfStatusEffectIsInEffect(_statusEffect):
 			if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".addStatusEffect(_statusEffect)
 				var _damageNumber = damageNumber.instance()
-				_damageNumber.create($"/root/World".level.getCritterTile(0), _statusEffect.capitalize(), statusEffectsData.statusEffectsData[_statusEffect].color)
+				_damageNumber.create($"/root/World".level.getCritterTile(0), _statusEffect, statusEffectsData[_statusEffect].color)
 				$"/root/World/Texts".add_child(_damageNumber)
 		else:
 			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_statusEffect)
-	
-	# Deal with status states in UI
-	var _currentHungerStateType = null
-	var _currentWeightStateType = null
-	var _previousHungerStateType = null
-	var _previousWeightStateType = null
-	for _statusState in statusStates:
-		if _statusState.matchn("hunger"):
-			if statusStates[_statusState].current == 1:
-				_currentHungerStateType = "hungry"
-			elif statusStates[_statusState].current == 2:
-				_currentHungerStateType = "malnourished"
-			elif statusStates[_statusState].current == 3:
-				_currentHungerStateType = "famished"
-			if statusStates[_statusState].previous == 1:
-				_previousHungerStateType = "hungry"
-			elif statusStates[_statusState].previous == 2:
-				_previousHungerStateType = "malnourished"
-			elif statusStates[_statusState].previous == 3:
-				_previousHungerStateType = "famished"
-			if (statusStates[_statusState].current > 0 or statusStates[_statusState].current == -1) and _currentHungerStateType != null:
-				if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_currentHungerStateType):
-					$"/root/World/UI/UITheme/GameStats".addStatusEffect(_currentHungerStateType)
-					var _damageNumber = damageNumber.instance()
-					_damageNumber.create($"/root/World".level.getCritterTile(0), _currentHungerStateType.capitalize(), statusEffectsData.statusEffectsData[_currentHungerStateType].color)
-					$"/root/World/Texts".add_child(_damageNumber)
-			if (
-				(_previousHungerStateType != null and _currentHungerStateType != null and !_previousHungerStateType.matchn(_currentHungerStateType)) or
-				(_previousHungerStateType != null and _currentHungerStateType == null)
-			):
-				if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_previousHungerStateType):
-					$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_previousHungerStateType)
-		elif _statusState.matchn("weight"):
-			if statusStates[_statusState].current == 1:
-				_currentWeightStateType = "overencumbured"
-			elif statusStates[_statusState].current == 2:
-				_currentWeightStateType = "burdened"
-			elif statusStates[_statusState].current == 3:
-				_currentWeightStateType = "flattened"
-			if statusStates[_statusState].previous == 1:
-				_previousWeightStateType = "overencumbured"
-			elif statusStates[_statusState].previous == 2:
-				_previousWeightStateType = "burdened"
-			elif statusStates[_statusState].previous == 3:
-				_previousWeightStateType = "flattened"
-			if (statusStates[_statusState].current > 0 or statusStates[_statusState].current == -1) and _currentWeightStateType != null:
-				if !$"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_currentWeightStateType):
-					$"/root/World/UI/UITheme/GameStats".addStatusEffect(_currentWeightStateType)
-					var _damageNumber = damageNumber.instance()
-					_damageNumber.create($"/root/World".level.getCritterTile(0), _currentWeightStateType.capitalize(), statusEffectsData.statusEffectsData[_currentWeightStateType].color)
-					$"/root/World/Texts".add_child(_damageNumber)
-			if (
-				(_previousWeightStateType != null and _currentWeightStateType != null and !_previousWeightStateType.matchn(_currentWeightStateType)) or
-				(_previousWeightStateType != null and _currentWeightStateType == null)
-			):
-				if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_previousWeightStateType):
-					$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_previousWeightStateType)
-	
-	# Deal with status effect and status state stat changes
-#	var _stats = baseStats.duplicate(true)
-#	for _statusEffect in statusEffects.keys():
-#		if statusEffects[_statusEffect] > 0 and statusEffectsData.statusEffectsData[_statusEffect].has("effects"):
-#			for _stat in statusEffectsData.statusEffectsData[_statusEffect].effects:
-#				_stats[_stat] += statusEffectsData.statusEffectsData[_statusEffect].effects[_stat]
-#	if _currentWeightStateType != null and statusEffectsData.statusEffectsData[_currentWeightStateType].has("effects"):
-#		for _stat in statusEffectsData.statusEffectsData[_currentWeightStateType].effects:
-#			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
-#	if _currentWeightStateType != null and statusEffectsData.statusEffectsData[_currentWeightStateType].has("effects"):
-#		for _stat in statusEffectsData.statusEffectsData[_currentWeightStateType].effects:
-#			_stats[_stat] += statusEffectsData.statusEffectsData[_currentWeightStateType].effects[_stat]
-#
-#	stats = _stats
 
 func calculateHungerStats():
 	if calories >= 800:
-		statusStates.hunger.current = 0
+		statusStates.hunger.state = 0
+		statusStates.hunger.current = ""
 	elif calories >= 200 and calories < 800:
-		statusStates.hunger.current = 1
+		statusStates.hunger.state = 1
+		statusStates.hunger.current = "hungry"
 	elif calories >= 0 and calories < 200:
-		statusStates.hunger.current = 2
+		statusStates.hunger.state = 2
+		statusStates.hunger.current = "malnourished"
 	elif calories < 0:
-		statusStates.hunger.current = 3
-		
+		statusStates.hunger.state = 3
+		statusStates.hunger.current = "famished"
+	
 	# Check if player becomes less hungry
 	if previousCalories < 800 and calories >= 800:
 		Globals.gameConsole.addLog("You are no longer hungry.")
@@ -747,19 +678,33 @@ func calculateWeightStats():
 	
 	var _weight = $Inventory.currentWeight
 	
-	statusStates.weight.previous = statusStates.weight.current
-	
 	if _weight <= maxCarryWeight.overEncumbured:
-		statusStates.weight.current = 0
+		statusStates.weight = {
+			"state": 0,
+			"current": "",
+			"previous": statusStates.weight.current
+		}
 		turnsUntilAction = 0
 	elif _weight > maxCarryWeight.overEncumbured and _weight <= maxCarryWeight.burdened:
-		statusStates.weight.current = 1
+		statusStates.weight = {
+			"state": 1,
+			"current": "overencumbured",
+			"previous": statusStates.weight.current
+		}
 		turnsUntilAction = 1
 	elif _weight > maxCarryWeight.burdened and _weight <= maxCarryWeight.flattened:
-		statusStates.weight.current = 2
+		statusStates.weight = {
+			"state": 2,
+			"current": "burdened",
+			"previous": statusStates.weight.current
+		}
 		turnsUntilAction = 2
 	elif _weight > maxCarryWeight.flattened:
-		statusStates.weight.current = 3
+		statusStates.weight = {
+			"state": 3,
+			"current": "flattened",
+			"previous": statusStates.weight.current
+		}
 		turnsUntilAction = 3
 	
 	if _weight > 0 and _weight <= maxCarryWeight.overEncumbured:
@@ -782,6 +727,18 @@ func calculateWeightStats():
 			"min": maxCarryWeight.flattened,
 			"max": 99999
 		}
+
+func calculateStatusEffectsAndStatusStates():
+	for _statusEffect in statusEffects.keys():
+		if checkIfStatusEffectIsInEffect(_statusEffect) and statusEffectsData[_statusEffect].has("effects"):
+			for _stat in statusEffectsData[_statusEffect].effects:
+				stats[_stat] += statusEffectsData[_statusEffect].effects[_stat]
+	if checkIfStatusStateIsInEffect("hunger") and statusEffectsData[statusStates.hunger.current.to_lower()].has("effects"):
+		for _stat in statusEffectsData[statusStates.hunger.current.to_lower()].effects:
+			stats[_stat] += statusEffectsData[statusStates.hunger.current.to_lower()].effects[_stat]
+	if checkIfStatusStateIsInEffect("weight") and statusEffectsData[statusStates.weight.current.to_lower()].has("effects"):
+		for _stat in statusEffectsData[statusStates.weight.current.to_lower()].effects:
+			stats[_stat] += statusEffectsData[statusStates.weight.current.to_lower()].effects[_stat]
 
 func calculateEquipmentStats():
 	# Armor class
@@ -967,6 +924,11 @@ func checkIfCritterHasEffect(_critter):
 		return true
 	if _critter.checkIfStatusEffectIsInEffect("displacement") and randi() % 4 == 0:
 		Globals.gameConsole.addLog("You miss the displaced image of {critterName}!".format({ "critterName": _critter.critterName }))
+		return true
+	return false
+
+func checkIfStatusStateIsInEffect(_statusState):
+	if statusStates[_statusState].state > 0:
 		return true
 	return false
 

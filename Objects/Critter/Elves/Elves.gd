@@ -218,7 +218,7 @@ var elves = [
 		"magicac": 15,
 		"attacks": [
 			{
-				"dmg": [8,12],
+				"dmg": [10,14],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

@@ -1,8 +1,5 @@
 extends Node2D
 
-onready var SpellShaderMaterial = preload("res://Assets/Spells/SpellShaderMaterial.tres")
-onready var SpellShader = preload("res://Assets/Spells/SpellShader.shader")
-
 onready var projectileSprite = preload("res://UI/Projectile Sprite/Projectile Sprite.tscn")
 
 signal playerAnimationDone

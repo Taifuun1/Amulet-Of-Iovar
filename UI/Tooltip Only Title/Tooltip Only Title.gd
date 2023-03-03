@@ -13,8 +13,8 @@ func _process(_delta):
 	if showing:
 		var cursorPosition = get_global_mouse_position()
 		var adjustedPosition = Vector2()
-		adjustedPosition.x = clamp(cursorPosition.x, 0, OS.get_window_size().x - rect_size.x - 34) + 32
-		adjustedPosition.y = clamp(cursorPosition.y, 0, OS.get_window_size().y - rect_size.y - 2)
+		adjustedPosition.x = clamp(cursorPosition.x, 0, get_viewport_rect().size.x - rect_size.x - 34) + 32
+		adjustedPosition.y = clamp(cursorPosition.y, 0, get_viewport_rect().size.y - rect_size.y - 2)
 		set_position(adjustedPosition)
 
 func showTooltip():

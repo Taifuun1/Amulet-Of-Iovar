@@ -5,13 +5,13 @@ func createNewLevel():
 	createGrid()
 	pathFind([])
 	
-	createDungeon()
+	createBeach()
 	
 	doFinalPathfinding()
 	
 	return self
 
-func createDungeon():
+func createBeach():
 	for _in in range(10):
 		createSea()
 		getSpawnableTiles(

@@ -56,7 +56,7 @@ func getInteractionFlavorMessage(_critterName, _critterAI):
 			"guard", "guard captain":
 				Globals.gameConsole.addLog("Stop! You violated the law. Pay the court a fine or serve your sentence. Your stolen goods are now forfeit.", _critterName)
 			"outlaw watcher", "outlaw fusiee'er", "outlaw merchandiee'er":
-				Globals.gameConsole.addLog("I'll shank ya!", _critterName)
+				Globals.gameConsole.addLog("I'll shank ya, mate!", _critterName)
 			"iovars cultist acolyte", "iovars cultist":
 				Globals.gameConsole.addLog("Die, interloper!", _critterName)
 			"half-lich":
@@ -86,7 +86,7 @@ func getInteractionFlavorMessage(_critterName, _critterAI):
 			"elf assassin":
 				Globals.gameConsole.addLog("...")
 			"elf king":
-				Globals.gameConsole.addLog("Your feet disgrace these halls.")
+				Globals.gameConsole.addLog("You are welcome in these halls.")
 			"cat":
 				Globals.gameConsole.addLog("You pet the cat.")
 				Globals.gameConsole.addLog("[i]Purrr...[/i]", _critterName)
@@ -176,7 +176,6 @@ var globalGameConsoleMessages = {
 		],
 		"despawn": [
 			"One with the fire...",
-			"My time... has come...",
 			"Perhaps... Iovar will meet his match afterall..."
 		]
 	},
@@ -473,13 +472,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 12,
 			"lines": [
-				"[i]Roars[/i]",
+				"[i]Roar[/i]",
 				"Raaarrr!",
 				"Grrrrrrr..."
 			],
 		},
 		"despawn": [
-			"[i]Whimpers[/i]",
+			"[i]Whimper[/i]",
 			"Grrrr..."
 		]
 	},
@@ -487,13 +486,13 @@ I wither away"""
 		"taunt": {
 			"frequency": 8,
 			"lines": [
-				"[i]Roars[/i]",
+				"[i]Roar[/i]",
 				"Raaarrr!",
 				"Grrrrrrr..."
 			],
 		},
 		"despawn": [
-			"[i]Whimpers[/i]",
+			"[i]Whimper[/i]",
 			"Grrrr..."
 		]
 	},
@@ -752,7 +751,7 @@ I wither away"""
 				"Mau?",
 				"Nau!",
 				"Mrrvvv.",
-				"[i]Purrs[/i]"
+				"[i]Purr[/i]"
 			]
 		},
 		"despawn": [
@@ -763,7 +762,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 12,
 			"lines": [
-				"[i]Roars[/i]",
+				"[i]Roar[/i]",
 				"Raawwrr!",
 				"Grrrrr...",
 				"Hissss!",
@@ -773,7 +772,7 @@ I wither away"""
 			"frequency": 10,
 			"lines": [
 				"Mrrvvv.",
-				"[i]Purrs[/i]"
+				"[i]Purr[/i]"
 			],
 		},
 		"despawn": [
@@ -784,7 +783,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 12,
 			"lines": [
-				"[i]Roars[/i]",
+				"[i]Roar[/i]",
 				"RAAAaawwrrr!",
 				"GRRRrrrrrrr...",
 				"Haz-hhsssssss!"
@@ -793,11 +792,11 @@ I wither away"""
 		"speech": {
 			"frequency": 10,
 			"lines": [
-				"[i]Purrs[/i]"
+				"[i]Purr[/i]"
 			],
 		},
 		"despawn": [
-			"[i]Whimpers[/i]",
+			"[i]Whimper[/i]",
 			"Grrrrrrr..."
 		]
 	},
@@ -830,6 +829,17 @@ I wither away"""
 				"Your hair... You... Too?"
 			],
 		},
+		"speech": {
+			"frequency": 20,
+			"lines": [
+				"Ugg?",
+				"Ogg.",
+				"Me strong!",
+				"Egghh.",
+				"[i]Grunts[/i]",
+				"Your hair... You... Too?"
+			],
+		},
 		"despawn": [
 			"UUUUUuuUUUGggghhhhh...",
 			"UUUuuUuunnfffff..."
@@ -848,6 +858,16 @@ I wither away"""
 				"[i]Grunts[/i]"
 			],
 		},
+		"speech": {
+			"frequency": 20,
+			"lines": [
+				"Ugg?",
+				"Ogg.",
+				"Me strong!",
+				"Egghh.",
+				"[i]Grunts[/i]"
+			],
+		},
 		"despawn": [
 			"UUUUUuuUUUGggghhhhh...",
 			"UUUuuUuunnfffff..."
@@ -859,6 +879,16 @@ I wither away"""
 			"frequency": 20,
 			"lines": [
 				"You big smelly willy!",
+				"Ugg?",
+				"Ogg.",
+				"Me strong!",
+				"Egghh.",
+				"[i]Grunts[/i]"
+			],
+		},
+		"speech": {
+			"frequency": 20,
+			"lines": [
 				"Ugg?",
 				"Ogg.",
 				"Me strong!",
@@ -885,6 +915,17 @@ I wither away"""
 				"[i]Grunts[/i]"
 			],
 		},
+		"speech": {
+			"frequency": 20,
+			"lines": [
+				"Ugg?",
+				"Ogg.",
+				"Me strong!",
+				"Egghh.",
+				"You drink?",
+				"[i]Grunts[/i]"
+			],
+		},
 		"despawn": [
 			"UUUGGgghhhhh...",
 			"UUUuuunnfffff..."
@@ -901,16 +942,18 @@ I wither away"""
 				"What?",
 				"What!",
 				"See?",
-				"[i]Grunts[/i]"
+				"[i]Grunt[/i]"
 			],
 		},
 		"speech": {
 			"frequency": 15,
 			"lines": [
-				"Shall we gather for whisky and cigars tonight?",
+				"Shall we gather for whiskey and cigars tonight?",
 				"Indeed, I believe so.",
 				"Nothing to report.",
 				"What?",
+				"What!",
+				"See?",
 				"Who's there?",
 				"Must'ave been the wind...",
 				"I need a drink...",
@@ -930,7 +973,7 @@ I wither away"""
 				"For the Guard!",
 				"Charge!",
 				"I won't give in!",
-				"[i]Grunts[/i]"
+				"[i]Grunt[/i]"
 			],
 		},
 		"speech": {
@@ -988,7 +1031,7 @@ I wither away"""
 		"taunt": {
 			"frequency": 14,
 			"lines": [
-				"Come 're!",
+				"Come e're!",
 				"Ye oaf!",
 				"I'll shank ya, mate!",
 				"You wanker!"
@@ -1177,7 +1220,6 @@ I wither away"""
 			"frequency": 6,
 			"lines": [
 				"SSSssss!",
-				"Sss.",
 				"Sss-szh!"
 			],
 		},
@@ -1197,7 +1239,6 @@ I wither away"""
 			"frequency": 6,
 			"lines": [
 				"SSSssss!",
-				"Sss.",
 				"Sss-szh!"
 			],
 		},
@@ -1217,7 +1258,6 @@ I wither away"""
 			"frequency": 6,
 			"lines": [
 				"SSSssss!",
-				"Sss.",
 				"Sss-szh!"
 			],
 		},
@@ -1237,7 +1277,6 @@ I wither away"""
 			"frequency": 6,
 			"lines": [
 				"SSSssss!",
-				"Sss.",
 				"Sss-szh!"
 			],
 		},
@@ -1257,7 +1296,6 @@ I wither away"""
 			"frequency": 6,
 			"lines": [
 				"SSSssss!",
-				"Sss.",
 				"Sss-szh!"
 			],
 		},
@@ -1355,7 +1393,7 @@ I wither away"""
 			"frequency": 7,
 			"lines": [
 				"Po-blaaat!",
-				"Pa-tooooot!",
+				"Pa-tooot!",
 				"Ptt. Ptt. Ptt.",
 				"Cluck. Cluck. Pt."
 			],
@@ -1382,7 +1420,7 @@ I wither away"""
 			],
 		},
 		"despawn": [
-			"BLURGH..."
+			"BLURGGGH..."
 		]
 	},
 	"Rhino": {
@@ -1519,13 +1557,16 @@ I wither away"""
 		"speech": {
 			"frequency": 14,
 			"lines": [
-				"OOOOOooooooaaaa..."
+				"OOOOOooooooaaaa...",
+				"OOOOOoooooouuuu...",
+				"OOOOOoooooooooo..."
 			],
 		},
 		"taunt": {
 			"frequency": 4,
 			"lines": [
-				"oooaaaooo..."
+				"oooaaaooo...",
+				"ooooooooo..."
 			],
 		},
 		"spell": [
@@ -1539,13 +1580,17 @@ I wither away"""
 		"speech": {
 			"frequency": 14,
 			"lines": [
-				"OOOOOooooooaaaa..."
+				"OOOOOooooooaaaa...",
+				"OOOOOoooooouuuu...",
+				"OOOOOoooooooooo..."
 			],
 		},
 		"taunt": {
 			"frequency": 2,
 			"lines": [
-				"OOOOOOOoooooOOOOO!"
+				"OOOOOOOoooooOOOOO!",
+				"oooooooOOOOOOO!",
+				"OOOoooooOOooooOOO!"
 			],
 		},
 		"spell": [

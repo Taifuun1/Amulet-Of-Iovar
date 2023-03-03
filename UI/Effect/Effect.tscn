@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Spells/SpellShaderMaterial.tres" type="Material" id=1]
 [ext_resource path="res://UI/Effect/Effect.gd" type="Script" id=2]
 
 [node name="Effect" type="Sprite"]
-material = ExtResource( 1 )
 script = ExtResource( 2 )

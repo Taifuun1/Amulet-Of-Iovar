@@ -362,7 +362,7 @@ func calculateMagicDamageIncrease(_type):
 			_additionalDamage += 2
 		
 		if _stats.wisdom > 18:
-			_d = 1
+			_additionalDamage += 3
 		
 		return {
 			"dmg": _stats.wisdom / 3 + _additionalDamage,
@@ -391,7 +391,7 @@ func calculateMagicDamageIncrease(_type):
 			_additionalDamage += 2
 		
 		if _stats.wisdom > 27:
-			_d = 1
+			_additionalDamage += 3
 		
 		return {
 			"dmg": _stats.wisdom / 3 + _additionalDamage,
@@ -400,11 +400,6 @@ func calculateMagicDamageIncrease(_type):
 	if _type.matchn("gleeie'er"):
 		var _additionalDamage = 0
 		var _d = 0
-		
-		if _stats.wisdom > 17:
-			_d = 2
-		elif _stats.wisdom > 8:
-			_d = 1
 		
 		if _critterClass.matchn("freedom fighter"):
 			_additionalDamage += 2
@@ -420,6 +415,11 @@ func calculateMagicDamageIncrease(_type):
 		
 		if _player.checkIfItemsTurnedOnHasItem("cool mikeys"):
 			_additionalDamage += 2
+		
+		if _stats.visage > 32:
+			_d = 2
+		elif _stats.visage > 19:
+			_d = 1
 		
 		return {
 			"dmg": _stats.visage / 3 + _additionalDamage,

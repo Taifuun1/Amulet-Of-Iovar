@@ -1,9 +1,10 @@
 extends BaseCritter
 
-var spell = load("res://Objects/Projectile/CritterSpell.tscn")
+var projectile = load("res://Objects/Projectile/Projectile.tscn")
 
 var spellData = load("res://Objects/Data/SpellData.gd").new().spellData
 var critterSpellData = load("res://Objects/Data/SpellCritterSpellsData.gd").new()
+var miasmaData = load("res://Objects/Data/SpellMiasmaData.gd").new()
 
 var levelId
 var aI
@@ -137,7 +138,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					_abilities.append(_ability)
 		if _abilities.size() != 0:
 			_pickedAbility = _abilities[randi() % _abilities.size()]
-			_pickedAbility.data = critterSpellData[_pickedAbility.abilityName]
+			if "Miasma" in _pickedAbility.abilityName:
+				_pickedAbility.data = miasmaData[_pickedAbility.abilityName]
+			else:
+				_pickedAbility.data = critterSpellData[_pickedAbility.abilityName]
 		if (
 			_pickedAbility != null and
 			_distanceFromPlayer.size() <= _pickedAbility.data.distance and
@@ -191,21 +195,22 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 										):
 											checkIfAddFlavorGamelog("spell")
 											yield(get_tree(), "idle_frame")
-											var _newSpell = spell.instance()
+											var _projectile = projectile.instance()
 											var _color = "#000"
 											if _pickedAbility.data.attacks[0].magicDmg.element != null:
 												_color = spellData[_pickedAbility.data.attacks[0].magicDmg.element].color
-											_newSpell.create(_tiles, {
-												"texture": load("res://Assets/Spells/Bolt.png"),
-												"color": _color,
-												"spellDamage": _pickedAbility.data.attacks
-												}
+											_projectile.create(_tiles, {
+													"texture": load("res://Assets/Spells/Bolt.png"),
+													"color": _color,
+													"damage": _pickedAbility.data.attacks
+												},
+												false,
+												false
 											)
-											$"/root/World/Animations".add_child(_newSpell)
+											$"/root/World/Animations".add_child(_projectile)
 											# warning-ignore:return_value_discarded
 											$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("critterAnimationDone", $"/root/World", "_on_Critter_Animation_done")
 											$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
-#											$"/root/World".currentGameState = $"/root/World".gameState.OUT_OF_PLAYERS_HANDS
 											var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
 											if (
 												_critterNode.checkIfStatusEffectIsInEffect("backscattering") and
@@ -252,21 +257,22 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 							Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 						
 						yield(get_tree(), "idle_frame")
-						var _newSpell = spell.instance()
+						var _projectile = projectile.instance()
 						var _color = "#000"
 						if _pickedAbility.data.attacks[0].magicDmg.element != null:
 							_color = spellData[_pickedAbility.data.attacks[0].magicDmg.element].color
-						_newSpell.create(_tiles, {
-							"texture": load("res://Assets/Spells/Bolt.png"),
-							"color": _color,
-							"spellDamage": _pickedAbility.data.attacks
-							}
+						_projectile.create(_tiles, {
+								"texture": load("res://Assets/Spells/Bolt.png"),
+								"color": _color,
+								"damage": _pickedAbility.data.attacks
+							},
+							false,
+							false
 						)
-						$"/root/World/Animations".add_child(_newSpell)
+						$"/root/World/Animations".add_child(_projectile)
 						# warning-ignore:return_value_discarded
 						$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("critterAnimationDone", $"/root/World", "_on_Critter_Animation_done")
 						$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
-#						$"/root/World".currentGameState = $"/root/World".gameState.OUT_OF_PLAYERS_HANDS
 						
 						for _critter in _critters:
 							var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _critter }))
@@ -332,8 +338,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								var _effect = load("res://UI/Effect/Effect.tscn")
 								for _tile in _tiles:
 									var _miasmaNode = _effect.instance()
-									_miasmaNode.create(load("res://Assets/Spells/Gas.png"), spellData[_pickedAbility.data.attacks[0].magicDmg.element].color, _tile, _pickedAbility.data.name, _level.levelId, _pickedAbility.data.duration, _pickedAbility.data.attacks)
 									$"/root/World/Effects".add_child(_miasmaNode)
+									_miasmaNode.create(load("res://Assets/Spells/Gas.png"), spellData[_pickedAbility.data.attacks[0].magicDmg.element].color, _tile, _pickedAbility.data.name, _level.levelId, _pickedAbility.data.duration, _pickedAbility.data.attacks)
 									_level.grid[_tile.x][_tile.y].effects.append(_pickedAbility.data.name)
 								mp -= _pickedAbility.data.mp
 								if _pickedAbility.data.name.matchn("fleir miasma"):

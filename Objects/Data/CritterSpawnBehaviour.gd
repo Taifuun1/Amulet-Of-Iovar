@@ -153,8 +153,8 @@ var critterSpawnBehaviour = {
 		"distance": 1
 	},
 	"Elf king": {
-		"amount": [0, 0],
-		"distance": 0
+		"amount": [1, 1],
+		"distance": 1
 	},
 	"Cat": {
 		"amount": [1, 2],

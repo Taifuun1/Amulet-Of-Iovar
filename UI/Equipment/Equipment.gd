@@ -602,29 +602,23 @@ func checkWhatIsWorn(_item):
 				Globals.gameConsole.addLog("Its like your legs have a mind of their own!")
 		"belt of plato":
 			if _playerNode.itemsTurnedOn.has(_item.id):
-				_playerNode.baseStats["wisdom"] -= 1
 				_playerNode.itemsTurnedOn.erase(_item.id)
 				Globals.gameConsole.addLog("Your feel very dumb.")
 			else:
-				_playerNode.baseStats["wisdom"] += 1
 				_playerNode.itemsTurnedOn.append(_item.id)
 				Globals.gameConsole.addLog("Your feel very wise.")
 		"belt of faith":
 			if _playerNode.itemsTurnedOn.has(_item.id):
-				_playerNode.baseStats["belief"] -= 1
 				_playerNode.itemsTurnedOn.erase(_item.id)
 				Globals.gameConsole.addLog("Your feel like you don't believe in anything.")
 			else:
-				_playerNode.baseStats["belief"] += 1
 				_playerNode.itemsTurnedOn.append(_item.id)
 				Globals.gameConsole.addLog("Your feel a rapturous faith fill you.")
 		"belt of symmetry":
 			if _playerNode.itemsTurnedOn.has(_item.id):
-				_playerNode.baseStats["visage"] -= 1
 				_playerNode.itemsTurnedOn.erase(_item.id)
 				Globals.gameConsole.addLog("Your feel ugly.")
 			else:
-				_playerNode.baseStats["visage"] += 1
 				_playerNode.itemsTurnedOn.append(_item.id)
 				Globals.gameConsole.addLog("Your feel very photogenetic.")
 		"toga":
@@ -666,29 +660,23 @@ func checkWhatIsWorn(_item):
 				Globals.gameConsole.addLog("The gloves feel very soft.")
 		"gauntlets of devastation":
 			if _playerNode.itemsTurnedOn.has(_item.id):
-				_playerNode.baseStats["strength"] -= 1
 				_playerNode.itemsTurnedOn.erase(_item.id)
 				Globals.gameConsole.addLog("Your feel like a weak sausage.")
 			else:
-				_playerNode.baseStats["strength"] += 1
 				_playerNode.itemsTurnedOn.append(_item.id)
 				Globals.gameConsole.addLog("Your feel like you can lift the world!")
 		"gauntlets of nimbleness":
 			if _playerNode.itemsTurnedOn.has(_item.id):
-				_playerNode.baseStats["legerity"] -= 1
 				_playerNode.itemsTurnedOn.erase(_item.id)
 				Globals.gameConsole.addLog("Your feel a little clumsy.")
 			else:
-				_playerNode.baseStats["legerity"] += 1
 				_playerNode.itemsTurnedOn.append(_item.id)
 				Globals.gameConsole.addLog("Your feel like an elf.")
 		"gauntlets of balance":
 			if _playerNode.itemsTurnedOn.has(_item.id):
-				_playerNode.baseStats["balance"] -= 1
 				_playerNode.itemsTurnedOn.erase(_item.id)
 				Globals.gameConsole.addLog("Your feel imbalanced.")
 			else:
-				_playerNode.baseStats["balance"] += 1
 				_playerNode.itemsTurnedOn.append(_item.id)
 				Globals.gameConsole.addLog("Your feel like a dwarf.")
 	_playerNode.checkAllIdentification(true)

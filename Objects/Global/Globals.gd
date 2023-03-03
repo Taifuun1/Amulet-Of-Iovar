@@ -163,3 +163,7 @@ func getGlobalsSaveData():
 		itemId = itemId,
 		critterId = critterId
 	}
+
+func _input(_event):
+	if Input.is_action_just_pressed("TOGGLE_FULLSCREEN"):
+		OS.window_fullscreen = !OS.window_fullscreen
