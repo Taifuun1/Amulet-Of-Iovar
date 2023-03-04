@@ -19,7 +19,6 @@
 [ext_resource path="res://UI/Dancing Dragons/Dancing Dragons.tscn" type="PackedScene" id=17]
 [ext_resource path="res://UI/Pause Menu/Pause Menu.tscn" type="PackedScene" id=18]
 
-
 [node name="World" type="TileMap"]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )

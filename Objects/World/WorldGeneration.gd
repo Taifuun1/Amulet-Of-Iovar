@@ -533,8 +533,6 @@ func checkIfThreadsAreDone():
 
 func _exit_tree():
 	if gameSetUpThread != null and !gameSetUpThread.is_alive():
-		print("game set up")
 		gameSetUpThread.wait_to_finish()
 	if saveGameThread != null and !saveGameThread.is_alive():
-		print("game saved")
 		saveGameThread.wait_to_finish()

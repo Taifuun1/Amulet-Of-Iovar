@@ -683,7 +683,9 @@ func zapItem(_direction):
 				"wand of turn lock":
 					for i in range(1, _zappedItem.value.distance):
 						var _tile = _playerPosition + _direction * i
-						if !Globals.isTileFree(_tile, _grid) or _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
+						if !Globals.isTileFree(_tile, _grid):
+							break
+						if _grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							if _zappedItem.piety.matchn("reverent") or _zappedItem.piety.matchn("formal"):
 								if _grid[_tile.x][_tile.y].interactable == null:
 									_grid[_tile.x][_tile.y].interactable = Globals.interactables.LOCKED

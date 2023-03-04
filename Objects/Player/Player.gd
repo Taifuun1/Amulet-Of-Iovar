@@ -497,11 +497,9 @@ func processPlayerSpecificEffects():
 		else:
 			calories -= 2
 	
-	statusStates.hunger.previous = statusStates.hunger.current
-	
-	####################
-	## Status effects ##
-	####################
+	######################################
+	## Status effects and status states ##
+	######################################
 	if playerVisibility.duration > 0:
 		playerVisibility.duration -= 1
 	else:
@@ -513,25 +511,6 @@ func processPlayerSpecificEffects():
 		if playerVisibility.distance > 0:
 			Globals.gameConsole.addLog("Your vision changes.")
 		playerVisibility.distance = -1
-	
-	###################
-	## Status states ##
-	###################
-	
-	print("")
-	print(statusStates)
-	
-	calculateStatusEffectsAndStatusStates()
-	
-	print(statusStates)
-	
-	########
-	## UI ##
-	########
-
-	processPlayerUIChanges()
-	
-	print(statusStates)
 	
 	################
 	## Worn items ##
@@ -617,7 +596,7 @@ func processPlayerUIChanges():
 				var _damageNumber = damageNumber.instance()
 				_damageNumber.create($"/root/World".level.getCritterTile(0), statusStates[_statusState].current.capitalize(), statusEffectsData[statusStates[_statusState].current].color)
 				$"/root/World/Texts".add_child(_damageNumber)
-		if !statusStates[_statusState].current.matchn(statusStates[_statusState].previous):
+		if !statusStates[_statusState].previous.empty() and !(statusStates[_statusState].current in statusStates[_statusState].previous):
 			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(statusStates[_statusState].previous):
 				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(statusStates[_statusState].previous)
 	
@@ -633,7 +612,10 @@ func processPlayerUIChanges():
 			if $"/root/World/UI/UITheme/GameStats".isStatusEffectInGameStats(_statusEffect):
 				$"/root/World/UI/UITheme/GameStats".removeStatusEffect(_statusEffect)
 
-func calculateHungerStats():
+func calculateHungerStats(_visual = false):
+	if !_visual:
+		statusStates.hunger.previous = statusStates.hunger.current
+	
 	if calories >= 800:
 		statusStates.hunger.state = 0
 		statusStates.hunger.current = ""
@@ -669,7 +651,11 @@ func calculateHungerStats():
 		if previousCalories > 0:
 			Globals.gameConsole.addLog("You are famished!")
 
-func calculateWeightStats():
+func calculateWeightStats(_visual = false):
+	
+	if !_visual:
+		statusStates.weight.previous = statusStates.weight.current
+	
 	maxCarryWeight = {
 		"overEncumbured": int(stats.strength / 4 * 3) * 60,
 		"burdened": int(stats.strength / 4 * 3) * 80,
@@ -679,32 +665,20 @@ func calculateWeightStats():
 	var _weight = $Inventory.currentWeight
 	
 	if _weight <= maxCarryWeight.overEncumbured:
-		statusStates.weight = {
-			"state": 0,
-			"current": "",
-			"previous": statusStates.weight.current
-		}
+		statusStates.weight.state = 0
+		statusStates.weight.current = ""
 		turnsUntilAction = 0
 	elif _weight > maxCarryWeight.overEncumbured and _weight <= maxCarryWeight.burdened:
-		statusStates.weight = {
-			"state": 1,
-			"current": "overencumbured",
-			"previous": statusStates.weight.current
-		}
+		statusStates.weight.state = 1
+		statusStates.weight.current = "overencumbured"
 		turnsUntilAction = 1
 	elif _weight > maxCarryWeight.burdened and _weight <= maxCarryWeight.flattened:
-		statusStates.weight = {
-			"state": 2,
-			"current": "burdened",
-			"previous": statusStates.weight.current
-		}
+		statusStates.weight.state = 2
+		statusStates.weight.current = "burdened"
 		turnsUntilAction = 2
 	elif _weight > maxCarryWeight.flattened:
-		statusStates.weight = {
-			"state": 3,
-			"current": "flattened",
-			"previous": statusStates.weight.current
-		}
+		statusStates.weight.state = 3
+		statusStates.weight.current = "flattened"
 		turnsUntilAction = 3
 	
 	if _weight > 0 and _weight <= maxCarryWeight.overEncumbured:

@@ -3,7 +3,6 @@
 [ext_resource path="res://UI/Pause Menu/Pause Menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/UITitleFont.tres" type="DynamicFont" id=2]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0509804, 0.109804, 0.247059, 1 )
 border_width_left = 2
@@ -506,10 +505,40 @@ margin_left = 8.0
 margin_right = -229.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 2 )
-text = "Save and Exit"
+text = "Toggle fullscreen"
 valign = 1
 
 [node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu41"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = SubResource( 4 )
+text = "Ctrl + Shift + f"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="ItemMenu42" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 600.0
+margin_right = 438.0
+margin_bottom = 650.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu42"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 2 )
+text = "Save and Exit"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu42"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0

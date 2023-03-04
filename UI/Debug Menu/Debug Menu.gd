@@ -5,7 +5,7 @@ func showMenu():
 	$DebugMenuPopup.show()
 
 func _on_Go_pressed():
-	$"/root/World"._debug__go_to_level(int($DebugMenuPopup/DebugMenuContainer/LineEdit.text))
+	$"/root/World".__debug__go_to_level(int($DebugMenuPopup/DebugMenuContainer/LineEdit.text))
 
 func _on_Hide_pressed():
 	hide()
