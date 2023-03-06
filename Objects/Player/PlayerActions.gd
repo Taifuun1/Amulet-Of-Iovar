@@ -1283,11 +1283,182 @@ func dipItem(_id):
 		$"/root/World".closeMenu()
 		$"/root/World".processGameTurn()
 
+func interactWith(_tileToInteractWith):
+	var _level = $"/root/World".level
+	if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
+		var _critter = get_node($"/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }))
+		GlobalGameConsoleMessages.getInteractionFlavorMessage(_critter.critterName, _critter.aI.aI)
+	elif _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
+			if $"/root/World/Critters/0"/Inventory.checkIfItemInInventoryByName("shovel"):
+				Globals.gameConsole.addLog("You dig up the item from the sand.")
+				if randi() % 3 == 0:
+					$"/root/World/Items/Items".createItem("message in a bottle", _tileToInteractWith)
+					Globals.gameConsole.addLog("You discover a message in a bottle!")
+				else:
+					$"/root/World/Items/Items".createItem($Items/Items.getRandomItem(), _tileToInteractWith)
+					Globals.gameConsole.addLog("You discover an item!")
+				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				$"/root/World".processGameTurn()
+			else:
+				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.DIGGABLE:
+			if $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("shovel"):
+				Globals.gameConsole.addLog("You dig up the item from the ground.")
+				$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), _tileToInteractWith)
+				Globals.gameConsole.addLog("You discover an item!")
+				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				$"/root/World".processGameTurn()
+			else:
+				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.LOCKED:
+			if $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("magic key"):
+				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				Globals.gameConsole.addLog("You unlock the door with your magic key.")
+				$"/root/World".processGameTurn(null, null, 1)
+			elif $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("key"):
+				$"/root/World/".interactTurnData = {
+					"interactTurn": true,
+					"interactCompleted": false,
+					"item": "key",
+					"interactType": "unlock"
+				}
+				$"/root/World".processGameTurn(null, _tileToInteractWith, 2)
+			elif $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("lockpick"):
+				$"/root/World/".interactTurnData = {
+					"interactTurn": true,
+					"interactCompleted": false,
+					"item": "lockpick",
+					"interactType": "unlock"
+				}
+				$"/root/World".processGameTurn(null, _tileToInteractWith, 3)
+			elif $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("credit card"):
+				$"/root/World/".interactTurnData = {
+					"interactTurn": true,
+					"interactCompleted": false,
+					"item": "credit card",
+					"interactType": "unlock"
+				}
+				$"/root/World".processGameTurn(null, _tileToInteractWith, 4)
+			else:
+				Globals.gameConsole.addLog("You don't have anything to unlock the door with. Maybe try kicking it?")
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT:
+			if randi() % 5 == 0:
+				$"/root/World/Items/Items".createItem("carrot", _tileToInteractWith)
+				Globals.gameConsole.addLog("You pick a carrot from the plant.")
+				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+#			elif randi() % 5 == 0:
+#				$Items/Items.createItem("beans", _tileToInteractWith)
+#				Globals.gameConsole.addLog("You pick beans from the plant.")
+#				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			elif randi() % 16 == 0:
+				$"/root/World/Items/Items".createItem("tomato", _tileToInteractWith)
+				Globals.gameConsole.addLog("You pick a tomato from the plant.")
+				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			else:
+				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+				Globals.gameConsole.addLog("The plant is empty.")
+			$"/root/World".processGameTurn()
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_CARROT:
+			$"/root/World/Items/Items".createItem("carrot", _tileToInteractWith)
+			Globals.gameConsole.addLog("You pick a carrot from the plant.")
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			$"/root/World".processGameTurn()
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_TOMATO:
+			$"/root/World/Items/Items".createItem("tomato", _tileToInteractWith)
+			Globals.gameConsole.addLog("You pick a tomato from the plant.")
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			$"/root/World".processGameTurn()
+#		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_BEAN:
+#			$Items/Items.createItem("beans", _tileToInteractWith)
+#			Globals.gameConsole.addLog("You pick beans from the plant.")
+#			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+#			processGameTurn()
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_ORANGE:
+			$"/root/World/Items/Items".createItem("orange", _tileToInteractWith)
+			Globals.gameConsole.addLog("You pick an orange from the plant.")
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			$"/root/World".processGameTurn()
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.FOUNTAIN:
+			var _emptyBottleInInventory = $"/root/World/Critters/0/Inventory".getNonStackableItemInInventory("empty potion bottle")
+			if typeof(_emptyBottleInInventory) != TYPE_BOOL:
+				$"/root/World/Items/Items".createItem("water potion", _tileToInteractWith)
+				if _emptyBottleInInventory.amount > 1:
+					_emptyBottleInInventory.amount -= 1
+				else:
+					$"/root/World/Items/Items".removeItem(_emptyBottleInInventory.id)
+				Globals.gameConsole.addLog("You fill the bottle with water.")
+				if randi() % 5 == 0:
+					_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+					Globals.gameConsole.addLog("The fountain dries up!")
+				$"/root/World".processGameTurn()
+			else:
+				Globals.gameConsole.addLog("You don't have any empty bottles.")
+	elif _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_CLOSED:
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == null:
+			if $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("magic key"):
+				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
+				Globals.gameConsole.addLog("You lock the door with your magic key.")
+				$"/root/World".processGameTurn(null, null, 1)
+			elif $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("key"):
+				$"/root/World/".interactTurnData = {
+					"interactTurn": true,
+					"interactCompleted": false,
+					"item": "key",
+					"interactType": "lock"
+				}
+				$"/root/World".processGameTurn(null, _tileToInteractWith, 2)
+			elif $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("lockpick"):
+				$"/root/World/".interactTurnData = {
+					"interactTurn": true,
+					"interactCompleted": false,
+					"item": "lockpick",
+					"interactType": "lock"
+				}
+				$"/root/World".processGameTurn(null, _tileToInteractWith, 3)
+			else:
+				Globals.gameConsole.addLog("You don't have anything to lock the door with.")
+	elif _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_OPEN:
+		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
+			Globals.gameConsole.addLog("The {critter} is blocking the door.".format({ "critter": get_node("Critters/{critter}".format({ "critter": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter })).critterName }))
+		elif !_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].items.empty():
+			Globals.gameConsole.addLog("There's some items blocking the door.")
+		else:
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile = Globals.tiles.DOOR_CLOSED
+			_level.removePointFromEnemyPathfinding(_tileToInteractWith)
+			Globals.gameConsole.addLog("You close the door.")
+			$"/root/World".processGameTurn()
+	else:
+		Globals.gameConsole.addLog("There doesn't seem to be anything to interact with there.")
+	$"/root/World".resetToDefaulGameState()
+
 
 
 ########################
 ### Helper functions ###
 ########################
+
+func dealWithInteract(_tileToInteractWith):
+	var _level = $"/root/World".level
+	var _interactTurnData = $"/root/World".interactTurnData
+	if _interactTurnData.interactType.matchn("lock"):
+		if _interactTurnData.item.matchn("key"):
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
+			Globals.gameConsole.addLog("You lock the door with your key.")
+		elif _interactTurnData.item.matchn("lockpick"):
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
+			Globals.gameConsole.addLog("You lock the door with your lockpick.")
+	elif _interactTurnData.interactType.matchn("unlock"):
+		if _interactTurnData.item.matchn("key"):
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			Globals.gameConsole.addLog("You unlock the door with your key.")
+		elif _interactTurnData.item.matchn("lockpick"):
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			Globals.gameConsole.addLog("You unlock the door with your lockpick.")
+		elif _interactTurnData.item.matchn("credit card"):
+			_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
+			Globals.gameConsole.addLog("You unlock the door with your credit card.")
+	$"/root/World".drawScreen()
 
 func dealWithTeleport(_critterId, _piety, _itemType = "scroll"):
 	var _world = $"/root/World"

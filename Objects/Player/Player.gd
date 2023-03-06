@@ -286,6 +286,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 		else:
 			_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile = Globals.tiles.DOOR_OPEN
 			_level.addPointToEnemyPathding(_tileToMoveTo)
+			Globals.gameConsole.addLog("You open the door.")
 	elif (
 		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.EMPTY or
 		_level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile == Globals.tiles.WALL_CAVE or

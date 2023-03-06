@@ -136,7 +136,7 @@ size_flags_vertical = 3
 
 [node name="ControlsMenuList" type="VBoxContainer" parent="ControlsMenuScroll"]
 margin_right = 450.0
-margin_bottom = 1550.0
+margin_bottom = 1600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -507,6 +507,7 @@ rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 2 )
 text = "Toggle fullscreen"
 valign = 1
+clip_text = true
 
 [node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu41"]
 anchor_right = 1.0

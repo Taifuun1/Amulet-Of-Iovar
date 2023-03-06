@@ -3,6 +3,8 @@ class_name WorldManagement
 
 onready var player = preload("res://Objects/Player/Player.tscn").instance()
 
+signal turnPassed
+
 enum gameState {
 	GAME_OVER
 	OUT_OF_PLAYERS_HANDS
@@ -70,23 +72,58 @@ var currentGameState = gameState.GAME
 var keepMoving = false
 var totalLevelCount = 1
 var gameOver = false
+var turnData = {
+	processAnotherTurn = false,
+	processEmptyTurn = false,
+	turnProcessFinished = false,
+	playerTile = null,
+	tileToMoveTo = null,
+	turnsLeft = 0,
+	safety = true
+}
+var interactTurnData = {
+	"interactTurn": false,
+	"interactCompleted": false,
+	"item": "",
+	"interactType": ""
+}
 
-func _process(_delta):
-	if inGame:
+func _physics_process(_delta):
+	if turnData.processAnotherTurn and turnData.turnProcessFinished:
+		processGameTurn(turnData.playerTile, turnData.tileToMoveTo, turnData.turnsLeft, turnData.safety)
+	elif interactTurnData.interactTurn and interactTurnData.interactCompleted and turnData.turnsLeft == 0:
+		$Critters/"0".dealWithInteract(turnData.tileToMoveTo)
+		interactTurnData = {
+			"interactTurn": false,
+			"interactCompleted": false,
+			"item": "",
+			"interactType": ""
+		}
+	elif inGame:
 		if currentGameState != gameState.GAME_OVER and ($Critters/"0".statusEffects["stun"] > 0 or $Critters/"0".statusEffects["sleep"] > 0):
 			if $Critters/"0".statusEffects["stun"] > 0: Globals.gameConsole.addLog("You are stunned!")
 			if $Critters/"0".statusEffects["sleep"] > 0: Globals.gameConsole.addLog("You are asleep.")
 			processGameTurn()
-	if generationDone:
+	elif generationDone:
 		generationDone = false
 		
-		yield(get_tree().create_timer(0.01), "timeout")
+		yield(get_tree(), "idle_frame")
+		
+		if !is_connected("turnPassed", self, "_onTurnPassed"):
+			# warning-ignore:return_value_discarded
+			connect("turnPassed", self, "_onTurnPassed")
 		
 		for _level in $Levels.get_children():
 			_level.clearOutInputs()
 		
-		updateUI()
+		$Critters/"0".calculateHungerStats(true)
+		$Critters/"0".calculateWeightStats(true)
+		$Critters/"0".calculateStatusEffectsAndStatusStates()
+		
 		updateTiles()
+		
+		yield(VisualServer, "frame_post_draw")
+		
 		drawLevel()
 		
 		inStartScreen = false
@@ -108,7 +145,7 @@ func setUpGameObjects(_playerData = null):
 	
 	$Critters/Critters.setNeutralClasses()
 	
-	yield(get_tree().create_timer(0.01), "timeout")
+	yield(VisualServer, "frame_post_draw")
 	
 	if _playerData == null:
 		for _level in $Levels.get_children():
@@ -119,22 +156,6 @@ func setUpGameObjects(_playerData = null):
 		
 #		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
 #		$Items/Items.createItem("Ring of fumbling", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("scroll of identify", null, 1, true, { "piety": "reverent" })
-#		$Items/Items.createItem("Eario of Fleir", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("Eario of Frost", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("Eario of Thunder", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("Eario of Gleeie'er", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("Eario of Toxix", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("luirio of line", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("luirio of cone", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("luirio of adjacent", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("luirio of point", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("luirio of fourway", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("heario of gas", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("heario of true", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("heario of bolt", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("heario of fragment", null, 1, true, { "piety": "formal" })
-#		$Items/Items.createItem("heario of flow", null, 1, true, { "piety": "formal" })
 	
 	for _node in $UI/UITheme.get_children():
 		if _node.name == "GameConsole":
@@ -156,7 +177,9 @@ func _input(_event):
 			$Critters/"0".statusEffects["sleep"] == 0
 		):
 			var _playerTile = level.getCritterTile(0)
-			if (
+			if _event is InputEventKey and _event.pressed and turnData.processAnotherTurn:
+				keepMoving = false
+			elif (
 				(
 					Input.is_action_just_pressed("MOVE_UP") or
 					Input.is_action_just_pressed("MOVE_UP_RIGHT") or
@@ -215,14 +238,10 @@ func _input(_event):
 								var _randomOpenTiles = _openTiles.duplicate(true)
 								_randomOpenTiles.shuffle()
 								_tileToMoveTo = _randomOpenTiles[0]
-							if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null:
-								keepMovingLoop(_playerTile, _tileToMoveTo)
-								return
 							else:
 								processGameTurn(_playerTile, _tileToMoveTo)
-								return
 						elif currentGameState == gameState.INTERACT:
-							interactWith(_tileToMoveTo)
+							$Critters/"0".interactWith(_tileToMoveTo)
 						elif currentGameState == gameState.KICK:
 							kickAt(_tileToMoveTo)
 						elif currentGameState == gameState.CAST:
@@ -233,7 +252,7 @@ func _input(_event):
 				Input.is_action_just_pressed("WAIT") and
 				currentGameState == gameState.GAME
 			):
-				processGameTurn(_playerTile)
+				processGameTurn()
 			elif (
 				Input.is_action_just_pressed("ASCEND") and
 				(
@@ -315,71 +334,70 @@ func _input(_event):
 					}
 				], _playerTile, "God")
 
-func processGameTurn(_playerTile = null, _tileToMoveTo = null):
-	if _playerTile != null:
+func processGameTurn(_playerTile = null, _tileToMoveTo = null, _turnsToProcess = 1 + $Critters/"0".turnsUntilAction, _safety = true):
+	var _turnsLeft = _turnsToProcess - 1
+	processGameEvents(_playerTile, _tileToMoveTo, _turnsLeft, _safety)
+	drawScreen()
+	if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null and _turnsLeft == 0:
+		var _direction = _tileToMoveTo - _playerTile
+		checkIfMoveAnotherTile(_tileToMoveTo, _tileToMoveTo + _direction)
+	turnData.turnProcessFinished = true
+
+func processGameEvents(_playerTile, _tileToMoveTo, _turnsLeft, _safety):
+	if _playerTile != null and !turnData.processEmptyTurn:
 		processPlayerAction(_playerTile, _tileToMoveTo)
-		if !processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
-			return false
-	processPlayerEffects()
-	processEnemyActions()
-	processEffects()
-	processCrittersSpawnStatus()
-	drawLevel()
-	updateTiles()
-	updateStats()
-	isGameOver()
-
-func processManyGameTurnsWithoutPlayerActionsAndWithoutSafety():
-	for _turn in $Critters/"0".turnsUntilAction:
-		processPlayerEffects()
-		processEnemyActions()
-		processEffects()
-		processCrittersSpawnStatus()
-		drawLevel()
-		updateTiles()
-		updateStats()
-		if isGameOver():
-			return false
-	return true
-
-func processManyGameTurnsWithoutPlayerActionsAndWithSafety(_turnAmount = 1):
-	for _turn in _turnAmount:
-		processPlayerEffects()
-		var _isPlayerHit = processEnemyActions()
-		processEffects()
-		processCrittersSpawnStatus()
-		drawLevel()
-		updateTiles()
-		updateStats()
-		if isGameOver():
-			return false
-		if _isPlayerHit:
-			return false
-	return true
+	var _isPlayerHit = processGameTurnActions()
+	if interactTurnData.interactTurn and _turnsLeft == 0:
+		interactTurnData.interactCompleted = true
+	if isGameOver():
+		emit_signal("turnPassed", false)
+	elif _isPlayerHit and !_safety and _turnsLeft != 0:
+		emit_signal("turnPassed", true, false, null, null, _turnsLeft, _safety)
+	elif _isPlayerHit and _safety:
+		emit_signal("turnPassed", false)
+	elif keepMoving and _turnsLeft != 0:
+		emit_signal("turnPassed", true, true, _playerTile, _tileToMoveTo, _turnsLeft, _safety)
+	else:
+		emit_signal("turnPassed", false if _turnsLeft == 0 else true, false if _turnsLeft == 0 else true, _playerTile, _tileToMoveTo, _turnsLeft, _safety)
 
 func processPlayerAction(_playerTile, _tileToMoveTo):
 	if (
 		(
-			Input.is_action_pressed("MOVE_UP") or
-			Input.is_action_pressed("MOVE_UP_RIGHT") or
-			Input.is_action_pressed("MOVE_RIGHT") or
-			Input.is_action_pressed("MOVE_DOWN_RIGHT") or
-			Input.is_action_pressed("MOVE_DOWN") or
-			Input.is_action_pressed("MOVE_DOWN_LEFT") or
-			Input.is_action_pressed("MOVE_LEFT") or
-			Input.is_action_pressed("MOVE_UP_LEFT")
-		) and
+			(
+				Input.is_action_pressed("MOVE_UP") or
+				Input.is_action_pressed("MOVE_UP_RIGHT") or
+				Input.is_action_pressed("MOVE_RIGHT") or
+				Input.is_action_pressed("MOVE_DOWN_RIGHT") or
+				Input.is_action_pressed("MOVE_DOWN") or
+				Input.is_action_pressed("MOVE_DOWN_LEFT") or
+				Input.is_action_pressed("MOVE_LEFT") or
+				Input.is_action_pressed("MOVE_UP_LEFT")
+			) and
+			(
+				_tileToMoveTo != null and
+				_tileToMoveTo.y >= 0 and
+				_tileToMoveTo.y < level.grid[0].size() and
+				_tileToMoveTo.x >= 0 and
+				_tileToMoveTo.x < level.grid.size()
+			)
+		) or
 		(
-			_tileToMoveTo != null and
-			_tileToMoveTo.y >= 0 and
-			_tileToMoveTo.y < level.grid[0].size() and
-			_tileToMoveTo.x >= 0 and
-			_tileToMoveTo.x < level.grid.size()
+			keepMoving and
+			_playerTile != null and
+			_tileToMoveTo != null
 		)
 	):
 		$"Critters/0".processPlayerAction(_playerTile, _tileToMoveTo, $Items/Items, level)
 	elif Input.is_action_pressed("ACCEPT"):
 		processAccept()
+
+func processGameTurnActions():
+	processPlayerEffects()
+	var _isPlayerHit = processEnemyActions()
+	processEffects()
+	processCrittersSpawnStatus()
+	updateStats()
+	return _isPlayerHit
 
 func processEnemyActions():
 	var _playerTile = level.getCritterTile(0)
@@ -410,13 +428,21 @@ func processCrittersSpawnStatus():
 		checkNewCritterSpawn += 1
 
 func processPlayerEffects():
-	$"/root/World/Critters/0".processPlayerSpecificEffects()
-	$"/root/World/Critters/0".processCritterEffects()
+	$Critters/"0".calculateHungerStats()
+	$Critters/"0".calculateWeightStats()
+	$Critters/"0".calculateStatusEffectsAndStatusStates()
+	$Critters/"0".processPlayerSpecificEffects()
+	$Critters/"0".processCritterEffects()
 
 func processEffects():
 	for _effect in $Effects.get_children():
 		if _effect.levelId == level.levelId:
 			_effect.tickTurn(level)
+
+func drawScreen():
+	drawLevel()
+	updateTiles()
+	yield(VisualServer, "frame_post_draw")
 
 func updateTiles():
 	for x in (level.grid.size()):
@@ -429,7 +455,8 @@ func updateTiles():
 				$Interactables.set_cellv(Vector2(x, y), -1)
 
 func drawLevel():
-	yield(get_tree().create_timer(0.01), "timeout")
+	yield(get_tree(), "idle_frame")
+	
 	if hideObjectsWhenDrawingNextFrame:
 		for _critter in $Critters.get_children():
 			_critter.hide()
@@ -445,7 +472,6 @@ func drawLevel():
 	updateUI()
 
 func drawFOV():
-	# FOV
 	var playerTile = level.getCritterTile(0)
 	var playerCenter = Vector2((playerTile.x + 0.5) * 32, (playerTile.y + 0.5) * 32)
 	var spaceState = get_world_2d().get_direct_space_state()
@@ -491,7 +517,6 @@ func drawFOV():
 				$FOV.greyCell(x, y)
 
 func drawCrittersAndItems():
-	# Critters and items
 	for x in (Globals.gridSize.x):
 		for y in (Globals.gridSize.y):
 			if level.grid[x][y].critter != null:
@@ -513,8 +538,6 @@ func drawCrittersAndItems():
 
 func updateUI():
 	$Critters/"0".inventory.updateWeight()
-	$Critters/"0".calculateHungerStats()
-	$Critters/"0".calculateWeightStats()
 	$Critters/"0".processPlayerUIChanges()
 	$Critters/"0".updatePlayerStats()
 
@@ -531,76 +554,56 @@ func isGameOver():
 		$"UI/UITheme/Game Over Stats".saveGameData()
 		$"UI/UITheme/Game Over Stats".show()
 		gameOver = true
-		yield(get_tree().create_timer(0.01), "timeout")
+		yield(VisualServer, "frame_post_draw")
 		return true
 	return false
 
-func keepMovingLoop(_playerTile, _tileToMoveTo):
-	var _currentTile = _playerTile
-	var _nextTile = _tileToMoveTo
-	var _direction = _tileToMoveTo - _playerTile
-	while keepMoving:
-		if (
-			(
-				_nextTile.x >= 0 and
-				_nextTile.x < level.grid.size() and
-				_nextTile.y >= 0 and
-				_nextTile.y < level.grid[0].size()
-			) and
-			Globals.isTileFree(_nextTile, level.grid) and
-			level.grid[_nextTile.x][_nextTile.y].tile != Globals.tiles.DOOR_CLOSED and
-			(
-				level.grid[_currentTile.x][_currentTile.y - 1].critter == null or
-				_currentTile.y - 1 < 0
-			) and
-			(
-				(
-					_currentTile.y - 1 < 0 or
-					level.grid.size() - 1 < _currentTile.x + 1
-				) or
-				level.grid[_currentTile.x + 1][_currentTile.y - 1].critter == null
-			) and
-			(
-				level.grid.size() - 1 < _currentTile.x + 1 or
-				level.grid[_currentTile.x + 1][_currentTile.y].critter == null
-			) and
-			(
-				(
-					level.grid.size() - 1 < _currentTile.x + 1 or
-					level.grid[0].size() - 1 < _currentTile.y + 1
-				) or
-				level.grid[_currentTile.x + 1][_currentTile.y + 1].critter == null
-			) and
-			(
-				level.grid[0].size() - 1 < _currentTile.y + 1 or
-				level.grid[_currentTile.x][_currentTile.y + 1].critter == null
-			) and
-			(
-				(
-					_currentTile.x - 1 < 0 or
-					level.grid[0].size() - 1 < _currentTile.y + 1
-				) or
-				level.grid[_currentTile.x - 1][_currentTile.y + 1].critter == null
-			) and
-			(
-				level.grid[_currentTile.x - 1][_currentTile.y].critter == null or
-				_currentTile.x - 1 < 0
-			) and
-			(
-				level.grid[_currentTile.x - 1][_currentTile.y - 1].critter == null or
-				(
-					_currentTile.x - 1 < 0 or
-					_currentTile.y - 1 < 0
-				)
-			)
-		):
-			$"Critters/0".processPlayerAction(_currentTile, _nextTile, $Items/Items, level)
-			processGameTurn()
-			yield(get_tree().create_timer(0.01), "timeout")
-		else:
-			keepMoving = false
-		_currentTile = _nextTile
-		_nextTile = _nextTile + _direction
+func checkIfMoveAnotherTile(_playerTile, _tileToMoveTo):
+	if (
+		Globals.isTileFree(_tileToMoveTo, level.grid) and
+		level.grid[_tileToMoveTo.x][_tileToMoveTo.y].tile != Globals.tiles.DOOR_CLOSED and
+		(
+			_playerTile.y - 1 < 0 or
+			level.grid[_playerTile.x][_playerTile.y - 1].critter == null
+		) and
+		(
+			_playerTile.y - 1 < 0 or
+			level.grid.size() - 1 < _playerTile.x + 1 or
+			level.grid[_playerTile.x + 1][_playerTile.y - 1].critter == null
+		) and
+		(
+			level.grid.size() - 1 < _playerTile.x + 1 or
+			level.grid[_playerTile.x + 1][_playerTile.y].critter == null
+		) and
+		(
+			level.grid.size() - 1 < _playerTile.x + 1 or
+			level.grid[0].size() - 1 < _playerTile.y + 1 or
+			level.grid[_playerTile.x + 1][_playerTile.y + 1].critter == null
+		) and
+		(
+			level.grid[0].size() - 1 < _playerTile.y + 1 or
+			level.grid[_playerTile.x][_playerTile.y + 1].critter == null
+		) and
+		(
+			_playerTile.x - 1 < 0 or
+			level.grid[0].size() - 1 < _playerTile.y + 1 or
+			level.grid[_playerTile.x - 1][_playerTile.y + 1].critter == null
+		) and
+		(
+			_playerTile.x - 1 < 0 or
+			level.grid[_playerTile.x - 1][_playerTile.y].critter == null
+		) and
+		(
+			_playerTile.x - 1 < 0 or
+			_playerTile.y - 1 < 0 or
+			level.grid[_playerTile.x - 1][_playerTile.y - 1].critter == null
+		)
+	):
+		emit_signal("turnPassed", true, false, _playerTile, _tileToMoveTo, 1 + $Critters/"0".turnsUntilAction, turnData.safety)
+		return
+	else:
+		keepMoving = false
+	emit_signal("turnPassed", false)
 
 func moveLevel(_direction):
 	$"/root/World".hide()
@@ -860,137 +863,8 @@ func castWith(_playerTile):
 			Globals.gameConsole.addLog("Cast towards what? (Pick a direction with numpad)")
 		"directionless":
 			$UI/UITheme/Runes.castSpell(_playerTile)
-#			yield($UI/UITheme/Runes.castSpell(_playerTile), "completed")
 		"notCastable":
 			Globals.gameConsole.addLog("Your currently worn runes are not enough to cast a spell.")
-
-func interactWith(_tileToInteractWith):
-	if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
-		var _critter = get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }))
-		GlobalGameConsoleMessages.getInteractionFlavorMessage(_critter.critterName, _critter.aI.aI)
-	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
-			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
-				Globals.gameConsole.addLog("You dig up the item from the sand.")
-				if randi() % 3 == 0:
-					$Items/Items.createItem("message in a bottle", _tileToInteractWith)
-					Globals.gameConsole.addLog("You discover a message in a bottle!")
-				else:
-					$Items/Items.createItem($Items/Items.getRandomItem(), _tileToInteractWith)
-					Globals.gameConsole.addLog("You discover an item!")
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-				processGameTurn()
-			else:
-				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.DIGGABLE:
-			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("shovel"):
-				Globals.gameConsole.addLog("You dig up the item from the ground.")
-				$Items/Items.createItem($Items/Items.getRandomItem(), _tileToInteractWith)
-				Globals.gameConsole.addLog("You discover an item!")
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-				processGameTurn()
-			else:
-				Globals.gameConsole.addLog("You need a shovel to dig up that item.")
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.LOCKED:
-			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-				Globals.gameConsole.addLog("You unlock the door with your magic key.")
-				processGameTurn()
-			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("key"):
-				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(2):
-					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-					Globals.gameConsole.addLog("You unlock the door with your key.")
-			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("lockpick"):
-				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(3):
-					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-					Globals.gameConsole.addLog("You unlock the door with your lockpick.")
-			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("credit card"):
-				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(4):
-					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-					Globals.gameConsole.addLog("You unlock the door with your credit card.")
-			else:
-				Globals.gameConsole.addLog("You don't have anything to open the door with. Maybe try kicking it?")
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT:
-			if randi() % 5 == 0:
-				$Items/Items.createItem("carrot", _tileToInteractWith)
-				Globals.gameConsole.addLog("You pick a carrot from the plant.")
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-#			elif randi() % 5 == 0:
-#				$Items/Items.createItem("beans", _tileToInteractWith)
-#				Globals.gameConsole.addLog("You pick beans from the plant.")
-#				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-			elif randi() % 16 == 0:
-				$Items/Items.createItem("tomato", _tileToInteractWith)
-				Globals.gameConsole.addLog("You pick a tomato from the plant.")
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-			else:
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-				Globals.gameConsole.addLog("The plant is empty.")
-			processGameTurn()
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_CARROT:
-			$Items/Items.createItem("carrot", _tileToInteractWith)
-			Globals.gameConsole.addLog("You pick a carrot from the plant.")
-			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-			processGameTurn()
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_TOMATO:
-			$Items/Items.createItem("tomato", _tileToInteractWith)
-			Globals.gameConsole.addLog("You pick a tomato from the plant.")
-			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-			processGameTurn()
-#		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_BEAN:
-#			$Items/Items.createItem("beans", _tileToInteractWith)
-#			Globals.gameConsole.addLog("You pick beans from the plant.")
-#			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-#			processGameTurn()
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.PLANT_ORANGE:
-			$Items/Items.createItem("orange", _tileToInteractWith)
-			Globals.gameConsole.addLog("You pick an orange from the plant.")
-			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-			processGameTurn()
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.FOUNTAIN:
-			var _emptyBottleInInventory = $Critters/"0"/Inventory.getNonStackableItemInInventory("empty potion bottle")
-			if typeof(_emptyBottleInInventory) != TYPE_BOOL:
-				$Items/Items.createItem("water potion", _tileToInteractWith)
-				if _emptyBottleInInventory.amount > 1:
-					_emptyBottleInInventory.amount -= 1
-				else:
-					$"/root/World/Items/Items".removeItem(_emptyBottleInInventory.id)
-				Globals.gameConsole.addLog("You fill the bottle with water.")
-				if randi() % 5 == 0:
-					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-					Globals.gameConsole.addLog("The fountain dries up!")
-				processGameTurn()
-			else:
-				Globals.gameConsole.addLog("You don't have any empty bottles.")
-	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_CLOSED:
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == null:
-			if $Critters/"0"/Inventory.checkIfItemInInventoryByName("magic key"):
-				level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
-				Globals.gameConsole.addLog("You lock the door with your magic key.")
-				processGameTurn()
-			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("key"):
-				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(2):
-					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
-					Globals.gameConsole.addLog("You lock the door with your key.")
-			elif $Critters/"0"/Inventory.checkIfItemInInventoryByName("lockpick"):
-				if processManyGameTurnsWithoutPlayerActionsAndWithSafety(3):
-					level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
-					Globals.gameConsole.addLog("You lock the door with your lockpick.")
-	elif level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile == Globals.tiles.DOOR_OPEN:
-		if level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
-			Globals.gameConsole.addLog("The {critter} is blocking the door.".format({ "critter": get_node("Critters/{critter}".format({ "critter": level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter })).critterName }))
-		elif !level.grid[_tileToInteractWith.x][_tileToInteractWith.y].items.empty():
-			Globals.gameConsole.addLog("There's some items blocking the door.")
-		else:
-			level.grid[_tileToInteractWith.x][_tileToInteractWith.y].tile = Globals.tiles.DOOR_CLOSED
-			level.removePointFromEnemyPathfinding(_tileToInteractWith)
-			Globals.gameConsole.addLog("You close the door.")
-			processGameTurn()
-	else:
-		Globals.gameConsole.addLog("There doesn't seem to be anything to interact with there.")
-	drawLevel()
-	updateTiles()
-	resetToDefaulGameState()
 
 func kickAt(_tileToKickAt):
 	if level.grid[_tileToKickAt.x][_tileToKickAt.y].critter != null:
@@ -1027,7 +901,6 @@ func kickAt(_tileToKickAt):
 
 func castAt(_playerTile, _tileToCastAt):
 	currentGameState = gameState.OUT_OF_PLAYERS_HANDS
-#	yield($UI/UITheme/Runes.castSpell(_playerTile, _tileToCastAt, level.grid), "completed")
 	$UI/UITheme/Runes.castSpell(_playerTile, _tileToCastAt, level.grid)
 
 func processAccept():
@@ -1092,7 +965,7 @@ func saveGameInThread():
 	$UI/UITheme/"Dancing Dragons".setLoadingText("Saving game...")
 	$UI/UITheme/"Dancing Dragons".startDancingDragons()
 	saveGameThread = Thread.new()
-	yield(get_tree().create_timer(0.01), "timeout")
+	yield(VisualServer, "frame_post_draw")
 	saveGameThread.start(self, "saveGame")
 
 func saveGame():
@@ -1178,7 +1051,7 @@ func saveGame():
 
 
 ######################################
-### Signal and debuggind functions ###
+### Signal and debug functions ###
 ######################################
 
 func _onPlayerAnimationDone():
@@ -1190,7 +1063,19 @@ func _on_Critter_Animation_done():
 #	if $Animations.get_child_count() == 1:
 #		resetToDefaulGameState()
 
-func _debug__go_to_level(_level):
+func _onTurnPassed(_processAnotherTurn = null, processEmptyTurn = false, _playerTile = null, _tileToMoveTo = null, _turnsLeft = 0, _safety = true):
+	if _processAnotherTurn != null:
+		turnData = {
+			processAnotherTurn = _processAnotherTurn,
+			processEmptyTurn = processEmptyTurn,
+			turnProcessFinished = false,
+			playerTile = _playerTile,
+			tileToMoveTo = _tileToMoveTo,
+			turnsLeft = _turnsLeft,
+			safety = _safety
+		}
+
+func __debug__go_to_level(_level):
 	$"/root/World".hide()
 	hideObjectsWhenDrawingNextFrame = true
 	
