@@ -338,6 +338,7 @@ func processGameTurn(_playerTile = null, _tileToMoveTo = null, _turnsToProcess =
 	if keepMoving and $Critters/"0".statusEffects["confusion"] == 0 and _tileToMoveTo != null and _turnsLeft == 0:
 		var _direction = _tileToMoveTo - _playerTile
 		checkIfMoveAnotherTile(_tileToMoveTo, _tileToMoveTo + _direction)
+	yield(VisualServer, "frame_post_draw")
 	turnData.turnProcessFinished = true
 
 func processGameEvents(_playerTile, _tileToMoveTo, _turnsLeft, _safety):

@@ -451,7 +451,7 @@ func dropItem(_playerTile, _item, _grid):
 				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats(), true)
 				$"/root/World/UI/UITheme/Game Over Stats".saveGameData()
 				$"/root/World/UI/UITheme/Game Over Stats".show()
-				yield(get_tree().create_timer(0.01), "timeout")
+				yield(VisualServer, "frame_post_draw")
 			_item.identifyItem(false, true, false)
 			if _item.piety.matchn("reverent"):
 				_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
