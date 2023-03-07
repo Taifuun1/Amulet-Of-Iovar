@@ -153,9 +153,6 @@ func setUpGameObjects(_playerData = null):
 		
 		for _level in $Levels.get_children():
 			$Critters/Critters.generateCrittersForLevel(_level)
-		
-#		$Items/Items.createItem("scroll of confusion", null, 1, true, { "piety": "blasphemous" })
-#		$Items/Items.createItem("Ring of fumbling", null, 1, true, { "piety": "formal" })
 	
 	for _node in $UI/UITheme.get_children():
 		if _node.name == "GameConsole":
@@ -239,11 +236,11 @@ func _input(_event):
 								_randomOpenTiles.shuffle()
 								_tileToMoveTo = _randomOpenTiles[0]
 							else:
-								processGameTurn(_playerTile, _tileToMoveTo)
+								processGameTurn(_playerTile, _tileToMoveTo, 1 + $Critters/"0".turnsUntilAction)
 						elif currentGameState == gameState.INTERACT:
 							$Critters/"0".interactWith(_tileToMoveTo)
 						elif currentGameState == gameState.KICK:
-							kickAt(_tileToMoveTo)
+							$Critters/"0".kickAt(_tileToMoveTo)
 						elif currentGameState == gameState.CAST:
 							castAt(_playerTile, _tileToMoveTo)
 						elif currentGameState == gameState.THROW_DIRECTION:
@@ -334,7 +331,7 @@ func _input(_event):
 					}
 				], _playerTile, "God")
 
-func processGameTurn(_playerTile = null, _tileToMoveTo = null, _turnsToProcess = 1 + $Critters/"0".turnsUntilAction, _safety = true):
+func processGameTurn(_playerTile = null, _tileToMoveTo = null, _turnsToProcess = 1, _safety = false):
 	var _turnsLeft = _turnsToProcess - 1
 	processGameEvents(_playerTile, _tileToMoveTo, _turnsLeft, _safety)
 	drawScreen()
@@ -644,8 +641,12 @@ func goToLevel(_tile, _level):
 	drawLevel()
 	$"/root/World".show()
 
-func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
-	var _stair = whichStairIsPlayerOn(_playerPosition)
+func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerTile):
+	var _stair
+	for _stairDirection in level.stairs.keys():
+		if level.stairs[_stairDirection] == _playerTile:
+			_stair = _stairDirection
+			break
 	if _direction == 1:
 		if levels.dungeon1.back().levelId == Globals.currentDungeonLevel:
 			if _stair.matchn("secondDownStair"):
@@ -758,12 +759,6 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition):
 			Globals.currentDungeonLevel += _direction
 			return "downStair"
 
-func whichStairIsPlayerOn(_playerTile):
-	for stair in level.stairs.keys():
-		if level.stairs[stair] == _playerTile:
-			return stair
-	return false
-
 func openMenu(_menu, _playerTile = null):
 	match _menu:
 		"inventory":
@@ -865,39 +860,6 @@ func castWith(_playerTile):
 			$UI/UITheme/Runes.castSpell(_playerTile)
 		"notCastable":
 			Globals.gameConsole.addLog("Your currently worn runes are not enough to cast a spell.")
-
-func kickAt(_tileToKickAt):
-	if level.grid[_tileToKickAt.x][_tileToKickAt.y].critter != null:
-		Globals.gameConsole.addLog("You kick the {critterName}!".format({ "critterName": get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToKickAt.x][_tileToKickAt.y].critter })).critterName }))
-		var _randomDmg = randi() % 3 + 1
-		var _strengthDmgIncrease = int($Critters/"0".stats.strength / 5)
-		get_node("Critters/{critterId}".format({ "critterId": level.grid[_tileToKickAt.x][_tileToKickAt.y].critter })).takeDamage(
-			[
-				{
-					"dmg": [_randomDmg, _randomDmg + _strengthDmgIncrease],
-					"bonusDmg": {},
-					"armorPen": 0,
-					"magicDmg": {
-						"dmg": [0,0],
-						"element": null
-					}
-				}
-			],
-			_tileToKickAt,
-			$Critters/"0".critterName
-		)
-	elif level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
-		if randi () % 8 == 0:
-			level.grid[_tileToKickAt.x][_tileToKickAt.y].tile = Globals.tiles.DOOR_OPEN
-			level.grid[_tileToKickAt.x][_tileToKickAt.y].interactable = null
-			level.addPointToEnemyPathding(_tileToKickAt)
-			Globals.gameConsole.addLog("CRASH!")
-		else:
-			Globals.gameConsole.addLog("WHAM!")
-	else:
-		Globals.gameConsole.addLog("You kick nothing!")
-	processGameTurn()
-	resetToDefaulGameState()
 
 func castAt(_playerTile, _tileToCastAt):
 	currentGameState = gameState.OUT_OF_PLAYERS_HANDS

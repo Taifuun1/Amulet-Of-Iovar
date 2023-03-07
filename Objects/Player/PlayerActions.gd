@@ -1315,7 +1315,7 @@ func interactWith(_tileToInteractWith):
 			if $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("magic key"):
 				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 				Globals.gameConsole.addLog("You unlock the door with your magic key.")
-				$"/root/World".processGameTurn(null, null, 1)
+				$"/root/World".processGameTurn()
 			elif $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("key"):
 				$"/root/World/".interactTurnData = {
 					"interactTurn": true,
@@ -1399,7 +1399,7 @@ func interactWith(_tileToInteractWith):
 			if $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("magic key"):
 				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = Globals.interactables.LOCKED
 				Globals.gameConsole.addLog("You lock the door with your magic key.")
-				$"/root/World".processGameTurn(null, null, 1)
+				$"/root/World".processGameTurn()
 			elif $"/root/World/Critters/0/Inventory".checkIfItemInInventoryByName("key"):
 				$"/root/World/".interactTurnData = {
 					"interactTurn": true,
@@ -1430,6 +1430,44 @@ func interactWith(_tileToInteractWith):
 			$"/root/World".processGameTurn()
 	else:
 		Globals.gameConsole.addLog("There doesn't seem to be anything to interact with there.")
+	$"/root/World".resetToDefaulGameState()
+
+func kickAt(_tileToKickAt):
+	var _level = $"/root/World".level
+	if _level.grid[_tileToKickAt.x][_tileToKickAt.y].critter != null:
+		var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tileToKickAt.x][_tileToKickAt.y].critter }))
+		if checkIfCritterHasEffect(_critter):
+			$"/root/World".resetToDefaulGameState()
+			return
+		Globals.gameConsole.addLog("You kick the {critterName}!".format({ "critterName": _critter.critterName }))
+		var _randomDmg = randi() % 3 + 1
+		var _strengthDmgIncrease = int($"/root/World/Critters/0".stats.strength / 5)
+		_critter.takeDamage(
+			[
+				{
+					"dmg": [_randomDmg, _randomDmg + _strengthDmgIncrease],
+					"bonusDmg": {},
+					"armorPen": 0,
+					"magicDmg": {
+						"dmg": [0,0],
+						"element": null
+					}
+				}
+			],
+			_tileToKickAt,
+			$"/root/World/Critters/0".critterName
+		)
+	elif _level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
+		if randi () % 8 == 0:
+			_level.grid[_tileToKickAt.x][_tileToKickAt.y].tile = Globals.tiles.DOOR_OPEN
+			_level.grid[_tileToKickAt.x][_tileToKickAt.y].interactable = null
+			_level.addPointToEnemyPathding(_tileToKickAt)
+			Globals.gameConsole.addLog("CRASH!")
+		else:
+			Globals.gameConsole.addLog("WHAM!")
+	else:
+		Globals.gameConsole.addLog("You kick nothing!")
+	$"/root/World".processGameTurn()
 	$"/root/World".resetToDefaulGameState()
 
 

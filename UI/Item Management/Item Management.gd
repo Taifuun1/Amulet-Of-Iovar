@@ -40,51 +40,44 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 			$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
 			$"/root/World".currentGameState = $"/root/World".gameState.LOOT
 			var _containerItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
-			$"/root/World/UI/UITheme/Container".showContainerList(_id, _containerItem.itemName, _containerItem.container, $"/root/World/Critters/0/Inventory".inventory)
+			$"/root/World/UI/UITheme/Container".showContainerList(_id, _containerItem.itemName, _containerItem.container, $"/root/World/Critters/0/Inventory".inventory) 
 			return
-		if $"/root/World".currentGameState == $"/root/World".gameState.READ:
+		elif $"/root/World".currentGameState == $"/root/World".gameState.READ:
 			$"/root/World/Critters/0".readItem(_id)
-			if _processGameTurn:
-				$"/root/World".processGameTurn()
-			return
-		if $"/root/World".currentGameState == $"/root/World".gameState.QUAFF:
+			if !_processGameTurn:
+				return
+		elif $"/root/World".currentGameState == $"/root/World".gameState.QUAFF:
 			$"/root/World/Critters/0".quaffItem(_id)
-			$"/root/World".processGameTurn()
-			return
-		if $"/root/World".currentGameState == $"/root/World".gameState.CONSUME:
+		elif $"/root/World".currentGameState == $"/root/World".gameState.CONSUME:
 			$"/root/World/Critters/0".consumeItem(_id)
-			$"/root/World".processGameTurn()
-			return
-		if $"/root/World".currentGameState == $"/root/World".gameState.ZAP:
+		elif $"/root/World".currentGameState == $"/root/World".gameState.ZAP:
 			$"/root/World/Critters/0".selectedItem = _id
 			var _zappedItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
-			if _zappedItem.identifiedItemName.matchn("wand of light") or _zappedItem.identifiedItemName.matchn("wand of summon critter"):
-				$"/root/World/Critters/0".zapItem(Vector2())
-				$"/root/World".closeMenu()
-				$"/root/World".processGameTurn()
+			if !_zappedItem.identifiedItemName.matchn("wand of light") and !_zappedItem.identifiedItemName.matchn("wand of summon critter"):
+				$"/root/World".closeMenu(false, true)
 				return
-			$"/root/World".closeMenu(false, true)
+			$"/root/World/Critters/0".zapItem(Vector2())
+			$"/root/World".closeMenu()
 			return
-		if $"/root/World".currentGameState == $"/root/World".gameState.THROW:
+		elif $"/root/World".currentGameState == $"/root/World".gameState.THROW:
 			$"/root/World/Critters/0".selectedItem = _id
 			$"/root/World".closeMenu(false, true)
 			return
-		if $"/root/World".currentGameState == $"/root/World".gameState.DIP_ITEM:
+		elif $"/root/World".currentGameState == $"/root/World".gameState.DIP_ITEM:
 			$"/root/World/Critters/0".selectedItem = _id
 			$"/root/World/Critters/0".dipItem(_id)
 			return
-		if $"/root/World".currentGameState == $"/root/World".gameState.DIP:
+		elif $"/root/World".currentGameState == $"/root/World".gameState.DIP:
 			$"/root/World/Critters/0".dipItem(_id)
-			$"/root/World".processGameTurn()
 			return
-		if $"/root/World".currentGameState == $"/root/World".gameState.USE:
+		elif $"/root/World".currentGameState == $"/root/World".gameState.USE:
 			$"/root/World/Critters/0".useItem(_id)
 			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
 			if _item.identifiedItemName.matchn("marker") or _item.identifiedItemName.matchn("magic marker"):
 				$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
 				return
-			$"/root/World".processGameTurn()
-			return
+		$"/root/World".processGameTurn()
+		return
 	
 	var clickedItem = get_node("ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList/{id}".format({ "id": _id }))
 	var isRemoved = false
