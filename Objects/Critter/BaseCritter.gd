@@ -234,22 +234,22 @@ func processCritterEffects():
 					hp = maxhp
 				else:
 					hp += 3
-			if (stats.legerity / 4) + (stats.strength / 4) >= 34:
+			if (stats.legerity / 3) + (stats.strength / 3) >= 34:
 				if hp + 5 > maxhp:
 					hp = maxhp
 				else:
 					hp += 5
-			elif (stats.legerity / 4) + (stats.strength / 4) >= 22:
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 22:
 				if hp + 4 > maxhp:
 					hp = maxhp
 				else:
 					hp += 4
-			elif (stats.legerity / 4) + (stats.strength / 4) >= 16:
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 16:
 				if hp + 3 > maxhp:
 					hp = maxhp
 				else:
 					hp += 3
-			elif (stats.legerity / 4) + (stats.strength / 4) >= 10:
+			elif (stats.legerity / 3) + (stats.strength / 3) >= 10:
 				if hp + 2 > maxhp:
 					hp = maxhp
 				else:

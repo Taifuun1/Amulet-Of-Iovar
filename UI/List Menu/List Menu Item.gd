@@ -7,7 +7,7 @@ func setValues(_name, _changeMenuItems = false, _otherText = null):
 	itemName = _name
 	name = str(_name)
 	
-	$Name.text = _name
+	$Name.text = _name[0].to_upper() + _name.substr(1,-1)
 	if _otherText != null:
 		$OtherText.text = str(_otherText)
 	

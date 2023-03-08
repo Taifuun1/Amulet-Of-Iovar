@@ -153,7 +153,7 @@ func getMinerCritterMove(_critterTile, _level):
 		elif _level.hasPoint(_point):
 			_openPoints.append(Vector2(_point))
 	
-	if _minablePoints.size() != 0 and randi() % 8 == 0:
+	if _minablePoints.size() != 0 and randi() % 18 == 0:
 		return [_critterTile, _minablePoints[randi() % _minablePoints.size()]]
 	elif(randi() % 3 + 1) == 1:
 		return []

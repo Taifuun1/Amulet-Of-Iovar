@@ -93,7 +93,7 @@ func createSea():
 					grid[x][y].tile = Globals.tiles.SEA
 				else:
 					grid[x][y].tile = Globals.tiles.SAND
-					if randi() % 41 == 0:
+					if randi() % 75 == 0:
 						grid[x][y].interactable = Globals.interactables.HIDDEN_ITEM
 			_isSeaTile = !_isSeaTile
 	else:
@@ -109,7 +109,7 @@ func createSea():
 					grid[x][y].tile = Globals.tiles.SEA
 				else:
 					grid[x][y].tile = Globals.tiles.SAND
-					if randi() % 41 == 0:
+					if randi() % 75 == 0:
 						grid[x][y].interactable = Globals.interactables.HIDDEN_ITEM
 			_isSeaTile = !_isSeaTile
 	
@@ -119,19 +119,19 @@ func createSea():
 			grid[_point.x][_point.y].interactable = null
 		else:
 			grid[_point.x][_point.y].tile = Globals.tiles.SAND
-			if randi() % 41 == 0:
+			if randi() % 75 == 0:
 				grid[_point.x][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 		if _seaSide == "north":
 			if randi() % 6 == 0:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SAND
-				if randi() % 41 == 0:
+				if randi() % 75 == 0:
 					grid[_point.x][_point.y - 1].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SEA
 				grid[_point.x][_point.y - 1].interactable = null
 			if !randi() % 6 == 0:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SAND
-				if randi() % 41 == 0:
+				if randi() % 75 == 0:
 					grid[_point.x][_point.y + 1].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SEA
@@ -139,14 +139,14 @@ func createSea():
 		elif _seaSide == "south":
 			if !randi() % 6 == 0:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SAND
-				if randi() % 41 == 0:
+				if randi() % 75 == 0:
 					grid[_point.x][_point.y - 1].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SEA
 				grid[_point.x][_point.y - 1].interactable = null
 			if randi() % 6 == 0:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SAND
-				if randi() % 41 == 0:
+				if randi() % 75 == 0:
 					grid[_point.x][_point.y + 1].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SEA
@@ -154,14 +154,14 @@ func createSea():
 		elif _seaSide == "west":
 			if randi() % 6 == 0:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SAND
-				if randi() % 41 == 0:
+				if randi() % 75 == 0:
 					grid[_point.x - 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SEA
 				grid[_point.x - 1][_point.y].interactable = null
 			if !randi() % 6 == 0:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SAND
-				if randi() % 41 == 0:
+				if randi() % 75 == 0:
 					grid[_point.x + 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SEA
@@ -169,14 +169,14 @@ func createSea():
 		elif _seaSide == "east":
 			if !randi() % 6 == 0:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SAND
-				if randi() % 41 == 0:
+				if randi() % 75 == 0:
 					grid[_point.x - 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SEA
 				grid[_point.x - 1][_point.y].interactable = null
 			if randi() % 6 == 0:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SAND
-				if randi() % 41 == 0:
+				if randi() % 75 == 0:
 					grid[_point.x + 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SEA

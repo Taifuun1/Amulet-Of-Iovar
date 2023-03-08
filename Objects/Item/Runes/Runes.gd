@@ -7,7 +7,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneEarioFleir.png"),
 			"type": "Rune",
 			"category": "Eario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Fleir",
 			"enchantable": false,
 			"stackable": true
@@ -19,7 +19,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneEarioFrost.png"),
 			"type": "Rune",
 			"category": "Eario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Frost",
 			"enchantable": false,
 			"stackable": true
@@ -31,7 +31,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneEarioThunder.png"),
 			"type": "Rune",
 			"category": "Eario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Thunder",
 			"enchantable": false,
 			"stackable": true
@@ -43,7 +43,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneEarioGleeie'er.png"),
 			"type": "Rune",
 			"category": "Eario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Gleeie'er",
 			"enchantable": false,
 			"stackable": true
@@ -55,7 +55,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneEarioToxix.png"),
 			"type": "Rune",
 			"category": "Eario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Toxix",
 			"enchantable": false,
 			"stackable": true
@@ -67,7 +67,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneLuirioLine.png"),
 			"type": "Rune",
 			"category": "Luirio",
-			"weight": 20,
+			"weight": 10,
 			"value": "Line",
 			"enchantable": false,
 			"stackable": true
@@ -79,7 +79,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneLuirioCone.png"),
 			"type": "Rune",
 			"category": "Luirio",
-			"weight": 20,
+			"weight": 10,
 			"value": "Cone",
 			"enchantable": false,
 			"stackable": true
@@ -91,7 +91,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneLuirioAdjacent.png"),
 			"type": "Rune",
 			"category": "Luirio",
-			"weight": 20,
+			"weight": 10,
 			"value": "Adjacent",
 			"enchantable": false,
 			"stackable": true
@@ -103,7 +103,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneLuirioPoint.png"),
 			"type": "Rune",
 			"category": "Luirio",
-			"weight": 20,
+			"weight": 10,
 			"value": "Point",
 			"enchantable": false,
 			"stackable": true
@@ -115,7 +115,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneLuirioFourWay.png"),
 			"type": "Rune",
 			"category": "Luirio",
-			"weight": 20,
+			"weight": 10,
 			"value": "Fourway",
 			"enchantable": false,
 			"stackable": true
@@ -127,7 +127,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneHearioGas.png"),
 			"type": "Rune",
 			"category": "Heario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Gas",
 			"enchantable": false,
 			"stackable": true
@@ -139,7 +139,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneHearioTrue.png"),
 			"type": "Rune",
 			"category": "Heario",
-			"weight": 20,
+			"weight": 10,
 			"value": "True",
 			"enchantable": false,
 			"stackable": true
@@ -151,7 +151,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneHearioBolt.png"),
 			"type": "Rune",
 			"category": "Heario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Bolt",
 			"enchantable": false,
 			"stackable": true
@@ -163,7 +163,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneHearioFragment.png"),
 			"type": "Rune",
 			"category": "Heario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Fragment",
 			"enchantable": false,
 			"stackable": true
@@ -175,7 +175,7 @@ var runes = {
 			"unidentifiedTexture": load("res://Assets/Runes/RuneHearioFlow.png"),
 			"type": "Rune",
 			"category": "Heario",
-			"weight": 20,
+			"weight": 10,
 			"value": "Flow",
 			"enchantable": false,
 			"stackable": true

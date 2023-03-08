@@ -38,11 +38,11 @@ func animateCycle():
 		return
 	for _tile in _cycleTiles:
 		if typeof(_tile) == TYPE_VECTOR2:
-			animateTile(_tile.tile)
+			animateTile(_tile)
 		else:
 			animateTile(_tile.tile, _tile.angle)
-		if checkIfCritterHit:
-			checkIfCritterIsHit(_tile.tile)
+			if checkIfCritterHit:
+				checkIfCritterIsHit(_tile.tile)
 	$Timer.start()
 
 func animateTile(_position, _angle = null):

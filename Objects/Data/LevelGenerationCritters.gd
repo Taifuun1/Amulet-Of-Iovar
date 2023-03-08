@@ -17,7 +17,6 @@ var critterLevelGenerationList = {
 			"blobs": ["Slerp", "Sluerp"],
 			"brebs": ["Fleir breb"],
 			"canines": ["Wolf"],
-			"elves": ["Elf hunter"],
 			"floatingSpheres": ["Floating eye", "Unstable floating sphere"],
 			"felines": ["Cat"],
 			"kobolds": ["Tiny kobold"],
@@ -131,7 +130,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"miningOutpost": {
-		"amount": [7, 12],
+		"amount": [4, 8],
 		"critters": {
 			"dwarves": ["Dwarf miner", "Dwarf engineer", "Dwarf smith"],
 			"humans": ["Guard", "Guard captain"]
@@ -156,7 +155,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"beach": {
-		"amount": [2, 4],
+		"amount": [2, 3],
 		"critters": {
 			"aquaticLife": ["Fiddler crab", "Ringed seal"],
 			"blobs": ["Slerp", "Sluerp"],
@@ -171,7 +170,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"banditWarcamp": {
-		"amount": [8, 12],
+		"amount": [8, 10],
 		"critters": {
 			"ants": ["Soldier ant"],
 			"blobs": ["Slerp"],
@@ -189,7 +188,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeonHalls1": {
-		"amount": [6, 10],
+		"amount": [6, 8],
 		"critters": {
 			"ants": ["Soldier ant"],
 			"blobs": ["Slerp", "Sluerp"],
@@ -208,7 +207,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeonHalls2": {
-		"amount": [7, 11],
+		"amount": [7, 9],
 		"critters": {
 			"ants": ["Soldier ant", "Double-pattern ant"],
 			"blobs": ["Slerp", "Sluerp"],
@@ -230,7 +229,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dungeonHalls3": {
-		"amount": [8, 12],
+		"amount": [8, 10],
 		"critters": {
 			"ants": ["Double-pattern ant"],
 			"aquaticLife": ["Tonatuna"],

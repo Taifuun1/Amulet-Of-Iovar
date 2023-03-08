@@ -61,13 +61,13 @@ var humans = [
 		"piety": "Neutral",
 		"level": 8,
 		"expDropAmount": 9,
-		"hp": 31,
+		"hp": 28,
 		"mp": 8,
 		"ac": 5,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [8,11],
+				"dmg": [7,10],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -116,13 +116,13 @@ var humans = [
 		"piety": "Neutral",
 		"level": 11,
 		"expDropAmount": 15,
-		"hp": 39,
+		"hp": 36,
 		"mp": 10,
 		"ac": 7,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [9,12],
+				"dmg": [8,11],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -131,7 +131,7 @@ var humans = [
 				}
 			},
 			{
-				"dmg": [5,6],
+				"dmg": [4,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

@@ -3,7 +3,6 @@
 [ext_resource path="res://Assets/Themes/dum2.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/Damage Number/Damage Number.gd" type="Script" id=2]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 36
 outline_size = 1

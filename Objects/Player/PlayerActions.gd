@@ -713,11 +713,13 @@ func zapItem(_direction):
 							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE
 							_level.addPointToEnemyPathding(_tile)
 							_level.addPointToPathPathding(_tile)
+							_level.grid[_tile.x][_tile.y].interactable = null
 							_isTileMined = true
 						if _level.grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_CAVE_DEEP:
 							_level.grid[_tile.x][_tile.y].tile = Globals.tiles.FLOOR_CAVE_DEEP
 							_level.addPointToEnemyPathding(_tile)
 							_level.addPointToPathPathding(_tile)
+							_level.grid[_tile.x][_tile.y].interactable = null
 							_isTileMined = true
 						if !Globals.isTileFree(_tile, _level.grid) or _level.grid[_tile.x][_tile.y].tile == Globals.tiles.DOOR_CLOSED:
 							break
@@ -928,7 +930,7 @@ func throwItem(_direction):
 			var _checkedTile = _playerPosition + _direction * i
 			if !Globals.isTileFree(_checkedTile, _grid) or _grid[_checkedTile.x][_checkedTile.y].tile == Globals.tiles.DOOR_CLOSED:
 				break
-			_tiles.append(_checkedTile)
+			_tiles.append([_checkedTile])
 			if _grid[_checkedTile.x][_checkedTile.y].critter != null:
 				_critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _grid[_checkedTile.x][_checkedTile.y].critter }))
 				_tile = _checkedTile
@@ -1286,7 +1288,7 @@ func dipItem(_id):
 func interactWith(_tileToInteractWith):
 	var _level = $"/root/World".level
 	if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter != null:
-		var _critter = get_node($"/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }))
+		var _critter = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].critter }))
 		GlobalGameConsoleMessages.getInteractionFlavorMessage(_critter.critterName, _critter.aI.aI)
 	elif _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable != null:
 		if _level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable == Globals.interactables.HIDDEN_ITEM:
@@ -1296,7 +1298,7 @@ func interactWith(_tileToInteractWith):
 					$"/root/World/Items/Items".createItem("message in a bottle", _tileToInteractWith)
 					Globals.gameConsole.addLog("You discover a message in a bottle!")
 				else:
-					$"/root/World/Items/Items".createItem($Items/Items.getRandomItem(), _tileToInteractWith)
+					$"/root/World/Items/Items".createItem($"/root/World/Items/Items".getRandomItem(), _tileToInteractWith)
 					Globals.gameConsole.addLog("You discover an item!")
 				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
 				$"/root/World".processGameTurn()
@@ -1351,7 +1353,7 @@ func interactWith(_tileToInteractWith):
 #				$Items/Items.createItem("beans", _tileToInteractWith)
 #				Globals.gameConsole.addLog("You pick beans from the plant.")
 #				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null
-			elif randi() % 16 == 0:
+			elif randi() % 10 == 0:
 				$"/root/World/Items/Items".createItem("tomato", _tileToInteractWith)
 				Globals.gameConsole.addLog("You pick a tomato from the plant.")
 				_level.grid[_tileToInteractWith.x][_tileToInteractWith.y].interactable = null

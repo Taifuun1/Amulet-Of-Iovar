@@ -226,8 +226,12 @@ func getAttacks(_stats):
 			_newBonusDamage.classBonusDamage = 1
 		var _earioMagicType = $"/root/World/UI/UITheme/Runes".isOnlyEarioEquipped()
 		if typeof(_earioMagicType) != TYPE_BOOL and (_newMagicDamage.element == null or _newMagicDamage.element.matchn(_earioMagicType)):
-			_newMagicDamage.dmg[0] += 1
-			_newMagicDamage.dmg[1] += 1
+			if $"/root/World/Critters/0".critterClass.matchn("rogue") and _earioMagicType.matchn("toxix"):
+				_newMagicDamage.dmg[0] += 2
+				_newMagicDamage.dmg[1] += 2
+			else:
+				_newMagicDamage.dmg[0] += 1
+				_newMagicDamage.dmg[1] += 1
 			_newMagicDamage.element = _earioMagicType.capitalize()
 		_attacks.append(
 			{
@@ -258,7 +262,7 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _playerSkills.sword.level == 1:
 			_additionalDamage += 1
 		
-		_dmg = int(_stats.balance / 7 + _additionalDamage)
+		_dmg = int(_stats.balance / 7 + enchantment + _additionalDamage)
 		
 		if _dualWielding and _playerSkills["dualWield"].level < 2:
 			_dmg -= 4
@@ -285,7 +289,7 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _playerSkills["two-hander"].level == 0:
 			_additionalDamage -= 2
 		
-		_dmg = int(_stats.strength / 10 + _additionalDamage)
+		_dmg = int(_stats.strength / 10 + enchantment + _additionalDamage)
 		
 		return {
 			"dmg": _dmg,
@@ -300,8 +304,7 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills.dagger.level == 3:
-			_additionalDamage += 1
-			_d += 1
+			_additionalDamage += 3
 		elif _playerSkills.dagger.level == 2:
 			_additionalDamage += 1
 		elif _playerSkills.dagger.level == 0:
@@ -312,7 +315,7 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _stats.legerity > 19:
 			_d += 1
 		
-		_dmg = int(_stats.legerity / 8 + _additionalDamage)
+		_dmg = int(_stats.legerity / 8 + enchantment / 2 + _additionalDamage)
 		
 		if _dualWielding and _playerSkills["dualWield"].level < 1:
 			_dmg -= 3
@@ -341,7 +344,7 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _playerSkills.mace.level == 0:
 			_additionalDamage -= 1
 		
-		_dmg = int((_stats.strength / 8) + (_stats.balance / 8) + _additionalDamage)
+		_dmg = int((_stats.strength / 8) + (_stats.balance / 8) + enchantment + _additionalDamage)
 		
 		if _dualWielding and _playerSkills["dualWield"].level < 2:
 			_dmg -= 5
@@ -376,7 +379,7 @@ func calculateWeaponAttackIncrease(_stats):
 		elif _stats.legerity > 15:
 			_d += 1
 		
-		_dmg = int(_stats.legerity / 15 + _additionalDamage)
+		_dmg = int(_stats.legerity / 15 + enchantment / 2 + _additionalDamage)
 		
 		if _dualWielding and _playerSkills["dualWield"].level < 2:
 			_dmg -= 3

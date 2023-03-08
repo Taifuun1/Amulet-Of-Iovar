@@ -774,7 +774,7 @@ func checkIfCritterIsPlayer(_critterName):
 
 func isCritterAwakened(_critterTile, _playerTile, _level):
 	if aI.activationDistance != null:
-		if _level.calculatePath(_critterTile, _playerTile).size() <= aI.activationDistance:
+		if _level.calculatePath(_critterTile, _playerTile).size() != 0 and _level.calculatePath(_critterTile, _playerTile).size() <= aI.activationDistance:
 			awakeCritter(_critterTile, _playerTile)
 			$"/root/World/UI/UITheme/DialogMenu".setText(critterName)
 

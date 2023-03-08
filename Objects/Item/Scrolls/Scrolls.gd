@@ -210,7 +210,9 @@ var scrolls = {
 			"points": 25,
 			"enchantable": false,
 			"stackable": true
-		},
+		}
+	],
+	"legendary": [
 		{
 			"itemName": "Scroll of genocide",
 			"unidentifiedItemName": null,
