@@ -72,21 +72,33 @@ var statusEffectsData = {
 	},
 	"overencumbured": {
 		"label": "oecb",
-		"description": "You are overencumbured. (+1 turn on move or attack)",
+		"description": "You are overencumbured. (-2 leg and -3 bal)",
 		"color": "#2357db",
-		"texture": load("res://Assets/Status Effects/StatusEffectOverEncumbured.png")
+		"texture": load("res://Assets/Status Effects/StatusEffectOverEncumbured.png"),
+		"effects": {
+			"legerity": -2,
+			"balance": -3
+		}
 	},
 	"burdened": {
 		"label": "brdn",
-		"description": "You are burdened. (+2 turns on move or attack)",
+		"description": "You are burdened. (-3 leg and -4 bal, +1 turns on move or attack)",
 		"color": "#0b3296",
-		"texture": load("res://Assets/Status Effects/StatusEffectBurdened.png")
+		"texture": load("res://Assets/Status Effects/StatusEffectBurdened.png"),
+		"effects": {
+			"legerity": -3,
+			"balance": -4
+		}
 	},
 	"flattened": {
 		"label": "flat",
-		"description": "You are flattened. (+3 turns on move or attack)",
+		"description": "You are flattened. (-4 leg and -5 bal, +2 turns on move or attack)",
 		"color": "#0b3296",
-		"texture": load("res://Assets/Status Effects/StatusEffectFlattened.png")
+		"texture": load("res://Assets/Status Effects/StatusEffectFlattened.png"),
+		"effects": {
+			"legerity": -4,
+			"balance": -5
+		}
 	},
 	"fast digestion": {
 		"label": "fsd",
@@ -120,7 +132,7 @@ var statusEffectsData = {
 	},
 	"backscattering": {
 		"label": "bsc",
-		"description": "You reflect some magic attacks. (Take no damage from rock throw and dragon breath)",
+		"description": "You reflect some magic attacks. (Take no damage from rock throw and dragon breath -spells)",
 		"color": "#7bcaea",
 		"texture": load("res://Assets/Status Effects/StatusEffectBackscattering.png")
 	},

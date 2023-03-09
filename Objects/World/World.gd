@@ -428,6 +428,7 @@ func processCrittersSpawnStatus():
 func processPlayerEffects():
 	$Critters/"0".calculateHungerStats()
 	$Critters/"0".calculateWeightStats()
+	$Critters/"0".setStats()
 	$Critters/"0".calculateStatusEffectsAndStatusStates()
 	$Critters/"0".processPlayerSpecificEffects()
 	$Critters/"0".processCritterEffects()

@@ -476,12 +476,13 @@ func addToInventory(_items):
 ### Player stat update functions ###
 ####################################
 
-func processPlayerSpecificEffects():
+func setStats():
 	#####################
 	## Copy base stats ##
 	#####################
-	stats = baseStats.duplicate(true)
-	
+	stats = baseStats.duplicate(true)	
+
+func processPlayerSpecificEffects():
 	############
 	## Hunger ##
 	############
@@ -672,15 +673,15 @@ func calculateWeightStats(_visual = false):
 	elif _weight > maxCarryWeight.overEncumbured and _weight <= maxCarryWeight.burdened:
 		statusStates.weight.state = 1
 		statusStates.weight.current = "overencumbured"
-		turnsUntilAction = 1
+		turnsUntilAction = 0
 	elif _weight > maxCarryWeight.burdened and _weight <= maxCarryWeight.flattened:
 		statusStates.weight.state = 2
 		statusStates.weight.current = "burdened"
-		turnsUntilAction = 2
+		turnsUntilAction = 1
 	elif _weight > maxCarryWeight.flattened:
 		statusStates.weight.state = 3
 		statusStates.weight.current = "flattened"
-		turnsUntilAction = 3
+		turnsUntilAction = 2
 	
 	if _weight > 0 and _weight <= maxCarryWeight.overEncumbured:
 		carryWeightBounds = {
@@ -705,15 +706,13 @@ func calculateWeightStats(_visual = false):
 
 func calculateStatusEffectsAndStatusStates():
 	for _statusEffect in statusEffects.keys():
-		if checkIfStatusEffectIsInEffect(_statusEffect) and statusEffectsData[_statusEffect].has("effects"):
+		if statusEffectsData[_statusEffect].has("effects") and checkIfStatusEffectIsInEffect(_statusEffect):
 			for _stat in statusEffectsData[_statusEffect].effects:
 				stats[_stat] += statusEffectsData[_statusEffect].effects[_stat]
-	if checkIfStatusStateIsInEffect("hunger") and statusEffectsData[statusStates.hunger.current.to_lower()].has("effects"):
-		for _stat in statusEffectsData[statusStates.hunger.current.to_lower()].effects:
-			stats[_stat] += statusEffectsData[statusStates.hunger.current.to_lower()].effects[_stat]
-	if checkIfStatusStateIsInEffect("weight") and statusEffectsData[statusStates.weight.current.to_lower()].has("effects"):
-		for _stat in statusEffectsData[statusStates.weight.current.to_lower()].effects:
-			stats[_stat] += statusEffectsData[statusStates.weight.current.to_lower()].effects[_stat]
+	for _statusState in statusStates.keys():
+		if !statusStates[_statusState].current.empty() and statusEffectsData[statusStates[_statusState].current].has("effects") and checkIfStatusStateIsInEffect(_statusState):
+			for _stat in statusEffectsData[statusStates[_statusState].current].effects:
+				stats[_stat] += statusEffectsData[statusStates[_statusState].current].effects[_stat]
 
 func calculateEquipmentStats():
 	# Armor class

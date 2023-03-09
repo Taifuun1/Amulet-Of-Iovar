@@ -323,7 +323,6 @@ func calculateMagicDamage():
 	if _magicAttacks[0].magicDmg.dmg[0] != 0 and _magicAttacks[0].magicDmg.dmg[1] != 0:
 		_magicAttacks[0].magicDmg.dmg = [_magicAttacks[0].magicDmg.dmg[0] + bonusMagicDmg, _magicAttacks[0].magicDmg.dmg[1] + bonusMagicDmg]
 	spellDamage = _magicAttacks
-	$"/root/World/Critters/0".updatePlayerStats()
 
 func calculateMagicDamageIncrease(_type):
 	var _stats = $"/root/World/Critters/0".stats
