@@ -56,7 +56,32 @@ var potions = {
 			"type": "Potion",
 			"category": null,
 			"weight": 12,
-			"value": null,
+			"value": {
+				"dmg": {
+					"formal": [
+						{
+							"dmg": [0,0],
+							"bonusDmg": {},
+							"armorPen": 0,
+							"magicDmg": {
+								"dmg": [5,14],
+								"element": "Frost"
+							}
+						}
+					],
+					"blasphemous": [
+						{
+							"dmg": [0,0],
+							"bonusDmg": {},
+							"armorPen": 0,
+							"magicDmg": {
+								"dmg": [4,12],
+								"element": "Frost"
+							}
+						}
+					]
+				}
+			},
 			"enchantable": false,
 			"stackable": true
 		}

@@ -13,7 +13,6 @@ var expDropAmount
 var drops
 var abilityHits
 var currentCritterAbilityHit = null
-var activationDistance = null
 var hostileRaces = []
 var etherealnessHit = false
 var isMimicked = false
@@ -75,6 +74,7 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 		currentCritterAbilityHit = _critter.currentAbilityHit
 	elif _critter.abilityHits.size() != 0:
 		currentCritterAbilityHit = randi() % _critter.abilityHits.size()
+	
 	resistances = _critter.resistances
 	
 	if _critter.has("statusEffects"):
@@ -87,6 +87,10 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 	
 	if _critter.has("hostileRaces"):
 		hostileRaces = _critter.hostileRaces
+	if _critter.has("etherealnessHit"):
+		etherealnessHit = _critter.etherealnessHit
+	if _critter.has("isMimicked"):
+		isMimicked = _critter.isMimicked
 	
 	$Tooltip/TooltipContainer.updateTooltip(critterName, _tooltip.description, _critter.texture)
 
@@ -806,6 +810,9 @@ func getCritterSaveData():
 		drops = drops,
 		abilityHits = abilityHits,
 		currentCritterAbilityHit = currentCritterAbilityHit,
+		hostileRaces = hostileRaces,
+		etherealnessHit = etherealnessHit,
+		isMimicked = isMimicked,
 		texture = $CritterSprite.texture.get_path()
 	}
 	_critterData.merge(getBaseCritterSaveData())

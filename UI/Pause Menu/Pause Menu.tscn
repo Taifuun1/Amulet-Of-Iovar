@@ -521,6 +521,37 @@ align = 1
 valign = 1
 clip_text = true
 
+[node name="ItemMenu43" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 600.0
+margin_right = 438.0
+margin_bottom = 650.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu43"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 2 )
+text = "Select all"
+valign = 1
+clip_text = true
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu43"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = SubResource( 4 )
+text = ","
+align = 1
+valign = 1
+clip_text = true
+
 [node name="ItemMenu42" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
 margin_top = 600.0
 margin_right = 438.0

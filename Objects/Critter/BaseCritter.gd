@@ -94,20 +94,7 @@ func calculateDmg(_attack, _activeArmorSets = null):
 	}
 	
 	if _attack.dmg != null:
-		var _acReduction = 100
-		var _armorClassAfterArmorPen = ac - _attack.armorPen
-		if _armorClassAfterArmorPen < 0: _armorClassAfterArmorPen = 0
-		var _damageReductionCount = int(_armorClassAfterArmorPen / 5)
-		var _damageReductionRemainder = _armorClassAfterArmorPen - _damageReductionCount * 5
-		if _damageReductionCount == 0:
-			_acReduction = _acReduction - _damageReductionRemainder * 4
-			_acReduction = float(_acReduction) / 100
-		else:
-			for _damageReduction in _damageReductionCount:
-				_acReduction = _acReduction * 0.8
-			_acReduction = _acReduction * (float(100 - _damageReductionRemainder * 4) / 100)
-			_acReduction = float(_acReduction) / 100
-		
+		var _acReduction = calculateACReduction(_attack.armorPen)
 		var _floorDmg = int(_attack.dmg[0])
 		var _dmgVariation = int(_attack.dmg[1] - _attack.dmg[0])
 		
@@ -144,6 +131,21 @@ func calculateDmg(_attack, _activeArmorSets = null):
 		"magicDmg": int(damage.magicDmg)
 	}
 
+func calculateACReduction(_armorPen):
+	var _acReduction = 100
+	var _armorClassAfterArmorPen = ac - _armorPen
+	if _armorClassAfterArmorPen < 0: _armorClassAfterArmorPen = 0
+	var _damageReductionCount = int(_armorClassAfterArmorPen / 5)
+	var _damageReductionRemainder = _armorClassAfterArmorPen - _damageReductionCount * 5
+	if _damageReductionCount == 0:
+		_acReduction = _acReduction - _damageReductionRemainder * 4
+		_acReduction = float(_acReduction) / 100
+	else:
+		for _damageReduction in _damageReductionCount:
+			_acReduction = _acReduction * 0.8
+		_acReduction = _acReduction * (float(100 - _damageReductionRemainder * 4) / 100)
+		_acReduction = float(_acReduction) / 100
+	return _acReduction
 
 
 ###############################

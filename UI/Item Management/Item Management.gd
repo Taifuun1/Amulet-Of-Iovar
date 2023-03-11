@@ -6,23 +6,32 @@ var items = []
 var selectedItems = []
 
 var chooseOnClick = false
+var allSelected = false
 
 func sortItems(a, b):
 	if get_node("/root/World/Items/{itemId}".format({ "itemId": a })).itemName < get_node("/root/World/Items/{itemId}".format({ "itemId": b })).itemName:
 		return true
 	return false
 
+
 func create():
 	name = "ItemManagement"
 	hide()
 
+func _input(_event):
+	if Input.is_action_just_pressed("SELECT_ALL") and visible and !chooseOnClick:
+		for _itemId in items:
+			toggleItemChecked(_itemId, !allSelected)
+		allSelected = !allSelected
+
 func showItemManagementList(_title, _chooseOnClick = true):
 	$ItemManagementContainer/TitleContainer/Title.text = _title
 	chooseOnClick = _chooseOnClick
+	allSelected = false
 	items.sort_custom(self, "sortItems")
-	for item in items:
+	for itemId in items:
 		var newItem = menuItem.instance()
-		var _item = get_node("/root/World/Items/{id}".format({ "id": item }))
+		var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": itemId }))
 		$ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList.add_child(newItem)
 		newItem.setValues(_item, "Item management", _chooseOnClick)
 	show()
@@ -34,25 +43,25 @@ func hideItemManagementList():
 	selectedItems = []
 	hide()
 
-func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
+func _on_Item_Management_List_Clicked(_itemId, _processGameTurn = true):
 	if chooseOnClick:
 		if $"/root/World".currentGameState == $"/root/World".gameState.PICK_LOOTABLE:
 			$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
 			$"/root/World".currentGameState = $"/root/World".gameState.LOOT
-			var _containerItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
-			$"/root/World/UI/UITheme/Container".showContainerList(_id, _containerItem.itemName, _containerItem.container, $"/root/World/Critters/0/Inventory".inventory) 
+			var _containerItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
+			$"/root/World/UI/UITheme/Container".showContainerList(_itemId, _containerItem.itemName, _containerItem.container, $"/root/World/Critters/0/Inventory".inventory) 
 			return
 		elif $"/root/World".currentGameState == $"/root/World".gameState.READ:
-			$"/root/World/Critters/0".readItem(_id)
+			$"/root/World/Critters/0".readItem(_itemId)
 			if !_processGameTurn:
 				return
 		elif $"/root/World".currentGameState == $"/root/World".gameState.QUAFF:
-			$"/root/World/Critters/0".quaffItem(_id)
+			$"/root/World/Critters/0".quaffItem(_itemId)
 		elif $"/root/World".currentGameState == $"/root/World".gameState.CONSUME:
-			$"/root/World/Critters/0".consumeItem(_id)
+			$"/root/World/Critters/0".consumeItem(_itemId)
 		elif $"/root/World".currentGameState == $"/root/World".gameState.ZAP:
-			$"/root/World/Critters/0".selectedItem = _id
-			var _zappedItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
+			$"/root/World/Critters/0".selectedItem = _itemId
+			var _zappedItem = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 			if !_zappedItem.identifiedItemName.matchn("wand of light") and !_zappedItem.identifiedItemName.matchn("wand of summon critter"):
 				$"/root/World".closeMenu(false, true)
 				return
@@ -60,33 +69,38 @@ func _on_Item_Management_List_Clicked(_id, _processGameTurn = true):
 			$"/root/World".closeMenu()
 			return
 		elif $"/root/World".currentGameState == $"/root/World".gameState.THROW:
-			$"/root/World/Critters/0".selectedItem = _id
+			$"/root/World/Critters/0".selectedItem = _itemId
 			$"/root/World".closeMenu(false, true)
 			return
 		elif $"/root/World".currentGameState == $"/root/World".gameState.DIP_ITEM:
-			$"/root/World/Critters/0".selectedItem = _id
-			$"/root/World/Critters/0".dipItem(_id)
+			$"/root/World/Critters/0".selectedItem = _itemId
+			$"/root/World/Critters/0".dipItem(_itemId)
 			return
 		elif $"/root/World".currentGameState == $"/root/World".gameState.DIP:
-			$"/root/World/Critters/0".dipItem(_id)
+			$"/root/World/Critters/0".dipItem(_itemId)
 			return
 		elif $"/root/World".currentGameState == $"/root/World".gameState.USE:
-			$"/root/World/Critters/0".useItem(_id)
-			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
+			$"/root/World/Critters/0".useItem(_itemId)
+			var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 			if _item.identifiedItemName.matchn("marker") or _item.identifiedItemName.matchn("magic marker"):
 				$"/root/World/UI/UITheme/ItemManagement".hideItemManagementList()
 				return
 		$"/root/World".processGameTurn()
 		return
 	
-	var clickedItem = get_node("ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList/{id}".format({ "id": _id }))
-	var isRemoved = false
-	for _item in range(selectedItems.duplicate().size()):
-		if selectedItems[_item] == clickedItem.id:
-			selectedItems.remove(_item)
-			isRemoved = true
-			clickedItem.get_node("CheckAndNameContainer/Check").pressed = false
-			break
-	if !isRemoved:
-		selectedItems.append(_id)
-		clickedItem.get_node("CheckAndNameContainer/Check").pressed = true
+	toggleItemChecked(_itemId)
+
+func toggleItemChecked(_itemId, _checkSpecific = null):
+	var clickedItem = get_node("ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList/{itemId}".format({ "itemId": _itemId }))
+	if _checkSpecific == null:
+		if clickedItem.get_node("CheckAndNameContainer/Check").pressed:
+			selectedItems.remove(_itemId)
+		else:
+			selectedItems.append(_itemId)
+		clickedItem.get_node("CheckAndNameContainer/Check").pressed = !clickedItem.get_node("CheckAndNameContainer/Check").pressed
+	else:
+		if _checkSpecific and !selectedItems.has("itemId"):
+			selectedItems.append(_itemId)
+		elif !_checkSpecific and selectedItems.has("itemId"):
+			selectedItems.remove(_itemId)
+		clickedItem.get_node("CheckAndNameContainer/Check").pressed = _checkSpecific

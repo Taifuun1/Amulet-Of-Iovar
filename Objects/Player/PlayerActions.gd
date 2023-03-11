@@ -200,9 +200,14 @@ func readItem(_id):
 					if _itemId != null:
 						_areEquipmentEmpty = false
 				if !_areEquipmentEmpty:
+					var _randomizedEquipmentSlots = []
+					for _equipmentSlot in _equipmentNode.equipment.duplicate(true):
+						_randomizedEquipmentSlots.append(_equipmentSlot)
+					_randomizedEquipmentSlots.shuffle()
 					if _readItem.piety.matchn("reverent"):
 						var _enchantCount = 0
-						for _itemId in _equipmentNode.equipment.values():
+						for _slot in _randomizedEquipmentSlots:
+							var _itemId = _equipmentNode.equipment[_slot]
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 								if _item.enchantment < 3:
@@ -214,7 +219,8 @@ func readItem(_id):
 								if _enchantCount == 2:
 									break
 					elif _readItem.piety.matchn("formal"):
-						for _itemId in _equipmentNode.equipment.values():
+						for _slot in _randomizedEquipmentSlots:
+							var _itemId = _equipmentNode.equipment[_slot]
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 								if _item.enchantment < 3:
@@ -224,7 +230,8 @@ func readItem(_id):
 									Globals.gameConsole.addLog("The {itemName} vibrates slightly.".format({ "itemName": _item.itemName }))
 								break
 					elif _readItem.piety.matchn("blasphemous"):
-						for _itemId in _equipmentNode.equipment.values():
+						for _slot in _randomizedEquipmentSlots:
+							var _itemId = _equipmentNode.equipment[_slot]
 							if _itemId != null:
 								var _item = get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId }))
 								if _item.enchantment > -3:
@@ -920,6 +927,8 @@ func throwItem(_direction):
 	var _playerPosition = $"/root/World".level.getCritterTile(0)
 	var _thrownItem = get_node("/root/World/Items/{id}".format({ "id": selectedItem }))
 	selectedItem = null
+	var _hitCritter = false
+	var _damage = null
 	if _thrownItem.type.matchn("potion"):
 		Globals.gameConsole.addLog("You throw the {itemName}.".format({ "itemName": _thrownItem.itemName }))
 		var _grid = $"/root/World".level.grid
@@ -956,37 +965,13 @@ func throwItem(_direction):
 						Globals.gameConsole.addLog("The {potion} burns the {critterName}!".format({ "potion": _thrownItem.itemName, "critterName": _critter.critterName }))
 					elif _thrownItem.piety.matchn("formal"):
 						_critter.statusEffects.toxix = 8
-						_critter.takeDamage(
-							[
-								{
-									"dmg": [0,0],
-									"bonusDmg": {},
-									"armorPen": 0,
-									"magicDmg": {
-										"dmg": [4,4],
-										"element": "Toxix"
-									}
-								}
-							],
-							_tile,
-							_critter.critterName
-						)
+						_damage = _thrownItem.value.dmg[_thrownItem.piety.to_lower()]
+						_hitCritter = true
 						Globals.gameConsole.addLog("The {potion} burns the {critterName}!".format({ "potion": _thrownItem.itemName, "critterName": _critter.critterName }))
 					elif _thrownItem.piety.matchn("blasphemous"):
 						_critter.statusEffects.toxix = 16
-						_critter.takeDamage(
-							{
-								"dmg": [0,0],
-								"bonusDmg": {},
-								"armorPen": 0,
-								"magicDmg": {
-									"dmg": [8,8],
-									"element": "Toxix"
-								}
-							},
-							_tile,
-							_critter.critterName
-						)
+						_damage = _thrownItem.value.dmg[_thrownItem.piety.to_lower()]
+						_hitCritter = true
 						Globals.gameConsole.addLog("The {potion} burns the {critterName} badly!".format({ "potion": _thrownItem.itemName, "critterName": _critter.critterName }))
 					Globals.isItemIdentified(_thrownItem)
 				"potion of heal":
@@ -1063,7 +1048,7 @@ func throwItem(_direction):
 			$"/root/World/Items/Items".removeItem(_thrownItem.id)
 		
 		var _projectile = load("res://Objects/Projectile/Projectile.tscn").instance()
-		_projectile.create(_tiles, { "texture": _thrownItem.itemTexture })
+		_projectile.create(_tiles, { "texture": _thrownItem.itemTexture, "damage": _damage }, _hitCritter)
 		$"/root/World/Animations".add_child(_projectile)
 		# warning-ignore:return_value_discarded
 		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_onPlayerAnimationDone")
@@ -1184,20 +1169,21 @@ func useItem(_id):
 						_blankPaper = _itemNode
 				if _blankPaper == null:
 					Globals.gameConsole.addLog("You don't have a blank scroll.")
-				for _rarity in $"/root/World/Items/Items".items.scroll:
-					for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
-						if (
-							GlobalItemInfo.globalItemInfo.has(_scroll.itemName) and
-							GlobalItemInfo.globalItemInfo[_scroll.itemName].identified
-						):
-							_scrolls.append(_scroll.itemName)
-							_letters[_scroll.itemName] = _scroll.value.letters
-				for _item in $"/root/World/Critters/0".inventory.inventory:
-					var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
-					if _itemNode.identifiedItemName.matchn("ink bottle"):
-						_ink += _itemNode.value.ink
-				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Write what? ({ink} letters of ink)".format({ "ink": _ink }), _scrolls, _usedItem, false, { "ink": _ink, "letters": _letters, "blankPaper": _blankPaper })
-				_additionalChoices = true
+				else:
+					for _rarity in $"/root/World/Items/Items".items.scroll:
+						for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
+							if (
+								GlobalItemInfo.globalItemInfo.has(_scroll.itemName) and
+								GlobalItemInfo.globalItemInfo[_scroll.itemName].identified
+							):
+								_scrolls.append(_scroll.itemName)
+								_letters[_scroll.itemName] = _scroll.value.letters
+					for _item in $"/root/World/Critters/0".inventory.inventory:
+						var _itemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _item }))
+						if _itemNode.identifiedItemName.matchn("ink bottle"):
+							_ink += _itemNode.value.ink
+					$"/root/World/UI/UITheme/ListMenu".showListMenuList("Write what? ({ink} letters of ink)".format({ "ink": _ink }), _scrolls, _usedItem, false, { "ink": _ink, "letters": _letters, "blankPaper": _blankPaper })
+					_additionalChoices = true
 			"magic marker":
 				var _scrolls = []
 				var _blankPaper = null
@@ -1207,15 +1193,16 @@ func useItem(_id):
 						_blankPaper = _itemNode
 				if _blankPaper == null:
 					Globals.gameConsole.addLog("You don't have a blank scroll.")
-				for _rarity in $"/root/World/Items/Items".items.scroll:
-					for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
-						if (
-							GlobalItemInfo.globalItemInfo.has(_scroll.itemName) and
-							GlobalItemInfo.globalItemInfo[_scroll.itemName].identified
-						):
-							_scrolls.append(_scroll.itemName)
-				$"/root/World/UI/UITheme/ListMenu".showListMenuList("Write what?", _scrolls, _usedItem, false, { "blankPaper": _blankPaper })
-				_additionalChoices = true
+				else:
+					for _rarity in $"/root/World/Items/Items".items.scroll:
+						for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
+							if (
+								GlobalItemInfo.globalItemInfo.has(_scroll.itemName) and
+								GlobalItemInfo.globalItemInfo[_scroll.itemName].identified
+							):
+								_scrolls.append(_scroll.itemName)
+					$"/root/World/UI/UITheme/ListMenu".showListMenuList("Write what?", _scrolls, _usedItem, false, { "blankPaper": _blankPaper })
+					_additionalChoices = true
 			_:
 				Globals.gameConsole.addLog("Thats not a tool...")
 		Globals.isItemIdentified(_usedItem)

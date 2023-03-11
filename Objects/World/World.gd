@@ -116,8 +116,10 @@ func _physics_process(_delta):
 		for _level in $Levels.get_children():
 			_level.clearOutInputs()
 		
+		$Critters/"0".inventory.updateWeight()
 		$Critters/"0".calculateHungerStats(true)
 		$Critters/"0".calculateWeightStats(true)
+		$Critters/"0".setStats()
 		$Critters/"0".calculateStatusEffectsAndStatusStates()
 		
 		updateTiles()
@@ -426,6 +428,7 @@ func processCrittersSpawnStatus():
 		checkNewCritterSpawn += 1
 
 func processPlayerEffects():
+	$Critters/"0".inventory.updateWeight()
 	$Critters/"0".calculateHungerStats()
 	$Critters/"0".calculateWeightStats()
 	$Critters/"0".setStats()
@@ -536,7 +539,6 @@ func drawCrittersAndItems():
 				get_node("Items/{id}".format({ "id": level.grid[x][y].items.back() })).show()
 
 func updateUI():
-	$Critters/"0".inventory.updateWeight()
 	$Critters/"0".processPlayerUIChanges()
 	$Critters/"0".updatePlayerStats()
 

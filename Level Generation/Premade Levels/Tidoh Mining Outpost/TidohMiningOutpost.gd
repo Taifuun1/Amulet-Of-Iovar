@@ -27,9 +27,11 @@ func createDungeon():
 			"upStair": Vector2(26,11)
 		}
 		placePresetItems(tidohMiningOutpostSpawns.tidohMiningOutpostSpawn1, self)
+		grid[1][11].interactable = Globals.interactables.ALTAR
 	if _groups[0] == "Tidoh Mining Outpost 2":
 		stairs = {
 			"downStair": Vector2(55,20),
 			"upStair": Vector2(4,2)
 		}
 		placePresetItems(tidohMiningOutpostSpawns.tidohMiningOutpostSpawn2, self)
+		grid[26][3].interactable = Globals.interactables.ALTAR

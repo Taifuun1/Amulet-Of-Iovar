@@ -5,6 +5,11 @@ onready var inventoryItem = preload("res://UI/Inventory/Inventory Item.tscn")
 var inventory = []
 var currentWeight = 0
 
+func sortItems(a, b):
+	if get_node("/root/World/Items/{itemId}".format({ "itemId": a })).itemName < get_node("/root/World/Items/{itemId}".format({ "itemId": b })).itemName:
+		return true
+	return false
+
 
 func create(_inventory = []):
 	name = "Inventory"
@@ -35,6 +40,7 @@ func removeFromInventory(_item):
 		updateWeight()
 
 func showInventory():
+	inventory.sort_custom(self, "sortItems")
 	for _itemId in inventory:
 		var _newItem = inventoryItem.instance()
 		if get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).type.matchn("corpse") or get_node("/root/World/Items/{itemId}".format({ "itemId": _itemId })).identifiedItemName.matchn("amulet of iovar"):

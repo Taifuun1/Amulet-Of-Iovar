@@ -117,6 +117,10 @@ var levelId = 1
 var itemId = 0
 var critterId = 1
 
+func _input(_event):
+	if Input.is_action_just_pressed("TOGGLE_FULLSCREEN"):
+		OS.window_fullscreen = !OS.window_fullscreen
+
 func isTileFree(_tile, _grid, _checkBlockedTiles = true):
 	if _checkBlockedTiles:
 		for blockingTile in blockedTiles:
@@ -163,7 +167,3 @@ func getGlobalsSaveData():
 		itemId = itemId,
 		critterId = critterId
 	}
-
-func _input(_event):
-	if Input.is_action_just_pressed("TOGGLE_FULLSCREEN"):
-		OS.window_fullscreen = !OS.window_fullscreen

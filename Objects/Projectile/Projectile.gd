@@ -17,11 +17,11 @@ var lastSprite = null
 func create(_tiles, _projectileData, _checkIfCritterHit = false, _isPlayer = true):
 	tiles = _tiles
 	
-	if _projectileData.has("texture"):
+	if _projectileData.has("texture") and _projectileData.texture != null:
 		texture = _projectileData.texture
-	if _projectileData.has("color"):
+	if _projectileData.has("color") and _projectileData.color != null:
 		color = _projectileData.color
-	if _projectileData.has("damage"):
+	if _projectileData.has("damage") and _projectileData.damage != null:
 		damage = _projectileData.damage
 	
 	isPlayer = _isPlayer

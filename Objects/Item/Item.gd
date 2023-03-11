@@ -304,7 +304,7 @@ func calculateWeaponAttackIncrease(_stats):
 			_additionalDamage += 1
 		
 		if _playerSkills.dagger.level == 3:
-			_additionalDamage += 3
+			_additionalDamage += 2
 		elif _playerSkills.dagger.level == 2:
 			_additionalDamage += 1
 		elif _playerSkills.dagger.level == 0:

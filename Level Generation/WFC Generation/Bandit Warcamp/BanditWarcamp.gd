@@ -30,6 +30,7 @@ func createDungeon():
 			}
 		])
 		removeSmallRooms()
+		removeDisconnectedWalls()
 		getSpawnableTiles(
 			["GRASS", "FLOOR_STONE_BRICK", "FLOOR_WOOD_BRICK"],
 			["FLOOR_STONE_BRICK", "FLOOR_WOOD_BRICK"],
@@ -77,3 +78,18 @@ func removeSmallRooms():
 		else:
 			_newRooms.append(_room)
 	rooms = _newRooms
+
+func removeDisconnectedWalls():
+	for x in grid.size():
+		for y in grid[0].size():
+			var _tile = Vector2(x, y)
+			if !checkIfTileIsInRoom(_tile):
+				if grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_WOOD_PLANK or grid[_tile.x][_tile.y].tile == Globals.tiles.WALL_STONE_BRICK:
+					grid[_tile.x][_tile.y].tile = Globals.tiles.GRASS
+					
+
+func checkIfTileIsInRoom(_tile):
+	for _room in rooms:
+		if _room.walls.has(_tile):
+			return true
+	return false

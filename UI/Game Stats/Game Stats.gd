@@ -142,7 +142,9 @@ func _onMouseEnteredStat(_nodePath, _stat):
 	var _tooltipDescription
 	if tooltipTexts[_stat].has("description"):
 		_tooltipDescription = tooltipTexts[_stat].description
-	if _stat.matchn("attacks"):
+	if _stat.matchn("ac"):
+		_tooltipDescription = _tooltipDescription.format({ "damageReduction": int(100 - 100 * $"/root/World/Critters/0".calculateACReduction(0)) })
+	elif _stat.matchn("attacks"):
 		var _magicElement = ""
 		if attacks.attack.magicDmg.element != null:
 			_magicElement = attacks.attack.magicDmg.element

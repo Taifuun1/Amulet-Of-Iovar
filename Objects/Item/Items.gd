@@ -106,9 +106,18 @@ func createItem(_item, _position = null, _amount = 1, _toInventory = false, _ext
 		elif _item.matchn("chest"):
 			_id = newItem.createItem(miscellaneousItems["chest"], _extraData, 1)
 		else:
-			_id = newItem.createItem(getItemByName(_item), _extraData, _amount)
+			var _itemData = getItemByName(_item)
+			if _itemData.stackable:
+				_id = newItem.createItem(_itemData, _extraData, _amount)
+			else:
+				for _index in _amount:
+					_id = newItem.createItem(_itemData, _extraData, 1)
 	else:
-		_id = newItem.createItem(_item, _extraData, _amount, _spawnNew)
+		if _item.stackable:
+			_id = newItem.createItem(_item, _extraData, _amount, _spawnNew)
+		else:
+			for _index in _amount:
+				_id = newItem.createItem(_item, _extraData, 1, _spawnNew)
 	
 	if _toInventory:
 		$"/root/World/Critters/0".addToInventory([newItem.id])
