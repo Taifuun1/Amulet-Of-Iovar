@@ -515,7 +515,7 @@ func quaffItem(_id):
 					Globals.gameConsole.addLog("You already feel confused enough!")
 			"potion of toxix":
 				if _quaffedItem.piety.matchn("reverent"):
-					statusEffects.toxix = 2
+					statusEffects.toxix = 3
 					Globals.gameConsole.addLog("The {potion} tastes slightly acidic. Bleagh!".format({ "potion": _quaffedItem.itemName }))
 				if _quaffedItem.piety.matchn("formal"):
 					statusEffects.toxix = 8

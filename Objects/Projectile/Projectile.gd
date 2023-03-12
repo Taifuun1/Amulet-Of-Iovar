@@ -39,6 +39,8 @@ func animateCycle():
 	for _tile in _cycleTiles:
 		if typeof(_tile) == TYPE_VECTOR2:
 			animateTile(_tile)
+			if checkIfCritterHit:
+				checkIfCritterIsHit(_tile)
 		else:
 			animateTile(_tile.tile, _tile.angle)
 			if checkIfCritterHit:

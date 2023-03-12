@@ -64,8 +64,8 @@ var potions = {
 							"bonusDmg": {},
 							"armorPen": 0,
 							"magicDmg": {
-								"dmg": [5,14],
-								"element": "Frost"
+								"dmg": [4,4],
+								"element": "Toxix"
 							}
 						}
 					],
@@ -75,8 +75,8 @@ var potions = {
 							"bonusDmg": {},
 							"armorPen": 0,
 							"magicDmg": {
-								"dmg": [4,12],
-								"element": "Frost"
+								"dmg": [8,8],
+								"element": "Toxix"
 							}
 						}
 					]

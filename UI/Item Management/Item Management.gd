@@ -94,7 +94,7 @@ func toggleItemChecked(_itemId, _checkSpecific = null):
 	var clickedItem = get_node("ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList/{itemId}".format({ "itemId": _itemId }))
 	if _checkSpecific == null:
 		if clickedItem.get_node("CheckAndNameContainer/Check").pressed:
-			selectedItems.remove(_itemId)
+			selectedItems.erase(_itemId)
 		else:
 			selectedItems.append(_itemId)
 		clickedItem.get_node("CheckAndNameContainer/Check").pressed = !clickedItem.get_node("CheckAndNameContainer/Check").pressed
@@ -102,5 +102,5 @@ func toggleItemChecked(_itemId, _checkSpecific = null):
 		if _checkSpecific and !selectedItems.has("itemId"):
 			selectedItems.append(_itemId)
 		elif !_checkSpecific and selectedItems.has("itemId"):
-			selectedItems.remove(_itemId)
+			selectedItems.erase(_itemId)
 		clickedItem.get_node("CheckAndNameContainer/Check").pressed = _checkSpecific

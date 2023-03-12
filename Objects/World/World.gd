@@ -64,14 +64,17 @@ var gameSetUpThread
 var saveGameThread
 
 var hideObjectsWhenDrawingNextFrame = true
+
 var checkNewCritterSpawn = 0
+var totalLevelCount = 1
+
 var inStartScreen = true
 var generationDone = false
+var gameOver = false
+
 var inGame = false
 var currentGameState = gameState.GAME
 var keepMoving = false
-var totalLevelCount = 1
-var gameOver = false
 var turnData = {
 	processAnotherTurn = false,
 	processEmptyTurn = false,
@@ -428,13 +431,13 @@ func processCrittersSpawnStatus():
 		checkNewCritterSpawn += 1
 
 func processPlayerEffects():
-	$Critters/"0".inventory.updateWeight()
 	$Critters/"0".calculateHungerStats()
 	$Critters/"0".calculateWeightStats()
 	$Critters/"0".setStats()
 	$Critters/"0".calculateStatusEffectsAndStatusStates()
 	$Critters/"0".processPlayerSpecificEffects()
 	$Critters/"0".processCritterEffects()
+	$Critters/"0".inventory.updateWeight()
 
 func processEffects():
 	for _effect in $Effects.get_children():
