@@ -10,9 +10,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{
@@ -70,9 +70,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{
@@ -130,9 +130,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{
@@ -190,9 +190,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{
@@ -250,9 +250,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{
@@ -310,9 +310,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{
@@ -374,9 +374,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{
@@ -434,9 +434,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{
@@ -494,9 +494,9 @@ var dragons = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 255,
-		"hp": 89,
+		"hp": 78,
 		"mp": 60,
-		"ac": 10,
+		"ac": 15,
 		"magicac": 10,
 		"attacks": [
 			{

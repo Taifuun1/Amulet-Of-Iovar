@@ -127,9 +127,9 @@ func createItem(_item, _extraData = {}, _amount = 1, _spawnNew = true):
 				charges = _item.value.charges
 			else:
 				charges = randi() % int(_item.value.charges[1]) + int(_item.value.charges[0])
-			if _item.value.has("turnedOn"):
+			if _item.value.has("lightSource"):
 				value = {
-					"turnedOn": false,
+					"lightSource": true,
 					"charges": charges,
 					"value": _item.value.value
 				}

@@ -47,7 +47,7 @@ var tools = {
 			"category": null,
 			"weight": 1,
 			"value": {
-				"turnedOn": null,
+				"lightSource": true,
 				"charges": [150, 100],
 				"value": 3
 			},
@@ -100,7 +100,7 @@ var tools = {
 			"category": null,
 			"weight": 25,
 			"value": {
-				"turnedOn": null,
+				"lightSource": true,
 				"charges": [500, 750],
 				"value": 5
 			},
@@ -207,7 +207,7 @@ var tools = {
 			"category": null,
 			"weight": 25,
 			"value": {
-				"turnedOn": null,
+				"lightSource": true,
 				"charges": -1,
 				"value": 7
 			},

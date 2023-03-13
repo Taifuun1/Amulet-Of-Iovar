@@ -689,15 +689,14 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerTile):
 				Globals.currentDungeonLevel = levels.dungeonHalls2.front().levelId
 				return "upStair"
 		elif levels.dungeonHalls2.back().levelId == Globals.currentDungeonLevel:
-			if _stair.matchn("secondUpStair"):
-				Globals.currentDungeonLevel = levels.dragonsPeak.front().levelId
-				return "downStair"
-			if _stair.matchn("downStair"):
-				Globals.currentDungeonLevel = levels.dungeonHalls3.front().levelId
-				return "upStair"
+			Globals.currentDungeonLevel = levels.dungeonHalls3.front().levelId
+			return "upStair"
 		elif levels.dungeonHalls3.back().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.theGreatShadows.front().levelId
 			return "upStair"
+		elif levels.dragonsPeak.front().levelId == Globals.currentDungeonLevel:
+			Globals.currentDungeonLevel = levels.dungeonHalls2.back().levelId
+			return "secondUpStair"
 		elif levels.theGreatShadows.back().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.fortress.front().levelId
 			return "upStair"
@@ -708,6 +707,10 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerTile):
 			Globals.currentDungeonLevel = levels.firstLevel.levelId
 			return "upStair"
 		else:
+			for _dragonsPeak in levels.dragonsPeak:
+				if _dragonsPeak.levelId == Globals.currentDungeonLevel and _stair.matchn("downStair"):
+					Globals.currentDungeonLevel -= _direction
+					return "upStair"
 			Globals.currentDungeonLevel += _direction
 			return "upStair"
 	elif _direction == -1:
@@ -741,15 +744,15 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerTile):
 		elif levels.dungeonHalls2.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeonHalls1.back().levelId
 			return "downStair"
+		elif levels.dungeonHalls2.back().levelId == Globals.currentDungeonLevel and _stair.matchn("secondUpStair"):
+			Globals.currentDungeonLevel = levels.dragonsPeak.front().levelId
+			return "downStair"
 		elif levels.labyrinth.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeonHalls1.back().levelId
 			return "secondDownStair"
 		elif levels.dungeonHalls3.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeonHalls2.back().levelId
 			return "downStair"
-		elif levels.dragonsPeak.front().levelId == Globals.currentDungeonLevel:
-			Globals.currentDungeonLevel = levels.dungeonHalls2.back().levelId
-			return "secondUpStair"
 		elif levels.theGreatShadows.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeonHalls3.back().levelId
 			return "downStair"
@@ -763,6 +766,10 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerTile):
 			Globals.currentDungeonLevel = churchLevel.levelId
 			return "downStair"
 		else:
+			for _dragonsPeak in levels.dragonsPeak:
+				if _dragonsPeak.levelId == Globals.currentDungeonLevel and _stair.matchn("upStair"):
+					Globals.currentDungeonLevel -= _direction
+					return "downStair"
 			Globals.currentDungeonLevel += _direction
 			return "downStair"
 

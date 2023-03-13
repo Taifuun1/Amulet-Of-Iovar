@@ -7,11 +7,19 @@ var containerItemNode
 var containerItems = []
 var inventoryItems = []
 
+func sortItems(a, b):
+	if get_node("/root/World/Items/{itemId}".format({ "itemId": a })).itemName < get_node("/root/World/Items/{itemId}".format({ "itemId": b })).itemName:
+		return true
+	return false
+
+
 func create():
 	name = "Container"
 	hide()
 
 func showContainerList(_id, _containerTitle, _containerItems, _inventoryItems):
+	_containerItems.sort_custom(self, "sortItems")
+	_inventoryItems.sort_custom(self, "sortItems")
 	containerItemNode = get_node("/root/World/Items/{itemId}".format({ "itemId": _id }))
 	$DividerContainer/ContainerContainer/ContainerTitle.text = _containerTitle
 	containerItems = _containerItems

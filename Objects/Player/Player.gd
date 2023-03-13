@@ -505,6 +505,7 @@ func processPlayerSpecificEffects():
 	if playerVisibility.duration > 0:
 		playerVisibility.duration -= 1
 	else:
+		playerVisibility.duration = -1
 		playerVisibility.distance = -1
 	
 	if checkIfStatusEffectIsInEffect("blindness"):
@@ -560,7 +561,6 @@ func processPlayerSpecificEffects():
 					if playerVisibility.distance != 0:
 						playerVisibility.distance = -1
 						Globals.gameConsole.addLog("Your candle has run out of wax.")
-					_item.value.turnedOn = false
 					itemsTurnedOn.erase(_itemId)
 			"oil lamp":
 				if _item.value.charges > 0:
@@ -571,7 +571,6 @@ func processPlayerSpecificEffects():
 					if playerVisibility.distance != 0:
 						playerVisibility.distance = -1
 						Globals.gameConsole.addLog("Your lamp has run out of oil.")
-					_item.value.turnedOn = false
 					itemsTurnedOn.erase(_itemId)
 			"magic lamp":
 				if playerVisibility.distance != 0:

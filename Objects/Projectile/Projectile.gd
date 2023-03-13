@@ -3,6 +3,7 @@ extends Node2D
 onready var projectileSprite = preload("res://UI/Projectile Sprite/Projectile Sprite.tscn")
 
 signal playerAnimationDone
+signal critterAnimationDone
 
 var tiles
 var texture

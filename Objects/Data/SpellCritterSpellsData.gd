@@ -154,7 +154,7 @@ var rockThrow = {
 	"name": "Rock throw",
 	"attacks": [
 		{
-			"dmg": [7,8],
+			"dmg": [7,9],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -171,7 +171,7 @@ var crackerThrow = {
 	"name": "Cracker throw",
 	"attacks": [
 		{
-			"dmg": [9,12],
+			"dmg": [8,12],
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
@@ -196,7 +196,7 @@ var fleirpoint = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [2, 14],
+				"dmg": [2, 10],
 				"element": "fleir"
 			}
 		}
@@ -213,7 +213,7 @@ var fleirnado = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [14, 22],
+				"dmg": [12, 20],
 				"element": "fleir"
 			}
 		}
@@ -230,7 +230,7 @@ var fleirBreath = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [18,28],
+				"dmg": [4,24],
 				"element": "fleir"
 			}
 		}
@@ -268,7 +268,7 @@ var frostBite = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [8, 17],
+				"dmg": [8, 15],
 				"element": "frost"
 			}
 		}
@@ -285,7 +285,7 @@ var frostTouch = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [7, 15],
+				"dmg": [5, 12],
 				"element": "frost"
 			}
 		}
@@ -302,7 +302,7 @@ var frostBreath = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [13,15],
+				"dmg": [11,13],
 				"element": "frost"
 			}
 		}
@@ -323,7 +323,7 @@ var thunderPoint = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [11, 13],
+				"dmg": [9, 11],
 				"element": "thunder"
 			}
 		}
@@ -340,7 +340,7 @@ var thundersplit = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [15, 17],
+				"dmg": [13, 17],
 				"element": "thunder"
 			}
 		}
@@ -357,7 +357,7 @@ var thunderBreath = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [17,18],
+				"dmg": [15,15],
 				"element": "thunder"
 			}
 		}
@@ -416,7 +416,7 @@ var gleeieerBreath = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [16,18],
+				"dmg": [14,16],
 				"element": "gleeie'er"
 			}
 		}
@@ -449,7 +449,7 @@ var dragonBreath = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [12,20],
+				"dmg": [10,18],
 				"element": "incineration"
 			}
 		}
@@ -466,7 +466,7 @@ var elderDragonBreath = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [15,32],
+				"dmg": [14,28],
 				"element": "incineration"
 			}
 		}
@@ -483,7 +483,7 @@ var voidBlast = {
 			"bonusDmg": {},
 			"armorPen": 0,
 			"magicDmg": {
-				"dmg": [21,33],
+				"dmg": [19,31],
 				"element": "void"
 			}
 		}
