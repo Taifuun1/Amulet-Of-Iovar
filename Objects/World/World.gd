@@ -432,12 +432,12 @@ func processCrittersSpawnStatus():
 
 func processPlayerEffects():
 	$Critters/"0".calculateHungerStats()
-	$Critters/"0".calculateWeightStats()
 	$Critters/"0".setStats()
 	$Critters/"0".calculateStatusEffectsAndStatusStates()
 	$Critters/"0".processPlayerSpecificEffects()
 	$Critters/"0".processCritterEffects()
 	$Critters/"0".inventory.updateWeight()
+	$Critters/"0".calculateWeightStats()
 
 func processEffects():
 	for _effect in $Effects.get_children():
@@ -473,7 +473,7 @@ func drawLevel():
 	
 	drawFOV()
 	drawCrittersAndItems()
-
+	
 	updateUI()
 
 func drawFOV():
@@ -522,6 +522,7 @@ func drawFOV():
 				$FOV.greyCell(x, y)
 
 func drawCrittersAndItems():
+	$Critters/"0".set_position(map_to_world(level.getCritterTile(0)) + half_tile_size)
 	for x in (Globals.gridSize.x):
 		for y in (Globals.gridSize.y):
 			if level.grid[x][y].critter != null:

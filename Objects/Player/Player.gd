@@ -452,11 +452,14 @@ func dropItem(_playerTile, _item, _grid):
 				$"/root/World/UI/UITheme/Game Over Stats".saveGameData()
 				$"/root/World/UI/UITheme/Game Over Stats".show()
 				yield(VisualServer, "frame_post_draw")
-			_item.identifyItem(false, true, false)
-			if _item.piety.matchn("reverent"):
-				_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
-			elif _item.piety.matchn("blasphemous"):
-				_dropLog.append("The {item} flashes with a black light.".format({ "item": _item.itemName }))
+				_dropLog.append("The amulet shines blindingly!")
+				_dropLog.append("You ascend!")
+			else:
+				_item.identifyItem(false, true, false)
+				if _item.piety.matchn("reverent"):
+					_dropLog.append("The {item} flashes with a white light.".format({ "item": _item.itemName }))
+				elif _item.piety.matchn("blasphemous"):
+					_dropLog.append("The {item} flashes with a black light.".format({ "item": _item.itemName }))
 	var _dropLogString = PoolStringArray(_dropLog).join(" ")
 	return _dropLogString
 

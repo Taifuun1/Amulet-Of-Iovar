@@ -1168,7 +1168,8 @@ func useItem(_id):
 						for _scroll in $"/root/World/Items/Items".items.scroll[_rarity]:
 							if (
 								GlobalItemInfo.globalItemInfo.has(_scroll.itemName) and
-								GlobalItemInfo.globalItemInfo[_scroll.itemName].identified
+								GlobalItemInfo.globalItemInfo[_scroll.itemName].identified and
+								!_scroll.itemName.matchn("scroll of genocide")
 							):
 								_scrolls.append(_scroll.itemName)
 								_letters[_scroll.itemName] = _scroll.value.letters

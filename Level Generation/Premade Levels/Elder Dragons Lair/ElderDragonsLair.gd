@@ -26,6 +26,7 @@ func createDungeon():
 			"downStair": Vector2(7,16)
 		}
 		placePresetItems(elderDragonsLairSpawns.elderDragonsLairSpawn1, self)
+		placePresetCritters(elderDragonsLairSpawns.elderDragonsLairSpawn1, self)
 	elif _groups[0] == "Elder Dragons Lair 2":
 		getSpawnableTiles(
 			["FLOOR_CAVE_DEEP", "FLOOR_DRAGONS_PEAK"],
@@ -36,3 +37,4 @@ func createDungeon():
 			"downStair": Vector2(55,22)
 		}
 		placePresetItems(elderDragonsLairSpawns.elderDragonsLairSpawn2, self)
+		placePresetCritters(elderDragonsLairSpawns.elderDragonsLairSpawn2, self)

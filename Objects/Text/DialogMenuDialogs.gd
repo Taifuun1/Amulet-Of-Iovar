@@ -34,7 +34,9 @@ var dialogMenuDialogs = {
 		"title": "Elder Dragon",
 		"text": """A massive beast looks at you. Something larger than anything you've faced so far. The elder dragon speaks.
 	
-	Elder dragon: "Hmm? Who might you be? The one seeking Iovar? Ah, I've heard of you. At least your hubris is intact. And now, before him, you'll test your mettle against me? I'll burn you to cinders, like every other adventurer foolish enough to wander into my lair."
+	Elder dragon: "Hmm? Who might you be? The one seeking Iovar? Ah, I've heard of you.
+	
+	You'll test your mettle against me? Before facing Iovar himself? At least your hubris is intact. I'll burn you to cinders, like every other adventurer foolish enough to wander into my lair."
 """
 	},
 	"Iovar": {
