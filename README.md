@@ -14,7 +14,7 @@ You, along with many others, have heard of Iovars mission. Time has come, as you
 * 90+ Monsters to fight, including 6 powerful bosses
 * 30+ Weapons to wield
 * 60+ Armor pieces to wear
-* 200+ Items
+* 200+ Items to use
 * Cast spells by mixing and matching different spell elements and types
 * Manage your hunger and weight
 * Use potions, scrolls, wands and other items
