@@ -16,7 +16,7 @@ var mimics = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [3,4],
+				"dmg": [3,3],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

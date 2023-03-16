@@ -16,7 +16,7 @@ var centaurs = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [5,9],
+				"dmg": [5,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

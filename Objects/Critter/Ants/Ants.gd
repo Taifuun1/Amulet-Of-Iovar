@@ -48,7 +48,7 @@ var ants = [
 		"aggroDistance": 16,
 		"texture": load("res://Assets/Critters/AntLeafAnt.png"),
 		"piety": "Neutral",
-		"level": 7,
+		"level": 6,
 		"expDropAmount": 3,
 		"hp": 14,
 		"mp": 7,
@@ -114,7 +114,7 @@ var ants = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [5,7],
+				"dmg": [5,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -123,7 +123,7 @@ var ants = [
 				}
 			},
 			{
-				"dmg": [5,7],
+				"dmg": [5,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -132,7 +132,7 @@ var ants = [
 				}
 			},
 			{
-				"dmg": [5,7],
+				"dmg": [5,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

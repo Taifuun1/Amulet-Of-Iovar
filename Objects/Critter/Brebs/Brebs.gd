@@ -16,12 +16,12 @@ var brebs = [
 		"magicac": 4,
 		"attacks": [
 			{
-				"dmg": [1,1],
+				"dmg": [0,0],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
+					"dmg": [1,1],
+					"element": "fleir"
 				}
 			}
 		],
@@ -62,12 +62,12 @@ var brebs = [
 		"magicac": 6,
 		"attacks": [
 			{
-				"dmg": [1,1],
+				"dmg": [0,0],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
+					"dmg": [1,1],
+					"element": "toxix"
 				}
 			}
 		],
@@ -108,12 +108,12 @@ var brebs = [
 		"magicac": 8,
 		"attacks": [
 			{
-				"dmg": [1,1],
+				"dmg": [0,0],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
+					"dmg": [1,1],
+					"element": "thunder"
 				}
 			}
 		],

@@ -16,7 +16,7 @@ var dwarves = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [3,5],
+				"dmg": [2,4],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

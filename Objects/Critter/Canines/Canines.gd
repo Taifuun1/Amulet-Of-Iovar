@@ -10,13 +10,13 @@ var canines = [
 		"piety": "Neutral",
 		"level": 4,
 		"expDropAmount": 2,
-		"hp": 9,
+		"hp": 8,
 		"mp": 0,
 		"ac": 0,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [2,3],
+				"dmg": [2,2],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -65,7 +65,7 @@ var canines = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [6,8],
+				"dmg": [5,7],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -108,7 +108,7 @@ var canines = [
 		"piety": "Neutral",
 		"level": 11,
 		"expDropAmount": 15,
-		"hp": 37,
+		"hp": 31,
 		"mp": 0,
 		"ac": 0,
 		"magicac": 0,

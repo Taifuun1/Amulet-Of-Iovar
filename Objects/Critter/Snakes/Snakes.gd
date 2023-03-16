@@ -16,7 +16,7 @@ var snakes = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [1,4],
+				"dmg": [1,3],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -75,7 +75,7 @@ var snakes = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [2,9],
+				"dmg": [2,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

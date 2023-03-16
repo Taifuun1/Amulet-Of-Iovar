@@ -67,7 +67,7 @@ var humans = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [7,10],
+				"dmg": [7,9],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

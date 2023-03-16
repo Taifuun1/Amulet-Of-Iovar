@@ -25,7 +25,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [2,3],
+				"dmg": [2,2],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

@@ -33,7 +33,7 @@ var weapons = {
 				"dmg": [2,5],
 				"d": 1,
 				"bonusDmg": {},
-				"armorPen": 0,
+				"armorPen": 1,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -160,13 +160,13 @@ var weapons = {
 			"category": "Mace",
 			"weight": 30,
 			"value": {
-				"dmg": [4,6],
+				"dmg": [2,6],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 2,
 				"magicDmg": {
-					"dmg": [0,0],
-					"element": null
+					"dmg": [1,1],
+					"element": "gleeie'er"
 				}
 			},
 			"enchantable": true,
@@ -269,10 +269,10 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 75,
 			"value": {
-				"dmg": [6,9],
+				"dmg": [5,8],
 				"d": 1,
 				"bonusDmg": {},
-				"armorPen": 1,
+				"armorPen": 2,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -357,10 +357,10 @@ var weapons = {
 			"category": "Mace",
 			"weight": 50,
 			"value": {
-				"dmg": [6,9],
+				"dmg": [5,8],
 				"d": 1,
 				"bonusDmg": {},
-				"armorPen": 3,
+				"armorPen": 4,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -402,10 +402,10 @@ var weapons = {
 			"category": "Sword",
 			"weight": 35,
 			"value": {
-				"dmg": [6,7],
+				"dmg": [5,7],
 				"d": 1,
 				"bonusDmg": {},
-				"armorPen": 1,
+				"armorPen": 2,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -423,12 +423,12 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 40,
 			"value": {
-				"dmg": [7,12],
+				"dmg": [6,10],
 				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 1
 				},
-				"armorPen": 2,
+				"armorPen": 4,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -451,7 +451,7 @@ var weapons = {
 				"dmg": [2,3],
 				"d": 2,
 				"bonusDmg": {},
-				"armorPen": 2,
+				"armorPen": 1,
 				"magicDmg": {
 					"dmg": [3,4],
 					"element": "Toxix"
@@ -558,7 +558,7 @@ var weapons = {
 			"category": "Mace",
 			"weight": 75,
 			"value": {
-				"dmg": [10,13],
+				"dmg": [8,11],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 6,
@@ -580,7 +580,7 @@ var weapons = {
 			"category": "Mace",
 			"weight": 75,
 			"value": {
-				"dmg": [5,6],
+				"dmg": [4,6],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 5,
@@ -602,12 +602,12 @@ var weapons = {
 			"category": "Mace",
 			"weight": 75,
 			"value": {
-				"dmg": [8,14],
+				"dmg": [6,12],
 				"d": 1,
 				"bonusDmg": {
 					"giants": 6
 				},
-				"armorPen": 4,
+				"armorPen": 6,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -631,7 +631,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [3,8],
+					"dmg": [3,7],
 					"element": "Fleir"
 				}
 			},
@@ -653,7 +653,7 @@ var weapons = {
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [4,6],
+					"dmg": [4,5],
 					"element": "Frost"
 				}
 			},
@@ -670,12 +670,12 @@ var weapons = {
 			"category": "Sword",
 			"weight": 50,
 			"value": {
-				"dmg": [4,6],
+				"dmg": [4,5],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [4,7],
+					"dmg": [3,7],
 					"element": "Thunder"
 				}
 			},
@@ -699,7 +699,7 @@ var weapons = {
 				},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [3,4],
+					"dmg": [2,3],
 					"element": "Gleeie'er"
 				}
 			},
@@ -716,7 +716,7 @@ var weapons = {
 			"category": "Sword",
 			"weight": 75,
 			"value": {
-				"dmg": [8,14],
+				"dmg": [6,12],
 				"d": 1,
 				"bonusDmg": {
 					"baseWeapon": 2
@@ -740,12 +740,12 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 202,
 			"value": {
-				"dmg": [17,25],
+				"dmg": [13,21],
 				"d": 1,
 				"bonusDmg": {
 					"dragons": 6
 				},
-				"armorPen": 3,
+				"armorPen": 6,
 				"magicDmg": {
 					"dmg": [0,0],
 					"element": null
@@ -764,12 +764,12 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 15,
 			"value": {
-				"dmg": [3,7],
+				"dmg": [3,10],
 				"d": 2,
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
-					"dmg": [3,8],
+					"dmg": [3,12],
 					"element": "Gleeie'er"
 				}
 			},
@@ -786,10 +786,10 @@ var weapons = {
 			"category": "Two-hander",
 			"weight": 150,
 			"value": {
-				"dmg": [10,14],
+				"dmg": [8,11],
 				"d": 1,
 				"bonusDmg": {},
-				"armorPen": 0,
+				"armorPen": 3,
 				"magicDmg": {
 					"dmg": [5,6],
 					"element": "Frost"

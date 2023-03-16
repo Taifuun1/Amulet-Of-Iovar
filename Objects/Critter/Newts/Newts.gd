@@ -69,7 +69,7 @@ var newts = [
 		"magicac": 5,
 		"attacks": [
 			{
-				"dmg": [3,4],
+				"dmg": [2,4],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -122,7 +122,7 @@ var newts = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [5,6],
+				"dmg": [4,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -175,7 +175,7 @@ var newts = [
 		"magicac": 3,
 		"attacks": [
 			{
-				"dmg": [5,9],
+				"dmg": [5,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

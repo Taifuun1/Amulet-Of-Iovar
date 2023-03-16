@@ -16,7 +16,7 @@ var bats = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [2,4],
+				"dmg": [2,3],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -117,7 +117,7 @@ var bats = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [4,5],
+				"dmg": [4,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -126,7 +126,7 @@ var bats = [
 				}
 			},
 			{
-				"dmg": [4,5],
+				"dmg": [4,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -172,7 +172,7 @@ var bats = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [3,4],
+				"dmg": [3,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -181,7 +181,7 @@ var bats = [
 				}
 			},
 			{
-				"dmg": [3,4],
+				"dmg": [3,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
