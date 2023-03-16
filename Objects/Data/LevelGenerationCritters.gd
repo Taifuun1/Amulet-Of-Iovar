@@ -14,6 +14,7 @@ var critterLevelGenerationList = {
 		"amount": [3, 5],
 		"critters": {
 			"ants": ["Sugar ant"],
+			"bats": ["Dark bat"],
 			"blobs": ["Slerp", "Sluerp"],
 			"brebs": ["Fleir breb"],
 			"canines": ["Wolf"],
@@ -30,7 +31,7 @@ var critterLevelGenerationList = {
 		"amount": [4, 6],
 		"critters": {
 			"ants": ["Leaf ant"],
-			"bats": ["Squinting bat"],
+			"bats": ["Dark bat", "Squinting bat"],
 			"blobs": ["Slerp", "Sluerp"],
 			"brebs": ["Fleir breb", "Toxix breb"],
 			"canines": ["Wolf"],
@@ -62,7 +63,7 @@ var critterLevelGenerationList = {
 			"felines": ["Cat", "Lynx"],
 			"outlaws": ["Outlaw watcher", "Outlaw fusiee'er"],
 			"kobolds": ["Tiny kobold", "Large kobold"],
-			"mimics": ["Mimic"],
+			"mimics": ["Mimic", "Humongous mimic"],
 			"newts": ["Highlands newt"],
 			"orcs": ["Flatlands orc", "Mountain orc"],
 			"rats": ["Cave rat"],
@@ -73,7 +74,7 @@ var critterLevelGenerationList = {
 		"amount": [4, 6],
 		"critters": {
 			"ants": ["Leaf ant"],
-			"bats": ["Squinting bat"],
+			"bats": ["Dark bat"],
 			"canines": ["Wolf"],
 			"centaurs": ["Hill centaur"],
 			"elves": ["Elf hunter", "Elf assassin"],
@@ -104,7 +105,7 @@ var critterLevelGenerationList = {
 		"amount": [4, 6],
 		"critters": {
 			"blobs": ["Sluerp"],
-			"bats": ["Spooky bat", "Vampire bat"],
+			"bats": ["Dark bat", "Squinting bat"],
 			"felines": ["Cat"],
 			"giants": ["Hill giant"],
 			"mimics": ["Mimic"],
@@ -117,7 +118,7 @@ var critterLevelGenerationList = {
 	"minesOfTidoh": {
 		"amount": [4, 6],
 		"critters": {
-			"bats": ["Dark bat"],
+			"bats": ["Squinting bat", "Spooky bat"],
 			"dwarves": ["Dwarf miner"],
 			"felines": ["Cat"],
 			"giants": ["Hill giant", "Balding giant"],
@@ -140,7 +141,7 @@ var critterLevelGenerationList = {
 		"amount": [5, 10],
 		"critters": {
 			"ants": ["Leaf ant"],
-			"bats": ["Dark bat"],
+			"bats": ["Spooky bat", "Vampire bat"],
 			"centaurs": ["Hill centaur"],
 			"dwarves": ["Dwarf miner", "Dwarf engineer"],
 			"felines": ["Cat", "Lynx"],
@@ -159,12 +160,8 @@ var critterLevelGenerationList = {
 		"critters": {
 			"aquaticLife": ["Fiddler crab", "Ringed seal"],
 			"blobs": ["Slerp", "Sluerp"],
-			"canines": ["Wolf"],
 			"centaurs": ["Hill centaur"],
 			"elves": ["Elf hunter"],
-			"felines": ["Cat"],
-			"giants": ["Hill giant"],
-			"mimics": ["Mimic"],
 			"newts": ["River newt"],
 			"snakes": ["Marsh snake"]
 		}
@@ -181,7 +178,7 @@ var critterLevelGenerationList = {
 			"outlaws": ["Outlaw watcher", "Outlaw fusiee'er", "Outlaw merchandiee'er"],
 			"kobolds": ["Large kobold"],
 			"liches": ["Half-lich"],
-			"mimics": ["Mimic"],
+			"mimics": ["Mimic", "Humongous mimic"],
 			"newts": ["Highlands newt"],
 			"orcs": ["Mountain orc"],
 			"rats": ["Sewer rat"]
@@ -191,6 +188,7 @@ var critterLevelGenerationList = {
 		"amount": [6, 8],
 		"critters": {
 			"ants": ["Soldier ant"],
+			"bats": ["Vampire bat"],
 			"blobs": ["Slerp", "Sluerp"],
 			"brebs": ["Fleir breb", "Toxix breb", "Thunder breb"],
 			"canines": ["Gearh"],

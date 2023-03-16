@@ -12,7 +12,7 @@ var elves = [
 		"expDropAmount": 4,
 		"hp": 13,
 		"mp": 15,
-		"ac": 0,
+		"ac": 3,
 		"magicac": 3,
 		"attacks": [
 			{
@@ -72,15 +72,15 @@ var elves = [
 		"aggroDistance": 21,
 		"texture": load("res://Assets/Critters/ElfAssassin.png"),
 		"piety": "Neutral",
-		"level": 10,
+		"level": 8,
 		"expDropAmount": 17,
-		"hp": 23,
+		"hp": 21,
 		"mp": 22,
-		"ac": 2,
+		"ac": 0,
 		"magicac": 2,
 		"attacks": [
 			{
-				"dmg": [4,5],
+				"dmg": [5,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -89,7 +89,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [1,3],
+				"dmg": [1,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -146,13 +146,13 @@ var elves = [
 		"piety": "Neutral",
 		"level": 15,
 		"expDropAmount": 128,
-		"hp": 56,
+		"hp": 54,
 		"mp": 37,
-		"ac": 4,
+		"ac": 10,
 		"magicac": 8,
 		"attacks": [
 			{
-				"dmg": [10,14],
+				"dmg": [14,18],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -161,7 +161,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [8,12],
+				"dmg": [8,14],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -212,13 +212,13 @@ var elves = [
 		"piety": "Neutral",
 		"level": 20,
 		"expDropAmount": 1000,
-		"hp": 79,
+		"hp": 89,
 		"mp": 55,
-		"ac": 7,
+		"ac": 24,
 		"magicac": 15,
 		"attacks": [
 			{
-				"dmg": [10,14],
+				"dmg": [21,25],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -227,7 +227,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [8,12],
+				"dmg": [13,17],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -236,7 +236,7 @@ var elves = [
 				}
 			},
 			{
-				"dmg": [6,10],
+				"dmg": [7,12],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

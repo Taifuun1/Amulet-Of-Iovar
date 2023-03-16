@@ -118,7 +118,7 @@ var humans = [
 		"expDropAmount": 15,
 		"hp": 36,
 		"mp": 10,
-		"ac": 7,
+		"ac": 9,
 		"magicac": 0,
 		"attacks": [
 			{

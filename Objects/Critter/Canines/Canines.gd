@@ -16,7 +16,7 @@ var canines = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [2,4],
+				"dmg": [2,3],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -65,7 +65,7 @@ var canines = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [6,9],
+				"dmg": [6,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

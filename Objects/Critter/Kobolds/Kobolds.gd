@@ -56,7 +56,7 @@ var kobolds = [
 		"piety": "Neutral",
 		"level": 6,
 		"expDropAmount": 6,
-		"hp": 16,
+		"hp": 21,
 		"mp": 0,
 		"ac": 0,
 		"magicac": 0,

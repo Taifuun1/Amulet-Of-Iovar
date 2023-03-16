@@ -183,7 +183,7 @@ var giants = [
 		"expDropAmount": 324,
 		"hp": 88,
 		"mp": 0,
-		"ac": 4,
+		"ac": 8,
 		"magicac": 0,
 		"attacks": [
 			{

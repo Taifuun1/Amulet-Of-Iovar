@@ -10,13 +10,13 @@ var quadrapeds = [
 		"piety": "Neutral",
 		"level": 11,
 		"expDropAmount": 32,
-		"hp": 48,
+		"hp": 50,
 		"mp": 8,
-		"ac": 4,
-		"magicac": 4,
+		"ac": 5,
+		"magicac": 10,
 		"attacks": [
 			{
-				"dmg": [12,13],
+				"dmg": [12,14],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -68,10 +68,10 @@ var quadrapeds = [
 		"hp": 70,
 		"mp": 21,
 		"ac": 7,
-		"magicac": 10,
+		"magicac": 18,
 		"attacks": [
 			{
-				"dmg": [21,23],
+				"dmg": [22,24],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

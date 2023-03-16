@@ -172,7 +172,7 @@ var ants = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [6,8],
+				"dmg": [7,9],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -181,7 +181,7 @@ var ants = [
 				}
 			},
 			{
-				"dmg": [6,8],
+				"dmg": [7,9],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -190,7 +190,7 @@ var ants = [
 				}
 			},
 			{
-				"dmg": [6,8],
+				"dmg": [7,9],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -199,7 +199,7 @@ var ants = [
 				}
 			},
 			{
-				"dmg": [6,8],
+				"dmg": [7,9],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

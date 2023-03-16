@@ -62,15 +62,15 @@ var mimics = [
 		"aggroDistance": 5,
 		"texture": load("res://Assets/Critters/MimicHumongousMimic.png"),
 		"piety": "Neutral",
-		"level": 14,
+		"level": 10,
 		"expDropAmount": 44,
-		"hp": 46,
+		"hp": 42,
 		"mp": 23,
-		"ac": 7,
+		"ac": 10,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [12,15],
+				"dmg": [11,14],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -79,7 +79,7 @@ var mimics = [
 				}
 			},
 			{
-				"dmg": [5,7],
+				"dmg": [6,8],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

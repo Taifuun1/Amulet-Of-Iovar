@@ -920,7 +920,7 @@ func zapItem(_direction):
 	_projectile.create(_tiles, _projectileData, _checkIfCritterHit)
 	$"/root/World/Animations".add_child(_projectile)
 	# warning-ignore:return_value_discarded
-	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_onPlayerAnimationDone")
+	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("projectileAnimationDone", $"/root/World", "_onPlayerAnimationDone")
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 
 func throwItem(_direction):
@@ -1051,7 +1051,7 @@ func throwItem(_direction):
 		_projectile.create(_tiles, { "texture": _thrownItem.itemTexture, "damage": _damage }, _hitCritter)
 		$"/root/World/Animations".add_child(_projectile)
 		# warning-ignore:return_value_discarded
-		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_onPlayerAnimationDone")
+		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("projectileAnimationDone", $"/root/World", "_onPlayerAnimationDone")
 		$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 	$"/root/World".closeMenu()
 

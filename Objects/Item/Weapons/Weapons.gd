@@ -9,7 +9,7 @@ var weapons = {
 			"category": "Sword",
 			"weight": 35,
 			"value": {
-				"dmg": [2,3],
+				"dmg": [2,4],
 				"d": 1,
 				"bonusDmg": {},
 				"armorPen": 0,

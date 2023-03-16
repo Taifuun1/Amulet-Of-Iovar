@@ -122,7 +122,7 @@ var rats = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [4,5],
+				"dmg": [5,7],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

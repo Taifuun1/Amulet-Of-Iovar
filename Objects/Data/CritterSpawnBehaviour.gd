@@ -33,20 +33,20 @@ var critterSpawnBehaviour = {
 		"distance": 2
 	},
 	"Dark bat": {
-		"amount": [1, 2],
+		"amount": [1, 3],
 		"distance": 2
 	},
 	"Squinting bat": {
-		"amount": [1, 2],
+		"amount": [1, 3],
 		"distance": 2
 	},
 	"Spooky bat": {
-		"amount": [1, 2],
+		"amount": [1, 3],
 		"distance": 2
 	},
 	"Vampire bat": {
-		"amount": [1, 2],
-		"distance": 2
+		"amount": [1, 1],
+		"distance": 0
 	},
 	"Slerp": {
 		"amount": [1, 1],
@@ -69,12 +69,12 @@ var critterSpawnBehaviour = {
 		"distance": 0
 	},
 	"Wolf": {
-		"amount": [2, 5],
-		"distance": 4
+		"amount": [3, 5],
+		"distance": 5
 	},
 	"Warg": {
 		"amount": [2, 3],
-		"distance": 4
+		"distance": 3
 	},
 	"Gearh": {
 		"amount": [1, 2],

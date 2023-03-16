@@ -122,12 +122,12 @@ var liches = [
 			{
 				"abilityName": "frostpoint",
 				"abilityType": "rangedSpell",
-				"chance": 6
+				"chance": 4
 			},
 			{
 				"abilityName": "summonCritter",
 				"abilityType": "spell",
-				"chance": 2
+				"chance": 4
 			}
 		],
 		"resistances": ["fleir", "frost", "gleeie'er", "toxix", "blindness", "confusion", "fumbling", "sleep"],

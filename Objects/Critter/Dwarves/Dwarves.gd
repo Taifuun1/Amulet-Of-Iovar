@@ -82,13 +82,13 @@ var dwarves = [
 		"piety": "Neutral",
 		"level": 8,
 		"expDropAmount": 8,
-		"hp": 24,
+		"hp": 32,
 		"mp": 5,
-		"ac": 2,
+		"ac": 9,
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [6,8],
+				"dmg": [5,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -131,7 +131,7 @@ var dwarves = [
 		"expDropAmount": 14,
 		"hp": 33,
 		"mp": 5,
-		"ac": 4,
+		"ac": 14,
 		"magicac": 0,
 		"attacks": [
 			{
@@ -193,13 +193,13 @@ var dwarves = [
 		"piety": "Neutral",
 		"level": 18,
 		"expDropAmount": 186,
-		"hp": 62,
+		"hp": 52,
 		"mp": 5,
-		"ac": 10,
+		"ac": 20,
 		"magicac": 5,
 		"attacks": [
 			{
-				"dmg": [18,20],
+				"dmg": [18,25],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

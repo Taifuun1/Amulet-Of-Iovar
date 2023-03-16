@@ -170,7 +170,7 @@ var aquaticLife = [
 		"magicac": 3,
 		"attacks": [
 			{
-				"dmg": [16,18],
+				"dmg": [16,20],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -179,7 +179,7 @@ var aquaticLife = [
 				}
 			},
 			{
-				"dmg": [16,18],
+				"dmg": [16,20],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

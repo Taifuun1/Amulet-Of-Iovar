@@ -147,7 +147,7 @@ var statusEffectsData = {
 	},
 	"onFleir": {
 		"label": "fle",
-		"description": "You are on fleir. (Take 3 damage every turn for a duration and -3 vis)",
+		"description": "You are on Fleir. (Take 3 damage every turn for a duration and -3 vis)",
 		"color": "#e7363f",
 		"texture": load("res://Assets/Status Effects/StatusEffectOnFleir.png"),
 		"effects": {

@@ -204,7 +204,7 @@ func castSpell(_playerTile, _tileToCastTo = null, grid = null):
 	_projectile.create(_tiles, _projectileData, true)
 	$"/root/World/Animations".add_child(_projectile)
 	# warning-ignore:return_value_discarded
-	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("playerAnimationDone", $"/root/World", "_onPlayerAnimationDone")
+	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("projectileAnimationDone", $"/root/World", "_onPlayerAnimationDone")
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 	
 	$"/root/World/Critters/0".mp -= mpUsage

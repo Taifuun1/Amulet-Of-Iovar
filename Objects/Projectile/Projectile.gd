@@ -2,8 +2,7 @@ extends Node2D
 
 onready var projectileSprite = preload("res://UI/Projectile Sprite/Projectile Sprite.tscn")
 
-signal playerAnimationDone
-signal critterAnimationDone
+signal projectileAnimationDone
 
 var tiles
 var texture
@@ -15,7 +14,7 @@ var checkIfCritterHit
 
 var lastSprite = null
 
-func create(_tiles, _projectileData, _checkIfCritterHit = false, _isPlayer = true):
+func create(_tiles, _projectileData, _checkIfCritterHit = false):
 	tiles = _tiles
 	
 	if _projectileData.has("texture") and _projectileData.texture != null:
@@ -25,16 +24,12 @@ func create(_tiles, _projectileData, _checkIfCritterHit = false, _isPlayer = tru
 	if _projectileData.has("damage") and _projectileData.damage != null:
 		damage = _projectileData.damage
 	
-	isPlayer = _isPlayer
 	checkIfCritterHit = _checkIfCritterHit
 
 func animateCycle():
 	var _cycleTiles = tiles.pop_front()
 	if _cycleTiles == null:
-		if isPlayer:
-			emit_signal("playerAnimationDone")
-		else:
-			emit_signal("critterAnimationDone")
+		emit_signal("projectileAnimationDone")
 		queue_free()
 		return
 	for _tile in _cycleTiles:

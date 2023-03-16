@@ -213,7 +213,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 											)
 											$"/root/World/Animations".add_child(_projectile)
 											# warning-ignore:return_value_discarded
-											$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("critterAnimationDone", $"/root/World", "_on_Critter_Animation_done")
+											$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("projectileAnimationDone", $"/root/World", "_on_Critter_Animation_done")
 											$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 											var _critterNode = get_node("/root/World/Critters/{critterId}".format({ "critterId": _level.grid[_tile.x][_tile.y].critter }))
 											if (
@@ -275,7 +275,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 						)
 						$"/root/World/Animations".add_child(_projectile)
 						# warning-ignore:return_value_discarded
-						$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("critterAnimationDone", $"/root/World", "_on_Critter_Animation_done")
+						$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("projectileAnimationDone", $"/root/World", "_on_Critter_Animation_done")
 						$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 						
 						for _critter in _critters:

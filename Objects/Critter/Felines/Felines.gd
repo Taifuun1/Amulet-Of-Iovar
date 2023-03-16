@@ -16,7 +16,7 @@ var felines = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [4,5],
+				"dmg": [4,4],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -57,7 +57,7 @@ var felines = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [3,4],
+				"dmg": [3,5],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -66,7 +66,7 @@ var felines = [
 				}
 			},
 			{
-				"dmg": [5,6],
+				"dmg": [5,7],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -107,7 +107,7 @@ var felines = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [5,8],
+				"dmg": [5,9],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -116,7 +116,7 @@ var felines = [
 				}
 			},
 			{
-				"dmg": [5,8],
+				"dmg": [5,9],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

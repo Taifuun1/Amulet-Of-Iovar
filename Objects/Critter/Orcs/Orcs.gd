@@ -118,9 +118,9 @@ var orcs = [
 		"piety": "Neutral",
 		"level": 8,
 		"expDropAmount": 12,
-		"hp": 26,
+		"hp": 29,
 		"mp": 0,
-		"ac": 3,
+		"ac": 2,
 		"magicac": 3,
 		"attacks": [
 			{
@@ -172,13 +172,13 @@ var orcs = [
 		"piety": "Neutral",
 		"level": 13,
 		"expDropAmount": 34,
-		"hp": 44,
+		"hp": 46,
 		"mp": 0,
 		"ac": 6,
 		"magicac": 3,
 		"attacks": [
 			{
-				"dmg": [8,14],
+				"dmg": [8,13],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -226,13 +226,13 @@ var orcs = [
 		"piety": "Neutral",
 		"level": 20,
 		"expDropAmount": 374,
-		"hp": 72,
+		"hp": 78,
 		"mp": 0,
-		"ac": 9,
+		"ac": 0,
 		"magicac": 5,
 		"attacks": [
 			{
-				"dmg": [19,31],
+				"dmg": [23,33],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
@@ -241,7 +241,7 @@ var orcs = [
 				}
 			},
 			{
-				"dmg": [2,10],
+				"dmg": [2,18],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {
