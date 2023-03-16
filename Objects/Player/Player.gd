@@ -235,7 +235,7 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			
 			# On enemy hit
 			if hits[currentHit] == 1:
-				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo, critterName)
+				var _didCritterDespawn = _critter.takeDamage(attacks, _tileToMoveTo, critterName, true, hits[currentHit])
 				if armorSetStunCount == 4:
 					armorSetStunCount = 1
 				else:
@@ -325,11 +325,13 @@ func processPlayerAction(_playerTile, _tileToMoveTo, _items, _level):
 			moveCritter(_playerTile, _tileToMoveTo, 0, _level)
 			checkIfThereIsSomethingOnTheGroundHere(_tileToMoveTo, _level)
 
-func takeDamage(_attacks, _critterTile, _critterName):
+func takeDamage(_attacks, _critterTile, _critterName, _hit = 1):
 	var _attacksLog = []
 	if _attacks.size() != 0:
+		if _hit == 0:
+			_attacksLog.append("{critterName} grazes you!".format({ "critterName": _critterName }))
 		for _attack in _attacks:
-			var _damage = calculateDmg(_attack)
+			var _damage = calculateDmg(_attack, null, _hit)
 			
 			if checkIfItemsTurnedOnHasItem("cloak of magical ambiguity") and _damage.dmg <= 0 and _damage.magicDmg > 0:
 				if _damage.magicDmg - 1 < 0:

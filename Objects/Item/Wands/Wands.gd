@@ -376,7 +376,7 @@ var wands = {
 			"category": null,
 			"weight": 10,
 			"value": {
-				"charges": [3, 5]
+				"charges": [4, 5]
 			},
 			"points": 150,
 			"enchantable": false,

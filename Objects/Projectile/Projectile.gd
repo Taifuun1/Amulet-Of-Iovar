@@ -5,11 +5,11 @@ onready var projectileSprite = preload("res://UI/Projectile Sprite/Projectile Sp
 signal projectileAnimationDone
 
 var tiles
+
 var texture
 var color
 var damage
 
-var isPlayer
 var checkIfCritterHit
 
 var lastSprite = null

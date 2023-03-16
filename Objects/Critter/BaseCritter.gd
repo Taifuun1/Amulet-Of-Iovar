@@ -87,7 +87,7 @@ func moveCritter(_moveFrom, _moveTo, _movingCritter, _level, _movedCritter = nul
 ### Damage calculation function ###
 ####################################
 
-func calculateDmg(_attack, _activeArmorSets = null):
+func calculateDmg(_attack, _activeArmorSets = null, _hit = 1):
 	var damage = {
 		"dmg": [0,0],
 		"magicDmg": 0
@@ -125,6 +125,9 @@ func calculateDmg(_attack, _activeArmorSets = null):
 		damage.magicDmg = _magicDmg - int(magicac / 2)
 		if damage.magicDmg < 0:
 			damage.magicDmg = 0
+	
+	if _hit == 0 and damage.dmg != 0:
+		damage.dmg /= 2
 	
 	return {
 		"dmg": int(damage.dmg),

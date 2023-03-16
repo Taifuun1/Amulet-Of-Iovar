@@ -420,7 +420,10 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		
 		# Hitting check
 		if aI.aggroTarget != null and _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == aI.aggroTarget:
-			get_node("/root/World/Critters/{critterId}".format({ "critterId": aI.aggroTarget })).takeDamage(attacks, _moveCritterTo, critterName)
+			if currentHit == 15:
+				currentHit = 0
+			currentHit += 1
+			get_node("/root/World/Critters/{critterId}".format({ "critterId": aI.aggroTarget })).takeDamage(attacks, _moveCritterTo, critterName, false, hits[currentHit])
 			return false
 		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == 0:
 			if currentHit == 15:
@@ -474,10 +477,8 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				if $"/root/World/Critters/0".checkIfStatusEffectIsInEffect("displacement") and randi() % 4 == 0:
 					Globals.gameConsole.addLog("{critterName} hits your displaced image!".format({ "critterName": critterName }))
 					return false
-				$"/root/World/Critters/0".takeDamage(attacks, _moveCritterTo, critterName)
-			else:
-				Globals.gameConsole.addLog("{critter} misses!".format({ "critter": critterName }))
-				return false
+				$"/root/World/Critters/0".takeDamage(attacks, _moveCritterTo, critterName, hits[currentHit])
+				return true
 			return true
 		# Movement check
 		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
@@ -487,10 +488,12 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 		else:
 			return false
 
-func takeDamage(_attacks, _critterTile, _critterName, _playerHitCheck = false):
+func takeDamage(_attacks, _critterTile, _critterName, _playerHitCheck = false, _hit = 1):
 	var _didCritterDie = null
 	var _attacksLog = []
 	if _attacks.size() != 0:
+		if _hit == 0:
+			_attacksLog.append("You graze {critterName}!".format({ "critterName": critterName }))
 		for _attack in _attacks:
 			# Armor sets
 			var _activeArmorSets = {

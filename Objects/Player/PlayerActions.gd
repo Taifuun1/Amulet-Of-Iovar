@@ -813,10 +813,10 @@ func zapItem(_direction):
 					if _zappedItem.piety.matchn("reverent"):
 						Globals.gameConsole.addLog("{itemName} somehow misses you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.piety.matchn("formal"):
-						takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _playerPosition, _zappedItem.itemName)
+						takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _playerPosition, _zappedItem.itemName, true)
 						Globals.gameConsole.addLog("{itemName} hits you!".format({ "itemName": _zappedItem.itemName }))
 					elif _zappedItem.piety.matchn("blasphemous"):
-						takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _playerPosition, _zappedItem.itemName)
+						takeDamage(_zappedItem.value.dmg[_zappedItem.piety.to_lower()], _playerPosition, _zappedItem.itemName, true)
 						Globals.gameConsole.addLog("{itemName} knocks the wind out of you!".format({ "itemName": _zappedItem.itemName }))
 					Globals.isItemIdentified(_zappedItem)
 					$"/root/World".closeMenu(_additionalChoices)
@@ -1439,7 +1439,9 @@ func kickAt(_tileToKickAt):
 				}
 			],
 			_tileToKickAt,
-			$"/root/World/Critters/0".critterName
+			$"/root/World/Critters/0".critterName,
+			true,
+			hits[currentHit]
 		)
 	elif _level.grid[_tileToKickAt.x][_tileToKickAt.y].tile == Globals.tiles.DOOR_CLOSED:
 		if randi () % 8 == 0:
