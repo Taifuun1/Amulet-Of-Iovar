@@ -473,13 +473,12 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 				Globals.gameConsole.addLog("{critterName} casts {spell}!".format({ "critterName": critterName.capitalize(), "spell": _pickedAbility.data.name }))
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
 				mp -= _pickedAbility.data.mp
-			elif hits[currentHit] == 1:
+			else:
 				if $"/root/World/Critters/0".checkIfStatusEffectIsInEffect("displacement") and randi() % 4 == 0:
 					Globals.gameConsole.addLog("{critterName} hits your displaced image!".format({ "critterName": critterName }))
 					return false
 				$"/root/World/Critters/0".takeDamage(attacks, _moveCritterTo, critterName, hits[currentHit])
 				return true
-			return true
 		# Movement check
 		elif _level.grid[_moveCritterTo.x][_moveCritterTo.y].critter == null:
 			moveCritter(_critterTile, _moveCritterTo, _critter, _level)

@@ -126,7 +126,7 @@ func calculateDmg(_attack, _activeArmorSets = null, _hit = 1):
 		if damage.magicDmg < 0:
 			damage.magicDmg = 0
 	
-	if _hit == 0 and damage.dmg != 0:
+	if _hit == 0 and damage.dmg >= 1:
 		damage.dmg /= 2
 	
 	return {
