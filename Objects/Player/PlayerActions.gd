@@ -655,7 +655,7 @@ func zapItem(_direction):
 	var spellData = load("res://Objects/Data/SpellData.gd").new().spellData
 	var _tiles = []
 	var _projectileData = { "texture": load("res://Assets/Spells/Bolt.png"), "color": "#FFFFFF" }
-	var _checkIfCritterHit = false
+	var _hitCritter = false
 	var _zappedItem = get_node("/root/World/Items/{id}".format({ "id": selectedItem }))
 	selectedItem = null
 	var _additionalChoices = false
@@ -806,7 +806,7 @@ func zapItem(_direction):
 							break
 						_tiles.append([{ "tile": _tile, "angle": spellData.spellDirections[_direction].angle }])
 						if _grid[_tile.x][_tile.y].critter != null:
-							_checkIfCritterHit = true
+							_hitCritter = true
 					if !_zappedItem.identifiedItemName.matchn("wand of magic sphere"):
 						_projectileData.color = load("res://Objects/Data/RuneData.gd").new().runeData.eario[_zappedItem.value.dmg[_zappedItem.piety.to_lower()][0].magicDmg.element.to_lower()].color
 				"wand of backwards magic sphere":
@@ -905,7 +905,7 @@ func zapItem(_direction):
 			checkAllIdentification(true)
 		else:
 			Globals.gameConsole.addLog("The wand seems a little flaccid. There's no charges left.")
-	if _checkIfCritterHit:
+	if _hitCritter:
 		Globals.isItemIdentified(_zappedItem)
 	$"/root/World".closeMenu(_additionalChoices)
 	if (
@@ -917,7 +917,7 @@ func zapItem(_direction):
 		if !_zappedItem.identifiedItemName.matchn("wand of magic sphere"):
 			_projectileData.color = load("res://Objects/Data/RuneData.gd").new().runeData.eario[_zappedItem.value.dmg[_zappedItem.piety.to_lower()][0].magicDmg.element.to_lower()].color
 		_projectileData.damage = _zappedItem.value.dmg[_zappedItem.piety.to_lower()]
-	_projectile.create(_tiles, _projectileData, _checkIfCritterHit)
+	_projectile.create(_tiles, _projectileData, _hitCritter)
 	$"/root/World/Animations".add_child(_projectile)
 	# warning-ignore:return_value_discarded
 	$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("projectileAnimationDone", $"/root/World", "_onPlayerAnimationDone")

@@ -1,33 +1,34 @@
 extends GenericLevel
-class_name Beach
 
 func createNewLevel():
 	createGrid()
 	pathFind([])
 	
-	createBeach()
+	createVacationResort()
 	
 	doFinalPathfinding()
 	
 	return self
 
-func createBeach():
+func createVacationResort():
 	for _in in range(10):
 		createSea()
+		createResortShack()
 		getSpawnableTiles(
-			["SAND", "SEA"],
-			["SAND"],
-			["SAND"]
+			["SAND", "SEA", "FLOOR_SAND"],
+			["SAND", "FLOOR_SAND"],
+			["SAND", "FLOOR_SAND"]
 		)
 		placeStairs("SAND")
 		if areAllStairsConnected():
 			return
 		resetLevel()
-	push_error("Can't create beach")
+	push_error("Can't create vacation resort")
 
 func createSea():
 	var _connectionPoints = []
 	var _seaSide
+	var _randomDiggablesChance = 46
 	
 	# 60, 24
 	var _edgeStartingAreas = {
@@ -93,7 +94,7 @@ func createSea():
 					grid[x][y].tile = Globals.tiles.SEA
 				else:
 					grid[x][y].tile = Globals.tiles.SAND
-					if randi() % 75 == 0:
+					if randi() % _randomDiggablesChance == 0:
 						grid[x][y].interactable = Globals.interactables.HIDDEN_ITEM
 			_isSeaTile = !_isSeaTile
 	else:
@@ -109,7 +110,7 @@ func createSea():
 					grid[x][y].tile = Globals.tiles.SEA
 				else:
 					grid[x][y].tile = Globals.tiles.SAND
-					if randi() % 75 == 0:
+					if randi() % _randomDiggablesChance == 0:
 						grid[x][y].interactable = Globals.interactables.HIDDEN_ITEM
 			_isSeaTile = !_isSeaTile
 	
@@ -119,19 +120,19 @@ func createSea():
 			grid[_point.x][_point.y].interactable = null
 		else:
 			grid[_point.x][_point.y].tile = Globals.tiles.SAND
-			if randi() % 75 == 0:
+			if randi() % _randomDiggablesChance == 0:
 				grid[_point.x][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 		if _seaSide == "north":
 			if randi() % 6 == 0:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SAND
-				if randi() % 75 == 0:
+				if randi() % _randomDiggablesChance == 0:
 					grid[_point.x][_point.y - 1].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SEA
 				grid[_point.x][_point.y - 1].interactable = null
 			if !randi() % 6 == 0:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SAND
-				if randi() % 75 == 0:
+				if randi() % _randomDiggablesChance == 0:
 					grid[_point.x][_point.y + 1].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SEA
@@ -139,14 +140,14 @@ func createSea():
 		elif _seaSide == "south":
 			if !randi() % 6 == 0:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SAND
-				if randi() % 75 == 0:
+				if randi() % _randomDiggablesChance == 0:
 					grid[_point.x][_point.y - 1].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x][_point.y - 1].tile = Globals.tiles.SEA
 				grid[_point.x][_point.y - 1].interactable = null
 			if randi() % 6 == 0:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SAND
-				if randi() % 75 == 0:
+				if randi() % _randomDiggablesChance == 0:
 					grid[_point.x][_point.y + 1].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x][_point.y + 1].tile = Globals.tiles.SEA
@@ -154,14 +155,14 @@ func createSea():
 		elif _seaSide == "west":
 			if randi() % 6 == 0:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SAND
-				if randi() % 75 == 0:
+				if randi() % _randomDiggablesChance == 0:
 					grid[_point.x - 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SEA
 				grid[_point.x - 1][_point.y].interactable = null
 			if !randi() % 6 == 0:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SAND
-				if randi() % 75 == 0:
+				if randi() % _randomDiggablesChance == 0:
 					grid[_point.x + 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SEA
@@ -169,15 +170,21 @@ func createSea():
 		elif _seaSide == "east":
 			if !randi() % 6 == 0:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SAND
-				if randi() % 75 == 0:
+				if randi() % _randomDiggablesChance == 0:
 					grid[_point.x - 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x - 1][_point.y].tile = Globals.tiles.SEA
 				grid[_point.x - 1][_point.y].interactable = null
 			if randi() % 6 == 0:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SAND
-				if randi() % 75 == 0:
+				if randi() % _randomDiggablesChance == 0:
 					grid[_point.x + 1][_point.y].interactable = Globals.interactables.HIDDEN_ITEM
 			else:
 				grid[_point.x + 1][_point.y].tile = Globals.tiles.SEA
 				grid[_point.x + 1][_point.y].interactable = null
+
+func createResortShack():
+	var _legibleRoomTiles = getAllLegibleRoomLocations([Globals.tiles.SAND], Vector2(4,4), Vector2(8,8))
+	var _room = _legibleRoomTiles[randi() % _legibleRoomTiles.size()]
+	placeRoom(_room.position, _room.size, { "wall": "WALL_BOARD", "floor": "FLOOR_SAND" })
+	placeDoors([1,1])

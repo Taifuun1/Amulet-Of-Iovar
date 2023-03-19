@@ -164,7 +164,7 @@ var bats = [
 		"aggroDistance": 20,
 		"texture": load("res://Assets/Critters/BatVampireBat.png"),
 		"piety": "Neutral",
-		"level": 8,
+		"level": 7,
 		"expDropAmount": 10,
 		"hp": 18,
 		"mp": 2,

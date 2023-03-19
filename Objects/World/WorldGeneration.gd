@@ -14,12 +14,11 @@ func sortLevels(_levelA, _levelB):
 
 const levelPaths = {
 	"dungeon": "res://Level Generation/Generic Generation/Dungeon Levels/Dungeon.tscn",
-	"beach": "res://Level Generation/Generic Generation/Beach/Beach.tscn",
-	"vacationResort": "res://Level Generation/Generic Generation/Beach/VacationResort.tscn",
 	"minesOfTidoh": "res://Level Generation/WFC Generation/Mines of Tidoh/MinesOfTidoh.tscn",
 	"depthsOfTidoh": "res://Level Generation/WFC Generation/Depths of Tidoh/DepthsOfTidoh.tscn",
 	"abandonedOutpost": "res://Level Generation/WFC Generation/Abandoned Outpost/AbandonedOutpost.tscn",
 	"anthill": "res://Level Generation/WFC Generation/Anthill/Anthill.tscn",
+	"vacationResort": "res://Level Generation/Generic Generation/Vacation Resort/VacationResort.tscn",
 	"patch": "res://Level Generation/WFC Generation/Patch/Patch.tscn",
 	"library": "res://Level Generation/WFC Generation/Library/Library.tscn",
 	"banditWarcamp": "res://Level Generation/WFC Generation/Bandit Warcamp/BanditWarcamp.tscn",
@@ -199,6 +198,7 @@ func setUpDungeon():
 	var _patchLevels = 0
 	var _abandonedOutpostLevels = 0
 	var _anthillLevels = 0
+	var _vacationResortLevels = 0
 	
 	### Dungeon 1
 	var firstLevel = load(levelPaths.dungeon).instance()
@@ -214,7 +214,7 @@ func setUpDungeon():
 		$Levels.add_child(newDungeon)
 	
 	### Library
-	for _level in range(randi() % 2 + 3):
+	for _level in range(randi() % 2 + 2):
 		var newlibrary = load(levelPaths.library).instance()
 		newlibrary.create("library", "library", "Library {level}".format({ "level": 1 + levels.library.size() }), 10000)
 		levels.library.append(newlibrary)
@@ -240,14 +240,18 @@ func setUpDungeon():
 	for _level in _dungeon3Count:
 		var newDungeon
 		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < _dungeon3Count - 1:
-			if randi() % 2 == 0:
+			if randi() % 3 == 0:
 				_patchLevels += 1
 				newDungeon = load(levelPaths.patch).instance()
 				newDungeon.create("patch", "dungeon3", "Patch {level}".format({ "level": _patchLevels }), 10000)
-			else:
+			if randi() % 3 == 0:
 				_anthillLevels += 1
 				newDungeon = load(levelPaths.anthill).instance()
 				newDungeon.create("anthill", "dungeon3", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			else:
+				_vacationResortLevels += 1
+				newDungeon = load(levelPaths.vacationResort).instance()
+				newDungeon.create("vacationResort", "vacationResort", "Vacation Resort {level}".format({ "level": _vacationResortLevels }), 10000)
 			_firstSectionRandomLevels -= 1
 		else:
 			newDungeon = load(levelPaths.dungeon).instance()
@@ -259,41 +263,28 @@ func setUpDungeon():
 	for _level in range(3):
 		var newDungeon
 		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < 2:
-			if randi() % 3 == 0:
+			if randi() % 4 == 0:
 				_patchLevels += 1
 				newDungeon = load(levelPaths.patch).instance()
 				newDungeon.create("patch", "dungeon4", "Patch {level}".format({ "level": _patchLevels }), 10000)
-			elif randi() % 3 == 0:
+			if randi() % 4 == 0:
 				_abandonedOutpostLevels += 1
 				newDungeon = load(levelPaths.abandonedOutpost).instance()
 				newDungeon.create("abandonedOutpost", "dungeon4", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
-			else:
+			if randi() % 4 == 0:
 				_anthillLevels += 1
 				newDungeon = load(levelPaths.anthill).instance()
 				newDungeon.create("anthill", "dungeon4", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			else:
+				_vacationResortLevels += 1
+				newDungeon = load(levelPaths.vacationResort).instance()
+				newDungeon.create("vacationResort", "vacationResort", "Vacation Resort {level}".format({ "level": _vacationResortLevels }), 10000)
 			_firstSectionRandomLevels -= 1
 		else:
 			newDungeon = load(levelPaths.dungeon).instance()
 			newDungeon.create("dungeon4", "dungeon4", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() }), 10000)
 		levels.dungeon4.append(newDungeon)
 		$Levels.add_child(newDungeon)
-	
-	### Beach
-	var newBeach = load(levelPaths.beach).instance()
-	newBeach.create("beach", "beach", "Beach {level}".format({ "level": levels.beach.size() + 1 }), 10000)
-	levels.beach.append(newBeach)
-	$Levels.add_child(newBeach)
-	
-	var newVacationResort = load(levelPaths.vacationResort).instance()
-	newVacationResort.create("beach", "beach", "Vacation resort", 10000)
-	levels.beach.append(newVacationResort)
-	$Levels.add_child(newVacationResort)
-	
-	for _level in range(randi() % 2 + 1):
-		var newBeach2 = load(levelPaths.beach).instance()
-		newBeach2.create("beach", "beach", "Beach {level}".format({ "level": 1 + levels.beach.size() }), 10000)
-		levels.beach.append(newBeach2)
-		$Levels.add_child(newBeach2)
 	
 	### Mines of Tidoh
 	for _level in range(randi() % 2 + 2):

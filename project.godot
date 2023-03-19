@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Level Generation/BaseLevel.gd"
 }, {
-"base": "GenericLevel",
-"class": "Beach",
-"language": "GDScript",
-"path": "res://Level Generation/Generic Generation/Beach/Beach.gd"
-}, {
 "base": "TileMap",
 "class": "EnemyPathfinding",
 "language": "GDScript",
@@ -57,7 +52,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "BaseCritter": "",
 "BaseLevel": "",
-"Beach": "",
 "EnemyPathfinding": "",
 "GenericLevel": "",
 "Player": "",

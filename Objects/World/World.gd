@@ -38,7 +38,6 @@ var levels = {
 	"dungeon1": [],
 	"library": [],
 	"dungeon2": [],
-	"beach": [],
 	"dungeon3": [],
 	"minesOfTidoh": [],
 	"depthsOfTidoh": [],
@@ -433,16 +432,18 @@ func processCrittersSpawnStatus():
 func processPlayerEffects():
 	$Critters/"0".calculateHungerStats()
 	$Critters/"0".setStats()
-	$Critters/"0".calculateStatusEffectsAndStatusStates()
 	$Critters/"0".processPlayerSpecificEffects()
 	$Critters/"0".processCritterEffects()
 	$Critters/"0".inventory.updateWeight()
 	$Critters/"0".calculateWeightStats()
+	$Critters/"0".calculateStatusEffectsAndStatusStates()
 
 func processEffects():
 	for _effect in $Effects.get_children():
 		if _effect.levelId == level.levelId:
 			_effect.tickTurn(level)
+		else:
+			_effect.hide()
 
 func drawScreen():
 	drawLevel()
@@ -664,9 +665,6 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerTile):
 				Globals.currentDungeonLevel = levels.dungeon2.front().levelId
 				return "upStair"
 		elif levels.dungeon2.back().levelId == Globals.currentDungeonLevel:
-			Globals.currentDungeonLevel = levels.beach.front().levelId
-			return "upStair"
-		elif levels.beach.back().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon3.front().levelId
 			return "upStair"
 		elif levels.dungeon3.back().levelId == Globals.currentDungeonLevel:
@@ -721,11 +719,8 @@ func whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerTile):
 		elif levels.library.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon1.back().levelId
 			return "secondDownStair"
-		elif levels.beach.front().levelId == Globals.currentDungeonLevel:
-			Globals.currentDungeonLevel = levels.dungeon2.back().levelId
-			return "downStair"
 		elif levels.dungeon3.front().levelId == Globals.currentDungeonLevel:
-			Globals.currentDungeonLevel = levels.beach.back().levelId
+			Globals.currentDungeonLevel = levels.dungeon2.back().levelId
 			return "downStair"
 		elif levels.minesOfTidoh.front().levelId == Globals.currentDungeonLevel:
 			Globals.currentDungeonLevel = levels.dungeon3.back().levelId

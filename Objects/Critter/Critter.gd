@@ -207,9 +207,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 													"texture": load("res://Assets/Spells/Bolt.png"),
 													"color": _color,
 													"damage": _pickedAbility.data.attacks
-												},
-												false,
-												false
+												}
 											)
 											$"/root/World/Animations".add_child(_projectile)
 											# warning-ignore:return_value_discarded
@@ -269,9 +267,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 								"texture": load("res://Assets/Spells/Bolt.png"),
 								"color": _color,
 								"damage": _pickedAbility.data.attacks
-							},
-							false,
-							false
+							}
 						)
 						$"/root/World/Animations".add_child(_projectile)
 						# warning-ignore:return_value_discarded

@@ -88,7 +88,7 @@ var itemGeneration = {
 			"legendary": 1
 		}
 	},
-	"beach": {
+	"vacationResort": {
 		"amount": 1,
 		"type": {
 			"amulet": 200,

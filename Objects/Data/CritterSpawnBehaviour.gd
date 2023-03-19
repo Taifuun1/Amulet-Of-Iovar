@@ -89,39 +89,39 @@ var critterSpawnBehaviour = {
 		"distance": 2
 	},
 	"Black dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Blue dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Cyan dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Green dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Red dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Silver dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Violet dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"White dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Yellow dragon": {
-		"amount": [1, 1],
+		"amount": [1, 2],
 		"distance": 3
 	},
 	"Dwarf miner": {

@@ -519,7 +519,7 @@ var items = {
 	},
 	"Shovel": {
 		"knowledge": false,
-		"description": "Allows you to dig hidden items on the beach."
+		"description": "Allows you to dig hidden items at vacation resort and abandoned outpost."
 	},
 	"Message in a bottle": {
 		"knowledge": false,

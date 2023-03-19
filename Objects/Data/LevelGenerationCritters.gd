@@ -71,19 +71,17 @@ var critterLevelGenerationList = {
 		}
 	},
 	"patch": {
-		"amount": [4, 6],
+		"amount": [3, 5],
 		"critters": {
-			"ants": ["Leaf ant"],
+			"ants": ["Sugar ant"],
 			"bats": ["Dark bat"],
 			"canines": ["Wolf"],
-			"centaurs": ["Hill centaur"],
-			"elves": ["Elf hunter", "Elf assassin"],
-			"felines": ["Cat", "Lynx"],
+			"elves": ["Elf hunter"],
+			"felines": ["Cat"],
 			"outlaws": ["Outlaw watcher"],
-			"newts": ["Highlands newt"],
-			"orcs": ["Flatlands orc"],
+			"newts": ["River newt"],
 			"rats": ["Big rat"],
-			"snakes": ["Garnered snake", "Marsh snake"]
+			"snakes": ["Garnered snake"]
 		}
 	},
 	"abandonedOutpost": {
@@ -155,8 +153,8 @@ var critterLevelGenerationList = {
 			"snakes": ["Garnered snake"]
 		}
 	},
-	"beach": {
-		"amount": [2, 3],
+	"vacationResort": {
+		"amount": [2, 4],
 		"critters": {
 			"aquaticLife": ["Fiddler crab", "Ringed seal"],
 			"blobs": ["Slerp", "Sluerp"],
@@ -267,7 +265,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"dragonsPeak": {
-		"amount": [3, 6],
+		"amount": [5, 7],
 		"critters": {
 			"dragons": ["Black dragon", "Blue dragon", "Cyan dragon", "Green dragon", "Red dragon", "Silver dragon", "Violet dragon", "White dragon", "Yellow dragon"]
 		}
