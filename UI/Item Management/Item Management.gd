@@ -90,17 +90,17 @@ func _on_Item_Management_List_Clicked(_itemId, _processGameTurn = true):
 	
 	toggleItemChecked(_itemId)
 
-func toggleItemChecked(_itemId, _checkSpecific = null):
+func toggleItemChecked(_itemId, _checkTo = null):
 	var clickedItem = get_node("ItemManagementContainer/ItemManagementListScrollContainer/ItemManagementList/{itemId}".format({ "itemId": _itemId }))
-	if _checkSpecific == null:
+	if _checkTo == null:
 		if clickedItem.get_node("CheckAndNameContainer/Check").pressed:
 			selectedItems.erase(_itemId)
 		else:
 			selectedItems.append(_itemId)
 		clickedItem.get_node("CheckAndNameContainer/Check").pressed = !clickedItem.get_node("CheckAndNameContainer/Check").pressed
 	else:
-		if _checkSpecific and !selectedItems.has("itemId"):
+		if _checkTo and !clickedItem.get_node("CheckAndNameContainer/Check").pressed:
 			selectedItems.append(_itemId)
-		elif !_checkSpecific and selectedItems.has("itemId"):
+		elif !_checkTo and clickedItem.get_node("CheckAndNameContainer/Check").pressed:
 			selectedItems.erase(_itemId)
-		clickedItem.get_node("CheckAndNameContainer/Check").pressed = _checkSpecific
+		clickedItem.get_node("CheckAndNameContainer/Check").pressed = _checkTo

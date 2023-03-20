@@ -79,8 +79,8 @@ var churchSpawn = [
 	},
 	{
 		"tiles": [
-			Vector2(39,10),
-			Vector2(47,12)
+			Vector2(38,10),
+			Vector2(48,12)
 		],
 		"critters": {
 			"races": null,
@@ -90,7 +90,7 @@ var churchSpawn = [
 				"Arch-lich"
 			]
 		},
-		"chance": 40
+		"chance": 45
 	},
 	{
 		"tiles": [

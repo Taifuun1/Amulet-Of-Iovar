@@ -16,7 +16,7 @@ var giants = [
 		"magicac": 0,
 		"attacks": [
 			{
-				"dmg": [5,7],
+				"dmg": [5,6],
 				"bonusDmg": {},
 				"armorPen": 0,
 				"magicDmg": {

@@ -68,6 +68,103 @@ var tidohMiningOutpostSpawn1 = [
 			"randomByRarity": true
 		},
 		"chance": 8
+	},
+	{
+		"tiles": [
+			Vector2(1,9),
+			Vector2(4,13)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Guard"
+			]
+		},
+		"chance": 25,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(9,0),
+			Vector2(33,23)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Guard"
+			]
+		},
+		"chance": 2,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(34,10),
+			Vector2(54,12)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Guard"
+			]
+		},
+		"chance": 1,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(55,0),
+			Vector2(57,23)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Guard"
+			]
+		},
+		"chance": 1,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": Vector2(6, 11),
+		"critters": {
+			"races": null,
+			"names": [
+				"Guard captain"
+			]
+		},
+		"chance": 100,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(49,4),
+			Vector2(52,7)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Dwarf miner",
+				"Dwarf engineer"
+			]
+		},
+		"chance": 15,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(42,15),
+			Vector2(45,18)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Dwarf miner",
+				"Dwarf engineer"
+			]
+		},
+		"chance": 15,
+		"aI": "Neutral"
 	}
 ]
 
@@ -153,5 +250,89 @@ var tidohMiningOutpostSpawn2 = [
 			]
 		},
 		"chance": 100
+	},
+	{
+		"tiles": [
+			Vector2(26,9),
+			Vector2(32,13)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Guard"
+			]
+		},
+		"chance": 25,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(24,1),
+			Vector2(30,6)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Guard"
+			]
+		},
+		"chance": 10,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": Vector2(22, 4),
+		"critters": {
+			"races": null,
+			"names": [
+				"Guard captain"
+			]
+		},
+		"chance": 100,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(35,12),
+			Vector2(39,15)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Dwarf miner",
+				"Dwarf engineer"
+			]
+		},
+		"chance": 15,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(30,16),
+			Vector2(31,19)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Dwarf miner",
+				"Dwarf engineer"
+			]
+		},
+		"chance": 15,
+		"aI": "Neutral"
+	},
+	{
+		"tiles": [
+			Vector2(30,12),
+			Vector2(34,22)
+		],
+		"critters": {
+			"races": null,
+			"names": [
+				"Dwarf miner",
+				"Dwarf engineer"
+			]
+		},
+		"chance": 15,
+		"aI": "Neutral"
 	}
 ]

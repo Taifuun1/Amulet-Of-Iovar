@@ -64,7 +64,6 @@ var critterLevelGenerationList = {
 			"outlaws": ["Outlaw watcher", "Outlaw fusiee'er"],
 			"kobolds": ["Tiny kobold", "Large kobold"],
 			"mimics": ["Mimic", "Humongous mimic"],
-			"newts": ["Highlands newt"],
 			"orcs": ["Flatlands orc", "Mountain orc"],
 			"rats": ["Cave rat"],
 			"snakes": ["Garnered snake", "Marsh snake"]
@@ -129,14 +128,16 @@ var critterLevelGenerationList = {
 		}
 	},
 	"miningOutpost": {
-		"amount": [4, 8],
+		"amount": [4, 6],
 		"critters": {
-			"dwarves": ["Dwarf miner", "Dwarf engineer", "Dwarf smith"],
-			"humans": ["Guard", "Guard captain"]
+			"bats": ["Squinting bat", "Spooky bat"],
+			"newts": ["Mine newt"],
+			"orcs": ["Goblin", "Flatlands orc"],
+			"rats": ["Sewer rat"],
 		}
 	},
 	"depthsOfTidoh": {
-		"amount": [5, 10],
+		"amount": [5, 8],
 		"critters": {
 			"ants": ["Leaf ant"],
 			"bats": ["Spooky bat", "Vampire bat"],
@@ -165,7 +166,7 @@ var critterLevelGenerationList = {
 		}
 	},
 	"banditWarcamp": {
-		"amount": [8, 10],
+		"amount": [7, 9],
 		"critters": {
 			"ants": ["Soldier ant"],
 			"blobs": ["Slerp"],

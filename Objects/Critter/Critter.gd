@@ -60,7 +60,7 @@ func createCritter(_critter, _levelId, _tooltip, _extraData = {}, _spawnNew = tr
 	
 	shields = 0
 	ac = int(_critter.ac)
-	magicac = int(_critter.ac)
+	magicac = int(_critter.magicac)
 	attacks = _critter.attacks
 	if _critter.has("currentHit"):
 		currentHit = _critter.currentHit
@@ -151,7 +151,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 			_distanceFromPlayer.size() <= _pickedAbility.data.distance and
 			_distanceFromPlayer.size() != 0
 		):
-			if !_pickedAbility.abilityType.matchn("skill") and mp - _pickedAbility.data.mp < 0:
+			if !_pickedAbility.abilityType.matchn("skill") and !_pickedAbility.abilityType.matchn("onAttack") and mp - _pickedAbility.data.mp < 0:
 				if randi() % 8 == 0:
 					Globals.gameConsole.addLog("Magical energy appears around {critter}s hands!".format({ "critter": critterName }))
 					return false
@@ -642,16 +642,7 @@ func takeDamage(_attacks, _critterTile, _critterName, _playerHitCheck = false, _
 			checkIfAddFlavorGamelog("despawn", critterName, true)
 		if (
 			(
-				(
-					_critterName.matchn("archeologist") or
-					_critterName.matchn("banker") or
-					_critterName.matchn("freedom fighter") or
-					_critterName.matchn("herbalogue") or
-					_critterName.matchn("mercenary") or
-					_critterName.matchn("exterminator") or
-					_critterName.matchn("rogue") or
-					_critterName.matchn("savant")
-				) and
+				checkIfCritterIsPlayer(_critterName) and
 				!(
 					aI.aI.matchn("aggressive") or
 					aI.aI.matchn("slow aggressive") or

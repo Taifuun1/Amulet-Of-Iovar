@@ -58,7 +58,7 @@ func animateTile(_position, _angle = null):
 func checkIfCritterIsHit(_tile):
 	var _hitCritter = $"/root/World".level.grid[_tile.x][_tile.y].critter
 	if _hitCritter != null:
-		var _critterExp = get_node("/root/World/Critters/{critter}".format({ "critter": _hitCritter })).takeDamage(damage, _tile, $"/root/World/Critters/0".critterName)
+		var _critterExp = get_node("/root/World/Critters/{critter}".format({ "critter": _hitCritter })).takeDamage(damage, _tile, $"/root/World/Critters/0".critterName, true)
 		if _critterExp != null:
 			$"/root/World/Critters/0".addExp(_critterExp)
 

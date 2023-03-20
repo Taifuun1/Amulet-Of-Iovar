@@ -284,6 +284,7 @@ func calculateMagicDamage():
 			}
 		}]
 		mpUsage = 0
+		$"/root/World/Critters/0".calculateEquipmentStats()
 		return
 	elif runes.heario == null:
 		var _earioNode = get_node("/root/World/Items/{id}".format({ "id": runes["eario"] }))
@@ -323,6 +324,7 @@ func calculateMagicDamage():
 	if _magicAttacks[0].magicDmg.dmg[0] != 0 and _magicAttacks[0].magicDmg.dmg[1] != 0:
 		_magicAttacks[0].magicDmg.dmg = [_magicAttacks[0].magicDmg.dmg[0] + bonusMagicDmg, _magicAttacks[0].magicDmg.dmg[1] + bonusMagicDmg]
 	spellDamage = _magicAttacks
+	$"/root/World/Critters/0".calculateEquipmentStats()
 
 func calculateMagicDamageIncrease(_type):
 	var _stats = $"/root/World/Critters/0".stats

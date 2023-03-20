@@ -251,7 +251,7 @@ func setUpDungeon():
 			else:
 				_vacationResortLevels += 1
 				newDungeon = load(levelPaths.vacationResort).instance()
-				newDungeon.create("vacationResort", "vacationResort", "Vacation Resort {level}".format({ "level": _vacationResortLevels }), 10000)
+				newDungeon.create("vacationResort", "dungeon3", "Vacation Resort {level}".format({ "level": _vacationResortLevels }), 10000)
 			_firstSectionRandomLevels -= 1
 		else:
 			newDungeon = load(levelPaths.dungeon).instance()
@@ -278,7 +278,7 @@ func setUpDungeon():
 			else:
 				_vacationResortLevels += 1
 				newDungeon = load(levelPaths.vacationResort).instance()
-				newDungeon.create("vacationResort", "vacationResort", "Vacation Resort {level}".format({ "level": _vacationResortLevels }), 10000)
+				newDungeon.create("vacationResort", "dungeon4", "Vacation Resort {level}".format({ "level": _vacationResortLevels }), 10000)
 			_firstSectionRandomLevels -= 1
 		else:
 			newDungeon = load(levelPaths.dungeon).instance()
@@ -287,7 +287,7 @@ func setUpDungeon():
 		$Levels.add_child(newDungeon)
 	
 	### Mines of Tidoh
-	for _level in range(randi() % 2 + 2):
+	for _level in range(2):
 		var newCave = load(levelPaths.minesOfTidoh).instance()
 		newCave.create("minesOfTidoh", "minesOfTidoh", "Mines of tidoh {level}".format({ "level": 1 + levels.minesOfTidoh.size() }), 2)
 		levels.minesOfTidoh.append(newCave)

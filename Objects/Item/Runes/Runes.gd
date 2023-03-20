@@ -10,7 +10,7 @@ var runes = {
 			"weight": 10,
 			"value": "Fleir",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Eario of Frost",
@@ -22,7 +22,7 @@ var runes = {
 			"weight": 10,
 			"value": "Frost",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Eario of Thunder",
@@ -34,7 +34,7 @@ var runes = {
 			"weight": 10,
 			"value": "Thunder",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Eario of Gleeie'er",
@@ -46,7 +46,7 @@ var runes = {
 			"weight": 10,
 			"value": "Gleeie'er",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Eario of Toxix",
@@ -58,7 +58,7 @@ var runes = {
 			"weight": 10,
 			"value": "Toxix",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Luirio of line",
@@ -70,7 +70,7 @@ var runes = {
 			"weight": 10,
 			"value": "Line",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Luirio of cone",
@@ -82,7 +82,7 @@ var runes = {
 			"weight": 10,
 			"value": "Cone",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Luirio of adjacent",
@@ -94,7 +94,7 @@ var runes = {
 			"weight": 10,
 			"value": "Adjacent",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Luirio of point",
@@ -106,7 +106,7 @@ var runes = {
 			"weight": 10,
 			"value": "Point",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Luirio of fourway",
@@ -118,7 +118,7 @@ var runes = {
 			"weight": 10,
 			"value": "Fourway",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Heario of gas",
@@ -130,7 +130,7 @@ var runes = {
 			"weight": 10,
 			"value": "Gas",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Heario of true",
@@ -142,7 +142,7 @@ var runes = {
 			"weight": 10,
 			"value": "True",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Heario of bolt",
@@ -154,7 +154,7 @@ var runes = {
 			"weight": 10,
 			"value": "Bolt",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Heario of fragment",
@@ -166,7 +166,7 @@ var runes = {
 			"weight": 10,
 			"value": "Fragment",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		},
 		{
 			"itemName": "Heario of flow",
@@ -178,7 +178,7 @@ var runes = {
 			"weight": 10,
 			"value": "Flow",
 			"enchantable": false,
-			"stackable": true
+			"stackable": false
 		}
 	]
 }

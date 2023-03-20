@@ -306,8 +306,6 @@ func _input(_event):
 			elif Input.is_action_just_pressed("INTERACT") and currentGameState == gameState.GAME:
 				currentGameState = gameState.INTERACT
 				Globals.gameConsole.addLog("Interact with what? (Pick a direction with numpad)")
-			elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME:
-				$"UI/UITheme/Debug Menu".showMenu()
 			elif Input.is_action_just_pressed("USE") and currentGameState == gameState.GAME:
 				openMenu("use")
 			elif Input.is_action_just_pressed("KICK") and currentGameState == gameState.GAME:
@@ -322,18 +320,20 @@ func _input(_event):
 				$UI/UITheme/PauseMenu.show()
 			elif Input.is_action_just_pressed("KEEP_MOVING") and currentGameState == gameState.GAME:
 				keepMoving = true
-			elif Input.is_action_just_pressed("GODS_WRATH") and currentGameState == gameState.GAME:
-				$Critters/"0".takeDamage([
-					{
-						"dmg": [9999, 99999],
-						"bonusDmg": {},
-						"armorPen": 0,
-						"magicDmg": {
-							"dmg": [0,0],
-							"element": null
-						}
-					}
-				], _playerTile, "God")
+#			elif Input.is_action_just_pressed("MOVE_TO_LEVEL") and currentGameState == gameState.GAME:
+#				$"UI/UITheme/Debug Menu".showMenu()
+#			elif Input.is_action_just_pressed("GODS_WRATH") and currentGameState == gameState.GAME:
+#				$Critters/"0".takeDamage([
+#					{
+#						"dmg": [9999, 99999],
+#						"bonusDmg": {},
+#						"armorPen": 0,
+#						"magicDmg": {
+#							"dmg": [0,0],
+#							"element": null
+#						}
+#					}
+#				], _playerTile, "God")
 
 func processGameTurn(_playerTile = null, _tileToMoveTo = null, _turnsToProcess = 1, _safety = false):
 	var _turnsLeft = _turnsToProcess - 1
@@ -441,8 +441,9 @@ func processPlayerEffects():
 func processEffects():
 	for _effect in $Effects.get_children():
 		if _effect.levelId == level.levelId:
+			_effect.show()
 			_effect.tickTurn(level)
-		else:
+		elif _effect.visible:
 			_effect.hide()
 
 func drawScreen():
@@ -614,14 +615,15 @@ func checkIfMoveAnotherTile(_playerTile, _tileToMoveTo):
 func moveLevel(_direction):
 	$"/root/World".hide()
 	hideObjectsWhenDrawingNextFrame = true
-	var _playerPosition = level.getCritterTile(0)
 	
+	var _playerPosition = level.getCritterTile(0)
 	var _placePlayerOnStair = whichLevelAndStairIsPlayerPlacedUpon(_direction, _playerPosition)
 	
 	level.grid[_playerPosition.x][_playerPosition.y].critter = null
 	level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
 	$FOV.moveLevel(Globals.currentDungeonLevel - 1)
 	updateTiles()
+	processEffects()
 	Globals.currentDungeonLevelName = level.dungeonLevelName
 	level.grid[level.stairs[_placePlayerOnStair].x][level.stairs[_placePlayerOnStair].y].critter = 0
 	
@@ -645,6 +647,7 @@ func goToLevel(_tile, _level):
 	level = get_node("Levels/{level}".format({ "level": Globals.currentDungeonLevel }))
 	$FOV.moveLevel(Globals.currentDungeonLevel - 1)
 	updateTiles()
+	processEffects()
 	Globals.currentDungeonLevelName = level.dungeonLevelName
 	level.grid[_tile.x][_tile.y].critter = 0
 	drawLevel()

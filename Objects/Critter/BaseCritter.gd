@@ -88,7 +88,7 @@ func moveCritter(_moveFrom, _moveTo, _movingCritter, _level, _movedCritter = nul
 ####################################
 
 func calculateDmg(_attack, _activeArmorSets = null, _hit = 1):
-	var damage = {
+	var _damage = {
 		"dmg": [0,0],
 		"magicDmg": 0
 	}
@@ -108,7 +108,7 @@ func calculateDmg(_attack, _activeArmorSets = null, _hit = 1):
 			_baseDmg = _floorDmg
 		else:
 			_baseDmg = randi() % int(_dmgVariation + 1) + _floorDmg
-		damage.dmg = int((_baseDmg + _totalBonusDamage) * _acReduction)
+		_damage.dmg = int((_baseDmg + _totalBonusDamage) * _acReduction)
 	
 	if typeof(_attack.magicDmg.dmg) == TYPE_ARRAY:
 		var _magicFloorDmg = int(_attack.magicDmg.dmg[0])
@@ -122,16 +122,19 @@ func calculateDmg(_attack, _activeArmorSets = null, _hit = 1):
 			_magicDmg += 3
 		if _attack.magicDmg.element != null and (resistances.has(_attack.magicDmg.element.to_lower()) or equipmentResistances.has(_attack.magicDmg.element.to_lower())):
 			_magicDmg /= 2
-		damage.magicDmg = _magicDmg - int(magicac / 2)
-		if damage.magicDmg < 0:
-			damage.magicDmg = 0
+		if magicac != 0:
+			_damage.magicDmg = _magicDmg - int(magicac / 2)
+		else:
+			_damage.magicDmg = _magicDmg
+		if _damage.magicDmg < 0:
+			_damage.magicDmg = 0
 	
-	if _hit == 0 and damage.dmg >= 1:
-		damage.dmg /= 2
+	if _hit == 0 and _damage.dmg >= 1:
+		_damage.dmg /= 2
 	
 	return {
-		"dmg": int(damage.dmg),
-		"magicDmg": int(damage.magicDmg)
+		"dmg": int(_damage.dmg),
+		"magicDmg": int(_damage.magicDmg)
 	}
 
 func calculateACReduction(_armorPen):

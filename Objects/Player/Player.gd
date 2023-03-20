@@ -772,10 +772,10 @@ func gainLevel():
 	
 	maxhp += hpIncrease + int(baseStats.balance / 5)
 	maxmp += mpIncrease + int(baseStats.wisdom / 5)
-	if hp + hpIncrease + int(baseStats.balance / 5) >= maxhp:
+	if hp + hpIncrease + int(baseStats.balance / 5) + hp / 2 >= maxhp:
 		hp = maxhp
 	else:
-		hp += hpIncrease + int(baseStats.balance / 5)
+		hp += hpIncrease + int(baseStats.balance / 5) + hp / 2
 	if mp + mpIncrease + int(baseStats.wisdom / 5) >= maxmp:
 		mp = maxmp
 	else:
