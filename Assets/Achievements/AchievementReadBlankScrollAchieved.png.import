@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sprite-0001.png-24d940ab6c0613f8619c9d0aa004419c.stex"
+path="res://.import/AchievementReadBlankScrollAchieved.png-3db800873f2377d6137133ef36ef03d9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Sprite-0001.png"
-dest_files=[ "res://.import/Sprite-0001.png-24d940ab6c0613f8619c9d0aa004419c.stex" ]
+source_file="res://Assets/Achievements/AchievementReadBlankScrollAchieved.png"
+dest_files=[ "res://.import/AchievementReadBlankScrollAchieved.png-3db800873f2377d6137133ef36ef03d9.stex" ]
 
 [params]
 
