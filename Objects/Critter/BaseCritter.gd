@@ -1,7 +1,7 @@
 extends Node2D
 class_name BaseCritter
 
-var damageNumber = load("res://UI/Damage Number/Damage Number.tscn")
+var damageNumber = load("res://UI/Damage Number/DamageNumber.tscn")
 
 var id
 

@@ -13,6 +13,7 @@ var liches = [
 		"hp": 32,
 		"mp": 68,
 		"ac": 5,
+		"magicac": 5,
 		"attacks": [
 			{
 				"dmg": [3,4],

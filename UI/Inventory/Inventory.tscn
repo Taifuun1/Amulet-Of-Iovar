@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://UI/Inventory/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://UI/RichTextLabel Extended/RichTextLabel Extended.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/RichTextLabel Extended/RichTextLabelExtended.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Themes/FantaisieArtistique.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Assets/Themes/UITheme.tres" type="Theme" id=4]
 [ext_resource path="res://Assets/Themes/UITitleFont.tres" type="DynamicFont" id=5]

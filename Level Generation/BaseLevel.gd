@@ -34,7 +34,7 @@ func create(_dungeonType, _dungeonSection, _dungeonLevelName, _visibility):
 func createGrid(_tile = Globals.tiles.EMPTY, _generateNewLevel = true):
 	if _generateNewLevel:
 		Globals.generatedLevels += 1
-		$"/root/World/UI/UITheme/Dancing Dragons".call_deferred("setLoadingText", "Generating level... \n{generatedLevels}".format({ "generatedLevels": Globals.generatedLevels }))
+		$"/root/World/UI/UITheme/Dancing Dragons".call_deferred("setLoadingText", "Generating level... (This will take a few minutes)\n{generatedLevels}".format({ "generatedLevels": Globals.generatedLevels }))
 	for x in range(Globals.gridSize.x):
 		grid.append([])
 		for _y in range(Globals.gridSize.y):

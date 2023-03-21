@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var inventoryItem = preload("res://UI/Inventory/Inventory Item.tscn")
+onready var inventoryItem = preload("res://UI/Inventory/InventoryItem.tscn")
 
 var inventory = []
 var currentWeight = 0

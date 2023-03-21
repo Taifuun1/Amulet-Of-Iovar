@@ -1,6 +1,6 @@
 extends Control
 
-var equipmentItem = load("res://UI/Equipment/Equipment Item.tscn")
+var equipmentItem = load("res://UI/Equipment/EquipmentItem.tscn")
 
 const equipmentUITemplatePaths = {
 	"lefthand": "res://Assets/UI/EquipmentHand.png",

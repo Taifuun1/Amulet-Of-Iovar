@@ -1,6 +1,6 @@
 extends Control
 
-onready var containerItem = preload("res://UI/Item Menu Item/Item Menu Item.tscn")
+onready var containerItem = preload("res://UI/Item Menu Item/ItemMenuItem.tscn")
 
 var containerItemNode
 

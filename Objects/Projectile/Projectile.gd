@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var projectileSprite = preload("res://UI/Projectile Sprite/Projectile Sprite.tscn")
+onready var projectileSprite = preload("res://UI/Projectile Sprite/ProjectileSprite.tscn")
 
 signal projectileAnimationDone
 

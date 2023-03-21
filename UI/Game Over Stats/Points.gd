@@ -1,6 +1,6 @@
 extends ScrollContainer
 
-onready var RichTextLabelExtended = preload("res://UI/RichTextLabel Extended/RichTextLabel Extended.tscn")
+onready var RichTextLabelExtended = preload("res://UI/RichTextLabel Extended/RichTextLabelExtended.tscn")
 
 var _pointItemCount = 0
 

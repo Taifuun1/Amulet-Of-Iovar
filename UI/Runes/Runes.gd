@@ -1,6 +1,6 @@
 extends Control
 
-var runeItem = load("res://UI/Runes/Rune Item.tscn")
+var runeItem = load("res://UI/Runes/RuneItem.tscn")
 var projectile = load("res://Objects/Projectile/Projectile.tscn")
 
 var runeData = load("res://Objects/Data/RuneData.gd").new().runeData

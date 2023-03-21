@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/Projectile Sprite/ProjectileSprite.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Spells/Adjacent.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Spells/SpellShaderMaterial.tres" type="Material" id=3]
+
+[node name="Projectile Sprite" type="Sprite"]
+material = ExtResource( 3 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

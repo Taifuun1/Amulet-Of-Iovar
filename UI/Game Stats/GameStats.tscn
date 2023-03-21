@@ -1,0 +1,885 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Assets/UI/BlankBar.png" type="Texture" id=1]
+[ext_resource path="res://UI/Game Stats/GameStats.gd" type="Script" id=2]
+[ext_resource path="res://Assets/UI/IconInventory.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/HPBar.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/BarOutline.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/MPBar.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/BarOutline2.png" type="Texture" id=7]
+[ext_resource path="res://UI/Tooltip/Tooltip.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/Tooltip Only Title/TooltipOnlyTitle.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/UI/IconQuaff.png" type="Texture" id=10]
+[ext_resource path="res://Assets/UI/IconRead.png" type="Texture" id=11]
+[ext_resource path="res://Assets/UI/IconZap.png" type="Texture" id=12]
+[ext_resource path="res://Assets/UI/IconEquipment.png" type="Texture" id=13]
+[ext_resource path="res://Assets/UI/IconConsume.png" type="Texture" id=14]
+[ext_resource path="res://Assets/UI/IconLoot.png" type="Texture" id=15]
+[ext_resource path="res://Assets/UI/IconRunes.png" type="Texture" id=16]
+[ext_resource path="res://Assets/UI/IconDip.png" type="Texture" id=17]
+[ext_resource path="res://Assets/UI/IconUse.png" type="Texture" id=18]
+[ext_resource path="res://Assets/UI/IconAttackNeutral.png" type="Texture" id=19]
+[ext_resource path="res://Assets/UI/IconAutoMine.png" type="Texture" id=20]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0235294, 0.0313726, 0.101961, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.305882, 0.509804, 1, 1 )
+
+[node name="GameStats" type="Panel"]
+margin_left = 800.0
+margin_top = 768.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 1120, 312 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="GameStatsContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="DetailsContainer" type="VBoxContainer" parent="GameStatsContainer"]
+margin_right = 377.0
+margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NameContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="NameText" type="Label" parent="GameStatsContainer/DetailsContainer/NameContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Name"
+clip_text = true
+
+[node name="Name" type="Label" parent="GameStatsContainer/DetailsContainer/NameContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/NameContainer" instance=ExtResource( 8 )]
+
+[node name="RaceContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 18.0
+margin_right = 377.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="RaceText" type="Label" parent="GameStatsContainer/DetailsContainer/RaceContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Race"
+clip_text = true
+
+[node name="Race" type="Label" parent="GameStatsContainer/DetailsContainer/RaceContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/RaceContainer" instance=ExtResource( 8 )]
+
+[node name="JusticeContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 36.0
+margin_right = 377.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="JusticeText" type="Label" parent="GameStatsContainer/DetailsContainer/JusticeContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Justice"
+clip_text = true
+
+[node name="Justice" type="Label" parent="GameStatsContainer/DetailsContainer/JusticeContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/JusticeContainer" instance=ExtResource( 8 )]
+
+[node name="TurnCountContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 54.0
+margin_right = 377.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="TurnCountContainer" type="Label" parent="GameStatsContainer/DetailsContainer/TurnCountContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Turns"
+clip_text = true
+
+[node name="TurnCount" type="Label" parent="GameStatsContainer/DetailsContainer/TurnCountContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/TurnCountContainer" instance=ExtResource( 8 )]
+
+[node name="DungeonLevelContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 72.0
+margin_right = 377.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="DungeonLevelText" type="Label" parent="GameStatsContainer/DetailsContainer/DungeonLevelContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Dungeon Level"
+clip_text = true
+
+[node name="DungeonLevel" type="Label" parent="GameStatsContainer/DetailsContainer/DungeonLevelContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/DungeonLevelContainer" instance=ExtResource( 8 )]
+
+[node name="StrengthContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 90.0
+margin_right = 377.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="StrengthText" type="Label" parent="GameStatsContainer/DetailsContainer/StrengthContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Strength"
+clip_text = true
+
+[node name="Strength" type="Label" parent="GameStatsContainer/DetailsContainer/StrengthContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/StrengthContainer" instance=ExtResource( 8 )]
+
+[node name="LegerityContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 108.0
+margin_right = 377.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="LegerityText" type="Label" parent="GameStatsContainer/DetailsContainer/LegerityContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Legerity"
+clip_text = true
+
+[node name="Legerity" type="Label" parent="GameStatsContainer/DetailsContainer/LegerityContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/LegerityContainer" instance=ExtResource( 8 )]
+
+[node name="BalanceContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 126.0
+margin_right = 377.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="BalanceText" type="Label" parent="GameStatsContainer/DetailsContainer/BalanceContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Balance"
+clip_text = true
+
+[node name="Balance" type="Label" parent="GameStatsContainer/DetailsContainer/BalanceContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/BalanceContainer" instance=ExtResource( 8 )]
+
+[node name="BeliefContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 144.0
+margin_right = 377.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="BeliefText" type="Label" parent="GameStatsContainer/DetailsContainer/BeliefContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Belief"
+clip_text = true
+
+[node name="Belief" type="Label" parent="GameStatsContainer/DetailsContainer/BeliefContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/BeliefContainer" instance=ExtResource( 8 )]
+
+[node name="VisageContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 162.0
+margin_right = 377.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="VisageText" type="Label" parent="GameStatsContainer/DetailsContainer/VisageContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Visage"
+clip_text = true
+
+[node name="Visage" type="Label" parent="GameStatsContainer/DetailsContainer/VisageContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/VisageContainer" instance=ExtResource( 8 )]
+
+[node name="WisdomContainer" type="HBoxContainer" parent="GameStatsContainer/DetailsContainer"]
+margin_top = 180.0
+margin_right = 377.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="WisdomText" type="Label" parent="GameStatsContainer/DetailsContainer/WisdomContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Wisdom"
+clip_text = true
+
+[node name="Wisdom" type="Label" parent="GameStatsContainer/DetailsContainer/WisdomContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/DetailsContainer/WisdomContainer" instance=ExtResource( 8 )]
+
+[node name="StatsContainer" type="VBoxContainer" parent="GameStatsContainer"]
+margin_left = 387.0
+margin_right = 764.0
+margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HPContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_right = 377.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="HPLabel" type="Label" parent="GameStatsContainer/StatsContainer/HPContainer"]
+margin_right = 24.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 24, 32 )
+text = "HP"
+align = 1
+valign = 1
+
+[node name="HP" type="Label" parent="GameStatsContainer/StatsContainer/HPContainer"]
+margin_left = 28.0
+margin_right = 73.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 45, 32 )
+text = "HP"
+align = 1
+valign = 1
+
+[node name="HPAmount" type="TextureProgress" parent="GameStatsContainer/StatsContainer/HPContainer"]
+margin_left = 77.0
+margin_right = 377.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 300, 32 )
+mouse_filter = 2
+value = 50.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/HPContainer" instance=ExtResource( 8 )]
+
+[node name="MPContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 36.0
+margin_right = 377.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="MPLabel" type="Label" parent="GameStatsContainer/StatsContainer/MPContainer"]
+margin_right = 24.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 24, 32 )
+text = "MP"
+align = 1
+valign = 1
+
+[node name="MP" type="Label" parent="GameStatsContainer/StatsContainer/MPContainer"]
+margin_left = 28.0
+margin_right = 73.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 45, 32 )
+text = "MP"
+align = 1
+valign = 1
+
+[node name="MPAmount" type="TextureProgress" parent="GameStatsContainer/StatsContainer/MPContainer"]
+margin_left = 77.0
+margin_right = 377.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 300, 32 )
+mouse_filter = 2
+value = 50.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/MPContainer" instance=ExtResource( 8 )]
+
+[node name="ACContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 72.0
+margin_right = 377.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="ACText" type="Label" parent="GameStatsContainer/StatsContainer/ACContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "AC"
+clip_text = true
+
+[node name="AC" type="Label" parent="GameStatsContainer/StatsContainer/ACContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/ACContainer" instance=ExtResource( 8 )]
+
+[node name="MagicACContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 90.0
+margin_right = 377.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="MagicACText" type="Label" parent="GameStatsContainer/StatsContainer/MagicACContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Magic AC"
+clip_text = true
+
+[node name="MagicAC" type="Label" parent="GameStatsContainer/StatsContainer/MagicACContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/MagicACContainer" instance=ExtResource( 8 )]
+
+[node name="AttacksContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 108.0
+margin_right = 377.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 377, 0 )
+mouse_filter = 2
+custom_constants/separation = 4
+
+[node name="AttacksText" type="Label" parent="GameStatsContainer/StatsContainer/AttacksContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+mouse_filter = 1
+text = "Attacks"
+clip_text = true
+
+[node name="Attacks" type="Label" parent="GameStatsContainer/StatsContainer/AttacksContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/AttacksContainer" instance=ExtResource( 8 )]
+
+[node name="MagicAttacksContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 126.0
+margin_right = 377.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 377, 0 )
+mouse_filter = 2
+custom_constants/separation = 4
+
+[node name="MagicAttacksText" type="Label" parent="GameStatsContainer/StatsContainer/MagicAttacksContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+mouse_filter = 1
+text = "Magic Attacks"
+clip_text = true
+
+[node name="MagicAttacks" type="Label" parent="GameStatsContainer/StatsContainer/MagicAttacksContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+mouse_filter = 1
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/MagicAttacksContainer" instance=ExtResource( 8 )]
+
+[node name="HitsContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+visible = false
+margin_top = 120.0
+margin_right = 377.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="AlignmentText" type="Label" parent="GameStatsContainer/StatsContainer/HitsContainer"]
+margin_right = 186.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 186, 0 )
+text = "Alignment"
+clip_text = true
+
+[node name="Alignment" type="Label" parent="GameStatsContainer/StatsContainer/HitsContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 187, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="LevelContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 144.0
+margin_right = 377.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="LevelText" type="Label" parent="GameStatsContainer/StatsContainer/LevelContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Level"
+clip_text = true
+
+[node name="Level" type="Label" parent="GameStatsContainer/StatsContainer/LevelContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "0"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/LevelContainer" instance=ExtResource( 8 )]
+
+[node name="ExperienceContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 162.0
+margin_right = 377.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="ExperienceText" type="Label" parent="GameStatsContainer/StatsContainer/ExperienceContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 186, 0 )
+text = "Experience"
+clip_text = true
+
+[node name="Experience" type="Label" parent="GameStatsContainer/StatsContainer/ExperienceContainer"]
+margin_left = 190.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 187, 0 )
+text = "0"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/ExperienceContainer" instance=ExtResource( 8 )]
+
+[node name="GoldPiecesContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 180.0
+margin_right = 377.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 377, 0 )
+
+[node name="GoldPiecesText" type="Label" parent="GameStatsContainer/StatsContainer/GoldPiecesContainer"]
+margin_right = 250.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 250, 0 )
+text = "Gold Pieces"
+clip_text = true
+
+[node name="GoldPieces" type="Label" parent="GameStatsContainer/StatsContainer/GoldPiecesContainer"]
+margin_left = 254.0
+margin_right = 377.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 123, 0 )
+text = "-"
+align = 2
+clip_text = true
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/GoldPiecesContainer" instance=ExtResource( 8 )]
+
+[node name="WeightContainer" type="VBoxContainer" parent="GameStatsContainer/StatsContainer"]
+margin_top = 198.0
+margin_right = 377.0
+margin_bottom = 236.0
+
+[node name="WeightLabel" type="Label" parent="GameStatsContainer/StatsContainer/WeightContainer"]
+margin_right = 377.0
+margin_bottom = 14.0
+text = "Weight"
+align = 1
+
+[node name="WeightBarContainer" type="HBoxContainer" parent="GameStatsContainer/StatsContainer/WeightContainer"]
+margin_top = 18.0
+margin_right = 377.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 377, 20 )
+mouse_filter = 2
+
+[node name="PreviousWeightBound" type="Label" parent="GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer"]
+margin_top = 3.0
+margin_right = 84.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 84, 0 )
+text = "0"
+
+[node name="Weigth" type="TextureProgress" parent="GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer"]
+margin_left = 88.0
+margin_right = 288.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 200, 20 )
+mouse_filter = 2
+size_flags_vertical = 0
+value = 50.0
+rounded = true
+texture_over = ExtResource( 7 )
+texture_progress = ExtResource( 1 )
+
+[node name="NextWeightBound" type="Label" parent="GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer"]
+margin_left = 292.0
+margin_right = 376.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 84, 20 )
+text = "0"
+align = 2
+
+[node name="Tooltip" parent="GameStatsContainer/StatsContainer/WeightContainer" instance=ExtResource( 8 )]
+
+[node name="EffectsAndIconsContainer" type="VBoxContainer" parent="GameStatsContainer"]
+margin_left = 774.0
+margin_right = 1112.0
+margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StatusEffectsContainer" type="GridContainer" parent="GameStatsContainer/EffectsAndIconsContainer"]
+margin_right = 338.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="IconsContainer" type="GridContainer" parent="GameStatsContainer/EffectsAndIconsContainer"]
+margin_top = 154.0
+margin_right = 338.0
+margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 6
+
+[node name="InventoryIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_right = 53.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/InventoryIcon" instance=ExtResource( 9 )]
+
+[node name="EquipmentIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 57.0
+margin_right = 110.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 13 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/EquipmentIcon" instance=ExtResource( 9 )]
+
+[node name="ReadIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 114.0
+margin_right = 167.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 11 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ReadIcon" instance=ExtResource( 9 )]
+
+[node name="QuaffIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 171.0
+margin_right = 224.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 10 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/QuaffIcon" instance=ExtResource( 9 )]
+
+[node name="ConsumeIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 228.0
+margin_right = 281.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ConsumeIcon" instance=ExtResource( 9 )]
+
+[node name="ZapIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 285.0
+margin_right = 338.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 12 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon" instance=ExtResource( 9 )]
+
+[node name="UseIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_top = 77.0
+margin_right = 53.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 18 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/UseIcon" instance=ExtResource( 9 )]
+
+[node name="RunesIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 57.0
+margin_top = 77.0
+margin_right = 110.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 16 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/RunesIcon" instance=ExtResource( 9 )]
+
+[node name="LootIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 114.0
+margin_top = 77.0
+margin_right = 167.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 15 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/LootIcon" instance=ExtResource( 9 )]
+
+[node name="DipIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 171.0
+margin_top = 77.0
+margin_right = 224.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 17 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" instance=ExtResource( 9 )]
+
+[node name="AutoMineIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 228.0
+margin_top = 77.0
+margin_right = 281.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 20 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" instance=ExtResource( 9 )]
+
+[node name="AttackNeutralIcon" type="TextureRect" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer"]
+margin_left = 285.0
+margin_top = 77.0
+margin_right = 338.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 19 )
+stretch_mode = 6
+
+[node name="Tooltip" parent="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" instance=ExtResource( 9 )]
+
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/NameContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/NameContainer", "className" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/NameContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/NameContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/RaceContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/RaceContainer", "race" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/RaceContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/RaceContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/JusticeContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/JusticeContainer", "justice" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/JusticeContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/JusticeContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/TurnCountContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/TurnCountContainer", "turnCount" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/TurnCountContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/TurnCountContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/DungeonLevelContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/DungeonLevelContainer", "dungeonLevel" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/DungeonLevelContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/DungeonLevelContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/StrengthContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/StrengthContainer", "strength" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/StrengthContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/StrengthContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/LegerityContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/LegerityContainer", "legerity" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/LegerityContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/LegerityContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/BalanceContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/BalanceContainer", "balance" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/BalanceContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/BalanceContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/BeliefContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/BeliefContainer", "belief" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/BeliefContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/BeliefContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/VisageContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/VisageContainer", "visage" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/VisageContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/VisageContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/DetailsContainer/WisdomContainer" to="." method="_onMouseEnteredStat" binds= [ "DetailsContainer/WisdomContainer", "wisdom" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/DetailsContainer/WisdomContainer" to="." method="_onMouseExitedStat" binds= [ "DetailsContainer/WisdomContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/HPContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/HPContainer", "hp" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/HPContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/HPContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/MPContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MPContainer", "mp" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/MPContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MPContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/ACContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/ACContainer", "ac" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/ACContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/ACContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/MagicACContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MagicACContainer", "magicac" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/MagicACContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MagicACContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/AttacksContainer/AttacksText" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/AttacksContainer", "attacksText" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/AttacksContainer/AttacksText" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/AttacksContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/AttacksContainer/Attacks" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/AttacksContainer", "attacks" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/AttacksContainer/Attacks" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/AttacksContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacksText" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MagicAttacksContainer", "magicAttacksText" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacksText" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MagicAttacksContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacks" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/MagicAttacksContainer", "magicAttacks" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/MagicAttacksContainer/MagicAttacks" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/MagicAttacksContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/LevelContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/LevelContainer", "level" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/LevelContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/LevelContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/ExperienceContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/ExperienceContainer", "experience" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/ExperienceContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/ExperienceContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/GoldPiecesContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/GoldPiecesContainer", "goldPieces" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/GoldPiecesContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/GoldPiecesContainer" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/StatsContainer/WeightContainer" to="." method="_onMouseEnteredStat" binds= [ "StatsContainer/WeightContainer", "weight" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/StatsContainer/WeightContainer" to="." method="_onMouseExitedStat" binds= [ "StatsContainer/WeightContainer" ]]
+[connection signal="value_changed" from="GameStatsContainer/StatsContainer/WeightContainer/WeightBarContainer/Weigth" to="." method="_on_Weigth_value_changed"]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/InventoryIcon" to="." method="_onIconClicked" binds= [ "inventory" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/InventoryIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/InventoryIcon", "inventory" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/InventoryIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/InventoryIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/EquipmentIcon" to="." method="_onIconClicked" binds= [ "equipment" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/EquipmentIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/EquipmentIcon", "equipment" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/EquipmentIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/EquipmentIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ReadIcon" to="." method="_onIconClicked" binds= [ "read" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ReadIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ReadIcon", "read" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ReadIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ReadIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/QuaffIcon" to="." method="_onIconClicked" binds= [ "quaff" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/QuaffIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/QuaffIcon", "quaff" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/QuaffIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/QuaffIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ConsumeIcon" to="." method="_onIconClicked" binds= [ "consume" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ConsumeIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ConsumeIcon", "consume" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ConsumeIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ConsumeIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon" to="." method="_onIconClicked" binds= [ "zap" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon", "zap" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/ZapIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/ZapIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/UseIcon" to="." method="_onIconClicked" binds= [ "use" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/UseIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/UseIcon", "use" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/UseIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/UseIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/RunesIcon" to="." method="_onIconClicked" binds= [ "runes" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/RunesIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/RunesIcon", "runes" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/RunesIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/RunesIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/LootIcon" to="." method="_onIconClicked" binds= [ "loot" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/LootIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/LootIcon", "loot" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/LootIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/LootIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onIconClicked" binds= [ "dip" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/DipIcon", "dip" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/DipIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/DipIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onIconClicked" binds= [ "autoMine" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/AutoMineIcon", "autoMine" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AutoMineIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/AutoMineIcon" ]]
+[connection signal="gui_input" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onIconClicked" binds= [ "attackNeutral" ]]
+[connection signal="mouse_entered" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onMouseEnteredStat" binds= [ "EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon", "attackNeutral" ]]
+[connection signal="mouse_exited" from="GameStatsContainer/EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" to="." method="_onMouseExitedStat" binds= [ "EffectsAndIconsContainer/IconsContainer/AttackNeutralIcon" ]]
