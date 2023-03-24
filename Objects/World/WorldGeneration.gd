@@ -244,7 +244,7 @@ func setUpDungeon():
 				_patchLevels += 1
 				newDungeon = load(levelPaths.patch).instance()
 				newDungeon.create("patch", "dungeon3", "Patch {level}".format({ "level": _patchLevels }), 10000)
-			if randi() % 3 == 0:
+			elif randi() % 3 == 0:
 				_anthillLevels += 1
 				newDungeon = load(levelPaths.anthill).instance()
 				newDungeon.create("anthill", "dungeon3", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
@@ -257,33 +257,6 @@ func setUpDungeon():
 			newDungeon = load(levelPaths.dungeon).instance()
 			newDungeon.create("dungeon3", "dungeon3", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() }), 10000)
 		levels.dungeon3.append(newDungeon)
-		$Levels.add_child(newDungeon)
-	
-	### Dungeon 4
-	for _level in range(3):
-		var newDungeon
-		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < 2:
-			if randi() % 4 == 0:
-				_patchLevels += 1
-				newDungeon = load(levelPaths.patch).instance()
-				newDungeon.create("patch", "dungeon4", "Patch {level}".format({ "level": _patchLevels }), 10000)
-			if randi() % 4 == 0:
-				_abandonedOutpostLevels += 1
-				newDungeon = load(levelPaths.abandonedOutpost).instance()
-				newDungeon.create("abandonedOutpost", "dungeon4", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
-			if randi() % 4 == 0:
-				_anthillLevels += 1
-				newDungeon = load(levelPaths.anthill).instance()
-				newDungeon.create("anthill", "dungeon4", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
-			else:
-				_vacationResortLevels += 1
-				newDungeon = load(levelPaths.vacationResort).instance()
-				newDungeon.create("vacationResort", "dungeon4", "Vacation Resort {level}".format({ "level": _vacationResortLevels }), 10000)
-			_firstSectionRandomLevels -= 1
-		else:
-			newDungeon = load(levelPaths.dungeon).instance()
-			newDungeon.create("dungeon4", "dungeon4", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() }), 10000)
-		levels.dungeon4.append(newDungeon)
 		$Levels.add_child(newDungeon)
 	
 	### Mines of Tidoh
@@ -316,6 +289,33 @@ func setUpDungeon():
 	newMinesEnd.create("depthsOfTidoh", "depthsOfTidoh", "Mines end", 1)
 	levels.depthsOfTidoh.append(newMinesEnd)
 	$Levels.add_child(newMinesEnd)
+	
+	### Dungeon 4
+	for _level in range(3):
+		var newDungeon
+		if randi() % 7 == 0 and _firstSectionRandomLevels != 0 and _level < 2:
+			if randi() % 4 == 0:
+				_patchLevels += 1
+				newDungeon = load(levelPaths.patch).instance()
+				newDungeon.create("patch", "dungeon4", "Patch {level}".format({ "level": _patchLevels }), 10000)
+			elif randi() % 4 == 0:
+				_abandonedOutpostLevels += 1
+				newDungeon = load(levelPaths.abandonedOutpost).instance()
+				newDungeon.create("abandonedOutpost", "dungeon4", "Abandoned Outpost {level}".format({ "level": _abandonedOutpostLevels }), 10000)
+			elif randi() % 4 == 0:
+				_anthillLevels += 1
+				newDungeon = load(levelPaths.anthill).instance()
+				newDungeon.create("anthill", "dungeon4", "Anthill {level}".format({ "level": _anthillLevels }), 10000)
+			else:
+				_vacationResortLevels += 1
+				newDungeon = load(levelPaths.vacationResort).instance()
+				newDungeon.create("vacationResort", "dungeon4", "Vacation Resort {level}".format({ "level": _vacationResortLevels }), 10000)
+			_firstSectionRandomLevels -= 1
+		else:
+			newDungeon = load(levelPaths.dungeon).instance()
+			newDungeon.create("dungeon4", "dungeon4", "Dungeon {level}".format({ "level": 2 + levels.dungeon1.size() + levels.dungeon2.size() + levels.dungeon3.size() + levels.dungeon4.size() }), 10000)
+		levels.dungeon4.append(newDungeon)
+		$Levels.add_child(newDungeon)
 	
 	### Bandit warcamp
 	for _level in range(5):
