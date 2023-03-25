@@ -81,9 +81,10 @@ size_flags_vertical = 3
 
 [node name="Points" parent="GameOverTabs/Points/PointsContainer" instance=ExtResource( 2 )]
 margin_right = 754.0
-margin_bottom = 494.0
+margin_bottom = 535.0
 
 [node name="Exit" type="Button" parent="GameOverTabs/Points/PointsContainer"]
+visible = false
 margin_top = 498.0
 margin_right = 754.0
 margin_bottom = 535.0
@@ -113,6 +114,7 @@ margin_right = 1524.0
 margin_bottom = 614.0
 
 [node name="Exit" type="Button" parent="GameOverTabs/Console log/ConsoleLogContainer"]
+visible = false
 margin_top = 618.0
 margin_right = 1524.0
 margin_bottom = 655.0
@@ -140,6 +142,7 @@ margin_right = 1524.0
 margin_bottom = 614.0
 
 [node name="Exit" type="Button" parent="GameOverTabs/Inventory/InventoryContainer"]
+visible = false
 margin_top = 618.0
 margin_right = 1524.0
 margin_bottom = 655.0
@@ -167,6 +170,7 @@ margin_right = 1524.0
 margin_bottom = 655.0
 
 [node name="Exit" type="Button" parent="GameOverTabs/Kill count/KillCountContainer"]
+visible = false
 margin_top = 618.0
 margin_right = 1524.0
 margin_bottom = 655.0
@@ -194,6 +198,7 @@ margin_right = 1524.0
 margin_bottom = 655.0
 
 [node name="Exit" type="Button" parent="GameOverTabs/Game stats/GameStatsContainer"]
+visible = false
 margin_top = 618.0
 margin_right = 1524.0
 margin_bottom = 655.0
