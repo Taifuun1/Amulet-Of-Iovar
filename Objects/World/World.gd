@@ -1020,8 +1020,9 @@ func saveGame():
 	}
 	$Save.saveData("SaveData", "SaveSlot{selectedSave}".format({ "selectedSave": StartingData.selectedSave }), _saveData)
 	
+	$UI/UITheme/"Dancing Dragons".setLoadingText("Reload page!")
+	
 	saveGameThread.call_deferred("wait_to_finish")
-	get_tree().quit()
 
 
 
