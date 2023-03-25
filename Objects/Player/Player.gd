@@ -450,7 +450,7 @@ func dropItem(_playerTile, _item, _grid):
 				$"/root/World".currentGameState = $"/root/World".gameState.GAME_OVER
 				$"/root/World".gameOver = true
 				GlobalGameStats.gameStats["Times ascended"] += 1
-				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend!", getGameOverStats(), true)
+				$"/root/World/UI/UITheme/Game Over Stats".setValues("You ascend! (Reload page to play again)", getGameOverStats(), true)
 				$"/root/World/UI/UITheme/Game Over Stats".saveGameData()
 				$"/root/World/UI/UITheme/Game Over Stats".show()
 				yield(VisualServer, "frame_post_draw")

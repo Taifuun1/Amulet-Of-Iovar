@@ -557,7 +557,7 @@ func isGameOver():
 	elif $Critters/"0".hp <= 0:
 		Globals.gameConsole.addLog("You die...")
 		currentGameState = gameState.GAME_OVER
-		$"UI/UITheme/Game Over Stats".setValues("You die!", $Critters/"0".getGameOverStats())
+		$"UI/UITheme/Game Over Stats".setValues("You die! (Reload page to play again)", $Critters/"0".getGameOverStats())
 		$"UI/UITheme/Game Over Stats".saveGameData()
 		$"UI/UITheme/Game Over Stats".show()
 		gameOver = true
