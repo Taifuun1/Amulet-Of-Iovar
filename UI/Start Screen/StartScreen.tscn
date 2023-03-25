@@ -61,27 +61,28 @@ rect_min_size = Vector2( 300, 516 )
 alignment = 2
 
 [node name="Start game" type="Button" parent="StartScreenContainer/StartScreenDividerContainer/ContentContainer/Panel/ButtonsContainer"]
-margin_top = 104.0
-margin_right = 300.0
-margin_bottom = 204.0
-rect_min_size = Vector2( 260, 100 )
-text = "Start game "
-
-[node name="Games" type="Button" parent="StartScreenContainer/StartScreenDividerContainer/ContentContainer/Panel/ButtonsContainer"]
 margin_top = 208.0
 margin_right = 300.0
 margin_bottom = 308.0
 rect_min_size = Vector2( 260, 100 )
-text = "Games "
+text = "Start game "
 
-[node name="Stats" type="Button" parent="StartScreenContainer/StartScreenDividerContainer/ContentContainer/Panel/ButtonsContainer"]
+[node name="Games" type="Button" parent="StartScreenContainer/StartScreenDividerContainer/ContentContainer/Panel/ButtonsContainer"]
 margin_top = 312.0
 margin_right = 300.0
 margin_bottom = 412.0
 rect_min_size = Vector2( 260, 100 )
+text = "Games "
+
+[node name="Stats" type="Button" parent="StartScreenContainer/StartScreenDividerContainer/ContentContainer/Panel/ButtonsContainer"]
+margin_top = 416.0
+margin_right = 300.0
+margin_bottom = 516.0
+rect_min_size = Vector2( 260, 100 )
 text = "Stats "
 
 [node name="Exit game" type="Button" parent="StartScreenContainer/StartScreenDividerContainer/ContentContainer/Panel/ButtonsContainer"]
+visible = false
 margin_top = 416.0
 margin_right = 300.0
 margin_bottom = 516.0
