@@ -1,9 +1,13 @@
 extends MarginContainer
 
-var saveData = load("res://Objects/Data/SaveData.gd").new().saveData
-
 var saveGamePickScreenItem = load("res://UI/Save Game Pick Screen/SaveGamePickScreenItem.tscn")
 
+var saveData = {
+	"className": "-",
+	"dungeonLevelName": "-",
+	"level": 0,
+	"points": "-"
+}
 
 func _ready():
 	for _i in range(3):
