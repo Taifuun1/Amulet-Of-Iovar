@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/Inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://UI/RichTextLabel Extended/RichTextLabelExtended.tscn" type="PackedScene" id=2]
@@ -13,6 +13,8 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.129412, 0.219608, 0.403922, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=5]
 
 [sub_resource type="StyleBoxLine" id=4]
 color = Color( 0.129412, 0.219608, 0.403922, 1 )
@@ -64,8 +66,15 @@ margin_bottom = 87.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 
+[node name="SpritePadding" type="Panel" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
+margin_right = 32.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 32, 50 )
+custom_styles/panel = SubResource( 5 )
+
 [node name="Name" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
-margin_right = 376.0
+margin_left = 36.0
+margin_right = 403.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -73,8 +82,8 @@ text = "Name"
 valign = 1
 
 [node name="Piety" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
-margin_left = 380.0
-margin_right = 756.0
+margin_left = 407.0
+margin_right = 774.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -82,8 +91,8 @@ text = "Piety"
 valign = 1
 
 [node name="Enchantment" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
-margin_left = 760.0
-margin_right = 1136.0
+margin_left = 778.0
+margin_right = 1145.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -91,7 +100,7 @@ text = "Enchantment"
 valign = 1
 
 [node name="Amount" type="Label" parent="InventoryBackground/InventoryContainer/DescriptionContainer"]
-margin_left = 1140.0
+margin_left = 1149.0
 margin_right = 1516.0
 margin_bottom = 50.0
 size_flags_horizontal = 3

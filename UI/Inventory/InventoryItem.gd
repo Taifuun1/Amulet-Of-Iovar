@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 var id
 var itemName
@@ -12,6 +12,16 @@ func setValues(_item):
 	id = _item.id
 	name = str(_item.id)
 	
+	if (
+		(
+			GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and
+			GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified == true
+		) or
+		_item.notIdentified.name
+	):
+		$Sprite.texture = _item.itemTexture
+	else:
+		$Sprite.texture = _item.unidenfiedItemTexture
 	if (
 		(
 			GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and

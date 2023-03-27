@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends PanelContainer
 
 var menuItemType
 
@@ -17,23 +17,24 @@ func setValues(_item, _menuItemType, _hideChecked = false):
 	menuItemType = _menuItemType
 	
 	if _hideChecked:
-		$CheckAndNameContainer/Check.hide()
+		$ItemMenuItemContainer/CheckAndNameContainer/Check.hide()
 	if _item.notIdentified.name or (GlobalItemInfo.globalItemInfo.has(_item.identifiedItemName) and GlobalItemInfo.globalItemInfo[_item.identifiedItemName].identified == true):
-		$CheckAndNameContainer/Name.createRichTextLabel(_item.itemName, _item.rarity)
+		$ItemMenuItemContainer/CheckAndNameContainer/Name.createRichTextLabel(_item.itemName, _item.rarity)
 	else:
-		$CheckAndNameContainer/Name.createRichTextLabel(_item.itemName)
+		$ItemMenuItemContainer/CheckAndNameContainer/Name.createRichTextLabel(_item.itemName)
 	if _item.notIdentified.piety:
-		$Piety.createRichTextLabel(_item.piety)
+		$ItemMenuItemContainer/Piety.createRichTextLabel(_item.piety)
 	else:
-		$Piety.createRichTextLabel("?")
+		$ItemMenuItemContainer/Piety.createRichTextLabel("?")
 	if _item.notIdentified.enchantment:
-		$Enchantment.createRichTextLabel(str(_item.enchantment))
+		$ItemMenuItemContainer/Enchantment.createRichTextLabel(str(_item.enchantment))
 	else:
-		$Enchantment.createRichTextLabel("?")
+		$ItemMenuItemContainer/Enchantment.createRichTextLabel("?")
 	if _item.amount != null:
-		$Amount.createRichTextLabel(str(_item.amount))
+		$ItemMenuItemContainer/Amount.createRichTextLabel(str(_item.amount))
 	else:
-		$Amount.createRichTextLabel("?")
+		$ItemMenuItemContainer/Amount.createRichTextLabel("?")
+
 
 func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
@@ -44,3 +45,13 @@ func _gui_input(event):
 				$"../../../.."._on_Item_Management_List_Clicked(id)
 		else:
 			$"../../../../.."._on_Container_List_Clicked(id)
+
+func _on_ItemMenuItem_mouse_entered():
+	var _panelStylebox = get_stylebox("panel").duplicate()
+	_panelStylebox.set_border_color(Color("253f7c"))
+	add_stylebox_override("panel", _panelStylebox)
+
+func _on_ItemMenuItem_mouse_exited():
+	var _panelStylebox = get_stylebox("panel").duplicate()
+	_panelStylebox.set_border_color(Color("00000000"))
+	add_stylebox_override("panel", _panelStylebox)
