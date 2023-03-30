@@ -481,9 +481,7 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					if !checkIfStatusEffectIsPermanent("fumbling"):
 						statusEffects.fumbling = 3
 					Globals.gameConsole.addLog("{critterName} touches you. The cold makes you shiver shiver!".format({ "critterName": critterName }))
-				print("taking damage")
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
-				print("hp ", $"/root/World/Critters/0".hp)
 				mp -= _pickedAbility.data.mp
 			elif (
 				abilityHits.size() != 0 and
