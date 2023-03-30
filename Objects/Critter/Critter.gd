@@ -445,7 +445,32 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					_pickedAbility.abilityName.matchn("thunderSelfdestruct")
 				):
 					Globals.gameConsole.addLog("{critterName} {spell}s!".format({ "critterName": critterName, "spell": _pickedAbility.data.name }))
+					$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
+					mp -= _pickedAbility.data.mp
+					yield(get_tree(), "idle_frame")
+					var _projectile = projectile.instance()
+					var _tiles = []
+					var _adjacentTiles = []
+					var _color = "#000"
+					for _direction in spellData.spellDirections:
+						_adjacentTiles.append({ "tile": _critterTile + _direction, "angle": int(spellData.spellDirections[_direction].angle + 90) })
+						if _pickedAbility.data.attacks[0].magicDmg.element != null and _pickedAbility.data.attacks[0].magicDmg.element.matchn("toxix"):
+							$"/root/World/UI/UITheme/Runes".createMiasma(_playerTile + _direction, "Toxix")
+					_tiles.append(_adjacentTiles)
+					if _pickedAbility.data.attacks[0].magicDmg.element != null:
+						_color = spellData[_pickedAbility.data.attacks[0].magicDmg.element].color
+					_projectile.create(_tiles, {
+							"texture": load("res://Assets/Spells/Adjacent.png"),
+							"color": _color,
+							"damage": _pickedAbility.data.attacks
+						}
+					)
+					$"/root/World/Animations".add_child(_projectile)
+					# warning-ignore:return_value_discarded
+					$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).connect("projectileAnimationDone", $"/root/World", "_on_Critter_Animation_done")
+					$"/root/World/Animations".get_child($"/root/World/Animations".get_child_count() - 1).animateCycle()
 					despawn(_critterTile, false, false)
+					return true
 				elif _pickedAbility.abilityName.matchn("lifesteal"):
 					if hp + 2 <= maxhp:
 						hp += 2
@@ -456,7 +481,9 @@ func processCritterAction(_critterTile, _playerTile, _critter, _level):
 					if !checkIfStatusEffectIsPermanent("fumbling"):
 						statusEffects.fumbling = 3
 					Globals.gameConsole.addLog("{critterName} touches you. The cold makes you shiver shiver!".format({ "critterName": critterName }))
+				print("taking damage")
 				$"/root/World/Critters/0".takeDamage(_pickedAbility.data.attacks, _moveCritterTo, critterName)
+				print("hp ", $"/root/World/Critters/0".hp)
 				mp -= _pickedAbility.data.mp
 			elif (
 				abilityHits.size() != 0 and
@@ -725,7 +752,7 @@ func despawn(_critterTile = null, _createCorpse = true, _createDrops = true):
 	_level.addPointToEnemyPathding(_gridPosition)
 	_level.critters.erase(id)
 	GlobalCritterInfo.removeCritterFromPlay(critterName)
-	queue_free()
+	call_deferred("queue_free")
 
 func addCritterBackToPopulation(_critterTile, _level):
 	_level.grid[_critterTile.x][_critterTile.y].critter = null
