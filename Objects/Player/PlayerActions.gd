@@ -11,6 +11,10 @@ func readItem(_id):
 			"blank scroll":
 				Globals.gameConsole.addLog("Its a blank scroll. Wow.")
 				Globals.isItemIdentified(_readItem)
+				# warning-ignore:return_value_discarded
+				Steam.setAchievement("READ_BLANK_SCROLL")
+				# warning-ignore:return_value_discarded
+				Steam.storeStats()
 			"official mail":
 				Globals.gameConsole.addLog("Its a grocery list of milk and eggs. Riveting.")
 				Globals.gameConsole.addLog("The mail disappears!")

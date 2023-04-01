@@ -79,6 +79,7 @@ StartingData="*res://Objects/Data/StartingData.gd"
 GlobalGameStats="*res://Objects/Global/GlobalGameStats.gd"
 GlobalGameConsoleMessages="*res://Objects/Global/GlobalGameConsoleMessages.gd"
 GlobalSave="*res://Objects/Global/GlobalSave.gd"
+GlobalSteam="*res://Objects/Global/GlobalSteam.gd"
 
 [debug]
 
