@@ -1,5 +1,14 @@
 
 var dialogMenuDialogs = {
+	"Start": {
+		"title": "Dungeon of Iovar",
+		"text": """Finally, you arrive at the dungeon. It's been a long journey, but your quest begins here. The winding dungeon sprawls before you... and above, the Church of Iovar.
+
+You hear an assortment of critters from the depths. The journey down will be most perilous. But, you have decided, you'll take godhood for yourself!
+
+Travel down to the depths, steal the Amulet of Iovar from under the wizards nose and travel back up to the Church! Sacrifice the amulet on the altar, and you'll find godhood yours. Or perharps, you'll perish to the multitude of critters along the way...
+"""
+	},
 	"Elhybar": {
 		"title": "Elhybar, The Historian",
 		"text": """Deep in the library, an old wizard toils at work. He's a keeper of records, scholarly writer and a book enthusiast. You face the keeper of the library.
@@ -32,7 +41,7 @@ var dialogMenuDialogs = {
 	},
 	"Elder Dragon": {
 		"title": "Elder Dragon",
-		"text": """A massive beast looks at you. Something larger than anything you've faced so far. The elder dragon speaks.
+		"text": """A massive beast looks at you. Larger than anything you've faced so far. The elder dragon speaks.
 	
 	Elder dragon: "Hmm? Who might you be? The one seeking Iovar? Ah, I've heard of you.
 	
