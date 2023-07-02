@@ -165,6 +165,9 @@ func setUpGameObjects(_playerData = null):
 			_node.show()
 	$FOV.show()
 	
+	if _playerData == null:
+		$"/root/World/UI/UITheme/DialogMenu".setText("Start")
+	
 	Globals.mutex.unlock()
 	generationDone = true
 

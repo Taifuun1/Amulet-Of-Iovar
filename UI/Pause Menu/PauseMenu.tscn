@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Themes/UITitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://UI/Pause Menu/PauseMenu.gd" type="Script" id=2]
@@ -38,12 +38,21 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.129412, 0.219608, 0.403922, 1 )
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 1 )
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.145098, 0.219608, 0.376471, 1 )
+
 [node name="PauseMenu" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 735.0
 margin_top = 200.0
-margin_right = -735.0
+margin_right = -685.0
 margin_bottom = -200.0
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
@@ -56,7 +65,7 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="Continue" type="Panel" parent="PauseMenuList"]
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
@@ -74,7 +83,7 @@ valign = 1
 
 [node name="Controls" type="Panel" parent="PauseMenuList"]
 margin_top = 50.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
@@ -93,7 +102,7 @@ valign = 1
 [node name="Codex" type="Panel" parent="PauseMenuList"]
 visible = false
 margin_top = 100.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
@@ -111,7 +120,7 @@ valign = 1
 
 [node name="SaveAndExit" type="Panel" parent="PauseMenuList"]
 margin_top = 100.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
@@ -135,20 +144,56 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ControlsMenuList" type="VBoxContainer" parent="ControlsMenuScroll"]
-margin_right = 450.0
-margin_bottom = 1650.0
+margin_right = 500.0
+margin_bottom = 1850.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="ItemMenu12" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_right = 438.0
+[node name="ItemTitle" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_right = 488.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu12"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemTitle"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Click on keybind to change it"
+valign = 1
+
+[node name="ItemResetDefaultKeys" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 50.0
+margin_right = 488.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemResetDefaultKeys"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Reset to defaults"
+valign = 1
+
+[node name="ItemMOVE_UP" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 100.0
+margin_right = 488.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -158,26 +203,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Move up"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu12"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Num pad 8"
 align = 1
 valign = 1
 
-[node name="ItemMenu13" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 50.0
-margin_right = 438.0
-margin_bottom = 100.0
+[node name="ItemMOVE_UP_RIGHT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 150.0
+margin_right = 488.0
+margin_bottom = 200.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu13"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP_RIGHT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -187,26 +231,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Move up right"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu13"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP_RIGHT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Num pad 9"
 align = 1
 valign = 1
 
-[node name="ItemMenu14" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 100.0
-margin_right = 438.0
-margin_bottom = 150.0
+[node name="ItemMOVE_RIGHT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 200.0
+margin_right = 488.0
+margin_bottom = 250.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu14"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_RIGHT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -216,26 +259,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Move right"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu14"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_RIGHT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Num pad 6"
 align = 1
 valign = 1
 
-[node name="ItemMenu15" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 150.0
-margin_right = 438.0
-margin_bottom = 200.0
+[node name="ItemMOVE_DOWN_RIGHT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 250.0
+margin_right = 488.0
+margin_bottom = 300.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu15"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN_RIGHT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -246,26 +288,25 @@ text = "Move down right"
 valign = 1
 clip_text = true
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu15"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN_RIGHT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Num pad 3"
 align = 1
 valign = 1
 
-[node name="ItemMenu16" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 200.0
-margin_right = 438.0
-margin_bottom = 250.0
+[node name="ItemMOVE_DOWN" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 300.0
+margin_right = 488.0
+margin_bottom = 350.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu16"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -275,26 +316,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Move down"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu16"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Num pad 2"
 align = 1
 valign = 1
 
-[node name="ItemMenu17" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 250.0
-margin_right = 438.0
-margin_bottom = 300.0
+[node name="ItemMOVE_DOWN_LEFT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 350.0
+margin_right = 488.0
+margin_bottom = 400.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu17"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN_LEFT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -304,26 +344,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Move down left"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu17"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN_LEFT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Num pad 1"
 align = 1
 valign = 1
 
-[node name="ItemMenu18" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 300.0
-margin_right = 438.0
-margin_bottom = 350.0
+[node name="ItemMOVE_LEFT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 400.0
+margin_right = 488.0
+margin_bottom = 450.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu18"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_LEFT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -333,26 +372,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Move left"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu18"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_LEFT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Num pad 4"
 align = 1
 valign = 1
 
-[node name="ItemMenu19" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 350.0
-margin_right = 438.0
-margin_bottom = 400.0
+[node name="ItemMOVE_UP_LEFT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 450.0
+margin_right = 488.0
+margin_bottom = 500.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu19"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP_LEFT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -362,235 +400,83 @@ custom_fonts/font = ExtResource( 1 )
 text = "Move up left"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu19"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP_LEFT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Num pad 7"
 align = 1
 valign = 1
 
-[node name="ItemMenu40" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 400.0
-margin_right = 438.0
-margin_bottom = 450.0
+[node name="ItemAccept" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1750.0
+margin_right = 488.0
+margin_bottom = 1800.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu40"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemAccept"]
 margin_left = 8.0
 margin_right = -229.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Keep moving"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu40"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "Nump. 5 + Direction"
-valign = 1
-clip_text = true
-
-[node name="ItemMenu37" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 450.0
-margin_right = 438.0
-margin_bottom = 500.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu37"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Wait"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu37"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "."
-align = 1
-valign = 1
-
-[node name="ItemMenu38" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 500.0
-margin_right = 438.0
-margin_bottom = 550.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu38"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "Accept"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu38"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemAccept"]
 margin_left = 221.0
+margin_right = 492.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 150, 50 )
+custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
 custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 6 )
 text = "Enter"
 align = 1
 valign = 1
-clip_text = true
 
-[node name="ItemMenu39" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 550.0
-margin_right = 438.0
-margin_bottom = 600.0
+[node name="ItemBack" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1750.0
+margin_right = 488.0
+margin_bottom = 1800.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu39"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemBack"]
 margin_left = 8.0
 margin_right = -229.0
 rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "Back"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu39"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemBack"]
 margin_left = 221.0
+margin_right = 492.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 150, 50 )
+custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
 custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 6 )
 text = "Space or right click"
+align = 1
 valign = 1
-clip_text = true
 
-[node name="ItemMenu41" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+[node name="ItemASCEND" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
 margin_top = 600.0
-margin_right = 438.0
+margin_right = 488.0
 margin_bottom = 650.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu41"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Toggle fullscreen"
-valign = 1
-clip_text = true
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu41"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "Ctrl + Shift + f"
-align = 1
-valign = 1
-clip_text = true
-
-[node name="ItemMenu43" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 600.0
-margin_right = 438.0
-margin_bottom = 650.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu43"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Select all"
-valign = 1
-clip_text = true
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu43"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = ","
-align = 1
-valign = 1
-clip_text = true
-
-[node name="ItemMenu42" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 600.0
-margin_right = 438.0
-margin_bottom = 650.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu42"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Save and Exit"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu42"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "Ctrl + Shift + s"
-align = 1
-valign = 1
-clip_text = true
-
-[node name="ItemMenu35" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 650.0
-margin_right = 438.0
-margin_bottom = 700.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu35"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemASCEND"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -600,26 +486,26 @@ custom_fonts/font = ExtResource( 1 )
 text = "Ascend"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu35"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemASCEND"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Shift + A"
 align = 1
 valign = 1
+clip_text = true
 
-[node name="ItemMenu36" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 700.0
-margin_right = 438.0
-margin_bottom = 750.0
+[node name="ItemDESCEND" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 650.0
+margin_right = 488.0
+margin_bottom = 700.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu36"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemDESCEND"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -628,27 +514,87 @@ rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 1 )
 text = "Descend"
 valign = 1
+clip_text = true
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu36"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemDESCEND"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Shift + D"
 align = 1
 valign = 1
+clip_text = true
 
-[node name="ItemMenu20" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+[node name="ItemKEEP_MOVING" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 700.0
+margin_right = 488.0
+margin_bottom = 750.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemKEEP_MOVING"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Keep moving"
+valign = 1
+clip_text = true
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemKEEP_MOVING"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+clip_text = true
+
+[node name="ItemWAIT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
 margin_top = 750.0
-margin_right = 438.0
+margin_right = 488.0
 margin_bottom = 800.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu20"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemWAIT"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Wait"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemWAIT"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+clip_text = true
+
+[node name="ItemINVENTORY" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 800.0
+margin_right = 488.0
+margin_bottom = 850.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemINVENTORY"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -658,113 +604,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Inventory"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu20"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemINVENTORY"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "i"
 align = 1
 valign = 1
 
-[node name="ItemMenu21" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 800.0
-margin_right = 438.0
-margin_bottom = 850.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu21"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Equipment"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu21"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "e"
-align = 1
-valign = 1
-
-[node name="ItemMenu22" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+[node name="ItemPICK_UP" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
 margin_top = 850.0
-margin_right = 438.0
+margin_right = 488.0
 margin_bottom = 900.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu22"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Runes"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu22"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "Shift + r"
-align = 1
-valign = 1
-
-[node name="ItemMenu23" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 900.0
-margin_right = 438.0
-margin_bottom = 950.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu23"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Loot"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu23"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "l"
-align = 1
-valign = 1
-
-[node name="ItemMenu24" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 950.0
-margin_right = 438.0
-margin_bottom = 1000.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu24"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemPICK_UP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -774,26 +632,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Pick up"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu24"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemPICK_UP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = ","
 align = 1
 valign = 1
 
-[node name="ItemMenu25" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1000.0
-margin_right = 438.0
-margin_bottom = 1050.0
+[node name="ItemDROP" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 900.0
+margin_right = 488.0
+margin_bottom = 950.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu25"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemDROP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -803,142 +660,53 @@ custom_fonts/font = ExtResource( 1 )
 text = "Drop"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu25"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemDROP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "Shift + ,"
 align = 1
 valign = 1
 
-[node name="ItemMenu27" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1050.0
-margin_right = 438.0
-margin_bottom = 1100.0
+[node name="ItemEQUIPMENT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 950.0
+margin_right = 488.0
+margin_bottom = 1000.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu27"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemEQUIPMENT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_right = -229.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = ExtResource( 1 )
-text = "Consume"
+text = "Equipment"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu27"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemEQUIPMENT"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "e"
 align = 1
 valign = 1
 
-[node name="ItemMenu28" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1100.0
-margin_right = 438.0
-margin_bottom = 1150.0
+[node name="ItemREAD" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1000.0
+margin_right = 488.0
+margin_bottom = 1050.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu28"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Quaff"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu28"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "q"
-align = 1
-valign = 1
-
-[node name="ItemMenu29" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1150.0
-margin_right = 438.0
-margin_bottom = 1200.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu29"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Interact"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu29"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "g"
-align = 1
-valign = 1
-
-[node name="ItemMenu30" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1200.0
-margin_right = 438.0
-margin_bottom = 1250.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu30"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Cast spell"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu30"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "f"
-align = 1
-valign = 1
-
-[node name="ItemMenu26" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1250.0
-margin_right = 438.0
-margin_bottom = 1300.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu26"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemREAD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -948,26 +716,109 @@ custom_fonts/font = ExtResource( 1 )
 text = "Read"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu26"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemREAD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "r"
 align = 1
 valign = 1
 
-[node name="ItemMenu31" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1300.0
-margin_right = 438.0
-margin_bottom = 1350.0
+[node name="ItemQUAFF" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1050.0
+margin_right = 488.0
+margin_bottom = 1100.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu31"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemQUAFF"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Quaff"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemQUAFF"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemCONSUME" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1100.0
+margin_right = 488.0
+margin_bottom = 1150.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemCONSUME"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Consume"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemCONSUME"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemINTERACT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1150.0
+margin_right = 488.0
+margin_bottom = 1200.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemINTERACT"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Interact"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemINTERACT"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemZAP" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1200.0
+margin_right = 488.0
+margin_bottom = 1250.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemZAP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -977,26 +828,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Zap"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu31"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemZAP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "z"
 align = 1
 valign = 1
 
-[node name="ItemMenu32" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1350.0
-margin_right = 438.0
-margin_bottom = 1400.0
+[node name="ItemUSE" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1250.0
+margin_right = 488.0
+margin_bottom = 1300.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu32"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemUSE"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -1006,55 +856,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "Use"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu32"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemUSE"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "u"
 align = 1
 valign = 1
 
-[node name="ItemMenu33" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1400.0
-margin_right = 438.0
-margin_bottom = 1450.0
+[node name="ItemKICK" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1300.0
+margin_right = 488.0
+margin_bottom = 1350.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 3 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu33"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_right = -229.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
-text = "Dip"
-valign = 1
-
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu33"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 221.0
-rect_min_size = Vector2( 150, 50 )
-custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
-text = "h"
-align = 1
-valign = 1
-
-[node name="ItemMenu34" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1450.0
-margin_right = 438.0
-margin_bottom = 1500.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
-
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu34"]
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemKICK"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -1064,21 +884,273 @@ custom_fonts/font = ExtResource( 1 )
 text = "Kick"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemMenu34"]
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemKICK"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 221.0
 rect_min_size = Vector2( 150, 50 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 4 )
-text = "k"
+align = 1
+valign = 1
+
+[node name="ItemRUNES" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1350.0
+margin_right = 488.0
+margin_bottom = 1400.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemRUNES"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Runes"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemRUNES"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemCAST" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1400.0
+margin_right = 488.0
+margin_bottom = 1450.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemCAST"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Cast"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemCAST"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemLOOT" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1450.0
+margin_right = 488.0
+margin_bottom = 1500.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemLOOT"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Loot"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemLOOT"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemDIP" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1500.0
+margin_right = 488.0
+margin_bottom = 1550.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemDIP"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Dip"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemDIP"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemSAVE" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1550.0
+margin_right = 488.0
+margin_bottom = 1600.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemSAVE"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Save"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemSAVE"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemPAUSE" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1600.0
+margin_right = 488.0
+margin_bottom = 1650.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemPAUSE"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Pause"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemPAUSE"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemTHROW" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1650.0
+margin_right = 488.0
+margin_bottom = 1700.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemTHROW"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Throw"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemTHROW"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemSELECT_ALL" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1700.0
+margin_right = 488.0
+margin_bottom = 1750.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemSELECT_ALL"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = ExtResource( 1 )
+text = "Select all"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemSELECT_ALL"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+rect_min_size = Vector2( 150, 50 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+valign = 1
+
+[node name="ItemToggleFullscreen" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1750.0
+margin_right = 488.0
+margin_bottom = 1800.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemToggleFullscreen"]
+margin_left = 8.0
+margin_right = -229.0
+rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Fullscreen"
+valign = 1
+
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemToggleFullscreen"]
+margin_left = 221.0
+margin_right = 492.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 150, 50 )
+custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 6 )
+text = "Ctrl + shift + F"
 align = 1
 valign = 1
 
 [node name="Back" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 1500.0
-margin_right = 438.0
-margin_bottom = 1550.0
+margin_top = 1800.0
+margin_right = 488.0
+margin_bottom = 1850.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 2 )
@@ -1097,4 +1169,36 @@ valign = 1
 [connection signal="gui_input" from="PauseMenuList/Controls" to="." method="_on_Continue_gui_input" binds= [ "Controls" ]]
 [connection signal="gui_input" from="PauseMenuList/Codex" to="." method="_on_Continue_gui_input" binds= [ "Codex" ]]
 [connection signal="gui_input" from="PauseMenuList/SaveAndExit" to="." method="_on_Continue_gui_input" binds= [ "Save and Exit" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemResetDefaultKeys" to="." method="_reset_Keybinds"]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP" to="." method="_On_Control_Change_Click" binds= [ "MOVE_UP" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP_RIGHT" to="." method="_On_Control_Change_Click" binds= [ "MOVE_UP_RIGHT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_RIGHT" to="." method="_On_Control_Change_Click" binds= [ "MOVE_RIGHT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN_RIGHT" to="." method="_On_Control_Change_Click" binds= [ "MOVE_DOWN_RIGHT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN" to="." method="_On_Control_Change_Click" binds= [ "MOVE_DOWN" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_DOWN_LEFT" to="." method="_On_Control_Change_Click" binds= [ "MOVE_DOWN_LEFT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_LEFT" to="." method="_On_Control_Change_Click" binds= [ "MOVE_LEFT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP_LEFT" to="." method="_On_Control_Change_Click" binds= [ "MOVE_UP_LEFT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemASCEND" to="." method="_On_Control_Change_Click" binds= [ "ASCEND" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemDESCEND" to="." method="_On_Control_Change_Click" binds= [ "DESCEND" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemKEEP_MOVING" to="." method="_On_Control_Change_Click" binds= [ "KEEP_MOVING" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemWAIT" to="." method="_On_Control_Change_Click" binds= [ "WAIT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemINVENTORY" to="." method="_On_Control_Change_Click" binds= [ "INVENTORY" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemPICK_UP" to="." method="_On_Control_Change_Click" binds= [ "PICK_UP" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemDROP" to="." method="_On_Control_Change_Click" binds= [ "DROP" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemEQUIPMENT" to="." method="_On_Control_Change_Click" binds= [ "EQUIPMENT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemREAD" to="." method="_On_Control_Change_Click" binds= [ "READ" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemQUAFF" to="." method="_On_Control_Change_Click" binds= [ "QUAFF" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemCONSUME" to="." method="_On_Control_Change_Click" binds= [ "CONSUME" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemINTERACT" to="." method="_On_Control_Change_Click" binds= [ "INTERACT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemZAP" to="." method="_On_Control_Change_Click" binds= [ "ZAP" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemUSE" to="." method="_On_Control_Change_Click" binds= [ "USE" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemKICK" to="." method="_On_Control_Change_Click" binds= [ "KICK" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemRUNES" to="." method="_On_Control_Change_Click" binds= [ "RUNES" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemCAST" to="." method="_On_Control_Change_Click" binds= [ "CAST" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemLOOT" to="." method="_On_Control_Change_Click" binds= [ "LOOT" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemDIP" to="." method="_On_Control_Change_Click" binds= [ "DIP" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemSAVE" to="." method="_On_Control_Change_Click" binds= [ "SAVE" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemPAUSE" to="." method="_On_Control_Change_Click" binds= [ "PAUSE" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemTHROW" to="." method="_On_Control_Change_Click" binds= [ "THROW" ]]
+[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemSELECT_ALL" to="." method="_On_Control_Change_Click" binds= [ "SELECT_ALL" ]]
 [connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/Back" to="." method="_on_Continue_gui_input" binds= [ "Back" ]]

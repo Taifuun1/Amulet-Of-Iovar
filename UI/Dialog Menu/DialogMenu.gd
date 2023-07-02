@@ -12,7 +12,9 @@ func setText(_dialogEvent):
 	$DialogContainer/Title.append_bbcode(_dialog.title)
 	$DialogContainer/ScrollContainer/Text.clear()
 	$DialogContainer/ScrollContainer/Text.append_bbcode(_dialog.text)
+	$"/root/World".currentGameState = $"/root/World".gameState.OUT_OF_PLAYERS_HANDS
 	show()
 
 func _on_Accept_Button_pressed():
+	$"/root/World".currentGameState = $"/root/World".gameState.GAME
 	hide()
