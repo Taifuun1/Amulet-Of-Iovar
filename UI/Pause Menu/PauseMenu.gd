@@ -2,6 +2,8 @@ extends Panel
 
 onready var defaultKeybinds = preload("res://Objects/Text/DefaultKeybinds.gd").new().defaultKeybinds
 
+var keybinds
+
 var changedAction = null
 var changedActionKeybind = null
 var shiftClick = ""
@@ -10,7 +12,8 @@ func _ready():
 	var directory = Directory.new()
 	if not directory.dir_exists("user://Keybinds"):
 		$"/root/World/Save".saveData("Keybinds", "Keybinds", defaultKeybinds)
-	setKeybinds($"/root/World/Save".loadData("Keybinds", "Keybinds"))
+	keybinds = $"/root/World/Save".loadData("Keybinds", "Keybinds")
+	setKeybinds(keybinds)
 
 func setKeybind(_scancode, _action, _modifiers = []):
 	var scancodeString = str(OS.get_scancode_string(_scancode))
@@ -85,11 +88,9 @@ func _input(_event):
 		if _event.scancode == 16777237:
 			shiftClick = "shift"
 		else:
-			if changedAction == "BACK":
-				for _event in InputMap.get_action_list("BACK"):
-					if !_event is InputEventMouse:
-						InputMap.action_erase_event("BACK", _event)
-			else:
-				InputMap.action_erase_events(changedAction)
-			setKeybind(_event.scancode, changedAction, [shiftClick])
+			InputMap.action_erase_events(changedAction)
+			keybinds[changedAction] = {"scancode": _event.scancode, "modifiers": []}
+			if !shiftClick.empty():
+				keybinds[changedAction].modifiers.append(shiftClick)
+			setKeybinds(keybinds)
 			resetControlsVariables()

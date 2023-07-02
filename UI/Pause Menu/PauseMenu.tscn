@@ -18,7 +18,7 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color( 0.145098, 0.207843, 0.337255, 1 )
+border_color = Color( 0.129412, 0.219608, 0.403922, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 1 )
@@ -438,34 +438,34 @@ custom_styles/normal = SubResource( 4 )
 align = 1
 valign = 1
 
-[node name="ItemBACK" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
-margin_top = 550.0
+[node name="ItemBack" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
+margin_top = 1750.0
 margin_right = 488.0
-margin_bottom = 600.0
+margin_bottom = 1800.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemBACK"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemBack"]
 margin_left = 8.0
 margin_right = -229.0
 rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "Back"
 valign = 1
 
-[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemBACK"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemBack"]
 margin_left = 221.0
+margin_right = 492.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 150, 50 )
+custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
 custom_fonts/font = ExtResource( 1 )
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 6 )
+text = "Space or right click"
 align = 1
 valign = 1
-clip_text = true
 
 [node name="ItemASCEND" type="Panel" parent="ControlsMenuScroll/ControlsMenuList"]
 margin_top = 600.0
@@ -1127,8 +1127,7 @@ custom_styles/panel = SubResource( 2 )
 
 [node name="ItemText" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemToggleFullscreen"]
 margin_left = 8.0
-margin_right = 259.0
-margin_bottom = 50.0
+margin_right = -229.0
 rect_min_size = Vector2( 0, 50 )
 custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
 custom_fonts/font = ExtResource( 1 )
@@ -1137,13 +1136,13 @@ valign = 1
 
 [node name="ItemButton" type="Label" parent="ControlsMenuScroll/ControlsMenuList/ItemToggleFullscreen"]
 margin_left = 221.0
-margin_right = 488.0
+margin_right = 492.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 150, 50 )
 custom_colors/font_color = Color( 0.2, 0.2, 0.2, 1 )
 custom_fonts/font = ExtResource( 1 )
 custom_styles/normal = SubResource( 6 )
-text = "Ctrl + shift + f"
+text = "Ctrl + shift + F"
 align = 1
 valign = 1
 
@@ -1179,7 +1178,6 @@ valign = 1
 [connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_LEFT" to="." method="_On_Control_Change_Click" binds= [ "MOVE_LEFT" ]]
 [connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemMOVE_UP_LEFT" to="." method="_On_Control_Change_Click" binds= [ "MOVE_UP_LEFT" ]]
 [connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemACCEPT" to="." method="_On_Control_Change_Click" binds= [ "ACCEPT" ]]
-[connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemBACK" to="." method="_On_Control_Change_Click" binds= [ "BACK" ]]
 [connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemASCEND" to="." method="_On_Control_Change_Click" binds= [ "ASCEND" ]]
 [connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemDESCEND" to="." method="_On_Control_Change_Click" binds= [ "DESCEND" ]]
 [connection signal="gui_input" from="ControlsMenuScroll/ControlsMenuList/ItemWAIT" to="." method="_On_Control_Change_Click" binds= [ "WAIT" ]]

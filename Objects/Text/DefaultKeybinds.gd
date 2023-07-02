@@ -8,7 +8,6 @@ var defaultKeybinds = {
 	"MOVE_LEFT": 16777354,
 	"MOVE_UP_LEFT": 16777357,
 	"ACCEPT": [16777221, 16777222],
-	"BACK": [32, { "mouse": 2 }],
 	"ASCEND": {"scancode": 65, "modifiers": ["shift"]},
 	"DESCEND": {"scancode": 68, "modifiers": ["shift"]},
 	"KEEP_MOVING": 16777355,
