@@ -23,6 +23,7 @@ func setKeybind(_scancode, _action, _modifiers = []):
 		if !_modifier.empty():
 			newInput[_modifier] = true
 			scancodeString = _modifier.capitalize() + " + " + scancodeString
+	InputMap.action_erase_events(_action)
 	InputMap.action_add_event(_action, newInput)
 	get_node("ControlsMenuScroll/ControlsMenuList/Item{actionName}/ItemButton".format({ "actionName": _action })).text = scancodeString
 
@@ -88,7 +89,6 @@ func _input(_event):
 		if _event.scancode == 16777237:
 			shiftClick = "shift"
 		else:
-			InputMap.action_erase_events(changedAction)
 			keybinds[changedAction] = {"scancode": _event.scancode, "modifiers": []}
 			if !shiftClick.empty():
 				keybinds[changedAction].modifiers.append(shiftClick)
