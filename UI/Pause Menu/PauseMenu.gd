@@ -9,10 +9,13 @@ var changedActionKeybind = null
 var shiftClick = ""
 
 func _ready():
+#	var file = File.new()
 	var directory = Directory.new()
 	if not directory.dir_exists("user://Keybinds"):
 		$"/root/World/Save".saveData("Keybinds", "Keybinds", defaultKeybinds)
-	keybinds = $"/root/World/Save".loadData("Keybinds", "Keybinds")
+		keybinds = defaultKeybinds
+	else:
+		keybinds = $"/root/World/Save".loadData("Keybinds", "Keybinds")
 	setKeybinds(keybinds)
 
 func setKeybind(_scancode, _action, _modifiers = []):
@@ -31,12 +34,6 @@ func setKeybinds(_keybindData):
 	for _keybind in _keybindData:
 		if typeof(_keybindData[_keybind]) == TYPE_DICTIONARY:
 			setKeybind(_keybindData[_keybind].scancode, _keybind, _keybindData[_keybind].modifiers)
-		elif typeof(_keybindData[_keybind]) == TYPE_ARRAY:
-			for _keybindIteration in _keybindData[_keybind]:
-				if typeof(_keybindIteration) == TYPE_DICTIONARY:
-					pass
-				else:
-					setKeybind(_keybindIteration, _keybind)
 		else:
 			setKeybind(_keybindData[_keybind], _keybind)
 	$"/root/World/Save".saveData("Keybinds", "Keybinds", _keybindData)
