@@ -1,6 +1,8 @@
 # Amulet Of Iovar
 Amulet of Iovar is a Nethack inspired roguelike. Delve deep into the dungeon of Iovar, steal his amulet and ascend to godhood.
 
+[Steam page](https://store.steampowered.com/app/2346540/Amulet_of_Iovar/)
+
 ## Description
 
 For eons, the ancient wizard Iovar has sought godhood. In his never-ending quest, he's built a huge dungeon full of critters big and small. Now, hes finally crafted an amulet worthy of gods.
